@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+
+<!--
+
+-->
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Version Control with Git</title>
+
+		<meta name="description" content="Version Control with Git">
+		<meta name="author" content="Software Carpentry">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../reveal.js/css/print/pdf.css' : '../reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--MathJax stuff -->
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}, TeX: { extensions: ["autobold.js"] }});
+		</script>
+		<script type="text/javascript"
+		  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="title">
+
+					<section>
+						<h1>Version Control with Git</h1>
+						<p>
+							Software Carpentry
+						</p>
+					</section>
+
+				</section>
+
+				<section id="What is Git?">
+
+					<section data-markdown data-separator-notes="^Note:">
+				    <script type="text/template">
+	## What is Version Control?
+
+	- Tracks changes to *any* file
+	- Any file can be tracked
+	- Text (`.txt`, `.py`, `.csv`, `.c`, `.r` etc. work best): these allow smart `diff`/`merge` etc.
+				    </script>
+					</section>
+
+					<section data-background="images/phdcomics1.gif" data-background-size="500px">
+					</section>
+
+					<section data-markdown data-separator-notes="^Note:">
+				    <script type="text/template">
+	## Why use Version Control? : 1
+
+	- A more *efficient* backup
+	- Reproducibility
+				    </script>
+					</section>
+
+					<section data-background="images/minion1.jpg" data-background-size="500px">
+					</section>
+
+					<section data-markdown data-separator-notes="^Note:">
+				    <script type="text/template">
+	## Why use Version Control? : 2
+
+	- Teamwork
+				    </script>
+					</section>
+
+				</section>
+
+				<section id="How to use Git?">
+
+					<section data-markdown data-separator-notes="^Note:">
+				    <script type="text/template">
+	## Version Control Tracks Changes
+
+	<img src="images/track-changes1.svg">
+
+	- Changes are tracked sequentially
+				    </script>
+					</section>
+
+					<section data-markdown data-separator-notes="^Note:">
+				    <script type="text/template">
+	## Version Control Tracks Changes
+
+	<img src="images/track-changes2.svg">
+
+	- Different versions can be saved
+				    </script>
+					</section>
+
+					<section data-markdown data-separator-notes="^Note:">
+				    <script type="text/template">
+	## Version Control Tracks Changes
+
+	<img src="images/track-changes3.svg">
+
+	- Multiple versions can be merged
+				    </script>
+					</section>
+
+					<section data-markdown data-separator-notes="^Note:">
+				    <script type="text/template">
+	## Version Control Alternatives
+
+	- Subversion (svn) : centralised
+	- Mercurial (hg) : distributed
+	- Git (git) : distributed
+
+	**Note**: GitHub $\ne$ git.
+				    </script>
+					</section>
+
+				</section>
+
+				<section id="Commands">
+
+					<section data-markdown data-separator-notes="^Note:">
+				    <script type="text/template">
+	## Local Configuration
+
+	- `git config`
+				    </script>
+					</section>
+
+					<section data-markdown data-separator-notes="^Note:">
+				    <script type="text/template">
+	## Setting up a repository
+
+	- `git init`
+	- `git status`
+				    </script>
+					</section>
+
+					<section data-markdown data-separator-notes="^Note:">
+				    <script type="text/template">
+	## Tracking changes to a file
+
+	- `git add`
+	- `git commit`
+				    </script>
+					</section>
+
+					<section data-markdown data-separator-notes="^Note:">
+				    <script type="text/template">
+	## git add and commit
+
+	<img src="images/add-commit1.png" height="500px">
+				    </script>
+					</section>
+
+					<section data-markdown data-separator-notes="^Note:">
+				    <script type="text/template">
+	## Exploring history 1
+
+	- `git log`
+	- `git diff`
+				    </script>
+					</section>
+
+					<section data-markdown data-separator-notes="^Note:">
+				    <script type="text/template">
+	## git diff 1
+
+	<img src="images/diff-staged1.png" height="500px">
+				    </script>
+					</section>
+
+					<section data-markdown data-separator-notes="^Note:">
+				    <script type="text/template">
+	## git diff 2
+
+	<img src="images/diff-staged2.png" height="500px">
+				    </script>
+					</section>
+
+					<section data-markdown data-separator-notes="^Note:">
+				    <script type="text/template">
+	## Restoring files
+
+	- `git checkout`
+				    </script>
+					</section>
+
+					<section data-markdown data-separator-notes="^Note:">
+				    <script type="text/template">
+	## git restoration
+
+	<img src="images/checkout1.png" height="500px">
+				    </script>
+					</section>
+
+					<section data-markdown data-separator-notes="^Note:">
+				    <script type="text/template">
+	## Git workflow  (local)
+
+	<img src="images/workflow-local1.png" height="500px">
+				    </script>
+					</section>
+
+					<section data-markdown data-separator-notes="^Note:">
+				    <script type="text/template">
+	## Collaboration
+
+	<img src="images/collaboration1.png" height="500px">
+				    </script>
+					</section>
+
+					<section data-markdown data-separator-notes="^Note:">
+				    <script type="text/template">
+	## Collaboration
+
+	- Let's collaborate via GitHub
+	- Working in pairs
+	- Developer A / Developer B
+				    </script>
+					</section>
+
+					<section data-markdown data-separator-notes="^Note:">
+				    <script type="text/template">
+	## Remote repository 1
+
+	- Developer A:
+		- Sign in to http://github.com
+		- Create repository
+		- `git remote add`
+		- `git push`
+		- Add Developer B as collaborator
+				    </script>
+					</section>
+
+					<section data-markdown data-separator-notes="^Note:">
+				    <script type="text/template">
+	## Remote repository 2
+
+	- Developer B:
+		- Clean up
+		- `git clone`
+		- `git add`
+		- `git commit`
+		- `git push`
+				    </script>
+					</section>
+
+					<section data-markdown data-separator-notes="^Note:">
+				    <script type="text/template">
+	## Remote repository 3
+
+	- Developer A:
+		- `git pull`
+				    </script>
+					</section>
+
+					<section>
+						<h2>Remote repository 4</h2>
+
+						<ul>
+							<li> Developer A:
+								<ul>
+									<li> Add README.md with
+										<ul>
+											<li> Authors
+											<li> Info
+										</ul>
+								</ul>
+							<li> Developer B
+								<ul>
+									<li> sync
+								</ul>
+						</ul>
+					</section>
+
+				</section>
+
+				<section id="Conflicts">
+
+						<section data-markdown data-separator-notes="^Note:">
+					    <script type="text/template">
+		## Conflicts
+
+		<img src="images/conflict1.png" height="500px">
+					    </script>
+						</section>
+
+						<section data-markdown data-separator-notes="^Note:">
+					    <script type="text/template">
+		## Git workflow (remote)
+
+		<img src="images/workflow-remote1.png" height="500px">
+					    </script>
+						</section>
+
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+## Next steps
+
+- Branching and merging
+- http://software-carpentry.org/
+					</script>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="../reveal.js/lib/js/head.min.js"></script>
+		<script src="../reveal.js/js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Parallax background image
+			    //parallaxBackgroundImage: '../../figures/hs-2009-05-a-full_jpg.jpg', // e.g. "https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg"
+
+			    // Parallax background size
+			    //parallaxBackgroundSize: '2145px 1213px', // CSS syntax, e.g. "2100px 900px" - currently only pixels are supported (don't use % or auto)
+
+			    // Amount of pixels to move the parallax background per slide step,
+			    // a value of 0 disables movement along the given axis
+			    // These are optional, if they aren't specified they'll be calculated automatically
+			    //parallaxBackgroundHorizontal: 200,
+			    //parallaxBackgroundVertical: 50
+
+				math: {
+			        mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+			        config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+			    },
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: '../reveal.js/plugin/math/math.js', async: true },
+					{ src: '../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
+					{ src: '../reveal.js/plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
