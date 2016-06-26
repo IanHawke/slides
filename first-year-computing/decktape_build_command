@@ -1,0 +1,1 @@
+~/Documents/github/decktape/bin/phantomjs ~/Documents/github/decktape/decktape.js --size 1366x768 reveal FirstYearProgrammingCourse.html FirstYearProgrammingCourse.pdf

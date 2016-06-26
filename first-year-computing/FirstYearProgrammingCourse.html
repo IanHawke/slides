@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+
+<!--
+
+-->
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>First Year Programming Course</title>
+
+		<meta name="description" content="Talk for Mathematical Sciences Away Day, 29 June 2016">
+		<meta name="author" content="Ian Hawke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/css/theme/white.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../reveal.js/css/print/pdf.css' : '../reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--MathJax stuff -->
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}, TeX: { extensions: ["autobold.js"] }});
+		</script>
+		<script type="text/javascript"
+		  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+		<!--Left align-->
+		<style type="text/css">
+			.reveal p { text-align: left; }
+			.reveal ol,
+			.reveal dl,
+			.reveal ul {
+			  display: block;
+			  text-align: left;
+			  margin: 0 0 0 1em; }
+			.reveal h2, h3 {
+				line-height: 2.0
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="title">
+
+					<section data-background-image="shortest-paper.png" data-background-position="right" data-background-size="50%">
+						<div style="float: left; width: 50%">
+							<h1>Mathematics and Computing</h1>
+							<h3>A first year course on programming</h3>
+							<h4>
+								Ian Hawke
+							<h4>
+						</div>
+					</section>
+
+				</section>
+
+				<section id="Background">
+
+					<section data-background-image="Maple.png" data-background-position="right" data-background-size="30%">
+						<div style="float: left; width: 70%">
+							<h2>Current status</h2>
+
+							<p>
+								<ul>
+									<li> Maple labs attached to Calculus (MATH1056).
+									<li> <a href="http://www.personal.soton.ac.uk/jav/soton/maple/homepage.html">Material outdated</a>: <q cite="http://www.personal.soton.ac.uk/jav/soton/maple/homepage.html">Last updated on October 5 2007.</q>
+									<li> Material not aligned with current modules.
+									<li> Maple not popular, unknown outside Maths.
+									<li> Students have requested "proper" coding course.
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+							GN asked for a plan, and material, to change these labs to cover a programming language instead. A group met a couple of times to discuss options and combined with a few email discussions IH produced some material based around Python. This material was not tested on students by the end of summer 2015, so its use was postponed.
+						</aside>
+					</section>
+
+					<section data-background-image="guzdial-lcd-cover.png" data-background-position="right" data-background-size="30%">
+						<div style="float: left; width: 70%">
+							<h2>Principles</h2>
+
+							<p>
+								Guzdial's <a href="http://cacm.acm.org/blogs/blog-cacm/203554-five-principles-for-programming-languages-for-learners/fulltext">principles for Programming Languages for Learners</a>:
+								<ol>
+									<li> Connect to what learners know (identity).
+									<li> Keep cognitive load low.
+									<li> Be honest (real).
+									<li> Be generative and productive.
+									<li> Test, don't trust.
+								</ol>
+							</p>
+						</div>
+
+						<aside class="notes">
+							Point 1 means we need to write a custom course - most are for CS, Physics or Engineering students. Point 2 means C, Fortran, Java are bad choices, and Mathematica problematic. Point 3 is about whether the coding is seen as broadly useful, or realistic. Maple falls here. Point 4 means the examples must connect to existing modules in interesting ways - it must be useful in ways pen-and-paper isn't. Point 5 links to MEQs and to trial run.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Material">
+
+					<section data-background-image="maths-with-python.png" data-background-position="right" data-background-size="40%">
+						<div style="float: left; width: 60%">
+							<h2>Material</h2>
+
+							<p>
+								Python material prepared, <a href="https://github.com/IanHawke/maths-with-python">available online</a>, <a href="https://github.com/IanHawke/maths-with-python/raw/master/pdf/FirstYearComputing_Master.pdf">multiple</a> <a href="http://maths-with-python.readthedocs.io/en/latest/?badge=latest">formats</a>. Piloted on small group of UGs, PG demonstrators.
+								<ul>
+									<li> Covers numerical and symbolic topics.
+									<li> Installed on University machines.
+									<li> Free.
+									<li> Used in eg Physics and Engineering.
+									<li> "Proper" programming language.
+									<li> Recognized by industry.
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+							Alternatives considered were C, Java, Matlab, Mathematica, Maple, Sage, R. Most fail on cognitive load (C, Java) or "honesty" (Maple, Sage). R probably next best; Python probably has a broader user base.
+						</aside>
+					</section>
+
+					<section data-background-image="sympy.png" data-background-position="right" data-background-size="40%">
+						<div style="float: left; width: 60%">
+							<h2>Content</h2>
+
+							<p>
+								Mathematical examples, exercises show
+								<ul>
+									<li> Variables, control flow, functions, etc.
+									<li> Symbolic methods.
+									<li> Linear algebra, differential equations, statistics, plotting.
+									<li> $\LaTeX$
+									<li> Classes, testing, advanced topics.
+								</ul>
+							</p>
+							<p>
+								Links to Number Theory, Differential Equations, Linear Algebra, Statistics modules.
+							</p>
+						</div>
+
+						<aside class="notes">
+							More exercises are needed.
+						</aside>
+					</section>
+
+					<section data-background-image="Anscombe.png" data-background-position="right" data-background-size="40%">
+						<div style="float: left; width: 60%">
+							<h2>Feedback so far</h2>
+
+							<p>
+								Feedback says the material
+								<ul>
+									<li> is  the right level for first year UGs;
+									<li> will easily fill 12 hours of labs;
+									<li> is well understood by the PG helpers;
+									<li> should work on University UDE and students' own machines;
+									<li> could use more worked exercises, to link to other modules.
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+							The PG helpers checked over the summer of 2015, and looked at all the material. The UG students started looking at the start of semester 2 (roughly the start of February), and so have mostly only looked at the first quarter of the material. This has all been self-paced study with no help from staff.
+						</aside>
+					</section>
+
+					<section data-background-image="sticky_notes.png" data-background-position="right" data-background-size="35%">
+						<div style="float: left; width: 65%">
+							<h2>Delivery</h2>
+
+								<p>
+									We can follow existing Maple labs route: self-paced with PG demonstrators.
+									<ul>
+										<li> No change in staff load.
+										<li> Weak students will disengage.
+									</ul>
+								</p>
+
+								<p>
+									<a href="http://software-carpentry.org/blog/2016/06/teaching-python-to-undergraduate-geoscientists.html">Alternative model</a> followed by <a href="http://arxiv.org/abs/1505.05425">Jacobs et al.</a>: short live-coded intro, then hands-on exercises with demonstrators.
+									<ul>
+										<li> More "lecturing" preparation.
+										<li> Expect much better feedback.
+									</ul>
+								</p>
+							</div>
+
+							<aside class="notes">
+								The Software Carpentry approach has a very good record in training novice level programming. However, it's usually preferred to have a 10:1 student/helper ratio, rather than current 25:1. Sticky notes and self-paced help but can't overcome this resource issue.
+							</aside>
+					</section>
+
+				</section>
+
+				<section id="Action">
+
+					<section data-background-image="Lorentz.png" data-background-position="right" data-background-size="40%">
+						<div style="float: left; width: 60%">
+							<h2>Action needed</h2>
+
+							<p>
+								<ul>
+									<li> Agreement that this is approach to take.
+									<li> Modification of module specs.
+									<li> More exercises.
+									<li> A staff member needs to take charge of delivery:
+										<ul>
+											<li> Organizing demonstrators.
+											<li> Liaise with iSolutions.
+											<li> Field problems with material.
+										</ul>
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+							If this course continues to be run in semester 1, I don't have the time available to coordinate. We must also consider fallback plans if our PG demonstrator numbers continue to fall, as the delivery plans rely heavily on them.
+				    </aside>
+					</section>
+
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="../reveal.js/lib/js/head.min.js"></script>
+		<script src="../reveal.js/js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: false,
+				center: true,
+
+				width:  1366,
+				height: 768,
+				margin: 0.1,
+
+				transition: 'none', // none/fade/slide/convex/concave/zoom
+
+				// Parallax background image
+			    //parallaxBackgroundImage: '../../figures/hs-2009-05-a-full_jpg.jpg', // e.g. "https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg"
+
+			    // Parallax background size
+			    //parallaxBackgroundSize: '2145px 1213px', // CSS syntax, e.g. "2100px 900px" - currently only pixels are supported (don't use % or auto)
+
+			    // Amount of pixels to move the parallax background per slide step,
+			    // a value of 0 disables movement along the given axis
+			    // These are optional, if they aren't specified they'll be calculated automatically
+			    //parallaxBackgroundHorizontal: 200,
+			    //parallaxBackgroundVertical: 50
+
+				math: {
+			        mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+			        config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+			    },
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: '../reveal.js/plugin/math/math.js', async: true },
+					{ src: '../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
+					{ src: '../reveal.js/plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
