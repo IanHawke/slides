@@ -10,7 +10,7 @@
 
 		<title>Beyond ideal MHD: resistive, reactive and relativistic plasmas</title>
 
-		<meta name="description" content="GR21 Conference, Columbia, NY, July 2016">
+		<meta name="description" content="GR21 Conference, Columbia, NY, July 11 2016">
 		<meta name="author" content="Ian Hawke">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -44,6 +44,46 @@
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
+
+		<!--Left align-->
+		<style type="text/css">
+			.reveal p { text-align: left; }
+			.reveal ol,
+			.reveal dl,
+			.reveal ul {
+			  display: block;
+			  text-align: left;
+			  margin: 0 0 0 1em; }
+			.reveal h1,
+			.reveal h2,
+			.reveal h3,
+			.reveal h4 {
+				text-transform: none
+			}
+
+			.reveal.slide .slides > section, .reveal.slide .slides > section > section {
+			  min-height: 100% !important;
+			  display: flex !important;
+			  flex-direction: column !important;
+			  justify-content: center !important;
+			  position: absolute !important;
+			  top: 0 !important;
+			  align-items: center !important;
+			}
+			section > h1, section > h2 {
+			  position: absolute !important;
+			  top: 0 !important;
+			  margin-left: auto !important;
+			  margin-right: auto !important;
+			  left: 0 !important;
+			  right: 0 !important;
+			  text-align: center !important;
+			}
+			.print-pdf .reveal.slide .slides > section, .print-pdf .reveal.slide .slides > section > section {
+			  min-height: 770px !important;
+			  position: relative !important;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -55,14 +95,26 @@
 
 				<section id="title">
 
-					<section data-background="./hs-2004-32-d-print.jpg">
-						<h1 style="color:#fff">Beyond ideal MHD:</h1>
-						<h3 styel="color:#fff">Resistive, reactive and relativistic plasmas</h3>
-						<p style="color:#fff">
-							Ian Hawke, Kyriaki Dionysopoulou, Nils Andersson, Greg Comer
-						</p>
-						<p><small><a href="http://twitter.com/ianhawke">@IanHawke</a>, <a href="http://https://github.com/IanHawke">github.com/IanHawke</a>, <a href="http://orcid.org/0000-0003-4805-0309">orcid.org/0000-0003-4805-0309</a>.</small>
-						</p>
+					<section data-background="images/ns-questions.jpeg" data-background-position="right" data-background-size="40%">
+						<div style="float: left; width: 60%">
+							<h1>Beyond ideal MHD:</h1>
+							<h3>Resistive, reactive and relativistic plasmas</h3>
+							<p>
+								<ul style="list-style: none;">
+									<li> Ian Hawke
+									<li> Kyriaki Dionysopoulou
+									<li> Nils Andersson
+									<li> Greg Comer
+								</ul>
+							</p>
+							<p>
+								<ul style="list-style: none;">
+									<li> <a href="http://twitter.com/ianhawke">@IanHawke</a>
+									<li> <a href="http://https://github.com/IanHawke">github.com/IanHawke</a>
+									<li> <a href="http://orcid.org/0000-0003-4805-0309">orcid.org/0000-0003-4805-0309</a>
+								</ul>
+							</p>
+						</div>
 						<aside class="notes">
 							Greg does the variational calculations, Nils the physical models, Kiki the numerics and I'm the jack (or maybe deuce) of all trades.
 						</aside>
@@ -72,15 +124,114 @@
 
 				<section id="MHD">
 
-					<section data-background-video="http://www.southampton.ac.uk/~kd10g13/movies/rho.mov">
-						<h4 style="text-align:left">Neutron star simulations</h4>
-						<p style="text-align:left" class="fragment">State-of-the-art: going beyond ideal MHD with phenomenological resistivity.</p>
+					<section data-background-video="http://www.southampton.ac.uk/~kd10g13/movies/combined3d.mov">
+
+						<aside class="notes">
+							This is an example of the field: Kiki's simulations of neutron star merger and collapse to black hole.
+						</aside>
+					</section>
+
+					<section>
+						<div class="header">
+							<h1>Options</h1>
+						</div>
+						<p>
+							<table>
+							  <tr>
+							    <th></th>
+							    <th>Single fluid</th>
+							    <th>Multi fluid</th>
+							  </tr>
+							  <tr>
+							    <td>Phenomenological resistivity</td>
+							    <td>GR: Palenzuela et al; Dionysopoulou et al</td>
+							    <td>SR: Amano et al; Barkov et al</td>
+							  </tr>
+							  <tr>
+							    <td>Physical closure resistivity</td>
+							    <td>GR: Khanna et al</td>
+							    <td></td>
+							  </tr>
+							</table>
+						</p>
+					</section>
+
+				</section>
+
+				<section id="Formulation">
+
+					<section>
+						<div class="header">
+							<h1>Formulation</h1>
+						</div>
+						<div style="float: left; width: 50%">
+							<p>
+								Measure particle number $n^a_{\text{x}}$ using reference space volume. Master function $\Lambda (n^2_\text{xy}, A_b)$.
+							</p>
+							<p>
+								Conjugate momenta $\bar{\mu}_a^{\text{x}}$ need not be parallel to flux $n^a_{\text{x}}$ (entrainment).
+							</p>
+							<p>
+								Allowing reference space interactions gives resistive, dissipative terms.
+							</p>
+						</div>
+						<div style="float: right; width: 50%">
+							<img src="images/reference-space.jpeg" />
+						</div>
+					</section>
+
+
+					<section data-background="images/timeflow.png" data-background-position="right" data-background-size="40%">
+						<div style="float: left; width: 60%">
+							<h2>Equations of motion</h2>
+							<p>
+								Variational calculation:
+								$$
+								\begin{align}
+								  \nabla_a n^a_{\text{x}} &= \Gamma_{\text{x}}, \\
+									f^{\text{x}}_a + \Gamma_{\text{x}} \bar{\mu}^{\text{x}}_a &= R^{\text{x}}_a.
+								\end{align}
+								$$
+							</p>
+							<p>
+								Force $f^{\text{x}}_a$ balances reactions $\Gamma_{\text{x}}$ and resistivity $R^{\text{x}}_a.$
+							</p>
+							<p class="fragment" data-fragment-index="0">
+								Variational constraints:
+								<ol class="fragment" data-fragment-index="0">
+									<li> Resistivity written as projection of velocity differences;
+									<li> Reactions fixed by resistivity;
+									<li> EM gauge invariance, second law, fix symmetry of coefficients.
+									<li> No consistent 2-fluid resistive form without reactions.
+								</ol>
+							</p>
+						</div>
+					</section>
+
+				</section>
+
+				<section id="Code">
+
+					<section>
+						<div class="header">
+							<h1>Multifluid code</h1>
+						</div>
+						<div>
+							<video src="http://www.southampton.ac.uk/~kd10g13/movies/kinkKW10.mov" autoplay controls>
+							</video>
+						</div>
+
 						<aside class="notes">
 							This is an example of the field: Kiki's simulations of neutron star merger and collapse to black hole.
 						</aside>
 					</section>
 
 				</section>
+
+			</section>
+
+		</section>
+
 
 			</div>
 
@@ -96,10 +247,14 @@
 			Reveal.initialize({
 				controls: false,
 				progress: true,
-				history: true,
-				center: true,
+				history: false,
+				center: false,
 
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				width:  1366,
+				height: 768,
+				margin: 0.05,
+
+				transition: 'none', // none/fade/slide/convex/concave/zoom
 
 				// Parallax background image
 			    //parallaxBackgroundImage: '../../figures/hs-2009-05-a-full_jpg.jpg', // e.g. "https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg"
