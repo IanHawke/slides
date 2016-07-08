@@ -150,6 +150,13 @@
 
 					<section>
 						<div class="header">
+							<h1>MHD is not enough</h1>
+						</div>
+
+					</section>
+
+					<section>
+						<div class="header">
 							<h1>Options</h1>
 						</div>
 						<p>
@@ -229,9 +236,33 @@
 
 				<section id="Code">
 
+
+					<section data-background="images/orzag_tang.png" data-background-position="right" data-background-size="70%">
+						<div style="float: left; width: 25%">
+							<div class="header">
+								<h1>Code</h1>
+							</div>
+							<p>
+								<ul>
+									<li> 3d, GR, nonlinear.
+									<li> Based on Einstein Toolkit.
+									<li> No entrainment.
+									<li> Phenomenological resistivity.
+									<li> Explicit or IMEX in time.
+									<li> ES-WENO.
+									<li> Attains expected convergence rates.
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+							Ideal MHD on the left, resistive code on the right.
+						</aside>
+					</section>
+
 					<section>
 						<div class="header">
-							<h1>Multifluid code</h1>
+							<h1>Multifluid comparison</h1>
 						</div>
 						<div>
 							<video src="http://www.southampton.ac.uk/~kd10g13/movies/kinkKW10.mov" autoplay controls>
@@ -255,6 +286,32 @@
 						<aside class="notes">
 							This is an example of the field: Kiki's simulations of neutron star merger and collapse to black hole.
 						</aside>
+					</section>
+
+				</section>
+
+				<section id="Summary">
+
+					<section>
+						<div class="header">
+							<h1>Summary</h1>
+						</div>
+						<p>
+							<ul>
+								<li>Multifluid formalism with coupled reference spaces gives
+									<ul>
+										<li>equations of motions with dissipation and resistivity;
+										<li>constraints on form of resistive terms;
+										<li>in principle values of all terms.
+									</ul>
+								<li>Code implementation in 3d GR
+									<ul>
+										<li>is completed in simplified model;
+										<li>is practical for moderate sized problems;
+										<li>shows the (in)consistencies of phenomenological approaches.
+									</ul>
+							</ul>
+						</p>
 					</section>
 
 				</section>
