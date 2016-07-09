@@ -54,11 +54,14 @@
 			  display: block;
 			  text-align: left;
 			  margin: 0 0 0 1em; }
-			.reveal h1,
+			.reveal h1 {
+				text-transform: none;
+				line-height: 2.0
+			}
 			.reveal h2,
 			.reveal h3,
 			.reveal h4 {
-				text-transform: none
+				text-transform: none;
 			}
 
 			.reveal.slide .slides > section, .reveal.slide .slides > section > section {
@@ -95,9 +98,9 @@
 
 				<section id="title">
 
-					<section data-background="images/ns-questions.jpeg" data-background-position="right" data-background-size="40%">
+					<section data-background="images/collapse_mf_cover.jpeg" data-background-position="right" data-background-size="42%" data-background-color="#000000">
 						<div style="float: left; width: 60%">
-							<h1>Beyond ideal MHD:</h1>
+							<h1 style="line-height: 1.0">Beyond ideal MHD:</h1>
 							<h3>Resistive, reactive and relativistic plasmas</h3>
 							<p>
 								<ul style="list-style: none;">
@@ -112,6 +115,7 @@
 									<li> <a href="http://twitter.com/ianhawke">@IanHawke</a>
 									<li> <a href="http://https://github.com/IanHawke">github.com/IanHawke</a>
 									<li> <a href="http://orcid.org/0000-0003-4805-0309">orcid.org/0000-0003-4805-0309</a>
+									<li> STAG, University of Southampton
 								</ul>
 							</p>
 						</div>
@@ -141,13 +145,14 @@
 
 				<section id="MHD">
 
-					<div class="header">
-						<h1>Motivation</h1>
-					</div>
-					<div>
-						<video src="http://www.southampton.ac.uk/~kd10g13/movies/combined3d.mov" controls autoplay="yes" poster="resistive_merger_0079.jpg">
-						</video>
-					</div>
+					<section data-background-color="#000000">
+						<div class="header">
+							<h1 style="line-height: 1.0">Motivation</h1>
+						</div>
+						<div>
+							<video src="http://www.southampton.ac.uk/~kd10g13/movies/combined3d.mov" controls autoplay="yes" poster="resistive_merger_0079.jpg">
+							</video>
+						</div>
 
 						<aside class="notes">
 							This is an example of the field: Kiki's simulations of neutron star merger and collapse to black hole.
@@ -158,32 +163,53 @@
 						<div class="header">
 							<h1>MHD is not enough</h1>
 						</div>
-
+						<div>
+							<p>
+								MHD approximation good for NS interior and exterior
+								<ul>
+									<li> on average;
+									<li> for different reasons.
+								</ul>
+							</p>
+							<p>
+								Going beyond the ideal case needed to
+								<ul>
+									<li> deal with highly dynamical situations;
+									<li> consistently link interior and exterior.
+								</ul>
+							</p>
+						</div>
 					</section>
 
 					<section>
 						<div class="header">
 							<h1>Options</h1>
 						</div>
-						<p>
-							<table>
-							  <tr>
-							    <th></th>
-							    <th>Single fluid</th>
-							    <th>Multi fluid</th>
-							  </tr>
-							  <tr>
-							    <td>Phenomenological resistivity</td>
-							    <td>GR: Palenzuela et al; Dionysopoulou et al</td>
-							    <td>SR: Amano et al; Barkov et al</td>
-							  </tr>
-							  <tr>
-							    <td>Physical closure resistivity</td>
-							    <td>GR: Khanna et al</td>
-							    <td></td>
-							  </tr>
-							</table>
-						</p>
+						<div>
+							<ol>
+								<li> Extend single fluid MHD with source;
+								<li> Treat each species as separate fluid.
+							</ol>
+							<p>
+								<table>
+								  <tr>
+								    <th></th>
+								    <th>Single fluid</th>
+								    <th>Multi fluid</th>
+								  </tr>
+								  <tr>
+								    <td>Phenomenological resistivity</td>
+								    <td>GR: Palenzuela et al; Dionysopoulou et al</td>
+								    <td>SR: Amano et al; Barkov et al</td>
+								  </tr>
+								  <tr>
+								    <td>Physical closure resistivity</td>
+								    <td>GR: Khanna et al</td>
+								    <td>GR: This work.</td>
+								  </tr>
+								</table>
+							</p>
+						</div>
 					</section>
 
 				</section>
@@ -268,7 +294,7 @@
 
 					<section>
 						<div class="header">
-							<h1>Multifluid comparison</h1>
+							<h1 style="line-height: 1.0">Multifluid comparison</h1>
 						</div>
 						<div>
 							<video src="http://www.southampton.ac.uk/~kd10g13/movies/kinkKW10.mov" autoplay="yes" controls poster="images/drift-kink.jpg">
@@ -280,7 +306,7 @@
 						</aside>
 					</section>
 
-					<section>
+					<section data-background-color="#000000">
 						<div class="header">
 							<h1>Neutron star collapse</h1>
 						</div>
