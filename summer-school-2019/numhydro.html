@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+
+<!--
+
+-->
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Numerical GR Hydrodynamics</title>
+
+		<meta name="description" content="Talk for Summer School, XX June 2019">
+		<meta name="author" content="Ian Hawke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/css/theme/white.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../reveal.js/css/print/pdf.css' : '../reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--MathJax stuff -->
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}, TeX: { extensions: ["autobold.js"] }});
+		</script>
+		<script type="text/javascript"
+		  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+		<!--Left align-->
+		<style type="text/css">
+			.reveal p { text-align: left; }
+			.reveal ol,
+			.reveal dl,
+			.reveal ul {
+			  display: block;
+			  text-align: left;
+			  margin: 0 0 0 1em; }
+			.reveal h2, h3 {
+				line-height: 2.0
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="title">
+
+					<section>
+						<div>
+							<h1>Numerical GR Hydrodynamics</h1>
+							<h3>A brief survey</h3>
+							<h4>
+								Ian Hawke
+							<h4>
+						</div>
+					</section>
+
+				</section>
+
+				<section id="Background">
+
+					<section>
+						<div>
+							<h2>Vacuum vs Matter</h2>
+
+							<p>
+								<ul>
+									<li> Range of models considered (GR vs (M)HD, non-ideal, $\nu$s, multifluids, ...). Parameter extraction harder.
+									<li> Scale (Planck length vs particle and turbulence lengths). Inherent approximations (EOS, interactions, ...).
+									<li> Form of solutions ($C^{\infty}$ or $C^4$ vs $C^0$). Restricts useful numerical methods.
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+							This directly follows on from the numerical GR vacuum section.
+
+							Nearly all current simulations focus on GR. The range of physics that could be important and included in matter simulations is huge. Minimum for state-of-the-art is MHD, an EOS that depends on species, and some radiation approximation. Additional directions could include non-ideal effects (viscosity, resistivity), elasticity for NS crusts, more complex treatments of heat or EM, and more.
+
+							Whilst vacuum simulations can scale everything to the mass of the black hole (or spacetime), that doesn't work for matter simulations. We're not going to simulate matter from a lattice quantum theory up - this would be impractical and wouldn't tell us much of use. The same is (mostly) true of particle models, although the scale is getting closer. By taking a mean-field meso-scale fluid-type approximation we simplify to something we can compute, at the cost of approximating interactions between features at scales we don't resolve. At the theoretical level this leads to EOS and other closure relations. At the numerical level it also leads to "subgrid" ideas, which we'll come back to.
+
+							These fluid-type models lead to nonlinear hyperbolic equations of motion, just like GR. Unlike GR they can develop discontinuities - shocks. The development and interaction of these (eg through the merger phase, or in jets, or CCSN) is what makes matter more complex.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h2>Conservation</h2>
+
+							<p>
+								EFEs imply $\nabla_a T^{ab} = 0$. Pick a tetrad, $e_b^{(j)}$ to get
+								$$
+								\begin{aligned}
+								  && \nabla_a \left[ e_b^{(j)} T^{ab} \right] &= \tfrac{1}{\sqrt{-g}} \partial_a \left( \sqrt{-g} e_b^{(j)} T^{ab} \right) = -T^{ab} \partial_a e_b^{(j)} \\
+									\implies && \partial_t {\bf q} + \partial_i {\bf f}^{(i)}({\bf q}) &= {\bf s}.
+								\end{aligned}
+								$$
+								Balance law form.
+
+								Only four equations: need other constituitive equations for, eg, EM, particle number, etc.
+							</p>
+						</div>
+
+						<aside class="notes">
+							Starting from stress-energy conservation we can choose a tetrad, typically aligned with the coordinates, to get four balance laws. The crucial point is the total divergence on the left-hand-side. First order hyperbolic PDEs of this form are well studied, and there's good numerical methods to solve them.
+
+							However, for astrophysically interesting matter we're going to need more than four fields to describe it. The conserved quantities (the ${\bf q}$'s) are roughly the energy and momentum of the average flow. We'll also need to describe EM fields, radiation, temperature and particle number by additional fields. These may be in balance law form, but may not (as seen in the multifluid section).
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h2>Key takeaway</h2>
+
+							<p>
+								Need numerical methods for
+								<ul>
+									<li> complex, interlinked models
+									<li> some described by balance laws
+									<li> <i>may</i> have non-conserved constituents
+									<li> small (unresolved) scale effects through closure relations.
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+							One crucial point to emphasize is that "unresolved" has a complex mix of theoretical and numerical implications.  In the fluid type approximation we have, at the theory level, eliminated particle interactions: these must be modelled through closure relations like cross-sections and the EOS. At the numerical end there are features that may be present in the theory but can't (yet) be numerical resolved: rapid reactions, or EM resistivity, are examples. These can either be approximated at the theory level ("instant" reactions, for example) or captured with special numerical methods.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Numerics">
+
+					<section>
+						<div>
+							<h2>Shocks</h2>
+
+							<p>
+								Shock speed $V_s$ from Rankine-Hugoniot, $V_s \left[ q \right] = \left[ f \right]$. Burgers equation
+								$$
+									\partial_t q + q \partial_x q = 0
+								$$
+								is equivalent to <i>any</i> of
+								$$
+									\partial_t q^n + \tfrac{n}{n+1} \partial_x q^{n+1} = 0,
+								$$
+								but they all have different shock speeds. Total derivative form crucial: otherwise need more information to fix solution.
+							</p>
+						</div>
+
+						<aside class="notes">
+							The reason that we care so much about balance law, and conservation law, form is that it's the easiest way to get a unique discontinuous solution: it fixes the speed of the shock. The Rankine-Hugoniot conditions which compute the shock speed are derived from the conservation law form. One non-conservative form can be equivalent to an infinite number of conservative forms, so you may need additional information to fix which one is correct.
+
+							To be annoying, not every non-conservative system has a conservative form, so in general we'll need to fix the shock speed for more general systems.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h2>Weak forms</h2>
+
+							<p>
+								Move the derivatives off the fields using $C^{\infty}$ test function $\phi$:
+								$$
+									\int_V \phi \partial_t {\bf q} + \oint_{\partial V} \phi {\bf f} - \int_V {\bf f} \cdot \nabla \phi = \int_V \phi {\bf s}.
+								$$
+							</p>
+							<p>
+								<ul>
+									<li> Split domain into volumes/elements/cells.
+									<li> Approximate fields, including $\phi$, leads to method.
+									<li> Surface integral couples neighbours; other terms <i>local</i>.
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+							This weak form means that the only derivative of a "real" field is the time derivative. This approach could be generalized by integrating over time as well - this leads to implicit methods that are more complex, but can be more accurate and efficient.
+
+							Once the domain is split into cells the weak form applies on each individually. Within each cell the fields, $\phi$ and $q$ (and hence implicitly the flux $f$) are approximated. For example, each can be approximated by a polynomial expansion. This will lead to a set of ODEs within each element, which can be solved by standard methods.
+
+							The two crucial parts of the algorithm are how the fields are approximated within each cell, and how the inter-cell flux (the surface integral) is computed. These need to be done carefully to avoid problems at shocks.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h2>Finite Volume Methods</h2>
+
+							<p>
+								Spatially constant $q \simeq \hat{q}_i(t)$ within cell:
+								$$
+									\tfrac{\text{d}}{\text{d}t} \hat{q}_i + \tfrac{1}{|V|} \oint_{\partial V} f(q) = s(\hat{q}_i).
+								$$
+								Simplify to 1d, no source:
+								$$
+									\tfrac{\text{d}}{\text{d}t} \hat{q}_i + \tfrac{1}{\Delta x} \left[ f(q_{i+1/2}(\hat{q}_i, \hat{q}_{i+1})) - f(q_{i-1/2}(\hat{q}_{i-1}, \hat{q}_{i})) \right] = 0.
+								$$
+								On $\partial V$ the field $q$ is multi-valued: solve <i>Riemann Problem</i> to get unique $q$ there.
+							</p>
+							<p>
+								Can improve accuracy accuracy by using more information when constructing $q_{i \pm 1/2}$.
+							</p>
+						</div>
+
+						<aside class="notes">
+							Finite volume methods make the simplest approximation. This removes one integral completely, and gives an explicit method. We still need to compute the surface integral.
+
+							By restricting to the simpler one-d case we see how the surface integral couples neighbouring cells. We need to compute the flux at the surface, which depends on the state there, but that does not have a unique value. If we know the limiting values of the fields either side of the surface we can solve, usually approximately, the Riemann Problem there to get a unique solution. This is usually only approximately valid for short times.
+
+							We are not restricted to using the approximation for the fields to get the input for the Riemann problem: we can use any stable information we like. This is where HRSC methods come in.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Going further">
+
+					<section>
+						<div>
+							<h2>Going further</h2>
+
+							<p>
+								<ul>
+									<li> Well balanced
+									<li> Positivity preserving
+									<li> Adaptivity (AMR, $h$/$p$)
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+							Details
+				    </aside>
+					</section>
+
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="../reveal.js/lib/js/head.min.js"></script>
+		<script src="../reveal.js/js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: false,
+				center: true,
+
+				width:  1366,
+				height: 768,
+				margin: 0.1,
+
+				transition: 'none', // none/fade/slide/convex/concave/zoom
+
+				// Parallax background image
+			    //parallaxBackgroundImage: '../../figures/hs-2009-05-a-full_jpg.jpg', // e.g. "https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg"
+
+			    // Parallax background size
+			    //parallaxBackgroundSize: '2145px 1213px', // CSS syntax, e.g. "2100px 900px" - currently only pixels are supported (don't use % or auto)
+
+			    // Amount of pixels to move the parallax background per slide step,
+			    // a value of 0 disables movement along the given axis
+			    // These are optional, if they aren't specified they'll be calculated automatically
+			    //parallaxBackgroundHorizontal: 200,
+			    //parallaxBackgroundVertical: 50
+
+				math: {
+			        mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+			        config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+			    },
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: '../reveal.js/plugin/math/math.js', async: true },
+					{ src: '../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
+					{ src: '../reveal.js/plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
