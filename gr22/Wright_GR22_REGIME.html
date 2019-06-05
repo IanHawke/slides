@@ -168,12 +168,9 @@
 						</div>
 
 						<aside class="notes">
-							Our motivation comes from binary neutron star mergers, which usually use ideal MHD.
-							Work predicated on ideal MHD insufficient for next generation of NS mergers<br />
-							Resistivity for magnetic fields - without incorrect for accretion rates and reconnection<br />
-							Multifluid necessary for entrainment, two-fluid effects etc. <br />
-							Resistive GRMHD by Kiki <br />
-							Multifluid theory by Andersson and Amano
+							Our motivation comes from binary neutron star mergers, which usually use ideal MHD. Whilst BBH produces convergent GWs, BNS has problems with pointwise convergence: see particularly the work of Kiuchi on resolution effects of maximum magnetic field strengths. The impact on, eg, angular momentum transport via dynamo wind up through the K-H-like instability near merger could be large, impacting multi-messenger predictions.<br>
+							There are also key physics missed by ideal MHD; reconnection (important for transport again), the link to the exterior plasma (multi-messenger again), and potential multi-fluid effects like entrainment. These are likely only significant in small regions, but may (through wind-up again) have qualitative impacts.<br>
+							Limited work in this direction, particularly by Palenzuela and Dionysopoulou in GR. Going to multifluids there's our work with Dionysopoulou and work in SR by Amano, Barkov and Komissarov, for example. Why has so little been done?
 						</aside>
 					</section>
 
@@ -193,8 +190,8 @@
               </p>
 						</div>
 						<aside class="notes">
-							Why is non-ideal not widely adopted then? <br />
-							Reason comes from the form of the equations - stiff, require IMEX<br />
+							There are physical reasons to ignore the non-ideal effects, but the primary reasons why they're ignored are numerical. Near the ideal MHD limit - which, we remember, is accurate over most of the domain - the resistive effects introduce a stiff source term. Essentially, the electric field evolution relaxes on a timescale proportional to the resistivity, which is extremely small. This restricts the timestep, often by many orders of magnitude.<br>
+							This can be helped using implicit integrators. Typically this makes the time integration only one order of magnitude slower. The best schemes mix implicit and explicit (hence IMEX) methods, as used by Palenzuela, Dionysopoulou, and Cordeiro-Carrillon, but are still too slow for "everyday" use.
 					</section>
 				</section>
 
@@ -226,10 +223,7 @@
 						</p>
 						</div>
 						<aside class="notes">
-							To do this, METHOD <br />
-							Multi-purpose, multi-physics numerical code <br />
-							Built to allow very easy investigation of different MHD models, integrators, flux methods etc. <br />
-							Available through github if you want to play
+							As a basis for investigating performance, Alex implemented a GPU based code using a range of integrators, including explicit and implicit RK, and IMEX schemes. It's SR, comparing ideal and resistive MHD, and multifluid electrodynamics. It's crucial to first check that hardware improvements alone won't help with extensions to resistive MHD.
 						</aside>
           </section>
 
@@ -252,9 +246,7 @@
 						</div>
 					</section>
 					<aside class="notes">
-						Bottom line is a 21 times speed up <br />
-						Gap between GPU and CPU performance is growing, expect this to increase in future! <br />
-						More details available in the paper
+						The performance improvements depends crucially on effectively managing the memory on the GPU; this is well known (note particularly Zink's GRMHD GPU code from 2011). With current hardware, even with the most complex multifluid systems it's possible to get order-of-magnitude speed ups. The bottom line is a factor 21 increase, which is expected to increase with GPU improvements. However, the relative gap between explicit and implicit methods is unchanged.
 					</aside>
         </section>
 
@@ -297,10 +289,9 @@
 
 						</div>
 						<aside class="notes">
-							Next we looked at model extensions - becoming more common in computational astrophysics <br />
-							Idea became common in classical turbulence simulations for emulating unresolved motion - has now seen action in GR hydro and MHD <br />
-							Other examples eg Giacomazzo to amplify B-fields due to unresolved turbulence <br />
-							Reason they are used is to add additional physics whilst keeping compuational cost low <br />
+							Instead of acceleration through hardware, we look at acceleration through changing the model.<br>
+							This is a standard approach in classical turbulence, particularly in large eddy simulations: add a source term to a "simple" system to approximate the unmodelled behaviour. This approach has been extended to GR by, for example, Radice and collaborators, who used the standard Smagorinsky approximation for subgrid turbulence. A particularly relevant example for us is Giacomazzo using a phenomenological subgrid source to study subgrid magnetic field amplification.<br>
+							The advantages of this approach are simplicity and cost: the principal part of the system doesn't change, so the bulk of the evolution is the same. The main disadvantage is linking parameters in the source to the physics, to make sure the results are actually meaningful.
 						</aside>
 					</section>
 					<section>
@@ -336,9 +327,8 @@
 							</p>
 						</div>
 						<aside class="notes">
-							Our extension is REGIME, developed using Chapman-Enskog analysis <br />
-							Starting point is the equations of ideal and resistive MHD <br />
-							Perturbations on top of ideal MHD solution for large conductivity
+							Our extension is REGIME, developed using Chapman-Enskog analysis. <br>
+							The assumption is that the full system can be split into stiff and non-stiff variables: here, the electric fields are stiff. We then do a perturbation expansion of the stiff variables. It is crucial that the background is in equilibrium: that is, the stiff source vanishes there. This expansion leads to a modified source for the non-stiff variables to leading order, which looks like a diffusion term.
 						</aside>
 					</section>
 
@@ -370,9 +360,7 @@
 							</ul>
 						</p>
 						<aside class="notes">
-							Follow the maths through to get ideal MHD plus an additional source term <br />
-							Proportional to the timescale, so small in the ideal limit <br />
-							Small source so can use explicit integrators
+							The crucial advantage of this Chapman-Enskog expansion is that the final system looks just like ideal MHD with an extra source. It's also non-stiff in the ideal limit: only as the resistivity becomes large will the source term cause problems. The parabolic nature of the source term does modify the numerical stability of the system, but will not have an impact for astrophysically interesting values of the resistivity. Importantly, the only parameter to tune here is the resistivity itself.
 						</aside>
 					</section>
 
@@ -391,11 +379,7 @@
 							</p>
 						</div>
 						<aside class="notes">
-							Thats the theory, does it work? <br />
-							Many more examples in the paper, here is one beautiful one - magnetic reconnection<br />
-							Resistive on the left, ideal + REGIME on the right <br />
-							Ideal MHD would look like the bottom row, adding REGIME allows us to replicate resistive MHD in the top row <br />
-							Results are indistinguishable
+							Here we show an example of magnetic reconnection, for two different resistivities, quite a long way from the ideal limit. If ideal MHD were used then the "islands" of magnetic pressure should stay separate. By including resistivity magnetic reconnection causes them to interact, with the width of the boundary layer linked to the resistivity value. The results here show the Chapman-Enskog approach is visually indistinguishable from the full resistive values. We also see clean convergence with grid resolution and with conductivity.
 						</aside>
 					</section>
 
@@ -405,20 +389,19 @@
 							<p>
 								<ul>
 									<li>
-										Extremely good agreement with resistive MHD;
+										Magnetic energy cascades to all scales;
 									</li>
 									<li>
-										Expected convergence with conductivity.
+										Good agreement with resistive MHD at larger scales;
+									</li>
+									<li>
+										The source term approach is <i>not</i> capturing subgrid behaviour.
 									</li>
 								</ul>
 							</p>
 						</div>
 						<aside class="notes">
-							Thats the theory, does it work? <br />
-							Many more examples in the paper, here is one beautiful one - magnetic reconnection<br />
-							Resistive on the left, ideal + REGIME on the right <br />
-							Ideal MHD would look like the bottom row, adding REGIME allows us to replicate resistive MHD in the top row <br />
-							Results are indistinguishable
+							To get more insight into what this approach is doing, and to link back to our binary neutron star motivation, we look at a Kelvin-Helmholtz instability. There's the standard Kolmogorov cascade of energy from large scales down to small, which is similar for all models. As we get to higher frequencies, and hence smaller scales, we see the different models diverge. Whilst the REGIME model is closer to the resistive case than the ideal is, once we start reaching grid-cell resolutions there is a substantial difference. This suggests that the REGIME model is capturing the large scale features of the resistive model, not the small.
 						</aside>
 					</section>
 
@@ -430,9 +413,7 @@
 							</p>
 						</div>
 						<aside class="notes">
-							What about the performance? <br />
-							Red line is REGIME, blue + green is resistive with explicit and implicit integrators <br />
-							For all parameter space REGIME is factors faster than resistive + IMEX, which is the current standard
+							Finally, we need to check the performance of REGIME against the resistive model. REGIME's performance is pretty much independent of the resistivity. In contrast, the runtime for an explicit RK scheme for the full resistive model (blue curve) blows up well before interesting resistivities are reached. The IMEX schemes allow physical resistivities to be evolved, but are always slower than regime, usually by factors of 5-10 or more.
 						</aside>
 					</section>
 
