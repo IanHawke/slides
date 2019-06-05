@@ -9,8 +9,8 @@
 
 		<title>Towards efficient, resistive, multi-fluid merger simulations</title>
 
-		<meta name="description" content="PHAROS Conference, Girona, Spain, April 25 2019">
-		<meta name="author" content="Alex James Wright">
+		<meta name="description" content="GR22 Conference, Valencia, Spain, July 2019">
+		<meta name="author" content="Ian Hawke">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -178,106 +178,39 @@
 						</aside>
 					</section>
 
-					<section id="Difficulties">
-						<div class="header">
+					<section id="Difficulties" data-background="BWPerfResistive.jpg" data-background-position="right" data-background-size="60%">
+						<div style="float: left; width: 39%">
 							<h1>Difficulties</h1>
-						</div>
-						<div style="float: left; width: 49%">
 						  <p>
                 <ul>
                   <li> More realistic models can be stiff;
-                  <li> Require implicit schemes for stability:
-                    <ul>
-                      <li> E.g. IMEX (Pareschi & Russo 2004).
+			              $$
+			              \begin{align}
+			                \partial_t q = \mathcal{F}(q) + \frac{1}{\epsilon} \mathcal{S}(q)
+			              \end{align}
+			              $$
+                  <li> Require implicit schemes for stability, e.g. IMEX (Pareschi & Russo 2004).
+								</ul>
               </p>
 						</div>
-            <div style="float: right; width: 49%">
-              $$
-              \begin{align}
-                \partial_t q = \mathcal{F}(q) + \frac{1}{\epsilon} \mathcal{S}(q)
-              \end{align}
-              $$
-              <br><br>
-              $$
-              \begin{align}
-                q^{(i)} = q^n + \Delta t G(q^n) + \Delta t H(q^{(i)})
-              \end{align}
-              $$
-            </div>
 						<aside class="notes">
 							Why is non-ideal not widely adopted then? <br />
 							Reason comes from the form of the equations - stiff, require IMEX<br />
 					</section>
-          <section id="Performance" data-background="BWPerfResistive.jpg" data-background-position="right" data-background-size="60%">
-            <div style="float: left; width: 40%">
-              <br><br><br><h3> Performance </h3>
-              <p>
-                <ul>
-                  <li> Performance depends on timescale, $\epsilon$;
-                  <li> Expect $5 \times$ slow down.
-              </p>
-            </div>
-            <aside class="notes">
-              Slow down because of additional computation compared to explicit evolution of ideal MHD <br />
-            </aside>
-          </section>
-
 				</section>
 
         <section id="GPU">
-          <section data-background="v100.jpg" data-background-position="right" data-background-size="50%">
-            <div style="float: left; width: 50%">
-              <br><br><br>
-              <h2> Massively parallel processors </h2>
-              <p>
-                Seeing wide use in scientific software:
-                <ul>
-                  <li> $\sim 100 \times$ greater FLOPS than CPU;
-                  <li> Common on HPC clusters;
-                  <li> FLOPS increasing faster than CPU.
-            </div>
-						<aside class="notes">
-							Our work is based on limiting the computational demands set by the more realistic models <br />
-							First, by utilizing GPUs <br />
-						</aside>
-          </section>
 
-          <section>
-            <div> <br><br>
-              <h2> GPU-capable codes </h2>
-              <p>
-                Some examples include:
-                <ul>
-                  <li> Wong (2011): MHD (non-relativistic);
-                  <li> Zhang (2018): AMR-MHD (non-relativistic);
-                  <li> Zink (2011): GRMHD (static spacetime).
-              </p>
-              <p>
-                <br>
-                All examples use (R)MHD and <emph>explicit</emph> numerical methods.
-                <br><br>
-                How will <emph>implicit</emph> schemes transfer?
-            </div>
-						<aside class="notes">
-							We are not the first for GPU-MHD, however all so far use ideal MHD + explicit integrators <br />
-							We need to know how IMEX required by multifluid and resistive MHD ports to GPUs
-						</aside>
-          </section>
-
-          <section data-background="HighResKHICrop.gif" data-background-position="bottom" data-background-size="55%">
-            <div style="float: left; width: 50%">
+          <section data-background="HighResKHICrop2.gif" data-background-position="right" data-background-size="55%">
+            <div style="float: left; width: 45%">
 							<h1>
 								METHOD:
 							</h1>
-							<ul>
-								<li>
-									Lightweight, multi-physics MHD code;
-								</li>
-						</div>
-						<div style="float: right; width: 50%">
-
 							<p>
 								<ul>
+									<li>
+										Lightweight, multi-physics MHD code;
+									</li>
 									<li>
 										Ideal and resistive single and two-fluid models;
 									</li>
@@ -285,13 +218,13 @@
 										Explicit or implicit integration;
 									</li>
 									<li>
-										GPU capable;
+										GPU capable.
 									</li>
-									<li>
-										Open source through GitHub.
-									</li>
+								</ul>
 							</p>
+							<p>
 							<small><a href="http://https://github.com/AlexJamesWright/METHOD">github.com/AlexJamesWright/METHOD</a></small>
+						</p>
 						</div>
 						<aside class="notes">
 							To do this, METHOD <br />
@@ -301,45 +234,22 @@
 						</aside>
           </section>
 
-					<section data-background="costPerCell.jpg" data-background-position='right' data-background-size="50%">
+					<section data-background="V100ParallelSpeedUpCrop.jpg" data-background-position='right' data-background-size="55%">
 						<div style="float: left; width: 45%">
-							<br /><br />
-							<h2> Porting to GPU </h2>
-							<ul>
-								<li>
-									Time integration is computationally expensive;
-								</li>
-								<li>
-									 Primitive recovery in each IMEX step;
-								</li>
-								<li>
-									 Demands correct use of shared memory.
-								</li>
-							</ul>
-						</div>
-						<aside class="notes">
-							First thing is identify time integration as expensive <br />
-							Correct usage of memory is important <br />
-							Hide latency by identifying most commonly accessed variables <br />
-							Nested rootfind, C2P variables needed alot, so in shared memory
-						</aside>
-					</section>
-
-					<section data-background="V100ParallelSpeedUp.jpg" data-background-position='right' data-background-size="50%">
-						<div style="float: left; width: 45%">
-							<br /><br />
-							<h2>Performance</h2><br />
-							<ul>
-								<li>
-									Parallel speed up of $21\times$ versus CPU
-								</li>
-								<li>
-									Further optimisations are possible/necessary
-								</li>
-								<li>
-									More details in Wright & Hawke (2019) - 'Resistive and multi-fluid RMHD on graphics processing units'.
-								</li>
-							</ul>
+							<h1>Performance</h1>
+							<p>
+								<ul>
+									<li>
+										Parallel speed up of $21\times$ versus CPU;
+									</li>
+									<li>
+										Further optimisations possible;
+									</li>
+									<li>
+										Wright & Hawke arXiV:<a href="https://arxiv.org/abs/1808.09721">1808.09721</a> DOI:<a href="https://doi.org/10.3847/1538-4365/aaf1b0">10.3847/1538-4365/aaf1b0</a>.
+									</li>
+								</ul>
+							</p>
 						</div>
 					</section>
 					<aside class="notes">
@@ -352,9 +262,9 @@
 				<section id="REGIME">
 					<section>
 						<div>
-							<br><br>
-							<h2>Model extensions</h2><br />
+							<h1>Model extensions</h1>
 							<div style="float: left; width:= 45%">
+								<p>
 									<ul>
 										Examples from:
 											<li>
@@ -370,17 +280,20 @@
 												Giacomazzo (2015) - subgrid source
 											</li>
 									</ul>
+								</p>
 							</div>
 							<div style="float: right; width: 45%">
-								<ul>
-									Source terms allow:
-									<li>
-										Easy way to add additional physics
-									</li>
-									<li>
-										Computationally cheaper than solving full model
-									</li>
-								</ul>
+								<p>
+									<ul>
+										Source terms allow:
+										<li>
+											Easy way to add additional physics
+										</li>
+										<li>
+											Computationally cheaper than solving full model
+										</li>
+									</ul>
+								</p>
 							</div>
 
 						</div>
@@ -392,33 +305,36 @@
 						</aside>
 					</section>
 					<section>
-						<div style="float: left; width: 45%">
-							<br /><br /><h1>REGIME:</h1><h2>A resistive extension to ideal MHD<sup>*</sup></h2><br /><br /><small><sup>*</sup>in preparation</small>
+						<div style="float: left; width: 40%">
+							<h1>REGIME:</h1>
+							<h2>A resistive extension to ideal MHD<sup>*</sup></h2>
+							<p>
+								<small><sup>*</sup>in preparation</small>
+							</p>
 						</div>
-						<div style="float: right; width: 55%">
-							<br /><br />
-							Chapman-Enskog expansion:
-							<ul><br />
+						<div style="float: right; width: 60%">
+
+							<p>
+							<ul>
 								<li>
-									Start from resistive MHD, $\overline{q}$ and $q$ are stiff and non-stiff:
-									<br /><br />
+									Start from resistive MHD, $\overline{q}$ stiff:
 									$$
 									\begin{align}
-										\partial_t q + \partial_x f(q, \overline{q}) = s(q, \overline{q})
+										\partial_t q + \partial_x f(q, \overline{q}) &= s(q, \overline{q}) \\
+										\partial_t \overline{q} + \partial_x \overline{f}(q, \overline{q}) &= \tfrac{1}{\epsilon} \overline{s} (q, \overline{q}).
 									\end{align}
 									$$
 								</li>
-							</ul>
-							<br />
-							<ul>
 								<li>
-									Expand equations around equilibrium (ideal) solution
-									<br /><br>
+									Chapman-Enskog expansion around ideal MHD:
 									$$
 									\begin{align}
-										\overline{q} = \overline{q}_0 + \epsilon \overline{q}_1 + \mathcal{O}(\epsilon^2)
+										\overline{q} & = \overline{q}_0 + \epsilon \overline{q}_1 + \mathcal{O}(\epsilon^2) \\
+										\to \quad \partial_t q + \partial_x f & = s + \epsilon \partial_x ( D \partial_x q ).
 									\end{align}
 									$$
+								</li>
+							</p>
 						</div>
 						<aside class="notes">
 							Our extension is REGIME, developed using Chapman-Enskog analysis <br />
@@ -429,13 +345,13 @@
 
 					<section>
 						<div>
-							<h2>Extension</h2>
+							<h1>Extension</h1>
 							<p>
 								To first order in $\epsilon$:
 							</p>
 							$$
 							\begin{align}
-								\partial_t q + \partial_x f = s + \epsilon \partial_x D
+								\partial_t q + \partial_x f = s + \epsilon \partial_x ( D \partial_x q ).
 							\end{align}
 							$$
 						</div>
@@ -464,7 +380,7 @@
 					<section data-background="RMRFinalStatePressure.jpg" data-background-position='right' data-background-size="55%">
 						<div style="float: left; width: 40%">
 							<br /><br />
-							<h2>Results:</h2>
+							<h1>Results</h1>
 							<br />
 							<ul>
 								<li>
@@ -484,16 +400,12 @@
 						</aside>
 					</section>
 
-					<section data-background='perfNew.jpg' data-background-position='bottom' data-background-size="85%">
+					<section data-background='perfNew.jpg' data-background-position='bottom' data-background-size="100%">
 						<div style="float: top">
-							<br />
-							<h2>Results:</h2>
-							<br />
-							<ul>
-								<li>
-									Many factors faster than full model.
-								</li>
-							</ul>
+							<h1>Performance</h1>
+							<p>
+								Many factors faster than full model.
+							</p>
 						</div>
 						<aside class="notes">
 							What about the performance? <br />
@@ -501,36 +413,6 @@
 							For all parameter space REGIME is factors faster than resistive + IMEX, which is the current standard
 						</aside>
 					</section>
-
-					<section>
-						<div>
-							<br /><br />
-							<h2>Whats next?</h2>
-							<br />
-							<center>
-							<ul>
-								<li>
-									Finalizing 'A resistive extension to ideal MHD';
-								</li>
-								<li>
-									Apply to resistive GRMHD;
-								</li>
-								<li>
-									Explore application to multi-fluid equations.
-								</li>
-							</ul>
-
-							</center>
-						</div>
-						<aside class="notes">
-							What do we want to do next?<br />
-							All simulations have been in SR <br />
-							We will perform the same alaysis in the GRMHD equaitons, and apply to mergers, accretion on to BHs, MRI etc... <br />
-							...to determine the performance benefits over resistive MHD
-						</aside>
-					</section>
-				</section>
-
 
 				<section id="Summary">
 
@@ -540,15 +422,10 @@
 						</div>
 						<p>
 							<ul>
-								<li>GPUs to accelerate resistive and multi-fluid models
-									<ul>
-										<li>speed-up limited by memory usage;
-										<li>shown $21\times$ speed-ups are possible;
-										<li>improved design will allow futher accelerations.
-									</ul>
 								<li>Resistive extension to ideal MHD
 									<ul>
 										<li>completed in SR with encouraging results;
+										<li>in progress in GR;
 										<li>results match full model in a fraction of the time;
 										<li>application to GRMHD will allow merger, accretion and MRI studies;
 										<li>method could be useful for multi-fluid and radiative models.
@@ -581,8 +458,8 @@
 				height: 768,
 				// showNotes = true,
 				margin: 0.05,
-				transition: 'convex', // none/fade/slide/convex/concave/zoom
-        backgroundTransition: 'convex',
+				transition: 'none', // none/fade/slide/convex/concave/zoom
+        backgroundTransition: 'none',
 				// Parallax background image
 			    //parallaxBackgroundImage: '../../figures/hs-2009-05-a-full_jpg.jpg', // e.g. "https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg"
 			    // Parallax background size
