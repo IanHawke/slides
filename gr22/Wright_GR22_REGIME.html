@@ -162,8 +162,6 @@
 										<li> Charged multi-fluid by Andersson (2017), Amano (2016).
 									</ul>
 								</p>
-                <p>
-
 							</div>
 						</div>
 
@@ -191,7 +189,8 @@
 						</div>
 						<aside class="notes">
 							There are physical reasons to ignore the non-ideal effects, but the primary reasons why they're ignored are numerical. Near the ideal MHD limit - which, we remember, is accurate over most of the domain - the resistive effects introduce a stiff source term. Essentially, the electric field evolution relaxes on a timescale proportional to the resistivity, which is extremely small. This restricts the timestep, often by many orders of magnitude.<br>
-							This can be helped using implicit integrators. Typically this makes the time integration only one order of magnitude slower. The best schemes mix implicit and explicit (hence IMEX) methods, as used by Palenzuela, Dionysopoulou, and Cordeiro-Carrillon, but are still too slow for "everyday" use.
+							This can be helped using implicit integrators. Typically this makes the time integration only one order of magnitude slower. The best schemes mix implicit and explicit (hence IMEX) methods, as used by Palenzuela, Dionysopoulou, and Cordeiro-Carrion, but are still too slow for "everyday" use.
+						</aside>
 					</section>
 				</section>
 
@@ -251,6 +250,7 @@
         </section>
 
 				<section id="REGIME">
+
 					<section>
 						<div>
 							<h1>Model extensions</h1>
@@ -294,6 +294,7 @@
 							The advantages of this approach are simplicity and cost: the principal part of the system doesn't change, so the bulk of the evolution is the same. The main disadvantage is linking parameters in the source to the physics, to make sure the results are actually meaningful.
 						</aside>
 					</section>
+
 					<section>
 						<div style="float: left; width: 40%">
 							<h1>REGIME:</h1>
@@ -363,6 +364,9 @@
 							The crucial advantage of this Chapman-Enskog expansion is that the final system looks just like ideal MHD with an extra source. It's also non-stiff in the ideal limit: only as the resistivity becomes large will the source term cause problems. The parabolic nature of the source term does modify the numerical stability of the system, but will not have an impact for astrophysically interesting values of the resistivity. Importantly, the only parameter to tune here is the resistivity itself.
 						</aside>
 					</section>
+				</section>
+
+				<section id="Results">
 
 					<section data-background="RMRFinalStatePressure.jpg" data-background-position='right' data-background-size="55%">
 						<div style="float: left; width: 40%">
@@ -383,8 +387,8 @@
 						</aside>
 					</section>
 
-					<section data-background="modelPowerSpectrumT5Sig100NoMinModPaperIHTalk.jpg" data-background-position='right' data-background-size="55%">
-						<div style="float: left; width: 40%">
+					<section data-background="modelPowerSpectrumT5Sig100NoMinModPaperIHTalk.jpg" data-background-position='right' data-background-size="40%">
+						<div style="float: left; width: 55%">
 							<h2>Kelvin-Helmholtz Instability</h2>
 							<p>
 								<ul>
@@ -416,6 +420,7 @@
 							Finally, we need to check the performance of REGIME against the resistive model. REGIME's performance is pretty much independent of the resistivity. In contrast, the runtime for an explicit RK scheme for the full resistive model (blue curve) blows up well before interesting resistivities are reached. The IMEX schemes allow physical resistivities to be evolved, but are always slower than regime, usually by factors of 5-10 or more.
 						</aside>
 					</section>
+				</section>
 
 				<section id="Summary">
 
