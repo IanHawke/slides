@@ -244,7 +244,7 @@
 							</p>
 						</div>
 						<aside class="notes">
-							The performance improvements depends crucially on effectively managing the memory on the GPU; this is well known (note particularly Zink's GRMHD GPU code from 2011). With current hardware, even with the most complex multifluid systems it's possible to get order-of-magnitude speed ups. The bottom line is a factor 21 increase, which is expected to increase with GPU improvements. However, the relative gap between explicit and implicit methods is unchanged.
+							The performance improvements depends crucially on effectively managing the memory on the GPU; this is well known (note particularly Zink's GRMHD GPU code from 2011). The limited shared memory causes particular issues when the state vector gets large, as with multifluid and resistive systems. With current hardware, even with the most complex multifluid systems it's possible to get order-of-magnitude speed ups. The bottom line is a factor 21 increase, which is expected to increase with GPU improvements. However, the relative gap between explicit and implicit methods is unchanged.
 						</aside>
 					</section>
         </section>
