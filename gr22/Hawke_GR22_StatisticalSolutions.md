@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="en">
+
+<!--
+-->
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Towards efficient, resistive, multi-fluid merger simulations</title>
+
+		<meta name="description" content="GR22 Conference, Valencia, Spain, July 2019">
+		<meta name="author" content="Ian Hawke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../reveal.js/css/print/pdf.css' : '../reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--MathJax stuff -->
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}, TeX: { extensions: ["autobold.js"] }});
+		</script>
+		<script type="text/javascript"
+		  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+
+		<!--PDF print -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../reveal.js/css/print/pdf.css' : '../reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+		<!--Left align-->
+		<style type="text/css">
+			.reveal p { text-align: left; }
+			.reveal ol,
+			.reveal dl,
+			.reveal ul {
+			  display: block;
+			  text-align: left;
+			  margin: 0 0 0 1em; }
+			.reveal h1 {
+				text-transform: none;
+				line-height: 2.0
+			}
+			.reveal h2,
+			.reveal h3,
+			.reveal h4 {
+				text-transform: none;
+			}
+			.reveal table td {
+				border-bottom: none;
+			}
+			.reveal.slide .slides > section, .reveal.slide .slides > section > section {
+			  min-height: 100% !important;
+			  display: flex !important;
+			  flex-direction: column !important;
+			  justify-content: center !important;
+			  position: absolute !important;
+			  top: 0 !important;
+			  align-items: center !important;
+			}
+			section > h1, section > h2 {
+			  position: absolute !important;
+			  top: 0 !important;
+			  margin-left: auto !important;
+			  margin-right: auto !important;
+			  left: 0 !important;
+			  right: 0 !important;
+			  text-align: center !important;
+			}
+			.print-pdf .reveal.slide .slides > section, .print-pdf .reveal.slide .slides > section > section {
+			  min-height: 770px !important;
+			  position: relative !important;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="title">
+
+					<section data-background="figures_aw/background.jpg" data-background-position="center" data-background-size="100%" data-background-color="#000000">
+						<div style="float: center">
+							<h1 style="line-height: 1.0">Towards efficient, resistive, multi-fluid merger simulations</h1>
+							<p>
+								<ul style="list-style: none;">
+									<li> Alex Wright
+									<li> Ian Hawke
+								</ul>
+							</p>
+							<p>
+								<ul style="list-style: none;">
+									<li> <a href="http://github.com/AlexJamesWright">github.com/AlexJamesWright</a>
+									<li> STAG, University of Southampton
+                  <li> Next Generation Computational Modelling Group
+									<li> <a href="http://arxiv.org/abs/1906.03150">arXiV:1906.03150</a>
+								</ul>
+							</p>
+						</div>
+						<aside class="notes">
+							Thanks to the chair and the organisers. This is the work of Alex Wright, a PhD student of Nils Andersson and myself at Southampton.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Motivation">
+
+					<section>
+						<div style="float: center; width: 100%">
+							<div class="header">
+								<h1>Non-ideal MHD is needed</h1>
+							</div>
+							<div style="float: left; width: 49%">
+								<p>
+									MHD misses out on:
+									<ul>
+										<li> correct EM fields (interior/exterior);
+										<li> magnetic reconnection;
+                    <li> accretion;
+                    <li> entrainment.
+									</ul>
+								</p>
+                <p>
+
+							</div>
+							<div style="float: right; width: 49%">
+								<p>
+									So far:
+									<ul>
+										<li> Resistive GRMHD by Dionysopoulou (2013), Palenzuela (2009), Qian (2016);
+										<li> Charged multi-fluid by Andersson (2017), Amano (2016).
+									</ul>
+								</p>
+							</div>
+						</div>
+
+						<aside class="notes">
+							Our motivation comes from binary neutron star mergers, which usually use ideal MHD. Whilst BBH produces convergent GWs, BNS has problems with pointwise convergence: see particularly the work of Kiuchi on resolution effects of maximum magnetic field strengths. The impact on, eg, angular momentum transport via dynamo wind up through the K-H-like instability near merger could be large, impacting multi-messenger predictions.<br>
+							There are also key physics missed by ideal MHD; reconnection (important for transport again), the link to the exterior plasma (multi-messenger again), and potential multi-fluid effects like entrainment. These are likely only significant in small regions, but may (through wind-up again) have qualitative impacts.<br>
+							Limited work in this direction, particularly by Palenzuela and Dionysopoulou in GR. Going to multifluids there's our work with Dionysopoulou and work in SR by Amano, Barkov and Komissarov, for example. Why has so little been done?
+						</aside>
+					</section>
+
+					<section id="Difficulties" data-background="figures_aw/BWPerfResistiveIHTalk.jpg" data-background-position="right" data-background-size="60%">
+						<div style="float: left; width: 39%">
+							<h1>Difficulties</h1>
+						  <p>
+                <ul>
+                  <li> More realistic models can be stiff;
+			              $$
+			              \begin{align}
+			                \partial_t q = \mathcal{F}(q) + \frac{1}{\epsilon} \mathcal{S}(q)
+			              \end{align}
+			              $$
+                  <li> Require implicit schemes for stability, e.g. IMEX (Pareschi & Russo 2004).
+								</ul>
+              </p>
+						</div>
+						<aside class="notes">
+							There are physical reasons to ignore the non-ideal effects, but the primary reasons why they're ignored are numerical. Near the ideal MHD limit - which, we remember, is accurate over most of the domain - the resistive effects introduce a stiff source term. Essentially, the electric field evolution relaxes on a timescale proportional to the resistivity, which is extremely small. This restricts the timestep, often by many orders of magnitude.<br>
+							This can be helped using implicit integrators. Typically this makes the time integration only one order of magnitude slower. The best schemes mix implicit and explicit (hence IMEX) methods, as used by Palenzuela, Dionysopoulou, and Cordeiro-Carrion, but are still too slow for "everyday" use.
+						</aside>
+					</section>
+				</section>
+
+        <section id="GPU">
+
+          <section data-background="figures_aw/HighResKHICrop2.gif" data-background-position="right" data-background-size="55%">
+            <div style="float: left; width: 45%">
+							<h1>
+								METHOD:
+							</h1>
+							<p>
+								<ul>
+									<li>
+										Lightweight, multi-physics MHD code;
+									</li>
+									<li>
+										Ideal and resistive single and two-fluid models;
+									</li>
+									<li>
+										Explicit or implicit integration;
+									</li>
+									<li>
+										GPU capable.
+									</li>
+								</ul>
+							</p>
+							<p>
+							<small><a href="https://github.com/AlexJamesWright/METHOD">github.com/AlexJamesWright/METHOD</a></small>
+						</p>
+						</div>
+						<aside class="notes">
+							As a basis for investigating performance, Alex implemented a GPU based code using a range of integrators, including explicit and implicit RK, and IMEX schemes. It's SR, comparing ideal and resistive MHD, and multifluid electrodynamics. It's crucial to first check that hardware improvements alone won't help with extensions to resistive MHD.
+						</aside>
+          </section>
+
+					<section data-background="figures_aw/V100ParallelSpeedUpIHTalk.jpg" data-background-position='right' data-background-size="55%">
+						<div style="float: left; width: 45%">
+							<h1>Performance</h1>
+							<p>
+								<ul>
+									<li>
+										Parallel speed up of $21\times$ versus CPU;
+									</li>
+									<li>
+										Further optimisations possible;
+									</li>
+									<li>
+										Wright & Hawke arXiV:<a href="https://arxiv.org/abs/1808.09721">1808.09721</a> DOI:<a href="https://doi.org/10.3847/1538-4365/aaf1b0">10.3847/1538-4365/aaf1b0</a>.
+									</li>
+								</ul>
+							</p>
+						</div>
+						<aside class="notes">
+							The performance improvements depends crucially on effectively managing the memory on the GPU; this is well known (note particularly Zink's GRMHD GPU code from 2011). The limited shared memory causes particular issues when the state vector gets large, as with multifluid and resistive systems. With current hardware, even with the most complex multifluid systems it's possible to get order-of-magnitude speed ups. The bottom line is a factor 21 increase, which is expected to increase with GPU improvements. However, the relative gap between explicit and implicit methods is unchanged.
+						</aside>
+					</section>
+        </section>
+
+				<section id="REGIME">
+
+					<section>
+						<div>
+							<h1>Model extensions</h1>
+							<div style="float: left; width:= 45%">
+								<p>
+									<ul>
+										Examples from:
+											<li>
+												Classical turbulence simulations (LES)
+											</li>
+											<li>
+												Radiative/reactive flows
+											</li>
+											<li>
+												Radice (2017) - GRLES
+											</li>
+											<li>
+												Giacomazzo (2015) - subgrid source
+											</li>
+									</ul>
+								</p>
+							</div>
+							<div style="float: right; width: 45%">
+								<p>
+									<ul>
+										Source terms allow:
+										<li>
+											Easy way to add additional physics
+										</li>
+										<li>
+											Computationally cheaper than solving full model
+										</li>
+									</ul>
+								</p>
+							</div>
+
+						</div>
+						<aside class="notes">
+							Instead of acceleration through hardware, we look at acceleration through changing the model.<br>
+							This is a standard approach in classical turbulence, particularly in large eddy simulations: add a source term to a "simple" system to approximate the unmodelled behaviour. This approach has been extended to GR by, for example, Radice and collaborators, who used the standard Smagorinsky approximation for subgrid turbulence. A particularly relevant example for us is Giacomazzo using a phenomenological subgrid source to study subgrid magnetic field amplification.<br>
+							The advantages of this approach are simplicity and cost: the principal part of the system doesn't change, so the bulk of the evolution is the same. The main disadvantage is linking parameters in the source to the physics, to make sure the results are actually meaningful.
+						</aside>
+					</section>
+
+					<section>
+						<div style="float: left; width: 40%">
+							<h1>REGIME:</h1>
+							<h2>A resistive extension to ideal MHD<sup>*</sup></h2>
+							<p>
+								<small><sup>*</sup><a href="http://arxiv.org/abs/1906.03150">arXiV:1906.03150</a></small>
+							</p>
+						</div>
+						<div style="float: right; width: 60%">
+
+							<p>
+							<ul>
+								<li>
+									Start from resistive MHD, $\overline{q}$ stiff:
+									$$
+									\begin{align}
+										\partial_t q + \partial_x f(q, \overline{q}) &= s(q, \overline{q}) \\
+										\partial_t \overline{q} + \partial_x \overline{f}(q, \overline{q}) &= \tfrac{1}{\epsilon} \overline{s} (q, \overline{q}).
+									\end{align}
+									$$
+								</li>
+								<li>
+									Chapman-Enskog expansion around ideal MHD:
+									$$
+									\begin{align}
+										\overline{q} & = \overline{q}_0 + \epsilon \overline{q}_1 + \mathcal{O}(\epsilon^2) \\
+										\to \quad \partial_t q + \partial_x f & = s + \epsilon \partial_x ( D \partial_x q ).
+									\end{align}
+									$$
+								</li>
+							</p>
+						</div>
+						<aside class="notes">
+							Our extension is REGIME, developed using Chapman-Enskog analysis. <br>
+							The assumption is that the full system can be split into stiff and non-stiff variables: here, the electric fields are stiff. We then do a perturbation expansion of the stiff variables. It is crucial that the background is in equilibrium: that is, the stiff source vanishes there. This expansion leads to a modified source for the non-stiff variables to leading order, which looks like a diffusion term.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h1>Extension</h1>
+							<p>
+								To first order in $\epsilon$:
+							</p>
+							$$
+							\begin{align}
+								\partial_t q + \partial_x f = s + \epsilon \partial_x ( D \partial_x q ).
+							\end{align}
+							$$
+						</div>
+						<p>
+							<br />
+							Features:
+							<ul>
+								<li>
+									New system extends ideal MHD;
+								</li>
+								<li>
+									Stiff in opposing limit to resistive MHD as $\epsilon \propto 1/\sigma$;
+								</li>
+								<li>
+									Small contribution near ideal MHD limit.
+								</li>
+							</ul>
+						</p>
+						<aside class="notes">
+							The crucial advantage of this Chapman-Enskog expansion is that the final system looks just like ideal MHD with an extra source. It's also non-stiff in the ideal limit: only as the resistivity becomes large will the source term cause problems. The parabolic nature of the source term does modify the numerical stability of the system, but will not have an impact for astrophysically interesting values of the resistivity. Importantly, the only parameter to tune here is the resistivity itself.
+						</aside>
+					</section>
+				</section>
+
+				<section id="Results">
+
+					<section data-background="figures_aw/RMRFinalStatePressure.jpg" data-background-position='right' data-background-size="55%">
+						<div style="float: left; width: 40%">
+							<h2>Reconnection</h2>
+							<p>
+								<ul>
+									<li>
+										Extremely good agreement with resistive MHD;
+									</li>
+									<li>
+										Expected convergence with conductivity.
+									</li>
+								</ul>
+							</p>
+						</div>
+						<aside class="notes">
+							Here we show an example of magnetic reconnection, for two different resistivities, quite a long way from the ideal limit. If ideal MHD were used then the "islands" of magnetic pressure should stay separate. By including resistivity magnetic reconnection causes them to interact, with the width of the boundary layer linked to the resistivity value. The results here show the Chapman-Enskog approach is visually indistinguishable from the full resistive values. We also see clean convergence with grid resolution and with conductivity.
+						</aside>
+					</section>
+
+					<section data-background="figures_aw/modelPowerSpectrumT5Sig100NoMinModPaperIHTalk.jpg" data-background-position='right' data-background-size="40%">
+						<div style="float: left; width: 55%">
+							<h2>Kelvin-Helmholtz Instability</h2>
+							<p>
+								<ul>
+									<li>
+										Magnetic energy cascades to all scales;
+									</li>
+									<li>
+										Good agreement with resistive MHD at larger scales;
+									</li>
+									<li>
+										The source term approach is <i>not</i> capturing subgrid behaviour.
+									</li>
+								</ul>
+							</p>
+						</div>
+						<aside class="notes">
+							To get more insight into what this approach is doing, and to link back to our binary neutron star motivation, we look at a Kelvin-Helmholtz instability. There's the standard Kolmogorov cascade of energy from large scales down to small, which is similar for all models. As we get to higher frequencies, and hence smaller scales, we see the different models diverge. Whilst the REGIME model is closer to the resistive case than the ideal is, once we start reaching grid-cell resolutions there is a substantial difference. This suggests that the REGIME model is capturing the large scale features of the resistive model, not the small.
+						</aside>
+					</section>
+
+					<section data-background='figures_aw/BWandReconnectionOptPerf3DIHTalk.jpg' data-background-position='bottom' data-background-size="100%">
+						<div style="float: top">
+							<h1>Performance</h1>
+							<p>
+								Many factors faster than full model.
+							</p>
+						</div>
+						<aside class="notes">
+							Finally, we need to check the performance of REGIME against the resistive model. REGIME's performance is pretty much independent of the resistivity. In contrast, the runtime for an explicit RK scheme for the full resistive model (blue curve) blows up well before interesting resistivities are reached. The IMEX schemes allow physical resistivities to be evolved, but are always slower than regime, usually by factors of 5-10 or more.
+						</aside>
+					</section>
+				</section>
+
+				<section id="Summary">
+
+					<section>
+						<div class="header">
+							<h1>Summary</h1>
+						</div>
+						<p>
+							<ul>
+								<li>Resistive extension to ideal MHD
+									<ul>
+										<li>completed in SR with encouraging results (<a href="http://arxiv.org/abs/1906.03150">arXiV:1906.03150</a>);
+										<li>in progress in GR;
+										<li>results match full model in a fraction of the time;
+										<li>application to GRMHD will allow merger, accretion and MRI studies;
+										<li>method could be useful for multi-fluid and radiative models.
+									</ul>
+							</ul>
+						</p>
+					</section>
+
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="../reveal.js/js/reveal.js"></script>
+
+		<script>
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+        controlsTutorial: false,
+        overview: true,
+				progress: true,
+        hash: true,
+				history: true,
+				center: false,
+				width:  1366,
+				height: 768,
+				// showNotes = true,
+				margin: 0.05,
+				transition: 'none', // none/fade/slide/convex/concave/zoom
+        backgroundTransition: 'none',
+				// Parallax background image
+			    //parallaxBackgroundImage: '../../figures/hs-2009-05-a-full_jpg.jpg', // e.g. "https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg"
+			    // Parallax background size
+			    //parallaxBackgroundSize: '2145px 1213px', // CSS syntax, e.g. "2100px 900px" - currently only pixels are supported (don't use % or auto)
+			    // Amount of pixels to move the parallax background per slide step,
+			    // a value of 0 disables movement along the given axis
+			    // These are optional, if they aren't specified they'll be calculated automatically
+			    //parallaxBackgroundHorizontal: 200,
+			    //parallaxBackgroundVertical: 50
+				math: {
+			        mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+			        config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+			    },
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: '../reveal.js/plugin/math/math.js', async: true },
+					{ src: '../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
+					{ src: '../reveal.js/plugin/notes/notes.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
