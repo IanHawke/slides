@@ -7,7 +7,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Towards efficient, resistive, multi-fluid merger simulations</title>
+		<title>Statistical solutions and astrophysical simulations</title>
 
 		<meta name="description" content="GR22 Conference, Valencia, Spain, July 2019">
 		<meta name="author" content="Ian Hawke">
@@ -110,24 +110,21 @@
 
 					<section data-background="figures_aw/background.jpg" data-background-position="center" data-background-size="100%" data-background-color="#000000">
 						<div style="float: center">
-							<h1 style="line-height: 1.0">Towards efficient, resistive, multi-fluid merger simulations</h1>
+							<h1 style="line-height: 1.0">Statistical solutions and astrophysical simulations</h1>
 							<p>
 								<ul style="list-style: none;">
-									<li> Alex Wright
 									<li> Ian Hawke
 								</ul>
 							</p>
 							<p>
 								<ul style="list-style: none;">
-									<li> <a href="http://github.com/AlexJamesWright">github.com/AlexJamesWright</a>
+									<li> <a href="http://twitter.com/IanHawke">@IanHawke</a>
 									<li> STAG, University of Southampton
-                  <li> Next Generation Computational Modelling Group
-									<li> <a href="http://arxiv.org/abs/1906.03150">arXiV:1906.03150</a>
 								</ul>
 							</p>
 						</div>
 						<aside class="notes">
-							Thanks to the chair and the organisers. This is the work of Alex Wright, a PhD student of Nils Andersson and myself at Southampton.
+							Thanks to the chair and the organisers. This talk is heavily based on work of Ulrik Fjordholm, Sid Mishra and collaborators, which is heavily mathematical numerical analysis concentrating on the Newtonian Euler equations. I think it's going to be incredibly important for numerical astrophysical simulations, particularly for multi-messenger simulations of, for example, binary neutron stars, so think as a field we should engage with this as soon as possible.
 						</aside>
 					</section>
 
@@ -138,23 +135,23 @@
 					<section>
 						<div style="float: center; width: 100%">
 							<div class="header">
-								<h1>Non-ideal MHD is needed</h1>
+								<h1>Uncertainty quantification</h1>
 							</div>
 							<div style="float: left; width: 49%">
 								<p>
-									MHD misses out on:
-									<ul>
-										<li> correct EM fields (interior/exterior);
-										<li> magnetic reconnection;
-                    <li> accretion;
-                    <li> entrainment.
-									</ul>
+									To match observations from simulations:
+									<ol>
+										<li> set initial data;
+										<li> simulate observable;
+                    <li> repeat across parameter space;
+                    <li> interpolate.
+									</ol>
+									Uncertainty from simulation and parameter space sampling.
 								</p>
-                <p>
-
 							</div>
 							<div style="float: right; width: 49%">
 								<p>
+									FIGURE HERE.
 									So far:
 									<ul>
 										<li> Resistive GRMHD by Dionysopoulou (2013), Palenzuela (2009), Qian (2016);
@@ -165,260 +162,47 @@
 						</div>
 
 						<aside class="notes">
-							Our motivation comes from binary neutron star mergers, which usually use ideal MHD. Whilst BBH produces convergent GWs, BNS has problems with pointwise convergence: see particularly the work of Kiuchi on resolution effects of maximum magnetic field strengths. The impact on, eg, angular momentum transport via dynamo wind up through the K-H-like instability near merger could be large, impacting multi-messenger predictions.<br>
-							There are also key physics missed by ideal MHD; reconnection (important for transport again), the link to the exterior plasma (multi-messenger again), and potential multi-fluid effects like entrainment. These are likely only significant in small regions, but may (through wind-up again) have qualitative impacts.<br>
-							Limited work in this direction, particularly by Palenzuela and Dionysopoulou in GR. Going to multifluids there's our work with Dionysopoulou and work in SR by Amano, Barkov and Komissarov, for example. Why has so little been done?
+							Thinking of how numerical simulations have been used to predict observations, like the maximum kick velocity in binary black hole mergers, or the gravitational wave luminosity from the same. As we don't know the exact initial conditions relevant for the observation, we sample the parameter space, simulating to get the value of any relevant observables at that point in parameter space. This can then be interpolated either directly or in some reduced model, such as extended one body. So the uncertainty depends on the simulation errors (such as truncation error), the modelling error (did we include all the physics), and the sampling error (essentially from the interpolation).
+							<br>
+							A key point to note. This approach implicitly assumes that the observable is not overly sensitive to the uncertainties: in other words, that the problem is well-posed.
 						</aside>
 					</section>
+				</section>
 
-					<section id="Difficulties" data-background="figures_aw/BWPerfResistiveIHTalk.jpg" data-background-position="right" data-background-size="60%">
+				<section id="Well-posedness">
+
+					<section id="Kelvin-Helmholtz-ID" data-background="figures_ih/kh_plot_id.pdf" data-background-position="right" data-background-size="60%">
 						<div style="float: left; width: 39%">
-							<h1>Difficulties</h1>
+							<h1>Kelvin-Helmholtz instability</h1>
 						  <p>
+								Classic KHI crucial test for astrophysical simulations:
                 <ul>
-                  <li> More realistic models can be stiff;
-			              $$
-			              \begin{align}
-			                \partial_t q = \mathcal{F}(q) + \frac{1}{\epsilon} \mathcal{S}(q)
-			              \end{align}
-			              $$
-                  <li> Require implicit schemes for stability, e.g. IMEX (Pareschi & Russo 2004).
+                  <li> relevant for wind-up effects in NS mergers;
+                  <li> contains shocks and features on "all" scales ("turbulence").
 								</ul>
               </p>
 						</div>
 						<aside class="notes">
-							There are physical reasons to ignore the non-ideal effects, but the primary reasons why they're ignored are numerical. Near the ideal MHD limit - which, we remember, is accurate over most of the domain - the resistive effects introduce a stiff source term. Essentially, the electric field evolution relaxes on a timescale proportional to the resistivity, which is extremely small. This restricts the timestep, often by many orders of magnitude.<br>
-							This can be helped using implicit integrators. Typically this makes the time integration only one order of magnitude slower. The best schemes mix implicit and explicit (hence IMEX) methods, as used by Palenzuela, Dionysopoulou, and Cordeiro-Carrion, but are still too slow for "everyday" use.
-						</aside>
-					</section>
-				</section>
-
-        <section id="GPU">
-
-          <section data-background="figures_aw/HighResKHICrop2.gif" data-background-position="right" data-background-size="55%">
-            <div style="float: left; width: 45%">
-							<h1>
-								METHOD:
-							</h1>
-							<p>
-								<ul>
-									<li>
-										Lightweight, multi-physics MHD code;
-									</li>
-									<li>
-										Ideal and resistive single and two-fluid models;
-									</li>
-									<li>
-										Explicit or implicit integration;
-									</li>
-									<li>
-										GPU capable.
-									</li>
-								</ul>
-							</p>
-							<p>
-							<small><a href="https://github.com/AlexJamesWright/METHOD">github.com/AlexJamesWright/METHOD</a></small>
-						</p>
-						</div>
-						<aside class="notes">
-							As a basis for investigating performance, Alex implemented a GPU based code using a range of integrators, including explicit and implicit RK, and IMEX schemes. It's SR, comparing ideal and resistive MHD, and multifluid electrodynamics. It's crucial to first check that hardware improvements alone won't help with extensions to resistive MHD.
-						</aside>
-          </section>
-
-					<section data-background="figures_aw/V100ParallelSpeedUpIHTalk.jpg" data-background-position='right' data-background-size="55%">
-						<div style="float: left; width: 45%">
-							<h1>Performance</h1>
-							<p>
-								<ul>
-									<li>
-										Parallel speed up of $21\times$ versus CPU;
-									</li>
-									<li>
-										Further optimisations possible;
-									</li>
-									<li>
-										Wright & Hawke arXiV:<a href="https://arxiv.org/abs/1808.09721">1808.09721</a> DOI:<a href="https://doi.org/10.3847/1538-4365/aaf1b0">10.3847/1538-4365/aaf1b0</a>.
-									</li>
-								</ul>
-							</p>
-						</div>
-						<aside class="notes">
-							The performance improvements depends crucially on effectively managing the memory on the GPU; this is well known (note particularly Zink's GRMHD GPU code from 2011). The limited shared memory causes particular issues when the state vector gets large, as with multifluid and resistive systems. With current hardware, even with the most complex multifluid systems it's possible to get order-of-magnitude speed ups. The bottom line is a factor 21 increase, which is expected to increase with GPU improvements. However, the relative gap between explicit and implicit methods is unchanged.
-						</aside>
-					</section>
-        </section>
-
-				<section id="REGIME">
-
-					<section>
-						<div>
-							<h1>Model extensions</h1>
-							<div style="float: left; width:= 45%">
-								<p>
-									<ul>
-										Examples from:
-											<li>
-												Classical turbulence simulations (LES)
-											</li>
-											<li>
-												Radiative/reactive flows
-											</li>
-											<li>
-												Radice (2017) - GRLES
-											</li>
-											<li>
-												Giacomazzo (2015) - subgrid source
-											</li>
-									</ul>
-								</p>
-							</div>
-							<div style="float: right; width: 45%">
-								<p>
-									<ul>
-										Source terms allow:
-										<li>
-											Easy way to add additional physics
-										</li>
-										<li>
-											Computationally cheaper than solving full model
-										</li>
-									</ul>
-								</p>
-							</div>
-
-						</div>
-						<aside class="notes">
-							Instead of acceleration through hardware, we look at acceleration through changing the model.<br>
-							This is a standard approach in classical turbulence, particularly in large eddy simulations: add a source term to a "simple" system to approximate the unmodelled behaviour. This approach has been extended to GR by, for example, Radice and collaborators, who used the standard Smagorinsky approximation for subgrid turbulence. A particularly relevant example for us is Giacomazzo using a phenomenological subgrid source to study subgrid magnetic field amplification.<br>
-							The advantages of this approach are simplicity and cost: the principal part of the system doesn't change, so the bulk of the evolution is the same. The main disadvantage is linking parameters in the source to the physics, to make sure the results are actually meaningful.
+							The Kelvin-Helmholtz instability is a simple analogue for the wind-up of vorticity and magnetic fields that happens during binary neutron star mergers. The matter on either side of the layer slips past each other, with the high relative velocities leading to vortex generation. Carefully setting up the initial data is a crucial point for code comparisons, with one of the standard approaches being to smooth the density transition whilst perturbing the transverse velocity. Here, instead, I'm following Fjordholm and Mishra by keeping the transition sharp and perturbing the location of the transition layer.
+							<br>
+							This is crucial because the question we want to ask is directly related to the uncertainty quantification we want to do. The question is: are the Euler equations well-posed?
 						</aside>
 					</section>
 
-					<section>
-						<div style="float: left; width: 40%">
-							<h1>REGIME:</h1>
-							<h2>A resistive extension to ideal MHD<sup>*</sup></h2>
-							<p>
-								<small><sup>*</sup><a href="http://arxiv.org/abs/1906.03150">arXiV:1906.03150</a></small>
-							</p>
-						</div>
-						<div style="float: right; width: 60%">
-
-							<p>
-							<ul>
-								<li>
-									Start from resistive MHD, $\overline{q}$ stiff:
-									$$
-									\begin{align}
-										\partial_t q + \partial_x f(q, \overline{q}) &= s(q, \overline{q}) \\
-										\partial_t \overline{q} + \partial_x \overline{f}(q, \overline{q}) &= \tfrac{1}{\epsilon} \overline{s} (q, \overline{q}).
-									\end{align}
-									$$
-								</li>
-								<li>
-									Chapman-Enskog expansion around ideal MHD:
-									$$
-									\begin{align}
-										\overline{q} & = \overline{q}_0 + \epsilon \overline{q}_1 + \mathcal{O}(\epsilon^2) \\
-										\to \quad \partial_t q + \partial_x f & = s + \epsilon \partial_x ( D \partial_x q ).
-									\end{align}
-									$$
-								</li>
-							</p>
+					<section id="Kelvin-Helmholtz-res" data-background="figures_ih/kh_rho_all_1234.pdf" data-background-position="right" data-background-size="70%">
+						<div style="float: left; width: 29%">
+							<h1>Lax's theorem</h1>
+						  <p>
+								Consistency plus stability with <i>no</i> convergence means the system is <i>not</i> well-posed.
+              </p>
 						</div>
 						<aside class="notes">
-							Our extension is REGIME, developed using Chapman-Enskog analysis. <br>
-							The assumption is that the full system can be split into stiff and non-stiff variables: here, the electric fields are stiff. We then do a perturbation expansion of the stiff variables. It is crucial that the background is in equilibrium: that is, the stiff source vanishes there. This expansion leads to a modified source for the non-stiff variables to leading order, which looks like a diffusion term.
+							To check well-posedness, Fjordholm and Mishra use Lax's theorem. In the standard form that says "for a well-posed system, consistency plus stability is equivalent to convergence". By using multiple numerical codes where we are confident of consistency, and where stability is obvious, the failure of the numerics to converge implies the continuum system is not well-posed. I'm showing this visually with my results using Mike Zingale's `pyro` code; in Fjordholm and Mishra's papers they show more detailed convergence measures.
+							<br>
+							So, if the system isn't well-posed, this destroys any hope of estimating parameters using the standard approach.
 						</aside>
 					</section>
 
-					<section>
-						<div>
-							<h1>Extension</h1>
-							<p>
-								To first order in $\epsilon$:
-							</p>
-							$$
-							\begin{align}
-								\partial_t q + \partial_x f = s + \epsilon \partial_x ( D \partial_x q ).
-							\end{align}
-							$$
-						</div>
-						<p>
-							<br />
-							Features:
-							<ul>
-								<li>
-									New system extends ideal MHD;
-								</li>
-								<li>
-									Stiff in opposing limit to resistive MHD as $\epsilon \propto 1/\sigma$;
-								</li>
-								<li>
-									Small contribution near ideal MHD limit.
-								</li>
-							</ul>
-						</p>
-						<aside class="notes">
-							The crucial advantage of this Chapman-Enskog expansion is that the final system looks just like ideal MHD with an extra source. It's also non-stiff in the ideal limit: only as the resistivity becomes large will the source term cause problems. The parabolic nature of the source term does modify the numerical stability of the system, but will not have an impact for astrophysically interesting values of the resistivity. Importantly, the only parameter to tune here is the resistivity itself.
-						</aside>
-					</section>
-				</section>
-
-				<section id="Results">
-
-					<section data-background="figures_aw/RMRFinalStatePressure.jpg" data-background-position='right' data-background-size="55%">
-						<div style="float: left; width: 40%">
-							<h2>Reconnection</h2>
-							<p>
-								<ul>
-									<li>
-										Extremely good agreement with resistive MHD;
-									</li>
-									<li>
-										Expected convergence with conductivity.
-									</li>
-								</ul>
-							</p>
-						</div>
-						<aside class="notes">
-							Here we show an example of magnetic reconnection, for two different resistivities, quite a long way from the ideal limit. If ideal MHD were used then the "islands" of magnetic pressure should stay separate. By including resistivity magnetic reconnection causes them to interact, with the width of the boundary layer linked to the resistivity value. The results here show the Chapman-Enskog approach is visually indistinguishable from the full resistive values. We also see clean convergence with grid resolution and with conductivity.
-						</aside>
-					</section>
-
-					<section data-background="figures_aw/modelPowerSpectrumT5Sig100NoMinModPaperIHTalk.jpg" data-background-position='right' data-background-size="40%">
-						<div style="float: left; width: 55%">
-							<h2>Kelvin-Helmholtz Instability</h2>
-							<p>
-								<ul>
-									<li>
-										Magnetic energy cascades to all scales;
-									</li>
-									<li>
-										Good agreement with resistive MHD at larger scales;
-									</li>
-									<li>
-										The source term approach is <i>not</i> capturing subgrid behaviour.
-									</li>
-								</ul>
-							</p>
-						</div>
-						<aside class="notes">
-							To get more insight into what this approach is doing, and to link back to our binary neutron star motivation, we look at a Kelvin-Helmholtz instability. There's the standard Kolmogorov cascade of energy from large scales down to small, which is similar for all models. As we get to higher frequencies, and hence smaller scales, we see the different models diverge. Whilst the REGIME model is closer to the resistive case than the ideal is, once we start reaching grid-cell resolutions there is a substantial difference. This suggests that the REGIME model is capturing the large scale features of the resistive model, not the small.
-						</aside>
-					</section>
-
-					<section data-background='figures_aw/BWandReconnectionOptPerf3DIHTalk.jpg' data-background-position='bottom' data-background-size="100%">
-						<div style="float: top">
-							<h1>Performance</h1>
-							<p>
-								Many factors faster than full model.
-							</p>
-						</div>
-						<aside class="notes">
-							Finally, we need to check the performance of REGIME against the resistive model. REGIME's performance is pretty much independent of the resistivity. In contrast, the runtime for an explicit RK scheme for the full resistive model (blue curve) blows up well before interesting resistivities are reached. The IMEX schemes allow physical resistivities to be evolved, but are always slower than regime, usually by factors of 5-10 or more.
-						</aside>
-					</section>
 				</section>
 
 				<section id="Summary">
