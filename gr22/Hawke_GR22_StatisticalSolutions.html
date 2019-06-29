@@ -173,9 +173,10 @@
 
 				<section id="Well-posedness">
 
-					<section id="Kelvin-Helmholtz-ID" data-background="figures_ih/kh_plot_id.png" data-background-position="right" data-background-size="60%">
-						<div style="float: left; width: 39%">
+					<section id="Kelvin-Helmholtz-ID" data-background="figures_ih/kh_plot_id_crop.png" data-background-position="bottom" data-background-size="85%">
+						<div style="float: top; width: 100%">
 							<h1>Kelvin-Helmholtz instability</h1>
+							<!--
 						  <p>
 								Classic KHI crucial test for astrophysical simulations:
                 <ul>
@@ -183,6 +184,7 @@
                   <li> contains shocks and features on "all" scales ("turbulence").
 								</ul>
               </p>
+						  -->
 						</div>
 						<aside class="notes">
 							The Kelvin-Helmholtz instability is a simple analogue for the wind-up of vorticity and magnetic fields that happens during binary neutron star mergers. The matter on either side of the layer slips past each other, with the high relative velocities leading to vortex generation. Carefully setting up the initial data is a crucial point for code comparisons, with one of the standard approaches being to smooth the density transition whilst perturbing the transverse velocity. Here, instead, I'm following Fjordholm and Mishra by keeping the transition sharp and perturbing the location of the transition layer.
@@ -191,17 +193,117 @@
 						</aside>
 					</section>
 
-					<section id="Kelvin-Helmholtz-res" data-background="figures_ih/kh_rho_all_1234.png" data-background-position="right" data-background-size="60%">
-						<div style="float: left; width: 39%">
+					<section id="Kelvin-Helmholtz-res" data-background="figures_ih/kh_rho_all_1234_crop.png" data-background-position="right" data-background-size="55%">
+						<div style="float: left; width: 44%">
 							<h1>Lax's theorem</h1>
 						  <p>
 								Consistency plus stability with <i>no</i> convergence means the system is <i>not</i> well-posed.
               </p>
 						</div>
 						<aside class="notes">
-							To check well-posedness, Fjordholm and Mishra use Lax's theorem. In the standard form that says "for a well-posed system, consistency plus stability is equivalent to convergence". By using multiple numerical codes where we are confident of consistency, and where stability is obvious, the failure of the numerics to converge implies the continuum system is not well-posed. I'm showing this visually with my results using Mike Zingale's `pyro` code; in Fjordholm and Mishra's papers they show more detailed convergence measures.
+							To check well-posedness, Fjordholm and Mishra use Lax's theorem. In the standard form that says "for a well-posed system, consistency plus stability is equivalent to convergence". By using multiple numerical codes where we are confident of consistency, and where stability is obvious, the failure of the numerics to converge implies the continuum system is not well-posed. I'm showing this visually with my results using Mike Zingale's `pyro` code, where we see the gross features are similar, but there is clearly no pointwise convergence; in Fjordholm and Mishra's papers they show more detailed convergence measures.
 							<br>
 							So, if the system isn't well-posed, this destroys any hope of estimating parameters using the standard approach.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Statistical solutions">
+
+					<section>
+						<div style="float: left; width: 90%">
+							<h1>Saving convergence</h1>
+							<p>
+								We don't see convergence to <i>weak solutions</i> of
+								$$
+								  \partial_t q + \partial_i f^{(i)}(q) = s(q).
+								$$
+							</p>
+							<p>
+								Instead use a spacetime-dependent probability measure $\nu$ solving
+								$$
+								  \partial_t \langle \nu, \text{id} \rangle  + \partial_{i} \langle \nu, f^{(i)} \rangle = \langle \nu, s \rangle.
+								$$
+							</p>
+							<p>
+								Need to ensure appropriate entropy solution and small scale features.
+							</p>
+						</div>
+						<aside class="notes">
+							This crucial point of Fjordholm and Mishra's work isn't to show problems, but to present a potential solution. Their approach is to change what we think of as a solution. We've already done this to solve Euler's equations in the first place: to account for shocks we have to talk about weak, distributional solutions. To get around the well-posedness issues Fjordholm and Mishra weaken the solution still further: we now consider probability measures at every single point of space and time, and force the measure to evolve in a manner consistent with our equations of motion. There are additional technical restrictions that need imposing. In particular the measure needs to obey and entropy condition in a similar fashion to a standard weak solution. Secondly, the solution needs to be "not too turbulent".
+						</aside>
+					</section>
+
+					<section id="MC1" data-background="figures_ih/kh_plot_128_realizations_crop.png" data-background-position="bottom" data-background-size="90%">
+						<div style="float: top; width: 90%">
+							<h1>Constructing the measure</h1>
+						</div>
+						<aside class="notes">
+							To numerically compute the probability measure that is the statistical solution we can use a Monte-Carlo algorithm. Here we're not doing anything clever: we modify the initial data by changing (pseudo-randomly) the perturbation in the location of the initial interface. Here I'm showing 128 realizations at a fixed resolution, which we can use to look at statistical properties of the solution.
+						</aside>
+					</section>
+
+					<section id="MC2" data-background="figures_ih/kh_mean_var_all_crop.png" data-background-position="right" data-background-size="70%">
+						<div style="float: left; width: 29%">
+							<h1>Mean</h1>
+							<p>
+								Both mean and variance clearly converge.
+							</p>
+						</div>
+						<aside class="notes">
+							Here I'm plotting the pointwise mean over all the realizations. You can visually see rapid convergence with resolution, but all cases are qualitatively similar. The characteristic Kelvin-Helmholtz vortices are gone, but there is now (on average) a transition layer between the high and low density regions.
+							<br>
+							Crucially by measuring the variance we can start to characterize the uncertainty in the observable. In this case we can do it on a pointwise basis, and see that, as we would expect, the variance is mostly small except in the transition layer. Characterizing what's going on in this "turbulent" region is the hard part.
+						</aside>
+					</section>
+
+					<section id="MC3" data-background="figures_ih/var_mean_kde_256_plot1_crop.png" data-background-position="right" data-background-size="60%">
+						<div style="float: left; width: 39%">
+							<h1>PDF</h1>
+							<p>
+								Can directly estimate the PDF, eg along a line. These also converge rapidly.
+							</p>
+						</div>
+						<aside class="notes">
+							We can directly estimate the probability distribution function. Here I'm taking advantage of the symmetry to do it along lines. We can see how the distribution changes through the transition layer. There's peaks corresponding to the two densities in the initial data clearly visible: that's at around $\rho=1$ and $2$. However, there's a third intermediate peak that wouldn't be obvious from the mean and variance alone.
+						</aside>
+					</section>
+
+					<section id="MC4" data-background="figures_ih/rho_pdfs_all_crop.png" data-background-position="bottom" data-background-size="80%">
+						<!--
+						<div style="float: top; width: 90%">
+							<h1>PDF convergence</h1>
+						</div>
+						-->
+						<aside class="notes">
+							Here are the PDFs converging with both resolution and the number of realizations. This is just along one line, but again Fjordholm, Mishra and collaborators have detailed statistical convergence measures in their papers.
+						</aside>
+					</section>
+
+					<section>
+						<div style="float: left; width: 90%">
+							<h1>Quantifying the problem</h1>
+							<p>
+								For "standard" case, measure numerical error as
+								$$
+								  {\cal E} \simeq C_1 (\Delta x)^s.
+								$$
+							</p>
+							<p>
+								For statistical solutions, simple Monte-Carlo, expect
+								$$
+								  {\cal E} \simeq C_1 (\Delta x)^s + C_2 M^{-1/2}.
+								$$
+							</p>
+							<p>
+								Measure $C_i$'s, see what error dominates.
+							</p>
+						</div>
+						<aside class="notes">
+							To bring it back to numbers, the point here is to quantify the uncertainty of a numerical prediction of an observable within a given model. Typically we would quantify the numerical uncertainty through the truncation error. This gives us a value at a point in parameter space, up to the numerical error.
+							<br>
+							Instead, with statistical solutions, we have all the statistical moments, up to the numerical error of the simulation, and the numerical error from only doing a finite number of realizations. We now have a probability measure at a point in parameter space, which can be used against the observations. In most regions the truncation error will dominate, but in cases like we've seen here - shocks interacting with "turbulence" - the realization error and the intrinsic variance may dominate instead. It's essential to quantify this before using such simulations in parameter estimation.
 						</aside>
 					</section>
 
@@ -215,16 +317,14 @@
 						</div>
 						<p>
 							<ul>
-								<li>Resistive extension to ideal MHD
-									<ul>
-										<li>completed in SR with encouraging results (<a href="http://arxiv.org/abs/1906.03150">arXiV:1906.03150</a>);
-										<li>in progress in GR;
-										<li>results match full model in a fraction of the time;
-										<li>application to GRMHD will allow merger, accretion and MRI studies;
-										<li>method could be useful for multi-fluid and radiative models.
-									</ul>
+								<li>Euler equations not globally well-posed;
+								<li>Statistical solutions mean simulations can still make predictions;
+								<li>Quantifying uncertainty will be essential when shocks interact with "turbulence", in eg binary neutron star mergers.
 							</ul>
 						</p>
+						<aside class="notes">
+							This talk has been heavily based on the work of Fjordholm and Mishra. I really think that we need to look closely at their work, and pay the computational cost of quantifying the uncertainties in our simulations through Monte-Carlo style estimations of the PDFs of our observables.
+						</aside>
 					</section>
 
 				</section>
