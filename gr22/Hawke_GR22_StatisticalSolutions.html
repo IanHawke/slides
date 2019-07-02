@@ -160,11 +160,45 @@
 						</div>
 
 						<aside class="notes">
-							Thinking of how numerical simulations have been used to predict observations, like the maximum kick velocity in binary black hole mergers, or the gravitational wave luminosity from the same. As we don't know the exact initial conditions relevant for the observation, we sample the parameter space, simulating to get the value of any relevant observables at that point in parameter space. This can then be interpolated either directly or in some reduced model, such as extended one body. So the uncertainty depends on the simulation errors (such as truncation error), the modelling error (did we include all the physics), and the sampling error (essentially from the interpolation).
+							Thinking of how numerical simulations have been used to predict observations, like the maximum kick velocity in binary black hole mergers, or the gravitational wave luminosity from the same. As we don't know the exact initial conditions relevant for the observation, we sample the parameter space, simulating to get the value of any relevant observables at that point in parameter space. This can then be interpolated either directly or in some reduced model, such as extended one body. This figure from the Georgia Tech group implicitly shows the sort of coverage of parameter space we expect to have. So the uncertainty depends on the simulation errors (such as truncation error), the modelling error (did we include all the physics), and the sampling error (essentially from the interpolation).
 							<br>
 							A key point to note. This approach implicitly assumes that the observable is not overly sensitive to the uncertainties: in other words, that the problem is well-posed.
 						</aside>
 					</section>
+
+					<section>
+						<div style="float: left; width: 50%">
+							<h1>Matter</h1>
+							<p>
+								Matter simulations:
+								<ol>
+									<li> have shocks;
+									<li> "turbulence";
+									<li> more observables;
+									<li> little on well-posedness.
+								</ol>
+							</p>
+							<p>
+								Can we get reliable predictions?
+							</p>
+						</div>
+						<div style="float: right; width: 50%">
+							<img src="figures_ih/KiuchiDensityVorticity.png" />
+							<p>
+								<a href="https://dx.doi.org/10.1103/PhysRevD.92.124034"> Kiuchi et al, 1509.09205</a>
+							</p>
+						</div>
+
+						<aside class="notes">
+							Life gets more complicated with matter simulations, where the fluid shocks formed in mergers can interact with features on ever smaller scales, which we often call "turbulence" even when working with ideal models. This image from the amazing simulations of Kiuchi and collaborators highlights that. For multi-messenger situations we're going to care about observables driven by local features of the fluid and magnetic field, so we're going to need to need robust predictions of the local values of the matter quantities.
+							<br>
+							Unfortunately global well-posedness results for matter systems, even without GR, are hard to come by.
+						</aside>
+					</section>
+
+
+
+
 				</section>
 
 				<section id="Well-posedness">
@@ -239,7 +273,7 @@
 					</section>
 
 					<section id="MC1" data-background="figures_ih/kh_plot_128_realizations_512.png" data-background-position="bottom" data-background-size="90%">
-						<div style="float: top; width: 90%">
+						<div style="header">
 							<h1>Constructing the measure</h1>
 						</div>
 						<aside class="notes">
@@ -291,8 +325,10 @@
 					</section>
 
 					<section>
-						<div style="float: left; width: 90%">
+						<div style="header">
 							<h1>Quantifying the problem</h1>
+						</div>
+						<div style="float: left; width: 90%">
 							<p>
 								For "standard" case, measure numerical error as
 								$$
@@ -306,7 +342,7 @@
 								$$
 							</p>
 							<p>
-								Measure $C_i$'s, see what error dominates.
+								Measure $C_i$'s, see what error dominates. If variance large, prediction hard!
 							</p>
 						</div>
 						<aside class="notes">
@@ -328,7 +364,8 @@
 							<ul>
 								<li>Euler equations not globally well-posed;
 								<li>Statistical solutions mean simulations can still make predictions;
-								<li>Quantifying uncertainty will be essential when shocks interact with "turbulence", in eg binary neutron star mergers.
+								<li>Quantifying uncertainty will be essential when shocks interact with "turbulence", in eg binary neutron star mergers;
+								<li>May be that large variance means numerics can't make robust predictions.
 							</ul>
 						</p>
 						<aside class="notes">
