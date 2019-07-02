@@ -176,7 +176,7 @@
 
 				<section id="Well-posedness">
 
-					<section id="Kelvin-Helmholtz-ID" data-background="figures_ih/kh_plot_id_crop.png" data-background-position="bottom" data-background-size="85%">
+					<section id="Kelvin-Helmholtz-ID" data-background="figures_ih/kh_plot_id.png" data-background-position="bottom" data-background-size="85%">
 						<div style="float: top; width: 100%">
 							<h1>Kelvin-Helmholtz instability</h1>
 							<!--
@@ -196,11 +196,18 @@
 						</aside>
 					</section>
 
-					<section id="Kelvin-Helmholtz-res" data-background="figures_ih/kh_rho_all_1234_crop.png" data-background-position="right" data-background-size="55%">
+					<section id="Kelvin-Helmholtz-res" data-background="figures_ih/kh_rho_all_1234.png" data-background-position="right" data-background-size="55%">
 						<div style="float: left; width: 44%">
-							<h1>Lax's theorem</h1>
+							<h1>Lax</h1>
 						  <p>
-								Consistency plus stability with <i>no</i> convergence means the system is <i>not</i> well-posed.
+								<ul>
+									<li> Code consistent;
+									<li> Numerics stable;
+									<li> No convergence.
+								</ul>
+							</p>
+							<p>
+								Lax's theorem means the system is <i>not</i> well-posed.
               </p>
 						</div>
 						<aside class="notes">
@@ -238,7 +245,7 @@
 						</aside>
 					</section>
 
-					<section id="MC1" data-background="figures_ih/kh_plot_128_realizations_crop.png" data-background-position="bottom" data-background-size="90%">
+					<section id="MC1" data-background="figures_ih/kh_plot_128_realizations_512.png" data-background-position="bottom" data-background-size="90%">
 						<div style="float: top; width: 90%">
 							<h1>Constructing the measure</h1>
 						</div>
@@ -247,11 +254,14 @@
 						</aside>
 					</section>
 
-					<section id="MC2" data-background="figures_ih/kh_mean_var_all_crop.png" data-background-position="right" data-background-size="70%">
+					<section id="MC2" data-background="figures_ih/kh_mean_var_all.png" data-background-position="right" data-background-size="70%">
 						<div style="float: left; width: 29%">
-							<h1>Mean</h1>
+							<h1>$\mathbb{E}$ & var</h1>
 							<p>
 								Both mean and variance clearly converge.
+							</p>
+							<p>
+								Characterize the uncertainty in the observable.
 							</p>
 						</div>
 						<aside class="notes">
@@ -261,11 +271,14 @@
 						</aside>
 					</section>
 
-					<section id="MC3" data-background="figures_ih/var_mean_kde_256_plot1_crop.png" data-background-position="right" data-background-size="60%">
+					<section id="MC3" data-background="figures_ih/var_mean_kde_256_plot1.png" data-background-position="right" data-background-size="60%">
 						<div style="float: left; width: 39%">
 							<h1>PDF</h1>
 							<p>
 								Can directly estimate the PDF, eg along a line. These also converge rapidly.
+							</p>
+							<p>
+								Some features not obvious from $\mathbb{E}$ and variance.
 							</p>
 						</div>
 						<aside class="notes">
@@ -273,7 +286,7 @@
 						</aside>
 					</section>
 
-					<section id="MC4" data-background="figures_ih/rho_pdfs_all_crop.png" data-background-position="bottom" data-background-size="80%">
+					<section id="MC4" data-background="figures_ih/rho_pdfs_all.png" data-background-position="bottom" data-background-size="77%">
 						<!--
 						<div style="float: top; width: 90%">
 							<h1>PDF convergence</h1>
