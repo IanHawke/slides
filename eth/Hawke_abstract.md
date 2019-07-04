@@ -1,0 +1,5 @@
+# Numerical simulations of Gravitational Waves from Neutron Stars
+
+Ian Hawke, STAG, University of Southampton
+
+In late 2017 the merger of two neutron stars was detected both in gravitational and electromagnetic waves. This gave unprecedented information on the behaviour of objects more massive than the sun, squashed into the size of a city, with magnetic fields many orders of magnitude larger than Earth's. As more detections come in, we will need to significantly improve the models we use to describe these events, and the numerical methods used to simulate them. Here I will discuss the difficulties in coupling Einstein's theory of General Relativity to ever more complex matter models, with a focus on recent multi-phase descriptions of charged species needed to describe non-ideal elastic and magnetic behaviour. This necessarily requires non-conservative numerical methods for the matter, numerically enforced constraints for the magnetic fields, and adaptive techniques to cover the large range of scales involved.

@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+
+<!--
+-->
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Numerical Simulations of Gravitational Waves from Neutron Stars</title>
+
+		<meta name="description" content="ETH, Zurich, October 2019">
+		<meta name="author" content="Ian Hawke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../reveal.js/css/print/pdf.css' : '../reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--MathJax stuff -->
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}, TeX: { extensions: ["autobold.js"] }});
+		</script>
+		<script type="text/javascript"
+		  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+
+		<!--PDF print -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../reveal.js/css/print/pdf.css' : '../reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+		<!--Left align-->
+		<style type="text/css">
+			.reveal p { text-align: left; }
+			.reveal ol,
+			.reveal dl,
+			.reveal ul {
+			  display: block;
+			  text-align: left;
+			  margin: 0 0 0 1em; }
+			.reveal h1 {
+				text-transform: none;
+				line-height: 2.0
+			}
+			.reveal h2,
+			.reveal h3,
+			.reveal h4 {
+				text-transform: none;
+			}
+			.reveal table td {
+				border-bottom: none;
+			}
+			.reveal.slide .slides > section, .reveal.slide .slides > section > section {
+			  min-height: 100% !important;
+			  display: flex !important;
+			  flex-direction: column !important;
+			  justify-content: center !important;
+			  position: absolute !important;
+			  top: 0 !important;
+			  align-items: center !important;
+			}
+			section > h1, section > h2 {
+			  position: absolute !important;
+			  top: 0 !important;
+			  margin-left: auto !important;
+			  margin-right: auto !important;
+			  left: 0 !important;
+			  right: 0 !important;
+			  text-align: center !important;
+			}
+			.print-pdf .reveal.slide .slides > section, .print-pdf .reveal.slide .slides > section > section {
+			  min-height: 770px !important;
+			  position: relative !important;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="title">
+
+					<section data-background="figures_aw/background.jpg" data-background-position="center" data-background-size="100%" data-background-color="#000000">
+						<div style="float: center">
+							<h1 style="line-height: 1.0">Numerical Simulations of Gravitational Waves from Neutron Stars</h1>
+							<p>
+								<ul style="list-style: none;">
+									<li> Ian Hawke
+								</ul>
+							</p>
+							<p>
+								<ul style="list-style: none;">
+									<li> <a href="http://twitter.com/ianhawke">@IanHawke</a>
+									<li> <a href="http://https://github.com/IanHawke">github.com/IanHawke</a>
+									<li> <a href="http://orcid.org/0000-0003-4805-0309">orcid.org/0000-0003-4805-0309</a>
+									<li> STAG, University of Southampton
+								</ul>
+							</p>
+						</div>
+						<aside class="notes">
+							Thanks for the invitation
+						</aside>
+					</section>
+
+				</section>
+
+<!--
+				<section id="Motivation">
+
+					<section data-background="figures_ih/BustilloEtAlBHKickParameterSpace.png" data-background-position="right" data-background-size="50%">
+						<div style="width: 90%">
+							<h1>Uncertainty quantification</h1>
+						</div>
+						<div style="float: left; width: 49%">
+							<p>
+								To match observations from simulations:
+								<ol>
+									<li> set initial data;
+									<li> simulate observable;
+                  <li> repeat across parameter space;
+                  <li> interpolate.
+								</ol>
+							</p>
+							<p>
+								Uncertainty from simulation and parameter space sampling.
+							</p>
+						</div>
+						<div style="position: absolute; bottom: 5px; right: 5px; width: 49%">
+							<p>
+								<a href="https://dx.doi.org/10.1103/PhysRevLett.121.191102"> Bustillo et al, 1806.11160</a>
+							</p>
+						</div>
+
+						<aside class="notes">
+							Thinking of how numerical simulations have been used to predict observations, like the maximum kick velocity in binary black hole mergers, or the gravitational wave luminosity from the same. As we don't know the exact initial conditions relevant for the observation, we sample the parameter space, simulating to get the value of any relevant observables at that point in parameter space. This can then be interpolated either directly or in some reduced model, such as extended one body. This figure from the Georgia Tech group implicitly shows the sort of coverage of parameter space we expect to have. So the uncertainty depends on the simulation errors (such as truncation error), the modelling error (did we include all the physics), and the sampling error (essentially from the interpolation).
+							<br>
+							A key point to note. This approach implicitly assumes that the observable is not overly sensitive to the uncertainties: in other words, that the problem is well-posed.
+						</aside>
+					</section>
+
+					<section>
+						<div style="float: left; width: 50%">
+							<h1>Matter</h1>
+							<p>
+								Matter simulations:
+								<ol>
+									<li> have shocks;
+									<li> "turbulence";
+									<li> more observables;
+									<li> little on well-posedness.
+								</ol>
+							</p>
+							<p>
+								Can we get reliable predictions?
+							</p>
+						</div>
+						<div style="float: right; width: 50%">
+							<img src="figures_ih/KiuchiDensityVorticity.png" />
+							<p>
+								<a href="https://dx.doi.org/10.1103/PhysRevD.92.124034"> Kiuchi et al, 1509.09205</a>
+							</p>
+						</div>
+
+						<aside class="notes">
+							Life gets more complicated with matter simulations, where the fluid shocks formed in mergers can interact with features on ever smaller scales, which we often call "turbulence" even when working with ideal models. This image from the amazing simulations of Kiuchi and collaborators highlights that. For multi-messenger situations we're going to care about observables driven by local features of the fluid and magnetic field, so we're going to need to need robust predictions of the local values of the matter quantities.
+							<br>
+							Unfortunately global well-posedness results for matter systems, even without GR, are hard to come by.
+						</aside>
+					</section>
+
+
+
+
+				</section>
+
+				<section id="Well-posedness">
+
+					<section id="Kelvin-Helmholtz-ID" data-background="figures_ih/kh_plot_id.png" data-background-position="bottom" data-background-size="85%">
+						<div style="float: top; width: 100%">
+							<h1>Kelvin-Helmholtz instability</h1>
+						</div>
+						<aside class="notes">
+							The Kelvin-Helmholtz instability is a simple analogue for the wind-up of vorticity and magnetic fields that happens during binary neutron star mergers. The matter on either side of the layer slips past each other, with the high relative velocities leading to vortex generation. Carefully setting up the initial data is a crucial point for code comparisons, with one of the standard approaches being to smooth the density transition whilst perturbing the transverse velocity. Here, instead, I'm following Fjordholm and Mishra by keeping the transition sharp and perturbing the location of the transition layer.
+							<br>
+							This is crucial because the question we want to ask is directly related to the uncertainty quantification we want to do. The question is: are the Euler equations well-posed?
+						</aside>
+					</section>
+
+					<section id="Kelvin-Helmholtz-res" data-background="figures_ih/kh_rho_all_1234.png" data-background-position="right" data-background-size="55%">
+						<div style="float: left; width: 44%">
+							<h1>Lax</h1>
+						  <p>
+								<ul>
+									<li> Code consistent;
+									<li> Numerics stable;
+									<li> No convergence.
+								</ul>
+							</p>
+							<p>
+								Lax's theorem means the system is <i>not</i> well-posed.
+              </p>
+						</div>
+						<aside class="notes">
+							To check well-posedness, Fjordholm and Mishra use Lax's theorem. In the standard form that says "for a well-posed system, consistency plus stability is equivalent to convergence". By using multiple numerical codes where we are confident of consistency, and where stability is obvious, the failure of the numerics to converge implies the continuum system is not well-posed. I'm showing this visually with my results using Mike Zingale's `pyro` code, where we see the gross features are similar, but there is clearly no pointwise convergence; in Fjordholm and Mishra's papers they show more detailed convergence measures.
+							<br>
+							So, if the system isn't well-posed, this destroys any hope of estimating parameters using the standard approach.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Statistical solutions">
+
+					<section>
+						<div style="float: left; width: 90%">
+							<h1>Saving convergence</h1>
+							<p>
+								We don't see convergence to <i>weak solutions</i> of
+								$$
+								  \partial_t q + \partial_i f^{(i)}(q) = s(q).
+								$$
+							</p>
+							<p>
+								Instead use a spacetime-dependent probability measure $\nu$ solving
+								$$
+								  \partial_t \langle \nu, \text{id} \rangle  + \partial_{i} \langle \nu, f^{(i)} \rangle = \langle \nu, s \rangle.
+								$$
+							</p>
+							<p>
+								Need to ensure appropriate entropy solution and small scale features.
+							</p>
+						</div>
+						<aside class="notes">
+							This crucial point of Fjordholm and Mishra's work isn't to show problems, but to present a potential solution. Their approach is to change what we think of as a solution. We've already done this to solve Euler's equations in the first place: to account for shocks we have to talk about weak, distributional solutions. To get around the well-posedness issues Fjordholm and Mishra weaken the solution still further: we now consider probability measures at every single point of space and time, and force the measure to evolve in a manner consistent with our equations of motion. There are additional technical restrictions that need imposing. In particular the measure needs to obey and entropy condition in a similar fashion to a standard weak solution. Secondly, the solution needs to be "not too turbulent".
+						</aside>
+					</section>
+
+					<section id="MC1" data-background="figures_ih/kh_plot_128_realizations_512.png" data-background-position="bottom" data-background-size="90%">
+						<div style="header">
+							<h1>Constructing the measure</h1>
+						</div>
+						<aside class="notes">
+							To numerically compute the probability measure that is the statistical solution we can use a Monte-Carlo algorithm. Here we're not doing anything clever: we modify the initial data by changing (pseudo-randomly) the perturbation in the location of the initial interface. Here I'm showing 128 realizations at a fixed resolution, which we can use to look at statistical properties of the solution.
+						</aside>
+					</section>
+
+					<section id="MC2" data-background="figures_ih/kh_mean_var_all.png" data-background-position="right" data-background-size="70%">
+						<div style="float: left; width: 29%">
+							<h1>$\mathbb{E}$ & var</h1>
+							<p>
+								Both mean and variance clearly converge.
+							</p>
+							<p>
+								Characterize the uncertainty in the observable.
+							</p>
+						</div>
+						<aside class="notes">
+							Here I'm plotting the pointwise mean over all the realizations. You can visually see rapid convergence with resolution, but all cases are qualitatively similar. The characteristic Kelvin-Helmholtz vortices are gone, but there is now (on average) a transition layer between the high and low density regions.
+							<br>
+							Crucially by measuring the variance we can start to characterize the uncertainty in the observable. In this case we can do it on a pointwise basis, and see that, as we would expect, the variance is mostly small except in the transition layer. Characterizing what's going on in this "turbulent" region is the hard part.
+						</aside>
+					</section>
+
+					<section id="MC3" data-background="figures_ih/var_mean_kde_256_plot1.png" data-background-position="right" data-background-size="60%">
+						<div style="float: left; width: 39%">
+							<h1>PDF</h1>
+							<p>
+								Can directly estimate the PDF, eg along a line. These also converge rapidly.
+							</p>
+							<p>
+								Some features not obvious from $\mathbb{E}$ and variance.
+							</p>
+						</div>
+						<aside class="notes">
+							We can directly estimate the probability distribution function. Here I'm taking advantage of the symmetry to do it along lines. We can see how the distribution changes through the transition layer. There's peaks corresponding to the two densities in the initial data clearly visible: that's at around $\rho=1$ and $2$. However, there's a third intermediate peak that wouldn't be obvious from the mean and variance alone.
+						</aside>
+					</section>
+
+					<section id="MC4" data-background="figures_ih/rho_pdfs_all.png" data-background-position="bottom" data-background-size="77%">
+						<aside class="notes">
+							Here are the PDFs converging with both resolution and the number of realizations. This is just along one line, but again Fjordholm, Mishra and collaborators have detailed statistical convergence measures in their papers.
+						</aside>
+					</section>
+
+					<section>
+						<div style="header">
+							<h1>Quantifying the problem</h1>
+						</div>
+						<div style="float: left; width: 90%">
+							<p>
+								For "standard" case, measure numerical error as
+								$$
+								  {\cal E} \simeq C_1 (\Delta x)^s.
+								$$
+							</p>
+							<p>
+								For statistical solutions, simple Monte-Carlo, expect
+								$$
+								  {\cal E} \simeq C_1 (\Delta x)^s + C_2 M^{-1/2}.
+								$$
+							</p>
+							<p>
+								Measure $C_i$'s, see what error dominates. If variance large, prediction hard!
+							</p>
+						</div>
+						<aside class="notes">
+							To bring it back to numbers, the point here is to quantify the uncertainty of a numerical prediction of an observable within a given model. Typically we would quantify the numerical uncertainty through the truncation error. This gives us a value at a point in parameter space, up to the numerical error.
+							<br>
+							Instead, with statistical solutions, we have all the statistical moments, up to the numerical error of the simulation, and the numerical error from only doing a finite number of realizations. We now have a probability measure at a point in parameter space, which can be used against the observations. In most regions the truncation error will dominate, but in cases like we've seen here - shocks interacting with "turbulence" - the realization error and the intrinsic variance may dominate instead. It's essential to quantify this before using such simulations in parameter estimation.
+						</aside>
+					</section>
+
+				</section>
+-->
+				<section id="Summary">
+
+					<section>
+						<div class="header">
+							<h1>Summary</h1>
+						</div>
+						<p>
+							<ul>
+								<li>Blah
+							</ul>
+						</p>
+						<aside class="notes">
+							Blah
+						</aside>
+					</section>
+
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="../reveal.js/js/reveal.js"></script>
+
+		<script>
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+        controlsTutorial: false,
+        overview: true,
+				progress: true,
+        hash: true,
+				history: true,
+				center: false,
+				width:  1366,
+				height: 768,
+				// showNotes = true,
+				margin: 0.05,
+				transition: 'none', // none/fade/slide/convex/concave/zoom
+        backgroundTransition: 'none',
+				// Parallax background image
+			    //parallaxBackgroundImage: '../../figures/hs-2009-05-a-full_jpg.jpg', // e.g. "https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg"
+			    // Parallax background size
+			    //parallaxBackgroundSize: '2145px 1213px', // CSS syntax, e.g. "2100px 900px" - currently only pixels are supported (don't use % or auto)
+			    // Amount of pixels to move the parallax background per slide step,
+			    // a value of 0 disables movement along the given axis
+			    // These are optional, if they aren't specified they'll be calculated automatically
+			    //parallaxBackgroundHorizontal: 200,
+			    //parallaxBackgroundVertical: 50
+				math: {
+			        mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
+			        config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+			    },
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: '../reveal.js/plugin/math/math.js', async: true },
+					{ src: '../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
+					{ src: '../reveal.js/plugin/notes/notes.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
