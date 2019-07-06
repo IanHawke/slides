@@ -119,10 +119,11 @@
 							</p>
 							<p>
 								<ul style="list-style: none;">
-									<li> <a href="http://twitter.com/ianhawke">@IanHawke</a>
-									<li> <a href="http://https://github.com/IanHawke">github.com/IanHawke</a>
-									<li> <a href="http://orcid.org/0000-0003-4805-0309">orcid.org/0000-0003-4805-0309</a>
+									<li> <a href="https://twitter.com/ianhawke">@IanHawke</a>
+									<li> <a href="https://github.com/IanHawke">github.com/IanHawke</a>
+									<li> <a href="https://orcid.org/0000-0003-4805-0309">orcid.org/0000-0003-4805-0309</a>
 									<li> STAG, University of Southampton
+									<li> <a href="https://ianhawke.github.io/slides/gr22/index.html">ianhawke.github.io/slides/gr22</a>
 								</ul>
 							</p>
 						</div>
@@ -360,14 +361,42 @@
 						<div class="header">
 							<h1>Summary</h1>
 						</div>
-						<p>
-							<ul>
-								<li>Euler equations not globally well-posed;
-								<li>Statistical solutions mean simulations can still make predictions;
-								<li>Quantifying uncertainty will be essential when shocks interact with "turbulence", in eg binary neutron star mergers;
-								<li>May be that large variance means numerics can't make robust predictions.
-							</ul>
-						</p>
+						<div>
+							<p>
+								<ul>
+									<li>Bad news: Euler equations not globally well-posed?
+									<li>Good news: Statistical solutions $\Rightarrow$ can still make predictions.
+									<li>Bad news: MC approach computationally expensive...
+									<li>Good news: ...but PDF may not need so high resolution.
+									<li>Bad news: High variance is crucial regions limits predictability?
+								</ul>
+							</p>
+							<p>
+								Much needs doing here.
+							</p>
+						</div>
+						<aside class="notes">
+							This talk has been heavily based on the work of Fjordholm and Mishra. I really think that we need to look closely at their work, and pay the computational cost of quantifying the uncertainties in our simulations through Monte-Carlo style estimations of the PDFs of our observables.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="References">
+
+					<section>
+						<div class="header">
+							<h2>References</h2>
+						</div>
+						<div>
+							<p>
+								<ul>
+									<li> Fjordholm, U. S., Lye, K., Mishra, S., & Weber, F. (2019). Statistical solutions of hyperbolic systems of conservation laws: numerical approximation. <a href="http://arxiv.org/abs/1906.02536">arxiv:1906.02536</a>.
+									<li> Fjordholm, U. S., Käppeli, R., Mishra, S., & Tadmor, E. (2017). Construction of Approximate Entropy Measure-Valued Solutions for Hyperbolic Systems of Conservation Laws. Foundations of Computational Mathematics, 17(3), 763–827. <a href="https://doi.org/10.1007/s10208-015-9299-z">DOI:10.1007/s10208-015-9299-z</a>.
+									<li> Abgrall, R., & Mishra, S. (2017). Uncertainty Quantification for Hyperbolic Systems of Conservation Laws. In Handbook of Numerical Analysis (Vol. 18, pp. 507–544).  <a  href="https://doi.org/10.1016/bs.hna.2016.11.003">DOI:10.1016/bs.hna.2016.11.003</a>.
+								</ul>
+							</p>
+						</div>
 						<aside class="notes">
 							This talk has been heavily based on the work of Fjordholm and Mishra. I really think that we need to look closely at their work, and pay the computational cost of quantifying the uncertainties in our simulations through Monte-Carlo style estimations of the PDFs of our observables.
 						</aside>
