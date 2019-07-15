@@ -10,7 +10,7 @@
 
 		<title>Numerical GR Hydrodynamics</title>
 
-		<meta name="description" content="Talk for Summer School, XX June 2019">
+		<meta name="description" content="Talk for Summer School, 17 June 2019">
 		<meta name="author" content="Ian Hawke">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -89,8 +89,8 @@
 
 							<p>
 								<ul>
-									<li> Range of models considered (GR vs (M)HD, non-ideal, $\nu$s, multifluids, ...). Parameter extraction harder.
 									<li> Scale (Planck length vs particle and turbulence lengths). Inherent approximations (EOS, interactions, ...).
+									<li> Range of models considered (GR vs (M)HD, non-ideal, $\nu$s, multifluids, ...). Parameter extraction harder.
 									<li> Form of solutions ($C^{\infty}$ or $C^4$ vs $C^0$). Restricts useful numerical methods.
 								</ul>
 							</p>
@@ -115,7 +115,7 @@
 								EFEs imply $\nabla_a T^{ab} = 0$. Pick a tetrad, $e_b^{(j)}$ to get
 								$$
 								\begin{aligned}
-								  && \nabla_a \left[ e_b^{(j)} T^{ab} \right] &= \tfrac{1}{\sqrt{-g}} \partial_a \left( \sqrt{-g} e_b^{(j)} T^{ab} \right) = -T^{ab} \partial_a e_b^{(j)} \\
+								  && \nabla_a \left[ e_b^{(j)} T^{ab} \right] &= \tfrac{1}{\sqrt{-g}} \partial_a \left( \sqrt{-g} e_b^{(j)} T^{ab} \right) = -T^{ab} \nabla_a e_b^{(j)} \\
 									\implies && \partial_t {\bf q} + \partial_i {\bf f}^{(i)}({\bf q}) &= {\bf s}.
 								\end{aligned}
 								$$
@@ -154,11 +154,38 @@
 
 				</section>
 
-				<section id="Numerics">
+				<section id="Shocks, fluids and theory">
 
 					<section>
 						<div>
-							<h2>Shocks</h2>
+							<h2>Shock formation</h2>
+
+							<p>
+								Advection equation
+								$$
+									\partial_t q + \partial_x (v q) = 0.
+								$$
+								Information moves to the right, speed $v$.
+							</p>
+							<p>
+								Burger's equation
+								$$
+									\partial_t q + \tfrac{1}{2} \partial_x q^{2} = 0.
+								$$
+								Information moves to the right, speed $q$. Shocks form.
+							</p>
+						</div>
+
+						<aside class="notes">
+							The reason that we care so much about balance law, and conservation law, form is that it's the easiest way to get a unique discontinuous solution: it fixes the speed of the shock. The Rankine-Hugoniot conditions which compute the shock speed are derived from the conservation law form. One non-conservative form can be equivalent to an infinite number of conservative forms, so you may need additional information to fix which one is correct.
+
+							To be annoying, not every non-conservative system has a conservative form, so in general we'll need to fix the shock speed for more general systems.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h2>Shocks and uniqueness</h2>
 
 							<p>
 								Shock speed $V_s$ from Rankine-Hugoniot, $V_s \left[ q \right] = \left[ f \right]$. Burgers equation
@@ -210,6 +237,52 @@
 
 					<section>
 						<div>
+							<h2>Euler equations</h2>
+
+							<p>
+								Newtonian:
+								$$
+								\partial_t \begin{pmatrix} \rho \\ \rho v \\ E \end{pmatrix} + \partial_x \begin{pmatrix} \rho v \\ \rho v^2 + p \\ (E + p) v \end{pmatrix} = {\bf 0}.
+								$$
+							</p>
+							<p class="fragment fade-in">
+								SR:
+								$$
+								\partial_t \begin{pmatrix} \rho W \\ \rho h W^2 v \\ E \end{pmatrix} + \partial_x \begin{pmatrix} \rho W v \\ \rho h W^2 v^2 + p \\ (E + p) v \end{pmatrix} = {\bf 0}.
+								$$
+							</p>
+
+						</div>
+
+						<aside class="notes">
+							Blah
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h2>GR Euler equations</h2>
+
+							<p>
+								GR:
+								$$
+								\partial_t \sqrt{\gamma} \begin{pmatrix} \rho W \\ \rho h W^2 v_j \\ \tau \end{pmatrix} + \partial_i \sqrt{-g} \begin{pmatrix} \rho W \left( v^i - \frac{\beta^i}{\alpha} \right) \\ \rho h W^2 v_j \left( v^i - \frac{\beta^i}{\alpha} \right) + p \delta^i_j \\ \tau \left( v^i - \frac{\beta^i}{\alpha} \right) + p v^i \end{pmatrix} = \sqrt{-g} \begin{pmatrix} 0 \\ T^{\mu\nu} \left( \partial_\mu g_{\nu j} - \Gamma^\mu_{\nu j} \right) \\ \alpha \left( T^{\mu 0} \partial_{\mu} \log \alpha - T^{\mu\nu} \Gamma^0_{\mu\nu} \right) \end{pmatrix}.
+								$$
+							</p>
+
+						</div>
+
+						<aside class="notes">
+							Blah
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Numerics">
+
+					<section>
+						<div>
 							<h2>Finite Volume Methods</h2>
 
 							<p>
@@ -223,9 +296,6 @@
 								$$
 								On $\partial V$ the field $q$ is multi-valued: solve <i>Riemann Problem</i> to get unique $q$ there.
 							</p>
-							<p>
-								Can improve accuracy accuracy by using more information when constructing $q_{i \pm 1/2}$.
-							</p>
 						</div>
 
 						<aside class="notes">
@@ -237,7 +307,128 @@
 						</aside>
 					</section>
 
+					<section>
+						<div>
+							<h2>Reconstruction</h2>
+
+							<p>
+								Go from $\hat{q}_i$ to $q(x_{i \pm 1/2})$.
+							</p>
+							<p>
+								<ul>
+									<li> Piecewise constant is stable at shocks.
+									<li> Higher order leads to Gibbs' oscillations.
+									<li> Need limiting.
+									<li> WENO: expensive but accurate.
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h2>Riemann Solver</h2>
+
+							<p>
+								Go from two values for $q_{i - 1/2}$ to $f_{i - 1/2}$. Example (Rusanov):
+								$$
+								  f = \frac{1}{2} \left( f_L + f_R + \frac{\Delta x}{\Delta t} \left( q_L - q_R \right) \right).
+								$$
+							</p>
+							<p>
+								<ul>
+									<li> Full solution of Riemann problem expensive, not always available.
+									<li> Need care when phase transitions happen.
+									<li> Typically get more accuracy gain from reconstruction.
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h2>Discontinuous Galerkin</h2>
+
+							<p>
+								Full function basis expansion: $q = \sum_m \hat{q}_m P_m(x)$. Plug in:
+								$$
+								  \int_V P_m P_n \hat{\phi}_m \partial_t \hat{q}_n + \oint_{\partial V} P_m P_n \hat{\phi}_m \hat{f}_n - \int_V P_m \hat{f}_m \hat{\phi}_n \nabla P_n = \int_V P_m P_n \hat{\phi}_m \hat{s}_n.
+								$$
+								Simplifies to
+								$$
+								  M \partial_t \hat{{\bf q}} + S^T f(\hat{{\bf q}}) = - [\phi {\bf F}]_{x_{i-1/2}}^{x_{i+1/2}}.
+								$$
+							</p>
+							<p>
+								<ul>
+									<li> More accurate.
+									<li> Less communication - exascale!
+									<li> Issues with shocks.
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h2>Gridding</h2>
+
+							<p>
+								Adaptive Mesh Refinement
+								<ul>
+									<li> Cuts resource massively.
+									<li> Builds on standard code.
+									<li> Communication and complexity issues.
+								</ul>
+							</p>
+							<p>
+								Multi-patch and spherical coordinates
+								<ul>
+									<li> Cuts resolution requirements, improves accuracy.
+									<li> Coordinate and complexity issues.
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h2>Constraints</h2>
+
+							<p>
+								MHD has no monopoles: require
+								$$
+								  \nabla \cdot {\bf B} = 0.
+								$$
+							</p>
+							<p>
+								Enforces numerically through
+								<ul>
+									<li> Constrained transport;
+									<li> Changing variables (vector potential);
+									<li> Constraint damping.
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+						</aside>
+					</section>
+
 				</section>
+
 
 				<section id="Going further">
 
@@ -249,7 +440,8 @@
 								<ul>
 									<li> Well balanced
 									<li> Positivity preserving
-									<li> Adaptivity (AMR, $h$/$p$)
+									<li> Adaptivity ($h$/$p$, adaptive model)
+									<li> Path conservative schemes.
 								</ul>
 							</p>
 						</div>

@@ -45,8 +45,8 @@ $$
 To get this into a form we can solve numerically, choose a tetrad $\{ e_a^{(j)} \}$: four orthonormal vectors. Typically these will be associated with the computational coordinates, so you can loosely think of them as $\partial_t, \partial_x$ and so on, but they generalize to more complex coordinate systems. Contract our conservation equation with a tetrad vector to get
 $$
 \begin{aligned}
-  && \nabla_a \left( T^{ab} e_b^{(j)} \right) &= - T^{ab} \partial_a e_b^{(j)}, \\
-  \implies && \frac{1}{\sqrt{-g}} \partial_a \left( \sqrt{-g} T^{ab} e_b^{(j)} \right) &= - T^{ab} \partial_a e_b^{(j)}.
+  && \nabla_a \left( T^{ab} e_b^{(j)} \right) &= - T^{ab} \nabla_a e_b^{(j)}, \\
+  \implies && \frac{1}{\sqrt{-g}} \partial_a \left( \sqrt{-g} T^{ab} e_b^{(j)} \right) &= - T^{ab} \nabla_a e_b^{(j)}.
 \end{aligned}
 $$
 We can rewrite this final equation by multiplying through the metric determinant and splitting off the time derivative to get the *balance law form*
