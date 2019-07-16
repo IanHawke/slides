@@ -29,4 +29,4 @@ Look at the [pyro](https://github.com/python-hydro/pyro2) code. Test the advecti
 
 ## Done a range of HRSC methods on multiple models in more than one dimension
 
-Take a look at [this branch of the notes](), end of chapter 5, for a detailed outline of Discontinuous Galerkin methods, and [this branch of the example codes]() for implementations for advection, Burgers and hydrodynamics. Ensure that you understand it and implement it on a new system. Can you work out how to extend it to higher dimensions?
+Take a look at [this branch of the notes](https://github.com/IanHawke/numerical_exercises/tree/dg), end of chapter 5, for a detailed outline of Discontinuous Galerkin methods, and [this branch of the example codes](https://github.com/IanHawke/hydro_examples/tree/dg) for implementations for advection, Burgers and hydrodynamics. Ensure that you understand it and implement it on a new system. Can you work out how to extend it to higher dimensions?
