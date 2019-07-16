@@ -283,19 +283,45 @@
 
 					<section>
 						<div>
+							<h2>Weak forms</h2>
+
+							<p>
+								Move the derivatives off the fields using $C^{\infty}$ test function $\phi$:
+								$$
+									\int_V \phi \partial_t {\bf q} + \oint_{\partial V} \phi {\bf f} - \int_V {\bf f} \cdot \nabla \phi = \int_V \phi {\bf s}.
+								$$
+							</p>
+							<p>
+								<ul>
+									<li> Split domain into volumes/elements/cells.
+									<li> Approximate fields, including $\phi$, leads to method.
+									<li> Surface integral couples neighbours; other terms <i>local</i>.
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+							This weak form means that the only derivative of a "real" field is the time derivative. This approach could be generalized by integrating over time as well - this leads to implicit methods that are more complex, but can be more accurate and efficient.
+
+							Once the domain is split into cells the weak form applies on each individually. Within each cell the fields, $\phi$ and $q$ (and hence implicitly the flux $f$) are approximated. For example, each can be approximated by a polynomial expansion. This will lead to a set of ODEs within each element, which can be solved by standard methods.
+
+							The two crucial parts of the algorithm are how the fields are approximated within each cell, and how the inter-cell flux (the surface integral) is computed. These need to be done carefully to avoid problems at shocks.
+						</aside>
+					</section>
+
+					<section>
+						<div>
 							<h2>Finite Volume Methods</h2>
 
 							<p>
 								Spatially constant $q \simeq \hat{q}_i(t)$ within cell:
 								$$
-									\tfrac{\text{d}}{\text{d}t} \hat{q}_i + \tfrac{1}{|V|} \oint_{\partial V} f(q) = s(\hat{q}_i).
+									\tfrac{\text{d}}{\text{d}t} \hat{q}_i + \tfrac{1}{|V|} \oint_{\partial V} f(q) = s(\hat{q}_i) \quad \implies \quad \tfrac{\text{d}}{\text{d}t} \hat{q}_i + \tfrac{1}{\Delta x} \left[ f_{i+1/2} - f_{i-1/2} \right] = 0.
 								$$
-								Simplify to 1d, no source:
-								$$
-									\tfrac{\text{d}}{\text{d}t} \hat{q}_i + \tfrac{1}{\Delta x} \left[ f(q_{i+1/2}(\hat{q}_i, \hat{q}_{i+1})) - f(q_{i-1/2}(\hat{q}_{i-1}, \hat{q}_{i})) \right] = 0.
-								$$
-								On $\partial V$ the field $q$ is multi-valued: solve <i>Riemann Problem</i> to get unique $q$ there.
+								On $\partial V$, $q$ is multi-valued: solve <i>Riemann Problem</i> to get unique $q$.
 							</p>
+
+							<img src="figures/riemann-mol.png" />
 						</div>
 
 						<aside class="notes">
