@@ -421,6 +421,80 @@
 
 				<section id="Numerics">
 
+					<section>
+						<div>
+							<h1>Conservation</h1>
+
+							<p>
+								EFEs imply $\nabla_a T^{ab} = 0$. Pick a tetrad, $e_b^{(j)}$ to get
+								$$
+								\begin{aligned}
+								  && \nabla_a \left[ e_b^{(j)} T^{ab} \right] &= \tfrac{1}{\sqrt{-g}} \partial_a \left( \sqrt{-g} e_b^{(j)} T^{ab} \right) = -T^{ab} \nabla_a e_b^{(j)} \\
+									\implies && \partial_t {\bf q} + \partial_i {\bf f}^{(i)}({\bf q}) &= {\bf s}.
+								\end{aligned}
+								$$
+								Balance law form.
+
+								Only four equations: need other constituitive equations for, eg, EM, particle number, etc.
+							</p>
+						</div>
+
+						<aside class="notes">
+							Starting from stress-energy conservation we can choose a tetrad, typically aligned with the coordinates, to get four balance laws. The crucial point is the total divergence on the left-hand-side. First order hyperbolic PDEs of this form are well studied, and there's good numerical methods to solve them.
+
+							However, for astrophysically interesting matter we're going to need more than four fields to describe it. The conserved quantities (the ${\bf q}$'s) are roughly the energy and momentum of the average flow. We'll also need to describe EM fields, radiation, temperature and particle number by additional fields. These may be in balance law form, but may not (as seen in the multifluid section).
+						</aside>
+					</section>
+
+					<section data-background="figures/Books.png" data-background-position="right" data-background-size="90%">
+						<div style="width: 90%">
+							<h1>Methods</h1>
+						</div>
+
+						<aside class="notes">
+							Balance law form is standard in CFD: from Godunov in the 1950s to van Leer in the 1970s, the methods we use have a long pedigree. The field, driven by the Valencia group through the 1990s, caught up by 2005. As long as we have the balance law form we can evolve the system with confidence, as we'll see with Bruno's talk.
+						</aside>
+					</section>
+
+					<section data-background="figures/RMRFinalStatePressure.jpg" data-background-position='right' data-background-size="55%">
+						<div style="float: left; width: 40%">
+							<h1>Non-ideal effects</h1>
+							<p>
+								Example of magnetic resistivity:
+								<ul>
+									<li>
+										width of features depends on resistivity;
+									</li>
+									<li>
+										source terms "stiff": stability of full model requires $\Delta t \sim \sigma^{-1}$;
+									</li>
+									<li>
+										can approximate model by perturbation expansion about ideal MHD.
+									</li>
+								</ul>
+							</p>
+						</div>
+						<aside class="notes">
+							Non-ideal effects are usually very small. Unfortunately, "usually" is not good enough: the NS surface, for example, depends crucially on non-ideal effects. In the "full" non-ideal models the additional terms usually come in through the sources, and are often "stiff": that is, they react by trying the "push" the system back to an equilibrium, and they do this on very fast timescales. That's problematic, as the evolution needs to resolve these short/fast scales in order to remain stable.
+							<br>
+							This example is from resistive MHD. If ideal MHD were used then the "islands" of magnetic pressure should stay separate. By including resistivity magnetic reconnection causes them to interact, with the width of the boundary layer linked to the resistivity value. As we get closer to "real" values of the resistivity you can see the connection region getting very thin.
+						</aside>
+					</section>
+
+					<section data-background='figures/BWandReconnectionOptPerf3DIHTalk.jpg' data-background-position='bottom' data-background-size="100%">
+						<div style="float: top">
+							<h1>Performance</h1>
+							<p>
+								Either use stable numerics or approximate model.
+							</p>
+						</div>
+						<aside class="notes">
+							There are two approaches to the stiffness problem. One is to use implicit numerical methods. This allows us to evolve the full model, stably, but has significant computational costs - in these examples it's usually an order of magnitude, and for real values it will only get worse.
+							<br>
+							The alternative is to approximate the model, which we do here by a perturbation expansion about the ideal MHD limit. This "Chapman-Enskog" expansion was designed for the Boltzmann equation, so has broader relevance. The performance is much better than the implicit methods, but there are some stability issues: the approximation is only stable for certain resolutions.
+						</aside>
+					</section>
+
 				</section>
 
 				<section id="Summary">
