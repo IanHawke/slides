@@ -132,40 +132,302 @@
 
 				</section>
 
-<!--
 				<section id="Motivation">
 
-					<section data-background="figures_ih/BustilloEtAlBHKickParameterSpace.png" data-background-position="right" data-background-size="50%">
+					<section data-background="figures/g1701866-v5-q-transform-30-1col-cside.png" data-background-position="right" data-background-size="50%">
 						<div style="width: 90%">
-							<h1>Uncertainty quantification</h1>
+							<h1>GW170817</h1>
 						</div>
 						<div style="float: left; width: 49%">
 							<p>
-								To match observations from simulations:
+								The only NS merger seen in GWs:
 								<ol>
-									<li> set initial data;
-									<li> simulate observable;
-                  <li> repeat across parameter space;
-                  <li> interpolate.
+									<li> high SNR;
+									<li> covers frequencies from 10s-1000s Hz;
+                  <li> observed in multiple detectors, allowing localisation.
 								</ol>
-							</p>
-							<p>
-								Uncertainty from simulation and parameter space sampling.
 							</p>
 						</div>
 						<div style="position: absolute; bottom: 5px; right: 5px; width: 49%">
 							<p>
-								<a href="https://dx.doi.org/10.1103/PhysRevLett.121.191102"> Bustillo et al, 1806.11160</a>
+								<a href="https://dx.doi.org/10.1103/PhysRevLett.121.191102"> LIGO, arxiv:</a>
 							</p>
 						</div>
 
 						<aside class="notes">
-							Thinking of how numerical simulations have been used to predict observations, like the maximum kick velocity in binary black hole mergers, or the gravitational wave luminosity from the same. As we don't know the exact initial conditions relevant for the observation, we sample the parameter space, simulating to get the value of any relevant observables at that point in parameter space. This can then be interpolated either directly or in some reduced model, such as extended one body. This figure from the Georgia Tech group implicitly shows the sort of coverage of parameter space we expect to have. So the uncertainty depends on the simulation errors (such as truncation error), the modelling error (did we include all the physics), and the sampling error (essentially from the interpolation).
+							GW170817 is the ony fully confirmed and checked GW signal of a BNS merger. In a staggering stroke of luck only seen when thousands collaborate over decades, the strongest GW signal yet detected was the (relatively) close merger of two neutron stars, giving us strong field information about their interior physics.
 							<br>
-							A key point to note. This approach implicitly assumes that the observable is not overly sensitive to the uncertainties: in other words, that the problem is well-posed.
+							A crucial point to note here is that LIGO has observed the merger from about 50 up to 500 Hz: in principle we expect the signal to span from tens to a few thousands of Hz.
 						</aside>
 					</section>
 
+					<section data-background="figures/bns_figure4.png" data-background-position="right" data-background-size="50%">
+						<div style="width: 90%">
+							<h1>GW170817</h1>
+						</div>
+						<div style="float: left; width: 49%">
+							<p>
+								NS constraints from GWs:
+								<ol>
+									<li> Mass $\sim 1.4 M_{\odot}$;
+									<li> Radius $\sim 11 \pm 1 \text{ km}$;
+                  <li> weak constraints on EOS through tidal compressibility.
+								</ol>
+							</p>
+						</div>
+						<div style="position: absolute; bottom: 5px; right: 5px; width: 49%">
+							<p>
+								<a href="https://dx.doi.org/10.1103/PhysRevLett.121.191102"> LIGO, arxiv:</a>
+							</p>
+						</div>
+
+						<aside class="notes">
+							Getting more information about the properties of matter in extreme situations is one key purpose of GW observations of NS mergers. Much of this information is expressed through the <i>equation of state</i>, a short-hand for how the microscopic properties affect large scale observables (for example, how the hydrodynamic pressure depends on density and temperature). The mass information doesn't tell us anything that wasn't known from pulsars, but the radius information is much harder to get that way. Information about the tidal compressibility, via the Love numbers, put constraints on the equation of state that are complementary to that from pulsar observations.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Multi messenger">
+
+					<section data-background="figures/SD_hp_pol_vs_IF_lowmass.png" data-background-position="right" data-background-size="50%">
+						<div style="width: 90%">
+							<h1>GWs and observables</h1>
+						</div>
+						<div style="float: left; width: 49%">
+							<p>
+								Expect LIGO to <i>only</i> see GWs from inspiral. Need lower noise at higher frequencies to see
+								<ol>
+									<li> post-merger signal, needed for "seismology";
+									<li> supernova signals;
+                  <li> information about final fate of object.
+								</ol>
+								Need third generation detectors (Einstein Telescope).
+							</p>
+						</div>
+						<div style="position: absolute; bottom: 5px; right: 5px; width: 49%">
+							<p>
+								<a href="https://dx.doi.org/10.1103/PhysRevLett.121.191102"> LIGO, arxiv:</a>
+							</p>
+						</div>
+
+						<aside class="notes">
+							This figure is from one of the Einstein Telescope design studies, overlaying expected GW signals on various detector noise curves. It emphasizes how lucky GW170817 was - that was at around 40Mpc, whereas here we're looking at the expected distance of 300Mpc. The key point is that it's the inspiral phase that hits the sweet spot of LIGO's noise curve. The higher frequency part of the signal is practically unobservable with LIGO; we'd need better detectors to get those.
+							<br>
+							The Einstein Telescope is one such third generation detector; that's likely at least 20 years in the future. LIGO is good enough for the inspiral: to get more information about the physics we'll need either to wait, or do something else.
+						</aside>
+					</section>
+
+					<section data-background="figures/timeline-with-spectrum-amgv7.png" data-background-position="right" data-background-size="50%">
+						<div style="width: 90%">
+							<h1>Multi messenger astronomy</h1>
+						</div>
+						<div style="float: left; width: 49%">
+							<p>
+								Want to complement GW observations with
+								<ol>
+									<li> electromagnetic signals (radio, X-ray, $\gamma$, ...);
+									<li> neutrino observations;
+                  <li> anything else we can get.
+								</ol>
+								Done with GW170817: inferred jet properties suggest more constraints on progenitors.
+							</p>
+						</div>
+						<div style="position: absolute; bottom: 5px; right: 5px; width: 49%">
+							<p>
+								<a href="https://dx.doi.org/10.1103/PhysRevLett.121.191102"> LIGO, arxiv:</a>
+							</p>
+						</div>
+
+						<aside class="notes">
+							Multi messenger is going to be the key approach until third generation detectors come online. Using complementary observation channels we can get further information to constrain the microscopic properties. This isn't new: neutrino and EM observations have been combined for studies of the sun, and for supernovae. By including GWs we're getting constraints on the coupling between gravity and matter. It's hard to do: localising the source just from GWs is tricky with so few detectors, especially fast enough (even with GW170817 the first trigger was in $\gamma$!), but improving the network will help (eg, LIGO India).
+							<br>
+							For GW170817 there's a wealth of information about the post-merger regime, particularly the jet pushed out by the kilonova and the products left over. This gives some weak constraints on the constituents of the progenitor NSs. These constraints will be strengthened by further observations in O3 and beyond: was Sunday's event (1st September) another BNS merger?
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Modelling">
+
+					<section data-background="figures/nstar_plot_stage3.png" data-background-position="right" data-background-size="50%">
+						<div style="width: 90%">
+							<h1>Modelling: inspiral</h1>
+						</div>
+						<div style="float: left; width: 49%">
+							<p>
+								For inspiral only bulk properties matter:
+								<ul>
+									<li> mass;
+									<li> spin;
+									<li> compactness (EOS);
+									<li> bulk internal magentic field.
+								</ul>
+								Leads to key numerical limits:
+								<ul>
+									<li> $\lambda_{\text{GW}} \sim 10^6 \text{ m} \implies L_{\text{grid}} \sim 10^7 \text{ m}$;
+									<li> $R_{\text{NS}} \sim 10^4 \text{ m} \implies $\Delta x \sim 100 \text{ m}$.
+									<li> Stability: $\Delta x \sim 100 \text{ m} \implies \Delta t \sim 10^{-6} \text{ s}$.
+								</ul>
+							</p>
+						</div>
+						<div style="position: absolute; bottom: 5px; right: 5px; width: 49%">
+							<p>
+								<a href=""> Steiner.</a>
+							</p>
+						</div>
+
+						<aside class="notes">
+							The inspiral phase is driven by the spacetime effects. There's practially no interaction between the NSs until the very final phase (but see the part about the crust later!). So the crucial quantities and leading order in the stress-energy, and we can write them down quite simply: total mass-energy (through baryon mass and magnetic fields), compactness, and (for longer inspirals) the effects of spin and eccentricity. This is very close to the situation for BHs.
+							<br>
+							From this we can determine the key numbers for numerical simulations. We saw from the plots for GW170817 that the GW frequencies run from tens to thousands of Hz. If we focus on the last fractions of a second, where the frequencies are in the hundreds of Hz and which are all we can practially simulate, then that corresponds to a gravitational wavelength of order $10^6$ m. To get enough GWs into our grid to measure we'll need multiple wavelengths, so a grid boundary at order $10^7$ m.
+							<br>
+							Similarly, we know that the NS radius is of order $10^4$ m. We'll need many tens of points across the radius to accurately capture the behaviour over the timescale of the merger, leading to a grid spacing of order $100$ m. Causality leads to the stability constraint (CFL!) meaning the timestep can't be bigger than $10^{-6}$ s. For evolving say $10$ ms that's $10^4$ steps at best.
+						</aside>
+					</section>
+
+					<section data-background="figures/ShibataUryu99.png" data-background-position="right" data-background-size="50%">
+						<div style="width: 90%">
+							<h1>How far have we come?</h1>
+						</div>
+						<div style="float: left; width: 49%">
+							<p>
+								Shibata & Uryū 1999:
+								<ul>
+									<li> just polytropes;
+									<li> boundary at $\sim 0.3 \lambda_{\text{GW}};
+									<li> $\Delta x \sim 600 \text{ m}$.
+								</ul>
+								Kiuchi & Shibata 2017:
+								<ul>
+									<li> MHD, "real" EOS;
+									<li> boundary at $\sim XX \lambda_{\text{GW}}$
+									<li> $\Delta x \sim 12 \text{ m}$.
+								</ul>
+							</p>
+						</div>
+						<div style="position: absolute; bottom: 5px; right: 5px; width: 49%">
+							<p>
+								<a href=""> Steiner.</a>
+							</p>
+						</div>
+
+						<aside class="notes">
+							There's been a big jump in modelling in the past 20 years. The work of Shibata and collaborators sets much of the standards and we can see how the early test simulations which don't meet the required standards for LIGO are now replaced by simulations definitely good enough for second generation detectors.
+							<br>
+							It's worth noting that at around this time the work of the Binary NS and BH Grand Challenges were bearing fruit, with the open GR3D code leading, through Mark Miller's MAHC code and the EU Network Whisky code, to the GRHydro code that's available through the ETK today.
+						</aside>
+					</section>
+
+					<section data-background="figures/NStar_both.png" data-background-position="right" data-background-size="90%">
+						<div style="width: 90%">
+							<h1>How far must we go?</h1>
+						</div>
+						<div style="position: absolute; bottom: 5px; right: 5px; width: 49%">
+							<p>
+								<a href=""> Steiner.</a>
+							</p>
+						</div>
+
+						<aside class="notes">
+							As we move to higher resolution we have to look at the NS modelling. Here are images from Page and Steiner looking at some of the additional physics that are going to have some level of impact on the observed signals. There's the crust and the layered nature of the star. There's the magnetic field, which has to consistently extend through the interior to the exterior. There's the exotic particles in the core, and the superfluid neutron fluids. There's a wealth of complex interactions with emitted radiation. A lot of these effects happen on short length or timescales so are unlikely to impact the inspiral, but the multi messenger post-merger signals will crucially depend on these details.
+						</aside>
+					</section>
+
+					<section data-background="figures/NStar_both.png" data-background-position="right" data-background-size="50%">
+						<div style="width: 90%">
+							<h1>Elastic crust</h1>
+						</div>
+						<div style="float: left; width: 49%">
+							<p>
+								Outer layers of NS form a "crust"
+								<ul>
+									<li> $L_{\text{crust}} \sim 10^{2}-10^{3} \text{ m}$;
+									<li> EOS "known"; strain and fracture less so;
+									<li> precursor shattering (Tsang)?
+								</ul>
+							</p>
+						</div>
+						<div style="position: absolute; bottom: 5px; right: 5px; width: 49%">
+							<p>
+								<a href=""> Steiner.</a>
+							</p>
+						</div>
+
+						<aside class="notes">
+							In the outer layers it's energetically favourable for the neutrons to form a lattice. The effects on the bulk motion are small - for example, the Love numbers (and hence tidal compressibility) change at the sub-percent level. However, the magnetic field is expected to be tightly bound to the crust, and mismatches between crustal and core motion and expected to generate observable signals. This is seen in pulsars via glitches; Tsang has suggested that inspiral resonances may shatter the crust leading to EM observable signals, giving detailed EOS information.
+							<br>
+							To simulate this we'll need a formulation and $\Delta x \sim 10$ m.
+						</aside>
+					</section>
+
+					<section data-background="figures/NStar_both.png" data-background-position="right" data-background-size="50%">
+						<div style="width: 90%">
+							<h1>Non-ideal effects</h1>
+						</div>
+						<div style="float: left; width: 49%">
+							<p>
+								Many sources:
+								<ul>
+									<li> Bulk and shear viscosity;
+									<li> EM resistivity;
+									<li> Magnetic turbulence;
+									<li> ...
+								</ul>
+								Crucial for interior (angular momentum transport) and exterior (heat and EM propagation).
+							</p>
+						</div>
+						<div style="position: absolute; bottom: 5px; right: 5px; width: 49%">
+							<p>
+								<a href=""> Steiner.</a>
+							</p>
+						</div>
+
+						<aside class="notes">
+							There's a broad range of length and timescales for non-ideal effects. Estimates from Alford and collaborators suggest shear viscosity could matter if there's significant gradients on lengthscales of order $10$ m, and bulk viscosity could be important in all current simulations. Going beyond ideal MHD is needed to consistently connect the interior and exterior of the NS, obviously needed for multi-messenger: it's likely that the lengthscales involved here are of the order of $1$ m, making things tricky.
+							<br>
+							The short/fast scales involved here mean we'll either need to be smart with our numerics or approximate the model in some way.
+						</aside>
+					</section>
+
+					<section data-background="figures/NStar_both.png" data-background-position="right" data-background-size="50%">
+						<div style="width: 90%">
+							<h1>Superfluids</h1>
+						</div>
+						<div style="float: left; width: 49%">
+							<p>
+								Modelling suggests
+								<ul>
+									<li> neutrons may Cooper pair: superfluids;
+									<li> flux tubes may form: superconductivity;
+									<li> details remain very uncertain!
+								</ul>
+							</p>
+						</div>
+						<div style="position: absolute; bottom: 5px; right: 5px; width: 49%">
+							<p>
+								<a href=""> Steiner.</a>
+							</p>
+						</div>
+
+						<aside class="notes">
+							There remains some dispute that effects that, on earth, are micro-scale quantum level with small-scale macro effects, like superconductivity and superfluidity, even exist on the kilometre lengthscales of a NS. However, it's strongly believed that Cooper pairing will lead to some part of the outer core and inner crust over a radius of at least metres will contain these effects. This has crucial for angular momentum transport - the quantization of rotation is inherent, and also leads to anisotropic heat transport and could have a massive effect of cooling of the remnant.
+							<br>
+							However, consistent hydrodynamic theories of, eg, superfluids, involve multiple inter-penetrating fluids with their own velocity vectors. The lengthscales could be relevant for all simulations - the flux tubes and vortices could stretch across the whole NS! - but the timescales where things relax could be extremely short.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Numerics">
+
+				</section>
+
+				<section id="Summary">
+
+				</section>
+
+<!--
 					<section>
 						<div style="float: left; width: 50%">
 							<h1>Matter</h1>
