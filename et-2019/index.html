@@ -131,7 +131,7 @@
 							</p>
 						</div>
 						<aside class="notes">
-							Thanks for the invitation
+							I'm going to briefly talk about current modelling techniques for NS binaries before looking at what we'll need for multi messenger scenarios and for third generation detectors.
 						</aside>
 					</section>
 
@@ -395,7 +395,7 @@
 						</div>
 
 						<aside class="notes">
-							There remains some dispute that effects that, on earth, are micro-scale quantum level with small-scale macro effects, like superconductivity and superfluidity, even exist on the kilometre lengthscales of a NS. However, it's strongly believed that Cooper pairing will lead to some part of the outer core and inner crust over a radius of at least metres will contain these effects. This has crucial for angular momentum transport - the quantization of rotation is inherent, and also leads to anisotropic heat transport and could have a massive effect of cooling of the remnant.
+							There remains some dispute that effects that, on earth, are micro-scale quantum level with small-scale macro effects, like superconductivity and superfluidity, even exist on the kilometre lengthscales of a NS. However, it's strongly believed that Cooper pairing will lead to some part of the outer core and inner crust, over a radius of at least metres, containing these effects. This is crucial for angular momentum transport - the quantization of rotation is inherent, and also leads to anisotropic heat transport and could have a massive effect on the cooling of the remnant.
 							<br>
 							However, consistent hydrodynamic theories of, eg, superfluids, involve multiple inter-penetrating fluids with their own velocity vectors. The lengthscales could be relevant for all simulations - the flux tubes and vortices could stretch across the whole NS! - but the timescales where things relax could be extremely short.
 						</aside>
@@ -425,7 +425,7 @@
 
 						<aside class="notes">
 							Starting from stress-energy conservation we can choose a tetrad, typically aligned with the coordinates, to get four balance laws. The crucial point is the total divergence on the left-hand-side. First order hyperbolic PDEs of this form are well studied, and there's good numerical methods to solve them.
-
+							<br>
 							However, for astrophysically interesting matter we're going to need more than four fields to describe it. The conserved quantities (the ${\bf q}$'s) are roughly the energy and momentum of the average flow. We'll also need to describe EM fields, radiation, temperature and particle number by additional fields. These may be in balance law form, but may not (as seen in the multifluid section).
 						</aside>
 					</section>
@@ -553,7 +553,7 @@
 						</div>
 
 						<aside class="notes">
-							This multifluids example comes from a very simple investigation of the two-stream instability, where physically we expectthe interactions between the fluids to be driven unstable. This is a very simple numerical scheme which means it can't handle shocks. Despite this, the computational cost is extreme: the multiple fluids increases the state vector considerably, and the conservative to primitive transformation is not just multi-dimensional but also requires solving a linear system as part of each internal step.
+							This multifluids example comes from a very simple investigation of the two-stream instability, where physically we expect the interactions between the fluids to be driven unstable. This is a very simple numerical scheme which means it can't handle shocks. Despite this, the computational cost is extreme: the multiple fluids increases the state vector considerably, and the conservative to primitive transformation is not just multi-dimensional but also requires solving a linear system as part of each internal step.
 							<br>
 							To make multifluid simulations useful for mergers we need better numerical methods that can deal with formulations not in balance law forms. Such methods exist - typically referred to as path-consistent methods - but rely crucially on an understanding of the <em>physical</em> dissipation to add. That's where we're lacking.
 						</aside>
