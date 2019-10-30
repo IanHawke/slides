@@ -191,15 +191,13 @@
 							<ul>
 								<li> $\lambda_{\text{GW}} \sim 10^6 \text{ m} \implies L_{\text{grid}} \sim 10^7 \text{ m}$;
 								<li> $R_{\text{NS}} \sim 10^4 \text{ m} \implies \Delta x \sim 100 \text{ m}$.
-								<li> Stability: $\Delta x \sim 100 \text{ m} \implies \Delta t \sim 10^{-6} \text{ s}$.
+								<li> CFL: $\Delta x \sim 100 \text{ m} \implies \Delta t \sim 10^{-6} \text{ s}$.
 							</ul>
 						</p>
-					</div>
-					<div style="position: absolute; bottom: 1px; right: 5px; width: 45%">
 						<p>
 							<ul style="list-style: none;">
 								<li>
-									<a href="https://github.com/awsteiner/nstar-plot">Steiner, GitHub</a>, <a href="http://www.astroscu.unam.mx/neutrones/NS-Picture/NStar/NStar.html">Page, UNAM.</a>
+									<a href="https://github.com/awsteiner/nstar-plot">Steiner, GitHub</a>; <a href="http://www.astroscu.unam.mx/neutrones/NS-Picture/NStar/NStar.html">Page, UNAM.</a>
 								</li>
 						</p>
 					</div>
@@ -378,6 +376,9 @@
 							<p>
 								Allowing reference space interactions gives resistive, dissipative terms.
 							</p>
+							<p>
+								<a href="https://doi.org/10.1088/0264-9381/32/7/075008">Andersson & Comer, 1306.3345.</a>
+							</p>
 						</div>
 
 						<aside class="notes">
@@ -388,9 +389,9 @@
 					</section>
 
 
-					<section data-background="images/timeflow.png" data-background-position="right" data-background-size="40%">
+					<section data-background="figures/timeflow.png" data-background-position="right" data-background-size="40%">
 						<div style="float: left; width: 60%">
-							<h2>Equations of motion</h2>
+							<h3>Equations of motion</h3>
 							<p>
 								Variational calculation:
 								$$
@@ -399,15 +400,12 @@
 									f^{\text{x}}_a + \Gamma_{\text{x}} \bar{\mu}^{\text{x}}_a + \nabla^b D^{\text{x}}_{ab} &= R^{\text{x}}_a.
 								\end{align}
 								$$
-							</p>
-							<p>
-								Force $f^{\text{x}}_a$ balances reactions $\Gamma_{\text{x}}$ and resistivity $R^{\text{x}}_a.$
+								Force $f^{\text{x}}_a$ balances non-ideal terms.
 							</p>
 							<p class="fragment" data-fragment-index="0">
 								Variational constraints:
 								<ol class="fragment" data-fragment-index="0">
-									<li> Resistivity written as projection of velocity differences;
-									<li> Reactions fixed by resistivity;
+									<li> Non-ideal terms from master function.
 									<li> EM gauge invariance, second law, fix symmetry of coefficients.
 									<li> No consistent 2-fluid resistive form without reactions.
 								</ol>
@@ -430,11 +428,11 @@
 								SR, pseudo-1d, equations of motion simplify to
 								$$
 								\begin{aligned}
-									\partial_t j^t + \partial_x j^x &= 0, \\
+									\partial_t j^t + \partial_x j^x &= 0, &
 									\partial_t s^t + \partial_x s^x &= 0, \\
-									\partial_t \Theta_x - \partial_x \Theta_t - \frac{s^y}{s^t} \partial_x \Theta_y &= 0, \\
-									\partial_t \Theta_y + \frac{s^x}{s^t} \partial_x \Theta_y &= 0, \\
-									\partial_t \mu_x - \partial_x \mu_t &= 0, \\
+									\partial_t \Theta_x - \partial_x \Theta_t - \color{red}{\frac{s^y}{s^t} \partial_x} \Theta_y &= 0, &
+									\partial_t \Theta_y + \color{red}{\frac{s^x}{s^t} \partial_x} \Theta_y &= 0, \\
+									\partial_t \mu_x - \partial_x \mu_t &= 0, &
 									\partial_t \mu_y &= 0.
 								\end{aligned}
 								$$
@@ -462,11 +460,100 @@
 				<section id="Resistivity">
 
 					<section>
+						<div>
+							<h2>Resistivity</h2>
+							<p>
+								Focus on resistive terms. For small $\eta$ have $\sim$ ideal MHD plus stiff
+								$$
+								\partial_t {\bf E} - \nabla \times {\bf B} = -{\bf J} \sim \eta^{-1}.
+								$$
+							</p>
+							<p>
+								Write full system as "slow" $q$, "fast" $\overline{q}$:
+								$$
+								\begin{align}
+									\partial_t q + \partial_x f(q, \overline{q}) &= s(q, \overline{q}) \\
+									\partial_t \overline{q} + \partial_x \overline{f}(q, \overline{q}) &= \tfrac{1}{\epsilon} \overline{s} (q, \overline{q}).
+								\end{align}
+								$$
+							</p>
+							<p>
+								Chapman-Enskog expansion around ideal MHD:
+								$$
+								\begin{align}
+									\overline{q} & = \overline{q}_0 + \epsilon \overline{q}_1 + \mathcal{O}(\epsilon^2) &
+									\to \quad \partial_t q + \partial_x f & = s + \epsilon \partial_x ( D \partial_x q ).
+								\end{align}
+								$$
+							</p>
+						</div>
 
 						<aside class="notes">
-							See slides from GR22
+							We can make more progress if we restrict further to just look at resistive terms. We keep the EM terms in, assume the species can be treated as flowing together as a single fluid, but allow their microscopic drift to generate an electric field. The standard Maxwell equations apply, but for small resistivities we're near the ideal limit, and the electric field evolution becomes stiff with the current going inversely with the resistivity. This makes numerical evolutions expensive and inaccurate, relying on costly implicit schemes. <br>
+
+							We can make progress by doing a singular perturbation (Chapman-Enskog) expansion about the ideal MHD state. The assumption is that the full system can be split into stiff and non-stiff variables: here, the electric fields are stiff. We then do a perturbation expansion of the stiff variables. It is crucial that the background is in equilibrium: that is, the stiff source vanishes there. This expansion leads to a modified source for the non-stiff variables to leading order, which looks like a diffusion term.
 						</aside>
 					</section>
+
+					<section data-background="figures/RMRFinalStatePressure.jpg" data-background-position='right' data-background-size="55%">
+						<div style="float: left; width: 40%">
+							<h2>Reconnection</h2>
+							<p>
+								<ul>
+									<li>
+										Extremely good agreement with resistive MHD;
+									</li>
+									<li>
+										Expected convergence with conductivity.
+									</li>
+								</ul>
+							</p>
+							<p>
+								<a href="https://dx.doi.org/10.1093/mnras/stz2779">Wright & Hawke, 1906.03150</a>
+							</p>
+						</div>
+						<aside class="notes">
+							Here we show an example of magnetic reconnection, for two different resistivities, quite a long way from the ideal limit. If ideal MHD were used then the "islands" of magnetic pressure should stay separate. By including resistivity magnetic reconnection causes them to interact, with the width of the boundary layer linked to the resistivity value. The results here show the Chapman-Enskog approach is visually indistinguishable from the full resistive values. We also see clean convergence with grid resolution and with conductivity.
+						</aside>
+					</section>
+
+					<section data-background="figures/modelPowerSpectrumT5Sig100NoMinModPaperIHTalk.jpg" data-background-position='right' data-background-size="40%">
+						<div style="float: left; width: 55%">
+							<h2>Kelvin-Helmholtz Instability</h2>
+							<p>
+								<ul>
+									<li>
+										Magnetic energy cascades to all scales;
+									</li>
+									<li>
+										Good agreement with resistive MHD at larger scales;
+									</li>
+									<li>
+										The source term approach is <i>not</i> capturing subgrid behaviour.
+									</li>
+								</ul>
+							</p>
+							<p>
+								<a href="https://dx.doi.org/10.1093/mnras/stz2779">Wright & Hawke, 1906.03150</a>
+							</p>
+						</div>
+						<aside class="notes">
+							To get more insight into what this approach is doing, and to link back to our binary neutron star motivation, we look at a Kelvin-Helmholtz instability. There's the standard Kolmogorov cascade of energy from large scales down to small, which is similar for all models. As we get to higher frequencies, and hence smaller scales, we see the different models diverge. Whilst the REGIME model is closer to the resistive case than the ideal is, once we start reaching grid-cell resolutions there is a substantial difference. This suggests that the REGIME model is capturing the large scale features of the resistive model, not the small.
+						</aside>
+					</section>
+
+					<section data-background='figures/BWandReconnectionOptPerf3DIHTalk.jpg' data-background-position='bottom' data-background-size="100%">
+						<div style="float: top">
+							<h1>Performance</h1>
+							<p>
+								Many factors faster than full model.
+							</p>
+						</div>
+						<aside class="notes">
+							Finally, we need to check the performance of REGIME against the resistive model. REGIME's performance is pretty much independent of the resistivity. In contrast, the runtime for an explicit RK scheme for the full resistive model (blue curve) blows up well before interesting resistivities are reached. The IMEX schemes allow physical resistivities to be evolved, but are always slower than regime, usually by factors of 5-10 or more.
+						</aside>
+					</section>
+				</section>
 
 				</section>
 
@@ -480,15 +567,22 @@
 						</div>
 						<p>
 							<ul>
-								<li>Blah
+								<li> NS merger observations in EM and GWs will constrain exotic physics - if we can model them. </li>
+								<li> Multifluid variational approach ensures all GW sources can be captured, but currently impractical to use. </li>
+								<li> Approximations to non-ideal effects likely crucial in near future - EM resistivity a good test bed. </li>
+								<li> Uncertainty quantification and statistical solutions: costly but necessary? </li>
+								<li> Non-conservative products and a "physical" GR dissipation: important next step. </li>
 							</ul>
 						</p>
 						<aside class="notes">
-							Blah
+							Thank you for your attention.
 						</aside>
 					</section>
 
 				</section>
+
+
+
 
 				<section id="Additional slides">
 
