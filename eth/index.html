@@ -366,10 +366,94 @@
 
 				<section id="Multifluids">
 
-					<section>
+					<section data-background="figures/pullback2.png" data-background-position="right" data-background-size="40%">
+						<div style="width: 59%">
+							<h2>Multifluids</h2>
+							<p>
+								Reference space now $3N$ dimensional. Measure particle number $n_{\text{x}}$ using 3-form $n^{\text{x}}_{ABC}$. Master function $\Lambda (n^2_\text{xy}, A_b)$.
+							</p>
+							<p>
+								Conjugate momenta $\bar{\mu}_a^{\text{x}}$ need not be parallel to flux $n^a_{\text{x}}$ (entrainment).
+							</p>
+							<p>
+								Allowing reference space interactions gives resistive, dissipative terms.
+							</p>
+						</div>
 
 						<aside class="notes">
-							See slides from GR22
+							The elasticity equations are a warm-up exercise for what we're really interested: relativistic multiphase flow. Carter wrote down a formalism in the 80's which allows for covariant interactions between fluids in relativity. This gives each of the $N$ fluids its own reference space as a 3-manifold. The volume form on the reference space when pulled back to the spacetime 4-manifold is automatically closed under the exterior derivative, giving the continuity equation. By varying a master function or Lagrangian written in terms of the Lorentz invariants, which are the dot products of number currents, we get the 4-Euler equations (which split into Euler and energy equations). <br>
+
+							Andersson and Comer extended this recently so that there is one $3N$-dimensional reference space. The volume elements remain 3-forms on this space, but the space isn't necessarilly a product of 3-dimensional spaces. This can be thought of as allowing the volume element for species X to depend on the coordinates of reference space Y. Running through the variational calculation again gives fluid-like equations with reactions, resistivity, and dissipation.
+						</aside>
+					</section>
+
+
+					<section data-background="images/timeflow.png" data-background-position="right" data-background-size="40%">
+						<div style="float: left; width: 60%">
+							<h2>Equations of motion</h2>
+							<p>
+								Variational calculation:
+								$$
+								\begin{align}
+								  \nabla_a n^a_{\text{x}} &= \Gamma_{\text{x}}, \\
+									f^{\text{x}}_a + \Gamma_{\text{x}} \bar{\mu}^{\text{x}}_a + \nabla^b D^{\text{x}}_{ab} &= R^{\text{x}}_a.
+								\end{align}
+								$$
+							</p>
+							<p>
+								Force $f^{\text{x}}_a$ balances reactions $\Gamma_{\text{x}}$ and resistivity $R^{\text{x}}_a.$
+							</p>
+							<p class="fragment" data-fragment-index="0">
+								Variational constraints:
+								<ol class="fragment" data-fragment-index="0">
+									<li> Resistivity written as projection of velocity differences;
+									<li> Reactions fixed by resistivity;
+									<li> EM gauge invariance, second law, fix symmetry of coefficients.
+									<li> No consistent 2-fluid resistive form without reactions.
+								</ol>
+							</p>
+						</div>
+
+						<aside class="notes">
+							Explicitly we here see the schematic form of the full equations. The first is the continuity equation, now including a particle creation rate $\Gamma_{\text{x}}$. Simplify to SR and the covariant $\nabla_a \to \partial_a$, expand the Einstein sum to get continuity. <br>
+
+							The second equation is the Euler equation. The $f^{\text{x}}_a = n^b_{\text{x}} \nabla_{[b} \mu_{a]}^{\text{x}}$ term is the force, which is the projection of the vorticity of that fluid. Particle creation leads to a "rocket" term, resistivity comes from velocity differences between fluid species, and dissipation comes from gradients of the volume elements. <br>
+
+							It should be emphasized that, whilst this theory does reduce to something Navier-Stokes like, all the non-ideal terms come from multifluid interactions, not local (sub-fluid-element scale) ones.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h2>Practical problems - superfluids</h2>
+							<p>
+								SR, pseudo-1d, equations of motion simplify to
+								$$
+								\begin{aligned}
+									\partial_t j^t + \partial_x j^x &= 0, \\
+									\partial_t s^t + \partial_x s^x &= 0, \\
+									\partial_t \Theta_x - \partial_x \Theta_t - \frac{s^y}{s^t} \partial_x \Theta_y &= 0, \\
+									\partial_t \Theta_y + \frac{s^x}{s^t} \partial_x \Theta_y &= 0, \\
+									\partial_t \mu_x - \partial_x \mu_t &= 0, \\
+									\partial_t \mu_y &= 0.
+								\end{aligned}
+								$$
+								EOS gives $j^x, s^x, \Theta_t, \mu_t$.
+							</p>
+							<p>
+								<ul>
+									<li> Non-conservative products: need dissipation. </li>
+									<li> Irrotationality constraint ($\mu_a \sim \partial_a \psi$). </li>
+									<li> ${\bf q} \to {\bf w}$ <em>extremely</em> expensive.
+								</ul>
+							</p>
+						</div>
+						<aside class="notes">
+							The general equations are far too complicated to implement right now. Aside from anything else, the non-ideal terms require derivatives on the reference space, which can only be converted to derivatives on spacetime in simple circumstances. So we'll look at a very simplified example. <br>
+
+							We saw earlier that superfluids are important for neutron stars. The hydrodynamic 2-fluid theory is appropriate on the scales we want, and fits within the reference-space framework. We have the "superfluid" component $j^a$, which behaves like a zero-temperature irrotational flow with no dissipation, and a "normal" component $s^a$ that behaves like a standard compressible fluid. These are coupled through the equation of state. <br>
+
+							Even in this simplified model where I've restricted to SR, only considered spatial derivatives in one direction, and assumed 2 spatial dimensions, we see the complications. There's non-conservative products (which appear through the force term $f_a^{\text{x}}$ in the general case). These will need a physically motivated dissipation term to evolve when we have shocks, which are bound to occur in the merger. There's additional auxilliary constraints from the irrotationality. The computational costs is high, as the use of the EOS to complete the system leads to costly nonlinear algebraic relations between variables.
 						</aside>
 					</section>
 
