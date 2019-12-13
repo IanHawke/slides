@@ -136,7 +136,7 @@
 
 				<section id="Motivation">
 
-					<section data-background="figures/BustilloEtAlBHKickParameterSpace.png" data-background-position="right" data-background-size="50%">
+					<section>
 						<div style="width: 90%">
 							<h1>Uncertainty quantification</h1>
 						</div>
@@ -154,14 +154,15 @@
 								Uncertainty from simulation and parameter space sampling.
 							</p>
 						</div>
-						<div style="position: absolute; bottom: 5px; right: 5px; width: 49%">
+						<div style="float: right; width: 50%">
+							<img src="figures/ParamsCorner_qchi.png" />
 							<p>
-								<a href="https://dx.doi.org/10.1103/PhysRevLett.121.191102"> Bustillo et al, 1806.11160</a>
+								<a href="http://dx.doi.org/10.1088/1361-6382/ab34e2"> Boyle et al, 1904.04831</a>
 							</p>
 						</div>
 
 						<aside class="notes">
-							Thinking of how numerical simulations have been used to predict observations, like the maximum kick velocity in binary black hole mergers, or the gravitational wave luminosity from the same. As we don't know the exact initial conditions relevant for the observation, we sample the parameter space, simulating to get the value of any relevant observables at that point in parameter space. This can then be interpolated either directly or in some reduced model, such as extended one body. This figure from the Georgia Tech group implicitly shows the sort of coverage of parameter space we expect to have. So the uncertainty depends on the simulation errors (such as truncation error), the modelling error (did we include all the physics), and the sampling error (essentially from the interpolation).
+							Thinking of how numerical simulations have been used to predict observations, like the maximum kick velocity in binary black hole mergers, or the gravitational wave luminosity from the same. As we don't know the exact initial conditions relevant for the observation, we sample the parameter space, simulating to get the value of any relevant observables at that point in parameter space. This can then be interpolated either directly or in some reduced model, such as extended one body. This figure from the SXS collaboration implicitly shows the sort of coverage of parameter space we expect to have. So the uncertainty depends on the simulation errors (such as truncation error), the modelling error (did we include all the physics), and the sampling error (essentially from the interpolation).
 							<br>
 							A key point to note. This approach implicitly assumes that the observable is not overly sensitive to the uncertainties: in other words, that the problem is well-posed.
 						</aside>
@@ -224,7 +225,7 @@
 						</aside>
 					</section>
 
-					<section id="Kelvin-Helmholtz-res" data-background="figures/kh_rho_all_1234.png" data-background-position="right" data-background-size="55%">
+					<section id="Kelvin-Helmholtz-res" data-background="figures/kh_rho_eps_0_05_123.png" data-background-position="right" data-background-size="55%">
 						<div style="float: left; width: 44%">
 							<h1>Lax</h1>
 						  <p>
@@ -252,14 +253,22 @@
 					<section>
 						<div style="float: left; width: 90%">
 							<h1>Saving convergence</h1>
+						</div>
+						<div style="float: left; width: 50%">
 							<p>
-								We don't see convergence to <i>weak solutions</i> of
+								<i>Strong</i> solutions fail at shocks:
 								$$
 								  \partial_t q + \partial_i f^{(i)}(q) = s(q).
 								$$
 							</p>
 							<p>
-								Instead use a spacetime-dependent probability measure $\nu$ solving
+								<i>Weak solutions</i> fail with turbulence:
+								$$
+								  \partial_t \int_V q + \oint_{\partial V} {\bf f}(q) = \int_V s(q).
+								$$
+							</p>
+							<p>
+								<i>Statistical solutions</i>: probability measure $\nu$ solving
 								$$
 								  \partial_t \langle \nu, \text{id} \rangle  + \partial_{i} \langle \nu, f^{(i)} \rangle = \langle \nu, s \rangle.
 								$$
@@ -267,6 +276,9 @@
 							<p>
 								Need to ensure appropriate entropy solution and small scale features.
 							</p>
+						</div>
+						<div style="float: right; width: 50%">
+							<img src="figures/weak_vs_stat_soln.png" />
 						</div>
 						<aside class="notes">
 							This crucial point of Fjordholm and Mishra's work isn't to show problems, but to present a potential solution. Their approach is to change what we think of as a solution. We've already done this to solve Euler's equations in the first place: to account for shocks we have to talk about weak, distributional solutions. To get around the well-posedness issues Fjordholm and Mishra weaken the solution still further: we now consider probability measures at every single point of space and time, and force the measure to evolve in a manner consistent with our equations of motion. There are additional technical restrictions that need imposing. In particular the measure needs to obey and entropy condition in a similar fashion to a standard weak solution. Secondly, the solution needs to be "not too turbulent".
@@ -282,7 +294,7 @@
 						</aside>
 					</section>
 
-					<section id="MC2" data-background="figures/kh_mean_var_all.png" data-background-position="right" data-background-size="70%">
+					<section id="MC2" data-background="figures/kh_rho_mean_wasserstein.png" data-background-position="right" data-background-size="70%">
 						<div style="float: left; width: 29%">
 							<h1>$\mathbb{E}$ & var</h1>
 							<p>
@@ -327,29 +339,18 @@
 
 					<section>
 						<div style="header">
-							<h1>Quantifying the problem</h1>
+							<h1>Proxy measures</h1>
 						</div>
-						<div style="float: left; width: 90%">
-							<p>
-								For "standard" case, measure numerical error as
-								$$
-								  {\cal E} \simeq C_1 (\Delta x)^s.
-								$$
-							</p>
-							<p>
-								For statistical solutions, simple Monte-Carlo, expect
-								$$
-								  {\cal E} \simeq C_1 (\Delta x)^s + C_2 M^{-1/2}.
-								$$
-							</p>
-							<p>
-								Measure $C_i$'s, see what error dominates. If variance large, prediction hard!
-							</p>
+						<div style="float: left; width: 50%">
+							<h3>Density</h3>
+							<img src="figures/kh_rho_mean_wasserstein.png" />
+						</div>
+						<div style="float: right; width: 50%">
+							<h3>Vorticity</h3>
+							<img src="figures/kh_vorticity_mean_wasserstein.png" />
 						</div>
 						<aside class="notes">
-							To bring it back to numbers, the point here is to quantify the uncertainty of a numerical prediction of an observable within a given model. Typically we would quantify the numerical uncertainty through the truncation error. This gives us a value at a point in parameter space, up to the numerical error.
-							<br>
-							Instead, with statistical solutions, we have all the statistical moments, up to the numerical error of the simulation, and the numerical error from only doing a finite number of realizations. We now have a probability measure at a point in parameter space, which can be used against the observations. In most regions the truncation error will dominate, but in cases like we've seen here - shocks interacting with "turbulence" - the realization error and the intrinsic variance may dominate instead. It's essential to quantify this before using such simulations in parameter estimation.
+							However, problems remain with the concepts of statistical solutions. One important point is that we can only guarantee convergence of quantities in the state vector, and algebraic operations of those quantities. So that means we can compute any statistical moment (such as mean and variance) of density, temperature and velocity. This does not hold for non-local operations. For example, the vorticity (here the curl of the three-velocity) does not converge in a formal sense. We can check the histograms and see the bulk of the PDF is fine: but the vorticies appearing on ever smaller scales have magnitudes depending on resolution, and the correlation measure does not numerically converge. At the mathematical level it's unclear if it even makes sense. How this links to non-local integral operators such as optical depth, and other quantities necessary for radiation transport, is very unclear.
 						</aside>
 					</section>
 
@@ -369,6 +370,7 @@
 									<li>Bad news: MC approach computationally expensive...
 									<li>Good news: ...but PDF may not need so high resolution.
 									<li>Bad news: High variance is crucial regions limits predictability?
+									<li>Bad news: some proxy measure may not make sense?
 								</ul>
 							</p>
 							<p>
