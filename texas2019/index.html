@@ -137,10 +137,10 @@
 				<section id="Motivation">
 
 					<section>
-						<div style="width: 90%">
+						<div style="width: 95%; margin-top: -1.5em; margin-bottom: -1.5em">
 							<h1>Uncertainty quantification</h1>
 						</div>
-						<div style="float: left; width: 49%">
+						<div style="float: left; width: 52%; padding-top: 0; margin-top: 0">
 							<p>
 								To match observations from simulations:
 								<ol>
@@ -154,7 +154,7 @@
 								Uncertainty from simulation and parameter space sampling.
 							</p>
 						</div>
-						<div style="float: right; width: 50%">
+						<div style="float: right; width: 48%">
 							<img src="figures/ParamsCorner_qchi.png" />
 							<p>
 								<a href="http://dx.doi.org/10.1088/1361-6382/ab34e2"> Boyle et al, 1904.04831</a>
@@ -251,10 +251,8 @@
 				<section id="Statistical solutions">
 
 					<section>
-						<div style="float: left; width: 90%">
-							<h1>Saving convergence</h1>
-						</div>
 						<div style="float: left; width: 50%">
+							<h2>Saving convergence</h2>
 							<p>
 								<i>Strong</i> solutions fail at shocks:
 								$$
@@ -268,13 +266,10 @@
 								$$
 							</p>
 							<p>
-								<i>Statistical solutions</i>: probability measure $\nu$ solving
+								<i>Statistical solutions</i>: measure $\nu$
 								$$
 								  \partial_t \langle \nu, \text{id} \rangle  + \partial_{i} \langle \nu, f^{(i)} \rangle = \langle \nu, s \rangle.
 								$$
-							</p>
-							<p>
-								Need to ensure appropriate entropy solution and small scale features.
 							</p>
 						</div>
 						<div style="float: right; width: 50%">
@@ -294,7 +289,7 @@
 						</aside>
 					</section>
 
-					<section id="MC2" data-background="figures/kh_rho_mean_wasserstein.png" data-background-position="right" data-background-size="70%">
+					<section id="MC2" data-background="figures/kh_mean_var_all.png" data-background-position="right" data-background-size="70%">
 						<div style="float: left; width: 29%">
 							<h1>$\mathbb{E}$ & var</h1>
 							<p>
@@ -338,9 +333,6 @@
 					</section>
 
 					<section>
-						<div style="header">
-							<h1>Proxy measures</h1>
-						</div>
 						<div style="float: left; width: 50%">
 							<h3>Density</h3>
 							<img src="figures/kh_rho_mean_wasserstein.png" />
