@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Numerical Simulations of Gravitational Waves from Neutron Stars</title>
+
+		<meta name="description" content="ETH, Zurich, October 2019">
+		<meta name="author" content="Ian Hawke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../reveal.js/css/print/pdf.css' : '../reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--MathJax stuff -->
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}, TeX: { extensions: ["autobold.js"] }});
+		</script>
+		<script type="text/javascript"
+		  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+
+		<!--PDF print -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../reveal.js/css/print/pdf.css' : '../reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+		<!--Left align-->
+		<style type="text/css">
+			.reveal p { text-align: left; }
+			.reveal ol,
+			.reveal dl,
+			.reveal ul {
+			  display: block;
+			  text-align: left;
+			  margin: 0 0 0 1em; }
+			.reveal h1 {
+				text-transform: none;
+				line-height: 2.0
+			}
+			.reveal h2,
+			.reveal h3,
+			.reveal h4 {
+				text-transform: none;
+			}
+			.reveal table td {
+				border-bottom: none;
+			}
+			.reveal.slide .slides > section, .reveal.slide .slides > section > section {
+			  min-height: 100% !important;
+			  display: flex !important;
+			  flex-direction: column !important;
+			  justify-content: center !important;
+			  position: absolute !important;
+			  top: 0 !important;
+			  align-items: center !important;
+			}
+			section > h1, section > h2 {
+			  position: absolute !important;
+			  top: 0 !important;
+			  margin-left: auto !important;
+			  margin-right: auto !important;
+			  left: 0 !important;
+			  right: 0 !important;
+			  text-align: center !important;
+			}
+			.print-pdf .reveal.slide .slides > section, .print-pdf .reveal.slide .slides > section > section {
+			  min-height: 770px !important;
+			  position: relative !important;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="title">
+
+					<section data-background="../gr22/figures_aw/background.jpg" data-background-position="center" data-background-size="100%" data-background-color="#000000">
+						<div style="float: center">
+							<h1 style="line-height: 1.0">Numerical Simulations of Gravitational Waves from Neutron Stars</h1>
+							<p>
+								<ul style="list-style: none;">
+									<li> Ian Hawke
+								</ul>
+							</p>
+							<p>
+								<ul style="list-style: none;">
+									<li> <a href="https://twitter.com/ianhawke">@IanHawke</a>
+									<li> <a href="https://https://github.com/IanHawke">github.com/IanHawke</a>
+									<li> <a href="https://orcid.org/0000-0003-4805-0309">orcid.org/0000-0003-4805-0309</a>
+									<li> STAG, University of Southampton
+								</ul>
+							</p>
+							<p style="margin: 50px">
+								<ul style="list-style: none;">
+									<li> <a href="http://ianhawke.github.io/slides/eth">ianhawke.github.io/slides/eth</a>
+								</ul>
+							</p>
+						</div>
+						<aside class="notes">
+							Thanks for the invitation.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Motivation">
+
+					<section data-background="figures/RA_Matrikel-82-Einstein-p4.png" data-background-position="right" data-background-size="70%">
+
+						<div style="float: left; width: 26%">
+							<h2>Einstein Field Equations</h2>
+							<p>
+								<ul>
+									<li style="margin-top: 20px"> $G_{ab} \propto T_{ab}$ </li>
+									<li style="margin-top: 20px"> Spacetime as manifold </li>
+									<li style="margin-top: 20px"> $G_{ab} \sim \partial^c \partial_c g_{ab}$ </li>
+									<li style="margin-top: 20px"> <em>Gravitational waves</em> </li>
+								</ul>
+							</p>
+
+						<aside class="notes">
+							Just over one hundred years ago Einstein, an alumnus of ETH, wrote down his final form for how matter interacts with spacetime. These equations of general relativity remain our best theory of gravity, successfully modelling behaviour on scales from centimetres to cosmological distances. <br>
+
+							Einstein's theory assumes that space and time together form a 4d manifold. The spacetime metric measuring proper distance is the key quantity to solve for, and (very roughly) the principal part of the field equations can be thought of as a set of coupled wave equations, source by the mass-energy of the matter. <br>
+
+							The interpretation as a wave equation leads to one of the most striking predictions of the theory is that information propagates no faster than light. This leads to predictions of gravitational waves. Like water waves these can be generated by some matter motion but then propagate large distances, carrying some information about the matter event that generated them.
+						</aside>
+
+					</section>
+
+					<section>
+						<iframe data-autoplay class="stretch" src="https://www.youtube.com/embed/fxhBYGQzDao"></iframe>
+
+						<aside class="notes">
+							The first direct detection of gravitational waves came four years ago, almost exactly a century after Einstein wrote down his equations. Two years later, in August 2017, LIGO saw the first (and, to date, only officially confirmed) detection of a merger of two neutron stars. This is the first chance using gravitational waves to probe the full Einstein Equations, coupling matter to gravity (as black holes are modelled as vacuum solutions). <br>
+
+							Here we see the neutron stars spiral in as gravitational waves remove energy from the system. They're disrupted just before they merge, when their relative angular velocities are roughly half the speed of light, leading to a hot, messy remnant that here rapidly collapses to a black hole. However, a lot of matter is left outside the black hole, and soon it will collapse inwards. When it interacts with the central magnetic field, wound up to high strengths by dynamo effects, much of the matter will be launched outwards in a jet. This produces strong emission in all EM bands and neutrinos, in addition to the gravitational waves.
+
+							 Again, this was really close (in astrophysical terms). The masses involved are much smaller - each neutron star is only a little heavier than our sun, whilst the black holes involved in the mergers we've seen are at least ten times heavier. However, the signal from the neutron stars is detected for much longer, so it's the most powerful signal we've seen. In addition to giving information on the masses and spins we can also estimate the radii and get some information about the equation of state. From just the gravitational waves this tells us very little right now, but even this very limited information is constraining the behaviour of matter at extreme densities.
+
+							But the luckiest thing about GW170817 is that is was detected across the electromagnetic spectrum. In fact, the very first alert came from a gamma-ray observatory. Gravitational waves then helped narrow down where to look. Over the following days (which for some poor teams stretched to months) the event was observed in every band (except, unfortunately, neutrinos). Essentially, the neutron stars crashed together, the central part collapsed to a black hole, and some of the remaining material was accelerated to near-light speed leading to huge amounts of emitted radiation. The EM signals constrain this process, giving us information complementary to the gravitational wave signal.
+
+							This is an example of multimessenger astronomy: using complementary signals to get astrophysical information. This is also where modelling becomes every more crucial. We need fully quantitivative models of general relativity coupled to matter, throughout the merger, including as much physics as possible. This relies on numerical simulation, and is the focus of what comes next.
+						</aside>
+					</section>
+
+					<section data-background="figures/NStar_l.png" data-background-position="right" data-background-size="40%">
+						<div style="float: left; width: 60%"><p>
+							<h2>Simulations</h2>
+							For inspiral only bulk properties matter:
+							<ul>
+								<li> mass ($\sim 1-2 M_{\odot}$);
+								<li> spin (??);
+								<li> compactness (EOS);
+								<li> magnetic field ($10^{8-14}$G).
+							</ul>
+						</p>
+						<p>
+							Leads to key numerical limits:
+							<ul>
+								<li> $\lambda_{\text{GW}} \sim 10^6 \text{ m} \implies L_{\text{grid}} \sim 10^7 \text{ m}$;
+								<li> $R_{\text{NS}} \sim 10^4 \text{ m} \implies \Delta x \sim 100 \text{ m}$.
+								<li> CFL: $\Delta x \sim 100 \text{ m} \implies \Delta t \sim 10^{-6} \text{ s}$.
+							</ul>
+						</p>
+						<p>
+							<ul style="list-style: none;">
+								<li>
+									<a href="https://github.com/awsteiner/nstar-plot">Steiner, GitHub</a>; <a href="http://www.astroscu.unam.mx/neutrones/NS-Picture/NStar/NStar.html">Page, UNAM.</a>
+								</li>
+						</p>
+					</div>
+
+					<aside class="notes">
+						Neutron stars are an astrophysical laboratory probing strong field gravity and the behaviour of matter at high densities. To get useful constraints we combine the gravitational wave detections (which currently only give information about the inspiral) with EM observations (which only give information about what happens post merger). <br>
+
+						Each neutron star is really massive - at least as massive as our sun. However, they're really compact, with a radius of 10-15km. Put a neutron star centred on this room, and the surface wouldn't reach halfway into Lake Zurich. The magnetic fields typically start ten orders of magnitude larger than that of the sun, and can be wound up orders of magnitude more by dynamo effects in the merger. <br>
+
+						From this we can determine the key numbers for numerical simulations. For GW170817 that the GW frequencies run from tens to thousands of Hz. If we focus on the last fractions of a second, where the frequencies are in the hundreds of Hz and which are all we can practially simulate, then that corresponds to a gravitational wavelength of order $10^6$ m. To get enough GWs into our grid to measure we'll need multiple wavelengths, so a grid boundary at order $10^7$ m. That's roughly the size of the Earth.
+						<br>
+
+						Similarly, we know that the NS radius is of order $10^4$ m. We'll need many tens of points across the radius to accurately capture the behaviour over the timescale of the merger, leading to a grid spacing of order $100$ m. The best current simulations have grid spacings on the order of $10$ m. So a single grid cell is a few times the size of this room: tiny compared to the Earth, but substantial for a single fluid element. Causality leads to the stability constraint (CFL!) meaning the timestep can't be bigger than $10^{-6}$ s. Computational resources restrict simulations to cover tens of ms at most.
+					</aside>
+
+					</section>
+
+				</section>
+
+
+				<section id="Equations of motion">
+
+					<section data-background="figures/lapse_shift.png" data-background-position="right" data-background-size="45%">
+
+						<div style="float: left; width: 55%">
+							<h2>Evolving spacetime</h2>
+							<p>
+								<ul>
+									<li> $G_{ab} = 0$ well-posed (Choquet-Bruhat). </li>
+									<li> Introduce "time": splits EFEs into 4 constraint and 6 evolution equations. </li>
+									<li> Naive (ADM) form <em>not</em> well-posed.
+									<li> Need <em>gauge</em> and <em>formulation</em> that
+										<ul>
+											<li> are well-posed; </li>
+											<li> behave near singularities; </li>
+											<li> cover spacetime and allow for wave extraction. </li>
+										</ul>
+									</li>
+								</ul>
+							</p>
+							<p>
+								Typically evolve 20-60 variables.
+							</p>
+						</div>
+
+						<aside class="notes">
+							Numerical simulations of neutron stars need to solve for the spacetime. Whilst there are ten Einstein equations, they are written in a coordinate free form that isn't suitable for numerical evolution. First we must choose coordinates through gauge conditions. We can pick coordinates so that, as expected for something that's "like" the wave equation, the EFEs are well posed. However, the simplest ways of writing Einstein's equations lead to weakly hyperbolic systems of PDEs of no obvious type. After considerable work the field has come up with a range of ways of re-writing the system, leading to strongly or symmetric hyperbolic PDEs, although not all formulations are first order in space. After including gauge conditions we typically have to solve 20-30 equations of motion for the spacetime, and take care of additional auxilliary constraints arising from the definition of new variables.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h2>Matter</h2>
+
+							<table style="width:100%">
+								<tr>
+									<td>Newtonian</td>
+									<td>$\partial_t \begin{pmatrix} \rho \\ \rho v \end{pmatrix} + \partial_x \begin{pmatrix} \rho v \\ \rho v^2 + p \end{pmatrix} = {\bf 0}.$</td>
+								</tr>
+								<tr class="fragment fade-in">
+									<td>SR</td>
+									<td>$\partial_t \begin{pmatrix} \rho \color{red}{W} \\ \rho \color{red}{h W^2} v \end{pmatrix} + \partial_x \begin{pmatrix} \rho \color{red}{W} v \\ \rho \color{red}{h W^2} v^2 + p \end{pmatrix} = {\bf 0}.$</td>
+								</tr>
+								<tr class="fragment fade-in">
+									<td>GR</td>
+									<td>$
+									\begin{aligned}
+									\partial_t \color{gold}{\sqrt{\gamma}} \begin{pmatrix} \rho W \\ \rho h W^2 v_j \end{pmatrix} &+ \partial_i \color{gold}{\sqrt{-g}} \begin{pmatrix} \rho W \left( v^i - \color{gold}{\frac{\beta^i}{\alpha}} \right) \\ \rho h W^2 v_j \left( v^i - \color{gold}{\frac{\beta^i}{\alpha}} \right) + p \delta^i_j \end{pmatrix} = \color{gold}{{\bf s}}, \\ {\bf s} &= \sqrt{-g} \begin{pmatrix} 0 \\ T^{\mu\nu} \left( \partial_\mu g_{\nu j} - \Gamma^\mu_{\nu j} \right) \end{pmatrix}.
+									\end{aligned}
+									$</td>
+								</tr>
+							</table>
+
+						</div>
+
+						<aside class="notes">
+							The matter source is minimally coupled to the spacetime. This is a great advantage: when solving for the spacetime the matter comes in as an algebraic source term, and when solving for the matter it's on an instantaneously given spacetime background. The equations of motion of relativistic matter can be illustrated using a compressible ideal fluid. Start with the continuity and Euler equations in Newtonian, without gravity, in conservation form. These should be standard. <br>
+
+							We then generalize to Special Relativity, where there's no gravity but matter can't move faster than light. We see the relativistic effects appear in two ways. First, terms are length contracted by this Lorentz factor: that's one at low speeds and diverges as the fluid velocity approaches that of light. Second, in the Euler equation we have to add in the energy content of the heat. This comes in through the specific enthalpy of the fluid. <br>
+
+							This is already enough to show a number of the mathematical and practical features that appear in the fully general model. The system remains hyperbolic but signal speeds can't be faster than light. The different equations of motion are more tightly coupled than in the Newtonian case as all components of the velocity appear in the Lorentz factor. The combination of these effects tend to make relativistic fluid simulations more costly and less accurate than Newtonian counterparts. <br>
+
+							Finally we look at the full GR hydro equations. The principal part is modified by the metric determinant, modifying how we measure length and time in a way that continuously varies. In addition, the choice of coordinates explicitly appears through the gauge variables. Finally, the non-local behaviour in the spacetime curvature appears in the gravitational source terms. Together these pose significant additional implementation issues - for example, it seems to be impossible to set up well-balanced schemes for these general equations - but few new conceptual issues.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Modelling">
+
+					<section data-background="figures/NStar_l.png" data-background-position="right" data-background-size="50%">
+						<div style="float: left; width: 49%">
+							<h2>Merger and beyond</h2>
+							<p>
+								Modelling suggests
+								<ul>
+									<li> elastic crust: tidal effects, shattering;</li>
+									<li> non-ideal, via
+										<ul>
+											<li> bulk and shear viscosity </li>
+											<li> EM resistivity (dynamos) </li>
+											<li> shock-turbulence, heat, ... </li>
+										</ul>
+									</li>
+									<li> neutron superfluids;
+									<li> flux tubes - superconductivity;
+									<li> details remain very uncertain!
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+							Current simulations can get down to resolutions around 10m. The elastic crust could be 1km thick, many of the non-ideal effects act on lengthscales of metres, and the superfluid regions of the star can extend for hundreds of metres. These all pose practical challenges.
+							<br>
+							The crucial mathematical problems come from the non-ideal and superfluid effects. Navier-Stokes style dissipation is acausal. There is no agreed "correct" non-ideal GR matter theory. We're looking for a first-order theory that's causal and thermodynamically stable. For the superfluids the problem is more practical. We have an agreed theory, but the equations of motion are not in conservative form. To evolve through merger, where strong shocks will occur, leads us back to non-conservative products, path-consistent schemes, and hence to dissipation again.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Elasticity">
+
+					<section data-background="figures/MatterSpaceElastic.png" data-background-position="right" data-background-size="60%">
+						<div style="width: 39%">
+							<h2>Elasticity</h2>
+							<p>
+								$$
+									T_{ab} = T^{\text{fluid}}_{ab} + \pi_{ab}.
+								$$
+								<ul>
+									<li> EOS depends on "strain"; </li>
+									<li> Covariance: <em>map</em> to reference (3)-manifold; </li>
+									<li> Hyperbolic conservation law with constraints. </li>
+									<li> Evolution of map $\psi^A_a$, reference metric $g_{AB}$ and volume element $n_{ABC}$. </li>
+								</ul>
+							</p>
+							<p style="margin: 10px; float: right;">
+								<a href="https://arxiv.org/abs/1107.2551">Gundlach et al, 1107.2551.</a>
+							</p>
+						</div>
+
+						<aside class="notes">
+							For simulating the crust we need the equations of motion for elastic matter (more realistic plastic flow probably not needed for mergers, and is conceptually hard to formulate). It's determined by the stress-energy tensor which looks like that of a perfect fluid plus an anisotropic pressure term. However, the equation of state depends on the strain, and measuring that requires comparing the matter configuration to its "relaxed" state in a covariant way. <br>
+
+							To do this we have to compare the current state of matter to where it came from. This involves mapping from our spacetime 3-slice to a "reference" 3-manifold with its own metric. This is standard in Newtonian theory as well, but there the coordinate simplifications mean the maps, metrics and volume elements can be implicit. In the GR formulation we've had to evolve these all explicitly, leading to a larger state vector and additional computational costs. <br>
+
+							For smooth solution Carter, Schmidt and others have shown this approach is well-posed. For our specific formulation and sensible EOSs we have that it's symmetric hyperbolic and can be written in conservation law form. However, there are auxilliary constraints from the definition of the maps between the manifolds, and comparable Newtonian formulations show that these should be added to the system to ensure numerical accuracy. These add non-conservative products, which complicate the analysis: in practical cases we've solved this naively without problems.
+						</aside>
+					</section>
+
+					<section data-background="figures/Shatter.png" data-background-position="bottom" data-background-size="95%">
+						<div style="width: 100%">
+							<h2>Shattering (<a href="https://eprints.soton.ac.uk/375532/">Erickson</a>)</h2>
+						</div>
+
+						<aside class="notes">
+							Can couple the crust to fluids as shown here. The computational cost of these simulations is large, compared to (M)HD. Evolving the maps is part of it - the state vector is twice the size. There are also constraints, as in MHD, but those seem to have little impact. The main issue is the conversion from conserved to primitive variables that requires a four dimensional root-find, which is both expensive and fragile. <br>
+
+							These shattering simulations rely on a level set approach to couple the elastic solid to the fluid. This uses Riemann-problem based boundary conditions at the matching layer between the materials, guaranteeing continuity of traction. A large part of our work has been checking when these approaches work in relativity, which seems to be in most cases (but not well when trying to match to the vacuum outside the NS).
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Multifluids">
+
+					<section data-background="figures/pullback2.png" data-background-position="right" data-background-size="40%">
+						<div style="width: 59%">
+							<h2>Multifluids</h2>
+							<p>
+								Reference space now $3N$ dimensional. Measure particle number $n_{\text{x}}$ using 3-form $n^{\text{x}}_{ABC}$. Master function $\Lambda (n^2_\text{xy}, A_b)$.
+							</p>
+							<p>
+								Conjugate momenta $\bar{\mu}_a^{\text{x}}$ need not be parallel to flux $n^a_{\text{x}}$ (entrainment).
+							</p>
+							<p>
+								Allowing reference space interactions gives resistive, dissipative terms.
+							</p>
+							<p>
+								<a href="https://doi.org/10.1088/0264-9381/32/7/075008">Andersson & Comer, 1306.3345.</a>
+							</p>
+						</div>
+
+						<aside class="notes">
+							The elasticity equations are a warm-up exercise for what we're really interested: relativistic multiphase flow. Carter wrote down a formalism in the 80's which allows for covariant interactions between fluids in relativity. This gives each of the $N$ fluids its own reference space as a 3-manifold. The volume form on the reference space when pulled back to the spacetime 4-manifold is automatically closed under the exterior derivative, giving the continuity equation. By varying a master function or Lagrangian written in terms of the Lorentz invariants, which are the dot products of number currents, we get the 4-Euler equations (which split into Euler and energy equations). <br>
+
+							Andersson and Comer extended this recently so that there is one $3N$-dimensional reference space. The volume elements remain 3-forms on this space, but the space isn't necessarilly a product of 3-dimensional spaces. This can be thought of as allowing the volume element for species X to depend on the coordinates of reference space Y. Running through the variational calculation again gives fluid-like equations with reactions, resistivity, and dissipation.
+						</aside>
+					</section>
+
+
+					<section data-background="figures/timeflow.png" data-background-position="right" data-background-size="40%">
+						<div style="float: left; width: 60%">
+							<h3>Equations of motion</h3>
+							<p>
+								Variational calculation:
+								$$
+								\begin{align}
+								  \nabla_a n^a_{\text{x}} &= \Gamma_{\text{x}}, \\
+									f^{\text{x}}_a + \Gamma_{\text{x}} \bar{\mu}^{\text{x}}_a + \nabla^b D^{\text{x}}_{ab} &= R^{\text{x}}_a.
+								\end{align}
+								$$
+								Force $f^{\text{x}}_a$ balances non-ideal terms.
+							</p>
+							<p class="fragment" data-fragment-index="0">
+								Variational constraints:
+								<ol class="fragment" data-fragment-index="0">
+									<li> Non-ideal terms from master function.
+									<li> EM gauge invariance, second law, fix symmetry of coefficients.
+									<li> No consistent 2-fluid resistive form without reactions.
+								</ol>
+							</p>
+						</div>
+
+						<aside class="notes">
+							Explicitly we here see the schematic form of the full equations. The first is the continuity equation, now including a particle creation rate $\Gamma_{\text{x}}$. Simplify to SR and the covariant $\nabla_a \to \partial_a$, expand the Einstein sum to get continuity. <br>
+
+							The second equation is the Euler equation. The $f^{\text{x}}_a = n^b_{\text{x}} \nabla_{[b} \mu_{a]}^{\text{x}}$ term is the force, which is the projection of the vorticity of that fluid. Particle creation leads to a "rocket" term, resistivity comes from velocity differences between fluid species, and dissipation comes from gradients of the volume elements. <br>
+
+							It should be emphasized that, whilst this theory does reduce to something Navier-Stokes like, all the non-ideal terms come from multifluid interactions, not local (sub-fluid-element scale) ones.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h2>Practical problems - superfluids</h2>
+							<p>
+								SR, pseudo-1d, equations of motion simplify to
+								$$
+								\begin{aligned}
+									\partial_t j^t + \partial_x j^x &= 0, &
+									\partial_t s^t + \partial_x s^x &= 0, \\
+									\partial_t \Theta_x - \partial_x \Theta_t - \color{red}{\frac{s^y}{s^t} \partial_x} \Theta_y &= 0, &
+									\partial_t \Theta_y + \color{red}{\frac{s^x}{s^t} \partial_x} \Theta_y &= 0, \\
+									\partial_t \mu_x - \partial_x \mu_t &= 0, &
+									\partial_t \mu_y &= 0.
+								\end{aligned}
+								$$
+								EOS gives $j^x, s^x, \Theta_t, \mu_t$.
+							</p>
+							<p>
+								<ul>
+									<li> Non-conservative products: need dissipation. </li>
+									<li> Irrotationality constraint ($\mu_a \sim \partial_a \psi$). </li>
+									<li> ${\bf q} \to {\bf w}$ <em>extremely</em> expensive.
+								</ul>
+							</p>
+						</div>
+						<aside class="notes">
+							The general equations are far too complicated to implement right now. Aside from anything else, the non-ideal terms require derivatives on the reference space, which can only be converted to derivatives on spacetime in simple circumstances. So we'll look at a very simplified example. <br>
+
+							We saw earlier that superfluids are important for neutron stars. The hydrodynamic 2-fluid theory is appropriate on the scales we want, and fits within the reference-space framework. We have the "superfluid" component $j^a$, which behaves like a zero-temperature irrotational flow with no dissipation, and a "normal" component $s^a$ that behaves like a standard compressible fluid. These are coupled through the equation of state. <br>
+
+							Even in this simplified model where I've restricted to SR, only considered spatial derivatives in one direction, and assumed 2 spatial dimensions, we see the complications. There's non-conservative products (which appear through the force term $f_a^{\text{x}}$ in the general case). These will need a physically motivated dissipation term to evolve when we have shocks, which are bound to occur in the merger. There's additional auxilliary constraints from the irrotationality. The computational costs is high, as the use of the EOS to complete the system leads to costly nonlinear algebraic relations between variables.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Resistivity">
+
+					<section>
+						<div>
+							<h2>Resistivity</h2>
+							<p>
+								Focus on resistive terms. For small $\eta$ have $\sim$ ideal MHD plus stiff
+								$$
+								\partial_t {\bf E} - \nabla \times {\bf B} = -{\bf J} \sim \eta^{-1}.
+								$$
+							</p>
+							<p>
+								Write full system as "slow" $q$, "fast" $\overline{q}$:
+								$$
+								\begin{align}
+									\partial_t q + \partial_x f(q, \overline{q}) &= s(q, \overline{q}) \\
+									\partial_t \overline{q} + \partial_x \overline{f}(q, \overline{q}) &= \tfrac{1}{\epsilon} \overline{s} (q, \overline{q}).
+								\end{align}
+								$$
+							</p>
+							<p>
+								Chapman-Enskog expansion around ideal MHD:
+								$$
+								\begin{align}
+									\overline{q} & = \overline{q}_0 + \epsilon \overline{q}_1 + \mathcal{O}(\epsilon^2) &
+									\to \quad \partial_t q + \partial_x f & = s + \epsilon \partial_x ( D \partial_x q ).
+								\end{align}
+								$$
+							</p>
+						</div>
+
+						<aside class="notes">
+							We can make more progress if we restrict further to just look at resistive terms. We keep the EM terms in, assume the species can be treated as flowing together as a single fluid, but allow their microscopic drift to generate an electric field. The standard Maxwell equations apply, but for small resistivities we're near the ideal limit, and the electric field evolution becomes stiff with the current going inversely with the resistivity. This makes numerical evolutions expensive and inaccurate, relying on costly implicit schemes. <br>
+
+							We can make progress by doing a singular perturbation (Chapman-Enskog) expansion about the ideal MHD state. The assumption is that the full system can be split into stiff and non-stiff variables: here, the electric fields are stiff. We then do a perturbation expansion of the stiff variables. It is crucial that the background is in equilibrium: that is, the stiff source vanishes there. This expansion leads to a modified source for the non-stiff variables to leading order, which looks like a diffusion term.
+						</aside>
+					</section>
+
+					<section data-background="figures/RMRFinalStatePressure.jpg" data-background-position='right' data-background-size="55%">
+						<div style="float: left; width: 40%">
+							<h2>Reconnection</h2>
+							<p>
+								<ul>
+									<li>
+										Extremely good agreement with resistive MHD;
+									</li>
+									<li>
+										Expected convergence with conductivity.
+									</li>
+								</ul>
+							</p>
+							<p>
+								<a href="https://dx.doi.org/10.1093/mnras/stz2779">Wright & Hawke, 1906.03150</a>
+							</p>
+						</div>
+						<aside class="notes">
+							Here we show an example of magnetic reconnection, for two different resistivities, quite a long way from the ideal limit. If ideal MHD were used then the "islands" of magnetic pressure should stay separate. By including resistivity magnetic reconnection causes them to interact, with the width of the boundary layer linked to the resistivity value. The results here show the Chapman-Enskog approach is visually indistinguishable from the full resistive values. We also see clean convergence with grid resolution and with conductivity.
+						</aside>
+					</section>
+
+					<section data-background="figures/modelPowerSpectrumT5Sig100NoMinModPaperIHTalk.jpg" data-background-position='right' data-background-size="40%">
+						<div style="float: left; width: 55%">
+							<h2>Kelvin-Helmholtz Instability</h2>
+							<p>
+								<ul>
+									<li>
+										Magnetic energy cascades to all scales;
+									</li>
+									<li>
+										Good agreement with resistive MHD at larger scales;
+									</li>
+									<li>
+										The source term approach is <i>not</i> capturing subgrid behaviour.
+									</li>
+								</ul>
+							</p>
+							<p>
+								<a href="https://dx.doi.org/10.1093/mnras/stz2779">Wright & Hawke, 1906.03150</a>
+							</p>
+						</div>
+						<aside class="notes">
+							To get more insight into what this approach is doing, and to link back to our binary neutron star motivation, we look at a Kelvin-Helmholtz instability. There's the standard Kolmogorov cascade of energy from large scales down to small, which is similar for all models. As we get to higher frequencies, and hence smaller scales, we see the different models diverge. Whilst the REGIME model is closer to the resistive case than the ideal is, once we start reaching grid-cell resolutions there is a substantial difference. This suggests that the REGIME model is capturing the large scale features of the resistive model, not the small.
+						</aside>
+					</section>
+
+					<section data-background='figures/BWandReconnectionOptPerf3DIHTalk.jpg' data-background-position='bottom' data-background-size="100%">
+						<div style="float: top">
+							<h1>Performance</h1>
+							<p>
+								Many factors faster than full model.
+							</p>
+						</div>
+						<aside class="notes">
+							Finally, we need to check the performance of REGIME against the resistive model. REGIME's performance is pretty much independent of the resistivity. In contrast, the runtime for an explicit RK scheme for the full resistive model (blue curve) blows up well before interesting resistivities are reached. The IMEX schemes allow physical resistivities to be evolved, but are always slower than regime, usually by factors of 5-10 or more.
+						</aside>
+					</section>
+				</section>
+
+				</section>
+
+
+
+				<section id="Summary">
+
+					<section>
+						<div class="header">
+							<h1>Summary</h1>
+						</div>
+						<p>
+							<ul>
+								<li> NS merger observations in EM and GWs will constrain exotic physics - if we can model them. </li>
+								<li> Multifluid variational approach ensures all GW sources can be captured, but currently impractical to use. </li>
+								<li> Approximations to non-ideal effects likely crucial in near future - EM resistivity a good test bed. </li>
+								<li> Uncertainty quantification and statistical solutions: costly but necessary? </li>
+								<li> Non-conservative products and a "physical" GR dissipation: important next step. </li>
+							</ul>
+						</p>
+						<aside class="notes">
+							Thank you for your attention.
+						</aside>
+					</section>
+
+				</section>
+
+
+
+
+				<section id="Additional slides">
+
+					<section>
+
+						<iframe data-autoplay class="stretch" src="https://www.youtube.com/embed/uYncv7z9Zyc?t=15"></iframe>
+
+						<aside class="notes">
+
+							Almost exactly a century after Einstein wrote down his theory, gravitational waves were directly detected for the first time. The LIGO team detected the merger of two black holes, which emitted more energy in gravitational waves than is contained in our solar system. The detectors work by measuring distances between mirrors, as the gravitational wave will change these in different directions. Despite the incredible energies involved, the distance change was tiny - 1e-18 metres. From the signal we can estimate the masses and spins of the black holes, giving us information about how they formed. <br>
+
+							Now, the first detection involved some luck: it was really loud (as it was quite close), and it happened just before the detectors were officially due to start taking data. Since then about a dozen weaker black hole mergers have been officially detected (and there's lots more candidates in the latest observing run, but more analysis is needed for confirmation). However, the really lucky event happened in 2017.
+						</aside>
+					</section>
+
+					<section data-background="figures/g1701866-v5-q-transform-30-1col-cside.png" data-background-position="right" data-background-size="40%">
+						<div style="float: left; width: 59%">
+							<h1>GW170817</h1>
+							<p>
+								The only NS merger seen in GWs:
+								<ol>
+									<li> high SNR;
+									<li> covers frequencies from 10s-1000s Hz;
+		              <li> observed in multiple detectors, allowing localisation.
+								</ol>
+							</p>
+							<p style="margin: 50px; float: right;">
+								<a href="https://arxiv.org/abs/1710.05832"> LIGO, 1710.05832</a>
+							</p>
+						</div>
+
+						<aside class="notes">
+							GW170817 is the only fully confirmed and checked GW signal of a BNS merger. In a staggering stroke of luck only seen when thousands collaborate over decades, the strongest GW signal yet detected was the (relatively) close merger of two neutron stars, giving us strong field information about their interior physics.
+							<br>
+							A crucial point to note here is that LIGO has observed the merger from about 50 up to 500 Hz: in principle we expect the signal to span from tens to a few thousands of Hz.
+						</aside>
+					</section>
+
+					<section data-background="figures/timeline-with-spectrum-amgv7.png" data-background-position="right" data-background-size="45%">
+
+						<div style="float: left; width: 55%">
+							<h2>Multi messenger</h2>
+							<p>
+								Want to complement GW observations with
+								<ul>
+									<li> electromagnetic signals (radio, X-ray, $\gamma$, ...);
+									<li> neutrino observations;
+	                <li> anything else we can get.
+								</ul>
+							</p>
+							<p>
+								Done with GW170817: inferred jet properties suggest more constraints on progenitors.
+							</p>
+							<p style="margin: 50px; float: right;">
+								<a href="https://arxiv.org/abs/1710.05833"> LIGO, 1710.05833</a>
+							</p>
+						</div>
+
+						<aside class="notes">
+							Multi messenger is going to be the key approach until third generation detectors come online. Using complementary observation channels we can get further information to constrain the microscopic properties. This isn't new: neutrino and EM observations have been combined for studies of the sun, and for supernovae. By including GWs we're getting constraints on the coupling between gravity and matter. It's hard to do: localising the source just from GWs is tricky with so few detectors, especially fast enough (even with GW170817 the first trigger was in $\gamma$!), but improving the network will help (eg, LIGO India).
+							<br>
+							For GW170817 there's a wealth of information about the post-merger regime, particularly the jet pushed out by the kilonova and the products left over. This gives some weak constraints on the constituents of the progenitor NSs. These constraints will be strengthened by further observations in O3 and beyond: was Sunday's event (1st September) another BNS merger?
+						</aside>
+					</section>
+
+
+					<section data-background="figures/Amaldi2017-Read-v3-p35-edit.png" data-background-position="right" data-background-size="70%">
+
+						<div style="float: left; width: 26%">
+							<h2>Sensitivity</h2>
+							<p>
+								Only inspiral seen with current detectors.
+							</p>
+							<p>
+								Tidal effects give some EOS constraints.
+							</p>
+							<p>
+								ET built no sooner than 2035.
+							</p>
+							<p style="margin: 50px; float: right;">
+								<a href="https://dcc-llo.ligo.org/LIGO-G1701287/public">Read: LIGO-G1701287</a>
+							</p>
+						</div>
+
+						<aside class="notes">
+
+						</aside>
+
+					</section>
+
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="../reveal.js/js/reveal.js"></script>
+
+		<script>
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+        controlsTutorial: false,
+        overview: true,
+				progress: true,
+        hash: true,
+				history: true,
+				center: false,
+				width:  1366,
+				height: 768,
+				// showNotes = true,
+				margin: 0.05,
+				transition: 'none', // none/fade/slide/convex/concave/zoom
+        backgroundTransition: 'none',
+				// Parallax background image
+			    //parallaxBackgroundImage: '../../figures/hs-2009-05-a-full_jpg.jpg', // e.g. "https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg"
+			    // Parallax background size
+			    //parallaxBackgroundSize: '2145px 1213px', // CSS syntax, e.g. "2100px 900px" - currently only pixels are supported (don't use % or auto)
+			    // Amount of pixels to move the parallax background per slide step,
+			    // a value of 0 disables movement along the given axis
+			    // These are optional, if they aren't specified they'll be calculated automatically
+			    //parallaxBackgroundHorizontal: 200,
+			    //parallaxBackgroundVertical: 50
+				math: {
+			        mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
+			        config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+			    },
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: '../reveal.js/plugin/math/math.js', async: true },
+					{ src: '../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
+					{ src: '../reveal.js/plugin/notes/notes.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
