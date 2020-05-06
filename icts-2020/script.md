@@ -134,4 +134,41 @@ We now have *eight* PDEs: the continuity equation for total particle number, the
 
 **Natural place for break 2** Around 44 minutes for this section!
 
+### The isolated neutron star
+
+Now we have equations of motion that we can, in principle, solve. Before doing so we need to check we having all the conditions required to solve a set of PDEs. The crucial things we need to think about are (1) do we know the domain on which we're going to solve; (2) do we know the boundary conditions we're going to impose; (3) do we know the relationships between all the variables involved in the problem?
+
+We discussed the domain when talking about the practical requirements at the start: a box big enough to hold multiple gravitational wavelengths. That means it will be many orders of magnitude bigger than our neutron star. That makes the boundary conditions we're going to impose deceptively easy: at the edge of the box there's no matter, and never will be any matter, so we can "just" set it to be vacuum.
+
+This is where we should realize that the vast majority of the box will be vacuum, maybe with some propagating EM waves. This is problematic, not for the boundary conditions themselves, but for the equations of motion. All our fluid conserved variables contain the density, which vanishes outside of the star. This means the equations degenerate in this vacuum region. This makes the surface of the neutron star in particular tricky to handle, and the boundary between a region that's mathematically well described by our equations, and one that's not.
+
+A range of analytical and numerical tricks, modifications and fixes have been suggested. The simplest, and still widely used, trick, is to introduce an *atmosphere*. This purely numerical trick replaces vacuum with a low density region that is left to evolve freely. Any point or region where the density, pressure or energy gets too low is reset to this atmosphere value.
+
+Whilst simple and (reasonably) robust, the physical implications of adding an atmosphere remain worrying. Experiments have shown that the impact of accreting this atmosphere onto the neutron star are negligible, and its interaction with the outer boundaries is also not a problem. However, its interaction with low density matter expelled in the merger process, particularly with magnetic fields, or in regions of high temperature, could have a significant impact on the observables. This is somewhere we must improve.
+
+### C2P: Relating the variables
+
+The final topic to explore before we work out how to solve our PDEs is to relate the different variables that appear in our equations of motion. We have a number of different classes of variables. The *primitive* variables are any minimal set of variables that could, in principle, be observed. Typically in hydrodynamics we would think of density, velocity, and (say) internal energy. The *conserved* variables are those actually evolved. Here that's something like the density, momentum, and energy. The *auxilliary* variables are other quantities that are useful to compute for analysis or simplicity, such as the enthalpy or Lorentz factor. The *fluxes* and *sources* finish the description of the equations of motion, and are usually a combination of primitive, conserved, and auxilliary variables.
+
+In the Newtonian case there are closed-form analytic expressions relating all variables, except those that need the equation of state. There is minimal cost in converting between any sets of variables, but minimising the number of times the equation of state is called is useful for computational performance.
+
+In the relativistic cases things change drastically. There are closed-form analytic expressions to go from the primitive to the auxilliary and conserved variables. However, it is very rare to have closed-form expressions that compute the primitive variables from the conserved variables. So, given initial values for all variables we can cheaply update the conserved variables using the equations of motion. It is then a complex, expensive process to recover the primitive and auxilliary variables that we need in order to compute the fluxes and sources to update to the next step.
+
+The typical approach is to write the relation between the conserved and primitive variables as a nonlinear implicit algebraic equation. Standard algorithms for solving these are known: when it can be written in terms of a single variable, as in the hydrodynamic case, then algorithms like bisection and Newton-Raphson can be used.
+
+Interestingly, when more physics is added in a *minimally coupled* fashion, the conversion does not get more complicated. You can see this from the stress-energy tensor. Minimal coupling essentially means the new physics is added in, meaning the new terms are added in to the conserved variables. Separating these terms that are linearly combined is possible in, for example, Einstein-Euler-Maxwell.
+
+*However*, this is not true in MHD. In using Ohms law to eliminate the electric field we strongly couple the Euler and Maxwell parts of the system, through "E equals v cross B". The MHD system becomes a multi-dimensional root-find, which is much more expensive and much less robust. There are available codes based on lengthy papers for doing this inversion: I strongly recommend relying on them.
+
+### Summary of lecture 1
+
+We have
+* talked about what's practical on physical and computational resource grounds;
+* motivated the hydrodynamic description;
+* written balance law PDEs from stress-energy conservation;
+* looked at how the remaining equations of motion can be found;
+* discussed remaining implementation issues including the atmosphere and converting between variables.
+
+In the next lecture we'll outline the numerical methods needed to solve these equations of motion.
+
 ## Lecture 2
