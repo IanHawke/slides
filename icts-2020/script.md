@@ -120,4 +120,18 @@ Finally we look at the equations in full general relativity. These equations loo
 
 The conceptual issues from the transition from SR to GR are (at least in terms of the matter) small. The *practical* implementation issues are, however, substantial. The speeds of propagation become much more complex to write down. The relation between conserved and primitive variables becomes steadily more complex as we move from Newtonian to relativity. More care is required in dealing with the variables: see that both covariant and contravariant components of the velocity appear in the fluxes, for example. However, many of the key *conceptual* points can be illustrated and tested in a Newtonian setting and Newtonian codes.
 
+### MHD
+
+Before we move on to talking about *how* we simulate these PDEs, I want to note how the electromagnetic fields can be included in our models.
+
+When we talked about mixture models we mentioned how we could distinguish different types of particles moving together. Going beyond just the fluid properties, we can also consider the charge of the particles. At any point, the total charge current is the sum over all species of their number current times their charge. This charge current acts as a source for the Maxwell equations. The Maxwell equations result from total charge conservation.
+
+All of this can be expressed in terms of the Faraday tensor. This gives a term which adds on to the stress-energy tensor, modifying the conserved variables and fluxes in our generic conservation equations. In addition, the Faraday tensor can be written in terms of electric and magnetic fields, and in these terms the Maxwell equations can be written in balance law form with the current as a source.
+
+The problem is that a lot of dynamics is acting on *very* short length and time scales. This makes the evolution of the full Einstein-Euler-Maxwell system very expensive, as we need - for stability - to take tiny timesteps. It is typical to make additional assumptions to restrict the impact of the small scale behaviour, and to enforce *ideal* conditions where there is no resistance to the charge current. In this case a simplified Ohm's law allows us to replace the electric field with the cross product of the magnetic and velocity fields, allowing us to drop the evolution equation for the electric field completely.
+
+We now have *eight* PDEs: the continuity equation for total particle number, the generic energy-momentum balance laws, and the three equations for the magnetic field. We have an equation of state closing the system, and constraints on the magnetic field following from Maxwell's equations. The evolution equations are practically more complex than in the hydrodynamic case, but conceptually similar. The constraint equation, however, causes conceptually new problems, as we'll see later.
+
+**Natural place for break 2** Around 44 minutes for this section!
+
 ## Lecture 2
