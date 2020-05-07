@@ -132,12 +132,547 @@
 						</aside>
 					</section>
 
-					<section>
+				</section>
 
-						<div>
-							<h1>Lectures</h1>
+				<section id="Generalities">
+
+					<section data-background="figures/g1701866-v5-q-transform-30-1col-cside.png" data-background-position="right" data-background-size="40%">
+						<div style="float: left; width: 59%">
+							<h1>GW170817</h1>
+							<p>
+								The only NS merger seen in GWs:
+								<ol>
+									<li> high SNR;
+									<li> covers frequencies from 10s-1000s Hz;
+                  <li> observed in multiple detectors, allowing localisation.
+								</ol>
+							</p>
+							<p style="margin: 50px; float: right;">
+								<a href="https://arxiv.org/abs/1710.05832"> LIGO, 1710.05832</a>
+							</p>
 						</div>
 
+						<aside class="notes">
+							For many of us studying numerical relativity and relativistic hydrodynamics the motivation is gravitational waves. The goal was to observe these and use them to tell us about gravity, relativity, and the physics of extreme objects.
+							<br>
+							With the detection of black hole mergers in 2015, and neutron star mergers from 2017, the goal is now reality. The object now is to squeeze the maximum possible information from these observations, through better modelling. Full, quantitative modelling of neutron star mergers needs numerical simulation, which is going to be the focus of these lectures.
+							<br>
+							Our first goal in numerical modelling is therefore to predict the gravitational wave signal as seen here: a "chirp" lasting seconds with frequencies in the hundreds to thousand of Hz.
+						</aside>
+
+					</section>
+
+					<section data-background="figures/bns_figure4.png" data-background-position="right" data-background-size="60%">
+						<div style="float: left; width: 39%">
+							<h1>GW170817</h1>
+							<p>
+								NS constraints from GWs:
+								<ol>
+									<li> Mass $\sim 1.4 M_{\odot}$;
+									<li> Radius $\sim 11 \pm 1 \text{ km}$;
+                  <li> weak constraints on EOS through tidal compressibility.
+								</ol>
+							</p>
+							<p style="margin: 50px; float: right;">
+								<a href="https://arxiv.org/abs/1710.05832"> LIGO, 1710.05832</a>
+							</p>
+						</div>
+
+						<aside class="notes">
+							The objects we're trying to model are compact. The single observation of neutron stars in gravitational waves has matched expectations from theoretical calculations and is comparable to observations in other bands: for example, the NICER observations of isolated neutron stars give similar numbers. For our purposes we need the neutron stars' mass, which is slightly more than our sun; we need their radii, which is around 10 to 15 km; and we need information on how the matter reacts to being pushed around. This final point, usually encoded in a single function called the equation of state, is something we still don't know well.
+						</aside>
+					</section>
+
+					<section data-background="figures/Sun_NASA_APOD_20100819_003221_4096_0304.jpg" data-background-position="right" data-background-size="60%">
+						<div style="float: left; width: 39%">
+							<img data-src="figures/Summit.jpg" style="width:100%" alt="Summit supercomputer. Photo: Carlos Jones/ORNL">
+							<p>
+								<ul>
+									<li>
+										Sun: $\sim 10^{60}$ elementary particles.
+									</li>
+									<li>
+										Computer resource on Earth: $\sim 10^{25}$ FLOPs.
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+							We want to do numerical simulations, or evolutions, involving neutron stars. A neutron star contains a bit more matter than our sun. Our sun contains roughly $10^{60}$ elementary particles in it.
+							<br>
+							To do a practical numerical simulation we're going to need to use a computer. The current fastest computer in the world, Summit, can do around $10^{18}$ floating point operations per second. The total world computing power is uncertain, but probably not above $10^{25}$ FLOPs.
+							<br>
+							Clearly we're not going to be able to do an evolution of every individual particle within a neutron star.
+						</aside>
+					</section>
+
+					<section>
+						<aside class="notes">
+							If we can't treat each particle separately, we'll have to average over them in some way. The hydrodynamics approximation averages over them all. Our $10^{60}$ separate particles, each with their own positions, velocities, and properties, are averaged to give a <i>single</i> (vector) field. At each point in spacetime this field will describe the number density of particles, and the direction in which they flow.
+							<br>
+							This averaging process gives us a small set of differential equations to solve. With some standard approximations, it actually reduces to <i>five</i> PDEs (on top of those describing the evolution of the spacetime). This makes the numerical simulation practical. However, it has also thrown away (or compressed) a lot of physics.
+							<br>
+							It also means that there is a crucial difference of principle and of scale between <i>vacuum</i> relativity and relativistic <i>hydrodynamics</i>. In the vacuum case we have Einstein's field equations which, in principle, hold on all scales within our simulations and models. In hydrodynamics, however, our model and description breaks down on certain scales. We must keep in mind that as computer power and numerical accuracy increases our results may <i>not</i> get better, as we may hit the limitations of our models.
+						</aside>
+					</section>
+
+					<section data-background="figures/nstar_plot_stage3.png" data-background-position="right" data-background-size="45%">
+						<div style="float: left; width: 55%">
+							<h2>Modelling: inspiral</h2>
+							<p>
+								For inspiral only bulk properties matter:
+								<ul>
+									<li> mass;
+									<li> spin;
+									<li> compactness (EOS);
+									<li> bulk internal magentic field.
+								</ul>
+							</p>
+							<p>
+								Leads to key numerical limits:
+								<ul>
+									<li> $\lambda_{\text{GW}} \sim 10^6 \text{ m} \implies L_{\text{grid}} \sim 10^7 \text{ m}$;
+									<li> Phase accuracy $\implies \Delta x \sim 100 \text{ m}$.
+									<li> Stability: $\Delta x \sim 100 \text{ m} \implies \Delta t \sim 10^{-6} \text{ s}$.
+								</ul>
+							</p>
+						</div>
+						<div style="position: absolute; bottom: 2px; right: 5px; width: 45%">
+							<p>
+								<ul style="list-style: none;">
+									<li>
+										<a href="https://github.com/awsteiner/nstar-plot">Steiner, GitHub.</a>
+									</li>
+									<li>
+										<a href="http://www.astroscu.unam.mx/neutrones/NS-Picture/NStar/NStar.html">Page, UNAM.</a>
+									</li>
+							</p>
+						</div>
+
+						<aside class="notes">
+							Now we have a starting point for our simulation. We're going to solve a set of PDEs within a domain: a box that we'll put around the neutron stars. Within this box we'll evolve the spacetime and the matter, and extract observable signatures like gravitational waves and emissions in the electromagnetic spectrum. We'll do this by splitting the box into small pieces - grid cells, or points, or elements - and replacing the PDE with discrete approximations that can be solved on a computer. The smaller the small pieces, the more accurate the solution, but the more computer time and memory we need.
+							<br>
+							So, what's our minimum requirements?
+							<br>
+							First, let's look at the gravitational waves detected from GW170817. These were detected in the hundreds to thousands of Hz. As the waves travel at the speed of light we can convert the frequencies to a wavelength, suggesting that the gravitational wavelength here is around $10^6$m. So, our computational box needs to be big enough to fit in a gravitational wavelength. In fact, it should be big enough to fit in multiple wavelengths, so we can cleanly extract the wave far from both the source - that is, far from the neutron stars - and also far from the artificial boundaries of our box. So our minimum requirement is that the box should be around $10^7$m to a side.
+							<br>
+							Next, let's think about the size of the grid cells. We're going to use a hydrodynamic model of the star. In a fluid model like this, information travels back and forth in waves. The numerical accuracy depends both on how accurately we capture the amplitude of the waves, and how accurately we capture their phase. A back of the envelope calculation tells us how many grid cells we need to use to capture a wave of wavelength the size of a neutron star (whose diameter is around $25$km) oscillating say $30$ times (which captures roughly the last $10$ orbits) to around $1$% accuracy, giving a grid cell size of around $10^2$m.
+							<br>
+							Finally, let's think about how many steps we have to take. When evolving forward in time we can think about the simulation in relativistic terms. Take a grid cell at a fixed time and think about its <i>past domain of dependence</i>: that is, which grid cells (at some previous time) could possibly affect the value of this cell? This suggests that the maximum timestep we can take is roughly the grid cell size divided by the speed of light, which is roughly $10^{-6}$s.
+							<br>
+							Putting this all together, we need a grid of roughly $10^{15}$ cells to solve a merger with reasonable accuracy. To solve for around $1$s - and remember that the GRB after GW170817 was detected a few seconds after the peak gravitational wave amplitude - we need to take $10^6$ timesteps. Combining this, we're looking at updating a small cell at least $10^{20}$ times. That's a lot of work.
+							<br>
+							Now, no current simulation evolves for a full second. However, simulations do evolve for up to around $100$ms, and do typically use resolutions around $100$m, and sometimes considerably finer. We need to consider what physics we can capture within a model on these scales, what behaviour we should expect, and how we can simulate that numerically.
+						</aside>
+					</section>
+
+					<section data-background="figures/timeline-with-spectrum-amgv7.png" data-background-position="right" data-background-size="45%">
+						<div style="float: left; width: 55%">
+							<h2>Multi messenger</h2>
+							<p>
+								Want to complement GW observations with
+								<ul>
+									<li> electromagnetic signals (radio, X-ray, $\gamma$, ...);
+									<li> neutrino observations;
+                  <li> anything else we can get.
+								</ul>
+							</p>
+							<p>
+								Done with GW170817: inferred jet properties suggest more constraints on progenitors.
+							</p>
+							<p style="margin: 10px; float: right;">
+								<a href="https://arxiv.org/abs/1710.05833"> LIGO, Fermi, INTEGRAL et al, 1710.05833</a>
+							</p>
+						</div>
+
+						<aside class="notes">
+						The description so far has concentrated on the inspiral phase and gravitational waves. However, GW170817 was seen in the EM spectrum as well - or at least the post-merger signal was. In fact, our expectations even from the most extreme scenarios are that no current gravitational wave detectors will be able to see anything much after merger. We'll need detailed numerical models of the matter as well as the spacetime to predict the EM and neutrino emission from the messy post-merger situation.
+						</aside>
+					</section>
+
+					<section>
+						<iframe src="https://www.youtube.com/embed/fxhBYGQzDao" frameborder="0" scrolling="no" class="stretch" width="100%" align="left"></iframe>
+						<!--
+							<iframe src="https://www.youtube.com/embed/UQCfo5L3ShQ" frameborder="0" scrolling="no" class="stretch" width="100%" align="right"></iframe>
+						-->
+						<aside class="notes">
+							Let's look at a simulation using a single perfect fluid with magnetic field. This simulation is from Bruno Giacomazzo's group. It ignores dissipation, viscosity, heat transport, magnetic resistivity, superfluidity, superconductivity, the elastic crust of the neutron star, and any radiation transport. It includes full general relativity, models the star as a hot fluid, and adds an ideal electromagnetic field.
+							<br>
+							Initially the stars inspiral due to the emission of gravitational waves. Around $15$ms after the start of the simulation the stars merge. At this point things get messy. When the stars smash into each other a shock propagates through the merged object, massively increasing the temperature. At the same time the magnetized material "slips" past its companion, winding up the total magnetic field in a dynamo effect. The remnant tries to settle down, with some material expelled from the system. But the object is too massive to support itself, and at around $30$ms the core collapses to a black hole. Most of the dense matter is rapidly swallowed into the black hole, leaving a small fraction at larger radius to settle into a disk. It's believed that the kilonova occurs when this remaining matter collapses back on the black hole.
+							<br>
+							We see that we need to model the fluid interior and the vacuum exterior. We need to model the shock as the stars smash together, and the resulting jump in temperature. We need to model the small scale structure in the interior as the magnetic fields wind up, forming the precursor to the jet. And we need to do this on top of evolving the spacetime, tracking any black holes that might appear.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h1>Questions...</h1>
+							<p>
+								<ul>
+									<li>
+										Stretch out;
+									</li>
+									<li>
+										have a break;
+									</li>
+									<li>
+										add questions to the chat.
+									</li>
+								</ul>
+							</p>
+						</div>
+						<aside class="notes">
+							We'll pause here for initial questions, before tackling the next section.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Conservation">
+
+					<section>
+						<div>
+							<h2>Conservation</h2>
+
+							<p>
+								EFEs imply $\nabla_a T^{ab} = 0$. Pick a tetrad, $e_b^{(j)}$ to get
+								$$
+								\begin{aligned}
+								  && \nabla_a \left[ e_b^{(j)} T^{ab} \right] &= \tfrac{1}{\sqrt{-g}} \partial_a \left( \sqrt{-g} e_b^{(j)} T^{ab} \right) = -T^{ab} \nabla_a e_b^{(j)} \\
+									\implies && \partial_t {\bf q} + \partial_i {\bf f}^{(i)}({\bf q}) &= {\bf s}.
+								\end{aligned}
+								$$
+								Balance law form.
+
+								Only four equations: need other constituitive equations for, eg, EM, particle number, etc.
+							</p>
+						</div>
+						<aside class="notes">
+							We now know the outlines of our problem. We want a model of matter, coupled to GR, that we can write as a set of PDEs. This model will encode the detailed physics we're interested in, at the level we can simulate with our given resources. But before we try and be specific, let's look at what we can say in general.
+							<br>
+							We know the field equations require total stress energy conservation: the divergence of $T^{ab}$ is zero. We can use this to get <i>four</i> equations of motion. The most useful form for our purposes is to use the standard identity for the 4-divergence of a vector, which can be written as the <i>partial</i> 4-divergence of that vector, weighted by the metric determinant. To get from the stress-energy, which is a two-tensor, to a vector, we contract the free index with one member of a <i>tetrad</i>, which is a set of orthonormal (in our case) vectors that we can link to the coordinates. This then allows us to write stress energy conservation as four PDEs, one for each member of the tetrad.
+							<br>
+							The key point is that the only derivatives of the matter appear in total divergence form. The term on the right-hand-side which isn't in this form only involves derivatives of the tetrad, which can be written as derivatives of spacetime quantities. We write this abstractly in <i>balance law form</i>: all derivatives of the matter are total derivatives, but these <i>fluxes</i> must balance off against the <i>source terms</i> which come from the geometry.
+							<br>
+							If we simplify to Minkowski space in standard Cartesian coordinates then the source terms vanish and these balance laws reduce to the <i>conservation laws</i> for energy-momentum. However, we need to be careful of this interpretation (locally): if we write Minkowski spacetime in <i>spherical</i> coordinates then there will be source terms, but that certainly does not mean that energy-momentum is being transferred between the matter and the spacetime.
+						</aside>
+					</section>
+
+					<section data-background="figures/characteristics.png" data-background-position="right" data-background-size="52%">
+						<div style="float: left; width: 50%">
+							<h2>Shock formation</h2>
+
+							<p>
+								Advection equation
+								$$
+									\partial_t q + \partial_x (v q) = 0.
+								$$
+								Information moves right, speed $v$.
+							</p>
+							<p>
+								Burgers equation
+								$$
+									\partial_t q + \tfrac{1}{2} \partial_x q^{2} = 0.
+								$$
+								Information moves right, speed $q$. Shocks form.
+							</p>
+						</div>
+						<aside class="notes">
+							We see that <i>generically</i> the matter will obey conservation laws. We expect the fluxes ${\bf f}$ to depend <i>nonlinearly</i> on the conserved variables ${\bf q}$. This immediately tells us something very important.
+							<br>
+							The simplest conservation law is the advection equation, where the solution is propagated to the right with constant speed $v$. For a nonlinear conservation law we can <i>locally</i> approximate it as an advection-like equation, where the solution propagates with speed $\partial_q f$. This means the propagation speed depends on the data. Depending on the form of the flux function, some gradients will steadily get steeper, and some will get shallower. In the absence of dissipation (and crucially the generic total energy-momentum equations have no dissipative terms) these steepening effects will lead to discontinuities: a generic <i>shock</i> will form.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h2>Shocks and uniqueness</h2>
+
+							<p>
+								Shock speed $V_s$ from Rankine-Hugoniot, $V_s \left[ q \right] = \left[ f \right]$. Burgers equation
+								$$
+									\partial_t q + q \partial_x q = 0
+								$$
+								is equivalent to <i>any</i> of
+								$$
+									\partial_t q^n + \tfrac{n}{n+1} \partial_x q^{n+1} = 0,
+								$$
+								but they all have different shock speeds. Total derivative form crucial: otherwise need more information to fix solution.
+							</p>
+						</div>
+
+						<aside class="notes">
+						From the conservation law form we can integrate over a small region of spacetime (see the exercises) to find the <i>Rankine-Hugoniot</i> conditions, telling us how fast the shock travels. It's important to note that this depends on the form of the flux function.
+						<br>
+						However, this highlights how important the form of the equations of motion is. Take the example of Burgers equation where the flux function is quadratic. This is equivalent, when solutions are differentiable, to a PDE where the local advection velocity is given by the data $q$ itself. However, this isn't unique. The conservation laws at the bottom are <i>all</i> equivalent to this non-conservative form of Burgers equation for positive $n$. Crucially, they all have different shock speeds, so different solutions in the discontinuous case.
+						<br>
+						For our purposes this means that when the shock forms as the neutron stars merge, and as it propagates around in the post-merger state, it will be <i>essential</i> that we have the correct form of the conserved variables and the fluxes. If we use the wrong conservative form then we will get the wrong solution. If we use the non-conservative form then we need to explicitly include a dissipative term and take appropriate limits, which is hard. If the model can't be phrased in a balance law form, getting correct shock forms will be complex.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h2>Euler equations in relativity</h2>
+
+							<p>
+								<ul>
+									<li>
+										Need: $\rho, u^a, \epsilon$.
+									</li>
+									<li>
+										Particles conserved: $$\nabla_a ( \rho u^a ) = 0.$$
+									</li>
+									<li>
+										Stress-energy: $$T_{ab} = \rho (1 + \epsilon) u_a u_b + p \perp_{ab}.$$
+									</li>
+									<li>
+										EOS: implies $p = p(\rho, \epsilon, \dots)$, and more.
+									</li>
+									<li>
+										Mixture models: $Y_{\text{x}}$ from $$\nabla_a ( \rho Y_{\text{x}} u^a ) = 0.$$
+									</li>
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+							Total stress-energy conservation gives us four equations. When we talk about a standard ideal fluid it depends on more information. We'll need the number density: the number of particles within a local volume. We'll need its velocity, which is three bits of information making up a unit 4-vector. And we'll need a variable describing the internal energy, or temperature: essentially, how much variation there is at the micro-scale that we've averaged over to get our hydrodynamics description.
+							<br>
+							This is five independent quantities. So, in addition to the four PDEs we get from stress-energy conservation, we'll need one more. We get this by assuming that particles are neither created nor destroyed, so the particle number flux is conserved. This gives us $\nabla_a (\rho u^a) = 0$. Using the same identity for total divergence as in the stress-energy case, we can use this to write the <i>continuity equation</i> as a PDE in conservation law form.
+							<br>
+							We can then write down the stress-energy tensor for the fluid. There is the total energy piece which moves with the flow. Then there is the isotropic pressure piece which acts normal to the flow. Plugging this into the conservation laws and adding the continuity equation gives us five PDEs for <i>six</i> quantities. To close the system we need to connect the thermodynamic variables: the density, internal energy, and pressure. We do this through the <i>equation of state</i>, which we can take to be a function giving pressure (and other quantities) in terms of density and internal energy, or density and temperature.
+							<br>
+							Before we move on we should talk about more complex <i>mixture</i> models. The equation of state describes the microscopic interactions between the particles. In the model we've talked about so far we haven't made any allowance for the differences between particles: we've only cared about how many there are, through the number density. This is too simplistic in many cases. Many equations of state really care about the <i>relative proportions</i> of the different particles involved. For example, many care about the <i>lepton fraction</i> $Y_e$, which is (roughly) the fraction of particles that are electrons.
+							<br>
+							The simplest mixture models are formed by imposing that each individual type of particle is also conserved, and that they all move with the same velocity. We then get the equivalent of the continuity equation for each species, which can be seen as an equation for the species fraction, say $Y_e$. The equation of state can then be extended to depend on these species fractions. In more complex mixture models we can allow particle <i>species</i> creation and destruction by adding source terms, provided the total number of particles stays fixed. This can require some care, as the particle interactions can impact on the energy-momentum.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h2>Slow motion limit</h2>
+
+							<p>
+								Newtonian:
+								$$
+								\partial_t \begin{pmatrix} \rho \\ \rho v \\ E \end{pmatrix} + \partial_x \begin{pmatrix} \rho v \\ \rho v^2 + p \\ (E + p) v \end{pmatrix} = {\bf 0}.
+								$$
+							</p>
+
+							<p>
+								Propagation speeds
+								$$
+								v, v \pm c_s: \quad c_s^2 \sim \frac{p}{\rho}.
+								$$
+							</p>
+						</div>
+
+						<aside class="notes">
+						It's useful to compare the resulting equations of motion to various limits. This is particularly true when developing numerical methods, algorithms and codes, and it allows us to test in simpler situations where it's easier to debug.
+						<br>
+						The particular limit we're most interested in is the Newtonian limit, where the speed of light is very large compared to the fluid velocities, and pressures (for example) are small. The Newtonian limit is particularly useful to us as there's a long and successful history of building simulation codes in academia and industry, and we can (and still do) use the experience and methods of this huge community.
+						<br>
+						The Newtonian equations in $1+1$ Cartesian coordinates have the following conservation law form. The continuity equation is first, essentially advecting the density along with the flow. The momentum equation is next. The momentum is advected, but there's also a contribution from the gradient of the pressure. The total energy equation is last, which again shows advective-like behaviour. If we were to investigate the speeds of propagation, which is one of the exercises, then we wouldn't be surprised that one is precisely the <i>advective velocity</i> $v$. The other speeds of propagation are the <i>acoustic velocities</i> which are $v \pm c_s$, where $c_s$ is the <i>speed of sound</i>. The sound speed depends only on the thermodynamic quantities and is given by the equation of state. In simple cases it's roughly the square root of the ratio of the pressure to the density.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h2>Back up to relativity</h2>
+
+							<table style="width:100%">
+								<tr>
+									<td>Newtonian</td>
+									<td>$\partial_t \begin{pmatrix} \rho \\ \rho v \end{pmatrix} + \partial_x \begin{pmatrix} \rho v \\ \rho v^2 + p \end{pmatrix} = {\bf 0}.$</td>
+								</tr>
+								<tr class="fragment fade-in">
+									<td>SR</td>
+									<td>$\partial_t \begin{pmatrix} \rho \color{red}{W} \\ \rho \color{red}{h W^2} v \end{pmatrix} + \partial_x \begin{pmatrix} \rho \color{red}{W} v \\ \rho \color{red}{h W^2} v^2 + p \end{pmatrix} = {\bf 0}.$</td>
+								</tr>
+								<tr class="fragment fade-in">
+									<td>GR</td>
+									<td>$
+									\begin{aligned}
+									\partial_t \color{gold}{\sqrt{\gamma}} \begin{pmatrix} \rho W \\ \rho h W^2 v_j \end{pmatrix} &+ \partial_i \color{gold}{\sqrt{-g}} \begin{pmatrix} \rho W \left( v^i - \color{gold}{\frac{\beta^i}{\alpha}} \right) \\ \rho h W^2 v_j \left( v^i - \color{gold}{\frac{\beta^i}{\alpha}} \right) + p \delta^i_j \end{pmatrix} = \color{gold}{{\bf s}}, \\ {\bf s} &= \sqrt{-g} \begin{pmatrix} 0 \\ T^{\mu\nu} \left( \partial_\mu g_{\nu j} - \Gamma^\mu_{\nu j} \right) \end{pmatrix}.
+									\end{aligned}
+									$</td>
+								</tr>
+							</table>
+
+						</div>
+
+						<aside class="notes">
+							To see how useful a model the Newtonian model will be to us, first look at the equations in special relativity. That is, take the GR equations in Minkowski spacetime in standard Cartesian coordinates. We see that they're directly comparable to the Newtonian limit.
+							<br>
+							We can see the additional relativistic effects in red. In the continuity equation we see the appearance of the <i>Lorentz factor</i>, which is linked to the velocity, and appears here because of length contraction or time dilation effects. The Lorentz factor is one when velocities are small but diverges as the velocity approaches the speed of light. This is a purely kinematic effect, exactly mirroring standard SR results on length contraction.
+							<br>
+							In the momentum equation we also see the Lorentz factor coming in. However, we also see the density term is modified by the appearance of the <i>specific enthalpy</i> $h$. This comes in because of mass-energy equivalence in relativity: the internal energy of the fluid has its own contribution to the mass.
+							<br>
+							The kinematic modifications here leave the <i>qualitative</i> form of the conservation laws the same, but modify the <i>quantitative</i> details. Possibly the most important for numerical work is the speeds of propagation. As you would expect in relativity the speeds have to be below the speed of light. One speed remains the advective velocity $v$. The acoustic velocities now use the <i>relativistic addition formula</i>, dividing the Newtonian formula by $1 \pm v c_s$. The appearance of the enthalpy in contributions to the mass also modifies the speed of sound.
+							<br>
+							Finally we look at the equations in full general relativity. These equations look much more complex, but should contain few surprises based on our previous discussions. First, from the form of the general energy-momentum conservation laws, we expect to get terms relating to the determinant of the metric. The difference between the <i>spatial</i> metric determinant which appears in the time derivative, and the <i>total</i> metric determinant appearing in the spatial divergence, is a factor of the lapse. This can be thought of as making the dimensions match up. The geometric source terms we have already discussed; they're very messy but, along with the metric determinants, result from the spacetime curvature. The other difference to note is the way the velocity is modified by the shift vector. This results from the $3+1$ decomposition, so the fluid velocity now has a piece related to the way coordinates move relative to our spatial slice.
+							<br>
+							The conceptual issues from the transition from SR to GR are (at least in terms of the matter) small. The <i>practical</i> implementation issues are, however, substantial. The speeds of propagation become much more complex to write down. The relation between conserved and primitive variables becomes steadily more complex as we move from Newtonian to relativity. More care is required in dealing with the variables: see that both covariant and contravariant components of the velocity appear in the fluxes, for example. However, many of the key <i>conceptual</i> points can be illustrated and tested in a Newtonian setting and Newtonian codes.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h2>Electromagnetism</h2>
+
+							<p>
+								Charge current $j^a \sim e (n^a_{\text{e}} - n^a_{\text{p}})$. Source for EM fields described by Faraday tensor $F_{ab} = \nabla_{[a} A_{b]}$, so
+								$$
+								\begin{aligned}
+								  \nabla_a F^{ab} &= 4 \pi j^a \\ \nabla_a {}^* F^{ab} &= 0.
+								\end{aligned}
+								$$
+								Gives Maxwell's equations: use $E^a, B^a \implies$ balance law form.
+							</p>
+							<p>
+								$$
+								  T_{ab} = T_{ab}^{\text{hydro}} + T_{ab}^{\text{EM}}.
+								$$
+							</p>
+							<p>
+								<ul>
+									<li>
+										Current diverges as resistivity $\to 0$: MHD limit $\implies {\bf E} = {\bf v} \times {\bf B}$.
+									</li>
+									<li>
+										Constraint $\nabla_a B^a = 0$ must hold.
+									</li>
+								</ul>
+							</p>
+						</div>
+						<aside class="notes">
+						Before we move on to talking about <i>how</i> we simulate these PDEs, I want to note how the electromagnetic fields can be included in our models.
+						<br>
+						When we talked about mixture models we mentioned how we could distinguish different types of particles moving together. Going beyond just the fluid properties, we can also consider the charge of the particles. At any point, the total charge current is the sum over all species of their number current times their charge. This charge current acts as a source for the Maxwell equations. The Maxwell equations result from total charge conservation.
+						<br>
+						All of this can be expressed in terms of the Faraday tensor. This gives a term which adds on to the stress-energy tensor, modifying the conserved variables and fluxes in our generic conservation equations. In addition, the Faraday tensor can be written in terms of electric and magnetic fields, and in these terms the Maxwell equations can be written in balance law form with the current as a source.
+						<br>
+						The problem is that a lot of dynamics is acting on <i>very</i> short length and time scales. This makes the evolution of the full Einstein-Euler-Maxwell system very expensive, as we need - for stability - to take tiny timesteps. It is typical to make additional assumptions to restrict the impact of the small scale behaviour, and to enforce <i>ideal</i> conditions where there is no resistance to the charge current. In this case a simplified Ohm's law allows us to replace the electric field with the cross product of the magnetic and velocity fields, allowing us to drop the evolution equation for the electric field completely.
+						<br>
+						We now have <i>eight</i> PDEs: the continuity equation for total particle number, the generic energy-momentum balance laws, and the three equations for the magnetic field. We have an equation of state closing the system, and constraints on the magnetic field following from Maxwell's equations. The evolution equations are practically more complex than in the hydrodynamic case, but conceptually similar. The constraint equation, however, causes conceptually new problems, as we'll see later.
+						</aside>
+					</section>
+
+					<section>
+							<div>
+								<h1>Questions...</h1>
+								<p>
+									<ul>
+										<li>
+											Deep breath;
+										</li>
+										<li>
+											have a drink;
+										</li>
+										<li>
+											stretch out;
+										</li>
+										<li>
+											add questions to the chat.
+										</li>
+									</ul>
+								</p>
+							</div>
+							<aside class="notes">
+								That was a long section. Gather your thoughts: we're getting closer to doing some real implementation.
+							</aside>
+						<aside class="notes">
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Implementation issues">
+
+					<section>
+						<div>
+							Placeholder for image.
+						</div>
+						<aside class="notes">
+							Now we have equations of motion that we can, in principle, solve. Before doing so we need to check we having all the conditions required to solve a set of PDEs. The crucial things we need to think about are
+							<ol>
+								<li> do we know the domain on which we're going to solve; </li>
+								<li> do we know the boundary conditions we're going to impose; </li>
+								<li> do we know the relationships between all the variables involved in the problem? </li>
+								</ol>
+							<br>
+							We discussed the domain when talking about the practical requirements at the start: a box big enough to hold multiple gravitational wavelengths. That means it will be many orders of magnitude bigger than our neutron star. That makes the boundary conditions we're going to impose deceptively easy: at the edge of the box there's no matter, and never will be any matter, so we can "just" set it to be vacuum.
+							<br>
+							This is where we should realize that the vast majority of the box will be vacuum, maybe with some propagating EM waves. This is problematic, not for the boundary conditions themselves, but for the equations of motion. All our fluid conserved variables contain the density, which vanishes outside of the star. This means the equations degenerate in this vacuum region. This makes the surface of the neutron star in particular tricky to handle, and the boundary between a region that's mathematically well described by our equations, and one that's not.
+							<br>
+							A range of analytical and numerical tricks, modifications and fixes have been suggested. The simplest, and still widely used, trick, is to introduce an <i>atmosphere</i>. This purely numerical trick replaces vacuum with a low density region that is left to evolve freely. Any point or region where the density, pressure or energy gets too low is reset to this atmosphere value.
+							<br>
+							Whilst simple and (reasonably) robust, the physical implications of adding an atmosphere remain worrying. Experiments have shown that the impact of accreting this atmosphere onto the neutron star are negligible, and its interaction with the outer boundaries is also not a problem. However, its interaction with low density matter expelled in the merger process, particularly with magnetic fields, or in regions of high temperature, could have a significant impact on the observables. This is somewhere we must improve.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							Placeholder text.
+						</div>
+						<aside class="notes">
+							The final topic to explore before we work out how to solve our PDEs is to relate the different variables that appear in our equations of motion. We have a number of different classes of variables. The <i>primitive</i> variables are any minimal set of variables that could, in principle, be observed. Typically in hydrodynamics we would think of density, velocity, and (say) internal energy. The <i>conserved</i> variables are those actually evolved. Here that's something like the density, momentum, and energy. The <i>auxilliary</i> variables are other quantities that are useful to compute for analysis or simplicity, such as the enthalpy or Lorentz factor. The <i>fluxes</i> and <i>sources</i> finish the description of the equations of motion, and are usually a combination of primitive, conserved, and auxilliary variables.
+							<br>
+							In the Newtonian case there are closed-form analytic expressions relating all variables, except those that need the equation of state. There is minimal cost in converting between any sets of variables, but minimising the number of times the equation of state is called is useful for computational performance.
+							<br>
+							In the relativistic cases things change drastically. There are closed-form analytic expressions to go from the primitive to the auxilliary and conserved variables. However, it is very rare to have closed-form expressions that compute the primitive variables from the conserved variables. So, given initial values for all variables we can cheaply update the conserved variables using the equations of motion. It is then a complex, expensive process to recover the primitive and auxilliary variables that we need in order to compute the fluxes and sources to update to the next step.
+							<br>
+							The typical approach is to write the relation between the conserved and primitive variables as a nonlinear implicit algebraic equation. Standard algorithms for solving these are known: when it can be written in terms of a single variable, as in the hydrodynamic case, then algorithms like bisection and Newton-Raphson can be used.
+							<br>
+							Interestingly, when more physics is added in a <i>minimally coupled</i> fashion, the conversion does not get more complicated. You can see this from the stress-energy tensor. Minimal coupling essentially means the new physics is added in, meaning the new terms are added in to the conserved variables. Separating these terms that are linearly combined is possible in, for example, Einstein-Euler-Maxwell.
+							<br>
+							<i>However</i>, this is not true in MHD. In using Ohms law to eliminate the electric field we strongly couple the Euler and Maxwell parts of the system, through "E equals v cross B". The MHD system becomes a multi-dimensional root-find, which is much more expensive and much less robust. There are available codes based on lengthy papers for doing this inversion: I strongly recommend relying on them.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Summary">
+
+					<section>
+						<div>
+							<h2>Summary</h2>
+							<p>
+								We have discussed
+								<ul>
+									<li>
+										what's practical;
+									</li>
+									<li>
+										the hydrodynamic description;
+									</li>
+									<li>
+										balance laws;
+									</li>
+									<li>
+										the remaining EOM;
+									</li>
+									<li>
+										implementation issues.
+									</li>
+								</ul>
+							</p>
+							<p>
+								Next lecture: how we actually evolve.
+							</p>
+						</div>
+						<aside class="notes">
+							We have
+							<ul>
+								<li> talked about what's practical on physical and computational resource grounds;
+								<li> motivated the hydrodynamic description;
+								<li> written balance law PDEs from stress-energy conservation;
+								<li> looked at how the remaining equations of motion can be found;
+								<li> discussed remaining implementation issues including the atmosphere and converting between variables.
+							</ul>
+							<br>
+							In the next lecture we'll outline the numerical methods needed to solve these equations of motion.
+						</aside>
 					</section>
 
 				</section>
