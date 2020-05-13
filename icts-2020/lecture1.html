@@ -589,10 +589,11 @@
 
 				<section id="Implementation issues">
 
-					<section>
+					<section data-background="figures/isolated_BNS.png" data-background-size="100%">
 						<div>
-							Placeholder for image.
+							<h1>Outside the NSs</h1>
 						</div>
+
 						<aside class="notes">
 							Now we have equations of motion that we can, in principle, solve. Before doing so we need to check we having all the conditions required to solve a set of PDEs. The crucial things we need to think about are
 							<ol>
@@ -613,7 +614,33 @@
 
 					<section>
 						<div>
-							Placeholder text.
+							<h1>C2P</h1>
+
+							<p>
+								Newtonian: $v = S / \rho$, etc.
+							</p>
+							<p>
+								Relativity: $\{ \rho_0, v^j, \epsilon \} \leftarrow f(D, S_j, \tau)$.
+								<ul>
+									<li>
+										Implicit and nonlinear: guess $\bar{p}$, solve $p - p(\bar{\rho}_0, \bar{\epsilon}) = 0$;
+									</li>
+									<li>
+										Expensive and not always robust.
+									</li>
+								</ul>
+							</p>
+							<p>
+								GRMHD: strong coupling through ${\bf E} = {\bf v} \times {\bf B}$.
+								<ul>
+									<li>
+										Multi-dimensional nonlinear algebraic equation;
+									</li>
+									<li>
+										<i>Very</i> expensive and sensitive.
+									</li>
+								</ul>
+							</p>
 						</div>
 						<aside class="notes">
 							The final topic to explore before we work out how to solve our PDEs is to relate the different variables that appear in our equations of motion. We have a number of different classes of variables. The <i>primitive</i> variables are any minimal set of variables that could, in principle, be observed. Typically in hydrodynamics we would think of density, velocity, and (say) internal energy. The <i>conserved</i> variables are those actually evolved. Here that's something like the density, momentum, and energy. The <i>auxilliary</i> variables are other quantities that are useful to compute for analysis or simplicity, such as the enthalpy or Lorentz factor. The <i>fluxes</i> and <i>sources</i> finish the description of the equations of motion, and are usually a combination of primitive, conserved, and auxilliary variables.
