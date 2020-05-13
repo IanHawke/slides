@@ -172,3 +172,94 @@ We have
 In the next lecture we'll outline the numerical methods needed to solve these equations of motion.
 
 ## Lecture 2
+
+### Welcome back
+
+In the first lecture I wanted to emphasize the modelling approximations and limitations of what goes in to a numerical simulation. These come from physical and resource limitations. They lead us to consider the most important features of our models, and so what aspects we need to model in what order. The key points from the first lecture were that
+* conservation and balance laws are generic features of matter simulations;
+* these lead to shocks, and these shocks do appear in mergers;
+* using techniques from Newtonian CFD is a good place to start, but we need to consider issues specific to NSs and relativity, like artificial atmospheres, and the more complex equations of motion.
+
+Today's lecture is going to be a deep dive into the numerical methods. We'll look at the standard techniques used in the field. The exercises associated with these lectures ask you to implement and test some of these techniques: that's the best way of getting to grips with the difficulties, limitations, costs, and complexities.
+
+### Balance laws
+
+The general form of the equations of motion of relativistic matter can be framed as here. Some quantity is evolved using its flux, ${\bf f}$, additional non-conservative terms that push the matter around through the matrix $A$, a second order diffusive derivative operator with dissipation matrix $D$, and a source term ${\bf s}$ that typically represents exchange of "stuff" to other parts of the model. In the most complex cases the functional form of the matrices, sources or fluxes can depend not only on nonlinear algebraic operators of the evolved vector ${\bf q}$, but even on nonlocal operators. An example would be radiation transport where the optical depth is needed.
+
+However, this is far more complicated than is generally needed for NS mergers, particularly through the inspiral stage. In these stages we are dominated by the flux terms. In the standard models (hydrodynamics, maybe including EM fields through the MHD approximation) we can write the equations in conservation law form. And, when radiation transport can be neglected, we can assume that the source terms are given in an algebraic form.
+
+This means we can concentrate on the fluxes. From a mathematical and implementation point of view the most important terms are the *principle part* with the highest derivatives, so we will (for now) look at the conservation law form and the numerical methods needed for that.
+
+### Characteristics
+
+As a quick recap, remember that for the advection equation (where the flux is a constant *velocity* $v$ multiplying the quantity $q$) we can define characteristics: lines, of slope $v$, along which the solution is unchanged. We can use this locally for nonlinear problems like Burgers equation: with a general flux $f$, the characteristic speed is $\partial_q f$. This only makes sense away from discontinuities.
+
+When we extend to the system case it's easiest to consider the linear problem first. When the flux is defined by a linear system, ${\bf f} = A {\bf q}$, then we can change variables to get the solution. A crucial aspect of the conservation laws is that they are *hyperbolic*: the essential consequence of this for now is that $A$ will be diagonalizable. This means we can define and work with the *characteristic variables* ${\bf w} = L {\bf q}$, where $L$ is the matrix of left eigenvectors. The characteristic variables obey *uncoupled* advection equations, with the advection velocity being $\lamba_i$, the eigenvalues of the matrix $A$. So we can use the solution from the advection equation: each characteristic variable propagates unchanged with a fixed speed. We can then find the solution for ${\bf q}$ by transforming back using the matrix of right eigenvectors.
+
+Locally, in smooth regions, we can see how this would work in the nonlinear case. The Jacobian matrix $J = \partial_{\bf q} {\bf f}$ plays the role of $A$. The characteristic variables can therefore be defined pointwise, noting that the eigenvalues and eigenvectors are going to vary with space. These are then propagated forward and recombined, in principle. In practice the re-combination is difficult, as the correct eigenvectors to use depend on the new data in ways that can be hard to disentangle.
+
+However, the viewpoint of using characteristics is fundamental to a lot of numerical algorithms. Whilst the full procedure outlined here is just about never done, the information is always useful to interpret how the algorithm is working.
+
+### Wave types
+
+From the characteristic point of view we can distinguish different generic types of behaviour. If we start from simple initial data, such as the piecewise constant data illustrated on the left, then there's typically three different outcomes. For complex systems we'll see them all, and some more!
+
+The first type of behaviour, on the left, is where the characteristics separate. This leads to a continuous spreading of the data. In hydrodynamics this is referred to as a *rarefaction wave*: the material is rarefied as it expands.
+
+The second type of behaviour, on the right, is where the characteristics converge. This leads to a discontinuity, even when the initial data is smooth, as discussed in the first lecture. This is a shock, and typically is associated with a jump in all variables. Specifically in the hydrodynamic case we would see entropy and temperature increase through the shock wave, whereas across any other wave they would remain constant.
+
+The final type of behaviour, in the middle, is where the characteristics move parallel to each other, maintaining the jump in the initial data. These *linear* waves are associated with jumps in material properties, or rotations of vector properties. In hydrodynamics these are the *contact waves*, and are associated with the advective velocity. The nonlinear waves are associated with the acoustic waves.
+
+In MHD there is a more complex wave structure. There is still a central linear contact wave, but each nonlinear acoustic wave splits into two nonlinear "fast" and "slow" waves separated by a linear wave across which the EM fields can rotate. This additional complexity in the wave structure is harder to resolve numerically.
+
+**Just under 20 minutes to the point**
+
+### Grids and approximations
+
+On to numerical approximation. We want to solve *continuum* partial differential equations on a computer. The solution, $q(x)$, needs - in principle - an infinite amount of information. That's because the continuum solution could, in principle, take totally different unpredictable values at every separate point $x$. This way of thinking is clearly useless when working with a computer with a finite amount of working memory.
+
+Instead we consider ways of approximating the solution $q(x)$. There are essentially three that are used in the field.
+
+The first is the point value approximation, used in *finite differencing*. In this case the domain is discretized into points, and we assume that we know (or want to compute) the value of the solution at each of these points. The solution is *not* known between the points. When we want to link the solution at different points - for example, when approximating a derivative - we have to impose the general behaviour of the solution between those points. For example, if we interpolate between points using a straight line then the derivative is the slope of this line.
+
+The second approach is to split the domain into *cells*, and within each cell to store the average value. This is the *finite volume* approach. In this case some information is known at every point in spacetime: the average value near that point. However, the exact value is known *nowhere*. Again, to get the value of the solution at a specific point we have to impose the general behaviour of the solution. When restricted to a given cell this behaviour has to be consistent with the average value within that cell. The finite volume approach implicitly "smears out" the local behaviour of the solution, which is exactly what we want when dealing with discontinuous solutions like shocks.
+
+The final approach has links to the finite volume approach, but is more often referred to as a *finite element* method. Instead of storing the average value of the solution within a cell, the *moments* of the solution with respect to some function basis are stored. Typically the zeroth moment would be the cell average of the solution, the first moment linked to its derivative, the second to its curvature and so on. This is fundamental to the *Discontinuous Galerkin* method that HP will talk about later. So far this hasn't been used much for relativistic matter simulations, for reasons we'll get to later.
+
+### Fluxes and telescoping
+
+To see the implications of the finite volume approach, where we split the domain into cells, let's use Gauss, or Stokes, to integrate our conservation law over the domain. We see that the integral over all space leads to all the spatial derivatives disappearing. The equation becomes an ODE, where the time derivative of the integral average of the solution over the domain is given by the surface integral of the flux through the domain.
+
+This is the *weak form* of the conservation law. We'll talk about weak forms more generally later. Crucially, the weak form is used to remove spatial derivatives from the solution (which might be discontinuous). This allows us to talk about discontinuous solutions, like shocks, with confidence that the mathematics will work out.
+
+We see that we're still not at a point where we can solve this equation. The ODE is defined by the surface integral of the flux. Evaluating this flux over the boundary of the domain requires knowing the solution at the boundary of the domain. But we don't know the solution there: we only know the integral average within the domain.
+
+This brings us to the fundamental step in numerical methods for conservation laws. We need a prescription for computing this boundary flux. Once we have that, we can solve the ODE using standard methods.
+
+To be concrete, let's reduce our domain down to one spatial dimension. We split the domain into cells. We label the cells with an integer $i$, and given the cell centre the coordinates $x_i$. The interfaces between the cells and the boundaries of each little subdomain. We label the coordinates of these interfaces with "half integers", so the boundaries of cell $i$ are at $x_{i-1/2}$ and $x_{i+1/2}$. We then write the ODE explicitly, showing that the average solution $\hat{q}_i$ within cell $i$ evolves due to the flux into the cell through the left interface at $i-1/2$ and the flux out of the cell through the right interface at $i+1/2$. Note that "into" and "out of" are conventions without physical meaning here, associated with assuming the material flows from left to right: the flux could be negative, meaning the material is flowing from right to left.
+
+There is a central result from writing the conservation law in this form. If we have a discrete algorithm that updates in this fashion then it is conservative *at the discrete level*. To see this, imagine summing up all the integral averages in all the cells. This would give the integral average over the entire domain at that time. Now imagine doing this at a later time, after the solution has been updated using the flux differencing form here. Each internal cell interface has a flux that is used twice: the flux through the interface at $i+1/2$ is used to update cell $i$ and cell $i+1$. As each update has different signs, the internal contributions cancel out. This *telescoping* effect means the total integral average is only changed by what comes in through the boundaries of the full domain. Total conservation is retained. This is essential to ensure the Rankine-Hugoniot conditions are satisfied at the discrete level and any shock propagates at the correct speed.
+
+### Computing the intercell flux
+
+We're now at the point where describing our algorithm boils down to computing the flux through a single cell interface. We'll look at *Godunov's method* and variants as a starting point.
+
+In Godunov's method we assume the solution is piecewise constant. That is, within each cell the value of the solution is the integral average. This gives us the value of the solution everywhere *except* at the cell interfaces, where there are two values that, in general, won't agree. We need to take these values and get the intercell flux.
+
+To do this, think about the characteristics. For example, think about the advection equation. If the advection velocity $v$ were positive then the solution at the cell interface would always be given by the value to the left of the interface. More generally, if the characteristic speed is positive, the value of the solution at the interface is given by the solution to the left. From this we can compute the flux.
+
+In the system case this is more complex. For a linear system we can convert to characteristic variables. The eigenvalues tell us which characteristic variables propagate to the right, meaning we should use the solution to the left of the interface, and vice-versa. This gives us the characteristic variables at the interface, from which we can convert back to get the solution, and hence the flux.
+
+In the nonlinear case this gets yet more complex. In this most general case we are looking for a solution to the *Riemann problem*: what's the solution of the PDEs when the initial data is piecewise constant? This can be hard to compute exactly: in most relativistic cases it's impractical. It can be approximated using some, or all, of the characteristic information as in the linear system case. In relativity people often use simple approximations, as computing the characteristic information needed for more complex approximations is expensive.
+
+### Approximate Riemann Solvers
+
+As an example of a simple approximation we look at the HLLE method. This assumes that there are two characteristic waves and that the solution jumps discontinuously across both. So the approximate solution will have three states: the initial left and right states (either side of the interface), and a central state. If the characteristic speeds have the same sign then the solution along the interface is given by one of the initial states, and everything is straightforward. If they have different signs then the solution along the interface is given by the intermediate state. This can be found by imposing conservation across each wave, leading to a simple formula for the intermediate state: from this the intercell flux follows.
+
+The HLLE method has some nice properties. It's fairly cheap to compute, especially if simple approximations to the characteristic speeds are used. It's not specific to one model. It's linked to *positivity preservation*: quantities like density that should be positive will remain positive, when HLLE is used in a particular way.
+
+However, HLLE has its problems. In particular, linear waves (like contact discontinuities) tend to be smeared out very badly. For MHD this can be a serious problem, as there's more linear waves.
+
+More complex approximations either work to ensure better behaviour when the waves aren't discontinuities, or to ensure better capturing of the linear waves. For hydrodynamics this helps but isn't essential in many cases: for MHD it's often needed.
+
+**About 40 minutes to this point**
