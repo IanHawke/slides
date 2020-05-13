@@ -212,7 +212,7 @@ The final type of behaviour, in the middle, is where the characteristics move pa
 
 In MHD there is a more complex wave structure. There is still a central linear contact wave, but each nonlinear acoustic wave splits into two nonlinear "fast" and "slow" waves separated by a linear wave across which the EM fields can rotate. This additional complexity in the wave structure is harder to resolve numerically.
 
-**Just under 20 minutes to the point**
+**Just under 20 minutes to this point**
 
 ### Grids and approximations
 
@@ -262,4 +262,14 @@ However, HLLE has its problems. In particular, linear waves (like contact discon
 
 More complex approximations either work to ensure better behaviour when the waves aren't discontinuities, or to ensure better capturing of the linear waves. For hydrodynamics this helps but isn't essential in many cases: for MHD it's often needed.
 
-**About 40 minutes to this point**
+**About 40 minutes to this point, so slightly over 20 minutes for this section**
+
+### Dimensions, costs, and accuracy
+
+We now have an algorithm that will work. Godunov's method assumes the solution is constant within each cell, and computes the intercell flux using an approximate Riemann Solver. This can be extended to two or three dimensions by solving a Riemann problem for each cell face.
+
+However, the algorithm isn't very accurate. This wouldn't matter if we could throw computing power at it, but as we've seen we're going to be limited in the size of the grid cells we can use. We measure the accuracy by how quickly the error reduces as we reduce the grid size. If the error scales as the cell size $\Delta x$ to some power $p$ then we say the method is $p^{\text{th}}$ order accurate. Godunov's method is first order accurate: if we reduce the cell width $\Delta x$ by a factor of 2 then we reduce the error by a factor of 2.
+
+Unfortunately, reducing the cell width by a factor of 2 does not mean the computational cost goes up by a factor of 2. In three space dimensions we have to reduce the grid size in each direction. The CFL stability limit discussed in the first lecture implies we also have to reduce the time step by a factor of 2. So the computational cost goes up by a factor of 16.
+
+So, for cost and efficiency reasons we want to improve the order of accuracy. If we get up to fourth order then the accuracy will scale linearly with the computational cost, which would be great. Unfortunately, increasing the order of accuracy is hard, and it's hard for a crucial, physical reason: shocks.
