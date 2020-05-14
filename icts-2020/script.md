@@ -334,3 +334,39 @@ The second problem is communication. To get enough information for a high-order 
 As a quick digression. Simulations have essentially four things that can slow them down. The first is how fast it does operations: the FLOP count. The second is how much memory it has. The third is how fast results can be saved to disk. As the fourth, when we split the calculation across multiple processes, is how fast the different bits of the simulation communicate with each other.
 
 On modern and near-future machines the main problem is communication speed. High order finite volume and finite difference schemes communicate too much information with cells too far away from themselves. This stops our simulations using the computational power available.
+
+One answer to both these issues is to use a Discontinuous Galerkin method. HP will cover this in his talk on vacuum, so here I'll just touch on the features important to hydrodynamics.
+
+First we have to revisit the weak form. In DG and other finite element methods we take the equations of motion, multiply by a *test function* $\phi$, and integrate by parts. This moves the spatial derivatives from the solution (which might be discontinuous) to the test function (which we can choose to be sufficiently differentiable).
+
+We then expand the solution and the test function in terms of some function basis: think of Fourier Series, or Legendre polynomials. We're going to store the *modes*: the coefficients of the solution with respect to the function basis expansion. We end up with evolution equations for the modes, but these are *coupled* through the mass matrix and stiffness vector. These matrices and vectors can be pre-computed. We see there is a term that looks like the standard boundary flux, for which we'll need something like a Riemann solver.
+
+DG methods don't have the communication or waste problems seen in finite volume or finite difference methods. They only couple a cell to its neighbours through the intercell flux. The high order reconstruction is automatic thanks to the mode information stored in each cell, which is evolved, not discarded between steps.
+
+However, standard DG methods will produce Gibbs oscillations at shocks, as energy is shifted to higher modes. In order to avoid these oscillations it's necessary to limit the solution, as in slope limiting, without reducing the accuracy (too much). This is hard to do without introducing coupling between the neighbouring cells. Getting this step correct is going to be crucial for making DG methods work in relativistic matter models.
+
+### MHD
+
+In this final part of the lecture we need to look at the extra steps needed to evolve MHD, which is the main model for current simulations. The problem with MHD is not the flux terms, which can be evolved with the exact same techniques as we've discussed. The problem is not with the source terms (unless we include resistive effects). The problem is with the "div B" constraint, $\nabla \cdot {\bf B} = 0$.
+
+Constraints are a fact of life in numerical relativity. They're useful as an independent measure of the accuracy of our simulation. However, some constraints, when violated, can destroy the simulation accuracy. It's been known for decades (even before Brackbill and Barnes did their key investigation) that MHD simulations violating the div B constraint would rapidly fail.
+
+There are essentially two types of approach to solving this problem. We can modify the evolution equations so that the constraint violations are kept "small", by damping and propagating these constraints away. Alternatively, we design our numerical scheme so that the constraints are zero at the discrete level.
+
+Constraint damping is the simplest approach. In essence, it works by adding additional terms, proportional to the constraint itself, so that the evolution equation for the constraint has its time derivative evolved by a term proportional to the constraint itself. Choosing the proportionality constant to be negative means the constraint is exponentially damped. To avoid feedback at specific points it's typical to add additional terms so that the constraint violations propagate as a wave equation.
+
+The main advantage of constraint propagation is its simplicity. Adding one or two equations of motion for the constraints and a couple of extra source terms is easy to implement. The disadvantages can be substantial. It requires hand-tuning a parameter, the damping time. Its mathematical status is dubious - there's some results suggesting the modified system isn't properly well posed. The interaction of the violations with grid boundaries, particularly AMR grid boundaries, can be very messy. And finally, it's not clear how small the constraint violations need to be to not cause problems.
+
+The preferred method now is to enforce the constraint at the discrete level. The favourite method at the moment is to *not* evolve the magnetic field directly, but instead to evolve the *vector potential* ${\bf A}$. We can always compute the magnetic field from the curl of the vector potential, and because the divergence of a curl automatically vanishes, this enforces the constraint.
+
+The vector potential is not unique: by modifying the *EM* gauge we can change its value. This means different choices for the evolution equation for the vector potential can be made. As with constraint damping, it turns out that propagating the vector potential is better than trying to fix it for simplicity. This means the preferred method is to use a Lorenz (or generalize Lorenz) gauge.
+
+It's useful to note that the vector potential must be continuous, as the magnetic field must be $C^0$, and the magnetic field goes like a derivative of the vector potential. So standard methods can be applied to the vector potential, or even methods that work for $C^1$ functions. However, in order to cleanly get the magnetic fields from the vector potential, and to get the terms needed for evolving the vector potential itself, its typical to discretely locate the vector potential at different locations to the other variables. Specifically, when thinking of the problem in finite volume form, the vector potential is stored at cell *edges*.
+
+### Summary
+
+The flux conservative form that we saw in the first lecture is essential for building numerical methods that deal with shocks correctly. Once that's in place we can improve are method by carefully considering how and where we are representing which variables. I think it's really important to learn the finite volume approach as a way of thinking about the key concepts. However, I also think that the medium to long term future of the field is moving towards finite difference or DG type methods, inspired by finite volume concepts.
+
+For MHD and other models including EM fields it's important that the constraints that follow from Maxwells equations are imposed. When implementing a new code I always first reach for constraint damping methods due to their simplicity. However, it's definitely true that the most accurate and useful codes available now are using methods that enforce the constraints at the discrete level. Combining high order accuracy with constraint enforcement is a challenge.
+
+## Lecture 3
