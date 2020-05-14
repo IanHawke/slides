@@ -311,7 +311,7 @@ Minmod slope limiting combined with a higher-order ODE solver will work to give 
 
 Trying to move to even higher order methods is complicated by an issue that our focus on one dimension has hidden to now: the computation of the intercell flux. Remember, in our finite volume approach, the cell average is updated by the surface integral of the flux over the cell boundary. Once we move to higher order reconstruction methods the solution, and hence the flux, varies over the surface of the cell. This means we can't evaluate it at a single point, as in one dimension: instead we must evaluate it at multiple points and approximate the surface integral.
 
-The most efficent way of approximating an integral in general is Gauss quadrature, where approximating the integrand at $k$ points in each dimension gives us $(2 k - 1)^{\text{th}}$ order accuracy. For second order accuracy we need only one point - this is the midpoint rule. With two points we get third order accuracy, and with three points we get fifth order accuracy. However, this is per dimension: to get fifth order accuracy in three dimensions, where each cell face is two dimensional, we will need to reconstruct to 25 points on each face and solve 25 separate Riemann problems per face. The computational cost and complexity goes up very rapidly.
+The most efficent way of approximating an integral in general is Gauss quadrature, where approximating the integrand at $k$ points in each dimension gives us $(2 k - 1)^{\text{th}}$ order accuracy. For second order accuracy we need only one point - this is the midpoint rule. With two points we get third order accuracy, and with three points we get fifth order accuracy. However, this is per dimension: to get fifth order accuracy in three dimensions, where each cell face is two dimensional, we will need to reconstruct to 9 points on each face and solve 9 separate Riemann problems per face. The computational cost and complexity goes up very rapidly.
 
 For this reason, high order finite volume methods are rare (although most methods in the field are finite volume methods, they aim for high absolute accuracy with second order convergence). To get higher accuracy, the standard approach in the field is to use finite differences.
 
@@ -323,19 +323,21 @@ So the standard approach is to use *flux splitting*. We compute the full flux at
 
 The slide shows a simple flux splitting approach which, like the HLLE method, only uses some of the characteristic information. This sort of finite differencing approach is used by codes like Radice's WhiskyTHC to get the current most accurate simulations.
 
+**About another 25-30 minutes to here**
+
 ### Discontinuous Galerkin
 
 There are two key computational problems with the higher order methods we've described to now.
 
 The first is waste. The reconstruction used in both finite difference and finite volume methods takes a limited amount of information about the solution - the cell averages, or the point values - and produces a form of the solution everywhere, usually as a piecewise polynomial. This form is then used to compute some terms, such as the intercell fluxes, and then all the high order information is thrown away. We only store the values of the solution or its cell average.
 
-The second problem is communication. To get enough information for a high-order approximation to the solution we need to look not just at the cell and its immediate neighbours, but to every further neighbouring cells. In general, we need to look at $k$ neighbours on either side to get $(2 k - 1)^{\text{th}}$ order accuracy. This is a real issue for big simulations on modern supercomputers.
+The second problem is communication. To get enough information for a high-order approximation to the solution we need to look not just at the cell and its immediate neighbours, but to ever further neighbouring cells. In general, we need to look at $k$ neighbours on either side to get $(2 k - 1)^{\text{th}}$ order accuracy. This is a real issue for big simulations on modern supercomputers.
 
 As a quick digression. Simulations have essentially four things that can slow them down. The first is how fast it does operations: the FLOP count. The second is how much memory it has. The third is how fast results can be saved to disk. As the fourth, when we split the calculation across multiple processes, is how fast the different bits of the simulation communicate with each other.
 
 On modern and near-future machines the main problem is communication speed. High order finite volume and finite difference schemes communicate too much information with cells too far away from themselves. This stops our simulations using the computational power available.
 
-One answer to both these issues is to use a Discontinuous Galerkin method. HP will cover this in his talk on vacuum, so here I'll just touch on the features important to hydrodynamics.
+One answer to both these issues is to use a Discontinuous Galerkin method. HP will cover this in his talk on vacuum numerics, so here I'll just touch on the features important to hydrodynamics.
 
 First we have to revisit the weak form. In DG and other finite element methods we take the equations of motion, multiply by a *test function* $\phi$, and integrate by parts. This moves the spatial derivatives from the solution (which might be discontinuous) to the test function (which we can choose to be sufficiently differentiable).
 
@@ -344,6 +346,8 @@ We then expand the solution and the test function in terms of some function basi
 DG methods don't have the communication or waste problems seen in finite volume or finite difference methods. They only couple a cell to its neighbours through the intercell flux. The high order reconstruction is automatic thanks to the mode information stored in each cell, which is evolved, not discarded between steps.
 
 However, standard DG methods will produce Gibbs oscillations at shocks, as energy is shifted to higher modes. In order to avoid these oscillations it's necessary to limit the solution, as in slope limiting, without reducing the accuracy (too much). This is hard to do without introducing coupling between the neighbouring cells. Getting this step correct is going to be crucial for making DG methods work in relativistic matter models.
+
+**About 10 more minutes to here**
 
 ### MHD
 
@@ -359,7 +363,7 @@ The main advantage of constraint propagation is its simplicity. Adding one or tw
 
 The preferred method now is to enforce the constraint at the discrete level. The favourite method at the moment is to *not* evolve the magnetic field directly, but instead to evolve the *vector potential* ${\bf A}$. We can always compute the magnetic field from the curl of the vector potential, and because the divergence of a curl automatically vanishes, this enforces the constraint.
 
-The vector potential is not unique: by modifying the *EM* gauge we can change its value. This means different choices for the evolution equation for the vector potential can be made. As with constraint damping, it turns out that propagating the vector potential is better than trying to fix it for simplicity. This means the preferred method is to use a Lorenz (or generalize Lorenz) gauge.
+The vector potential is not unique: by modifying the *EM* gauge we can change its value. This means different choices for the evolution equation for the vector potential can be made. As with constraint damping, it turns out that propagating the vector potential is better than trying to fix it for simplicity. This means the preferred method is to use a Lorenz (or generalized Lorenz) gauge.
 
 It's useful to note that the vector potential must be continuous, as the magnetic field must be $C^0$, and the magnetic field goes like a derivative of the vector potential. So standard methods can be applied to the vector potential, or even methods that work for $C^1$ functions. However, in order to cleanly get the magnetic fields from the vector potential, and to get the terms needed for evolving the vector potential itself, its typical to discretely locate the vector potential at different locations to the other variables. Specifically, when thinking of the problem in finite volume form, the vector potential is stored at cell *edges*.
 
@@ -368,5 +372,7 @@ It's useful to note that the vector potential must be continuous, as the magneti
 The flux conservative form that we saw in the first lecture is essential for building numerical methods that deal with shocks correctly. Once that's in place we can improve are method by carefully considering how and where we are representing which variables. I think it's really important to learn the finite volume approach as a way of thinking about the key concepts. However, I also think that the medium to long term future of the field is moving towards finite difference or DG type methods, inspired by finite volume concepts.
 
 For MHD and other models including EM fields it's important that the constraints that follow from Maxwells equations are imposed. When implementing a new code I always first reach for constraint damping methods due to their simplicity. However, it's definitely true that the most accurate and useful codes available now are using methods that enforce the constraints at the discrete level. Combining high order accuracy with constraint enforcement is a challenge.
+
+**Additional 10-15 minutes to end**
 
 ## Lecture 3
