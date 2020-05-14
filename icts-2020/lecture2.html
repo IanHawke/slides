@@ -133,11 +133,299 @@
 					</section>
 
 					<section>
-
 						<div>
-							<h1>Lectures</h1>
 						</div>
+						<aside class="notes">
+							In the first lecture I wanted to emphasize the modelling approximations and limitations of what goes in to a numerical simulation. These come from physical and resource limitations. They lead us to consider the most important features of our models, and so what aspects we need to model in what order. The key points from the first lecture were that
+							* conservation and balance laws are generic features of matter simulations;
+							* these lead to shocks, and these shocks do appear in mergers;
+							* using techniques from Newtonian CFD is a good place to start, but we need to consider issues specific to NSs and relativity, like artificial atmospheres, and the more complex equations of motion.
+							<br>
+							Today's lecture is going to be a deep dive into the numerical methods. We'll look at the standard techniques used in the field. The exercises associated with these lectures ask you to implement and test some of these techniques: that's the best way of getting to grips with the difficulties, limitations, costs, and complexities.
+						</aside>
+					</section>
 
+					<section>
+						<div>
+							<h1>Balance laws</h1>
+						</div>
+						<aside class="notes">
+							The general form of the equations of motion of relativistic matter can be framed as here. Some quantity is evolved using its flux, ${\bf f}$, additional non-conservative terms that push the matter around through the matrix $A$, a second order diffusive derivative operator with dissipation matrix $D$, and a source term ${\bf s}$ that typically represents exchange of "stuff" to other parts of the model. In the most complex cases the functional form of the matrices, sources or fluxes can depend not only on nonlinear algebraic operators of the evolved vector ${\bf q}$, but even on nonlocal operators. An example would be radiation transport where the optical depth is needed.
+							<br>
+							However, this is far more complicated than is generally needed for NS mergers, particularly through the inspiral stage. In these stages we are dominated by the flux terms. In the standard models (hydrodynamics, maybe including EM fields through the MHD approximation) we can write the equations in conservation law form. And, when radiation transport can be neglected, we can assume that the source terms are given in an algebraic form.
+							<br>
+							This means we can concentrate on the fluxes. From a mathematical and implementation point of view the most important terms are the <i>principle part</i> with the highest derivatives, so we will (for now) look at the conservation law form and the numerical methods needed for that.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h1>Characteristics</h1>
+						</div>
+						<aside class="notes">
+							As a quick recap, remember that for the advection equation (where the flux is a constant <i>velocity</i> $v$ multiplying the quantity $q$) we can define characteristics: lines, of slope $v$, along which the solution is unchanged. We can use this locally for nonlinear problems like Burgers equation: with a general flux $f$, the characteristic speed is $\partial_q f$. This only makes sense away from discontinuities.
+							<br>
+							When we extend to the system case it's easiest to consider the linear problem first. When the flux is defined by a linear system, ${\bf f} = A {\bf q}$, then we can change variables to get the solution. A crucial aspect of the conservation laws is that they are <i>hyperbolic</i>: the essential consequence of this for now is that $A$ will be diagonalizable. This means we can define and work with the <i>characteristic variables</i> ${\bf w} = L {\bf q}$, where $L$ is the matrix of left eigenvectors. The characteristic variables obey <i>uncoupled</i> advection equations, with the advection velocity being $\lamba_i$, the eigenvalues of the matrix $A$. So we can use the solution from the advection equation: each characteristic variable propagates unchanged with a fixed speed. We can then find the solution for ${\bf q}$ by transforming back using the matrix of right eigenvectors.
+							<br>
+							Locally, in smooth regions, we can see how this would work in the nonlinear case. The Jacobian matrix $J = \partial_{\bf q} {\bf f}$ plays the role of $A$. The characteristic variables can therefore be defined pointwise, noting that the eigenvalues and eigenvectors are going to vary with space. These are then propagated forward and recombined, in principle. In practice the re-combination is difficult, as the correct eigenvectors to use depend on the new data in ways that can be hard to disentangle.
+							<br>
+							However, the viewpoint of using characteristics is fundamental to a lot of numerical algorithms. Whilst the full procedure outlined here is just about never done, the information is always useful to interpret how the algorithm is working.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h1>Wave types</h1>
+						</div>
+						<aside class="notes">
+							From the characteristic point of view we can distinguish different generic types of behaviour. If we start from simple initial data, such as the piecewise constant data illustrated on the left, then there's typically three different outcomes. For complex systems we'll see them all, and some more!
+							<br>
+							The first type of behaviour, on the left, is where the characteristics separate. This leads to a continuous spreading of the data. In hydrodynamics this is referred to as a <i>rarefaction wave</i>: the material is rarefied as it expands.
+							<br>
+							The second type of behaviour, on the right, is where the characteristics converge. This leads to a discontinuity, even when the initial data is smooth, as discussed in the first lecture. This is a shock, and typically is associated with a jump in all variables. Specifically in the hydrodynamic case we would see entropy and temperature increase through the shock wave, whereas across any other wave they would remain constant.
+							<br>
+							The final type of behaviour, in the middle, is where the characteristics move parallel to each other, maintaining the jump in the initial data. These <i>linear</i> waves are associated with jumps in material properties, or rotations of vector properties. In hydrodynamics these are the <i>contact waves</i>, and are associated with the advective velocity. The nonlinear waves are associated with the acoustic waves.
+							<br>
+							In MHD there is a more complex wave structure. There is still a central linear contact wave, but each nonlinear acoustic wave splits into two nonlinear "fast" and "slow" waves separated by a linear wave across which the EM fields can rotate. This additional complexity in the wave structure is harder to resolve numerically.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h1>Grids and approximations</h1>
+						</div>
+						<aside class="notes">
+							On to numerical approximation. We want to solve <i>continuum</i> partial differential equations on a computer. The solution, $q(x)$, needs - in principle - an infinite amount of information. That's because the continuum solution could, in principle, take totally different unpredictable values at every separate point $x$. This way of thinking is clearly useless when working with a computer with a finite amount of working memory.
+							<br>
+							Instead we consider ways of approximating the solution $q(x)$. There are essentially three that are used in the field.
+							<br>
+							The first is the point value approximation, used in <i>finite differencing</i>. In this case the domain is discretized into points, and we assume that we know (or want to compute) the value of the solution at each of these points. The solution is <i>not</i> known between the points. When we want to link the solution at different points - for example, when approximating a derivative - we have to impose the general behaviour of the solution between those points. For example, if we interpolate between points using a straight line then the derivative is the slope of this line.
+							<br>
+							The second approach is to split the domain into <i>cells</i>, and within each cell to store the average value. This is the <i>finite volume</i> approach. In this case some information is known at every point in spacetime: the average value near that point. However, the exact value is known <i>nowhere</i>. Again, to get the value of the solution at a specific point we have to impose the general behaviour of the solution. When restricted to a given cell this behaviour has to be consistent with the average value within that cell. The finite volume approach implicitly "smears out" the local behaviour of the solution, which is exactly what we want when dealing with discontinuous solutions like shocks.
+							<br>
+							The final approach has links to the finite volume approach, but is more often referred to as a <i>finite element</i> method. Instead of storing the average value of the solution within a cell, the <i>moments</i> of the solution with respect to some function basis are stored. Typically the zeroth moment would be the cell average of the solution, the first moment linked to its derivative, the second to its curvature and so on. This is fundamental to the <i>Discontinuous Galerkin</i> method that HP will talk about later. So far this hasn't been used much for relativistic matter simulations, for reasons we'll get to later.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h1>Fluxes and telescoping</h1>
+						</div>
+						<aside class="notes">
+							To see the implications of the finite volume approach, where we split the domain into cells, let's use Gauss, or Stokes, to integrate our conservation law over the domain. We see that the integral over all space leads to all the spatial derivatives disappearing. The equation becomes an ODE, where the time derivative of the integral average of the solution over the domain is given by the surface integral of the flux through the domain.
+							<br>
+							This is the <i>weak form</i> of the conservation law. We'll talk about weak forms more generally later. Crucially, the weak form is used to remove spatial derivatives from the solution (which might be discontinuous). This allows us to talk about discontinuous solutions, like shocks, with confidence that the mathematics will work out.
+							<br>
+							We see that we're still not at a point where we can solve this equation. The ODE is defined by the surface integral of the flux. Evaluating this flux over the boundary of the domain requires knowing the solution at the boundary of the domain. But we don't know the solution there: we only know the integral average within the domain.
+							<br>
+							This brings us to the fundamental step in numerical methods for conservation laws. We need a prescription for computing this boundary flux. Once we have that, we can solve the ODE using standard methods.
+							<br>
+							To be concrete, let's reduce our domain down to one spatial dimension. We split the domain into cells. We label the cells with an integer $i$, and given the cell centre the coordinates $x_i$. The interfaces between the cells and the boundaries of each little subdomain. We label the coordinates of these interfaces with "half integers", so the boundaries of cell $i$ are at $x_{i-1/2}$ and $x_{i+1/2}$. We then write the ODE explicitly, showing that the average solution $\hat{q}_i$ within cell $i$ evolves due to the flux into the cell through the left interface at $i-1/2$ and the flux out of the cell through the right interface at $i+1/2$. Note that "into" and "out of" are conventions without physical meaning here, associated with assuming the material flows from left to right: the flux could be negative, meaning the material is flowing from right to left.
+							<br>
+							There is a central result from writing the conservation law in this form. If we have a discrete algorithm that updates in this fashion then it is conservative <i>at the discrete level</i>. To see this, imagine summing up all the integral averages in all the cells. This would give the integral average over the entire domain at that time. Now imagine doing this at a later time, after the solution has been updated using the flux differencing form here. Each internal cell interface has a flux that is used twice: the flux through the interface at $i+1/2$ is used to update cell $i$ and cell $i+1$. As each update has different signs, the internal contributions cancel out. This <i>telescoping</i> effect means the total integral average is only changed by what comes in through the boundaries of the full domain. Total conservation is retained. This is essential to ensure the Rankine-Hugoniot conditions are satisfied at the discrete level and any shock propagates at the correct speed.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h1>Computing the intercell flux</h1>
+						</div>
+						<aside class="notes">
+							We're now at the point where describing our algorithm boils down to computing the flux through a single cell interface. We'll look at *Godunov's method* and variants as a starting point.
+							<br>
+							In Godunov's method we assume the solution is piecewise constant. That is, within each cell the value of the solution is the integral average. This gives us the value of the solution everywhere <i>except</i> at the cell interfaces, where there are two values that, in general, won't agree. We need to take these values and get the intercell flux.
+							<br>
+							To do this, think about the characteristics. For example, think about the advection equation. If the advection velocity $v$ were positive then the solution at the cell interface would always be given by the value to the left of the interface. More generally, if the characteristic speed is positive, the value of the solution at the interface is given by the solution to the left. From this we can compute the flux.
+							<br>
+							In the system case this is more complex. For a linear system we can convert to characteristic variables. The eigenvalues tell us which characteristic variables propagate to the right, meaning we should use the solution to the left of the interface, and vice-versa. This gives us the characteristic variables at the interface, from which we can convert back to get the solution, and hence the flux.
+							<br>
+							In the nonlinear case this gets yet more complex. In this most general case we are looking for a solution to the <i>Riemann problem</i>: what's the solution of the PDEs when the initial data is piecewise constant? This can be hard to compute exactly: in most relativistic cases it's impractical. It can be approximated using some, or all, of the characteristic information as in the linear system case. In relativity people often use simple approximations, as computing the characteristic information needed for more complex approximations is expensive.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h1>Approximate Riemann Solvers</h1>
+						</div>
+						<aside class="notes">
+							As an example of a simple approximation we look at the HLLE method. This assumes that there are two characteristic waves and that the solution jumps discontinuously across both. So the approximate solution will have three states: the initial left and right states (either side of the interface), and a central state. If the characteristic speeds have the same sign then the solution along the interface is given by one of the initial states, and everything is straightforward. If they have different signs then the solution along the interface is given by the intermediate state. This can be found by imposing conservation across each wave, leading to a simple formula for the intermediate state: from this the intercell flux follows.
+							<br>
+							The HLLE method has some nice properties. It's fairly cheap to compute, especially if simple approximations to the characteristic speeds are used. It's not specific to one model. It's linked to <i>positivity preservation</i>: quantities like density that should be positive will remain positive, when HLLE is used in a particular way.
+							<br>
+							However, HLLE has its problems. In particular, linear waves (like contact discontinuities) tend to be smeared out very badly. For MHD this can be a serious problem, as there's more linear waves.
+							<br>
+							More complex approximations either work to ensure better behaviour when the waves aren't discontinuities, or to ensure better capturing of the linear waves. For hydrodynamics this helps but isn't essential in many cases: for MHD it's often needed.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h1>Dimensions, costs, and accuracy</h1>
+						</div>
+						<aside class="notes">
+							We now have an algorithm that will work. Godunov's method assumes the solution is constant within each cell, and computes the intercell flux using an approximate Riemann Solver. This can be extended to two or three dimensions by solving a Riemann problem for each cell face.
+							<br>
+							However, the algorithm isn't very accurate. This wouldn't matter if we could throw computing power at it, but as we've seen we're going to be limited in the size of the grid cells we can use. We measure the accuracy by how quickly the error reduces as we reduce the grid size. If the error scales as the cell size $\Delta x$ to some power $p$ then we say the method is $p^{\text{th}}$ order accurate. Godunov's method is first order accurate: if we reduce the cell width $\Delta x$ by a factor of 2 then we reduce the error by a factor of 2.
+							<br>
+							Unfortunately, reducing the cell width by a factor of 2 does not mean the computational cost goes up by a factor of 2. In three space dimensions we have to reduce the grid size in each direction. The CFL stability limit discussed in the first lecture implies we also have to reduce the time step by a factor of 2. So the computational cost goes up by a factor of 16.
+							<br>
+							So, for cost and efficiency reasons we want to improve the order of accuracy. If we get up to fourth order then the accuracy will scale linearly with the computational cost, which would be great. Unfortunately, increasing the order of accuracy is hard, and it's hard for a crucial, physical reason: shocks.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h2>Monotonicity, Gibbs oscillations, and Godunov's theorem</h2>
+						</div>
+						<aside class="notes">
+							A different visual way of thinking about Godunov's method (in one dimensions, at least) is the *Reconstruct, Evolve, Average* framework. We start with the cell average solution: within each cell the solution is constant. This is the <i>reconstruction</i> step: going from our cell averages to an assumed form for the solution everywhere. We compute the intercell fluxes. Locally, this approximately advects our solution at a certain speed. We now have a (roughly) piecewise constant solution that isn't aligned with the cell boundaries. This is the <i>evolve</i> step. To get back to our cell averages, the <i>average</i> step takes the cell average within each cell of our new solution.
+							<br>
+							In principle, most of these steps are exact. The averaging step is exact. The evolve step needs doing with some ODE solver, but that can be done to high accuracy. The evolve step also needs the computation of the intercell flux, but it's possible in simple situations to do that exactly. It's the reconstruction step that introduces the first order approximation. By enforcing that the solution is piecewise constant we significantly reduce the accuracy of the method.
+							<br>
+							To improve this, we need to improve the reconstruction. The next step up would be to use piecewise linear reconstruction: assuming the solution is a straight line, not necessarilly flat, within each cell. Then up to quadratic functions and higher order. This would give the improved accuracy we seek. Unfortunately it also introduces other problems when the true solution is discontinuous.
+							<br>
+							Here's a standard discontinuous function: it's piecewise constant with one jump. If we look for a Fourier series representation of this function then the partial sum gives us a representation that oscillates around the true solution. These oscillations are concentrated near the discontinuity.
+							<br>
+							There are three obvious ways to get around this. First, split the domain into smaller cells. However, we see that there's no scale to the true solution, so these oscillations will still appear. They'll get squeezed closer to the discontinuity, but their magnitude won't reduce.
+							<br>
+							Second we could include more terms in the partial sum. The result is the same as changing the cell size: the oscillations get squeezed closer to the discontinuity without getting smaller.
+							<br>
+							Finally, we could change the function basis. Instead of using a Fourier series we could expand in standard polynomials, or Legendre polynomials, or something else. This doesn't help either: these oscillations are a generic feature.
+							<br>
+							These <i>Gibbs oscillations</i> will destroy our numerical accuracy. They don't converge with resolution: typically they blow up in a few iterations. Most depressing is Godunov's theorem. It asks when the solution might be <i>monotone</i>: that means, when the solution lies between the minimum and maximum of the original solution. Godunov's theorem says that a linear algorithm that is monotone <i>must</i> be first order accurate.
+							<br>
+							We have one loophole left by Godunov's theorem. It only applies to <i>linear</i> methods: that is, methods where the algorithm essentially does the same thing everywhere, ignoring the values and form of the data. The past 50 years and more of CFD has focused on better ways of <i>locally modifying</i> the algorithm based on the values and form of the solution itself, to avoid Gibbs oscillations.
+							<br>
+							It's this nonlinearity that makes numerical methods for matter models so much more complex and expensive than numerical methods for smooth solutions (such as the spacetime). It's typical for the computational cost of the matter evolution to be greater than that of the spacetime evolution, even though we're usually evolving far fewer variables, sometimes by an order of magnitude.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h1>Slope limiting</h1>
+						</div>
+						<aside class="notes">
+							The first nonlinear scheme to look at is slope limiting. We're still doing a reconstruct-evolve-average method. So we'll reconstruct our solution within each cell based on the cell averages within this cell and its neighbours. Then we'll compute the intercell flux, evolve, and average to get new cell averages. The new step is that the reconstruction within each cell will be piecewise linear, not piecewise constant.
+							<br>
+							We can approximate the slope inside each cell by forward, backward or central differencing. Central differencing uses more information and will be the most accurate in smooth regions. However, if we use two cells across a shock then we'll get oscillations. So what we want to do is compare the three different possible slopes. When it looks like we're in a smooth region we choose the slope from central differencing. When it looks like we're not in a smooth region we use piecewise constant reconstruction: the slope is zero. Then we want some smooth transition between the two extremes.
+							<br>
+							The easiest check for possible shocks or problems is to look for when forward and backward differencing gives slopes with different signs. The simplest approximate slope that works is to look just at the forward and backward (or upwind and downwind) slopes, and choose the <i>minmod</i> slope. That is, if the two slopes have different signs, the slope is set to zero. If they have the same sign, we choose the slope with smallest magnitude.
+							<br>
+							Minmod slope limiting combined with a higher-order ODE solver will work to give better than first order accuracy. Unfortunately it's not <i>much</i> better until we get to high resolution: the exercises give examples of this. Better slope limiters are available, but even the best won't do better than second order accuracy, a long way from the fourth order or better that we want.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h1>Finite difference methods</h1>
+						</div>
+						<aside class="notes">
+							Trying to move to even higher order methods is complicated by an issue that our focus on one dimension has hidden to now: the computation of the intercell flux. Remember, in our finite volume approach, the cell average is updated by the surface integral of the flux over the cell boundary. Once we move to higher order reconstruction methods the solution, and hence the flux, varies over the surface of the cell. This means we can't evaluate it at a single point, as in one dimension: instead we must evaluate it at multiple points and approximate the surface integral.
+							<br>
+							The most efficent way of approximating an integral in general is Gauss quadrature, where approximating the integrand at $k$ points in each dimension gives us $(2 k - 1)^{\text{th}}$ order accuracy. For second order accuracy we need only one point - this is the midpoint rule. With two points we get third order accuracy, and with three points we get fifth order accuracy. However, this is per dimension: to get fifth order accuracy in three dimensions, where each cell face is two dimensional, we will need to reconstruct to 9 points on each face and solve 9 separate Riemann problems per face. The computational cost and complexity goes up very rapidly.
+							<br>
+							For this reason, high order finite volume methods are rare (although most methods in the field are finite volume methods, they aim for high absolute accuracy with second order convergence). To get higher accuracy, the standard approach in the field is to use finite differences.
+							<br>
+							In finite difference methods we still write the update formula <i>as if</i> we were computing intercell fluxes. This form, with its telescoping property, is necessary to get shock speeds correct. However, we're now interpreting these $f_{i \pm 1/2}$ terms differently. We don't need these terms to approximate the intercell fluxes, as in finite differences there are no cells, only the values of the solution at the central point. Instead we allow these half-integer terms to be anything, provided the difference $(f_{i+1/2} - f_{i-1/2})/(\Delta x)$ approximates the derivative of $f$ to the appropriate order. As everything is interpreted at the <i>grid point</i>, we automatically get the accuracy associated with the order of approximation of the derivative.
+							<br>
+							This appears to be wonderful. By directly dealing with the flux and not going through the solution we are bypassing all the issues with cells, intercell fluxes, and Riemann problems. Unfortunately this simple approach also throws away all the characteristic information and so is horribly unstable. By differencing simply without checking which direction the information is travelling in, we introduce Gibbs-like oscillations that rapidly kill the simulation.
+							<br>
+							So the standard approach is to use <i>flux splitting</i>. We compute the full flux at the grid point, $f(q_i)$. We then split it into two pieces, $f^{(\pm)}$, one of which travels to the left, and one of which travels to the right. This encodes some of the characteristic information. We then use a suitably upwinded reconstruction method on the split fluxes to get their values at the half-integer locations. Finally, we recombine the split fluxes to get the terms needed in the update formula.
+							<br>
+							The slide shows a simple flux splitting approach which, like the HLLE method, only uses some of the characteristic information. This sort of finite differencing approach is used by codes like Radice's WhiskyTHC to get the current most accurate simulations.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h1>Discontinuous Galerkin</h1>
+						</div>
+						<aside class="notes">
+							There are two key computational problems with the higher order methods we've described to now.
+							<br>
+							The first is waste. The reconstruction used in both finite difference and finite volume methods takes a limited amount of information about the solution - the cell averages, or the point values - and produces a form of the solution everywhere, usually as a piecewise polynomial. This form is then used to compute some terms, such as the intercell fluxes, and then all the high order information is thrown away. We only store the values of the solution or its cell average.
+							<br>
+							The second problem is communication. To get enough information for a high-order approximation to the solution we need to look not just at the cell and its immediate neighbours, but to ever further neighbouring cells. In general, we need to look at $k$ neighbours on either side to get $(2 k - 1)^{\text{th}}$ order accuracy. This is a real issue for big simulations on modern supercomputers.
+							<br>
+							As a quick digression. Simulations have essentially four things that can slow them down. The first is how fast it does operations: the FLOP count. The second is how much memory it has. The third is how fast results can be saved to disk. As the fourth, when we split the calculation across multiple processes, is how fast the different bits of the simulation communicate with each other.
+							<br>
+							On modern and near-future machines the main problem is communication speed. High order finite volume and finite difference schemes communicate too much information with cells too far away from themselves. This stops our simulations using the computational power available.
+							<br>
+							One answer to both these issues is to use a Discontinuous Galerkin method. HP will cover this in his talk on vacuum numerics, so here I'll just touch on the features important to hydrodynamics.
+							<br>
+							First we have to revisit the weak form. In DG and other finite element methods we take the equations of motion, multiply by a <i>test function</i> $\phi$, and integrate by parts. This moves the spatial derivatives from the solution (which might be discontinuous) to the test function (which we can choose to be sufficiently differentiable).
+							<br>
+							We then expand the solution and the test function in terms of some function basis: think of Fourier Series, or Legendre polynomials. We're going to store the <i>modes</i>: the coefficients of the solution with respect to the function basis expansion. We end up with evolution equations for the modes, but these are <i>coupled</i> through the mass matrix and stiffness vector. These matrices and vectors can be pre-computed. We see there is a term that looks like the standard boundary flux, for which we'll need something like a Riemann solver.
+							<br>
+							DG methods don't have the communication or waste problems seen in finite volume or finite difference methods. They only couple a cell to its neighbours through the intercell flux. The high order reconstruction is automatic thanks to the mode information stored in each cell, which is evolved, not discarded between steps.
+							<br>
+							However, standard DG methods will produce Gibbs oscillations at shocks, as energy is shifted to higher modes. In order to avoid these oscillations it's necessary to limit the solution, as in slope limiting, without reducing the accuracy (too much). This is hard to do without introducing coupling between the neighbouring cells. Getting this step correct is going to be crucial for making DG methods work in relativistic matter models.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h1>MHD</h1>
+						</div>
+						<aside class="notes">
+							In this final part of the lecture we need to look at the extra steps needed to evolve MHD, which is the main model for current simulations. The problem with MHD is not the flux terms, which can be evolved with the exact same techniques as we've discussed. The problem is not with the source terms (unless we include resistive effects). The problem is with the "div B" constraint, $\nabla \cdot {\bf B} = 0$.
+							<br>
+							Constraints are a fact of life in numerical relativity. They're useful as an independent measure of the accuracy of our simulation. However, some constraints, when violated, can destroy the simulation accuracy. It's been known for decades (even before Brackbill and Barnes did their key investigation) that MHD simulations violating the div B constraint would rapidly fail.
+							<br>
+							There are essentially two types of approach to solving this problem. We can modify the evolution equations so that the constraint violations are kept "small", by damping and propagating these constraints away. Alternatively, we design our numerical scheme so that the constraints are zero at the discrete level.
+							<br>
+							Constraint damping is the simplest approach. In essence, it works by adding additional terms, proportional to the constraint itself, so that the evolution equation for the constraint has its time derivative evolved by a term proportional to the constraint itself. Choosing the proportionality constant to be negative means the constraint is exponentially damped. To avoid feedback at specific points it's typical to add additional terms so that the constraint violations propagate as a wave equation.
+							<br>
+							The main advantage of constraint propagation is its simplicity. Adding one or two equations of motion for the constraints and a couple of extra source terms is easy to implement. The disadvantages can be substantial. It requires hand-tuning a parameter, the damping time. Its mathematical status is dubious - there's some results suggesting the modified system isn't properly well posed. The interaction of the violations with grid boundaries, particularly AMR grid boundaries, can be very messy. And finally, it's not clear how small the constraint violations need to be to not cause problems.
+							<br>
+							The preferred method now is to enforce the constraint at the discrete level. The favourite method at the moment is to <i>not</i> evolve the magnetic field directly, but instead to evolve the <i>vector potential</i> ${\bf A}$. We can always compute the magnetic field from the curl of the vector potential, and because the divergence of a curl automatically vanishes, this enforces the constraint.
+							<br>
+							The vector potential is not unique: by modifying the <i>EM</i> gauge we can change its value. This means different choices for the evolution equation for the vector potential can be made. As with constraint damping, it turns out that propagating the vector potential is better than trying to fix it for simplicity. This means the preferred method is to use a Lorenz (or generalized Lorenz) gauge.
+							<br>
+							It's useful to note that the vector potential must be continuous, as the magnetic field must be $C^0$, and the magnetic field goes like a derivative of the vector potential. So standard methods can be applied to the vector potential, or even methods that work for $C^1$ functions. However, in order to cleanly get the magnetic fields from the vector potential, and to get the terms needed for evolving the vector potential itself, its typical to discretely locate the vector potential at different locations to the other variables. Specifically, when thinking of the problem in finite volume form, the vector potential is stored at cell <i>edges</i>.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h2>Summary</h2>
+							<p>
+								We have discussed
+								<ul>
+									<li>
+										the three key approaches,
+										<ul>
+											<li>
+												finite volumes;
+											</li>
+											<li>
+												finite differences;
+											</li>
+											<li>
+												finite elements (Discontinuous Galerkin),
+											</li>
+										</ul>
+									</li>
+									<li>
+										discrete flux conservation;
+									</li>
+									<li>
+										reconstruction, monotonicity and Gibbs oscillations;
+									</li>
+									<li>
+										MHD and constraints.
+									</li>
+								</ul>
+							</p>
+							<p>
+								Next lecture: some aspects of the future.
+							</p>
+						</div>
+						<aside class="notes">
+							The flux conservative form that we saw in the first lecture is essential for building numerical methods that deal with shocks correctly. Once that's in place we can improve are method by carefully considering how and where we are representing which variables. I think it's really important to learn the finite volume approach as a way of thinking about the key concepts. However, I also think that the medium to long term future of the field is moving towards finite difference or DG type methods, inspired by finite volume concepts.
+							<br>
+							For MHD and other models including EM fields it's important that the constraints that follow from Maxwells equations are imposed. When implementing a new code I always first reach for constraint damping methods due to their simplicity. However, it's definitely true that the most accurate and useful codes available now are using methods that enforce the constraints at the discrete level. Combining high order accuracy with constraint enforcement is a challenge.
+						</aside>
 					</section>
 
 				</section>
