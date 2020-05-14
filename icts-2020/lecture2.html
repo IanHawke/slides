@@ -137,9 +137,17 @@
 						</div>
 						<aside class="notes">
 							In the first lecture I wanted to emphasize the modelling approximations and limitations of what goes in to a numerical simulation. These come from physical and resource limitations. They lead us to consider the most important features of our models, and so what aspects we need to model in what order. The key points from the first lecture were that
-							* conservation and balance laws are generic features of matter simulations;
-							* these lead to shocks, and these shocks do appear in mergers;
-							* using techniques from Newtonian CFD is a good place to start, but we need to consider issues specific to NSs and relativity, like artificial atmospheres, and the more complex equations of motion.
+							<ul>
+								<li>
+								 	conservation and balance laws are generic features of matter simulations;
+							 	</li>
+							 	<li>
+							 		these lead to shocks, and these shocks do appear in mergers;
+								</li>
+								<li>
+									using techniques from Newtonian CFD is a good place to start, but we need to consider issues specific to NSs and relativity, like artificial atmospheres, and the more complex equations of motion.
+								</li>
+							</ul>
 							<br>
 							Today's lecture is going to be a deep dive into the numerical methods. We'll look at the standard techniques used in the field. The exercises associated with these lectures ask you to implement and test some of these techniques: that's the best way of getting to grips with the difficulties, limitations, costs, and complexities.
 						</aside>
@@ -165,7 +173,7 @@
 						<aside class="notes">
 							As a quick recap, remember that for the advection equation (where the flux is a constant <i>velocity</i> $v$ multiplying the quantity $q$) we can define characteristics: lines, of slope $v$, along which the solution is unchanged. We can use this locally for nonlinear problems like Burgers equation: with a general flux $f$, the characteristic speed is $\partial_q f$. This only makes sense away from discontinuities.
 							<br>
-							When we extend to the system case it's easiest to consider the linear problem first. When the flux is defined by a linear system, ${\bf f} = A {\bf q}$, then we can change variables to get the solution. A crucial aspect of the conservation laws is that they are <i>hyperbolic</i>: the essential consequence of this for now is that $A$ will be diagonalizable. This means we can define and work with the <i>characteristic variables</i> ${\bf w} = L {\bf q}$, where $L$ is the matrix of left eigenvectors. The characteristic variables obey <i>uncoupled</i> advection equations, with the advection velocity being $\lamba_i$, the eigenvalues of the matrix $A$. So we can use the solution from the advection equation: each characteristic variable propagates unchanged with a fixed speed. We can then find the solution for ${\bf q}$ by transforming back using the matrix of right eigenvectors.
+							When we extend to the system case it's easiest to consider the linear problem first. When the flux is defined by a linear system, ${\bf f} = A {\bf q}$, then we can change variables to get the solution. A crucial aspect of the conservation laws is that they are <i>hyperbolic</i>: the essential consequence of this for now is that $A$ will be diagonalizable. This means we can define and work with the <i>characteristic variables</i> ${\bf w} = L {\bf q}$, where $L$ is the matrix of left eigenvectors. The characteristic variables obey <i>uncoupled</i> advection equations, with the advection velocity being $\lambda_i$, the eigenvalues of the matrix $A$. So we can use the solution from the advection equation: each characteristic variable propagates unchanged with a fixed speed. We can then find the solution for ${\bf q}$ by transforming back using the matrix of right eigenvectors.
 							<br>
 							Locally, in smooth regions, we can see how this would work in the nonlinear case. The Jacobian matrix $J = \partial_{\bf q} {\bf f}$ plays the role of $A$. The characteristic variables can therefore be defined pointwise, noting that the eigenvalues and eigenvectors are going to vary with space. These are then propagated forward and recombined, in principle. In practice the re-combination is difficult, as the correct eigenvectors to use depend on the new data in ways that can be hard to disentangle.
 							<br>
@@ -231,7 +239,7 @@
 							<h1>Computing the intercell flux</h1>
 						</div>
 						<aside class="notes">
-							We're now at the point where describing our algorithm boils down to computing the flux through a single cell interface. We'll look at *Godunov's method* and variants as a starting point.
+							We're now at the point where describing our algorithm boils down to computing the flux through a single cell interface. We'll look at <i>Godunov's method</i> and variants as a starting point.
 							<br>
 							In Godunov's method we assume the solution is piecewise constant. That is, within each cell the value of the solution is the integral average. This gives us the value of the solution everywhere <i>except</i> at the cell interfaces, where there are two values that, in general, won't agree. We need to take these values and get the intercell flux.
 							<br>
@@ -278,7 +286,7 @@
 							<h2>Monotonicity, Gibbs oscillations, and Godunov's theorem</h2>
 						</div>
 						<aside class="notes">
-							A different visual way of thinking about Godunov's method (in one dimensions, at least) is the *Reconstruct, Evolve, Average* framework. We start with the cell average solution: within each cell the solution is constant. This is the <i>reconstruction</i> step: going from our cell averages to an assumed form for the solution everywhere. We compute the intercell fluxes. Locally, this approximately advects our solution at a certain speed. We now have a (roughly) piecewise constant solution that isn't aligned with the cell boundaries. This is the <i>evolve</i> step. To get back to our cell averages, the <i>average</i> step takes the cell average within each cell of our new solution.
+							A different visual way of thinking about Godunov's method (in one dimensions, at least) is the <i>Reconstruct, Evolve, Average</i> framework. We start with the cell average solution: within each cell the solution is constant. This is the <i>reconstruction</i> step: going from our cell averages to an assumed form for the solution everywhere. We compute the intercell fluxes. Locally, this approximately advects our solution at a certain speed. We now have a (roughly) piecewise constant solution that isn't aligned with the cell boundaries. This is the <i>evolve</i> step. To get back to our cell averages, the <i>average</i> step takes the cell average within each cell of our new solution.
 							<br>
 							In principle, most of these steps are exact. The averaging step is exact. The evolve step needs doing with some ODE solver, but that can be done to high accuracy. The evolve step also needs the computation of the intercell flux, but it's possible in simple situations to do that exactly. It's the reconstruction step that introduces the first order approximation. By enforcing that the solution is piecewise constant we significantly reduce the accuracy of the method.
 							<br>
