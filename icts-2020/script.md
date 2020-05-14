@@ -273,3 +273,64 @@ However, the algorithm isn't very accurate. This wouldn't matter if we could thr
 Unfortunately, reducing the cell width by a factor of 2 does not mean the computational cost goes up by a factor of 2. In three space dimensions we have to reduce the grid size in each direction. The CFL stability limit discussed in the first lecture implies we also have to reduce the time step by a factor of 2. So the computational cost goes up by a factor of 16.
 
 So, for cost and efficiency reasons we want to improve the order of accuracy. If we get up to fourth order then the accuracy will scale linearly with the computational cost, which would be great. Unfortunately, increasing the order of accuracy is hard, and it's hard for a crucial, physical reason: shocks.
+
+
+### Monotonicity, Gibbs oscillations, and Godunov's theorem
+
+A different visual way of thinking about Godunov's method (in one dimensions, at least) is the *Reconstruct, Evolve, Average* framework. We start with the cell average solution: within each cell the solution is constant. This is the *reconstruction* step: going from our cell averages to an assumed form for the solution everywhere. We compute the intercell fluxes. Locally, this approximately advects our solution at a certain speed. We now have a (roughly) piecewise constant solution that isn't aligned with the cell boundaries. This is the *evolve* step. To get back to our cell averages, the *average* step takes the cell average within each cell of our new solution.
+
+In principle, most of these steps are exact. The averaging step is exact. The evolve step needs doing with some ODE solver, but that can be done to high accuracy. The evolve step also needs the computation of the intercell flux, but it's possible in simple situations to do that exactly. It's the reconstruction step that introduces the first order approximation. By enforcing that the solution is piecewise constant we significantly reduce the accuracy of the method.
+
+To improve this, we need to improve the reconstruction. The next step up would be to use piecewise linear reconstruction: assuming the solution is a straight line, not necessarilly flat, within each cell. Then up to quadratic functions and higher order. This would give the improved accuracy we seek. Unfortunately it also introduces other problems when the true solution is discontinuous.
+
+Here's a standard discontinuous function: it's piecewise constant with one jump. If we look for a Fourier series representation of this function then the partial sum gives us a representation that oscillates around the true solution. These oscillations are concentrated near the discontinuity.
+
+There are three obvious ways to get around this. First, split the domain into smaller cells. However, we see that there's no scale to the true solution, so these oscillations will still appear. They'll get squeezed closer to the discontinuity, but their magnitude won't reduce.
+
+Second we could include more terms in the partial sum. The result is the same as changing the cell size: the oscillations get squeezed closer to the discontinuity without getting smaller.
+
+Finally, we could change the function basis. Instead of using a Fourier series we could expand in standard polynomials, or Legendre polynomials, or something else. This doesn't help either: these oscillations are a generic feature.
+
+These *Gibbs oscillations* will destroy our numerical accuracy. They don't converge with resolution: typically they blow up in a few iterations. Most depressing is Godunov's theorem. It asks when the solution might be *monotone*: that means, when the solution lies between the minimum and maximum of the original solution. Godunov's theorem says that a linear algorithm that is monotone *must* be first order accurate.
+
+We have one loophole left by Godunov's theorem. It only applies to *linear* methods: that is, methods where the algorithm essentially does the same thing everywhere, ignoring the values and form of the data. The past 50 years and more of CFD has focused on better ways of *locally modifying* the algorithm based on the values and form of the solution itself, to avoid Gibbs oscillations.
+
+It's this nonlinearity that makes numerical methods for matter models so much more complex and expensive than numerical methods for smooth solutions (such as the spacetime). It's typical for the computational cost of the matter evolution to be greater than that of the spacetime evolution, even though we're usually evolving far fewer variables, sometimes by an order of magnitude.
+
+### Slope limiting
+
+The first nonlinear scheme to look at is slope limiting. We're still doing a reconstruct-evolve-average method. So we'll reconstruct our solution within each cell based on the cell averages within this cell and its neighbours. Then we'll compute the intercell flux, evolve, and average to get new cell averages. The new step is that the reconstruction within each cell will be piecewise linear, not piecewise constant.
+
+We can approximate the slope inside each cell by forward, backward or central differencing. Central differencing uses more information and will be the most accurate in smooth regions. However, if we use two cells across a shock then we'll get oscillations. So what we want to do is compare the three different possible slopes. When it looks like we're in a smooth region we choose the slope from central differencing. When it looks like we're not in a smooth region we use piecewise constant reconstruction: the slope is zero. Then we want some smooth transition between the two extremes.
+
+The easiest check for possible shocks or problems is to look for when forward and backward differencing gives slopes with different signs. The simplest approximate slope that works is to look just at the forward and backward (or upwind and downwind) slopes, and choose the *minmod* slope. That is, if the two slopes have different signs, the slope is set to zero. If they have the same sign, we choose the slope with smallest magnitude.
+
+Minmod slope limiting combined with a higher-order ODE solver will work to give better than first order accuracy. Unfortunately it's not *much* better until we get to high resolution: the exercises give examples of this. Better slope limiters are available, but even the best won't do better than second order accuracy, a long way from the fourth order or better that we want.
+
+### Finite difference methods
+
+Trying to move to even higher order methods is complicated by an issue that our focus on one dimension has hidden to now: the computation of the intercell flux. Remember, in our finite volume approach, the cell average is updated by the surface integral of the flux over the cell boundary. Once we move to higher order reconstruction methods the solution, and hence the flux, varies over the surface of the cell. This means we can't evaluate it at a single point, as in one dimension: instead we must evaluate it at multiple points and approximate the surface integral.
+
+The most efficent way of approximating an integral in general is Gauss quadrature, where approximating the integrand at $k$ points in each dimension gives us $(2 k - 1)^{\text{th}}$ order accuracy. For second order accuracy we need only one point - this is the midpoint rule. With two points we get third order accuracy, and with three points we get fifth order accuracy. However, this is per dimension: to get fifth order accuracy in three dimensions, where each cell face is two dimensional, we will need to reconstruct to 25 points on each face and solve 25 separate Riemann problems per face. The computational cost and complexity goes up very rapidly.
+
+For this reason, high order finite volume methods are rare (although most methods in the field are finite volume methods, they aim for high absolute accuracy with second order convergence). To get higher accuracy, the standard approach in the field is to use finite differences.
+
+In finite difference methods we still write the update formula *as if* we were computing intercell fluxes. This form, with its telescoping property, is necessary to get shock speeds correct. However, we're now interpreting these $f_{i \pm 1/2}$ terms differently. We don't need these terms to approximate the intercell fluxes, as in finite differences there are no cells, only the values of the solution at the central point. Instead we allow these half-integer terms to be anything, provided the difference $(f_{i+1/2} - f_{i-1/2})/(\Delta x)$ approximates the derivative of $f$ to the appropriate order. As everything is interpreted at the *grid point*, we automatically get the accuracy associated with the order of approximation of the derivative.
+
+This appears to be wonderful. By directly dealing with the flux and not going through the solution we are bypassing all the issues with cells, intercell fluxes, and Riemann problems. Unfortunately this simple approach also throws away all the characteristic information and so is horribly unstable. By differencing simply without checking which direction the information is travelling in, we introduce Gibbs-like oscillations that rapidly kill the simulation.
+
+So the standard approach is to use *flux splitting*. We compute the full flux at the grid point, $f(q_i)$. We then split it into two pieces, $f^{(\pm)}$, one of which travels to the left, and one of which travels to the right. This encodes some of the characteristic information. We then use a suitably upwinded reconstruction method on the split fluxes to get their values at the half-integer locations. Finally, we recombine the split fluxes to get the terms needed in the update formula.
+
+The slide shows a simple flux splitting approach which, like the HLLE method, only uses some of the characteristic information. This sort of finite differencing approach is used by codes like Radice's WhiskyTHC to get the current most accurate simulations.
+
+### Discontinuous Galerkin
+
+There are two key computational problems with the higher order methods we've described to now.
+
+The first is waste. The reconstruction used in both finite difference and finite volume methods takes a limited amount of information about the solution - the cell averages, or the point values - and produces a form of the solution everywhere, usually as a piecewise polynomial. This form is then used to compute some terms, such as the intercell fluxes, and then all the high order information is thrown away. We only store the values of the solution or its cell average.
+
+The second problem is communication. To get enough information for a high-order approximation to the solution we need to look not just at the cell and its immediate neighbours, but to every further neighbouring cells. In general, we need to look at $k$ neighbours on either side to get $(2 k - 1)^{\text{th}}$ order accuracy. This is a real issue for big simulations on modern supercomputers.
+
+As a quick digression. Simulations have essentially four things that can slow them down. The first is how fast it does operations: the FLOP count. The second is how much memory it has. The third is how fast results can be saved to disk. As the fourth, when we split the calculation across multiple processes, is how fast the different bits of the simulation communicate with each other.
+
+On modern and near-future machines the main problem is communication speed. High order finite volume and finite difference schemes communicate too much information with cells too far away from themselves. This stops our simulations using the computational power available.
