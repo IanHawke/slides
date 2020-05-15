@@ -132,8 +132,26 @@
 						</aside>
 					</section>
 
+				</section>
+
+				<section id="Recap and waves">
+
 					<section>
 						<div>
+							<h1>What we covered</h1>
+							<p>
+								<ul>
+									<li>
+										Balance laws are generic;
+									</li>
+									<li>
+										lead to shocks, central to merger physics;
+									</li>
+									<li>
+										start from Newtonian CFD: extend with care.
+									</li>
+								</ul>
+							</p>
 						</div>
 						<aside class="notes">
 							In the first lecture I wanted to emphasize the modelling approximations and limitations of what goes in to a numerical simulation. These come from physical and resource limitations. They lead us to consider the most important features of our models, and so what aspects we need to model in what order. The key points from the first lecture were that
@@ -156,6 +174,26 @@
 					<section>
 						<div>
 							<h1>Balance laws</h1>
+							<p>
+								All the terms:
+								$$
+								\partial_t {\bf q} + \nabla \cdot {\bf f} + A \cdot \nabla {\bf q} = \nabla \left( D \cdot \nabla {\bf q} \right) + {\bf s}.
+								$$
+							</p>
+							<p>
+								In mergers
+								<ul>
+									<li>
+										ignore diffusive term;
+									</li>
+									<li>
+										simple models don't have $A$ term;
+									</li>
+									<li>
+										source terms often local, well-behaved.
+									</li>
+								</ul>
+							</p>
 						</div>
 						<aside class="notes">
 							The general form of the equations of motion of relativistic matter can be framed as here. Some quantity is evolved using its flux, ${\bf f}$, additional non-conservative terms that push the matter around through the matrix $A$, a second order diffusive derivative operator with dissipation matrix $D$, and a source term ${\bf s}$ that typically represents exchange of "stuff" to other parts of the model. In the most complex cases the functional form of the matrices, sources or fluxes can depend not only on nonlinear algebraic operators of the evolved vector ${\bf q}$, but even on nonlocal operators. An example would be radiation transport where the optical depth is needed.
@@ -166,9 +204,22 @@
 						</aside>
 					</section>
 
-					<section>
-						<div>
-							<h1>Characteristics</h1>
+					<section data-background="figures/characteristics.png" data-background-position="right" data-background-size="52%">
+						<div style="float: left; width: 50%">
+							<h2>Characteristics</h2>
+							<p>
+								For $\partial_t q + \partial_x f = 0$ get local speed
+								$$
+								\partial_t q + \color{red}{\partial_q f} \partial_x q = 0.
+								$$
+							</p>
+							<p>
+								For system $\partial_t {\bf q} + A \partial_x {\bf q} = 0$ diagonalize to get
+								$$
+								{\bf w} = L {\bf q}, \quad \partial_t {\bf w} + \Lambda \partial_x {\bf w} = 0.
+								$$
+								Extend to nonlinear case with care.
+							</p>
 						</div>
 						<aside class="notes">
 							As a quick recap, remember that for the advection equation (where the flux is a constant <i>velocity</i> $v$ multiplying the quantity $q$) we can define characteristics: lines, of slope $v$, along which the solution is unchanged. We can use this locally for nonlinear problems like Burgers equation: with a general flux $f$, the characteristic speed is $\partial_q f$. This only makes sense away from discontinuities.
@@ -181,9 +232,25 @@
 						</aside>
 					</section>
 
-					<section>
-						<div>
-							<h1>Wave types</h1>
+					<section data-background="figures/livrev_fig05.png" data-background-position="right" data-background-size="52%">
+						<div style="float: left; width: 48%">
+							<h2>Wave types</h2>
+							<p>
+								<ul>
+									<li>
+										Rarefaction: nonlinear, continuous.
+									</li>
+									<li>
+										Shocks: nonlinear, discontinuous.
+									</li>
+									<li>
+										Contacts: linear, discontinuous.
+									</li>
+									<li>
+										Compound waves: MHD, phase transitions.
+									</li>
+								</ul>
+							</p>
 						</div>
 						<aside class="notes">
 							From the characteristic point of view we can distinguish different generic types of behaviour. If we start from simple initial data, such as the piecewise constant data illustrated on the left, then there's typically three different outcomes. For complex systems we'll see them all, and some more!
@@ -200,7 +267,46 @@
 
 					<section>
 						<div>
-							<h1>Grids and approximations</h1>
+							<h1>Questions...</h1>
+							<p>
+								<ul>
+									<li>
+										Stretch out;
+									</li>
+									<li>
+										have a break;
+									</li>
+									<li>
+										add questions to the chat.
+									</li>
+								</ul>
+							</p>
+						</div>
+						<aside class="notes">
+							We'll pause here for initial questions, before tackling the next section.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Cells and fluxes">
+
+					<section style="float: left; width: 48%">
+						<div>
+							<h2>Grids and approximations</h2>
+							<p>
+								<ul>
+									<li>
+										Finite differences: store point values.
+									</li>
+									<li>
+										Finite volumes: store cell averages.
+									</li>
+									<li>
+										Finite elements (DG): store modal coefficients.
+									</li>
+								</ul>
+							</p>
 						</div>
 						<aside class="notes">
 							On to numerical approximation. We want to solve <i>continuum</i> partial differential equations on a computer. The solution, $q(x)$, needs - in principle - an infinite amount of information. That's because the continuum solution could, in principle, take totally different unpredictable values at every separate point $x$. This way of thinking is clearly useless when working with a computer with a finite amount of working memory.
@@ -216,8 +322,19 @@
 					</section>
 
 					<section>
-						<div>
-							<h1>Fluxes and telescoping</h1>
+						<div style="float: left; width: 48%">
+							<h2>Fluxes and telescoping</h2>
+							<p>
+								Integrate over cell $i \to \hat{q}_i$:
+								$$
+								  \frac{\text{d}}{\text{d} t} \hat{q}_i + \frac{1}{|V_i|} \oint_{\partial V_i} f(q) = 0.
+								$$
+								Restrict to one dimension:
+								$$
+								  \frac{\text{d}}{\text{d} t} \hat{q}_i = \frac{1}{\Delta x} \left[ f_{i-1/2} - f_{i+1/2} \right].
+								$$
+								Gives <i>discrete</i> conservation.
+							</p>
 						</div>
 						<aside class="notes">
 							To see the implications of the finite volume approach, where we split the domain into cells, let's use Gauss, or Stokes, to integrate our conservation law over the domain. We see that the integral over all space leads to all the spatial derivatives disappearing. The equation becomes an ODE, where the time derivative of the integral average of the solution over the domain is given by the surface integral of the flux through the domain.
@@ -235,8 +352,28 @@
 					</section>
 
 					<section>
-						<div>
-							<h1>Computing the intercell flux</h1>
+						<div style="float: left; width: 48%">
+							<h2>Computing the intercell flux</h2>
+							<p>
+								Godunov:
+								<ul>
+									<li>
+										$q(x) = \hat{q}$ in cell $i$;
+									</li>
+									<li>
+										$f_{i+1/2} = F(\hat{q}_i, \hat{q}_{i+1})$;
+									</li>
+									<li>
+										$\partial_q f > 0 \implies f_{i+1/2} = f(\hat{q}_i)$;
+									</li>
+									<li>
+										Systems: use ${\bf w}$ variables;
+									</li>
+									<li>
+										Nonlinear: approximate!
+									</li>
+								</ul>
+							</p>
 						</div>
 						<aside class="notes">
 							We're now at the point where describing our algorithm boils down to computing the flux through a single cell interface. We'll look at <i>Godunov's method</i> and variants as a starting point.
@@ -252,8 +389,26 @@
 					</section>
 
 					<section>
-						<div>
-							<h1>Approximate Riemann Solvers</h1>
+						<div style="float: left; width: 55%">
+							<h2>Approximate Riemann Solvers</h2>
+							<p>
+								HLLE for $f_{i+1/2} = F(q_i, q_{i+1}) = F(q_L, q_R)$:
+								<ul>
+									<li>
+										assume fastest speeds are $\xi_{\pm}$;
+									</li>
+									<li>
+										impose conservation;
+									</li>
+									<li>
+										$$
+										q_* = \frac{\xi_{+} q_R - \xi_{-} q_L - f(q_R) + f(q_R)}{\xi_{+} - \xi_{-}};
+										$$
+									</li>
+									<li>
+										get flux from appropriate state.
+									</li>
+							</p>
 						</div>
 						<aside class="notes">
 							As an example of a simple approximation we look at the HLLE method. This assumes that there are two characteristic waves and that the solution jumps discontinuously across both. So the approximate solution will have three states: the initial left and right states (either side of the interface), and a central state. If the characteristic speeds have the same sign then the solution along the interface is given by one of the initial states, and everything is straightforward. If they have different signs then the solution along the interface is given by the intermediate state. This can be found by imposing conservation across each wave, leading to a simple formula for the intermediate state: from this the intercell flux follows.
@@ -265,6 +420,32 @@
 							More complex approximations either work to ensure better behaviour when the waves aren't discontinuities, or to ensure better capturing of the linear waves. For hydrodynamics this helps but isn't essential in many cases: for MHD it's often needed.
 						</aside>
 					</section>
+
+					<section>
+						<div>
+							<h1>Questions...</h1>
+							<p>
+								<ul>
+									<li>
+										Stretch out;
+									</li>
+									<li>
+										have a break;
+									</li>
+									<li>
+										add questions to the chat.
+									</li>
+								</ul>
+							</p>
+						</div>
+						<aside class="notes">
+							We'll pause here for initial questions, before tackling the next section.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Volumes and differences">
 
 					<section>
 						<div>
@@ -346,6 +527,32 @@
 
 					<section>
 						<div>
+							<h1>Questions...</h1>
+							<p>
+								<ul>
+									<li>
+										Stretch out;
+									</li>
+									<li>
+										have a break;
+									</li>
+									<li>
+										add questions to the chat.
+									</li>
+								</ul>
+							</p>
+						</div>
+						<aside class="notes">
+							We'll pause here for initial questions, before tackling the next section.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="MHD">
+
+					<section>
+						<div>
 							<h1>Discontinuous Galerkin</h1>
 						</div>
 						<aside class="notes">
@@ -393,6 +600,10 @@
 							It's useful to note that the vector potential must be continuous, as the magnetic field must be $C^0$, and the magnetic field goes like a derivative of the vector potential. So standard methods can be applied to the vector potential, or even methods that work for $C^1$ functions. However, in order to cleanly get the magnetic fields from the vector potential, and to get the terms needed for evolving the vector potential itself, its typical to discretely locate the vector potential at different locations to the other variables. Specifically, when thinking of the problem in finite volume form, the vector potential is stored at cell <i>edges</i>.
 						</aside>
 					</section>
+
+				</section>
+
+				<section id="Summary">
 
 					<section>
 						<div>
