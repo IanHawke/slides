@@ -491,9 +491,26 @@
 
 				<section id="Volumes and differences">
 
-					<section>
-						<div>
-							<h1>Dimensions, costs, and accuracy</h1>
+					<section data-background="figures/godunov_advection.png" data-background-position="right" data-background-size="35%">
+						<div style="float: left; width: 60%">
+							<h2>Dimensions, costs, and accuracy</h2>
+							<p>
+								Godunov isn't good enough:
+								<ul>
+									<li>
+										Error $\propto (\Delta x)^1$.
+									</li>
+									<li>
+										Computational cost $\propto (\Delta x)^{-4}$.
+									</li>
+									<li>
+										Need higher order methods. But...
+									</li>
+									<li>
+										...leads to problems with shocks.
+									</li>
+								</ul>
+							</p>
 						</div>
 						<aside class="notes">
 							We now have an algorithm that will work. Godunov's method assumes the solution is constant within each cell, and computes the intercell flux using an approximate Riemann Solver. This can be extended to two or three dimensions by solving a Riemann problem for each cell face.
@@ -506,9 +523,26 @@
 						</aside>
 					</section>
 
-					<section>
-						<div>
-							<h2>Monotonicity, Gibbs oscillations, and Godunov's theorem</h2>
+					<section data-background="figures/08_godunov.png" data-background-position="right" data-background-size="35%">
+						<div style="float: left; width: 60%">
+							<h3>Reconstruct-Evolve-Average</h3>
+							<p>
+								Rethink Godunov as three steps:
+								<ul>
+									<li>
+										<i>Reconstruct</i> $\hat{q} \to q(x)$;
+									</li>
+									<li>
+										<i>Evolve</i> $q(x)$;
+									</li>
+									<li>
+										<i>Average</i> $q(x) \to \hat{q}$.
+									</li>
+								</ul>
+							</p>
+							<p>
+								Reconstruction loses accuracy.
+							</p>
 						</div>
 						<aside class="notes">
 							A different visual way of thinking about Godunov's method (in one dimensions, at least) is the <i>Reconstruct, Evolve, Average</i> framework. We start with the cell average solution: within each cell the solution is constant. This is the <i>reconstruction</i> step: going from our cell averages to an assumed form for the solution everywhere. We compute the intercell fluxes. Locally, this approximately advects our solution at a certain speed. We now have a (roughly) piecewise constant solution that isn't aligned with the cell boundaries. This is the <i>evolve</i> step. To get back to our cell averages, the <i>average</i> step takes the cell average within each cell of our new solution.
@@ -516,7 +550,34 @@
 							In principle, most of these steps are exact. The averaging step is exact. The evolve step needs doing with some ODE solver, but that can be done to high accuracy. The evolve step also needs the computation of the intercell flux, but it's possible in simple situations to do that exactly. It's the reconstruction step that introduces the first order approximation. By enforcing that the solution is piecewise constant we significantly reduce the accuracy of the method.
 							<br>
 							To improve this, we need to improve the reconstruction. The next step up would be to use piecewise linear reconstruction: assuming the solution is a straight line, not necessarilly flat, within each cell. Then up to quadratic functions and higher order. This would give the improved accuracy we seek. Unfortunately it also introduces other problems when the true solution is discontinuous.
-							<br>
+						</aside>
+					</section>
+
+					<section data-background="figures/gibbs_oscillations.png" data-background-position="right" data-background-size="35%">
+						<div style="float: left; width: 60%">
+							<h3>Monotonicity, Gibbs oscillations, and Godunov's theorem</h3>
+							<p>
+								Fourier Series: <br> discontinuities $\implies$ oscillations.
+								<ul>
+									<li>
+										Don't converge with $\Delta x$;
+									</li>
+									<li>
+										Don't converge with more modes;
+									</li>
+									<li>
+										Don't go away with different function basis.
+									</li>
+								</ul>
+							</p>
+							<p>
+								Monotonicity: scheme doesn't introduce oscillations.
+							</p>
+							<p>
+								<em>Godunov's theorem</em>: linear monotonic schemes are first order accurate.
+							</p>
+						</div>
+						<aside class="notes">
 							Here's a standard discontinuous function: it's piecewise constant with one jump. If we look for a Fourier series representation of this function then the partial sum gives us a representation that oscillates around the true solution. These oscillations are concentrated near the discontinuity.
 							<br>
 							There are three obvious ways to get around this. First, split the domain into smaller cells. However, we see that there's no scale to the true solution, so these oscillations will still appear. They'll get squeezed closer to the discontinuity, but their magnitude won't reduce.
@@ -533,9 +594,32 @@
 						</aside>
 					</section>
 
-					<section>
-						<div>
-							<h1>Slope limiting</h1>
+					<section data-background="figures/slope_limiting.png" data-background-position="right" data-background-size="35%">
+						<div style="float: left; width: 60%">
+							<h2>Slope limiting</h2>
+							<p>
+								Assume $q(x) = \hat{q}_i + \tfrac{x - x_i}{2} \sigma$.
+							</p>
+							<p>
+								Slope $\sigma$ could be
+								<ul>
+									<li>
+										Upwind: $\sigma_{\text{u}} = \hat{q}_{i+1} - \hat{q}_i$;
+									</li>
+									<li>
+										Downwind: $\sigma_{\text{d}} = \hat{q}_{i} - \hat{q}_{i-1}$;
+									</li>
+									<li>
+										Centered: $\sigma_{\text{c}} = \tfrac{1}{2} ( \hat{q}_{i+1} - \hat{q}_{i-1})$.
+									</li>
+								</ul>
+							</p>
+							<p>
+								All would give oscillations. <em>Limit</em> slope:
+								$$
+								  \bar{\sigma} \equiv \bar{\sigma}(\sigma_{\text{u}}, \sigma_{\text{d}}) \overset{\text{(eg)}}{=} \begin{cases} 0 & \text{if } \sigma_{\text{u}} \cdot \sigma_{\text{d}} \le 0 \\ \sigma_{\text{u}} & \text{if }  | \sigma_{\text{u}} | < | \sigma_{\text{d}} | \\  \sigma_{\text{d}} & \text{if }  | \sigma_{\text{u}} | > | \sigma_{\text{d}} | \end{cases}.
+								$$
+							</p>
 						</div>
 						<aside class="notes">
 							The first nonlinear scheme to look at is slope limiting. We're still doing a reconstruct-evolve-average method. So we'll reconstruct our solution within each cell based on the cell averages within this cell and its neighbours. Then we'll compute the intercell flux, evolve, and average to get new cell averages. The new step is that the reconstruction within each cell will be piecewise linear, not piecewise constant.
@@ -548,14 +632,30 @@
 						</aside>
 					</section>
 
-					<section>
-						<div>
-							<h1>Finite difference methods</h1>
+					<section data-background="figures/fv_gauss_points.png" data-background-position="right" data-background-size="15%">
+						<div style="float: left; width: 80%">
+							<h2>Finite difference methods</h2>
+							<p>
+								In $N$-d, finite volume needs a surface integral: expensive.
+							</p>
+							<p>
+								Instead, write a finite difference method as
+								$$
+								  \frac{\text{d}}{\text{d} t} q_i = \frac{1}{\Delta x} \left[ f_{i-1/2} - f_{i+1/2} \right].
+								$$
+								Now $f_{i \pm 1/2}$ <em>not</em> intercell fluxes. Directly reconstruct flux.
+							</p>
+							<p>
+								For stability must <em>split flux</em>:
+								$$
+								  f = f^{(+)} + f^{(-)}, \quad f^{(\pm)} = \tfrac{1}{2} \left( f \pm \max | \lambda | q \right).
+								$$
+							</p>
 						</div>
 						<aside class="notes">
 							Trying to move to even higher order methods is complicated by an issue that our focus on one dimension has hidden to now: the computation of the intercell flux. Remember, in our finite volume approach, the cell average is updated by the surface integral of the flux over the cell boundary. Once we move to higher order reconstruction methods the solution, and hence the flux, varies over the surface of the cell. This means we can't evaluate it at a single point, as in one dimension: instead we must evaluate it at multiple points and approximate the surface integral.
 							<br>
-							The most efficent way of approximating an integral in general is Gauss quadrature, where approximating the integrand at $k$ points in each dimension gives us $(2 k - 1)^{\text{th}}$ order accuracy. For second order accuracy we need only one point - this is the midpoint rule. With two points we get third order accuracy, and with three points we get fifth order accuracy. However, this is per dimension: to get fifth order accuracy in three dimensions, where each cell face is two dimensional, we will need to reconstruct to 9 points on each face and solve 9 separate Riemann problems per face. The computational cost and complexity goes up very rapidly.
+							The most efficent way of approximating an integral in general is Gauss quadrature, where approximating the integrand at $k$ points in each dimension gives us $(2 k)^{\text{th}}$ order accuracy. For second order accuracy we need only one point - this is the midpoint rule. With two points we get fourth order accuracy, and with three points we get sixth order accuracy. However, this is per dimension: to get fourth order accuracy in three dimensions, where each cell face is two dimensional, we will need to reconstruct to 4 points on each face and solve 4 separate Riemann problems per face. The computational cost and complexity goes up very rapidly.
 							<br>
 							For this reason, high order finite volume methods are rare (although most methods in the field are finite volume methods, they aim for high absolute accuracy with second order convergence). To get higher accuracy, the standard approach in the field is to use finite differences.
 							<br>
@@ -595,36 +695,29 @@
 
 				<section id="MHD">
 
-					<section>
-						<div>
-							<h1>Discontinuous Galerkin</h1>
-						</div>
-						<aside class="notes">
-							There are two key computational problems with the higher order methods we've described to now.
-							<br>
-							The first is waste. The reconstruction used in both finite difference and finite volume methods takes a limited amount of information about the solution - the cell averages, or the point values - and produces a form of the solution everywhere, usually as a piecewise polynomial. This form is then used to compute some terms, such as the intercell fluxes, and then all the high order information is thrown away. We only store the values of the solution or its cell average.
-							<br>
-							The second problem is communication. To get enough information for a high-order approximation to the solution we need to look not just at the cell and its immediate neighbours, but to ever further neighbouring cells. In general, we need to look at $k$ neighbours on either side to get $(2 k - 1)^{\text{th}}$ order accuracy. This is a real issue for big simulations on modern supercomputers.
-							<br>
-							As a quick digression. Simulations have essentially four things that can slow them down. The first is how fast it does operations: the FLOP count. The second is how much memory it has. The third is how fast results can be saved to disk. As the fourth, when we split the calculation across multiple processes, is how fast the different bits of the simulation communicate with each other.
-							<br>
-							On modern and near-future machines the main problem is communication speed. High order finite volume and finite difference schemes communicate too much information with cells too far away from themselves. This stops our simulations using the computational power available.
-							<br>
-							One answer to both these issues is to use a Discontinuous Galerkin method. HP will cover this in his talk on vacuum numerics, so here I'll just touch on the features important to hydrodynamics.
-							<br>
-							First we have to revisit the weak form. In DG and other finite element methods we take the equations of motion, multiply by a <i>test function</i> $\phi$, and integrate by parts. This moves the spatial derivatives from the solution (which might be discontinuous) to the test function (which we can choose to be sufficiently differentiable).
-							<br>
-							We then expand the solution and the test function in terms of some function basis: think of Fourier Series, or Legendre polynomials. We're going to store the <i>modes</i>: the coefficients of the solution with respect to the function basis expansion. We end up with evolution equations for the modes, but these are <i>coupled</i> through the mass matrix and stiffness vector. These matrices and vectors can be pre-computed. We see there is a term that looks like the standard boundary flux, for which we'll need something like a Riemann solver.
-							<br>
-							DG methods don't have the communication or waste problems seen in finite volume or finite difference methods. They only couple a cell to its neighbours through the intercell flux. The high order reconstruction is automatic thanks to the mode information stored in each cell, which is evolved, not discarded between steps.
-							<br>
-							However, standard DG methods will produce Gibbs oscillations at shocks, as energy is shifted to higher modes. In order to avoid these oscillations it's necessary to limit the solution, as in slope limiting, without reducing the accuracy (too much). This is hard to do without introducing coupling between the neighbouring cells. Getting this step correct is going to be crucial for making DG methods work in relativistic matter models.
-						</aside>
-					</section>
-
-					<section>
-						<div>
-							<h1>MHD</h1>
+					<section data-background="figures/brackbill_barnes.png" data-background-position="right" data-background-size="40%">
+						<div style="float: left; width: 60%">
+							<h2>MHD</h2>
+							<p>
+								Constraint ${\cal C} = \nabla \cdot {\bf B} = 0$ needed.
+							</p>
+							<p>
+								Either
+								<ul>
+									<li>
+										Modify equations of motion so
+										$$
+										  \partial_t {\cal C} \sim -\alpha {\cal C} \quad \implies \quad {\cal C} \sim e^{-\alpha t};
+										$$
+									</li>
+									<li>
+										Find discrete scheme so, when $\nabla \to D$,
+										$$
+										  D \cdot {\bf B} = 0.
+										$$
+									</li>
+								</ul>
+							</p>
 						</div>
 						<aside class="notes">
 							In this final part of the lecture we need to look at the extra steps needed to evolve MHD, which is the main model for current simulations. The problem with MHD is not the flux terms, which can be evolved with the exact same techniques as we've discussed. The problem is not with the source terms (unless we include resistive effects). The problem is with the "div B" constraint, $\nabla \cdot {\bf B} = 0$.
@@ -636,7 +729,36 @@
 							Constraint damping is the simplest approach. In essence, it works by adding additional terms, proportional to the constraint itself, so that the evolution equation for the constraint has its time derivative evolved by a term proportional to the constraint itself. Choosing the proportionality constant to be negative means the constraint is exponentially damped. To avoid feedback at specific points it's typical to add additional terms so that the constraint violations propagate as a wave equation.
 							<br>
 							The main advantage of constraint propagation is its simplicity. Adding one or two equations of motion for the constraints and a couple of extra source terms is easy to implement. The disadvantages can be substantial. It requires hand-tuning a parameter, the damping time. Its mathematical status is dubious - there's some results suggesting the modified system isn't properly well posed. The interaction of the violations with grid boundaries, particularly AMR grid boundaries, can be very messy. And finally, it's not clear how small the constraint violations need to be to not cause problems.
-							<br>
+						</aside>
+					</section>
+
+					<section data-background="figures/GRID_CELL.png" data-background-position="right" data-background-size="40%">
+						<div style="float: left; width: 60%">
+							<h2>Vector Potentials</h2>
+							<p>
+								Use vector potential ${\bf A}$, so ${\bf B} = \nabla \times {\bf A}$.
+							</p>
+							<p>
+								<ul>
+									<li>
+										Automatically preserves constraint.
+									</li>
+									<li>
+										<em>EM</em> gauge freedom. Prefer <em>Lorenz</em> gauge,
+										$$
+											\begin{aligned}
+												\partial_t {\bf A} + \nabla \Phi & \sim {\bf E}, \\
+												\partial_t \Phi + \nabla \cdot {\bf A} &\sim 0.
+											\end{aligned}
+										$$
+									</li>
+									<li>
+										Grid structure is conceptually more complex.
+									</li>
+								</ul>
+							</p>
+						</div>
+						<aside class="notes">
 							The preferred method now is to enforce the constraint at the discrete level. The favourite method at the moment is to <i>not</i> evolve the magnetic field directly, but instead to evolve the <i>vector potential</i> ${\bf A}$. We can always compute the magnetic field from the curl of the vector potential, and because the divergence of a curl automatically vanishes, this enforces the constraint.
 							<br>
 							The vector potential is not unique: by modifying the <i>EM</i> gauge we can change its value. This means different choices for the evolution equation for the vector potential can be made. As with constraint damping, it turns out that propagating the vector potential is better than trying to fix it for simplicity. This means the preferred method is to use a Lorenz (or generalized Lorenz) gauge.
