@@ -291,19 +291,25 @@
 
 				<section id="Cells and fluxes">
 
-					<section style="float: left; width: 48%">
-						<div>
+					<section data-background="figures/fd_fv_fe_grids.png" data-background-position="right" data-background-size="50%">
+						<div style="float: left; width: 50%">
 							<h2>Grids and approximations</h2>
 							<p>
 								<ul>
 									<li>
-										Finite differences: store point values.
+										Finite differences:<br>
+
+										store point values $q_i$.
 									</li>
 									<li>
-										Finite volumes: store cell averages.
+										Finite volumes:<br>
+
+										store cell averages $\hat{q}_i$.
 									</li>
 									<li>
-										Finite elements (DG): store modal coefficients.
+										Finite elements (DG):<br>
+
+										store modal coefficients $q^{(m)}_i$.
 									</li>
 								</ul>
 							</p>
@@ -351,8 +357,8 @@
 						</aside>
 					</section>
 
-					<section>
-						<div style="float: left; width: 48%">
+					<section data-background="figures/godunov_flux.png" data-background-position="right" data-background-size="35%">
+						<div style="float: left; width: 65%">
 							<h2>Computing the intercell flux</h2>
 							<p>
 								Godunov:
@@ -361,13 +367,17 @@
 										$q(x) = \hat{q}$ in cell $i$;
 									</li>
 									<li>
-										$f_{i+1/2} = F(\hat{q}_i, \hat{q}_{i+1})$;
+										$$
+											f_{i+1/2} = F(\hat{q}_i, \hat{q}_{i+1});
+										$$
 									</li>
 									<li>
-										$\partial_q f > 0 \implies f_{i+1/2} = f(\hat{q}_i)$;
+										$$
+											\partial_q f > 0 \implies f_{i+1/2} = f(\hat{q}_i);
+										$$
 									</li>
 									<li>
-										Systems: use ${\bf w}$ variables;
+										Systems: use characteristic variables;
 									</li>
 									<li>
 										Nonlinear: approximate!
@@ -388,11 +398,14 @@
 						</aside>
 					</section>
 
-					<section>
-						<div style="float: left; width: 55%">
+					<section data-background="figures/hlle.png" data-background-position="right" data-background-size="35%">
+						<div style="float: left; width: 65%">
 							<h2>Approximate Riemann Solvers</h2>
 							<p>
-								HLLE for $f_{i+1/2} = F(q_i, q_{i+1}) = F(q_L, q_R)$:
+								HLLE for
+								$$
+									f_{i+1/2} = F(q_i, q_{i+1}) = F(q_L, q_R):
+								$$
 								<ul>
 									<li>
 										assume fastest speeds are $\xi_{\pm}$;
