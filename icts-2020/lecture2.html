@@ -137,19 +137,44 @@
 
 				<section id="Recap and waves">
 
-					<section>
-						<div>
-							<h1>What we covered</h1>
+					<section data-background="figures/GammaLawTemp.png" data-background-position="right" data-background-size="50%">
+						<div style="float: left; width: 50%">
+							<h2>What we covered</h2>
 							<p>
 								<ul>
 									<li>
 										Balance laws are generic;
 									</li>
 									<li>
-										lead to shocks, central to merger physics;
+										lead to shocks;
 									</li>
 									<li>
-										start from Newtonian CFD: extend with care.
+										shocks appear in mergers;
+									</li>
+									<li>
+										start from Newtonian CFD;
+									</li>
+									<li>
+										GR gives
+										<ul>
+											<li>
+												increased cost;
+											</li>
+											<li>
+												increased complexity;
+											</li>
+										</ul>
+									</li>
+									<li>
+										Merger problem gives
+										<ul>
+											<li>
+												surface/atmosphere;
+											</li>
+											<li>
+												lots more physics.
+											</li>
+										</ul>
 									</li>
 								</ul>
 							</p>
@@ -297,8 +322,8 @@
 						</aside>
 					</section>
 
-					<section>
-						<div>
+					<section data-background="figures/Weih1912_09340_rho.png" data-background-position="right" data-background-size="50%">
+						<div style="float: left; width: 49%">
 							<h1>Questions...</h1>
 							<p>
 								<ul>
@@ -312,6 +337,9 @@
 										add questions to the chat.
 									</li>
 								</ul>
+							</p>
+							<p style="margin-top: 200px; float: right">
+								<a href="https://arxiv.org/abs/1912.09340"> Weih et al, 1912.09340.</a>
 							</p>
 						</div>
 						<aside class="notes">
@@ -412,7 +440,7 @@
 										Systems: use characteristic variables;
 									</li>
 									<li>
-										Nonlinear: approximate!
+										Nonlinear: solve <em>Riemann Problem</em>, usually approximately!
 									</li>
 								</ul>
 							</p>
@@ -434,7 +462,7 @@
 						<div style="float: left; width: 65%">
 							<h2>Approximate Riemann Solvers</h2>
 							<p>
-								HLLE for
+								HLLE: to find
 								$$
 									f_{i+1/2} = F(q_i, q_{i+1}) = F(q_L, q_R):
 								$$
@@ -466,8 +494,8 @@
 						</aside>
 					</section>
 
-					<section>
-						<div>
+					<section data-background="figures/Bernuzzi2004_06419.png" data-background-position="right" data-background-size="50%">
+						<div style="float: left; width: 49%">
 							<h1>Questions...</h1>
 							<p>
 								<ul>
@@ -475,16 +503,22 @@
 										Stretch out;
 									</li>
 									<li>
-										have a break;
+										take a chance to refocus;
+									</li>
+									<li>
+										ensure you're ready for more detail;
 									</li>
 									<li>
 										add questions to the chat.
 									</li>
 								</ul>
 							</p>
+							<p style="margin-top: 100px; float:right">
+								<a href="https://arxiv.org/abs/2004.06419"> Bernuzzi, 2004.06419.</a>
+							</p>
 						</div>
 						<aside class="notes">
-							We'll pause here for initial questions, before tackling the next section.
+							We're getting deeper into the numerics now, but there's a lot deeper to go. Drop questions into the chat to make sure you're ready for the next part.
 						</aside>
 					</section>
 
@@ -503,6 +537,12 @@
 									</li>
 									<li>
 										Computational cost $\propto (\Delta x)^{-4}$.
+									</li>
+									<li>
+										Extrema are <em>clipped</em>.
+									</li>
+									<li>
+										GWs need better phase accuracy.
 									</li>
 									<li>
 										Need higher order methods. But...
@@ -529,17 +569,17 @@
 							<h3>Reconstruct-Evolve-Average</h3>
 							<p>
 								Rethink Godunov as three steps:
-								<ul>
+								<ol style="line-height: 0.95">
 									<li>
-										<i>Reconstruct</i> $\hat{q} \to q(x)$;
+										<i>Reconstruct</i>: $$\hat{q} \to q(x);$$
 									</li>
 									<li>
-										<i>Evolve</i> $q(x)$;
+										<i>Evolve</i>: $$q(x);$$
 									</li>
 									<li>
-										<i>Average</i> $q(x) \to \hat{q}$.
+										<i>Average</i>: $$q(x) \to \hat{q}.$$
 									</li>
-								</ul>
+								</ol>
 							</p>
 							<p>
 								Reconstruction loses accuracy.
@@ -670,16 +710,26 @@
 						</aside>
 					</section>
 
-					<section>
+					<section data-background="figures/Ciolfi2001_10241.png" data-background-position="right" data-background-size="50%">
+						<div style="float: left; width: 49%">
 						<div>
 							<h1>Questions...</h1>
 							<p>
 								<ul>
 									<li>
-										Stretch out;
+										One topic left, so
 									</li>
 									<li>
-										have a break;
+										deep breath;
+									</li>
+									<li>
+										stretch out;
+									</li>
+									<li>
+										drink something;
+									</li>
+									<li>
+										screen break;
 									</li>
 									<li>
 										add questions to the chat.
@@ -687,8 +737,11 @@
 								</ul>
 							</p>
 						</div>
+						<p style="float: right">
+							<a href="https://arxiv.org/abs/2001.10241"> Ciolfi, 2001.10241.</a>
+						</p>
 						<aside class="notes">
-							We'll pause here for initial questions, before tackling the next section.
+							We'll pause here for questions, before tackling MHD.
 						</aside>
 					</section>
 
@@ -772,8 +825,8 @@
 
 				<section id="Summary">
 
-					<section>
-						<div>
+					<section data-background="figures/logtflow-average2ms-2.4ms.png" data-background-position="right" data-background-size="50%">
+						<div style="float: left; width: 49%">
 							<h2>Summary</h2>
 							<p>
 								We have discussed
@@ -788,7 +841,7 @@
 												finite differences;
 											</li>
 											<li>
-												finite elements (Discontinuous Galerkin),
+												finite elements,
 											</li>
 										</ul>
 									</li>
@@ -805,6 +858,11 @@
 							</p>
 							<p>
 								Next lecture: some aspects of the future.
+							</p>
+						</div>
+						<div style="position: absolute; bottom: 5px; right: 5px; width: 49%">
+							<p>
+								<a href="https://arxiv.org/abs/1707.09475"> Alford et al, 1707.09475.</a>
 							</p>
 						</div>
 						<aside class="notes">
