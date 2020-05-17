@@ -123,7 +123,8 @@
 							</p>
 							<p style="margin: 50px">
 								<ul style="list-style: none;">
-									<li> <a href="http://ianhawke.github.io/slides/icts-2020">ianhawke.github.io/slides/icts-2020</a>
+									<li> <a href="http://ianhawke.github.io/slides/icts-2020">ianhawke.github.io/slides/icts-2020</a> </li>
+									<li> Additional material at <a href="http://ianhawke.github.io/icts-2020">ianhawke.github.io/icts-2020</a> </li>
 								</ul>
 							</p>
 						</div>
@@ -206,9 +207,15 @@
 						</aside>
 					</section>
 
-					<section data-background="figures/fluid_averaging.png" data-background-position="bottom"  data-background-size="90%">
+					<section>
 						<div>
-							<h2>Averaging</h2>
+							<h4>Averaging</h4>
+						</div>
+						<div style="float: left; width: 73%">
+							<img data-src="figures/OpenAstroBookshelf/fluid_scale.png" style="width:100%" alt="Open Astrophysics Bookshelf">
+						</div>
+						<div style="float: left; width: 27%">
+							<img data-src="figures/fluid_averaging.png" style="width:100%">
 						</div>
 						<aside class="notes">
 							If we can't treat each particle separately, we'll have to average over them in some way. The hydrodynamics approximation averages over them all. Our $10^{60}$ separate particles, each with their own positions, velocities, and properties, are averaged to give a <i>single</i> (vector) field. At each point in spacetime this field will describe the number density of particles, and the direction in which they flow.
@@ -307,8 +314,8 @@
 						</aside>
 					</section>
 
-					<section>
-						<div>
+					<section data-background="figures/ShibataUryu99.png" data-background-position="right" data-background-size="50%">
+						<div style="float: left; width: 55%">
 							<h1>Questions...</h1>
 							<p>
 								<ul>
@@ -322,6 +329,9 @@
 										add questions to the chat.
 									</li>
 								</ul>
+							</p>
+							<p style="margin-top: 200px; margin-right: 80px; float: right;">
+								<a href="https://arxiv.org/abs/gr-qc/9911058">Shibata & Uryū 1999</a>
 							</p>
 						</div>
 						<aside class="notes">
@@ -338,7 +348,10 @@
 							<h2>Conservation</h2>
 
 							<p>
-								EFEs imply $\nabla_a T^{ab} = 0$. Pick a tetrad, $e_b^{(j)}$ to get
+								EFEs imply $\nabla_a T^{ab} = 0$.
+							</p>
+							<p>
+								Pick a tetrad, $e_b^{(j)}$ to get
 								$$
 								\begin{aligned}
 								  && \nabla_a \left[ e_b^{(j)} T^{ab} \right] &= \tfrac{1}{\sqrt{-g}} \partial_a \left( \sqrt{-g} e_b^{(j)} T^{ab} \right) = -T^{ab} \nabla_a e_b^{(j)} \\
@@ -346,7 +359,8 @@
 								\end{aligned}
 								$$
 								Balance law form.
-
+							</p>
+							<p>
 								Only four equations: need other constituitive equations for, eg, EM, particle number, etc.
 							</p>
 						</div>
@@ -400,7 +414,10 @@
 								$$
 									\partial_t q^n + \tfrac{n}{n+1} \partial_x q^{n+1} = 0,
 								$$
-								but they all have different shock speeds. Total derivative form crucial: otherwise need more information to fix solution.
+								but they all have different shock speeds.
+							</p>
+							<p>
+								 Total derivative form crucial: otherwise need more information to fix solution.
 							</p>
 						</div>
 
@@ -561,8 +578,8 @@
 						</aside>
 					</section>
 
-					<section>
-							<div>
+					<section data-background="figures/KiuchiDensityVorticity.png" data-background-position="right" data-background-size="50%">
+							<div style="float: left; width: 49%">
 								<h1>Questions...</h1>
 								<p>
 									<ul>
@@ -579,6 +596,9 @@
 											add questions to the chat.
 										</li>
 									</ul>
+								</p>
+								<p style="margin-top: 150px; margin-right:80px; float:right">
+									<a href="https://dx.doi.org/10.1103/PhysRevD.92.124034"> Kiuchi et al, 1509.09205</a>
 								</p>
 							</div>
 							<aside class="notes">
@@ -664,8 +684,8 @@
 
 				<section id="Summary">
 
-					<section>
-						<div>
+					<section data-background="figures/GammaLawTemp.png" data-background-position="right" data-background-size="50%">
+						<div style="float: left; width: 50%">
 							<h2>Summary</h2>
 							<p>
 								We have discussed
