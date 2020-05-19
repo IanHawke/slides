@@ -133,40 +133,410 @@
 						</aside>
 					</section>
 
-					<section>
+				</section>
 
-						<div>
-							<h1>Lectures</h1>
+				<section id="Non-ideal MHD">
+
+					<section data-background="figures/g1701866-v5-q-transform-30-1col-cside.png" data-background-position="right" data-background-size="40%">
+						<div style="float: left; width: 59%">
+							<h2>The present</h2>
+							<ul>
+								<li>
+									Ideal GRMHD;
+								</li>
+								<li>
+									exploring parameter space in
+									<ul>
+										<li>
+											masses
+										</li>
+										<li>
+											mass ratios
+										</li>
+										<li>
+											compositions
+										</li>
+										<li>
+											magnetic field strengths
+										</li>
+										<li>
+											magnetic field configurations
+										</li>
+										<li>
+											EOSs and parameters
+										</li>
+									</ul>
+								</li>
+								<li>
+									worrying about
+									<ul>
+										<li>
+											turbulence and small scale features
+										</li>
+										<li>
+											finite temperature
+										</li>
+										<li>
+											reactions and transport.
+										</li>
+									</ul>
+								</li>
+							</ul>
 						</div>
 
+						<aside class="notes">
+							A huge amount of work is currently being done by many groups on numerical simulations of neutron star mergers. The past two lectures have covered the background to the simplified models and the underlying numerical methods that are being used. However, there's a lot of detailed work that's been done as is happening right now, expanding on what we know, and looking at covering the parameter space within these models.
+							<br>
+							Today's lecture is going to look at some directions and approaches that may be needed in the short to medium term.
+						</aside>
 					</section>
 
-										<section>
-											<div>
-												<h1>Discontinuous Galerkin</h1>
-											</div>
-											<aside class="notes">
-												There are two key computational problems with the higher order methods we've described to now.
-												<br>
-												The first is waste. The reconstruction used in both finite difference and finite volume methods takes a limited amount of information about the solution - the cell averages, or the point values - and produces a form of the solution everywhere, usually as a piecewise polynomial. This form is then used to compute some terms, such as the intercell fluxes, and then all the high order information is thrown away. We only store the values of the solution or its cell average.
-												<br>
-												The second problem is communication. To get enough information for a high-order approximation to the solution we need to look not just at the cell and its immediate neighbours, but to ever further neighbouring cells. In general, we need to look at $k$ neighbours on either side to get $(2 k - 1)^{\text{th}}$ order accuracy. This is a real issue for big simulations on modern supercomputers.
-												<br>
-												As a quick digression. Simulations have essentially four things that can slow them down. The first is how fast it does operations: the FLOP count. The second is how much memory it has. The third is how fast results can be saved to disk. As the fourth, when we split the calculation across multiple processes, is how fast the different bits of the simulation communicate with each other.
-												<br>
-												On modern and near-future machines the main problem is communication speed. High order finite volume and finite difference schemes communicate too much information with cells too far away from themselves. This stops our simulations using the computational power available.
-												<br>
-												One answer to both these issues is to use a Discontinuous Galerkin method. HP will cover this in his talk on vacuum numerics, so here I'll just touch on the features important to hydrodynamics.
-												<br>
-												First we have to revisit the weak form. In DG and other finite element methods we take the equations of motion, multiply by a <i>test function</i> $\phi$, and integrate by parts. This moves the spatial derivatives from the solution (which might be discontinuous) to the test function (which we can choose to be sufficiently differentiable).
-												<br>
-												We then expand the solution and the test function in terms of some function basis: think of Fourier Series, or Legendre polynomials. We're going to store the <i>modes</i>: the coefficients of the solution with respect to the function basis expansion. We end up with evolution equations for the modes, but these are <i>coupled</i> through the mass matrix and stiffness vector. These matrices and vectors can be pre-computed. We see there is a term that looks like the standard boundary flux, for which we'll need something like a Riemann solver.
-												<br>
-												DG methods don't have the communication or waste problems seen in finite volume or finite difference methods. They only couple a cell to its neighbours through the intercell flux. The high order reconstruction is automatic thanks to the mode information stored in each cell, which is evolved, not discarded between steps.
-												<br>
-												However, standard DG methods will produce Gibbs oscillations at shocks, as energy is shifted to higher modes. In order to avoid these oscillations it's necessary to limit the solution, as in slope limiting, without reducing the accuracy (too much). This is hard to do without introducing coupling between the neighbouring cells. Getting this step correct is going to be crucial for making DG methods work in relativistic matter models.
-											</aside>
-										</section>
+					<section>
+						<div style="float: left; width: 60%">
+							<h2>Current</h2>
+							<img src="figures/nstar_plot_stage3.png">
+							<p style="margin-top: -100px; margin-left: 150px">
+								<a href="https://github.com/awsteiner/nstar-plot">Steiner, GitHub.</a>; <a href="http://www.astroscu.unam.mx/neutrones/NS-Picture/NStar/NStar.html">Page, UNAM.</a>
+							</p>
+						</div>
+						<div style="float: right; width: 40%">
+							<h2>Goal</h2>
+							<img src="figures/NStar_l.png">
+						</div>
+
+						<aside class="notes">
+							To emphasize how far we've got to go, compare the cartoons of where we are with the cartoon of the physics that detailed theoretical modelling suggests should be important.
+							<br>
+							In particular, current models are ignoring all additional structure that might be formed, typically by neutron interactions, including the crust, superfluidity, possible "pasta" phases, and so on. Exterior magnetic fields are a complex problem and aren't dealt with properly yet. The composition of the inner core in particular has only just started to impinge on current simulations.
+						</aside>
+					</section>
+
+					<section data-background="figures/Harutyunyan1605_07612.png" data-background-position="right" data-background-size="30%">
+
+						<div style="float: left; width: 70%">
+							<h2>Non ideal MHD</h2>
+							<p>
+								Ideal MHD assumes $\sigma \to \infty$ to enforce
+								$$
+								  {\bf E} = {\bf v} \times {\bf B}.
+								$$
+							</p>
+							<p>
+								Detailed calculations show $\sigma$ drops when
+								<ul>
+									<li>
+										density drops;
+									</li>
+									<li>
+										temperature increases;
+									</li>
+									<li>
+										magnetic field increases.
+									</li>
+								</ul>
+							</p>
+							<p>
+								All possible in (post) merger.
+							</p>
+							<p style="margin: 50px; float: right;">
+								<a href="https://arxiv.org/abs/1605.07612"> Harutyunyan & Sedrakian, 1605.07612</a>
+							</p>
+						</div>
+
+						<aside class="notes">
+							Our current models rely on the ideal MHD approximation. As we've seen in the previous two lectures, this simplifies the full Maxwell equations by imposing an Ohm's law that relates the electric field to the magnetic field and fluid velocity. This is only valid when there is no resistance to the charge current. This means we're requiring the conductivity to be infinite.
+							<br>
+							Detailed calculations have been done of the conductivity within neutron stars, with one recent example concentrating on the outer layers of the neutron star shown in the figure by Harutyunyan and Sedrakian. We see that the conductivity is large, typically around $10^{20} \text{s}^{-1}$ or bigger. However, the conductivity drops off sharply at low densities and high temperatures. It also drops off sharply as the magnetic field strength increases.
+							<br>
+							This means that during a neutron star merger we should expect the resistivity to become important in the core (where the temperature and the magnetic field are high) and in the remnant disk (where the density is low and the temperature high). So for multimessenger simulations we need to check if resistivity has an impact.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h2>Plasma models</h2>
+							<p>
+								A more general Ohm's law:
+								$$
+								\def\n{{\rm n}}
+								\def\p{{\rm p}}
+								\def\e{{\rm e}}
+								\def\l{\Lambda}
+								\def\c{{\rm c}}
+								\def\h{\Sigma}
+								\def\s{\mathrm{s}}
+								\newcommand{\A}{{\cal A}}
+								{\scriptsize
+								\begin{aligned}
+								e n_\e \mathcal E_b &- \left( 1 - {n_\e \mu_\e \over p+\varepsilon}\right) \epsilon_{bac} J^a b^c - {1\over n_\e e} \left( \hat {\mathcal R} - \Gamma_\e s \A^{\e\s} \right) J_b   \\
+								&= - en_\e \epsilon_{bac} v_\p^a b^c + \mathcal R_{\e\n} w^{\n\p}_b + \left( \mathcal R_{\e\s} - \Gamma_\e s \A^{\e\s} \right) \left( {q_b \over sT} - v^\p_b\right)  \\
+								&-n_\e \mu_\e \left[ \left( v_\p^a - {J^a\over e n_\e} \right) \nabla_a u_b + \perp^c_b u^a \nabla_a \left( v^\p_c - {J_c\over e n_\e} \right)
+								+ \left( v^\p_b - {J_b \over e n_\e} \right) u^a {1\over \mu_\e} \nabla_a \mu_\e \right] \\
+								&+ 2 n_\e u^a \nabla_{[a} s\A^{\e\s} w^{\s\e}_{b]} - e \Gamma_\e \left[ \perp^a_b+ u^a \left( v^\p_b -{J_b\over en_\e}\right) \right] A_a .
+								\end{aligned}
+								}
+								$$
+							</p>
+							<p>
+								From <a href="http://arxiv.org/abs/1610.00449">Andersson et al, 1610.00449</a>. Only considers $e, p, n$ plus heat.
+							</p>
+						</div>
+						<aside class="notes">
+							The point of Ohm's law is to link the charge current to the other variables that are being considered. In general this requires studying the plasma problem: instead of averaging over all the particles, we have to distinguish between the different species and consider how they interact.
+							<br>
+							However, even in moderately complex models such as that shown on the slide here the relation rapidly becomes impractical for numerical purposes. Here the model only considers neutrons, electrons, protons and heat. The interaction is quite impressively horrible, and that lengthy paper is largely spent trying to reduce this relation to simpler cases where some intuitive links can be built.
+						</aside>
+					</section>
+
+					<section data-background="figures/Dionysopoulou1502_02021.png" data-background-position="right" data-background-size="30%">
+
+						<div style="float: left; width: 70%">
+							<h2>Resistive MHD</h2>
+							<p>
+								Instead impose $j^a = q n^a + J^a$,
+								$$
+								  J^i = q v^i + W \sigma \left[ E^i + \epsilon^{ijk} v_j B_k - (v_k E^k) v^i \right].
+								$$
+							</p>
+							<p>
+								Can now solve full Einstein-Euler-Maxwell (11 PDEs), given constituitive relations (EOS, $\sigma \equiv \sigma(\rho, T)$).
+							</p>
+							<p>
+								<em>However</em>, near ideal MHD write $\eta = \sigma^{-1} \ll 1$, to see
+								$$
+								\partial_t {\bf E} \sim \frac{1}{\eta} \left[ {\bf E} + \dots \right]: \quad \text{stiff}.
+								$$
+							</p>
+							<p style="float: right;">
+								<a href="https://arxiv.org/abs/1502.02021"> Dionysopoulou et al, 1502.02021</a>
+							</p>
+						</div>
+
+						<aside class="notes">
+							In current simulations using resistivity people don't start from the plasma model. Insted the Ohm's law given introduces the conductivity tensor explicitly, performs a $3+1$ split of the charge current little $j^a$, and imposes that the spatial part of the current big $J^i$ is linked to the velocity and the EM fields. All current simulations, starting from the work of Palenzuela, and through to work by Lehner, Dionysopoulou and Alic, restrict to scalar conductivities.
+							<br>
+							We now have a prescription for the charge current meaning we can solve the full Einstein-Euler-Maxwell equations, which are 11 PDEs: one from continuity, four from generic energy-momentum conservation, and six from Maxwell's equations. In addition we have to provide the constituitive relations for the equation of state (fixing, for example, the pressure) and for the conductivity itself. For now we can think of the conductivity as a constant, but as we've seen above, in general it will be a function of density, temperature, composition and magnetic field strength.
+							<br>
+							We now run into a problem, not at the analytic level, but at the numerical. Consider how the electric field evolves. We know its time derivative is given by the curl of the magnetic field and is sourced by the charge current. The conductivity in the charge current is large, particularly near the ideal MHD limit. To match up with how numerical analysts talk about this problem we rewrite in terms of the scalar resistivity, $\eta$, which tends to zero in the ideal limit. So, in this limit, the problem is stiff. That is, it's trying to react on a timescale proportional to the resistivity $\eta$, but this is very small. This has consequences at the level of ODEs.
+						</aside>
+					</section>
+
+					<section data-background="figures/stiff_ode_euler.png" data-background-position="right" data-background-size="30%">
+
+						<div style="float: left; width: 70%">
+							<h3>Stiffness an ODE solvers</h3>
+							<p>
+								Solution of
+								$$
+									\frac{\text{d} q}{\text{d} t} = F(q) = -\alpha q, \qquad q(0) = 1
+								$$
+								is $\exp[-\alpha t]$. Can use
+								$$
+									\begin{aligned}
+								  	\text{Forward Euler:} && q^{n+1} &= q^n + \Delta t \, F(q^n), \\
+										\text{Backward Euler:} && q^{n+1} &= q^n + \Delta t \, F(q^{n+1}).
+									\end{aligned}
+								$$
+							</p>
+							<p>
+								<ul>
+									<li>
+										Explicit: fast, unstable if $\Delta t \gtrsim \alpha$;
+									</li>
+									<li>
+										Implicit: slow (nonlinear algebraic equation at every step), stable.
+									</li>
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+							The problem of stiffness is directly linked to the solution of the ODE. So far we haven't been too explicit about how to solve the ODE - HP has gone into more detail. The essential point is that we want to be sufficiently accurate whilst keeping it computationally cheap. This means we're usually using third or fourth order explicit Runge-Kutta methods.
+							<br>
+							However, when dealing with stiff problems we have the source term reacting on timescales that are comparable to or smaller than the timestep used by the ODE solver. This happens in resistive MHD, where near the ideal MHD limit the source term is trying to force the electric field to behave as in the traditional Ohm's law, and it's trying to force it to react very quickly.
+							<br>
+							On the exercise sheet there's an analytical calculation for the linear problem shown here. The exact solution is a rapid exponential decay. The explicit forward Euler scheme only works when the timestep is small enough: that is, when the timestep is roughly smaller than the decay timescale $\alpha$. This is a qualitative feature of all explicit methods, including those used in our standard simulations.
+							<br>
+							The alternative shown here is the implicit backward Euler scheme. For a general ODE this is called implicit as, in order to compute the time update $q^{n+1}$, we need to solve the implicit nonlinear algebraic equation specified by the function $F$. In our full PDE problem we're going to have to do this at every grid cell, at every update. These implicit schemes are stable, but much more expensive, often by orders of magnitude.
+							<br>
+							At first glance this makes resistive MHD impractical. However, there are two tricks we can play.
+						</aside>
+					</section>
+
+					<section data-background="figures/Ponce1404_0692.png" data-background-position="right" data-background-size="20%">
+
+						<div style="float: left; width: 80%">
+							<h2>IMEX</h2>
+							<p>
+								Solves stiff system
+								$
+								\partial_t q + \partial_x f = \varepsilon^{-1} R(q)$ by writing a Runge-Kutta step as
+								$$
+									\begin{aligned}
+								  	q^{(i)} &= \color{green}{q^n} - \Delta t \, \color{green}{\sum_{j=1}^{i-1} \left[ \tilde{a}_{ij} \partial_x f(q^{(j)}) - \frac{a_{ij}}{\varepsilon} R(q^{(j)}) \right]} + \\ &\qquad \Delta t \, \color{red}{\sum_{k=i} \frac{a_{ik}}{\varepsilon} R(q^{(k)})}.
+									\end{aligned}
+								$$
+							</p>
+							<p>
+								Choose coefficients $a_{ik}$ to minimize implicit cost.
+							</p>
+							<p style="float: right;">
+								<a href="https://arxiv.org/abs/1404.0692"> Ponce et al, 1404.0692</a>
+							</p>
+						</div>
+
+						<aside class="notes">
+							The first workaround for the computational cost of implicit schemes is to note that for many problems, including ours, the stiff terms only appear in a few equations. In our case we're solving 11 PDEs and the stiff source term only affects three: those linked to the electric field. We could therefore try a mixed scheme, where the bulk of the system is updated explicitly, and only the electric field is treated implicitly.
+							<br>
+							This is the fundamental idea behind the implicit-explict (or IMEX) Runge-Kutta methods of Pareschi and Russo. They've been used for resistive MHD by Palenzuela and others. This allows for practical simulations with resistivities up to $\sim 10^{11} \text{s}^{-1}$. There's been considerable work done to accelerate the implicit step: see, for example, the work of Cordeiro-Carillon who's used IMEX schemes to deal with issues in spherical coordinates.
+							<br>
+							In the end, however, the implicit step is still limited by the size of the resistivity. It's still impractical to run full merger simulations with physical values of the resistivity.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h2>Relaxation systems</h2>
+							<p>
+								Look at
+								$$
+								\begin{aligned}
+								  \partial_t q + \partial_x v &= 0 \\
+									\partial_t v + a \partial_x q &= \varepsilon^{-1} \left[ f(q) - v \right].
+								\end{aligned}
+								$$
+							</p>
+							<p>
+								<ul>
+									<li>
+										<em>Equilibrium</em> is $v = f(q)$. Remove $v$ from system.
+									</li>
+									<li> Chapman-Enskog expansion $v = f(q) + \varepsilon v_1$ gives
+										$$
+										  \partial_t q + \partial_x f(q) = \varepsilon \partial_x \left\{ \left[ a - \left( f'(q) \right)^2 \right] \partial_x q \right\}.
+										$$
+									</li>
+									<li>
+										Smaller system with <em>diffusive</em> correction.
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+							As the purely numerical IMEX approach doesn't yet allow for practical simulations of the full resistive simulations in mergers, we instead look for an analytic trick. This comes from work on <em>relaxation systems</em>, where the stiff source term is meant to force the large system towards an equilibrium. This is the situation we've got with resistive MHD.
+							<br>
+							The problem we're looking at here is a toy problem. The variable $q$ is the one we really care about. It evolves slowly, but is coupled to another variable $v$. $v$ has a stiff source term that tries to force $v$ to its equilibrium solution, and because it is stiff this causes $v$ to evolve quickly. At equilibrium $v$ is given by a function of the slow variable $q$: out of equilibrium the source tries to rapidly push it back.
+							<br>
+							In the limit where $\varepsilon \to 0$ the equilibrium constraint must be enforced. At that point we can drop the evolution equation for the fast variable $v$ and only consider the slow variable $q$. Away from this limiting case we can expand our fast variable in the small timescale $\varepsilon$. This is a Chapman-Enskog expansion. The leading order term gives us the equilibrium solution. The next term can be determined explicitly by the full evolution equations.
+							<br>
+							Plugging in this linear term we get an equation of motion for the slow variable that decouples from the fast variable. It looks like the equilibrium conservation law with a correction term. This correction term is small - it's multiplied by the small timescale $\varepsilon$. Importantly this correction term is a second derivative: it's a diffusive correction to the original system.
+							<br>
+							This toy problem leads to a scalar equation. We can extend this to systems to deal with resistive MHD. In resistive MHD the fast variables are the electric fields. The equilibrium solution will be ideal MHD. The short timescale is given by the resistivity. The diffusive correction will capture the long-lengthscale corrections coming from EM resistivity.
+						</aside>
+					</section>
+
+					<section data-background="figures/Wright_REGIME_B12.png" data-background-position="right" data-background-size="30%">
+
+						<div style="float: left; width: 70%">
+							<h2>REGIME</h2>
+							<p>
+								Chapman-Enskog expansion on resistive MHD:
+								$$
+								{\small
+								\newcommand{\pdv}[2]{\frac{\partial {#1}}{\partial {#2}}}
+								\newcommand{\bm}[1]{{\bf {#1}}}
+									\begin{aligned}
+								  	\partial_t (\sqrt{\gamma} {\bf q}) &+ \partial_i (\sqrt{-g} {\bf f}^i_0 + {\bf F}^i )  = \sqrt{-g} {\bf s}_0 + {\bf S} + \partial_i {\bf D}^i, \\
+										{\bf D}^i &= - \pdv{\bm{f}^i_0}{\overline{\bm{q}}} \bigg( \pdv{\overline{\bm{s}}_0}{\overline{\bm{q}}} \bigg)^{-1} \bigg[ \partial_j(\sqrt{-g} \overline{\bm{f}}^j_0) + \dots \bigg].
+									\end{aligned}
+								}
+								$$
+							</p>
+							<p>
+								<ul>
+									<li>
+										Corrections to fluxes and sources;
+									</li>
+									<li>
+										Not stiff as $\varepsilon \to 0$;
+									</li>
+									<li>
+										Works for NS merger regime;
+									</li>
+									<li>
+										No free lunch: new timestep restriction!
+									</li>
+								</ul>
+							</p>
+							<p style="float: right;">
+								<a href="https://arxiv.org/abs/1906.03510"> Wright & Hawke, 1906.03150</a>
+							</p>
+						</div>
+
+						<aside class="notes">
+							Alex Wright has done the hard work of extending the Chapman-Enskog approach to relativistic resistive MHD. The result is conceptually similar to the toy problem, but practically much more complex. The full expressions are found using computer algebra, but their general form is as here: there are corrections to the fluxes, the geometric sources, and there's the expected diffusive correction. The leading order expansion also gives us the standard ideal MHD Ohm's law.
+							<br>
+							With this approach we can now use standard explicit solvers. We're back to only solving 8 PDEs, whilst still getting the resistive corrections to leading order. It's more expensive that ideal MHD, but only by constant factors, not by orders of magnitude, because it's not stiff.
+							<br>
+							However, there's no free lunch, so we should expect some problems. In particular, numerical algorithms for solving diffusive terms typically have stricter timestep restrictions for stability, with the timestep scaling proportional to $(\Delta x)^2$. That also happens with the correction term here. That would significantly restrict our simulations at very fine resolutions. However, for current NS merger simulations we're not hit by that stability limit.
+						</aside>
+					</section>
+
+					<section data-background="figures/Radice1809_11161.png" data-background-position="right" data-background-size="35%">
+						<div style="float: left; width: 65%">
+							<h1>Questions...</h1>
+							<p>
+								<ul>
+									<li>
+										Stretch out;
+									</li>
+									<li>
+										have a break;
+									</li>
+									<li>
+										add questions to the chat.
+									</li>
+								</ul>
+							</p>
+							<p style="margin-top: 200px; margin-right: 80px; float: right;">
+								<a href="https://arxiv.org/abs/1809.11161">Radice et al, 1809.11161</a>
+							</p>
+						</div>
+						<aside class="notes">
+							We'll pause here for initial questions, before tackling the next section.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="DG">
+
+					<section>
+						<div>
+							<h1>Discontinuous Galerkin</h1>
+						</div>
+						<aside class="notes">
+							There are two key computational problems with the higher order methods we've described to now.
+							<br>
+							The first is waste. The reconstruction used in both finite difference and finite volume methods takes a limited amount of information about the solution - the cell averages, or the point values - and produces a form of the solution everywhere, usually as a piecewise polynomial. This form is then used to compute some terms, such as the intercell fluxes, and then all the high order information is thrown away. We only store the values of the solution or its cell average.
+							<br>
+							The second problem is communication. To get enough information for a high-order approximation to the solution we need to look not just at the cell and its immediate neighbours, but to ever further neighbouring cells. In general, we need to look at $k$ neighbours on either side to get $(2 k - 1)^{\text{th}}$ order accuracy. This is a real issue for big simulations on modern supercomputers.
+							<br>
+							As a quick digression. Simulations have essentially four things that can slow them down. The first is how fast it does operations: the FLOP count. The second is how much memory it has. The third is how fast results can be saved to disk. As the fourth, when we split the calculation across multiple processes, is how fast the different bits of the simulation communicate with each other.
+							<br>
+							On modern and near-future machines the main problem is communication speed. High order finite volume and finite difference schemes communicate too much information with cells too far away from themselves. This stops our simulations using the computational power available.
+							<br>
+							One answer to both these issues is to use a Discontinuous Galerkin method. HP will cover this in his talk on vacuum numerics, so here I'll just touch on the features important to hydrodynamics.
+							<br>
+							First we have to revisit the weak form. In DG and other finite element methods we take the equations of motion, multiply by a <i>test function</i> $\phi$, and integrate by parts. This moves the spatial derivatives from the solution (which might be discontinuous) to the test function (which we can choose to be sufficiently differentiable).
+							<br>
+							We then expand the solution and the test function in terms of some function basis: think of Fourier Series, or Legendre polynomials. We're going to store the <i>modes</i>: the coefficients of the solution with respect to the function basis expansion. We end up with evolution equations for the modes, but these are <i>coupled</i> through the mass matrix and stiffness vector. These matrices and vectors can be pre-computed. We see there is a term that looks like the standard boundary flux, for which we'll need something like a Riemann solver.
+							<br>
+							DG methods don't have the communication or waste problems seen in finite volume or finite difference methods. They only couple a cell to its neighbours through the intercell flux. The high order reconstruction is automatic thanks to the mode information stored in each cell, which is evolved, not discarded between steps.
+							<br>
+							However, standard DG methods will produce Gibbs oscillations at shocks, as energy is shifted to higher modes. In order to avoid these oscillations it's necessary to limit the solution, as in slope limiting, without reducing the accuracy (too much). This is hard to do without introducing coupling between the neighbouring cells. Getting this step correct is going to be crucial for making DG methods work in relativistic matter models.
+						</aside>
+					</section>
 
 				</section>
 
