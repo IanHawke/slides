@@ -135,7 +135,7 @@
 
 				</section>
 
-				<section id="Non-ideal MHD">
+				<section id="Outline">
 
 					<section data-background="figures/g1701866-v5-q-transform-30-1col-cside.png" data-background-position="right" data-background-size="40%">
 						<div style="float: left; width: 59%">
@@ -210,6 +210,52 @@
 							In particular, current models are ignoring all additional structure that might be formed, typically by neutron interactions, including the crust, superfluidity, possible "pasta" phases, and so on. Exterior magnetic fields are a complex problem and aren't dealt with properly yet. The composition of the inner core in particular has only just started to impinge on current simulations.
 						</aside>
 					</section>
+
+					<section>
+						<div>
+							<h2>Multiscale theory</h2>
+							<p>
+								Let ${\cal L}_{1,2}$ describe different bits of physics. Then
+								$$
+								\begin{aligned}
+									\partial_t q &= {\cal L}_1 q + \varepsilon {\cal L}_2 q, \\
+									\partial_t \tilde{q} &= {\cal L}_1 \tilde{q}
+								\end{aligned}
+								$$
+								are indistinguishable for times $\sim \varepsilon^{-1}$.
+							</p>
+							<p>
+								As $\varepsilon$ is a timescale, look for physics/problem $\tau$, or $v / L$, or $D / L^2$, or...
+							</p>
+							<p>
+								Argument fails for
+								<ul>
+									<li>
+										nonlinear operators;
+									</li>
+									<li>
+										resonances.
+									</li>
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+							There's been a few questions about how important individual bits of physics are. There are two responses to that.
+							<br>
+							The first is an argument for multiscale theory. This assumes that there's two bits of input physics each described by a differential operator, ${\cal L}_{1,2}$. We've seen the differential operators relevant for hydrodynamics and MHD and can imagine how MHD can be written as the hydro differential operator plus a separate operator. The assumption is then that the physics acts of different scales, with the second physical model being "small", hence multiplied by $\varepsilon$.
+							<br>
+							In many cases it can be proved that the full models with both sets of input physics is indistinguishable from a model using just the first set of input physics, provided we're allowed to change parameters of the first model a little, and provided we only look on timescales proportional to $1/\varepsilon$.
+							<br>
+							Now, we want to work on timescales of around a second. So, if the relative difference between two models gives a parameter whose timescale is less than this then we can probably ignore it. To do this we'd look for appropriate dimensionless constants and physical timescales. However, this needs doing with care. For example, bulk viscosity will depend on the Reynolds number and the size of the NS. But that's an average over all viscosity contributions. We know that viscosity typically acts strongly in boundary layers, which would appear - for example - near the crust-core interface. In this case the length scale is much shorter - maybe centimetres or less - which hugely boosts the impact.
+							<br>
+							In addition to these problems with applying the multiscale theory, it's known that the theory fails in particular circumstances. What the theory is doing is assuming the second operator acts on short, fast scales compared to the first, and then it's averaging (in some sense) over those scales. This only works as long as there's no resonances - that is, no feedback from the large scale to the small. However, this feedback most definitely occurs in fluid models through turbulence. So we would expect the details of this approach to fail in the post merger regime. At that point nonlinear numerical simulation is the only way to tell when the new physical model is quantitatively needed.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Non-ideal MHD">
 
 					<section data-background="figures/Harutyunyan1605_07612.png" data-background-position="right" data-background-size="30%">
 
