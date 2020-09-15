@@ -1,8 +1,0 @@
-import glob
-import sys
-with open(sys.argv[1]) as f:
-    content = f.read()
-    
-for x in glob.glob('img'):
-    if x.replace('.png', '') not in content:
-        print(x)

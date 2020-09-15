@@ -1,6 +1,0 @@
-import glob
-import shutil
-
-for x in glob.glob('img*/*'):
-    if not x.endswith('_notitle.png'):
-        shutil.remove(x)
