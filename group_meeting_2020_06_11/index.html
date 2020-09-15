@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+
+<!--
+-->
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Group Meeting</title>
+
+		<meta name="description" content="Group Meeting, June 2020">
+		<meta name="author" content="Ian Hawke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../reveal.js/css/print/pdf.css' : '../reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--MathJax stuff -->
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}, TeX: { extensions: ["autobold.js"] }});
+		</script>
+		<script type="text/javascript"
+		  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+
+		<!--PDF print -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../reveal.js/css/print/pdf.css' : '../reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+		<!--Left align-->
+		<style type="text/css">
+			.reveal p { text-align: left; }
+			.reveal ol,
+			.reveal dl,
+			.reveal ul {
+			  display: block;
+			  text-align: left;
+			  margin: 0 0 0 1em; }
+			.reveal h1 {
+				text-transform: none;
+				line-height: 2.0
+			}
+			.reveal h2,
+			.reveal h3,
+			.reveal h4 {
+				text-transform: none;
+			}
+			.reveal table td {
+				border-bottom: none;
+			}
+			.reveal.slide .slides > section, .reveal.slide .slides > section > section {
+			  min-height: 100% !important;
+			  display: flex !important;
+			  flex-direction: column !important;
+			  justify-content: center !important;
+			  position: absolute !important;
+			  top: 0 !important;
+			  align-items: center !important;
+			}
+			section > h1, section > h2 {
+			  position: absolute !important;
+			  top: 0 !important;
+			  margin-left: auto !important;
+			  margin-right: auto !important;
+			  left: 0 !important;
+			  right: 0 !important;
+			  text-align: center !important;
+			}
+			.print-pdf .reveal.slide .slides > section, .print-pdf .reveal.slide .slides > section > section {
+			  min-height: 770px !important;
+			  position: relative !important;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="Deep learning">
+
+					<section>
+						<div>
+							<h1>Observables</h1>
+							<p>
+								Numerics: parameters $c$, solutions $q$, observables $O$:
+								$$
+									c \overset{{\cal S}}{\to} q \overset{{\cal O}}{\to} O.
+								$$
+							</p>
+							<p>
+								Can combine solution and observation operators, ${\cal L} = {\cal O} \circ {\cal S}$.
+							</p>
+							<p>
+								Example: airfoil, pressure $p$:
+								$$
+									\text{Lift} = {\cal L}_1(c) = \frac{1}{{\cal K}(c)}\int_{\hat{S}(c)} p(c) (\hat{\bf n}(c) \cdot \psi_l(c)) \,  \text{d} s.
+								$$
+							</p>
+						</div>
+						<aside class="notes">
+							The parameters or coefficients $c$ are assumed given in terms of a distribution. We want to compute them from the observations. The standard numerics approach is to solve for the flow field $q$ and computed all the things needed to compare to observations $O$ from the solution $q$ itself.
+						</aside>
+					</section>
+
+					<section data-background="figures/airfoil_samples.png" data-background-size="100%">
+
+						<div style="position: relative; min-height: 750px;">
+							<p style="position: absolute; bottom: 0;">
+								<a href="https://arxiv.org/abs/1903.03040">Lye, Mishra & Ray: 1903.03040</a>
+							</p>
+						</div>
+
+						<aside class="notes">
+							Similar to last week: numerical simulation results depend on the parameters (eg, describing initial and boundary data, and equations of state), and the output of individual samples can vary wildly.
+						</aside>
+					</section>
+
+					<section>
+
+						<div>
+
+							<h1>Reduced models</h1>
+
+							<p>
+								<table>
+								<thead>
+								  <tr>
+								    <th></th>
+								    <th>Time (in secs)</th>
+								  </tr>
+								</thead>
+								<tbody>
+								  <tr>
+								    <td>Sample generation</td>
+								    <td>$24000$</td>
+								  </tr>
+								  <tr>
+								    <td>Training (Lift)</td>
+								    <td>$700$</td>
+								  </tr>
+								  <tr>
+								    <td>Evaluation (Lift)</td>
+								    <td>$9 \times 10^{-6}$</td>
+								  </tr>
+								  <tr>
+								    <td>Training (Drag)</td>
+								    <td>$840$</td>
+								  </tr>
+								  <tr>
+								    <td>Evaluation (Drag)</td>
+								    <td>$10^{-5}$</td>
+								  </tr>
+								</tbody>
+								</table>
+							</p>
+							<p>
+								<a href="https://arxiv.org/abs/1903.03040">Lye, Mishra & Ray: 1903.03040</a>
+							</p>
+						</div>
+
+						<aside class="notes">
+							Simulations to slow. Want a reduced model. Here a neural net is trained using deep learning techniques, which is many orders of magnitude faster to evaluate.
+						</aside>
+					</section>
+
+					<section data-background="figures/histograms.png" data-background-size="100%">
+
+						<div style="position: relative; min-height: 750px;">
+							<h2>Observables are robust</h2>
+							<p style="position: absolute; bottom: 0;">
+								<a href="https://arxiv.org/abs/1903.03040">Lye, Mishra & Ray: 1903.03040</a>
+							</p>
+						</div>
+
+						<aside class="notes">
+							The key is that <em>observables</em> are robust to training with very few samples (in this case). Producing the histograms of the pressure then computing the observables doesn't work without a lot more samples.
+						</aside>
+					</section>
+
+					<section>
+
+						<div>
+							<h1>Astrophysical observables?</h1>
+							<p>
+								<ul>
+									<li>
+										Graviational waves:
+										<ul>
+											<li>
+												Amplitude, phase.
+											</li>
+										</ul>
+									</li>
+									<li>
+										Neutrinos:
+										<ul>
+											<li>
+												Counts, energy.
+											</li>
+										</ul>
+									</li>
+									<li>
+										Electromagnetic:
+										<ul>
+											<li>
+												Frequency, energy, polarization.
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</p>
+						</div>
+						<aside class="notes">
+							So what would be the <em>robust observables</em> that we should be looking at?
+						</aside>
+					</section>
+
+				</section>
+			</div>
+
+		</div>
+
+		<script src="../reveal.js/js/reveal.js"></script>
+
+		<script>
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+        controlsTutorial: false,
+        overview: true,
+				progress: true,
+        hash: true,
+				history: true,
+				center: false,
+				width:  1366,
+				height: 768,
+				// showNotes = true,
+				margin: 0.05,
+				transition: 'none', // none/fade/slide/convex/concave/zoom
+        backgroundTransition: 'none',
+				// Parallax background image
+			    //parallaxBackgroundImage: '../../figures/hs-2009-05-a-full_jpg.jpg', // e.g. "https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg"
+			    // Parallax background size
+			    //parallaxBackgroundSize: '2145px 1213px', // CSS syntax, e.g. "2100px 900px" - currently only pixels are supported (don't use % or auto)
+			    // Amount of pixels to move the parallax background per slide step,
+			    // a value of 0 disables movement along the given axis
+			    // These are optional, if they aren't specified they'll be calculated automatically
+			    //parallaxBackgroundHorizontal: 200,
+			    //parallaxBackgroundVertical: 50
+				math: {
+			        mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
+			        config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+			    },
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: '../reveal.js/plugin/math/math.js', async: true },
+					{ src: '../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
+					{ src: '../reveal.js/plugin/notes/notes.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
