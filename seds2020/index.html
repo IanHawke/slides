@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Gravitational waves, neutron stars, and numerical simulations</title>
+
+		<meta name="description" content="SEDS Celestia, October 2020">
+		<meta name="author" content="Ian Hawke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../reveal.js/css/print/pdf.css' : '../reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--MathJax stuff -->
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}, TeX: { extensions: ["autobold.js"] }, "AssistiveMML":{disabled: true,}});
+		</script>
+		<script type="text/javascript"
+		  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+
+		<!--PDF print -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../reveal.js/css/print/pdf.css' : '../reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+		<!--Left align-->
+		<style type="text/css">
+			.reveal p { text-align: left; }
+			.reveal ol,
+			.reveal dl,
+			.reveal ul {
+			  display: block;
+			  text-align: left;
+			  margin: 0 0 0 1em; }
+			.reveal h1 {
+				text-transform: none;
+				line-height: 2.0
+			}
+			.reveal h2,
+			.reveal h3,
+			.reveal h4 {
+				text-transform: none;
+			}
+			.reveal table td {
+				border-bottom: none;
+			}
+			.reveal.slide .slides > section, .reveal.slide .slides > section > section {
+			  min-height: 100% !important;
+			  display: flex !important;
+			  flex-direction: column !important;
+			  justify-content: center !important;
+			  position: absolute !important;
+			  top: 0 !important;
+			  align-items: center !important;
+			}
+			section > h1, section > h2 {
+			  position: absolute !important;
+			  top: 0 !important;
+			  margin-left: auto !important;
+			  margin-right: auto !important;
+			  left: 0 !important;
+			  right: 0 !important;
+			  text-align: center !important;
+			}
+			.print-pdf .reveal.slide .slides > section, .print-pdf .reveal.slide .slides > section > section {
+			  min-height: 770px !important;
+			  position: relative !important;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="title">
+
+					<section data-background="figures/background.jpg" data-background-position="center" data-background-size="100%" data-background-color="#000000">
+						<div style="float: center; width: 60%">
+							<h2>Gravitational waves, neutron stars, and numerical simulations</h2>
+							<p style="margin: 50px">
+								<ul style="list-style: none;">
+									<li> Ian Hawke
+								</ul>
+							</p>
+							<p>
+								<ul style="list-style: none;">
+									<li> <a href="https://https://github.com/IanHawke" style="color:#FFFFFF">github.com/IanHawke</a>
+									<li> STAG, University of Southampton
+								</ul>
+							</p>
+							<p style="margin: 50px">
+								<ul style="list-style: none;">
+									<li> <a href="http://ianhawke.github.io/slides/icts-2020" style="color:#FFFFFF">ianhawke.github.io/slides/seds2020</a> </li>
+								</ul>
+							</p>
+						</div>
+						<aside class="notes">
+							In 2017 two neutron stars merged over 100 light years away. Observed by both gravitational wave and electromagnetic detectors, this one event gave us a huge amount of information about gravity and particle physics. However, detailed modelling was needed to even make a detection, and is essential for interpreting the results. This talk will outline the modelling needed for full numerical simulations of neutron star mergers, and what we need to improve for future detections.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Generalities">
+
+					<section data-background="figures/timeline-with-spectrum-amgv7.png" data-background-position="right" data-background-size="45%">
+						<div style="float: left; width: 55%">
+							<h1>GW170817</h1>
+							<p>
+								Two neutron stars merging seen
+								<ol>
+									<li> in gravitational waves; </li>
+									<li> in every electromagnetic band; </li>
+									<li> well localized. </li>
+								</ol>
+							</p>
+							<p>
+								Amazing insight into extreme astrophysics.
+							</p>
+							<p style="margin: 10px; float: right;">
+								<a href="https://arxiv.org/abs/1710.05833"> LIGO, Fermi, INTEGRAL et al, 1710.05833</a>
+							</p>
+						</div>
+
+						<aside class="notes">
+							Sometimes a breakthrough needs some luck. Three years ago, after thousands of physicists had worked for decades, we got lucky to observe two neutron stars merging 40 Mpc (130 Mly) away. In astrophysics terms this is "close". Even better, some of the resulting signal pointed in just the right direction. But first, let's go through this plot.
+							<br>
+							Top left we've got the signal in gravitational waves. Usually described as tiny ripples in spacetime, they're generated by very massive objects moving very quickly. When two neutron stars, each more massive than our sun, are orbiting each other at about a third the speed of light, plenty of gravitational waves are produced. The energy that goes into these waves sucks energy from the orbit of the neutron stars, reducing the orbital separation, and hence speeding up the orbital velocity. This is seen as an increase in the frequency of the gravitational waves with time, which goes up until they crash into each other.
+							<br>
+							The gravitational waves propagate at the speed of light and are generated even before merger, so are the first signal to reach us. However, they're hard to analyse and detect. After the neutron stars smash together they may, as in this case, collapse to a black hole, leaving a hot soup of matter around. When this remaining matter falls in to the black hole it can produce a massive jet of energized particles. This kilonova is one form of gamma-ray burst. For GW170817, this flash of high energy gamma rays was actually the first indication that observers noticed of this violent event. Gravitational wave observers were able to rapidly dig into their data to find it, but the automated algorithms didn't spot it.
+							<br>
+							As the remaining matter slowly cools, and the jet of energized particles moves towards us, the event has been seen in every single EM band. As EM observatories have much narrower fields of view this means the event has been pinned down to one specific galaxy.
+							<br>
+							This one observation had a huge impact on the field. Leaving aside the Nobel prize, and the newspaper headlines about "generating all the gold in the universe", this has led to thousands of papers talking about the impact of this one observation on theories of gravity, theories of electromagnetism, theories of matter in extremes of temperature and density, and theories of how these objects formed in the first place. So, we should talk a little more about the objects that we're studying and why.
+						</aside>
+
+					</section>
+
+					<section data-background="figures/NA_NSproperties.png">
+						<div style="position: fixed; bottom: 2px; width: 100%">
+							<p>
+								Andersson
+							</p>
+						</div>
+
+						<aside class="notes">
+							Most of the information that we have about neutron stars comes from observing pulsars. Observations of neutron stars typically put them around 1.4 times the mass of our sun. The most massive neutron stars are around twice the mass of our sun. So we tend to think of them like our sun, but compressed.
+							<br>
+							However, neutron stars are <em>really</em> compact. The most accurate results come from the NICER satellite which observed burning on the surface of neutron stars. We can also get constraints from pulsars, and from our gravitational wave observation (singular!). These all put the neutron star radius at between 10 and 15 kilometres: I believe that's roughly the distance between your main campus and the Aguada Fort. Crushing the $10^{60}$ particles contained within the sun into such a small volume leads to extremes of density, where matter can behave in ways not seen elsewhere in the universe.
+							<br>
+							A neutron star may look a little like a "planet". The outer layer has a "crust", just like the Earth. However, this crust is not made of rock. Instead, neutrons have been pushed so close together that they form a lattice, like a metal or a crystal. It's not the weak EM force that pins them together like terrestrial materials, however, but the strong nuclear force. This is probably the toughest "solid" material in the known universe.
+							<br>
+							Moving further in, the density increases to the point where fundamental particles separate and flow freely. In fact, they may interact quantum mechanically and flow as a superfluid, without any resistance from their neighbours. This is mostly a theoretical prediction, but there are observations of temperature changes in some young neutron stars that is best explained by the superfluid.
+							<br>
+							Further in again, we reach densities where our best theoretical models have significant uncertainties. It may be that the quarks making up the fundamental particles become deconfined, or other exotic particles are formed.
+							<br>
+							Finally, it's important to note that the charged fundamental particles like electrons and protons are still around: they do not vanish, even when the forces are dominated by the heavy neutrons. These charged particles will generate strong magnetic fields, as the neutron stars and so compact that they can rotate quickly, and the compression of the magnetic energy raises the peak field strength. A <em>typical</em> neutron star is eight orders of magnitude greater than our sun. This can go up rapidly during a merger, especially, possibly by another eight orders of magnitude!
+						</aside>
+					</section>
+
+					<section data-background="figures/WattsNSproperties.png" data-background-position="right" data-background-size="60%">
+						<div style="float: left; width: 39%">
+							<h2>What do we learn?</h2>
+							<p>
+								<ul>
+									<li>
+										Colliders: hot, low density.
+									</li>
+									<li>
+										NSs: cold (!), high density.
+									</li>
+								</ul>
+							</p>
+							<p>
+								So NSs tell us about
+								<ul>
+									<li>
+										extremes of gravity;
+									</li>
+									<li>
+										extremes of particle physics.
+									</li>
+								</ul>
+							</p>
+							<p>
+								Results should complement colliders.
+							</p>
+						</div>
+						<div style="position: fixed; bottom: 2px; width: 100%">
+							<p>
+								Watts et al
+							</p>
+						</div>
+
+						<aside class="notes">
+							There are two main things we expect to learn from neutron stars.
+							<br>
+							First, as we've said, neutron stars are really compact. That makes them very extreme objects for gravity. In standard theories of matter and gravity, the only object more compact than a neutron star is a black hole. But black holes are harder to observe: we can now see the gravitational waves as they merge, and we can see hot matter near the horizon, but we don't get any observations in the electromagnetic spectrum through merger itself. With neutron stars we do get EM signals near this extreme event.
+							<br>
+							As an example, in GW170817, the gamma ray burst first reached us about two seconds after the peak in gravitational waves. Over hundreds of millions of light years this allows us to compare the speed of gravitational waves to the speed of light to incredible precision. It's the tightest constraint to date on how fast information about spacetime propagates through spacetime, and a crucial test of Einstein's theory (which, of course, it passed).
+							<br>
+							Second, we get an insight into fundamental particles in an entirely novel way. When talking about particle physics experiments we mostly think of the big particle colliders like the LHC, which accelerate particles to near light speed and bash them together. This probes the nature of the fundamental particles, but at low densities (as they can't accelerate much matter) and high temperatures (from the extreme acceleration).
+							<br>
+							Neutron stars, in contrast, are high densities and low temperatures. This gives us complementary information about the matter, and by piecing together observations we narrow down the acceptable physics.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Models">
+
+					<section data-background="figures/Sun_NASA_APOD_20100819_003221_4096_0304.jpg" data-background-position="right" data-background-size="60%">
+						<div style="float: left; width: 39%">
+							<img data-src="figures/Summit.jpg" style="width:100%" alt="Summit supercomputer. Photo: Carlos Jones/ORNL">
+							<p>
+								<ul>
+									<li>
+										Sun: $\sim 10^{60}$ elementary particles.
+									</li>
+									<li>
+										Computer resource on Earth: $\sim 10^{25}$ FLOPs.
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+							We want to do numerical simulations, or evolutions, involving neutron stars. A neutron star contains a bit more matter than our sun. Our sun contains roughly $10^{60}$ elementary particles in it.
+							<br>
+							To do a practical numerical simulation we're going to need to use a computer. The current fastest computer in the world, Summit, can do around $10^{18}$ floating point operations per second. The total world computing power is uncertain, but probably not above $10^{25}$ FLOPs.
+							<br>
+							So, it would take (much) longer than the lifetime of the universe to simulate this number of particles when using every computer on Earth. Clearly we're not going to be able to do an evolution of every individual particle within a neutron star.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h4>Averaging</h4>
+						</div>
+						<div style="float: left; width: 73%">
+							<img data-src="figures/OpenAstroBookshelf/fluid_scale.png" style="width:100%" alt="Open Astrophysics Bookshelf">
+						</div>
+						<div style="float: left; width: 27%">
+							<img data-src="figures/fluid_averaging.png" style="width:100%">
+						</div>
+						<aside class="notes">
+							If we can't treat each particle separately, we'll have to average over them in some way. The hydrodynamics approximation averages over them all. Our $10^{60}$ separate particles, each with their own positions, velocities, and properties, are averaged to give a <i>single</i> (vector) field. At each point in spacetime this field will describe the number density of particles, and the direction in which they flow.
+							<br>
+							This averaging process gives us a small set of differential equations to solve. With some standard approximations, it actually reduces to <i>five</i> PDEs (on top of those describing the evolution of the spacetime). This makes the numerical simulation practical. However, it has also thrown away (or compressed) a lot of physics.
+							<br>
+							It also means that there is a crucial difference of principle and of scale between <i>vacuum</i> relativity and relativistic <i>hydrodynamics</i>. In the vacuum case we have Einstein's field equations which, in principle, hold on all scales within our simulations and models. In hydrodynamics, however, our model and description breaks down on certain scales. We must keep in mind that as computer power and numerical accuracy increases our results may <i>not</i> get better, as we may hit the limitations of our models.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h2>Characteristics</h2>
+							<p>
+								<ul>
+									<li> Nothing moves faster than light;
+									<li> Cause and effect: only look at the "past light cone".
+								</ul>
+							</p>
+							<p>
+								If a particle follows a path $X(t)$, and $q(X)$ is constant on that path, then
+								$$
+								  \partial_t q(x, t) + \frac{\partial_x X}{\partial_t X} \partial_x q(x, t) = 0.
+								$$
+							</p>
+							<p>
+								The path $X(t)$ is a <em>characteristic</em>: we trace information back in time to get future solutions.
+							</p>
+						</div>
+						<aside class="notes">
+							Having averaged our matter to get a set of differential equations, we need to think about how the solutions of these differential equations behave.
+							<br>
+							As we're working within Einstein's theory, we know that nothing can propagate faster than light. That means that the only things that can change a quantity "now" must have been able to interact with that quantity. Think of a particle $P_1$ at the current time, and ask if it can interact with a different particle $P_2$. If they can interact then it must be possible to connect, using some curve moving at less than lightspeed, to the spacetime point where the particle $P_1$ is now to some spacetime point where $P_2$ was in the past.
+							<br>
+							We then assume that interaction carries information: that is, some quantity $q$ that does not change along that path in spacetime $X$ between the two particles. It is the <em>ordinary</em> derivative of the quantity $q$ that does not change. If we sit at a coordinate location and let the path move past us then we have to take partial derivatives to see how the quantity changes in our local coordinates $(x, t)$. This gives us a PDE satisfied by the quantity $q$.
+							<br>
+							The equations of motion of relativistic matter will have this sort of form: information will propagate at large, but finite, speeds. We want to work backwards from the PDEs to get characteristics along which information does not change. If we knew that, then we might be able to predict future information from our initial conditions.
+						</aside>
+					</section>
+
+					<section>
+						<div>
+							<h2>Conservation</h2>
+
+							<p>
+								EFEs $G_{ab} = 8 \pi \kappa T_{ab}$ imply $\nabla_a T^{ab} = 0$.
+							</p>
+							<p>
+								Pick a tetrad, $e_b^{(j)}$ to get
+								$$
+								\begin{aligned}
+								  && \nabla_a \left[ e_b^{(j)} T^{ab} \right] &= \tfrac{1}{\sqrt{-g}} \partial_a \left( \sqrt{-g} e_b^{(j)} T^{ab} \right) = -T^{ab} \nabla_a e_b^{(j)} \\
+									\implies && \color{red}{\partial_t {\bf q} + \partial_i {\bf f}^{(i)}({\bf q})} &= \color{red}{{\bf s}}.
+								\end{aligned}
+								$$
+								Balance law form.
+							</p>
+							<p>
+								Only four equations: need other constituitive equations for, eg, EM, particle number, etc.
+							</p>
+						</div>
+						<aside class="notes">
+							We now know the outlines of our problem. We want a model of matter, coupled to GR, that we can write as a set of PDEs. This model will encode the detailed physics we're interested in, at the level we can simulate with our given resources. But before we try and be specific, let's look at what we can say in general.
+							<br>
+							We know the field equations require total stress energy conservation: the divergence of $T^{ab}$ is zero. We can use this to get <i>four</i> equations of motion. The most useful form for our purposes is to use the standard identity for the 4-divergence of a vector, which can be written as the <i>partial</i> 4-divergence of that vector, weighted by the metric determinant. To get from the stress-energy, which is a two-tensor, to a vector, we contract the free index with one member of a <i>tetrad</i>, which is a set of orthonormal (in our case) vectors that we can link to the coordinates. This then allows us to write stress energy conservation as four PDEs, one for each member of the tetrad.
+							<br>
+							The key point is that the only derivatives of the matter appear in total divergence form. The term on the right-hand-side which isn't in this form only involves derivatives of the tetrad, which can be written as derivatives of spacetime quantities. We write this abstractly in <i>balance law form</i>: all derivatives of the matter are total derivatives, but these <i>fluxes</i> must balance off against the <i>source terms</i> which come from the geometry.
+							<br>
+							If we simplify to Minkowski space in standard Cartesian coordinates then the source terms vanish and these balance laws reduce to the <i>conservation laws</i> for energy-momentum. However, we need to be careful of this interpretation (locally): if we write Minkowski spacetime in <i>spherical</i> coordinates then there will be source terms, but that certainly does not mean that energy-momentum is being transferred between the matter and the spacetime.
+						</aside>
+					</section>
+
+					<section data-background="figures/characteristics.png" data-background-position="right" data-background-size="52%">
+						<div style="float: left; width: 50%">
+							<h2>Shock formation</h2>
+
+							<p>
+								Advection equation
+								$$
+									\partial_t q + \partial_x (v q) = 0.
+								$$
+								Information moves right, speed $v$.
+							</p>
+							<p>
+								Burgers equation
+								$$
+									\partial_t q + \tfrac{1}{2} \partial_x q^{2} = 0.
+								$$
+								Information moves right, speed $q$. Shocks form.
+							</p>
+						</div>
+						<aside class="notes">
+							We see that <i>generically</i> the matter will obey conservation laws. We expect the fluxes ${\bf f}$ to depend <i>nonlinearly</i> on the conserved variables ${\bf q}$. This immediately tells us something very important.
+							<br>
+							The simplest conservation law is the advection equation, where the solution is propagated to the right with constant speed $v$. This is exactly the situation discussed when talking about characteristics: the information is constant along straight lines of slope $v$.
+							<br>
+						  For a nonlinear conservation law we can <i>locally</i> approximate it as an advection-like equation, where the solution propagates with speed $\partial_q f$. This means the propagation speed depends on the data. Depending on the form of the flux function, some gradients will steadily get steeper, and some will get shallower. In the absence of dissipation (and crucially the generic total energy-momentum equations have no dissipative terms) these steepening effects will lead to discontinuities: a generic <i>shock</i> will form.
+						</aside>
+					</section>
+
+				</section>
+				<section id="Numerics">
+
+					<section data-background="figures/fd_fv_fe_grids.png" data-background-position="right" data-background-size="50%">
+						<div style="float: left; width: 50%">
+							<h2>PDEs and numerics</h2>
+							<div class="fragment fade-in-then-out" style="height: 0px">
+								<p>
+									Finite differences:
+									<ul>
+										<li>
+											Store point values $q_i$;
+										</li>
+										<li>
+											$$
+												\partial_x f(q) \to \tfrac{1}{2 \Delta x} \left( f_{i+1} - f_{i-1} \right).
+											$$
+										</li>
+										<li>
+											Works well for smooth data.
+										</li>
+										<li>
+											Ok convergence, communication issues.
+										</li>
+									</ul>
+								</p>
+							</div>
+							<div class="fragment fade-in-then-out" style="height: 0px">
+								<p>
+									Finite volumes:
+									<ul>
+										<li>
+											Store cell averages $\hat{q}_i = \tfrac{1}{\Delta x} \int_{x_{i-1/2}}^{x_{i+1/2}} \text{d} x \, q$;
+										</li>
+										<li>
+											$$
+												\partial_x f \underset{\int \text{d} x}{\rightarrow} \tfrac{1}{\Delta x} \left( f_{i+1/2} - f_{i-1/2} \right).
+											$$
+										</li>
+										<li>
+											Works well for discontinuous data.
+										</li>
+										<li>
+											Slow convergence, communication issues.
+										</li>
+									</ul>
+								</p>
+							</div>
+							<div class="fragment fade-in-then-out" style="height: 0px">
+								<p>
+									Finite elements:
+									<ul>
+										<li>
+											Store modal coefficients $q^{(m)}_i$;
+										</li>
+										<li>
+											$$
+												\partial_x f \underset{\int \text{d} x \, \phi(x)}{\rightarrow} M {\bf q} + \dots .
+											$$
+										</li>
+										<li>
+											Works well for smooth data; tricky for discontinuous.
+										</li>
+										<li>
+											Good convergence, good communication.
+										</li>
+									</ul>
+								</p>
+							</div>
+						</div>
+						<aside class="notes">
+							On to numerical approximation. We want to solve <i>continuum</i> partial differential equations on a computer. The solution, $q(x)$, needs - in principle - an infinite amount of information. That's because the continuum solution could, in principle, take totally different unpredictable values at every separate point $x$. This way of thinking is clearly useless when working with a computer with a finite amount of working memory.
+							<br>
+							Instead we consider ways of approximating the solution $q(x)$. We do this by making assumptions about the functions we're trying to solve for. The more correct assumptions we make, the better our solution will be. However, as soon as we make one inconsistent assumption our solution may be completely wrong. Think of this as a "garbage in, garbage out" type of saying. The solutions for the spacetime that we evolve will be nice and smooth nearly everywhere, so we can make very strong assumptions and get very accurate solutions. However, our solutions for relativistic fluids can have strong shocks, so we need to make much more conservative assumptions, making it harder to get accurate solutions.
+							<br>
+							The first is the point value approximation, used in <i>finite differencing</i>. In this case the domain is discretized into points, and we assume that we know (or want to compute) the value of the solution at each of these points. The solution is <i>not</i> known between the points. When we want to link the solution at different points - for example, when approximating a derivative - we have to impose the general behaviour of the solution between those points. For example, if we interpolate between points using a straight line then the derivative is the slope of this line.
+							<br>
+							The second approach is to split the domain into <i>cells</i>, and within each cell to store the average value. This is the <i>finite volume</i> approach. In this case some information is known at every point in spacetime: the average value near that point. However, the exact value is known <i>nowhere</i>. Again, to get the value of the solution at a specific point we have to impose the general behaviour of the solution. When restricted to a given cell this behaviour has to be consistent with the average value within that cell. The finite volume approach implicitly "smears out" the local behaviour of the solution, which is exactly what we want when dealing with discontinuous solutions like shocks.
+							<br>
+							The final approach has links to the finite volume approach, but is more often referred to as a <i>finite element</i> method. Instead of storing the average value of the solution within a cell, the <i>moments</i> of the solution with respect to some function basis are stored. Typically the zeroth moment would be the cell average of the solution, the first moment linked to its derivative, the second to its curvature and so on. This uses a function basis expansion: think about a Taylor series, or a Fourier series, but truncated after a few terms. This is fundamental to the <i>Discontinuous Galerkin</i> method that will be one of the central methods for the future of our field.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Results">
+
+					<section data-background="figures/Radice1809_11161.png" data-background-position="right" data-background-size="35%">
+						<div style="float: left; width: 65%">
+							<h1>Messy mergers</h1>
+							<p>
+								The merger process
+								<ul>
+									<li>
+										mixes the particles strongly;
+									</li>
+									<li>
+										generate turbulence and small scale structures;
+									</li>
+									<li>
+										the high temperatures and mixing lead to strong signals, nucleosynthesis, etc.
+									</li>
+								</ul>
+							</p>
+							<p style="margin-top: 200px; margin-right: 80px; float: right;">
+								<a href="https://arxiv.org/abs/1809.11161">Radice et al, 1809.11161</a>
+							</p>
+						</div>
+						<aside class="notes">
+							This simulation by Radice illustrates how messy the merger process can be. The figure is illustrating the lepton fraction: that is, how many particles in a local region are electrons. This is very important for computing local properties, as the electrons are so much lighter than the other particles.
+							<br>
+							As the stars merge we see the matter is reasonably well ordered. However, after merger we see small scale features everywhere. The stars do not so much crash straight into each other as graze past each other. This generates lots of turbulence, leading to small scale features all over the place. This mixes up the particles in ways that is hard to predict. A lot of current working is going into understanding how we can model and analyse these small scale features, and what impact they will have on observed signals.
+						</aside>
+					</section>
+
+					<section data-background="figures/jets.png" data-background-position="right" data-background-size="45%">
+						<div style="float: left; width: 55%">
+							<h1>Structured jets</h1>
+							<p>
+								After the merger
+								<ul>
+									<li>
+										jets form, accelerated by magnetic fields;
+									</li>
+									<li>
+										but the physics needed is still unclear, and the strength very model dependent;
+									</li>
+									<li>
+										the magnetic field structure is crucial in creating a kilonova signal.
+									</li>
+								</ul>
+							</p>
+							<p style="margin-top: 200px; margin-right: 80px; float: right;">
+								<a href="https://arxiv.org/abs/2001.10241"> Ciolfi, 2001.10241</a>; <a href="https://arxiv.org/abs/1906.03510"> Wright & Hawke, 1906.03150</a>.
+							</p>
+						</div>
+						<aside class="notes">
+							These simulations show the opposite: how order can be formed in the merger process.
+							<br>
+							It's essential to explain the kilonova signal that the model generates a jet, so that particles are accelerated away from the black hole at relativistic speeds. This needs a magnetic field, and current simulations are now consistently forming jet-like structures where the density is low but the magnetic field strength is high, which could predict the jet signals that are observed.
+							<br>
+							However, the key details are too dependent on the details added to the model. In addition, the timescales for predicting the signals are far too long for what we can simulate. A lot more work is needed in this direction.
+						</aside>
+					</section>
+
+
+				</section>
+
+				<section id="Summary">
+
+					<section data-background="figures/GammaLawTemp.png" data-background-position="right" data-background-size="50%">
+						<div style="float: left; width: 50%">
+							<h2>Summary</h2>
+							<p>
+								We have discussed
+								<ul>
+									<li>
+										neutrons stars as astrophysical laboratories;
+									</li>
+									<li>
+										building a fluid model;
+									</li>
+									<li>
+										numerical evolutions of neutron star models.
+									</li>
+								</ul>
+							</p>
+							<p>
+								There's a lot more to do!
+							</p>
+						</div>
+						<aside class="notes">
+							Thank you for your attention.
+						</aside>
+					</section>
+
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="../reveal.js/js/reveal.js"></script>
+
+		<script>
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+        controlsTutorial: false,
+        overview: true,
+				progress: true,
+        hash: true,
+				history: true,
+				center: false,
+				width:  1366,
+				height: 768,
+				// showNotes = true,
+				margin: 0.05,
+				transition: 'none', // none/fade/slide/convex/concave/zoom
+        backgroundTransition: 'none',
+				// Parallax background image
+			    //parallaxBackgroundImage: '../../figures/hs-2009-05-a-full_jpg.jpg', // e.g. "https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg"
+			    // Parallax background size
+			    //parallaxBackgroundSize: '2145px 1213px', // CSS syntax, e.g. "2100px 900px" - currently only pixels are supported (don't use % or auto)
+			    // Amount of pixels to move the parallax background per slide step,
+			    // a value of 0 disables movement along the given axis
+			    // These are optional, if they aren't specified they'll be calculated automatically
+			    //parallaxBackgroundHorizontal: 200,
+			    //parallaxBackgroundVertical: 50
+				math: {
+			        mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
+			        config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+			    },
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: '../reveal.js/plugin/math/math.js', async: true },
+					{ src: '../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
+					{ src: '../reveal.js/plugin/notes/notes.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
