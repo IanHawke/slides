@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Non-ideal effects in magnetised BNS merger simulations</title>
+
+		<meta name="description" content="CompOSE, February 2021">
+		<meta name="author" content="Ian Hawke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../reveal.js/css/print/pdf.css' : '../reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--MathJax stuff -->
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}, TeX: { extensions: ["autobold.js"] }, "AssistiveMML":{disabled: true,}});
+		</script>
+		<script type="text/javascript"
+		  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+
+		<!--PDF print -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../reveal.js/css/print/pdf.css' : '../reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+		<!--Left align-->
+		<style type="text/css">
+			.reveal p { text-align: left; }
+			.reveal ol,
+			.reveal dl,
+			.reveal ul {
+			  display: block;
+			  text-align: left;
+			  margin: 0 0 0 1em; }
+			.reveal h1 {
+				text-transform: none;
+				line-height: 2.0
+			}
+			.reveal h2,
+			.reveal h3,
+			.reveal h4 {
+				text-transform: none;
+			}
+			.reveal table td {
+				border-bottom: none;
+			}
+			.reveal.slide .slides > section, .reveal.slide .slides > section > section {
+			  min-height: 100% !important;
+			  display: flex !important;
+			  flex-direction: column !important;
+			  justify-content: center !important;
+			  position: absolute !important;
+			  top: 0 !important;
+			  align-items: center !important;
+			}
+			section > h1, section > h2 {
+			  position: absolute !important;
+			  top: 0 !important;
+			  margin-left: auto !important;
+			  margin-right: auto !important;
+			  left: 0 !important;
+			  right: 0 !important;
+			  text-align: center !important;
+			}
+			.print-pdf .reveal.slide .slides > section, .print-pdf .reveal.slide .slides > section > section {
+			  min-height: 770px !important;
+			  position: relative !important;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="title">
+
+					<section data-background="figures/background.jpg" data-background-position="center" data-background-size="100%" data-background-color="#000000">
+						<div style="float: center; width: 60%">
+							<h2>Adaptive Model Refinement and resistivity</h2>
+							<p style="margin: 50px">
+								<ul style="list-style: none;">
+									<li> Ian Hawke
+								</ul>
+							</p>
+							<p>
+								<ul style="list-style: none;">
+									<li> <a href="https://https://github.com/IanHawke" style="color:#FFFFFF">github.com/IanHawke</a></li>
+									<li> <a href="https://orcid.org/0000-0003-4805-0309" style="color:#FFFFFF">orcid.org/0000-0003-4805-0309</a></li>
+									<li> STAG, University of Southampton</li>
+								</ul>
+							</p>
+							<p style="margin: 50px">
+								<ul style="list-style: none;">
+									<li> <a href="https://ianhawke.github.io/slides/compose21" style="color:#FFFFFF">ianhawke.github.io/slides/compose21</a> </li>
+								</ul>
+							</p>
+						</div>
+						<aside class="notes">
+							Thank you for inviting me to give this talk. The work I'm going to describe was largely done by a PhD student, Alex Wright, who graduated towards the end of last year.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Resistivity">
+
+					<section>
+						<div>
+							<h2>Resistive MHD</h2>
+							<p>
+								In relativity, solve Maxwell as
+								$$
+								\begin{aligned}
+									\partial_t \begin{pmatrix} B^i \\ E_i \end{pmatrix} + \partial_k \begin{pmatrix} -\epsilon^{ijk} E_j \\ \epsilon^{ijk} B_j \end{pmatrix} &= -\begin{pmatrix} 0 \\ \color{gold}{\varrho} v_i + \frac{W}{\color{red}{\eta}} \left[ \color{blue}{E_i + \epsilon_{ijk} v^j B^k} - (v_k E^k) v_i \right] \end{pmatrix}.
+								\end{aligned}
+								$$
+							</p>
+							<p>
+								<ul>
+									<li> Relativistic velocities mean $\varrho$ not small. </li>
+									<li> Ideal limit $\eta \to 0$ gives ${\bf E} = -{\bf v} \times {\bf B}$. </li>
+									<li> In neutron stars $\eta$ very small - stiff system. Implicit methods required. </li>
+									<li> (Also solve for spacetime - $\gtrsim 10$ wave equations - and fluid.)
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+							Now, solving the Maxwell equations is nothing new - there's great work being done within your own group on this. There are, however, additional issues when you add relativity, which we illustrate by writing the Maxwell equations in special relativity and writing out the charge current including the simplest scalar resistivity, as here. The velocity, $v^i$, is given by evolving the fluid - think of this like the standard Euler equations, although there are some relativistic issues there too. The Lorentz factor, $W$, is determined by the velocity - it essentially encodes the length contraction due to the fluid moving at relativistic speeds. <br>
+							The relativistic velocities mean that there can be a large difference between the fluid frame and the observer frame, leading to the charge current being large. The strong coupling through the Lorentz factor makes it tricky to simplify this equation further. That means that, unless we can work in specific limits, we have to solve the full system. <br>
+							The obvious limit to work in is the ideal limit where the scalar resistivity $\eta$ vanishes. This fixes the electric field in terms of the velocity and magnetic field, and we're back to MHD. Nearly all simulations of neutron stars have used the MHD approximation. This isn't just numerical convenience: there are papers arguing that the resistivity will be so small - $\eta \lesssim 10^{-16} \text{s}$ - that it's totally negligible. <br>
+							However, even small resistivity can lead to large qualitative changes in magnetic field <i>configurations</i>, which can be seen by looking at helicity arguments. So there's interest in studying the near-ideal limit. Unfortunately this limit is <i>stiff</i>: the current, which gives the source term for the electric field, is large and can change on very short scales. <br>
+							A couple of brave groups have tackled this full problem. To get around the stiffness issue they've used implicit solvers. Specifically, they've used the Implicit-Explicit, or IMEX solvers, to do the time update. This has worked in test cases, but the resistivities used to date have been at least six orders of magnitude too large, and the simulations are an order of magnitude slower than the ideal case. Using physically meaningful parameter values isn't possible with IMEX schemes as yet.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="REGIME">
+
+					<section>
+						<div>
+							<h2>Relaxation systems</h2>
+							<p>
+								Toy problem of Liu (see LeVeque):
+								$$
+								\begin{aligned}
+								\partial_t u + \partial_x v &=0, \\
+								\partial_t v + a \partial_x u &= \color{red}{\epsilon^{-1}} \left( f(u) - v \right).
+								\end{aligned}
+								$$
+							</p>
+							<p>
+								Use <em>Chapman-Enskog</em> expansion $v = f(u) + \color{green}{\epsilon} v_1$ to get
+								$$
+									\partial_t u + \partial_x f(u) = \color{green}{\epsilon} \partial_x \left( \left[ a - \left(f'\right)^2 \right] \partial_x u \right).
+								$$
+							</p>
+							<p>
+								<ul>
+									<li>Smaller system, so cheaper.</li>
+									<li>Source now $\propto \color{green}{\epsilon}$, not $\color{red}{\epsilon^{-1}}$: stiffness gone.</li>
+									<li>Diffusive correction: shocks, timestep, stability issues.</li>
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+							When Alex and I started looking at this problem we found this toy problem in LeVeque's red book, that was proposed by Liu back in the 1980's. Here $u, v$ are scalar fields. In the limit where the small parameter $\epsilon$ goes to zero the second equation becomes a constraint, forcing $v$ to be $f(u)$. That means we end up with a single conservation law, simplifying the system. <br>
+							The case we're interested in is where $\epsilon$ is small but not zero. This is known as a relaxation system as the fast variable $v$ is expected to rapidly evolve so that $v$ is close to $f(u)$, whilst $u$ is expected to evolve slowly. To take advantage of this behaviour we can do a perturbation expansion, where $v$ takes its equilibrium value $f(u)$ to leading order in $\epsilon$, but has a correction term at first order. <br>
+							This <i>Chapman-Enskog</i> expansion can be used to again eliminate the second equation in the system. However, the full system is needed to get an expression for the correction term $v_1$. On plugging in the correction we no longer have a conservation law. We now have a source term which needs the second derivative of our slow variable $u$. <br>
+							This new system is not exact, but is an approximation for small $\epsilon$. It has a number of crucial advantages for our problem. <br>
+							First, it's reduced the size of the system. In fact, when applied to resistive MHD, we'll eliminate the evolution equation for the electric field, and evolve exactly the same variables as in <i>ideal</i> MHD. This makes modifying an existing code to cover resistivity a lot more straightforward. <br>
+							Second, our system is no longer stiff in the limit of small $\epsilon$. Applied to resistive MHD, it means it's not stiff in the limit of small resistivity. This means we can use explicit time integrators rather than IMEX schemes. Together, these advantages will speed up resistive evolutions to make them practical for neutron star mergers. <br>
+							However, as there's never a free lunch, there must be balancing disadvantages. The most important is numerical stability from the choice of timestep. We're used to setting the timestep from the CFL condition, so proportional to the grid spacing. However, standard von Neumann stability analysis for a simple heat equation suggests that the parabolic or diffusive correction term will lead to a timestep restriction that is proportional to the square of the grid spacing. <br>
+							Whether this approach is useful depends on the proportionality constants in these timestep restrictions. We take the viewpoint that we're always going to want to use the timestep from the hyperbolic CFL limit. This means that there is a minimum grid spacing that we can use. Below this grid spacing the parabolic time step restriction will be violated and the method unstable. We can approximately locate this critical minimum grid spacing analytically, but it's best determined by numerical experiments.
+						</aside>
+					</section>
+
+					<section data-background="figures/REGIME/CurrentSheetFinalComparisonOld.png" data-background-position='right' data-background-size="55%">
+						<div style="float: left; width: 40%">
+							<h2>Current sheet</h2>
+							<p>
+								<ul>
+									<li>
+										Standard error-function diffusive solution;
+									</li>
+									<li>
+										Use "small" conductivity $\sigma = \eta^{-1}$: hard test for expansion;
+									</li>
+									<li>
+										Extremely good agreement with resistive MHD (using IMEX);
+									</li>
+									<li>
+										Expected convergence with conductivity.
+									</li>
+								</ul>
+							</p>
+							<p>
+								<a href="https://dx.doi.org/10.1093/mnras/stz2779">Wright & Hawke, 1906.03150</a>
+							</p>
+						</div>
+						<aside class="notes">
+							The first test is one dimensional and standard: by keeping all the hydro variables constant with zero velocity, the resistive equations boil down to a heat equation, with the standard error function solution that slowly diffuses with time. <br>
+							We show the result for three conductivities, remembering that the conductivity $\sigma$ is the inverse of the resistivity $\eta$. The values we're using here are a long way away from the astrophysical regime: they were chosen as we can practically solve the full resistive system using IMEX methods for these values. As such they're a hard test for the perturbation expansion. Despite this there is excellent agreement between the full resistive results solved using IMEX methods, and our perturbation expansion technique (labelled REGIME) solved using standard explicit methods.
+						</aside>
+					</section>
+
+
+					<section data-background="figures/REGIME/RMRFinalStatePressure_hot.png" data-background-position='right' data-background-size="55%">
+						<div style="float: left; width: 40%">
+							<h2>Reconnection</h2>
+							<p>
+								<ul>
+									<li>
+										Resistivity leads the magnetic "islands" to connect;
+									</li>
+									<li>
+										The width of the connection is $\propto \eta = \sigma^{-1}$;
+									</li>
+									<li>
+										Extremely good agreement with resistive MHD;
+									</li>
+									<li>
+										Expected convergence with conductivity.
+									</li>
+								</ul>
+							</p>
+							<p>
+								<a href="https://dx.doi.org/10.1093/mnras/stz2779">Wright & Hawke, 1906.03150</a>
+							</p>
+						</div>
+						<aside class="notes">
+							Here we show an example of magnetic reconnection, for two different resistivities, quite a long way from the ideal limit. If ideal MHD were used then the "islands" of magnetic pressure should stay separate. By including resistivity magnetic reconnection causes them to interact, with the width of the boundary layer linked to the resistivity value. The results here show the Chapman-Enskog approach is visually indistinguishable from the full resistive values. We also see clean convergence with grid resolution and with conductivity.
+						</aside>
+					</section>
+
+					<section data-background="figures/REGIME/modelPowerSpectrumT5Sig100NoMinModPaperIHTalk.jpg" data-background-position='right' data-background-size="40%">
+						<div style="float: left; width: 55%">
+							<h2>Kelvin-Helmholtz Instability</h2>
+							<p>
+								<ul>
+									<li>
+										Magnetic energy cascades to all scales;
+									</li>
+									<li>
+										Good agreement with resistive MHD at larger scales;
+									</li>
+									<li>
+										The source term approach is <i>not</i> capturing subgrid behaviour.
+									</li>
+								</ul>
+							</p>
+							<p>
+								<a href="https://dx.doi.org/10.1093/mnras/stz2779">Wright & Hawke, 1906.03150</a>
+							</p>
+						</div>
+						<aside class="notes">
+							To get more insight into what this approach is doing, and to link back to our binary neutron star motivation, we look at a Kelvin-Helmholtz instability. There's the standard Kolmogorov cascade of energy from large scales down to small, which is similar for all models. As we get to higher frequencies, and hence smaller scales, we see the different models diverge. Whilst the REGIME model is closer to the resistive case than the ideal is, once we start reaching grid-cell resolutions there is a substantial difference. This suggests that the REGIME model is capturing the large scale features of the resistive model, not the small.
+						</aside>
+					</section>
+
+					<section data-background='figures/REGIME/BWandReconnectionOptPerf3DIHTalk.jpg' data-background-position='bottom' data-background-size="100%">
+						<div style="float: top">
+							<h2>Performance</h2>
+							<p>
+								<ul>
+									<li>
+										Many factors faster than full model.
+									</li>
+									<li>
+										For neutron stars want $\sigma \gtrsim 10^{12}$.
+									</li>
+								</ul>
+							</p>
+						</div>
+						<aside class="notes">
+							Finally, we need to check the performance of REGIME against the resistive model. REGIME's performance is pretty much independent of the resistivity. In contrast, the runtime for an explicit RK scheme for the full resistive model (blue curve) blows up well before interesting resistivities are reached. The IMEX schemes allow physical resistivities to be evolved, but are always slower than regime, usually by factors of 5-10 or more.
+						</aside>
+					</section>
+				</section>
+
+			</section>
+
+			<section id="Resistive mergers">
+
+				<section>
+					<div>
+						<h2>The general case</h2>
+						<p>
+							GR has source terms. Schematically
+							$$
+							\begin{aligned}
+								\partial_t {\bf q} + \partial_i {\bf f}^{(i)}({\bf q}, \overline{\bf q}) &= {\bf s}({\bf q}, \overline{\bf q}), \\
+								\partial_t \overline{\bf q} + \partial_i \overline{\bf f}^{(i)}({\bf q}, \overline{\bf q}) &= \color{red}{\eta^{-1}} \overline{\bf s}({\bf q}, \overline{\bf q}).
+							\end{aligned}
+							$$
+						</p>
+						<p>
+							Chapman-Enskog expansion still works:
+							$$
+								\partial_t {\bf q} + \partial_i \left( {\bf f}^{(i)}_0 + \color{green}{\eta} {\bf F}^{(i)} \right) = {\bf s}_0 + \color{green}{\eta} \left( {\bf S} + \partial_i {\bf D}^{(i)} \right).
+							$$
+						</p>
+						<p>
+							With ${\bf D}^{(i)} \sim A^{ij} \partial_j {\bf q}$ we still have diffusive correction.
+						</p>
+					</div>
+					<aside class="notes">
+						Moving to general relativity, which we need for the neutron star merger, we now have source terms due to the gravitational effects. This makes the expansion process practically more complex, and it appears to be qualitatively different in a range of ways. <br>
+						In this more general case we still have a source term correction that is parabolic or diffusive like, in that it contains second derivative terms. This is very similar to the earlier cases. However, we now have corrections to the fluxes and sources. These are all proportional to the resistivity, and it's not transparent as to exactly where the terms should sit. <br>
+						In our case, directly evolving the terms here in the "obvious" form leads to accuracy and stability that is very close to the results in special relativity. So whilst this case appears much more complex, the key conceptual questions of accuracy and stability seem to follow the simpler case without change.
+					</aside>
+				</section>
+
+				<section data-background="figures/GRR/rhomaxMedRes.png" data-background-position='right' data-background-size="65%">
+					<div style="float: left; width: 30%">
+						<h2>Moderate case</h2>
+						<p>
+							<ul>
+								<li>
+									Perform BNS mergers with $B \sim 10^{12} \text{G}$;
+								</li>
+								<li>
+									Qualitative results are similar;
+								</li>
+								<li>
+									Post-merger collapse to black hole <em>delayed</em> by resistivity.
+								</li>
+							</ul>
+						</p>
+					</div>
+					<aside class="notes">
+						Working together with Bruno Giacomazzo, Alex has repeated the simulation of a magnetized binary neutron star merger shown at the start of the talk. However, he's also added resistivity. Here we're showing the results of the simplest case: the resistivity is constant, and as large as reasonably seems plausible (which is still six orders of magnitude smaller than previous simulations). This gives us the most direct comparison of the effect of resistivity to date. <br>
+						Most qualitative features are unchanged by the introduction of resistivity. The clearest difference can be seen by tracking the maximum density in the simulation, which is usually at the core of the stars or the remnant. The first vertical line indicates the point where the stars merge. The dots, associated with the steep drop in density, is when the black hole forms.
+						<br>
+						We clearly see a delay in the formation of the black hole when resistivity is included. This seemed odd to us: we expected that resistivity would, well, resist the motion, slowing the matter, and reducing the effective pressure support from rotation. So our expectations were that any visible resistive effects would lead to earlier collapse, not later.
+					</aside>
+				</section>
+
+				<section data-background="figures/GRR/rhomaxHighMag.png" data-background-position='right' data-background-size="65%">
+					<div style="float: left; width: 30%">
+						<h2>Extreme case</h2>
+						<p>
+							<ul>
+								<li>
+									Perform BNS mergers with $B \sim 10^{16} \text{G}$;
+								</li>
+								<li>
+									This field strength is extreme (magnetar);
+								</li>
+								<li>
+									Post-merger collapse to black hole <em>massively delayed</em> by resistivity.
+								</li>
+							</ul>
+						</p>
+					</div>
+					<aside class="notes">
+						To check that this effect is real and not an artefact of small corrections, Alex went to the most extreme case plausible. The resistivity remains the same, but we remember that resistive effects (such as changes in helicity) are also linked to the magnetic field strength. By increasing the seed magnetic field to magnetar strength, the limit of what might be plausible, we can check the impact of resistivity. <br>
+						Now the delay in black hole formation is long enough that the simulation can barely be performed. It's clear that something about resistivity is increasing the effective pressure support.
+					</aside>
+				</section>
+
+				<section data-background="figures/GRR/FieldLinesVertical.png" data-background-position='right' data-background-size="31%">
+					<div style="float: left; width: 65%">
+						<h2>Field Structure</h2>
+						<p>
+							<ul>
+								<li>
+									Resistivity changes the magnetic field structure;
+								</li>
+								<li>
+									Post-merger the field is "turbulent", messy;
+								</li>
+								<li>
+									Resistivity re-orders the field, reducing "drag";
+								</li>
+								<li>
+									Increase in rotational effective pressure seen, delaying collapse.
+								</li>
+							</ul>
+						</p>
+					</div>
+					<aside class="notes">
+						The best idea we have for the cause of delayed collapse is the magnetic field structure. Here we have plots of some magnetic field lines and two constant density surfaces. The ideal case is at the top, resistive at the bottom. We're still trying to find a good quantitative way of analysing the magnetic field structure, so for now we focus on visual analysis of the field lines as shown here, and proxy analysis via the magnetic pressure and an effective rotational pressure, not shown here. <br>
+						The key result from the analysis is that resistivity has no noticeable impact on the magnitude of the magnetic fields, but does have an impact on its ordering. This is probably easier to see, although still not easy, by looking at the field line structure in the bottom of both plots. <br>
+						The argument that we want to make from this is that the messy, almost turbulent magnetic field structure that occurs during merger, will be simplified by the resistivity. We expect this analytically from helicity arguments, but it appears to be a substantial effect. By making the magnetic field more "structured" the fluid rotates faster, increasing the effective pressure support and delaying collapse.
+					</aside>
+				</section>
+
+			</section>
+
+			<section id="Summary">
+
+				<section data-background="figures/GRR/cuts_snapsh_xy_IF_MRMedRes.png" data-background-position="right" data-background-size="55%">
+					<div style="float: left; width: 43%">
+						<h2>Summary</h2>
+						<p>
+							<ul>
+								<li>
+									Astrophysical problems are often <em>nearly</em> ideal.
+								</li>
+								<li>
+									Leading order non-ideal effects
+									<ul>
+										<li>
+									 		can avoid stiffness problems;
+										</li>
+										<li>
+											can show qualitative physical changes.
+										</li>
+									</ul>
+								</li>
+								<li>
+									Adaptive Model Refinement can make simulations practical across the full range of parameter space.
+								</li>
+							</ul>
+						</p>
+					</div>
+					<aside class="notes">
+						Thank you for your attention.
+					</aside>
+				</section>
+
+			</section>
+
+			</div>
+
+		</div>
+
+		<script src="../reveal.js/js/reveal.js"></script>
+
+		<script>
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+        controlsTutorial: false,
+        overview: true,
+				progress: true,
+        hash: true,
+				history: true,
+				center: false,
+				width:  1366,
+				height: 768,
+				// showNotes = true,
+				margin: 0.05,
+				transition: 'none', // none/fade/slide/convex/concave/zoom
+        backgroundTransition: 'none',
+				// Parallax background image
+			    //parallaxBackgroundImage: '../../figures/hs-2009-05-a-full_jpg.jpg', // e.g. "https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg"
+			    // Parallax background size
+			    //parallaxBackgroundSize: '2145px 1213px', // CSS syntax, e.g. "2100px 900px" - currently only pixels are supported (don't use % or auto)
+			    // Amount of pixels to move the parallax background per slide step,
+			    // a value of 0 disables movement along the given axis
+			    // These are optional, if they aren't specified they'll be calculated automatically
+			    //parallaxBackgroundHorizontal: 200,
+			    //parallaxBackgroundVertical: 50
+				math: {
+			        mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
+			        config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+			    },
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: '../reveal.js/plugin/math/math.js', async: true },
+					{ src: '../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
+					{ src: '../reveal.js/plugin/notes/notes.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
