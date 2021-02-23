@@ -105,9 +105,9 @@
 
 				<section id="title">
 
-					<section data-background="figures/background.jpg" data-background-position="center" data-background-size="100%" data-background-color="#000000">
+					<section data-background="figures/GRR/FieldLinesVertical.png" data-background-position='right' data-background-size="31%">
 						<div style="float: center; width: 60%">
-							<h2>Adaptive Model Refinement and resistivity</h2>
+							<h2>Non-ideal effects in magnetised BNS merger simulations </h2>
 							<p style="margin: 50px">
 								<ul style="list-style: none;">
 									<li> Ian Hawke
@@ -135,33 +135,121 @@
 
 				<section id="Resistivity">
 
-					<section>
-						<div>
-							<h2>Resistive MHD</h2>
+					<section data-background="figures/Harutyunyan1605_07612.png" data-background-position="right" data-background-size="30%">
+
+						<div style="float: left; width: 70%">
+							<h2>Non ideal MHD</h2>
 							<p>
-								In relativity, solve Maxwell as
+								Ideal MHD assumes $\sigma \to \infty$ to enforce
 								$$
-								\begin{aligned}
-									\partial_t \begin{pmatrix} B^i \\ E_i \end{pmatrix} + \partial_k \begin{pmatrix} -\epsilon^{ijk} E_j \\ \epsilon^{ijk} B_j \end{pmatrix} &= -\begin{pmatrix} 0 \\ \color{gold}{\varrho} v_i + \frac{W}{\color{red}{\eta}} \left[ \color{blue}{E_i + \epsilon_{ijk} v^j B^k} - (v_k E^k) v_i \right] \end{pmatrix}.
-								\end{aligned}
+								  {\bf E} = -{\bf v} \times {\bf B}.
 								$$
 							</p>
 							<p>
+								Detailed calculations show $\sigma$ drops when
 								<ul>
-									<li> Relativistic velocities mean $\varrho$ not small. </li>
-									<li> Ideal limit $\eta \to 0$ gives ${\bf E} = -{\bf v} \times {\bf B}$. </li>
-									<li> In neutron stars $\eta$ very small - stiff system. Implicit methods required. </li>
-									<li> (Also solve for spacetime - $\gtrsim 10$ wave equations - and fluid.)
+									<li>
+										density drops;
+									</li>
+									<li>
+										temperature increases;
+									</li>
+									<li>
+										magnetic field increases.
+									</li>
 								</ul>
+							</p>
+							<p>
+								All possible in (post) merger.
+							</p>
+							<p style="margin: 50px; float: right;">
+								<a href="https://arxiv.org/abs/1605.07612"> Harutyunyan & Sedrakian, 1605.07612</a>
 							</p>
 						</div>
 
 						<aside class="notes">
-							Now, solving the Maxwell equations is nothing new - there's great work being done within your own group on this. There are, however, additional issues when you add relativity, which we illustrate by writing the Maxwell equations in special relativity and writing out the charge current including the simplest scalar resistivity, as here. The velocity, $v^i$, is given by evolving the fluid - think of this like the standard Euler equations, although there are some relativistic issues there too. The Lorentz factor, $W$, is determined by the velocity - it essentially encodes the length contraction due to the fluid moving at relativistic speeds. <br>
-							The relativistic velocities mean that there can be a large difference between the fluid frame and the observer frame, leading to the charge current being large. The strong coupling through the Lorentz factor makes it tricky to simplify this equation further. That means that, unless we can work in specific limits, we have to solve the full system. <br>
-							The obvious limit to work in is the ideal limit where the scalar resistivity $\eta$ vanishes. This fixes the electric field in terms of the velocity and magnetic field, and we're back to MHD. Nearly all simulations of neutron stars have used the MHD approximation. This isn't just numerical convenience: there are papers arguing that the resistivity will be so small - $\eta \lesssim 10^{-16} \text{s}$ - that it's totally negligible. <br>
-							However, even small resistivity can lead to large qualitative changes in magnetic field <i>configurations</i>, which can be seen by looking at helicity arguments. So there's interest in studying the near-ideal limit. Unfortunately this limit is <i>stiff</i>: the current, which gives the source term for the electric field, is large and can change on very short scales. <br>
-							A couple of brave groups have tackled this full problem. To get around the stiffness issue they've used implicit solvers. Specifically, they've used the Implicit-Explicit, or IMEX solvers, to do the time update. This has worked in test cases, but the resistivities used to date have been at least six orders of magnitude too large, and the simulations are an order of magnitude slower than the ideal case. Using physically meaningful parameter values isn't possible with IMEX schemes as yet.
+							Our current models rely on the ideal MHD approximation. As we've seen in the previous two lectures, this simplifies the full Maxwell equations by imposing an Ohm's law that relates the electric field to the magnetic field and fluid velocity. This is only valid when there is no resistance to the charge current. This means we're requiring the conductivity to be infinite.
+							<br>
+							Detailed calculations have been done of the conductivity within neutron stars, with one recent example concentrating on the outer layers of the neutron star shown in the figure by Harutyunyan and Sedrakian. We see that the conductivity is large, typically around $10^{20} \text{s}^{-1}$ or bigger. However, the conductivity drops off sharply at low densities and high temperatures. It also drops off sharply as the magnetic field strength increases.
+							<br>
+							This means that during a neutron star merger we should expect the resistivity to become important in the core (where the temperature and the magnetic field are high) and in the remnant disk (where the density is low and the temperature high). So for multimessenger simulations we need to check if resistivity has an impact.
+						</aside>
+					</section>
+
+					<section data-background="figures/Dionysopoulou1502_02021.png" data-background-position="right" data-background-size="30%">
+
+						<div style="float: left; width: 70%">
+							<h2>Resistive MHD</h2>
+							<p>
+								Instead impose $e^a \sim \eta j^a$,
+								$$
+								  \partial_t E_i + \partial_k ( \epsilon^{ijk} B_j ) \sim \frac{W}{\color{red}{\eta}} \left[ \color{blue}{E_i + \epsilon_{ijk} v^j B^k} - (v_k E^k) v_i \right].
+								$$
+							</p>
+							<p>
+								Simulations done at "large" resistivity, eg
+								<ul>
+									<li>
+										<a href="https://arxiv.org/abs/1404.0692"> Ponce et al</a>,
+									</li>
+									<li>
+								  	<a href="https://arxiv.org/abs/1502.02021"> Dionysopoulou et al</a>,
+									</li>
+									<li>
+										<a href="http://arxiv.org/abs/2102.01346"> Shibata et al</a>.
+									</li>
+								</ul>
+							</p>
+							<p>
+								Numerical <em>stiffness</em> as $\eta \to 0$.
+							</p>
+							<p style="float: right;">
+								<a href="https://arxiv.org/abs/1502.02021"> Dionysopoulou et al, 1502.02021</a>
+							</p>
+						</div>
+
+						<aside class="notes">
+							In current simulations using resistivity people don't start from the plasma model. Insted the Ohm's law given introduces the conductivity tensor explicitly, performs a $3+1$ split of the charge current little $j^a$, and imposes that the spatial part of the current big $J^i$ is linked to the velocity and the EM fields. All current simulations, starting from the work of Palenzuela, and through to work by Lehner, Dionysopoulou and Alic, restrict to scalar conductivities.
+							<br>
+							We now have a prescription for the charge current meaning we can solve the full Einstein-Euler-Maxwell equations, which are 11 PDEs: one from continuity, four from generic energy-momentum conservation, and six from Maxwell's equations. In addition we have to provide the constituitive relations for the equation of state (fixing, for example, the pressure) and for the conductivity itself. For now we can think of the conductivity as a constant, but as we've seen above, in general it will be a function of density, temperature, composition and magnetic field strength.
+							<br>
+							We now run into a problem, not at the analytic level, but at the numerical. Consider how the electric field evolves. We know its time derivative is given by the curl of the magnetic field and is sourced by the charge current. The conductivity in the charge current is large, particularly near the ideal MHD limit. To match up with how numerical analysts talk about this problem we rewrite in terms of the scalar resistivity, $\eta$, which tends to zero in the ideal limit. So, in this limit, the problem is stiff. That is, it's trying to react on a timescale proportional to the resistivity $\eta$, but this is very small. This has consequences at the level of ODEs.
+						</aside>
+					</section>
+
+					<section data-background="figures/time_average1.png" data-background-position="right" data-background-size="30%">
+						<div style="float: left; width: 70%">
+							<h2>LES effects</h2>
+							<p>
+								<ul>
+									<li>
+										Even if physics ideal on <em>micro</em>-scale...
+									</li>
+									<li>
+										Numerics $\implies$ average over $\sim 10-100$m scale.
+									</li>
+								</ul>
+							</p>
+							<p>
+								Averaging: $u^a = \langle u^a \rangle + \delta u^a \to$ "non-ideal" subgrid closures.
+							</p>
+							<p>
+								Averaged currents won't be ideal! Eg
+								$$
+								  \eta \sim \langle -\delta u^b j^a \langle {F}_{ba} \rangle + u^b j^a \delta F_{ba} \rangle.
+								$$
+							</p>
+							<p>
+								See eg <a href="https://arxiv.org/abs/1904.04099">Viganò et al</a>, or <a href="http://arxiv.org/abs/1205.2951">Bucciantini and del Zanna</a>.
+							</p>
+						</div>
+
+						<aside class="notes">
+							Even when the physical non-ideal coefficients are negligible, there is plenty of room for non-ideal <i>effects</i> to get into a numerical simulation. Our best numerical simulations of mergers use grid resolutions of tens of metres. Thus we average or filter all the physics on shorter lengthscales into a smoothed single set of numbers within each grid cell.
+							<br>
+							This split, into a smoothed, slowly varying set of fields that we can simulate numerically, and the small scale fluctuations that we can't, underlies <i>Large Eddy Simulation</i>, and has been very successfully employed by, for example, Radice and collaborators in recent years. The idea is that the fluctuating behaviour, that can't be ab-initio solved for, must be input into the formalism. When viewed in terms of the formalism, at the level of the stress-energy tensor, this necessarily adds non-ideal terms to the model at the <i>macro</i> scale, even when the <i>micro</i> scale behaviour is ideal. We can capture this by writing down the effective LES resistivity in terms of the fluctuations.
+							<br>
+							There's been a lot of interesting work on estimating suitable closure relations, for example by small scale simulations combined with machine learning techniques. A lot more needs doing to pull out the relativistic effects, and determine the stability issues.
 						</aside>
 					</section>
 
@@ -176,21 +264,21 @@
 								Toy problem of Liu (see LeVeque):
 								$$
 								\begin{aligned}
-								\partial_t u + \partial_x v &=0, \\
-								\partial_t v + a \partial_x u &= \color{red}{\epsilon^{-1}} \left( f(u) - v \right).
+								\partial_t B + \partial_x E &=0, \\
+								\partial_t E + a \partial_x B &= \color{red}{\eta^{-1}} \left( f(B) - E \right).
 								\end{aligned}
 								$$
 							</p>
 							<p>
-								Use <em>Chapman-Enskog</em> expansion $v = f(u) + \color{green}{\epsilon} v_1$ to get
+								Use <em>Chapman-Enskog</em> expansion $E = f(B) + \color{green}{\eta} E_1$ to get
 								$$
-									\partial_t u + \partial_x f(u) = \color{green}{\epsilon} \partial_x \left( \left[ a - \left(f'\right)^2 \right] \partial_x u \right).
+									\partial_t B + \partial_x f(B) = \color{green}{\eta} \partial_x \left( \left[ a - \left(f'\right)^2 \right] \partial_x B \right).
 								$$
 							</p>
 							<p>
 								<ul>
 									<li>Smaller system, so cheaper.</li>
-									<li>Source now $\propto \color{green}{\epsilon}$, not $\color{red}{\epsilon^{-1}}$: stiffness gone.</li>
+									<li>Source now $\propto \color{green}{\eta}$, not $\color{red}{\eta^{-1}}$: stiffness gone.</li>
 									<li>Diffusive correction: shocks, timestep, stability issues.</li>
 								</ul>
 							</p>
@@ -315,6 +403,144 @@
 
 			<section id="Resistive mergers">
 
+				<section data-background="figures/GRR/rhomaxMedRes.png" data-background-position='right' data-background-size="65%">
+					<div style="float: left; width: 30%">
+						<h2>Moderate case</h2>
+						<p>
+							<ul>
+								<li>
+									Perform BNS mergers with $B \sim 10^{12} \text{G}$;
+								</li>
+								<li>
+									Resistive case $\sigma \simeq 2 \cdot 10^{17} \text{ s}^{-1}$;
+								</li>
+								<li>
+									Qualitative results are similar;
+								</li>
+								<li>
+									Post-merger collapse <em>delayed</em> by resistivity.
+								</li>
+							</ul>
+						</p>
+					</div>
+					<aside class="notes">
+						Working together with Bruno Giacomazzo, Alex has repeated the simulation of a magnetized binary neutron star merger shown at the start of the talk. However, he's also added resistivity. Here we're showing the results of the simplest case: the resistivity is constant, and as large as reasonably seems plausible (which is still six orders of magnitude smaller than previous simulations). This gives us the most direct comparison of the effect of resistivity to date. <br>
+						Most qualitative features are unchanged by the introduction of resistivity. The clearest difference can be seen by tracking the maximum density in the simulation, which is usually at the core of the stars or the remnant. The first vertical line indicates the point where the stars merge. The dots, associated with the steep drop in density, is when the black hole forms.
+						<br>
+						We clearly see a delay in the formation of the black hole when resistivity is included. This seemed odd to us: we expected that resistivity would, well, resist the motion, slowing the matter, and reducing the effective pressure support from rotation. So our expectations were that any visible resistive effects would lead to earlier collapse, not later.
+					</aside>
+				</section>
+
+				<section data-background="figures/GRR/rhomaxHighMag.png" data-background-position='right' data-background-size="65%">
+					<div style="float: left; width: 30%">
+						<h2>Extreme case</h2>
+						<p>
+							<ul>
+								<li>
+									Perform BNS mergers with $B \sim 10^{16} \text{G}$;
+								</li>
+								<li>
+									Resistive case $\sigma \simeq 2 \cdot 10^{17} \text{ s}^{-1}$;
+								</li>
+								<li>
+									Post-merger collapse <em>massively delayed</em> by resistivity;
+								</li>
+								<li>
+									Suggests helicity evolution key?
+								</li>
+							</ul>
+						</p>
+					</div>
+					<aside class="notes">
+						To check that this effect is real and not an artefact of small corrections, Alex went to the most extreme case plausible. The resistivity remains the same, but we remember that resistive effects (such as changes in helicity) are also linked to the magnetic field strength. By increasing the seed magnetic field to magnetar strength, the limit of what might be plausible, we can check the impact of resistivity. <br>
+						Now the delay in black hole formation is long enough that the simulation can barely be performed. It's clear that something about resistivity is increasing the effective pressure support.
+					</aside>
+				</section>
+
+				<section>
+					<div style="position:fixed; top:0; left:0; width:650px; height:768px;">
+						<h2>Pressure support</h2>
+						<p>
+							<ul>
+								<li>
+									Angle-averaged slices;
+								</li>
+								<li>
+									$\rho, e$ unchanged: energy not put into heat;
+								</li>
+								<li class="fragment" data-fragment-index="0">
+									Magnetic field differences larger;
+								</li>
+								<li class="fragment" data-fragment-index="0">
+									Effective "centrifugal pressure" main difference;
+								</li>
+								<li class="fragment" data-fragment-index="1">
+									Suggests: resistivity re-orders field (helicity), reduces turbulent magnetic drag, increases rotation, delays collapse.
+								</li>
+							</ul>
+						</p>
+					</div>
+					<div style="position:fixed; top:0; right:0; width:576px; height:768px;">
+					  <img class="fragment fade-out" data-fragment-index="0" width="576" src="figures/GRR/meanBinsPlusPressSliceXZ1MedRes.png" style="position:absolute;top:0;left:0;"/>
+					  <img class="fragment fade-in" data-fragment-index="0" width="576" src="figures/GRR/pressureBinsSliceXZMedRes.png" style="position:absolute;top:0;left:0;"/>
+					</div>
+					<aside class="notes">
+						First, we consider the matter distribution. From the top row we can see that whilst there is some small variation, the matter is distributed nearly identically in both simulations. The similarities are a result of the time at which the snapshots are taken, and should mean that differences in other interesting quantities, such as internal energy density for example, are not a result of variations in the matter distribution but rather some other process, likely due to the inclusion of resistivity.
+						<br>
+						The second row shows the internal energy density distribution, $e$. If some resistive process was more efficiently transferring energy into the fluid or increasing entropy, this would be shown as a  rise in $e$. There are some differences at $t=7.6$ms, with a larger internal energy densities for iBNS at all radii, but this feature seems to be insignificant with variations of $\lesssim 10\%$. Furthermore, the differences seem not to persist, and are not present in the later snapshot. We can conclude from this that the damping of the oscillations for the rBMP is not caused by transfer of this energy into heat.
+						<br>
+						In the final two rows we plot the distribution of the magnetic norm and the corresponding magnetic energy density. These plots show significantly larger differences between the two simulations. The ideal simulation shows a general trend in which the magnetic quantities begin large and evolve to lower values. This is in contrast the resistive simulation, in which we see the opposite effect, culminating in a stronger and more energetic  magnetic fields by the time the iBMP collapses. These results do not explain why the rBMP collapses later than the iBMP, they do suggest, however, that the magnetic fields may be responsible in some capacity. To a degree, we should expect this, as the effects of resistivity tend to be more pronounced on the magnetic fields.
+						<br>
+						Fundamentally, the delayed collapse of rBMP must be a result of some additional outward net force, or pressure gradient, that is present in the resistive simulation but absent from the ideal. One hypothesis is that the pressure gradient associated with the magnetic fields it greater in rBMP, and that this small change to the total pressure is enough to prevent the collapse of the critical HMNS for a short period of time. To understand the interplay of the different sources of pressure in the system, we now present the angle-averaged pressure distributions and their corresponding gradients at the final snapshot where $t=9.55\si{ms}$.
+						<br>
+						The first row shows the hydrodynamic pressure and its associated gradient. Generally, the two simulations show rather similar profiles in this respect, with negative pressure gradients providing resistance against collapse. Quantitatively, the profiles are essentially identical for $r\gtrsim3\si{km}$, with the rBMP showing a larger negative $\nabla p_{\mathrm{hydro}}$ for $r\lesssim3\si{km}$, and therefore resisting collapse more strongly.
+						<br>
+						The next row shows the pressure and associated pressure gradient of the magnetic fields. We noted from earlier that there is a significant difference in the strength and energy contained within the magnetic fields, raising the question as to whether an increased magnetic pressure (gradient) is responsible for the delay. From the plot of the magnetic pressure, it is clear that whilst there are substantial changes in the profiles, the magnitude is far too small to affect the collapse time of rBMP (when compared to the magnitude of the hydro pressure). Of course, this effect may grow and be a contributing factor for simulations of larger strength initial fields, but for these simulations can be discounted.
+						<br>
+						In the third row, we show the effective centrifugal pressure, $p_{\mathrm{centrifugal}}$ within the two BMPs, and the corresponding effective pressure gradient, $\nabla p_{\mathrm{centrifugal}}$. Here, we can see magnitudes that are comparable to those of the hydrodynamic pressure, and differences between the ideal and resistive simulations that are significant. In the core region, $r\lesssim3\si{km}$, differences in the pressure gradient profiles between the simulations are an order of magnitude, with the iBMP showing a substantial <i>positive</i> pressure gradient. A positive effective pressure gradient would act to suck matter towards the core, promoting collapse rather than resisting it. We can see the effect of this in the final row, where we plot the sum of all  pressure sources.
+						<br>
+						The addition of the effective centrifugal pressure has a large effect on the total pressure gradient in the core, with the iBMP showing signs of a pressure profile that will promote collapse in contrast with the profile of the rBMP which is opposing the collapse strongly. It is likely that the size of this effect is large enough to be a contributing factor to the subsequent collapse of the iBMP, and the delay in the collapse of rBMP.
+					</aside>
+				</section>
+
+			</section>
+
+			<section id="Summary">
+
+				<section data-background="figures/GRR/cuts_snapsh_xy_IF_MRMedRes.png" data-background-position="right" data-background-size="55%">
+					<div style="float: left; width: 43%">
+						<h2>Summary</h2>
+						<p>
+							<ul>
+								<li>
+									BNS mergers often <em>nearly</em> ideal.
+								</li>
+								<li>
+									Including only leading order non-ideal effects
+									<ul>
+										<li>
+									 		can avoid stiffness problems;
+										</li>
+										<li>
+											can show qualitative physical changes.
+										</li>
+									</ul>
+								</li>
+								<li>
+									How to capture physical effects on average at this order?
+								</li>
+							</ul>
+						</p>
+					</div>
+					<aside class="notes">
+						Thank you for your attention.
+					</aside>
+				</section>
+
+			</section>
+
+			<section id="Additional material">
+
 				<section>
 					<div>
 						<h2>The general case</h2>
@@ -344,51 +570,44 @@
 					</aside>
 				</section>
 
-				<section data-background="figures/GRR/rhomaxMedRes.png" data-background-position='right' data-background-size="65%">
+				<section data-background="figures/GRR/gw_strain_multisimMedRes.png" data-background-position='right' data-background-size="70%">
 					<div style="float: left; width: 30%">
-						<h2>Moderate case</h2>
+						<h2>GWs</h2>
 						<p>
-							<ul>
-								<li>
-									Perform BNS mergers with $B \sim 10^{12} \text{G}$;
-								</li>
-								<li>
-									Qualitative results are similar;
-								</li>
-								<li>
-									Post-merger collapse to black hole <em>delayed</em> by resistivity.
-								</li>
-							</ul>
+							Resistivity damps modulation faster.
+						</p>
+						<p>
+							Effect of delayed collapse, not cause.
 						</p>
 					</div>
 					<aside class="notes">
-						Working together with Bruno Giacomazzo, Alex has repeated the simulation of a magnetized binary neutron star merger shown at the start of the talk. However, he's also added resistivity. Here we're showing the results of the simplest case: the resistivity is constant, and as large as reasonably seems plausible (which is still six orders of magnitude smaller than previous simulations). This gives us the most direct comparison of the effect of resistivity to date. <br>
-						Most qualitative features are unchanged by the introduction of resistivity. The clearest difference can be seen by tracking the maximum density in the simulation, which is usually at the core of the stars or the remnant. The first vertical line indicates the point where the stars merge. The dots, associated with the steep drop in density, is when the black hole forms.
-						<br>
-						We clearly see a delay in the formation of the black hole when resistivity is included. This seemed odd to us: we expected that resistivity would, well, resist the motion, slowing the matter, and reducing the effective pressure support from rotation. So our expectations were that any visible resistive effects would lead to earlier collapse, not later.
+						The delayed collapse has an effect on the resulting gravitational wave signal. Whilst the waveforms of the two simulations share most of their features, they begin to diverge a few ms after merger, with rBNS showing an extended ringdown. The GW strain also gives information regarding the oscillation modes of the remnant. The fundamental mode of the BMP is seen as the rapid oscillation, 3-4kHz, during the ringdown. There is also a second mode modulating this high frequency signal at around 1kHz. This mode is present for both simulations, but appears to decay more rapidly in the resistive simulation. This suggests that some process is removing energy from this mode of oscillation and transferring it elsewhere.
 					</aside>
 				</section>
 
-				<section data-background="figures/GRR/rhomaxHighMag.png" data-background-position='right' data-background-size="65%">
-					<div style="float: left; width: 30%">
-						<h2>Extreme case</h2>
-						<p>
-							<ul>
-								<li>
-									Perform BNS mergers with $B \sim 10^{16} \text{G}$;
-								</li>
-								<li>
-									This field strength is extreme (magnetar);
-								</li>
-								<li>
-									Post-merger collapse to black hole <em>massively delayed</em> by resistivity.
-								</li>
-							</ul>
-						</p>
+				<section data-background="figures/GRR/B_norm_slices_all.png" data-background-position='right' data-background-size="80%">
+					<div style="float: left; width: 10%">
+						<h2>$|B|$</h2>
+
 					</div>
 					<aside class="notes">
-						To check that this effect is real and not an artefact of small corrections, Alex went to the most extreme case plausible. The resistivity remains the same, but we remember that resistive effects (such as changes in helicity) are also linked to the magnetic field strength. By increasing the seed magnetic field to magnetar strength, the limit of what might be plausible, we can check the impact of resistivity. <br>
-						Now the delay in black hole formation is long enough that the simulation can barely be performed. It's clear that something about resistivity is increasing the effective pressure support.
+						Part of the following analysis will require looking at angle-averaged quantities in the $x$-$z$ plane. For this analysis to be accurate, we need to be confident that the data is approximately symmetric about the $z$-axis. Here we show three snapshots of the magnetic field norm at four heights, $z = 0$, $15$, $30$ and $45\si{km}$, for the two simulations. We can see that there is no sign of any large scale, asymmetric features such as spiral arms, and so can confidently assume that the data is approximately symmetric about the $z$-axis for both simulations.
+						<br>
+						The left column measures $t$ relative to merger; the right colum measures $t$ relative to horizon formation.
+					</aside>
+				</section>
+
+				<section data-background="figures/GRR/pcentrifugal_gradient_slice_xzMedRes.png" data-background-position='bottom' data-background-size="100%">
+					<div style="float: top; width: 100%">
+						<h2>Centrifugal pressure</h2>
+
+					</div>
+					<aside class="notes">
+							As we have identified differences in the effective centrifugal pressure as a likely contributing factor for the delayed collapse of rBMP, we will now analyse it in more detail. This figure shows the distribution of the effective centrifugal pressure gradient in the $x$-$z$ slice for the ideal (top row) and resistive (bottom row), at each snapshot in time. In the initial snapshot ($t\approx5.7$ms) the profiles are very similar, with no substantial differences between the simulations. By the second and third snapshots, however, there is a large, positive effective pressure gradient that has developed in the ideal simulation that is not present in the resistive simulation. Furthermore, the effect is highly concentrated in the region where the rest-mass density is greatest, and where the horizon is formed---ie the core.
+							<br>
+							The relative contribution of the effective centrifugal pressure can be seen in Figure \ref{fig:med res all grad pressures}, where we show slices in the $x$-$z$ plane at $t\approx9.55$ms of the gradients of the centrifugal pressure (first column), the magnetohydrodynamic pressure (second column) and the total pressure (final column). The total pressure profile in the core of the iBMP is significantly altered by the effective centrifugal pressure, with a large increase in the size of the region of positive gradient. This suggests that this effect can have a large impact on the stability of the HMNS remnant, providing a mechanism to speed up or slow down eventual collapse. A similar region exists in the core of the rBMP, but is significantly reduced in both extent and magnitude.
+							<br>
+							Ultimately, the effective centrifugal pressure is a result of the mass distribution and the profile of the velocity that is perpendicular to the radius. We have seen that the matter is distributed in the same way in both simulations as thus can conclude that the velocity profiles must be different in the BMP cores. Differences in the velocity profiles will be due to the braking of the flux-freezing condition of ideal MHD in the resistive simulation. In the ideal simulation, the fluid cannot cross the magnetic field lines, resulting in a force that resists the fluid motion, changing the fluid's velocity vector and strongly reconfiguring the magnetic fields. This will not occur to the same extent in the resistive simulation, whereby the fluid may cross field lines to some degree.
 					</aside>
 				</section>
 
@@ -416,40 +635,6 @@
 						The best idea we have for the cause of delayed collapse is the magnetic field structure. Here we have plots of some magnetic field lines and two constant density surfaces. The ideal case is at the top, resistive at the bottom. We're still trying to find a good quantitative way of analysing the magnetic field structure, so for now we focus on visual analysis of the field lines as shown here, and proxy analysis via the magnetic pressure and an effective rotational pressure, not shown here. <br>
 						The key result from the analysis is that resistivity has no noticeable impact on the magnitude of the magnetic fields, but does have an impact on its ordering. This is probably easier to see, although still not easy, by looking at the field line structure in the bottom of both plots. <br>
 						The argument that we want to make from this is that the messy, almost turbulent magnetic field structure that occurs during merger, will be simplified by the resistivity. We expect this analytically from helicity arguments, but it appears to be a substantial effect. By making the magnetic field more "structured" the fluid rotates faster, increasing the effective pressure support and delaying collapse.
-					</aside>
-				</section>
-
-			</section>
-
-			<section id="Summary">
-
-				<section data-background="figures/GRR/cuts_snapsh_xy_IF_MRMedRes.png" data-background-position="right" data-background-size="55%">
-					<div style="float: left; width: 43%">
-						<h2>Summary</h2>
-						<p>
-							<ul>
-								<li>
-									Astrophysical problems are often <em>nearly</em> ideal.
-								</li>
-								<li>
-									Leading order non-ideal effects
-									<ul>
-										<li>
-									 		can avoid stiffness problems;
-										</li>
-										<li>
-											can show qualitative physical changes.
-										</li>
-									</ul>
-								</li>
-								<li>
-									Adaptive Model Refinement can make simulations practical across the full range of parameter space.
-								</li>
-							</ul>
-						</p>
-					</div>
-					<aside class="notes">
-						Thank you for your attention.
 					</aside>
 				</section>
 
