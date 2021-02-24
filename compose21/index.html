@@ -405,11 +405,11 @@
 
 				<section data-background="figures/GRR/rhomaxMedRes.png" data-background-position='right' data-background-size="65%">
 					<div style="float: left; width: 30%">
-						<h2>Moderate case</h2>
+						<h2>$B \sim 10^{12} \text{G}$</h2>
 						<p>
 							<ul>
 								<li>
-									Perform BNS mergers with $B \sim 10^{12} \text{G}$;
+									<a href="https://arxiv.org/abs/1607.01791">Kawamura et al</a>, $M \sim 1.6 M_{\odot}$, gamma-law EOS;
 								</li>
 								<li>
 									Resistive case $\sigma \simeq 2 \cdot 10^{17} \text{ s}^{-1}$;
@@ -433,17 +433,17 @@
 
 				<section data-background="figures/GRR/rhomaxHighMag.png" data-background-position='right' data-background-size="65%">
 					<div style="float: left; width: 30%">
-						<h2>Extreme case</h2>
+						<h2>$B \sim 10^{16} \text{G}$</h2>
 						<p>
 							<ul>
 								<li>
-									Perform BNS mergers with $B \sim 10^{16} \text{G}$;
+									Helicity timescale $\sim \eta |B|$;
 								</li>
 								<li>
 									Resistive case $\sigma \simeq 2 \cdot 10^{17} \text{ s}^{-1}$;
 								</li>
 								<li>
-									Post-merger collapse <em>massively delayed</em> by resistivity;
+									Collapse <em>massively delayed</em> by resistivity;
 								</li>
 								<li>
 									Suggests helicity evolution key?
@@ -635,6 +635,44 @@
 						The best idea we have for the cause of delayed collapse is the magnetic field structure. Here we have plots of some magnetic field lines and two constant density surfaces. The ideal case is at the top, resistive at the bottom. We're still trying to find a good quantitative way of analysing the magnetic field structure, so for now we focus on visual analysis of the field lines as shown here, and proxy analysis via the magnetic pressure and an effective rotational pressure, not shown here. <br>
 						The key result from the analysis is that resistivity has no noticeable impact on the magnitude of the magnetic fields, but does have an impact on its ordering. This is probably easier to see, although still not easy, by looking at the field line structure in the bottom of both plots. <br>
 						The argument that we want to make from this is that the messy, almost turbulent magnetic field structure that occurs during merger, will be simplified by the resistivity. We expect this analytically from helicity arguments, but it appears to be a substantial effect. By making the magnetic field more "structured" the fluid rotates faster, increasing the effective pressure support and delaying collapse.
+					</aside>
+				</section>
+
+				<section>
+					<div>
+						<h2>Israel-Stewart toy model</h2>
+						<p>
+							Extreme simplification of Israel-Stewart:
+							$$
+							\begin{aligned}
+						      \partial_t T + \partial_x q &=0, \\
+						      \tau_q \partial_t q &= \tilde{q}(T) - q, \qquad \tilde{q} = -\lambda \partial_x T.
+						  \end{aligned}
+							$$
+						</p>
+						<p>
+							Chapman-Enskog for $\tau_q \ll 1$:
+							$$
+								\partial_t T = \lambda \partial_{xx} T - \tau_q \lambda^2 \partial_{xxxx} T.
+							$$
+						</p>
+						<p>
+							<ul>
+								<li>
+									Retention-diffusion equation.
+								</li>
+								<li>
+									Stability limits asymptotically stricter from $\partial_x^{(4)}$ term.
+								</li>
+							</ul>
+						</p>
+					</div>
+					<aside class="notes">
+						The same Chapman-Enskog expansion could be applied to more complex systems. In the context of LES, where we want to use this approach to ensure the closure relations are stable when they capture short/fast scale physics, this means we need a model of non-ideal hydrodynamics. We look at Israel-Stewart.
+						<br>
+						For now, it's enough to look at a slow-motion toy model. We see that the gradient expansion approach means we're going to get higher derivative terms at leading order. With this very simplified model (where we've dropped the heat terms - this is basically the Cattaneo equation) we end up with a linear equation. When we put flux terms back in, or look at simplified bulk viscosity models, the correction terms are no longer linear and involve a larger combination of derivative corrections, from second to fourth order.
+						<br>
+						Performing the same linearized von Neumann analysis as in the resistivity case we see that this correction term has much stricter bounds when the grid size gets small: this suggests it will be less likely that this method will be practically useful.
 					</aside>
 				</section>
 
