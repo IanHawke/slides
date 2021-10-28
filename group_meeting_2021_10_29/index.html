@@ -9,7 +9,7 @@
 
 		<title>Group Meeting</title>
 
-		<meta name="description" content="Group Meeting, September 2020">
+		<meta name="description" content="Group Meeting, October 2021">
 		<meta name="author" content="Ian Hawke">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -108,76 +108,88 @@
 
 				<section id="Title">
 
-					<section data-background="figures/JCM-fast-bubble.png" data-background-size="90%" data-background-position="bottom">
+					<section>
 
-						<h1>Interfaces</h1>
-
+						<div>
+							<h2>IPAM meeting</h2>
+						</div>
+						<div>
+							<h3><a href="http://www.ipam.ucla.edu/programs/long-programs/mathematical-and-computational-challenges-in-the-era-of-gravitational-wave-astronomy/">Mathematical and Computational Challenges in the Era of Gravitational Wave Astronomy</a></h3>
+						</div>
+						<div>
+							<p>
+								<ul>
+									<li> <a href="http://www.ipam.ucla.edu/programs/workshops/workshop-i-computational-challenges-in-multi-messenger-astrophysics/?tab=schedule">Workshop I: Computational Challenges in Multi-Messenger Astrophysics : October 4-8, 2021</a> </li>
+									<li style="color :red;"> Workshop II: Mathematical and Numerical Aspects of Gravitation : October 25-29, 2021 </li>
+									<li> Workshop III: Source inference and parameter estimation in Gravitational Wave Astronomy : November 15-19, 2021 </li>
+									<li> Workshop IV: Big Data in Multi-Messenger Astrophysics : November 29 - December 3, 2021 </li>
+								</ul>
+							</p>
+						</div>
 						<aside class="notes">
-							We want to do simulations of relativistic matter with qualitative changes in the matter on short length and time scales. There are many ways to do this.
+							IPAM long workshop
 						</aside>
 					</section>
 
 				</section>
 
-				<section id="Examples">
+				<section id="NSs">
 
 					<section data-background="figures/nstar_plot.png" data-background-size="50%" data-background-position="right">
 
 						<div style="width:50%; float:'left'">
-							<h1>Interfaces</h1>
+							<h1>NS mergers</h1>
 							<p>
 								<ul>
 									<li>
-										Crust-core (elastic-fluid);
+										Radice; Rezzolla; Shibata; Ciolfi; Palenzuela.
 									</li>
 									<li>
-										Interior-exterior (matter-vacuum);
+										"Confident" on merger; post-merger (MHD) turbulence and neutrinos much less certain.
 									</li>
 									<li>
-										Phase transitions (fluid-fluid);
+										Phase transitions a big talking point.
 									</li>
 									<li>
-										and so on.
+										Palenzuela's results on MHD via LES impressive.
 									</li>
 								</ul>
 							</p>
 						</div>
 
 						<aside class="notes">
-							Any qualitative change in the matter (or particularly the most useful matter model) on a length scale less than the grid size is effectively a sharp jump. When thinking of binary merger simulations, this means transitions on scales of metres or less. There are many examples: crust-core, interior-exterior, viscous boundary layers of any type.
+							Five major talks on binary mergers. Radice, Shibata and Ciolfi seemed to have a "consensus" viewpoint about which physics mattered when, and also were confident through merger (although the discussion largely avoided magnetic fields). Palenzuela showed how LES could ensure convergence of the magnetic fields through merger - impressive but the last talk so little discussed. Rezzolla tried to buck the consensus a bit, but the key results match. Phase transitions were discussed a fair amount, although to little real purpose IMO.
 						</aside>
 					</section>
 
 				</section>
 
-				<section id="Types">
+				<section id="CCSN">
 
 					<section data-background="figures/diffuse_vs_sharp.png" data-background-size="30%" data-background-position="right">
 
 						<div style="width:70%; float:'left'">
-							<h2>Diffuse or sharp</h2>
+							<h2>Stellar collapse</h2>
 							<p>
 								<ul>
 									<li>
-										"True" \(T^{\text{NS}}_{ab}\) too complex/expensive.
+										Mezzacappa; Kotake; Aloy; Powell; di Palma.
 									</li>
 									<li>
-										Take limits \(T^{\text{el}}_{ab}\),  \(T^{\text{fl}}_{ab}\).
+										Emphasis on neutrino physics.
 									</li>
 									<li>
-										Diffuse model: \[T_{ab} = \alpha T^{\text{el}}_{ab} + (1 - \alpha) T^{\text{fl}}_{ab}.\]
+
 									</li>
 									<li>
-										Sharp model: \[T_{ab} = H(\alpha) T^{\text{el}}_{ab} + (1 - H(\alpha)) T^{\text{fl}}_{ab}.\]
+
 									</li>
 								</ul>
 							</p>
 						</div>
 
 						<aside class="notes">
-							There is no case where we can solve using the true stress energy tensor of neutron star matter, but this is particularly true for nonlinear merger simulations. Instead we take simplified limits: here I use the elastic and fluid limits to illustrate. In different regions of spacetime each limit will be more (or less) appropriate. The question is how we model the whole star.<br>
-							In diffuse interface models the total stress energy tensor is, in principle, some combination of the individual limiting stress energies. As an illustration here I'm using a volume fraction weighting of the two, creating a mixture model at every point in spacetime. More general models are possible. Over most of spacetime one term will dominate and you simulate only that. In the interface region, however, the model considers a mixture. This model needs a number of additional closure relations, for the volume fraction, and for how forces (from the divergence of the stress energy) are distributed between the two limiting tensors. Enforcing thermodynamic consistency can be tricky at both analytic and numerical levels. However, when this is possible, and when the lengthscales make it practical, this is the easiest approach. Unfortunately it's rarely useful in a neutron star context (although you can think of the atmosphere treatment through this lens).<br>
-							In the sharp interface approach the stress energy at any point in spacetime is given by only one of the individual stress energy tensors. The interface between the two is a point, or surface, on which boundary conditions are imposed. Some of these boundary conditions are natural, as we need the normal components of stress-energy to be continuous (this is continuity of traction). In some cases ("stick" boundary conditions) the tangential components may also vanish. We still need a closure relation for the scalar field \(\alpha\), which we usually advect with the flow. In sharp interface methods we have a lot more control over the behaviour at the interface, and it is not smeared over unphysical lengthscales. This makes it more relevant for neutron star simulations. Enforcing thermodynamic consistency can still be a problem. I will focus on sharp interface methods for the rest of this presentation.
+
 						</aside>
 
 					</section>
