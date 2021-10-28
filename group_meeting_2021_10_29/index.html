@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+
+<!--
+-->
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Group Meeting</title>
+
+		<meta name="description" content="Group Meeting, September 2020">
+		<meta name="author" content="Ian Hawke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../reveal.js/css/print/pdf.css' : '../reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--MathJax stuff -->
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}, TeX: { extensions: ["autobold.js"] }});
+		</script>
+		<script type="text/javascript"
+		  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+
+		<!--PDF print -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../reveal.js/css/print/pdf.css' : '../reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+		<!--Left align-->
+		<style type="text/css">
+			.reveal p { text-align: left; }
+			.reveal ol,
+			.reveal dl,
+			.reveal ul {
+			  display: block;
+			  text-align: left;
+			  margin: 0 0 0 1em; }
+			.reveal h1 {
+				text-transform: none;
+				line-height: 2.0
+			}
+			.reveal h2,
+			.reveal h3,
+			.reveal h4 {
+				text-transform: none;
+			}
+			.reveal table td {
+				border-bottom: none;
+			}
+			.reveal.slide .slides > section, .reveal.slide .slides > section > section {
+			  min-height: 100% !important;
+			  display: flex !important;
+			  flex-direction: column !important;
+			  justify-content: center !important;
+			  position: absolute !important;
+			  top: 0 !important;
+			  align-items: center !important;
+			}
+			section > h1, section > h2 {
+			  position: absolute !important;
+			  top: 0 !important;
+			  margin-left: auto !important;
+			  margin-right: auto !important;
+			  left: 0 !important;
+			  right: 0 !important;
+			  text-align: center !important;
+			}
+			.print-pdf .reveal.slide .slides > section, .print-pdf .reveal.slide .slides > section > section {
+			  min-height: 770px !important;
+			  position: relative !important;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="Title">
+
+					<section data-background="figures/JCM-fast-bubble.png" data-background-size="90%" data-background-position="bottom">
+
+						<h1>Interfaces</h1>
+
+						<aside class="notes">
+							We want to do simulations of relativistic matter with qualitative changes in the matter on short length and time scales. There are many ways to do this.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Examples">
+
+					<section data-background="figures/nstar_plot.png" data-background-size="50%" data-background-position="right">
+
+						<div style="width:50%; float:'left'">
+							<h1>Interfaces</h1>
+							<p>
+								<ul>
+									<li>
+										Crust-core (elastic-fluid);
+									</li>
+									<li>
+										Interior-exterior (matter-vacuum);
+									</li>
+									<li>
+										Phase transitions (fluid-fluid);
+									</li>
+									<li>
+										and so on.
+									</li>
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+							Any qualitative change in the matter (or particularly the most useful matter model) on a length scale less than the grid size is effectively a sharp jump. When thinking of binary merger simulations, this means transitions on scales of metres or less. There are many examples: crust-core, interior-exterior, viscous boundary layers of any type.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Types">
+
+					<section data-background="figures/diffuse_vs_sharp.png" data-background-size="30%" data-background-position="right">
+
+						<div style="width:70%; float:'left'">
+							<h2>Diffuse or sharp</h2>
+							<p>
+								<ul>
+									<li>
+										"True" \(T^{\text{NS}}_{ab}\) too complex/expensive.
+									</li>
+									<li>
+										Take limits \(T^{\text{el}}_{ab}\),  \(T^{\text{fl}}_{ab}\).
+									</li>
+									<li>
+										Diffuse model: \[T_{ab} = \alpha T^{\text{el}}_{ab} + (1 - \alpha) T^{\text{fl}}_{ab}.\]
+									</li>
+									<li>
+										Sharp model: \[T_{ab} = H(\alpha) T^{\text{el}}_{ab} + (1 - H(\alpha)) T^{\text{fl}}_{ab}.\]
+									</li>
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+							There is no case where we can solve using the true stress energy tensor of neutron star matter, but this is particularly true for nonlinear merger simulations. Instead we take simplified limits: here I use the elastic and fluid limits to illustrate. In different regions of spacetime each limit will be more (or less) appropriate. The question is how we model the whole star.<br>
+							In diffuse interface models the total stress energy tensor is, in principle, some combination of the individual limiting stress energies. As an illustration here I'm using a volume fraction weighting of the two, creating a mixture model at every point in spacetime. More general models are possible. Over most of spacetime one term will dominate and you simulate only that. In the interface region, however, the model considers a mixture. This model needs a number of additional closure relations, for the volume fraction, and for how forces (from the divergence of the stress energy) are distributed between the two limiting tensors. Enforcing thermodynamic consistency can be tricky at both analytic and numerical levels. However, when this is possible, and when the lengthscales make it practical, this is the easiest approach. Unfortunately it's rarely useful in a neutron star context (although you can think of the atmosphere treatment through this lens).<br>
+							In the sharp interface approach the stress energy at any point in spacetime is given by only one of the individual stress energy tensors. The interface between the two is a point, or surface, on which boundary conditions are imposed. Some of these boundary conditions are natural, as we need the normal components of stress-energy to be continuous (this is continuity of traction). In some cases ("stick" boundary conditions) the tangential components may also vanish. We still need a closure relation for the scalar field \(\alpha\), which we usually advect with the flow. In sharp interface methods we have a lot more control over the behaviour at the interface, and it is not smeared over unphysical lengthscales. This makes it more relevant for neutron star simulations. Enforcing thermodynamic consistency can still be a problem. I will focus on sharp interface methods for the rest of this presentation.
+						</aside>
+
+					</section>
+
+					<section data-background="figures/track_vs_capture.png" data-background-size="30%" data-background-position="right">
+
+						<div style="width:70%; float:'left'">
+							<h2>Track or capture</h2>
+							<p>
+								<ul>
+									<li>
+										Interface tracking:
+										<ul>
+											<li>
+												Put coordinates on interface (particles), advect particles with flow, reconstruct interface location.
+											</li>
+											<li>
+												Location "exact", curvatures more tricky.
+											</li>
+											<li>
+												Twisting and reconnection a hard problem.
+											</li>
+										</ul>
+									</li>
+									<li>
+										Interface capturing:
+										<ul>
+											<li>
+												Interface as zero-contour of scalar field, advect scalar field.
+											</li>
+											<li>
+												Location "captured", curvatures simple.
+											</li>
+											<li>
+												Topology change easy.
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+							Within the sharp interface approach there are two steps required. First, we must locate where the boundary is, with any of its properties (for example, if surface tension matters you need to know the curvature). There are two standard approaches.<br>
+							In <em>tracking</em> approaches we essentially use Lagrangian coordinates to follow the location of the interface. This is "exact" in some sense. If we knew the advection velocity for the interface exactly, and could solve the ODEs exactly, we would know the location exactly at points, or particles, within the interface. Reconstructing the boundary location between points on the interface is harder, as is computing curvatures, as the interface may behave in arbitrarily odd ways between particle points. This is linked to the vorticity of the flow which can twist the interface and cause reconnection. In strongly vortical flows, or when topology changes, interface tracking can be really hard. This is often the situation in neutron star mergers.<br>
+							In <em>capturing</em> approaches we use a scalar field in the Eulerian coordinates advected with the flow. The zero level set contour of this field is the interface. We no longer know the exact location of the interface - it is only "captured" up to a grid cell width on the Eulerian grid. However, computing curvatures is simple, and topology change is handled straightforwardly. As this works for neutron star mergers it's the approach I've concentrated on.
+						</aside>
+
+					</section>
+
+					<section data-background="figures/bcs_internal_external.png" data-background-size="30%" data-background-position="right">
+
+						<div style="width:70%; float:'left'">
+							<h2>BCs: internal or external</h2>
+							<p>
+								Applying the BC \( [ s^a T_{ab} ] = 0 \):
+								<ul>
+									<li>
+										Internal approach:
+										<ul>
+											<li>
+												Compute normal force, "smear" over cells.
+											</li>
+											<li>
+												Easy to add, internally conservative.
+											</li>
+											<li>
+												Thermodynamic consistency not enforced, issues with strong shocks.
+											</li>
+										</ul>
+									</li>
+									<li>
+										External approach:
+										<ul>
+											<li>
+												Compute "ghost" cell with wave structure.
+											</li>
+											<li>
+												Works with shocks, standard numerics.
+											</li>
+											<li>
+												Loss of conservation, more complex.
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+							The second step a sharp interface method needs to do is to apply the boundary conditions once the location of the boundary is known. For simplicity I'll just think about those continuity of traction conditions normal to the interface, but things could be more complex. Again there are two approaches.<br>
+							The first is that from the embedded boundary approach. The effect of the boundary condition is considered by its effect on the material currently under consideration, say the fluid. Its impact is considered as a force applied by the interface. Rather than trying to impose this force exactly at the boundary (which is hard, numerically) it is distributed over the neighbouring computational cells. Essentially, it is smeared out. It will then act as a body force. This retains conservation and captures the boundary effects. However, it's unclear if it is thermodynamically consistent, which means if a shock hits the interface it's unclear if its behaviour is correctly captured. It's also difficult to get the smearing consistent on both sides of the boundary. When one side is a (semi)-rigid body that's not such an issue, but getting force consistency at the interface isn't clear.<br>
+							The second approach is from the ghost fluid method. It's standard to apply boundary conditions by introducing "ghost cells" that live outside the computational domain, and filling them with "ghost data" that captures the correct effect at the boundary. The GFM does this with the internal interface. We have the nonlinear problem of finding the state that produces the wave structure and thermodynamic behaviour encoded in the interface boundary condition. This is computationally painful, especially in complex geometries, but does ensure correct behaviour with strong shocks. We do lose conservation, however, as the interface moves, due to the interaction between the level set capturing the interface location, and the filling of the ghost cells.
+						</aside>
+
+					</section>
+
+				</section>
+
+				<section id="Examples">
+
+					<section data-background="figures/sr_mhd_bubble.png" data-background-size="45%" data-background-position="right">
+
+						<div style="width:55%; float:'left'">
+							<h2>SR MHD</h2>
+							<p>
+								<a href="http://eprints.soton.ac.uk/375551/">John Muddle</a>'s thesis:
+								<ul>
+									<li>
+										Mach 1.5 shock hits a bubble; magnetic field in \(x\)-direction.
+									</li>
+									<li>
+										Magnetic field resists vortical windup, but "fingering" still occurs.
+									</li>
+									<li>
+										Needs consistency of
+										<ul>
+											<li>
+												thermodynamics for shock;
+											</li>
+											<li>
+												magnetic fields - Alfven waves crucial;
+											</li>
+											<li>
+												interface windup with vorticity.
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+							In John Muddle's thesis (look on eprints) he developed a ghost fluid method that is consistent for essentially arbitrary matter models. Using the level set to capture the location of the interface and a thermodynamically consistent approximation of the wave structure he was able to simulate interface interaction between fluids and vacuum or between magnetized fluids.<br>
+							The example here is an extension of the standard bubble test used in Newtonian cases. Both fluids use a simple gamma-law equation of state, but with different parameters, so waves will propagate faster through the "bubble". A magnetic field is added, just using the $B_x$ component, which will resist the deformation of the bubble. The plasma beta parameter is large so behaviour is still dominated by the hydrodynamics. A Mach 1.5 shock is injected from the right. The snapshots in time should be read top to bottom then left to right (two columns). The top half of each plot is the density. The bottom half shows the shock structure through a Schlieren plot (Laplacian of the density) in grey, and the vorticity.<br>
+							The key physics captured here is how the Alfven waves slowly propagate the vorticity away from the interfaces. This reduces the vortical windup of the interface and the growth of the "fingers", although - in this hydrodynamically dominated case - they still appear. The key numerical issue is that correctly capturing this effect requires a number of physical features to be consistent at the interface, particularly the thermodynamics and the wave structure including the Alfven waves.
+						</aside>
+
+					</section>
+
+						<section data-background="figures/crustquake.gif" data-background-size="75%" data-background-position="bottom">
+
+							<div style="width:100%; float:'left'">
+								<h2>Crust quakes</h2>
+								<p>
+									<a href="http://eprints.soton.ac.uk/375532/">Stephanie Erickson</a>'s thesis:
+								</p>
+							</div>
+
+							<aside class="notes">
+								In Stephanie Erickson's thesis (look on eprints) she developed methods for relativistic elastic matter and used the ghost fluid method for a toy model of a crust quake. Here we have a solid crust coupled to a fluid core with an external atmosphere. In this figure the $p_{xx}$ component of the stress tensor is shown on the left, and its deviation from the equilibrium value on the right. When it starts to evolve the velocity vectors of the matter are also shown. Reading the figure from top to bottom we have the atmosphere, then the crust (which is anisotropically stressed in a small ball), then the fluid.<br>
+								The key physics captured here is how the stress propagates through the crust and into the fluid, slightly deforming the interfaces as it goes. Even by the end the system has still not completely relaxed, with significant stress still visible. Numerically, it is essential to correctly capture the wave structure to get the appropriate elastic behaviour.
+							</aside>
+
+						</section>
+
+				</section>
+
+				<section id="Details">
+
+					<section data-background="figures/GFM.png" data-background-size="95%" data-background-position="bottom">
+
+						<div>
+							<h1>GFM sketch</h1>
+						</div>
+
+						<aside class="notes">
+							A schematic of how the GFM works. For a point in the "real" fluid under consideration, find its normal (by finite differencing the level set). Find the point in the physical model on the other side of the interface (it's usually not exactly on a point, so interpolate as appropriate). Set up a multi-material Riemann problem using these two states. Approximate the wave structure as appropriate, and solve. This gives the state in the "real" fluid under consideration that would be needed to produce the right wave structure. Impose that in the ghost cell. Extrapolate normal to the interface as needed.
+						</aside>
+
+					</section>
+
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="../reveal.js/js/reveal.js"></script>
+
+		<script>
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+        controlsTutorial: false,
+        overview: true,
+				progress: true,
+        hash: true,
+				history: true,
+				center: false,
+				width:  1366,
+				height: 768,
+				// showNotes = true,
+				margin: 0.05,
+				transition: 'none', // none/fade/slide/convex/concave/zoom
+        backgroundTransition: 'none',
+				// Parallax background image
+			    //parallaxBackgroundImage: '../../figures/hs-2009-05-a-full_jpg.jpg', // e.g. "https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg"
+			    // Parallax background size
+			    //parallaxBackgroundSize: '2145px 1213px', // CSS syntax, e.g. "2100px 900px" - currently only pixels are supported (don't use % or auto)
+			    // Amount of pixels to move the parallax background per slide step,
+			    // a value of 0 disables movement along the given axis
+			    // These are optional, if they aren't specified they'll be calculated automatically
+			    //parallaxBackgroundHorizontal: 200,
+			    //parallaxBackgroundVertical: 50
+				math: {
+			        mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
+			        config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+			    },
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: '../reveal.js/plugin/math/math.js', async: true },
+					{ src: '../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
+					{ src: '../reveal.js/plugin/notes/notes.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
