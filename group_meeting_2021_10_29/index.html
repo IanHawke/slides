@@ -131,18 +131,34 @@
 						</aside>
 					</section>
 
+					<section>
+
+						<div>
+							<h1>ICERM?</h1>
+							<p>
+								<a href="https://icerm.brown.edu/programs/sp-f20">Advances in Computational Relativity</a> in 2020 had similar structure.
+								<ul>
+									<li>IPAM is hybrid, not virtual.</li>
+									<li>ICERM had more EMRIs, IPAM more maths.</li>
+									<li>A lot of overlap.</li>
+								</ul>
+							</p>
+						</div>
+
+					</section>
+
 				</section>
 
 				<section id="NSs">
 
-					<section data-background="figures/nstar_plot.png" data-background-size="50%" data-background-position="right">
+					<section data-background="figures/bns.png" data-background-size="43%" data-background-position="right">
 
-						<div style="width:50%; float:'left'">
+						<div style="width:60%; float:'left'">
 							<h1>NS mergers</h1>
 							<p>
 								<ul>
 									<li>
-										Radice; Rezzolla; Shibata; Ciolfi; Palenzuela.
+										Radice; Rezzolla; Shibata; Ciolfi; Murgia-Berthier; Hamilton; Palenzuela.
 									</li>
 									<li>
 										"Confident" on merger; post-merger (MHD) turbulence and neutrinos much less certain.
@@ -158,7 +174,8 @@
 						</div>
 
 						<aside class="notes">
-							Five major talks on binary mergers. Radice, Shibata and Ciolfi seemed to have a "consensus" viewpoint about which physics mattered when, and also were confident through merger (although the discussion largely avoided magnetic fields). Palenzuela showed how LES could ensure convergence of the magnetic fields through merger - impressive but the last talk so little discussed. Rezzolla tried to buck the consensus a bit, but the key results match. Phase transitions were discussed a fair amount, although to little real purpose IMO.
+							Five major talks on binary mergers. Radice, Shibata and Ciolfi seemed to have a "consensus" viewpoint about which physics mattered when, and also were confident through merger (although the discussion largely avoided magnetic fields aside from Ciolfi, Palenzuela). Palenzuela showed how LES could ensure convergence of the magnetic fields through merger - impressive but the last talk so little discussed. Rezzolla tried to buck the consensus a bit, but the key results match. Phase transitions were discussed a fair amount, although to little real purpose IMO. <br>
+							Should also mention talks by Murgia-Berthier, Hamilton as much more implementation focused - useful if you want implementation details, but less on the physics.
 						</aside>
 					</section>
 
@@ -166,23 +183,61 @@
 
 				<section id="CCSN">
 
-					<section data-background="figures/diffuse_vs_sharp.png" data-background-size="30%" data-background-position="right">
+					<section data-background="figures/ccsn.png" data-background-size="48%" data-background-position="right">
 
-						<div style="width:70%; float:'left'">
+						<div style="width:50%; float:'left'">
 							<h2>Stellar collapse</h2>
 							<p>
 								<ul>
 									<li>
-										Mezzacappa; Kotake; Aloy; Powell; di Palma.
+										Cerda Duran; Mezzacappa; Kotake; Aloy; Powell; di Palma.
 									</li>
 									<li>
 										Emphasis on neutrino physics.
 									</li>
 									<li>
-
+										Astroseismology and inference - optimistic.
 									</li>
 									<li>
+										Code comparisons - don't look good...
+									</li>
+									<li>
+										Machine learning.
+									</li>
+								</ul>
+							</p>
+						</div>
 
+						<aside class="notes">
+							Most of the stellar collapse talks focused on Type II core collapse. The exception was Aloy who's looking for extreme cases and goes for hypermassive progenitors. Look to Mezzapcappa and Kotake for detailed descriptions of neutrinos and the impact on explosions. Look to Cerda Duran for potential links to parameter estimation using GWs via astroseismology. Powell was very detailed on GWs, but showed a very disheartening code comparison. di Palma was interested in neutrino observations and did machine learning on a fake parametrised waveform.
+						</aside>
+
+					</section>
+
+				</section>
+
+				<section id="BBH">
+
+					<section data-background="figures/bbh_accretion.png" data-background-size="50%" data-background-position="right">
+
+						<div style="width:40%; float:'left'">
+							<h1>Black holes</h1>
+							<p>
+								<ul>
+									<li>
+										Lousto; Shoemaker; Campanelli; Pfeiffer.
+									</li>
+									<li>
+										Environmental questions and accretion - mass transfer, spin, EM signals.
+									</li>
+									<li>
+										3G detectors a big push.
+									</li>
+									<li>
+										Extremal cases.
+									</li>
+									<li>
+										EMRI links.
 									</li>
 								</ul>
 							</p>
@@ -194,86 +249,27 @@
 
 					</section>
 
-					<section data-background="figures/track_vs_capture.png" data-background-size="30%" data-background-position="right">
+				</section>
 
-						<div style="width:70%; float:'left'">
-							<h2>Track or capture</h2>
+				<section id="Other">
+
+					<section data-background="figures/nonconvex2.png" data-background-size="50%" data-background-position="right">
+
+						<div style="width:40%; float:'left'">
+							<h1>Other talks</h1>
 							<p>
 								<ul>
 									<li>
-										Interface tracking:
-										<ul>
-											<li>
-												Put coordinates on interface (particles), advect particles with flow, reconstruct interface location.
-											</li>
-											<li>
-												Location "exact", curvatures more tricky.
-											</li>
-											<li>
-												Twisting and reconnection a hard problem.
-											</li>
-										</ul>
+										Modified gravity: Witek; Lehner.
 									</li>
 									<li>
-										Interface capturing:
-										<ul>
-											<li>
-												Interface as zero-contour of scalar field, advect scalar field.
-											</li>
-											<li>
-												Location "captured", curvatures simple.
-											</li>
-											<li>
-												Topology change easy.
-											</li>
-										</ul>
-									</li>
-								</ul>
-							</p>
-						</div>
-
-						<aside class="notes">
-							Within the sharp interface approach there are two steps required. First, we must locate where the boundary is, with any of its properties (for example, if surface tension matters you need to know the curvature). There are two standard approaches.<br>
-							In <em>tracking</em> approaches we essentially use Lagrangian coordinates to follow the location of the interface. This is "exact" in some sense. If we knew the advection velocity for the interface exactly, and could solve the ODEs exactly, we would know the location exactly at points, or particles, within the interface. Reconstructing the boundary location between points on the interface is harder, as is computing curvatures, as the interface may behave in arbitrarily odd ways between particle points. This is linked to the vorticity of the flow which can twist the interface and cause reconnection. In strongly vortical flows, or when topology changes, interface tracking can be really hard. This is often the situation in neutron star mergers.<br>
-							In <em>capturing</em> approaches we use a scalar field in the Eulerian coordinates advected with the flow. The zero level set contour of this field is the interface. We no longer know the exact location of the interface - it is only "captured" up to a grid cell width on the Eulerian grid. However, computing curvatures is simple, and topology change is handled straightforwardly. As this works for neutron star mergers it's the approach I've concentrated on.
-						</aside>
-
-					</section>
-
-					<section data-background="figures/bcs_internal_external.png" data-background-size="30%" data-background-position="right">
-
-						<div style="width:70%; float:'left'">
-							<h2>BCs: internal or external</h2>
-							<p>
-								Applying the BC \( [ s^a T_{ab} ] = 0 \):
-								<ul>
-									<li>
-										Internal approach:
-										<ul>
-											<li>
-												Compute normal force, "smear" over cells.
-											</li>
-											<li>
-												Easy to add, internally conservative.
-											</li>
-											<li>
-												Thermodynamic consistency not enforced, issues with strong shocks.
-											</li>
-										</ul>
+										Observational aspects: Quitzow-James, Janiuk.
 									</li>
 									<li>
-										External approach:
-										<ul>
-											<li>
-												Compute "ghost" cell with wave structure.
-											</li>
-											<li>
-												Works with shocks, standard numerics.
-											</li>
-											<li>
-												Loss of conservation, more complex.
-											</li>
-										</ul>
+										Numerical theory: Serna, LeFloch.
+									</li>
+									<li>
+										CCE: Winicour.
 									</li>
 								</ul>
 							</p>
@@ -283,81 +279,6 @@
 							The second step a sharp interface method needs to do is to apply the boundary conditions once the location of the boundary is known. For simplicity I'll just think about those continuity of traction conditions normal to the interface, but things could be more complex. Again there are two approaches.<br>
 							The first is that from the embedded boundary approach. The effect of the boundary condition is considered by its effect on the material currently under consideration, say the fluid. Its impact is considered as a force applied by the interface. Rather than trying to impose this force exactly at the boundary (which is hard, numerically) it is distributed over the neighbouring computational cells. Essentially, it is smeared out. It will then act as a body force. This retains conservation and captures the boundary effects. However, it's unclear if it is thermodynamically consistent, which means if a shock hits the interface it's unclear if its behaviour is correctly captured. It's also difficult to get the smearing consistent on both sides of the boundary. When one side is a (semi)-rigid body that's not such an issue, but getting force consistency at the interface isn't clear.<br>
 							The second approach is from the ghost fluid method. It's standard to apply boundary conditions by introducing "ghost cells" that live outside the computational domain, and filling them with "ghost data" that captures the correct effect at the boundary. The GFM does this with the internal interface. We have the nonlinear problem of finding the state that produces the wave structure and thermodynamic behaviour encoded in the interface boundary condition. This is computationally painful, especially in complex geometries, but does ensure correct behaviour with strong shocks. We do lose conservation, however, as the interface moves, due to the interaction between the level set capturing the interface location, and the filling of the ghost cells.
-						</aside>
-
-					</section>
-
-				</section>
-
-				<section id="Examples">
-
-					<section data-background="figures/sr_mhd_bubble.png" data-background-size="45%" data-background-position="right">
-
-						<div style="width:55%; float:'left'">
-							<h2>SR MHD</h2>
-							<p>
-								<a href="http://eprints.soton.ac.uk/375551/">John Muddle</a>'s thesis:
-								<ul>
-									<li>
-										Mach 1.5 shock hits a bubble; magnetic field in \(x\)-direction.
-									</li>
-									<li>
-										Magnetic field resists vortical windup, but "fingering" still occurs.
-									</li>
-									<li>
-										Needs consistency of
-										<ul>
-											<li>
-												thermodynamics for shock;
-											</li>
-											<li>
-												magnetic fields - Alfven waves crucial;
-											</li>
-											<li>
-												interface windup with vorticity.
-											</li>
-										</ul>
-									</li>
-								</ul>
-							</p>
-						</div>
-
-						<aside class="notes">
-							In John Muddle's thesis (look on eprints) he developed a ghost fluid method that is consistent for essentially arbitrary matter models. Using the level set to capture the location of the interface and a thermodynamically consistent approximation of the wave structure he was able to simulate interface interaction between fluids and vacuum or between magnetized fluids.<br>
-							The example here is an extension of the standard bubble test used in Newtonian cases. Both fluids use a simple gamma-law equation of state, but with different parameters, so waves will propagate faster through the "bubble". A magnetic field is added, just using the $B_x$ component, which will resist the deformation of the bubble. The plasma beta parameter is large so behaviour is still dominated by the hydrodynamics. A Mach 1.5 shock is injected from the right. The snapshots in time should be read top to bottom then left to right (two columns). The top half of each plot is the density. The bottom half shows the shock structure through a Schlieren plot (Laplacian of the density) in grey, and the vorticity.<br>
-							The key physics captured here is how the Alfven waves slowly propagate the vorticity away from the interfaces. This reduces the vortical windup of the interface and the growth of the "fingers", although - in this hydrodynamically dominated case - they still appear. The key numerical issue is that correctly capturing this effect requires a number of physical features to be consistent at the interface, particularly the thermodynamics and the wave structure including the Alfven waves.
-						</aside>
-
-					</section>
-
-						<section data-background="figures/crustquake.gif" data-background-size="75%" data-background-position="bottom">
-
-							<div style="width:100%; float:'left'">
-								<h2>Crust quakes</h2>
-								<p>
-									<a href="http://eprints.soton.ac.uk/375532/">Stephanie Erickson</a>'s thesis:
-								</p>
-							</div>
-
-							<aside class="notes">
-								In Stephanie Erickson's thesis (look on eprints) she developed methods for relativistic elastic matter and used the ghost fluid method for a toy model of a crust quake. Here we have a solid crust coupled to a fluid core with an external atmosphere. In this figure the $p_{xx}$ component of the stress tensor is shown on the left, and its deviation from the equilibrium value on the right. When it starts to evolve the velocity vectors of the matter are also shown. Reading the figure from top to bottom we have the atmosphere, then the crust (which is anisotropically stressed in a small ball), then the fluid.<br>
-								The key physics captured here is how the stress propagates through the crust and into the fluid, slightly deforming the interfaces as it goes. Even by the end the system has still not completely relaxed, with significant stress still visible. Numerically, it is essential to correctly capture the wave structure to get the appropriate elastic behaviour.
-							</aside>
-
-						</section>
-
-				</section>
-
-				<section id="Details">
-
-					<section data-background="figures/GFM.png" data-background-size="95%" data-background-position="bottom">
-
-						<div>
-							<h1>GFM sketch</h1>
-						</div>
-
-						<aside class="notes">
-							A schematic of how the GFM works. For a point in the "real" fluid under consideration, find its normal (by finite differencing the level set). Find the point in the physical model on the other side of the interface (it's usually not exactly on a point, so interpolate as appropriate). Set up a multi-material Riemann problem using these two states. Approximate the wave structure as appropriate, and solve. This gives the state in the "real" fluid under consideration that would be needed to produce the right wave structure. Impose that in the ghost cell. Extrapolate normal to the interface as needed.
 						</aside>
 
 					</section>
