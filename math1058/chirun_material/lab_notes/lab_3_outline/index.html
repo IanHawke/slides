@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        
+            <meta charset="utf-8">
+            <meta name="robots" content="noindex">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="author" content="Ian Hawke" />
+            <meta name="date" content="2022-01-25" />
+        
+
+        <title>Lab 3 outline | Operational Research and Mathematical Computing</title>
+
+        
+    
+    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../../static/styles.css">
+            <link rel="stylesheet" id="customiseCSS" href="../../static/light.css">
+            
+            
+        
+    <link rel="stylesheet" id="customiseCodeCSS" href="../../static/pygmentize.light.css">
+    <link rel="stylesheet" href="../../static/codemirror-5.26.0/lib/codemirror.css">
+    <link rel="stylesheet" href="../../static/boole.css">
+    <link rel="stylesheet" href="../../static/numbasEmbed.css">
+
+    <link rel="stylesheet" href="../../static/bootstrap-toc.css?v=3">
+    <link rel="stylesheet" href="../../static/print.css">
+
+
+        
+    
+    
+            <script defer src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <script defer src="../../static/mathjax_config.js"></script>
+            <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+            <script defer src="../../static/customisation.js"></script>
+            <script defer src="../../static/mp4.js"></script>
+            
+            
+        
+    <script defer src="../../static/jquery.flexibleArea.js"></script>
+    <script defer src="../../static/spin.min.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/lib/codemirror.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/octave/octave.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/python/python.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/r/r.js"></script>
+    <script defer src="../../static/boole.js"></script>
+    <script defer src="../../static/numbasEmbed.js"></script>
+
+    <script defer src="../../static/bootstrap-toc.js"></script>
+
+    </head>
+    <body data-spy="scroll" data-target="#chapterTOC" data-offset="50">
+        
+<div class="collapse" id="navbarToggleCustomise">
+	<div class="bg-secondary text-white p-3">
+		<form onsubmit="return false;" id="navbarCustomise">
+			<div class="form-row">
+				<label>Theme Customisation</label>
+				<div id="themeSelector" class="form-group col-md-12">
+					<button class="btn btn-dark mr-2" value="dark">Dark</button>
+					<button class="btn btn-pastel mr-2" value="pastel">Pastel</button>
+					<button class="btn btn-light mr-4" value="light">Light</button>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label style="display: block" for="font-scale">Font size (<span id="font-size-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="font-scale" min="50" max="600" value="100">
+					<button id="font-scale-reset" class="btn btn-sm">Reset</button>
+				</div>
+				<div class="form-group col-md-4">
+					<label style="display: block" for="p-space">Spacing (<span id="p-space-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="p-space" min="0" max="600" value="100">
+					<button id="p-space-reset" class="btn btn-sm">Reset</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<nav aria-label="breadcrumb">
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="../../index.html">Operational Research and Mathematical Computing</a>
+		</li>
+		
+		<li class="breadcrumb-item">
+			<a href="../../lab_notes/index.html">Lab notes</a>
+		</li>
+		
+		<li class="breadcrumb-item active">
+			Lab 3 outline
+		</li>
+		<li class="ml-auto">
+			<button class="navbar-toggler p0" type="button" data-toggle="collapse" data-target="#navbarToggleCustomise" aria-controls="navbarToggleCustomise" aria-expanded="false" aria-label="Toggle customisations panel">
+				<i class="fa fa-cog" aria-hidden="true" title="Toggle customisations panel"></i> <span class="sr-only">Toggle customisations panel</span>
+			</button>
+		</li>
+	</ul>
+</nav>
+
+
+        <header>
+            
+            
+        </header>
+        <main>
+            
+    <div class="container mt-3">
+        <div class="row">
+            
+            <div id="sidebar" class="col-md-3">
+                <nav class="mb-3" id="chapterTOC" data-toggle="toc">
+                    <ul class="nav navbar-nav">
+                        
+                        
+                        <li><a id="notebook-link" class="nav-link" href="../../lab_notes/lab_3_outline/lab_3_outline.ipynb" download><i class="fa fa-book" aria-hidden="true" title="Download Notebook"></i>&nbsp;Download Notebook</a></li>
+                        
+                        
+                        <li><a id="pdf-link" class="nav-link" href="../../lab_notes/lab_3_outline/lab_3_outline.pdf" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" title="Download as PDF"></i>&nbsp;Download as PDF</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+            <div id="content" class="col-md-9"> 
+            
+            <section class="section1"><h1>Lab week 3</h1>
+<p>In week 2 we introduced lists and looked at <code>for</code> loops.</p>
+<section class="section2"><h2>Script</h2>
+<p>Last time we saw lists. A list contains many objects. Likewise, there are many mathematical things that contain many objects.</p>
+<p>Sets are one type. If you add a set to another set you get a new set containing the objects in both sets. The new set is larger (generically) than either individual set.</p>
+<p>Vectors are another type. If you add one vector to another vector you get a new vector whose components are the sum of the individual vector components. The new vector has the same size (in terms of number of components) as the individual vectors.</p>
+<p>How does a list act?</p>
+<div class="highlight"><pre><span></span><span class="n">list_1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">list_2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">list_1</span> <span class="o">+</span> <span class="n">list_2</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[1, 2, 3, 4]
+</pre></div>
+<p>A list acts like the description of a set, not like a vector.</p>
+<p>Consider what multiplying a container by a scalar number should do for a set and a vector. Then check a list:</p>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">list_1</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[1, 2, 1, 2]
+</pre></div>
+<p>Again, lists act more like sets than vectors.</p>
+<p>This is fine when we want to work with general sets. However, we will also frequently need (as in Linear Algebra) vectors, and matrices, and so on. In Python, we can use <code>numpy</code> for this: in particular we can use its <code>array</code> object. These can be created directly from lists.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="n">vector_1</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">list_1</span><span class="p">)</span>
+<span class="n">vector_2</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">list_2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vector_1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vector_1</span> <span class="o">+</span> <span class="n">vector_2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">vector_1</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[1 2]
+[4 6]
+[2 4]
+</pre></div>
+<p>We see that an <code>array</code> is displayed much like a list (using spaces rather than commas to separate entries). However, it acts as a vector would: addition of a pair of two-dimensional vectors produces another two-dimensional vector, as does multiplication of a two-dimensional vector by a scalar.</p>
+<p>Note that the <code>len</code> function and the indexing operations act the same as on lists:</p>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vector_1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vector_1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+<div class="highlight"><pre><span></span>2
+1
+</pre></div>
+<div class="highlight"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">vector_n</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vector_n</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vector_n</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vector_n</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[1 2 3 4 5]
+5
+[2 3 4]
+</pre></div>
+<p>There are some restrictions with <code>numpy</code> arrays. They are meant to represent vectors, matrices, and similar higher dimensional objects. So if you nest lists within lists you must do so consistently:</p>
+<div class="highlight"><pre><span></span><span class="n">matrix_wrong_1</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+</pre></div>
+<div class="highlight"><pre><span></span>---------------------------------------------------------------------------
+
+ValueError                                Traceback (most recent call last)
+
+&lt;ipython-input-6-ce621beadb7d&gt; in &lt;module&gt;()
+----&gt; 1 matrix_wrong_1 = numpy.array([1, 2, [3, 4]])
+
+
+ValueError: setting an array element with a sequence.
+</pre></div>
+<div class="highlight"><pre><span></span><span class="n">matrix_right_1</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">matrix_right_1</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[[1 2]
+ [3 4]]
+</pre></div>
+<p>You should also use only a single type of object in a <code>numpy</code> <code>array</code>: do not mix numbers with strings, for example.</p>
+<p>With higher dimensional objects like matrices you can access them in two ways. Either use the "list of lists" approach:</p>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">matrix_right_1</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+<div class="highlight"><pre><span></span>1
+</pre></div>
+<p>The alternative, which is preferred, is to treat it as a single object that takes multiple indexes:</p>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">matrix_right_1</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+</pre></div>
+<div class="highlight"><pre><span></span>1
+</pre></div>
+<p>Slicing works with higher dimensional objects:</p>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">matrix_right_1</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">matrix_right_1</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[1 3]
+[3 4]
+</pre></div>
+<p>There are a number of utility functions for creating matrices:</p>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[ 1.  1.  1.]
+[[ 1.  1.]
+ [ 1.  1.]]
+[[ 0.  0.]
+ [ 0.  0.]]
+[[ 1.  0.  0.]
+ [ 0.  1.  0.]
+ [ 0.  0.  1.]]
+[[ 0.11645041  0.82370944]
+ [ 0.69588563  0.87133502]]
+</pre></div>
+<p>Note that the conventions of the functions are not always consistent.</p>
+<section class="section5"><h5>Exercise</h5>
+<p>In the Gaussian Elimination algorithm a matrix (or augmented matrix) is reduced to triangular form by subtracting rows from each other. Write a function <code>row_elimination</code> that takes a matrix <code>A</code> and two row numbers <code>r1</code> and <code>r2</code>. It should return the matrix <code>A</code> with <script type="math/tex">\epsilon \times</script>
+<code>r1</code> subtracted from row <code>r2</code>. Here <code>epsilon</code> should make the matrix entry <script type="math/tex">a_{r_2, r_1} \to 0</script>: that is,
+<script type="math/tex; mode=display">
+  \epsilon = \frac{a_{r_2, r_1}}{a_{r_1, r_1}}.
+</script>
+</p>
+<p>Check on the matrix
+<script type="math/tex; mode=display">
+A = \begin{pmatrix}
+1 & 4 & 3 \\
+2 & -7 & 5 \\
+1 & 2 & 6
+\end{pmatrix}.
+</script>
+Can you use or extend your function to write a function that takes <code>A</code> and returns the triangular form?</p>
+<p>The <code>numpy</code> package also contains a lot of useful Linear Algebra functions in its <code>linalg</code> subpackage. For example, matrix multiplication and dot products:</p>
+<div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[[28 20 11]
+ [76 47 26]
+ [97 29 23]]
+[14 41 59]
+35
+</pre></div>
+<p>Computing determinants:</p>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+</pre></div>
+<div class="highlight"><pre><span></span>27.0
+</pre></div>
+<p>Solving linear systems of equations, such as <script type="math/tex">A {\bf x} = {\bf d}</script>:</p>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[ -6.33333333e+00   5.66666667e+00  -1.40980702e-16]
+</pre></div>
+</section><section class="section5"><h5>Exercise</h5>
+<p>Define three matrices:
+<script type="math/tex; mode=display">
+A = \begin{pmatrix}
+1 & 4 & 3 & 2 \\
+2 & -7 & 5 & 1 \\
+1 & 2 & 6 & 0 \\
+2 & -10 & 3 & 4
+\end{pmatrix}, \quad
+B = \begin{pmatrix}
+5 & 2 & -4 & -2 \\
+-3 & 1 & 5 & 1 \\
+4 & -1 & 1 & 3 \\
+2 & 1 & -1 & 1
+\end{pmatrix}, \quad
+C = \begin{pmatrix}
+3 & 0 & 0 & 0 \\
+7 & -6 & 0 & 0 \\
+2 & -1 & -1 & 0 \\
+-4 & -2 & 2 & -2
+\end{pmatrix}.
+</script>
+Compute the ranks of all matrices. Compute the determinants of
+<script type="math/tex; mode=display">
+A^T B^{-1}, \qquad B/4, \qquad C, \qquad 2 B + C.
+</script>
+</p>
+</section></section></section>
+            </div>
+        </div>
+    </div>
+
+        </main>
+		
+		<footer class="text-muted">
+	<hr>
+	<div class="container">
+		<div class="float-right">
+			<ul style="list-style: none">
+			<li><a href="#">Back to top</a></li>
+			
+			
+			<li><a href="../../lab_notes/lab_3_outline/lab_3_outline.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;Download as PDF</a></li>
+			
+			</ul>
+		</div>
+		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
+		<p>This page last generated: 2022-01-25</p>
+	</div>
+</footer>
+		
+    </body>
+</html>

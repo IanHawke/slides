@@ -1,0 +1,658 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        
+            <meta charset="utf-8">
+            <meta name="robots" content="noindex">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="author" content="Ian Hawke" />
+            <meta name="date" content="2022-01-25" />
+        
+
+        <title>Lab 9 outline | Operational Research and Mathematical Computing</title>
+
+        
+    
+    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../../static/styles.css">
+            <link rel="stylesheet" id="customiseCSS" href="../../static/light.css">
+            
+            
+        
+    <link rel="stylesheet" id="customiseCodeCSS" href="../../static/pygmentize.light.css">
+    <link rel="stylesheet" href="../../static/codemirror-5.26.0/lib/codemirror.css">
+    <link rel="stylesheet" href="../../static/boole.css">
+    <link rel="stylesheet" href="../../static/numbasEmbed.css">
+
+    <link rel="stylesheet" href="../../static/bootstrap-toc.css?v=3">
+    <link rel="stylesheet" href="../../static/print.css">
+
+
+        
+    
+    
+            <script defer src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <script defer src="../../static/mathjax_config.js"></script>
+            <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+            <script defer src="../../static/customisation.js"></script>
+            <script defer src="../../static/mp4.js"></script>
+            
+            
+        
+    <script defer src="../../static/jquery.flexibleArea.js"></script>
+    <script defer src="../../static/spin.min.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/lib/codemirror.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/octave/octave.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/python/python.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/r/r.js"></script>
+    <script defer src="../../static/boole.js"></script>
+    <script defer src="../../static/numbasEmbed.js"></script>
+
+    <script defer src="../../static/bootstrap-toc.js"></script>
+
+    </head>
+    <body data-spy="scroll" data-target="#chapterTOC" data-offset="50">
+        
+<div class="collapse" id="navbarToggleCustomise">
+	<div class="bg-secondary text-white p-3">
+		<form onsubmit="return false;" id="navbarCustomise">
+			<div class="form-row">
+				<label>Theme Customisation</label>
+				<div id="themeSelector" class="form-group col-md-12">
+					<button class="btn btn-dark mr-2" value="dark">Dark</button>
+					<button class="btn btn-pastel mr-2" value="pastel">Pastel</button>
+					<button class="btn btn-light mr-4" value="light">Light</button>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label style="display: block" for="font-scale">Font size (<span id="font-size-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="font-scale" min="50" max="600" value="100">
+					<button id="font-scale-reset" class="btn btn-sm">Reset</button>
+				</div>
+				<div class="form-group col-md-4">
+					<label style="display: block" for="p-space">Spacing (<span id="p-space-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="p-space" min="0" max="600" value="100">
+					<button id="p-space-reset" class="btn btn-sm">Reset</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<nav aria-label="breadcrumb">
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="../../index.html">Operational Research and Mathematical Computing</a>
+		</li>
+		
+		<li class="breadcrumb-item">
+			<a href="../../lab_notes/index.html">Lab notes</a>
+		</li>
+		
+		<li class="breadcrumb-item active">
+			Lab 9 outline
+		</li>
+		<li class="ml-auto">
+			<button class="navbar-toggler p0" type="button" data-toggle="collapse" data-target="#navbarToggleCustomise" aria-controls="navbarToggleCustomise" aria-expanded="false" aria-label="Toggle customisations panel">
+				<i class="fa fa-cog" aria-hidden="true" title="Toggle customisations panel"></i> <span class="sr-only">Toggle customisations panel</span>
+			</button>
+		</li>
+	</ul>
+</nav>
+
+
+        <header>
+            
+            
+        </header>
+        <main>
+            
+    <div class="container mt-3">
+        <div class="row">
+            
+            <div id="sidebar" class="col-md-3">
+                <nav class="mb-3" id="chapterTOC" data-toggle="toc">
+                    <ul class="nav navbar-nav">
+                        
+                        
+                        <li><a id="notebook-link" class="nav-link" href="../../lab_notes/lab_9_outline/lab_9_outline.ipynb" download><i class="fa fa-book" aria-hidden="true" title="Download Notebook"></i>&nbsp;Download Notebook</a></li>
+                        
+                        
+                        <li><a id="pdf-link" class="nav-link" href="../../lab_notes/lab_9_outline/lab_9_outline.pdf" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" title="Download as PDF"></i>&nbsp;Download as PDF</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+            <div id="content" class="col-md-9"> 
+            
+            <section class="section1"><h1>Lab week 9</h1>
+<p>This builds directly on week 8.</p>
+<section class="section2"><h2>Building robust functions</h2>
+<p>Constructing any mathematical algorithm is both an end in itself and a tool for future use. Being able to solve one linear programming problem using the Simplex method is good. Being able to solve any (suitable) linear programming problem using a function implementing the Simplex method allows us to ask more complicated questions. For example, how sensitive is the optimal solution to different constraints? This may be hard to answer analytically, but by calling our Simplex method function with slightly different inputs we can explore this question numerically.</p>
+<p>However, this <em>only</em> works if the function we are calling is robust. We know that Simplex "fails" on certain inputs (for example, when the problem is unbounded). If we accidentally pass in incorrect input (an unbounded problem, for example), or nonsense (the right inputs, but in the wrong order, for example), then we need our function to catch this error and inform us. If we don't, we might use nonsense output from the Simplex function as "true" results for our more complex questions.</p>
+</section><section class="section2"><h2>Documentation as contract</h2>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simplex_method</span><span class="p">(</span><span class="n">cost_coeffs</span><span class="p">,</span> <span class="n">rhs_coeffs</span><span class="p">,</span> <span class="n">lp_coeffs</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Simplex method</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    cost_coeffs : vector of float</span>
+<span class="sd">        Cost coefficients (appear in objective function), length nvars</span>
+<span class="sd">    rhs_coeffs : vector of float</span>
+<span class="sd">        Coefficients on RHS of inequalities, length nvars</span>
+<span class="sd">    lp_coeffs : array of float</span>
+<span class="sd">        Coefficients on LHS of inequalities, size nvars x nvars</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    status : str</span>
+<span class="sd">        "optimal" or "unbounded" depending on problem.</span>
+<span class="sd">    z : float</span>
+<span class="sd">        Minimized objective function.</span>
+<span class="sd">    x : vector of float</span>
+<span class="sd">        Optimized coefficients.</span>
+<span class="sd">    """</span>
+    <span class="n">nvars</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rhs_coeffs</span><span class="p">)</span>
+    <span class="n">tableau</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="o">+</span><span class="n">nvars</span><span class="p">,</span> <span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">nvars</span><span class="p">))</span>
+    <span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">rhs_coeffs</span>
+    <span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="n">nvars</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">cost_coeffs</span>
+    <span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">1</span><span class="p">:</span><span class="n">nvars</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">lp_coeffs</span>
+    <span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="n">nvars</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">nvars</span><span class="p">)</span>
+    <span class="c1"># Find negative cost coefficients</span>
+    <span class="n">negative_cost_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">negative_cost_idx</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"unbounded"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nvars</span><span class="p">)</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">negative_cost_idx</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">column</span> <span class="o">=</span> <span class="n">negative_cost_idx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="c1"># Bland's algorithm</span>
+        <span class="n">positive_tableau_idx</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="n">column</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">positive_tableau_idx</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">"unbounded"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nvars</span><span class="p">)</span>
+        <span class="n">ratio</span> <span class="o">=</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="n">column</span><span class="p">]</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="n">positive_tableau_idx</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">ratio</span><span class="p">[</span><span class="n">positive_tableau_idx</span><span class="p">])]</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="c1"># Pivot</span>
+        <span class="n">tableau</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">tableau</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="p">:]</span> <span class="o">/</span> <span class="n">tableau</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">work_row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nvars</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">row</span> <span class="o">==</span> <span class="n">work_row</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">scale</span> <span class="o">=</span> <span class="n">tableau</span><span class="p">[</span><span class="n">work_row</span><span class="p">,</span> <span class="n">column</span><span class="p">]</span> <span class="o">/</span> <span class="n">tableau</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">]</span>
+            <span class="n">tableau</span><span class="p">[</span><span class="n">work_row</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">tableau</span><span class="p">[</span><span class="n">work_row</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">scale</span> <span class="o">*</span> <span class="n">tableau</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="n">negative_cost_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># Check</span>
+    <span class="n">negative_cost_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="o">-</span><span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">x</span> <span class="o">=</span>  <span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="s2">"optimal"</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">x</span>
+</pre></div>
+<p>Above is an implementation of the simplex method. For now, concentrate on the documentation. In particular, note that the inputs are <em>required</em> to be arrays, that the arrays are <em>required</em> to be floating point (real) numbers, and that the sizes of the arrays are <em>required</em> to match.</p>
+<p>What happens if we don't match the requirements? Possibly nothing bad:</p>
+<div class="highlight"><pre><span></span><span class="n">cost_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">rhs_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">lp_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">simplex_method</span><span class="p">(</span><span class="n">cost_coeffs</span><span class="p">,</span> <span class="n">rhs_coeffs</span><span class="p">,</span> <span class="n">lp_coeffs</span><span class="p">))</span>
+</pre></div>
+<div class="highlight"><pre><span></span>('optimal', -2.6, array([2.2, 0.4]))
+</pre></div>
+<p>This looks like we did nothing wrong, but check the types of the numbers we passed in:</p>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">cost_coeffs</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rhs_coeffs</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lp_coeffs</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>int64
+int64
+int64
+</pre></div>
+<p>We actually passed in integers rather than floats. In many (but not all!) cases this doesn't make a difference, and so failing to perfectly match the requirement is not a problem.</p>
+<p>However, in other cases it can really matter:</p>
+<div class="highlight"><pre><span></span><span class="n">costs_too_long</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">simplex_method</span><span class="p">(</span><span class="n">costs_too_long</span><span class="p">,</span> <span class="n">rhs_coeffs</span><span class="p">,</span> <span class="n">lp_coeffs</span><span class="p">))</span>
+</pre></div>
+<div class="highlight"><pre><span></span>---------------------------------------------------------------------------
+
+ValueError                                Traceback (most recent call last)
+
+&lt;ipython-input-5-fd1557774531&gt; in &lt;module&gt;
+      1 costs_too_long = np.array([1.0, 2.0, 3.0])
+----&gt; 2 print(simplex_method(costs_too_long, rhs_coeffs, lp_coeffs))
+
+
+&lt;ipython-input-2-99868ecd8a46&gt; in simplex_method(cost_coeffs, rhs_coeffs, lp_coeffs)
+     24     tableau = np.zeros((1+nvars, 1+2*nvars))
+     25     tableau[1:, 0] = rhs_coeffs
+---&gt; 26     tableau[0, 1:nvars+1] = cost_coeffs
+     27     tableau[1:, 1:nvars+1] = lp_coeffs
+     28     tableau[1:, nvars+1:] = np.identity(nvars)
+
+
+ValueError: could not broadcast input array from shape (3) into shape (2)
+</pre></div>
+<p>The sizes were inconsistent, compared to the assumptions that we made within the algorithm. This leads to an error.</p>
+<p>The interpretation of this within Python is that <em>documentation is a contract</em>. The docstring of a function promises that <em>if</em> the inputs match the requirements, <em>then</em> the output will match the specifications. If the input doesn't meet requirements, then the function may <em>try</em> to produce sensible output, but may produce errors (or worse: it may produce output that looks plausible, but is wrong).</p>
+<p>Not all programming languages are as permissive as Python. Some will insist that the input matches very specific requirements and refuse to even try to compute an answer if not.</p>
+<p>Python uses what is called "duck-typing": if the input looks like a duck and quacks like a duck, it will be treated as a duck. In the first case above, integers (in this case) behave the same way as floats, and so can be treated as floats.</p>
+</section></section><section class="section1"><h1>Trying and failing</h1>
+<p>The flip side of duck typing and the permissive Python approach is that when errors occur, as in the second case above, they can be difficult to link to the problem that caused them, and the error message can be hard to interpret.</p>
+<p>We can improve our function by <em>adding in our own error messages</em> to explicitly catch, and explain, the error when calling the function.</p>
+<p>Let's extract the key part of the function, using the "incorrect" inputs:</p>
+<div class="highlight"><pre><span></span><span class="n">cost_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">])</span>
+<span class="n">rhs_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">lp_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+
+<span class="n">nvars</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rhs_coeffs</span><span class="p">)</span>
+<span class="n">tableau</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="o">+</span><span class="n">nvars</span><span class="p">,</span> <span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">nvars</span><span class="p">))</span>
+<span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">rhs_coeffs</span>
+<span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="n">nvars</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">cost_coeffs</span>
+</pre></div>
+<div class="highlight"><pre><span></span>---------------------------------------------------------------------------
+
+ValueError                                Traceback (most recent call last)
+
+&lt;ipython-input-6-413a3e940c5b&gt; in &lt;module&gt;
+      6 tableau = np.zeros((1+nvars, 1+2*nvars))
+      7 tableau[1:, 0] = rhs_coeffs
+----&gt; 8 tableau[0, 1:nvars+1] = cost_coeffs
+
+
+ValueError: could not broadcast input array from shape (3) into shape (2)
+</pre></div>
+<p>We see that we are programmatically setting up the tableau to have a specific size based on the number of equations, which is given by the number of RHS coefficients, which is given by the length of <code>rhs_coeffs</code>. However, we have <em>assumed</em> that this size, <code>nvars</code>, matches the number of variables, and hence the number of cost coefficients. We have documented this in the docstring - it is an underlying assumption in this (limited) implementation - but have not checked that it is true. When it is not true, as with this input, we get the error as the three entries in <code>cost_coeffs</code> cannot be stuffed into the two entries in that column of the <code>tableau</code>.</p>
+<p>This is, indeed, an error in the inputs: they do not match our contract. It is an error in the values of the variable <code>cost_coeffs</code>, so calling it a <code>ValueError</code> makes sense. However, the message - however correct it may be - does not immediately help us fix the problem. Now that we know what the problem is and where it comes from, we can do better, by <em>raising the error ourselves</em>.</p>
+<p>Modify the code to <em>check the inputs match the contract</em>:</p>
+<div class="highlight"><pre><span></span><span class="n">nvars</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rhs_coeffs</span><span class="p">)</span>
+<span class="n">tableau</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="o">+</span><span class="n">nvars</span><span class="p">,</span> <span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">nvars</span><span class="p">))</span>
+<span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">rhs_coeffs</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cost_coeffs</span><span class="p">)</span> <span class="o">!=</span> <span class="n">nvars</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"The length of cost_coeffs must match the length of rhs_coeffs."</span><span class="p">)</span>
+<span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="n">nvars</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">cost_coeffs</span>
+</pre></div>
+<div class="highlight"><pre><span></span>---------------------------------------------------------------------------
+
+ValueError                                Traceback (most recent call last)
+
+&lt;ipython-input-7-fc3a19c2e27b&gt; in &lt;module&gt;
+      3 tableau[1:, 0] = rhs_coeffs
+      4 if len(cost_coeffs) != nvars:
+----&gt; 5     raise ValueError("The length of cost_coeffs must match the length of rhs_coeffs.")
+      6 tableau[0, 1:nvars+1] = cost_coeffs
+
+
+ValueError: The length of cost_coeffs must match the length of rhs_coeffs.
+</pre></div>
+<p>This produces the exact same error as before, but now the error message tells the user calling the function exactly what needs to be fixed.</p>
+<p>We can use this to make our original function more robust. We can even modify the code so that we remove the need for a <code>status</code> flag. We can raise an exception if the problem is unbounded.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simplex_method</span><span class="p">(</span><span class="n">cost_coeffs</span><span class="p">,</span> <span class="n">rhs_coeffs</span><span class="p">,</span> <span class="n">lp_coeffs</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Simplex method</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    cost_coeffs : vector of float</span>
+<span class="sd">        Cost coefficients (appear in objective function), length nvars</span>
+<span class="sd">    rhs_coeffs : vector of float</span>
+<span class="sd">        Coefficients on RHS of inequalities, length nvars</span>
+<span class="sd">    lp_coeffs : array of float</span>
+<span class="sd">        Coefficients on LHS of inequalities, size nvars x nvars</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    z : float</span>
+<span class="sd">        Minimized objective function.</span>
+<span class="sd">    x : vector of float</span>
+<span class="sd">        Optimized coefficients.</span>
+<span class="sd">    """</span>
+    <span class="n">nvars</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rhs_coeffs</span><span class="p">)</span>
+    <span class="n">tableau</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="o">+</span><span class="n">nvars</span><span class="p">,</span> <span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">nvars</span><span class="p">))</span>
+    <span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">rhs_coeffs</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cost_coeffs</span><span class="p">)</span> <span class="o">!=</span> <span class="n">nvars</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"The length of cost_coeffs must match the length of rhs_coeffs."</span><span class="p">)</span>
+    <span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="n">nvars</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">cost_coeffs</span>
+    <span class="k">if</span> <span class="n">lp_coeffs</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="p">(</span><span class="n">nvars</span><span class="p">,</span> <span class="n">nvars</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"The shape of lp_coeffs must be (n, n) to match the length (n) of rhs_coeffs."</span><span class="p">)</span>
+    <span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">1</span><span class="p">:</span><span class="n">nvars</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">lp_coeffs</span>
+    <span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="n">nvars</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">nvars</span><span class="p">)</span>
+    <span class="c1"># Find negative cost coefficients</span>
+    <span class="n">negative_cost_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">negative_cost_idx</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"The problem is unbounded"</span><span class="p">)</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">negative_cost_idx</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">column</span> <span class="o">=</span> <span class="n">negative_cost_idx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="c1"># Bland's algorithm</span>
+        <span class="n">positive_tableau_idx</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="n">column</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">positive_tableau_idx</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"The problem is unbounded"</span><span class="p">)</span>
+        <span class="n">ratio</span> <span class="o">=</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="n">column</span><span class="p">]</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="n">positive_tableau_idx</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">ratio</span><span class="p">[</span><span class="n">positive_tableau_idx</span><span class="p">])]</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="c1"># Pivot</span>
+        <span class="n">tableau</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">tableau</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="p">:]</span> <span class="o">/</span> <span class="n">tableau</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">work_row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nvars</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">row</span> <span class="o">==</span> <span class="n">work_row</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">scale</span> <span class="o">=</span> <span class="n">tableau</span><span class="p">[</span><span class="n">work_row</span><span class="p">,</span> <span class="n">column</span><span class="p">]</span> <span class="o">/</span> <span class="n">tableau</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">]</span>
+            <span class="n">tableau</span><span class="p">[</span><span class="n">work_row</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">tableau</span><span class="p">[</span><span class="n">work_row</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">scale</span> <span class="o">*</span> <span class="n">tableau</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="n">negative_cost_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># Check</span>
+    <span class="n">negative_cost_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="o">-</span><span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">x</span> <span class="o">=</span>  <span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">z</span><span class="p">,</span> <span class="n">x</span>
+</pre></div>
+<p>We can check that this behaves as expected by putting in an unbounded problem:</p>
+<div class="highlight"><pre><span></span><span class="n">cost_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">rhs_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">lp_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">simplex_method</span><span class="p">(</span><span class="n">cost_coeffs</span><span class="p">,</span> <span class="n">rhs_coeffs</span><span class="p">,</span> <span class="n">lp_coeffs</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>---------------------------------------------------------------------------
+
+ValueError                                Traceback (most recent call last)
+
+&lt;ipython-input-9-4ff0d23ee693&gt; in &lt;module&gt;
+      2 rhs_coeffs = np.array([-1, -2])
+      3 lp_coeffs = np.array([[-1, 1], [-1, -1]])
+----&gt; 4 simplex_method(cost_coeffs, rhs_coeffs, lp_coeffs)
+
+
+&lt;ipython-input-8-432b99016f91&gt; in simplex_method(cost_coeffs, rhs_coeffs, lp_coeffs)
+     38         positive_tableau_idx =  np.nonzero(tableau[1:, column] &gt; 0)[0]
+     39         if len(positive_tableau_idx) == 0:
+---&gt; 40             raise ValueError("The problem is unbounded")
+     41         ratio = tableau[1:, 0] / tableau[1:, column]
+     42         row = positive_tableau_idx[np.argmin(ratio[positive_tableau_idx])] + 1
+
+
+ValueError: The problem is unbounded
+</pre></div>
+<p>We now run into the issue with making better error messages: it blocks exploration. If we wanted to call the simplex method on lots of inputs, and find which was the "best" result, we would be stopped by the error message as soon as any case went wrong. We can see this when trying to varying the first cost coefficient in the unbounded problem:</p>
+<div class="highlight"><pre><span></span><span class="n">costs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">costs</span><span class="p">:</span>
+    <span class="n">cost_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">cost</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">simplex_method</span><span class="p">(</span><span class="n">cost_coeffs</span><span class="p">,</span> <span class="n">rhs_coeffs</span><span class="p">,</span> <span class="n">lp_coeffs</span><span class="p">))</span>
+</pre></div>
+<div class="highlight"><pre><span></span>(1.0, array([-1., -3.]))
+(1.0, array([-1., -3.]))
+(1.0, array([-1., -3.]))
+(1.0, array([-1., -3.]))
+(1.0, array([-1., -3.]))
+
+
+
+---------------------------------------------------------------------------
+
+ValueError                                Traceback (most recent call last)
+
+&lt;ipython-input-10-8bc09ddd2faf&gt; in &lt;module&gt;
+      2 for cost in costs:
+      3     cost_coeffs = np.array([cost, -1])
+----&gt; 4     print(simplex_method(cost_coeffs, rhs_coeffs, lp_coeffs))
+
+
+&lt;ipython-input-8-432b99016f91&gt; in simplex_method(cost_coeffs, rhs_coeffs, lp_coeffs)
+     38         positive_tableau_idx =  np.nonzero(tableau[1:, column] &gt; 0)[0]
+     39         if len(positive_tableau_idx) == 0:
+---&gt; 40             raise ValueError("The problem is unbounded")
+     41         ratio = tableau[1:, 0] / tableau[1:, column]
+     42         row = positive_tableau_idx[np.argmin(ratio[positive_tableau_idx])] + 1
+
+
+ValueError: The problem is unbounded
+</pre></div>
+<p>However, we can get around this problem programmatically. The idea is to <em>try</em> and do a calculation. If it works, good. If not, we can decide what to do, based on the error. The Python syntax looks very much like <code>if</code>/<code>else</code> statements:</p>
+<div class="highlight"><pre><span></span><span class="n">cost_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">simplex_method</span><span class="p">(</span><span class="n">cost_coeffs</span><span class="p">,</span> <span class="n">rhs_coeffs</span><span class="p">,</span> <span class="n">lp_coeffs</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"That input does not work"</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>That input does not work
+</pre></div>
+<p>This means we can complete the loop by ignoring cases where the algorithm is unbounded:</p>
+<div class="highlight"><pre><span></span><span class="n">costs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">costs</span><span class="p">:</span>
+    <span class="n">cost_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">cost</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="n">simplex_method</span><span class="p">(</span><span class="n">cost_coeffs</span><span class="p">,</span> <span class="n">rhs_coeffs</span><span class="p">,</span> <span class="n">lp_coeffs</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"cost"</span><span class="p">,</span> <span class="n">cost</span><span class="p">,</span> <span class="s2">"leads to unbounded problem"</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>2.0 (1.0, array([-1., -3.]))
+1.7777777777777777 (1.0, array([-1., -3.]))
+1.5555555555555556 (1.0, array([-1., -3.]))
+1.3333333333333335 (1.0, array([-1., -3.]))
+1.1111111111111112 (1.0, array([-1., -3.]))
+cost 0.8888888888888888 leads to unbounded problem
+cost 0.6666666666666667 leads to unbounded problem
+cost 0.44444444444444464 leads to unbounded problem
+cost 0.22222222222222232 leads to unbounded problem
+cost 0.0 leads to unbounded problem
+</pre></div>
+<p>There are many additional error types that can be caught and checked: one that often comes up in mathematical calculations is zero division:</p>
+<div class="highlight"><pre><span></span><span class="mi">1</span><span class="o">/</span><span class="mi">0</span>
+</pre></div>
+<div class="highlight"><pre><span></span>---------------------------------------------------------------------------
+
+ZeroDivisionError                         Traceback (most recent call last)
+
+&lt;ipython-input-13-9e1622b385b6&gt; in &lt;module&gt;
+----&gt; 1 1/0
+
+
+ZeroDivisionError: division by zero
+</pre></div>
+<p>Exactly the same steps can be used for that case:</p>
+<div class="highlight"><pre><span></span><span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"10 divide"</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s2">"is"</span><span class="p">,</span> <span class="mi">10</span><span class="o">/</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Cannot divide by zero"</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>10 divide 2 is 5.0
+Cannot divide by zero
+10 divide -3 is -3.3333333333333335
+</pre></div>
+</section><section class="section1"><h1>Testing</h1>
+<p>We can make our code more robust but we need to trust that it is correct. To do this we want to test against simple cases where we know the solution and check that it is right.</p>
+<p>Note that we do not want to do this once. We have already modified our function a few times. Each time we change something we may be introducing errors. So each time we change something we want to re-run our tests to check we have not introduced a problem when trying to fix another. That means we want to make the tests as easy to run as possible.</p>
+<p>Let us first look at a "solved" problem, where the LP coefficients are in the form of the identity matrix, so the optimal values of the coefficients match the RHS coefficients:</p>
+<div class="highlight"><pre><span></span><span class="n">cost_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">rhs_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">lp_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">simplex_method</span><span class="p">(</span><span class="n">cost_coeffs</span><span class="p">,</span> <span class="n">rhs_coeffs</span><span class="p">,</span> <span class="n">lp_coeffs</span><span class="p">))</span>
+</pre></div>
+<div class="highlight"><pre><span></span>(-2.0, array([1., 1.]))
+
+
+&lt;ipython-input-8-432b99016f91&gt;:41: RuntimeWarning: divide by zero encountered in true_divide
+  ratio = tableau[1:, 0] / tableau[1:, column]
+</pre></div>
+<p>We knew in advance that we should have <script type="math/tex">{\bf x} = (1, 1)</script> and so <script type="math/tex">z = -2</script>. So we could check for that:</p>
+<div class="highlight"><pre><span></span><span class="n">correct_z</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span>
+<span class="n">correct_xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">z</span><span class="p">,</span> <span class="n">xs</span> <span class="o">=</span> <span class="n">simplex_method</span><span class="p">(</span><span class="n">cost_coeffs</span><span class="p">,</span> <span class="n">rhs_coeffs</span><span class="p">,</span> <span class="n">lp_coeffs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"z correct?"</span><span class="p">,</span> <span class="n">z</span> <span class="o">==</span> <span class="n">correct_z</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"xs correct?"</span><span class="p">,</span> <span class="n">xs</span> <span class="o">==</span> <span class="n">correct_xs</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>z correct? True
+xs correct? [ True  True]
+
+
+&lt;ipython-input-8-432b99016f91&gt;:41: RuntimeWarning: divide by zero encountered in true_divide
+  ratio = tableau[1:, 0] / tableau[1:, column]
+</pre></div>
+<p>For the coefficient case, we do not want to look at each coefficient: we want to know that they're all correct. <code>numpy</code> allows us to check this:</p>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"xs correct"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">xs</span> <span class="o">==</span> <span class="n">correct_xs</span><span class="p">))</span>
+</pre></div>
+<div class="highlight"><pre><span></span>xs correct True
+</pre></div>
+<p>We want to turn this test into a function, so that every time we change our <code>simplex_method</code> function we can test it with one line of code. In Python, there are standard conventions for this:</p>
+<ol>
+<li>The testing function has a name starting <code>test_</code>, and typically takes no arguments;</li>
+<li>The testing function uses <code>assert</code> to check that it is giving correct results.</li>
+</ol>
+<p>Explicitly, the test above would be:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_simple</span><span class="p">():</span>
+    <span class="n">cost_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">rhs_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">lp_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+    <span class="n">correct_z</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span>
+    <span class="n">correct_xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">z</span><span class="p">,</span> <span class="n">xs</span> <span class="o">=</span> <span class="n">simplex_method</span><span class="p">(</span><span class="n">cost_coeffs</span><span class="p">,</span> <span class="n">rhs_coeffs</span><span class="p">,</span> <span class="n">lp_coeffs</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">z</span> <span class="o">==</span> <span class="n">correct_z</span><span class="p">,</span> <span class="s2">"Objective function should be -2"</span>
+    <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">xs</span> <span class="o">==</span> <span class="n">correct_xs</span><span class="p">),</span> <span class="s2">"Coefficients should match RHS"</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="n">test_simple</span><span class="p">()</span>
+</pre></div>
+<div class="highlight"><pre><span></span>&lt;ipython-input-8-432b99016f91&gt;:41: RuntimeWarning: divide by zero encountered in true_divide
+  ratio = tableau[1:, 0] / tableau[1:, column]
+</pre></div>
+<p>This produces no output! This is what we want: if the tests pass everything is fine and we continue. If the tests fail, we want to see that. We can check that by writing a function specifically designed to fail:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_simple_fails</span><span class="p">():</span>
+    <span class="n">cost_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">rhs_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">lp_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+    <span class="n">correct_z</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">correct_xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">z</span><span class="p">,</span> <span class="n">xs</span> <span class="o">=</span> <span class="n">simplex_method</span><span class="p">(</span><span class="n">cost_coeffs</span><span class="p">,</span> <span class="n">rhs_coeffs</span><span class="p">,</span> <span class="n">lp_coeffs</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">z</span> <span class="o">==</span> <span class="n">correct_z</span><span class="p">,</span> <span class="s2">"Objective function should be -2, but we are comparing to -1"</span>
+    <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">xs</span> <span class="o">==</span> <span class="n">correct_xs</span><span class="p">),</span> <span class="s2">"Coefficients should match RHS"</span>
+
+<span class="n">test_simple_fails</span><span class="p">()</span>
+</pre></div>
+<div class="highlight"><pre><span></span>&lt;ipython-input-8-432b99016f91&gt;:41: RuntimeWarning: divide by zero encountered in true_divide
+  ratio = tableau[1:, 0] / tableau[1:, column]
+
+
+
+---------------------------------------------------------------------------
+
+AssertionError                            Traceback (most recent call last)
+
+&lt;ipython-input-20-512710b47034&gt; in &lt;module&gt;
+      9     assert np.all(xs == correct_xs), "Coefficients should match RHS"
+     10 
+---&gt; 11 test_simple_fails()
+
+
+&lt;ipython-input-20-512710b47034&gt; in test_simple_fails()
+      6     correct_xs = np.array([1, 1])
+      7     z, xs = simplex_method(cost_coeffs, rhs_coeffs, lp_coeffs)
+----&gt; 8     assert z == correct_z, "Objective function should be -2, but we are comparing to -1"
+      9     assert np.all(xs == correct_xs), "Coefficients should match RHS"
+     10
+
+
+AssertionError: Objective function should be -2, but we are comparing to -1
+</pre></div>
+<p>We can write as many tests as we like, but each should add something new: that way, if a test fails, it tells us something specific has changed in the function we are testing. Here is an example:</p>
+<div class="highlight"><pre><span></span><span class="n">cost_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">rhs_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">lp_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">simplex_method</span><span class="p">(</span><span class="n">cost_coeffs</span><span class="p">,</span> <span class="n">rhs_coeffs</span><span class="p">,</span> <span class="n">lp_coeffs</span><span class="p">))</span>
+</pre></div>
+<div class="highlight"><pre><span></span>(0.6666666666666667, array([ 1.66666667, -0.66666667]))
+</pre></div>
+<p>We see that the results are floats, not integers, with long decimal expansions (probably representing e.g. <script type="math/tex">2/3</script> and similar). Testing these with direct equalities is dangerous:</p>
+<div class="highlight"><pre><span></span><span class="n">z</span><span class="p">,</span> <span class="n">xs</span> <span class="o">=</span> <span class="n">simplex_method</span><span class="p">(</span><span class="n">cost_coeffs</span><span class="p">,</span> <span class="n">rhs_coeffs</span><span class="p">,</span> <span class="n">lp_coeffs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">z</span> <span class="o">==</span> <span class="mi">2</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">xs</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="o">/</span><span class="mi">3</span><span class="p">]))</span>
+</pre></div>
+<div class="highlight"><pre><span></span>False
+[False False]
+</pre></div>
+<p>Instead, we want to check that the results are <em>close</em> to the expected solution.</p>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="mi">2</span><span class="o">/</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="o">/</span><span class="mi">3</span><span class="p">])))</span>
+</pre></div>
+<div class="highlight"><pre><span></span>True
+True
+</pre></div>
+<p>We can then build this into a test:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_close</span><span class="p">():</span>
+    <span class="n">cost_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">rhs_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">lp_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+    <span class="n">correct_z</span> <span class="o">=</span> <span class="mi">2</span><span class="o">/</span><span class="mi">3</span>
+    <span class="n">correct_xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="o">/</span><span class="mi">3</span><span class="p">])</span>
+    <span class="n">z</span><span class="p">,</span> <span class="n">xs</span> <span class="o">=</span> <span class="n">simplex_method</span><span class="p">(</span><span class="n">cost_coeffs</span><span class="p">,</span> <span class="n">rhs_coeffs</span><span class="p">,</span> <span class="n">lp_coeffs</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">correct_z</span><span class="p">),</span> <span class="s2">"Objective function should be 2/3"</span>
+    <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">correct_xs</span><span class="p">),</span> <span class="s2">"Coefficients should be 5/3, -2/3"</span>
+
+<span class="n">test_close</span><span class="p">()</span>
+</pre></div>
+<p>We now have two (useful) tests. Every time we modify <code>simplex_method</code> we can now check that we have not introduced a bug by running two lines of code.</p>
+<section class="section4"><h4>Exercise</h4>
+<p>Move these tests into a file along with your <code>simplex_method</code> function: call this <code>simplex.py</code>.</p>
+<p>Make sure you have <a href="https://docs.pytest.org/en/6.2.x/"><code>pytest</code></a> installed (it should be part of Anaconda: in a terminal type <code>import pytest</code> to check).</p>
+<p>Then <code>pytest</code> can be used to run all the tests. In a terminal, type
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="n">pytest</span><span class="o">.</span><span class="n">main</span><span class="p">([</span><span class="s1">'simplex.py'</span><span class="p">])</span>
+</pre></div>
+The resulting screen output should look something like:
+<div class="highlight"><pre><span></span><span class="o">=============================</span> <span class="nb">test</span> session <span class="nv">starts</span> <span class="o">==============================</span>
+...
+collected <span class="m">3</span> items
+
+simplex.py .F.                                                           <span class="o">[</span><span class="m">100</span>%<span class="o">]</span>
+
+<span class="o">===================================</span> <span class="nv">FAILURES</span> <span class="o">===================================</span>
+______________________________ test_simple_fails _______________________________
+
+    def test_simple_fails<span class="o">()</span>:
+        <span class="nv">cost_coeffs</span> <span class="o">=</span> np.array<span class="o">([</span>-1, -1<span class="o">])</span>
+        <span class="nv">rhs_coeffs</span> <span class="o">=</span> np.array<span class="o">([</span><span class="m">1</span>, <span class="m">1</span><span class="o">])</span>
+        <span class="nv">lp_coeffs</span> <span class="o">=</span> np.array<span class="o">([[</span><span class="m">1</span>, <span class="m">0</span><span class="o">]</span>, <span class="o">[</span><span class="m">0</span>, <span class="m">1</span><span class="o">]])</span>
+        <span class="nv">correct_z</span> <span class="o">=</span> -1
+        <span class="nv">correct_xs</span> <span class="o">=</span> np.array<span class="o">([</span><span class="m">1</span>, <span class="m">1</span><span class="o">])</span>
+        z, <span class="nv">xs</span> <span class="o">=</span> simplex_method<span class="o">(</span>cost_coeffs, rhs_coeffs, lp_coeffs<span class="o">)</span>
+&gt;       assert <span class="nv">z</span> <span class="o">==</span> correct_z, <span class="s2">"Objective function should be -2, but we are comparing to -1"</span>
+E       AssertionError: Objective <span class="k">function</span> should be -2, but we are comparing to -1
+
+simplex.py:76: <span class="nv">AssertionError</span>
+<span class="o">===============================</span> warnings <span class="nv">summary</span> <span class="o">===============================</span>
+simplex.py::test_simple
+simplex.py::test_simple_fails
+  /Users/ih3/Desktop/MATH1058/simplex.py:43: RuntimeWarning: divide by zero encountered <span class="k">in</span> true_divide
+    <span class="nv">ratio</span> <span class="o">=</span> tableau<span class="o">[</span><span class="m">1</span>:, <span class="m">0</span><span class="o">]</span> / tableau<span class="o">[</span><span class="m">1</span>:, column<span class="o">]</span>
+
+-- Docs: https://docs.pytest.org/en/stable/warnings.html
+<span class="o">===========================</span> short <span class="nb">test</span> summary <span class="nv">info</span> <span class="o">============================</span>
+FAILED simplex.py::test_simple_fails - AssertionError: Objective <span class="k">function</span> sho...
+<span class="o">===================</span> <span class="m">1</span> failed, <span class="m">2</span> passed, <span class="m">2</span> warnings <span class="k">in</span> <span class="m">0</span>.16s <span class="o">====================</span>
+</pre></div></p>
+<p>This has run all the tests for us and summarized the results. Using a test runner like <code>pytest</code> is invaluable when working with large codes, as it means every change can be automatically checked to see it hasn't broken existing code.</p>
+</section></section>
+            </div>
+        </div>
+    </div>
+
+        </main>
+		
+		<footer class="text-muted">
+	<hr>
+	<div class="container">
+		<div class="float-right">
+			<ul style="list-style: none">
+			<li><a href="#">Back to top</a></li>
+			
+			
+			<li><a href="../../lab_notes/lab_9_outline/lab_9_outline.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;Download as PDF</a></li>
+			
+			</ul>
+		</div>
+		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
+		<p>This page last generated: 2022-01-25</p>
+	</div>
+</footer>
+		
+    </body>
+</html>

@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Lecture 1</title>
+
+		<meta name="description" content="Math1058">
+		<meta name="author" content="Ian Hawke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css">
+
+		<!-- Printing and PDF exports
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../reveal.js/css/print/pdf.css' : '../reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	-->
+
+		<!--MathJax stuff
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}, TeX: { extensions: ["autobold.js"] }});
+		</script>
+		<script type="text/javascript"
+		  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+-->
+		<!--Left align-
+		<style type="text/css">
+			.reveal p { text-align: left; }
+			.reveal ol,
+			.reveal dl,
+			.reveal ul {
+			  display: block;
+			  text-align: left;
+			  margin: 0 0 0 1em; }
+			.reveal h1 {
+				text-transform: none;
+				line-height: 2.0
+			}
+			.reveal h2,
+			.reveal h3,
+			.reveal h4 {
+				text-transform: none;
+			}
+			.reveal table td {
+				border-bottom: none;
+			}
+			.reveal.slide .slides > section, .reveal.slide .slides > section > section {
+			  min-height: 100% !important;
+			  display: flex !important;
+			  flex-direction: column !important;
+			  justify-content: center !important;
+			  position: absolute !important;
+			  top: 0 !important;
+			  align-items: center !important;
+			}
+			section > h1, section > h2 {
+			  position: absolute !important;
+			  top: 0 !important;
+			  margin-left: auto !important;
+			  margin-right: auto !important;
+			  left: 0 !important;
+			  right: 0 !important;
+			  text-align: center !important;
+			}
+			.print-pdf .reveal.slide .slides > section, .print-pdf .reveal.slide .slides > section > section {
+			  min-height: 770px !important;
+			  position: relative !important;
+			}
+		</style>
+	-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="Title">
+
+					<section>
+
+						<div>
+							<h1>Introduction to Operatonal Research</h1>
+						</div>
+
+						<aside class="notes">
+							Welcome to MATH1058, an Introduction to Operational Research and Mathematical Computing. My name is Ian Hawke; I am the module lead. Michael Kenna-Allison will also be instructing on the module. We will get into the course structure and who is doing what later. For now, I want to outline the problems we are going to tackle in this module.
+						</aside>
+					</section>
+
+					<section>
+
+						<div>
+							<h1>A meeting</h1>
+						</div>
+						<aside class="notes">
+						  Imagine - it should not be difficult - that you've had a hard year, spending far too much time away from friends and family, and that you desperately want to meet up with a group of friends and just relax. So, you start planning.
+						  <br>
+						  However, this is complicated. Your group of friends is scattered across the country. The differing work and study commitments narrow down the times you are all available. Some have other family commitments, adding more constraints. Travel may be difficult, or costly, or uncertain, constraining where the meet up can take place. Add in personality clashes, differences in what people want to do, and random last minute problems, we see that planning any meet up for a large group can be a lot of work.
+						  <br>
+						  However, this is important. It can be done; it must be done. The question is how to do it best. This leads to two questions. What do we mean by "best"? Once we know what that means, can we find a "best", or "optimal", solution?
+						</aside>
+
+					</section>
+
+					<section>
+
+						<div>
+							<h2>Operational Research</h2>
+							<p>
+								<ul>
+									<li>
+										Describe;
+									</li>
+									<li>
+										Predict;
+									</li>
+									<li>
+										<em>Prescribe</em>.
+									</li>
+								</ul>
+							</p>
+						</div>
+						<div>
+							<img src="images/01_intro/describe_predict.png">
+						</div>
+						<aside class="notes">
+							Analytics covers a huge range of applied mathematics and statistics, including modelling, forecasting, machine learning, and a range of other fields and tools. In the context of our meet-up problem, we need to know what our group is doing (describe), what they, and their connections, work, travel options and so on, are going to be doing (predict), and what we should do for the best (prescribe).
+						  <br>
+						  The operational research tools that we will introduce, analyse, and code are all prescriptive. Once we know what the problem is and what it means for a solution to be the best, or to be optimal, the tools and algorithms of operational research will find that solution. Of course, there are cases where such a solution does not exist, or there are many such solutions. Our analysis should tell us when this happens as well.
+						</aside>
+
+					</section>
+
+				</section>
+
+				<section id="Algorithms">
+
+					<section>
+
+						<div>
+							<h2>Algorithms</h2>
+							<p>
+								<ul>
+									<li>
+										A description
+									</li>
+									<li>
+										of a <em>finite</em> set of operations
+									</li>
+									<li>
+										that solve a <em>given problem</em>
+									</li>
+									<li>
+										for <em>all</em> of its <em>instances</em>.
+									</li>
+								</ul>
+							</p>
+						</div>
+						<div class="fragment">
+							<h4>Example</h4>
+							<p>
+								<ul>
+									<li>
+										<em>Problem</em>: solve $a x^2 + b x + c = 0$ for $x \in \mathbb{C}$.
+									</li>
+									<li>
+										<em>Instance</em>: $a = 2, b = 8, c = 5$.
+									</li>
+									<li>
+										<em>Algorithm</em>:
+										<ol>
+											<li>
+												Compute $b^2-4ac$ and $2a$;
+											</li>
+											<li>
+												Compute $\sqrt{b^2-4ac}$;
+											</li>
+											<li>
+												Compute $(-b\pm\sqrt{b^2-4ac})/(2a)$.
+											</li>
+										</ol>
+									</li>
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+						  An algorithm is a description in some formal language. Mathematics is one such formal language. A computer code is another. One key aspect of this module is transforming problems between informal specifications (in natural language) and formal specifications (in mathematics or in code). Different formal languages emphasise different aspects of the problem, as so are useful in different ways.
+						  <br>
+						  The example algorithm of computing the roots of a quadratic equation is standard. We see how, mathematically, it can be reduced to a limited number of explicit calculations. Depending on the detail level and implicit assumptions you are willing to allow you could write it on one line; here it is written in three, although the first and last lines both describe two calculations each. There remains the implicit assumption that $a$ is non-zero. Mathematically we would often think that this assumption is obvious. It may need to be explicitly dealt with in a computer code.
+						</aside>
+
+					</section>
+
+					<section>
+						<div>
+							<h2>Decision making</h2>
+							<p>
+								Find
+								<ul>
+									<li>
+										among a (very large) set (<em>feasible region</em>);
+									</li>
+									<li>
+										the best case (according to <em>quantitative objectives</em>).
+									</li>
+								</ul>
+							</p>
+						</div>
+						<div class="fragment">
+							<p>
+								Typically consider
+								<ul>
+									<li>
+										cost minimization;
+									</li>
+									<li>
+ 										profit maximization;
+									</li>
+								</ul>
+								subject to <em>constraints</em>.
+						</div>
+
+						<aside class="notes">
+						  Making decisions is hard when there are many alternatives. The mathematical way of doing this is needed when we need to automate decision making, or when we need an argument to break a deadlock, or when it is not obvious what is best. Many of the questions in setting up the problem are not fully mathematical. Examples would be how we measure what the best case is, or which of many possible measurements we use.
+						  <br>
+						  We also constrain our decision making process. In the meet-up problem, there is no point considering holding the meeting on the Moon unless your friendship group is really select. We have to constrain ourselves to what is possible. This is the key distinction from calculus, where finding extreme points is done over the whole space such as the real numbers.
+						  <br>
+						  These constraints define the set of possible solutions that we consider. This is usually referred to as the feasible region. From the name you can guess that we're making links between this set and geometry, by thinking of it is part of a larger continuous space. This is extremely important in what we develop later.
+						</aside>
+
+					</section>
+
+				</section>
+
+				<section id="Examples">
+
+					<section data-background="images/01_intro/ford_plant.jpeg" data-background-size="50%" data-background-position="right">
+
+						<div style="width:45%; float:'left'">
+							<h2>Production planning</h2>
+							<p>
+								<ul>
+									<li>
+										<em>Decision</em>: how many units of X to make per day;
+									</li>
+									<li>
+										<em>Objective</em>: minimise production costs;
+									</li>
+									<li>
+										<em>Constraints</em>: daily demand.
+									</li>
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+							OR tools and decision making are hugely important in industrial contexts. One classic type of problem is production planning. If a factory produces more goods then you have more to sell in order to make a profit. However, if the demand is not there then you have wasted material (which costs money). Equally, introducing new equipment or techniques or training could increase productivity but also increase costs. Balancing these different aspects can be framed mathematically to guide decisions.
+						</aside>
+
+					</section>
+
+					<section data-background="images/01_intro/shortest_path.png" data-background-size="50%" data-background-position="right">
+
+						<div style="width:45%; float:'left'">
+							<h2>Shortest path problem</h2>
+							<p>
+								<ul>
+									<li>
+										<em>Decision</em>: what route to take from A to B;
+									</li>
+									<li>
+										<em>Objective</em>: minimise travel distance or time;
+									</li>
+									<li>
+										<em>Constraints</em>: traffic, road quality.
+									</li>
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+							The shortest path problem is hugely important in many contexts. It is easy to visualise on a real road or rail network. It is also relevant for more other networks, including power networks and communication networks.
+						</aside>
+
+					</section>
+
+					<section data-background="images/01_intro/clique.png" data-background-size="50%" data-background-position="right">
+
+						<div style="width:45%; float:'left'">
+							<h2>Maximum clique problem</h2>
+							<p>
+								<ul>
+									<li>
+										<em>Decision</em>: what people form a group;
+									</li>
+									<li>
+										<em>Objective</em>: find groups of friends;
+									</li>
+									<li>
+										<em>Constraints</em>: limited information.
+									</li>
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+							Depending on the case and application, and your approach to privacy and information sharing, the maximum clique problem is either useful or disturbing. The broad idea is to take information from social networks, such as connections, conversations, likes and follows, and so on, and use them to group the users in some way. This is meant to reveal emergent or hidden commonalities that can be used or analysed.
+						</aside>
+
+					</section>
+
+					<section data-background="images/01_intro/travelling_salesman.png" data-background-size="50%" data-background-position="right">
+
+						<div style="width:45%; float:'left'">
+							<h2>Traveling Salesman Problem</h2>
+							<p>
+								<ul>
+									<li>
+										<em>Decision</em>: what route to travel between many points;
+									</li>
+									<li>
+										<em>Objective</em>: minimise travel distance or time;
+									</li>
+									<li>
+										<em>Constraints</em>: go through each destination once.
+									</li>
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+							The traveling salesman problem, or TSP, is another hugely influential problem that is not yet solved. It's important for logistics where goods or people need to be transported between multiple locations, but the particular order in which each is visited is unimportant. What matters is that each is visited only once. This is easy to do with only a couple of destinations, but probably intractable for large numbers of destinations. Proving mathematically how the cost of solving the problem grows with the number of destinations is hard.
+						</aside>
+
+					</section>
+
+				</section>
+
+				<section id="Taxonomy">
+
+					<section data-background="images/01_intro/taxonomy.png" data-background-size="80%" data-background-position="bottom">
+
+						<div>
+							<h2>Taxonomy</h2>
+						</div>
+
+						<aside class="notes">
+							As discussed in the meet-up problem, there are many aspects to OR problems. How many quantifiable objectives do you want to optimise? How many independent people are making decisions? Are you considering sources of uncertainty? The more things you consider, the more complex the solution methods become, and the more fragile the solution methods often are.
+						  <br>
+						  In this module we are going to focus on mathematical programming, or mathematical optimization problems. There will be a single objective to optimise. There will be a single decision maker saying what is best. There will be no uncertainty considered. We will see many examples of problems where the full reality does not fit within these solution methods. It is always worth trying the simplest solution methods first. But it is then necessary to consider how accurate these solution methods are, when you have to ignore fundamental aspects of the problem.
+						</aside>
+
+					</section>
+
+				</section>
+
+				<section id="Module">
+
+					<section>
+
+						<div>
+							<h2>This module</h2>
+							<p>
+								Each week:
+								<ul>
+									<li>
+										Two lectures  (M, W);
+									</li>
+									<li>
+										One problem class (Fr);
+									</li>
+									<li>
+										One computer lab (M, W, Th, Fr).
+									</li>
+								</ul>
+							</p>
+						</div>
+
+						<div class="fragment">
+							<p>
+								Theory:
+								<ul>
+									<li>
+										Linear programming, simplex method;
+									</li>
+									<li>
+										Shortest paths, Dijkstra's algorithm.
+									</li>
+								</ul>
+							</p>
+							<p>
+								Computing:
+								<ul>
+									<li>
+										Python;
+									</li>
+									<li>
+										Excel;
+									</li>
+									<li>
+										LaTeX.
+									</li>
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+							The lectures and problem class will be recorded on Panopto. The labs will not, but recorded sessions from last year covering the computing material are available through Blackboard.
+							<br>
+							On the theory side we will focus on two classes of problems and the algorithms needed to solve them. We will be interested in how and when they work, and how fast.
+							<br>
+							On the computing side, we need to complement the theoretical analysis with practical experience in how these algorithms work on typical examples. We need to implement them: for this we will use Python. We need to analyse the results, for which we will use Excel. And we need to communicate the results, for which we will use LaTeX.
+						</aside>
+
+					</section>
+
+					<section>
+
+						<div>
+							<h2>Assessment</h2>
+							<p>
+								<ul>
+									<li>
+										Theory worksheets:
+										<ul>
+											<li>
+												formative;
+											</li>
+											<li>
+												Discussed from week 2.
+											</li>
+										</ul>
+									</li>
+									<li>
+										Python assignments:
+										<ul>
+											<li>
+    										total of 20%;
+											</li>
+											<li>
+    									  biweekly from week 3.
+											</li>
+										</ul>
+									</li>
+									<li>
+										OR+Coding coursework:
+										<ul>
+											<li>
+    										total of 40%;
+											</li>
+											<li>
+    										released at Easter, submit week 12.
+											</li>
+										</ul>
+									</li>
+									<li>
+										Exam:
+										<ul>
+											<li>
+    										total of 40%;
+											</li>
+											<li>
+    										written, theory based.
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</p>
+						</div>
+
+						<aside class="notes">
+							The assessments are as listed here. All week numbers correspond to teaching weeks.
+						</aside>
+
+					</section>
+
+				</section>
+
+			</div>
+
+		</div>
+
+
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/zoom/zoom.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/search/search.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../reveal.js/plugin/math/math.js"></script>
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath.KaTeX ]
+			});
+
+		</script>
+
+
+	</body>
+</html>

@@ -1,0 +1,1309 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        
+            <meta charset="utf-8">
+            <meta name="robots" content="noindex">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="author" content="Ian Hawke" />
+            <meta name="date" content="2022-01-20" />
+        
+
+        <title>Sorting | Operational Research and Mathematical Computing</title>
+
+        
+    
+    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../../../static/styles.css">
+            <link rel="stylesheet" id="customiseCSS" href="../../../static/light.css">
+            
+            
+        
+    <link rel="stylesheet" id="customiseCodeCSS" href="../../../static/pygmentize.light.css">
+    <link rel="stylesheet" href="../../../static/codemirror-5.26.0/lib/codemirror.css">
+    <link rel="stylesheet" href="../../../static/boole.css">
+    <link rel="stylesheet" href="../../../static/numbasEmbed.css">
+
+    <link rel="stylesheet" href="../../../static/bootstrap-toc.css?v=3">
+    <link rel="stylesheet" href="../../../static/print.css">
+
+
+        
+    
+    
+            <script defer src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <script defer src="../../../static/mathjax_config.js"></script>
+            <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+            <script defer src="../../../static/customisation.js"></script>
+            <script defer src="../../../static/mp4.js"></script>
+            
+            
+        
+    <script defer src="../../../static/jquery.flexibleArea.js"></script>
+    <script defer src="../../../static/spin.min.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/lib/codemirror.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/octave/octave.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/python/python.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/r/r.js"></script>
+    <script defer src="../../../static/boole.js"></script>
+    <script defer src="../../../static/numbasEmbed.js"></script>
+
+    <script defer src="../../../static/bootstrap-toc.js"></script>
+
+    </head>
+    <body data-spy="scroll" data-target="#chapterTOC" data-offset="50">
+        
+<div class="collapse" id="navbarToggleCustomise">
+	<div class="bg-secondary text-white p-3">
+		<form onsubmit="return false;" id="navbarCustomise">
+			<div class="form-row">
+				<label>Theme Customisation</label>
+				<div id="themeSelector" class="form-group col-md-12">
+					<button class="btn btn-dark mr-2" value="dark">Dark</button>
+					<button class="btn btn-pastel mr-2" value="pastel">Pastel</button>
+					<button class="btn btn-light mr-4" value="light">Light</button>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label style="display: block" for="font-scale">Font size (<span id="font-size-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="font-scale" min="50" max="600" value="100">
+					<button id="font-scale-reset" class="btn btn-sm">Reset</button>
+				</div>
+				<div class="form-group col-md-4">
+					<label style="display: block" for="p-space">Spacing (<span id="p-space-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="p-space" min="0" max="600" value="100">
+					<button id="p-space-reset" class="btn btn-sm">Reset</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<nav aria-label="breadcrumb">
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="../../../index.html">Operational Research and Mathematical Computing</a>
+		</li>
+		
+		<li class="breadcrumb-item">
+			<a href="../../../notes/notes_by_chapter/index.html">Notes by chapter</a>
+		</li>
+		
+		<li class="breadcrumb-item active">
+			Sorting
+		</li>
+		<li class="ml-auto">
+			<button class="navbar-toggler p0" type="button" data-toggle="collapse" data-target="#navbarToggleCustomise" aria-controls="navbarToggleCustomise" aria-expanded="false" aria-label="Toggle customisations panel">
+				<i class="fa fa-cog" aria-hidden="true" title="Toggle customisations panel"></i> <span class="sr-only">Toggle customisations panel</span>
+			</button>
+		</li>
+	</ul>
+</nav>
+
+
+        <header>
+            
+            
+        </header>
+        <main>
+            
+    <div class="container mt-3">
+        <div class="row">
+            
+            <div id="sidebar" class="col-md-3">
+                <nav class="mb-3" id="chapterTOC" data-toggle="toc">
+                    <ul class="nav navbar-nav">
+                        
+                        
+                        
+                        <li><a id="pdf-link" class="nav-link" href="../../../notes/notes_by_chapter/sorting/sorting.pdf" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" title="Download as PDF"></i>&nbsp;Download as PDF</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+            <div id="content" class="col-md-9"> 
+            
+            
+<!-- Latex Chapter/Part -->
+<h1 id="chap:sorting">Sorting</h1>
+<section class="section">
+<h2 id="sec:sorting:motivation">3.1 The motivation</h2>
+<p>
+In the previous chapter we saw how a linear program could be solved. We can find every vertex of the feasible region and then evaluate the objective function at all vertices. By sorting this values we then have the optimal solution. 
+</p>
+<p>
+However, we claimed that this method was impractically slow, as the computational cost can grow as <script type="math/tex">m^ m</script> (sometimes called exponentially, or geometrically). We should make this explicit. Assume that one operation (finding one vertex and computing the objective function there) takes one microsecond, <script type="math/tex">1 \mu \text{s}</script>. Then compare how long it would take if the computational cost were linear (grows as <script type="math/tex">m</script>), quadratic (grows as <script type="math/tex">m^2</script>), or geometric (grows as <script type="math/tex">2^ m</script> or as <script type="math/tex">m^ m</script>) as the number of vertices <script type="math/tex">m</script> increases: 
+</p>
+<div class="centered"> <table class="tabular">
+<tr><td colspan="" rowspan="" style="text-align:left; border-right:1px solid black"><p>
+ Vertices (<script type="math/tex">m</script>) 
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:right"><p>
+ Linear (<script type="math/tex">m</script>) 
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:right"><p>
+ Quadratic (<script type="math/tex">m^2</script>) 
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:right"><p>
+<script type="math/tex">2^ m</script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:right"><p>
+<script type="math/tex">m^ m</script>
+</p>
+</td>
+</tr>
+<tr><td colspan="" rowspan="" style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black"><p>
+<script type="math/tex">1</script>
+</p>
+</td>
+<td colspan="" rowspan="" style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:right"><p>
+<script type="math/tex">1 \mu \text{s}</script>
+</p>
+</td>
+<td colspan="" rowspan="" style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:right"><p>
+<script type="math/tex">1 \mu \text{s}</script>
+</p>
+</td>
+<td colspan="" rowspan="" style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:right"><p>
+<script type="math/tex">1 \mu \text{s}</script>
+</p>
+</td>
+<td colspan="" rowspan="" style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:right"><p>
+<script type="math/tex">1 \mu \text{s}</script>
+</p>
+</td>
+</tr>
+<tr><td colspan="" rowspan="" style="text-align:left; border-right:1px solid black"><p>
+<script type="math/tex">10</script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:right"><p>
+<script type="math/tex">10 \mu \text{s}</script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:right"><p>
+<script type="math/tex">10^2 \mu \text{s}</script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:right"><p>
+<script type="math/tex">\sim 10^3 \mu \text{s}</script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:right"><p>
+<script type="math/tex">\sim 3 \text{ hours}</script>
+</p>
+</td>
+</tr>
+<tr><td colspan="" rowspan="" style="text-align:left; border-right:1px solid black"><p>
+<script type="math/tex">100</script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:right"><p>
+<script type="math/tex">100 \mu \text{s}</script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:right"><p>
+<script type="math/tex">10^{-2} \text{s}</script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:right"><p>
+<script type="math/tex">\sim 10^{22} \text{ years}</script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:right"><p>
+<script type="math/tex">\sim 10^{192} \text{ years}</script>
+</p>
+</td>
+</tr>
+</table> </div>
+<p>
+ We see that the power law cases (linear and quadratic) both complete in fractions of a second for a hundred vertices, whilst neither geometric case will complete within the lifetime of the universe. Note that Chvátal, writing around 1980, comments that problems with <script type="math/tex">m \ge 10^3</script> were being solved routinely. In modern usage linear programs with <script type="math/tex">m \ge 10^6</script> are being solved in under a minute by the best solvers. 
+</p>
+</section><section class="section">
+<h2 id="sec:sorting:problem">3.2 The problem</h2>
+<p>
+The problem, for this chapter, is to understand how to analyse an algorithm. Once we can measure how fast, in principle, an algorithm completes its task, we can use this to compare different techniques. 
+</p>
+<p>
+We will not apply this analysis to linear programming algorithms at first, as there is a simpler case at hand. That is the final step in our impractical algorithm for linear programs: sorting a list of numbers. 
+</p>
+<section class="subsection">
+<h3 id="sec:sorting:problem:sorting">3.2.1 Sorting</h3>
+<p>
+The <em>sorting problem</em> is to take a list <script type="math/tex">a</script> of objects with a <em>partial order</em> <script type="math/tex">\le </script>, sort the list into non-decreasing order. 
+</p>
+<p>
+The type of the objects is left unspecified. They could be real numbers or integers, which will be our standard examples. They could be letters or words. The key point is that it must be possible to compare any two objects in the list to give an order. That is, <script type="math/tex">\forall x, y \in a</script>, the comparison <script type="math/tex">x \le y</script> must be either true or false. A list containing all integers is fine. A list containing a mix of letters and numbers is not (without further assumptions). A list containing complex numbers is not fine either. 
+</p>
+<p>
+We assume the list has length <script type="math/tex">n</script> and refer to the individual entries in the list as <script type="math/tex">a_ i</script>, where <script type="math/tex">i \in \{ 1, \dots , n \} </script> is the <em>index</em>. We are looking to construct a <em>permutation operator</em> <script type="math/tex">\pi \colon \{ 1, \dots , n \}  \to \{ 1, \dots , n \} </script> which is a bijective function on the indexes. The permutation operator tells us where to go in the original list to find the object at a given position in the sorted list. 
+</p>
+<p>
+Formally, the problem is to find a permutation <script type="math/tex">\pi </script> such that 
+</p>
+<div class="eqn" id="a0000001136">
+<script type="math/tex; mode=display">\begin{equation}a_{\pi (i)} \le a_{\pi (i+1)} \quad \forall i \in \{ 1, \dots , n \} .\tag{3.1}\end{equation}</script>
+</div>
+<p>
+As a concrete example, consider the list <script type="math/tex">a = (7, 2, 2, 6, 1, 4)</script>. By eye we see the sorted list is <script type="math/tex">s = (1, 2, 2, 4, 6, 7)</script>. Looking at the indices we construct the permutation: 
+</p>
+<div class="eqn" id="a0000001137">
+<script type="math/tex; mode=display">\begin{equation}\begin{array}{cccccccc} a &  \colon &  7 &  2 &  2 &  6 &  1 &  4 \\ \text{index} &  \colon &  1 &  2 &  3 &  4 &  5 &  6 \end{array} \to \begin{array}{cccccccc} s &  \colon &  1 &  2 &  2 &  4 &  6 &  7 \\ \pi (\text{index}) &  \colon &  5 &  2 &  3 &  6 &  4 &  1 \end{array}\tag{3.2}\end{equation}</script>
+</div>
+</section>
+</section><section class="section">
+<h2 id="a0000001138">3.3 Algorithms</h2>
+<p>
+We look at three different sorting algorithms before introduing a detailed analysis. 
+</p>
+<section class="subsection">
+<h3 id="a0000001139">3.3.1 Brute Force Sort</h3>
+<p>
+This is a two step process. 
+</p>
+<ol class="enumerate" id="a0000001140" style="list-style: none">
+<li id="a0000001141" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		1.
+	</span>
+<p>
+Enumerate all possible permutations <script type="math/tex">\pi </script> of length <script type="math/tex">n</script>. 
+</p>
+</li>
+<li id="a0000001142" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		2.
+	</span>
+<p>
+Return the first permutation giving a sorted list. 
+</p>
+</li>
+</ol>
+<p>
+This is closely linked to the impractical algorithm introduced to solve the linear programming problem. 
+</p>
+<p>
+It is possible that only one permutation sorts the list, and that (by bad luck) it is the last one constructed. Given a list with <script type="math/tex">n</script> items we can construct <script type="math/tex">n!</script> permutations of that list (consider how many positions the first object can take, then, having fixed the first, how many the second can take, and so on). For large <script type="math/tex">n</script> we have that <script type="math/tex">n! \sim n^ n</script>, and we have seen how rapidly that grows. 
+</p>
+</section><section class="subsection">
+<h3 id="a0000001143">3.3.2 Selection sort</h3>
+<p>
+This is an iterative process. 
+</p>
+<ol class="enumerate" id="a0000001144" style="list-style: none">
+<li id="a0000001145" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		1.
+	</span>
+<p>
+Find the smallest object. 
+</p>
+</li>
+<li id="a0000001146" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		2.
+	</span>
+<p>
+Swap it with the object in position one (if strictly smaller). 
+</p>
+</li>
+<li id="a0000001147" value="3">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		3.
+	</span>
+<p>
+Find the next smallest object in the list; alternatively, consider the list <em>except</em> the first object. 
+</p>
+</li>
+<li id="a0000001148" value="4">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		4.
+	</span>
+<p>
+Swap it with the object in position two (if strictly smaller). 
+</p>
+</li>
+<li id="a0000001149" value="5">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		5.
+	</span>
+<p>
+Continue to the end of the list. 
+</p>
+</li>
+</ol>
+<p>
+When implemented in code this algorithm requires two loops. The outer loop runs over the whole list and corresponds to the position we are going to swap the “smallest” object into. The inner loop is to find the smallest object, and runs over only part of the list. 
+</p>
+<p>
+The steps for <script type="math/tex">a = (7, 2, 2, 6, 1, 4)</script> are as follows. When we find the smallest object it will be in the sublist denoted by square brackets: 
+</p>
+<ol class="enumerate" id="a0000001150" style="list-style: none">
+<li id="a0000001151" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		1.
+	</span>
+<ol class="enumerate" id="a0000001152" style="list-style: none">
+<li id="a0000001153" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(a)
+	</span>
+<p>
+: Smallest object in <script type="math/tex">([7, 2, 2, 6, 1, 4])</script> is <script type="math/tex">1</script> at index <script type="math/tex">5</script>. 
+</p>
+</li>
+<li id="a0000001154" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(b)
+	</span>
+<p>
+: Swap with object at index <script type="math/tex">1</script>, giving <script type="math/tex">(1, 2, 2, 6, 7, 4)</script>. 
+</p>
+</li>
+</ol>
+</li>
+<li id="a0000001155" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		2.
+	</span>
+<ol class="enumerate" id="a0000001156" style="list-style: none">
+<li id="a0000001157" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(a)
+	</span>
+<p>
+: Smallest object in <script type="math/tex">(1, [2, 2, 6, 7, 4])</script> is <script type="math/tex">2</script> at index <script type="math/tex">2</script>. 
+</p>
+</li>
+<li id="a0000001158" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(b)
+	</span>
+<p>
+: Do not swap as already at index <script type="math/tex">2</script>, giving <script type="math/tex">(1, 2, 2, 6, 7, 4)</script>. 
+</p>
+</li>
+</ol>
+</li>
+<li id="a0000001159" value="3">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		3.
+	</span>
+<ol class="enumerate" id="a0000001160" style="list-style: none">
+<li id="a0000001161" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(a)
+	</span>
+<p>
+: Smallest object in <script type="math/tex">(1, 2, [2, 6, 7, 4])</script> is <script type="math/tex">2</script> at index <script type="math/tex">3</script>. 
+</p>
+</li>
+<li id="a0000001162" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(b)
+	</span>
+<p>
+: Do not swap as already at index <script type="math/tex">3</script>, giving <script type="math/tex">(1, 2, 2, 6, 7, 4)</script>. 
+</p>
+</li>
+</ol>
+</li>
+<li id="a0000001163" value="4">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		4.
+	</span>
+<ol class="enumerate" id="a0000001164" style="list-style: none">
+<li id="a0000001165" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(a)
+	</span>
+<p>
+: Smallest object in <script type="math/tex">(1, 2, 2, [6, 7, 4])</script> is <script type="math/tex">4</script> at index <script type="math/tex">6</script>. 
+</p>
+</li>
+<li id="a0000001166" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(b)
+	</span>
+<p>
+: Swap with object at index <script type="math/tex">4</script>, giving <script type="math/tex">(1, 2, 2, 4, 7, 6)</script>. 
+</p>
+</li>
+</ol>
+</li>
+<li id="a0000001167" value="5">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		5.
+	</span>
+<ol class="enumerate" id="a0000001168" style="list-style: none">
+<li id="a0000001169" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(a)
+	</span>
+<p>
+: Smallest object in <script type="math/tex">(1, 2, 2, 4, [7, 6])</script> is <script type="math/tex">6</script> at index <script type="math/tex">6</script>. 
+</p>
+</li>
+<li id="a0000001170" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(b)
+	</span>
+<p>
+: Swap with object at index <script type="math/tex">5</script>, giving <script type="math/tex">(1, 2, 2, 4, 6, 7)</script>. 
+</p>
+</li>
+</ol>
+</li>
+<li id="a0000001171" value="6">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		6.
+	</span>
+<p>
+We have reached the last object, so the list is sorted. 
+</p>
+</li>
+</ol>
+</section><section class="subsection">
+<h3 id="a0000001172">3.3.3 Insertion sort</h3>
+<p>
+Conceptually this process splits the list <script type="math/tex">a</script> into two pieces, or sublists. One is sorted and the other unsorted. We write <script type="math/tex">a = (s | u)</script> where <script type="math/tex">|</script> marks the separation between the sublists. At the start <script type="math/tex">s</script> is empty and <script type="math/tex">u = a</script>. Then, while <script type="math/tex">u</script> is not empty, we 
+</p>
+<ol class="enumerate" id="a0000001173" style="list-style: none">
+<li id="a0000001174" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		1.
+	</span>
+<p>
+Compare the first entry of the unsorted list <script type="math/tex">u</script> with each entry of the sorted list <script type="math/tex">s</script> in turn <em>from the right</em>. 
+</p>
+</li>
+<li id="a0000001175" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		2.
+	</span>
+<p>
+If <script type="math/tex">u_1 < s_ i</script>, swap the entry in the sorted list with the first entry in the unsorted list. Do this for each entry in the sorted list until <script type="math/tex">u_1</script> is in order. 
+</p>
+</li>
+<li id="a0000001176" value="3">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		3.
+	</span>
+<p>
+Move the separation marker one entry to the right (so that <script type="math/tex">s_ i</script>, which was swapped with <script type="math/tex">u_1</script>, is still in the sorted list). 
+</p>
+</li>
+</ol>
+<p>
+As with selection sort, when implemented in code we have two loops, one running over the whole list and one over some part of the list. We may expect the computational cost of the two to be similar. 
+</p>
+<p>
+The steps for <script type="math/tex">a = (7, 2, 2, 6, 1, 4)</script> are as follows. 
+</p>
+<ol class="enumerate" id="a0000001177" style="list-style: none">
+<li id="a0000001178" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		1.
+	</span>
+<ol class="enumerate" id="a0000001179" style="list-style: none">
+<li id="a0000001180" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(a)
+	</span>
+<p>
+<script type="math/tex">(|7, 2, 2, 6, 1, 4)</script> has nothing in the unsorted list. 
+</p>
+</li>
+<li id="a0000001181" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(b)
+	</span>
+<p>
+Move the separation marker to the right, giving <script type="math/tex">(7 | 2, 2, 6, 1, 4)</script>. 
+</p>
+</li>
+</ol>
+</li>
+<li id="a0000001182" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		2.
+	</span>
+<ol class="enumerate" id="a0000001183" style="list-style: none">
+<li id="a0000001184" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(a)
+	</span>
+<p>
+As <script type="math/tex">2 < 7</script>, swap <script type="math/tex">s_1</script> and <script type="math/tex">u_1</script>, giving <script type="math/tex">(2 | 7, 2, 6, 1, 4)</script>. 
+</p>
+</li>
+<li id="a0000001185" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(b)
+	</span>
+<p>
+Move the separation marker to the right, giving <script type="math/tex">(2, 7 | 2, 6, 1, 4)</script>. 
+</p>
+</li>
+</ol>
+</li>
+<li id="a0000001186" value="3">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		3.
+	</span>
+<ol class="enumerate" id="a0000001187" style="list-style: none">
+<li id="a0000001188" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(a)
+	</span>
+<p>
+As <script type="math/tex">2 < 7</script>, swap <script type="math/tex">s_2</script> and <script type="math/tex">u_1</script>, giving <script type="math/tex">(2, 2 | 7, 6, 1, 4)</script>. 
+</p>
+</li>
+<li id="a0000001189" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(b)
+	</span>
+<p>
+As <script type="math/tex">2</script> is not less than <script type="math/tex">2</script> no further sorting is needed. 
+</p>
+</li>
+<li id="a0000001190" value="3">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(c)
+	</span>
+<p>
+Move the separation marker to the right, giving <script type="math/tex">(2, 2, 7 | 6, 1, 4)</script>. 
+</p>
+</li>
+</ol>
+</li>
+<li id="a0000001191" value="4">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		4.
+	</span>
+<ol class="enumerate" id="a0000001192" style="list-style: none">
+<li id="a0000001193" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(a)
+	</span>
+<p>
+As <script type="math/tex">6 < 7</script>, swap <script type="math/tex">s_3</script> and <script type="math/tex">u_1</script>, giving <script type="math/tex">(2, 2, 6 | 7, 1, 4)</script>. 
+</p>
+</li>
+<li id="a0000001194" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(b)
+	</span>
+<p>
+As <script type="math/tex">6</script> is not less than <script type="math/tex">2</script> no further sorting is needed. 
+</p>
+</li>
+<li id="a0000001195" value="3">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(c)
+	</span>
+<p>
+Move the separation marker to the right, giving <script type="math/tex">(2, 2, 6, 7 | 1, 4)</script>. 
+</p>
+</li>
+</ol>
+</li>
+<li id="a0000001196" value="5">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		5.
+	</span>
+<ol class="enumerate" id="a0000001197" style="list-style: none">
+<li id="a0000001198" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(a)
+	</span>
+<p>
+As <script type="math/tex">1 < 7</script>, swap <script type="math/tex">s_4</script> and <script type="math/tex">u_1</script>, giving <script type="math/tex">(2, 2, 6, 1 | 7, 4)</script>. 
+</p>
+</li>
+<li id="a0000001199" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(b)
+	</span>
+<p>
+As <script type="math/tex">1 < 6</script>, swap <script type="math/tex">s_3</script> and (what was) <script type="math/tex">u_1</script>, giving <script type="math/tex">(2, 2, 1, 6 | 7, 4)</script>. 
+</p>
+</li>
+<li id="a0000001200" value="3">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(c)
+	</span>
+<p>
+As <script type="math/tex">1 < 2</script>, swap <script type="math/tex">s_2</script> and (what was) <script type="math/tex">u_1</script>, giving <script type="math/tex">(2, 1, 2, 6 | 7, 4)</script>. 
+</p>
+</li>
+<li id="a0000001201" value="4">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(d)
+	</span>
+<p>
+As <script type="math/tex">1 < 2</script>, swap <script type="math/tex">s_1</script> and (what was) <script type="math/tex">u_1</script>, giving <script type="math/tex">(1, 2, 2, 6 | 7, 4)</script>. 
+</p>
+</li>
+<li id="a0000001202" value="5">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(e)
+	</span>
+<p>
+Move the separation marker to the right, giving <script type="math/tex">(1, 2, 2, 6, 7 | 4)</script>. 
+</p>
+</li>
+</ol>
+</li>
+<li id="a0000001203" value="6">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		6.
+	</span>
+<ol class="enumerate" id="a0000001204" style="list-style: none">
+<li id="a0000001205" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(a)
+	</span>
+<p>
+As <script type="math/tex">4 < 7</script>, swap <script type="math/tex">s_5</script> and <script type="math/tex">u_1</script>, giving <script type="math/tex">(1, 2, 2, 6, 4 | 7)</script>. 
+</p>
+</li>
+<li id="a0000001206" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(b)
+	</span>
+<p>
+As <script type="math/tex">4 < 6</script>, swap <script type="math/tex">s_4</script> and (what was) <script type="math/tex">u_1</script>, giving <script type="math/tex">(1, 2, 2, 4, 6 | 7)</script>. 
+</p>
+</li>
+<li id="a0000001207" value="3">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(c)
+	</span>
+<p>
+As <script type="math/tex">4</script> is not less than <script type="math/tex">2</script> no further sorting is needed. 
+</p>
+</li>
+<li id="a0000001208" value="4">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(d)
+	</span>
+<p>
+Move the separation marker to the right, giving <script type="math/tex">(1, 2, 2, 4, 6, 7 |)</script>. 
+</p>
+</li>
+</ol>
+</li>
+<li id="a0000001209" value="7">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		7.
+	</span>
+<p>
+The unsorted list is empty, so the sorted list is complete. 
+</p>
+</li>
+</ol>
+</section>
+</section><section class="section">
+<h2 id="a0000001210">3.4 Analysis of algorithms</h2>
+<p>
+We have three different algorithms to sort a list, and a rough idea of how they will behave. However, that rough idea could easily be wrong. If the first permutation generated by the brute-force method sorts the list then it is faster than either selection or insertion sort. 
+</p>
+<p>
+Equally, it is generally impractical to work out how long a sorting algorithm may take in all cases and describe the result statistically, as the time taken will diverge to infinity with the size of the list. 
+</p>
+<p>
+Instead, we will look at the <em>worst case</em>: what is the maximum length of time an algorithm may take? 
+</p>
+<section class="subsection">
+<h3 id="a0000001211">3.4.1 Definitions</h3>
+<p>
+An <em>elementary operation</em> (EO) is any simple operation an algorithm may take with roughly the same cost. Examples would be comparisons, swaps, additions, multiplications, or assigning a value to a variable. 
+</p>
+<p>
+The <em>instance size</em> is a number <script type="math/tex">n</script> that characterises the size of the problem. When sorting it would be the length of the list <script type="math/tex">a</script>. 
+</p>
+<p>
+In the <em>worst case</em> analysis we reduce every choice that the algorithm makes to the one needing the most elementary operations. 
+</p>
+<section class="subsubsection">
+<h4 id="a0000001212">Useful results</h4>
+<p>
+The <em>Gauss series</em> or arithmetic progression formula is 
+</p>
+<div class="eqn" id="a0000001213">
+<script type="math/tex; mode=display">\begin{equation}1 + 2 + \dots + n = \sum _{i=1}^ n i = \frac{n (n+1)}{2}.\tag{3.3}\end{equation}</script>
+</div>
+<p>
+The size of a set of consecutive integers, <script type="math/tex">\{  i, i+1, \dots , j \} </script> is 
+</p>
+<div class="eqn" id="a0000001214">
+<script type="math/tex; mode=display">\begin{equation}| \{  i, i+1, \dots , j \}  | = j - i + 1.\tag{3.4}\end{equation}</script>
+</div>
+</section>
+</section><section class="subsection">
+<h3 id="a0000001215">3.4.2 Selection Sort</h3>
+<div class="highlight"><pre><span></span><span class="linenos">1</span>for i in range(0, n-1):
+<span class="linenos">2</span>    j = i
+<span class="linenos">3</span>    for k in range(i+1, n):
+<span class="linenos">4</span>        if a[k] &lt; a[j]:
+<span class="linenos">5</span>            j = k
+<span class="linenos">6</span>    if a[j] &lt; a[i]:
+<span class="linenos">7</span>        a[i], a[j] = a[j], a[i]
+</pre></div>
+<p>
+This Python code performs selection sort. 
+</p>
+<ul class="itemize" id="a0000001216">
+<li id="a0000001217"> <p>
+Line 1 loops <script type="math/tex">n-1</script> times over: 
+</p>
+<ul class="itemize" id="a0000001218">
+<li id="a0000001219"> <p>
+Line 2 assigns one value (1 EO); 
+</p>
+</li>
+<li id="a0000001220"> <p>
+Line 3 loops <script type="math/tex">n - (i+1) + 1</script> times over: 
+</p>
+<ul class="itemize" id="a0000001221">
+<li id="a0000001222"> <p>
+Line 4 does one comparison (1 EO); 
+</p>
+</li>
+<li id="a0000001223"> <p>
+Line 5 assigns one value (1 EO); 
+</p>
+</li>
+</ul>
+<p>
+ The total cost of the loop is <script type="math/tex">2 (n - i)</script> EOs; 
+</p>
+</li>
+<li id="a0000001224"> <p>
+Line 6 does one comparison (1 EO); 
+</p>
+</li>
+<li id="a0000001225"> <p>
+Line 7 does one comparison (1 EO); 
+</p>
+</li>
+</ul>
+<p>
+ The total cost of the loop is 
+</p>
+<div id="a0000001226">
+<div class="eqnarrayid" id="a0000001227"></div><div class="eqnarrayid" id="a0000001228"></div><div class="eqnarrayid" id="a0000001229"></div><script type="math/tex; mode=display">
+\begin{align}
+\tag{3.5} \sum _{i=1}^{n-1} (1 + 2(n - i) + 2) & = \sum _{i=1}^{n-1} (2 n + 3) - 2 \sum _{i-1}^{n-1} i \\ 
+\tag{3.6}& = (n-1)(2n+3) - 2 \frac{(n-1) n}{2} \\ 
+\tag{3.7}& = (n-1)(n+3) = n^2 + 2 n - 3. 
+\end{align}
+</script>
+</div>
+</li>
+</ul>
+<p>
+We see that the analysis gives the worst case of selection sort as <script type="math/tex">\sim n^2</script>. As shown earlier this grows much more slowly that the worst case <script type="math/tex">\sim n^ n</script> for the brute-force algorithm. Selection sort may be practical. 
+</p>
+</section><section class="subsection">
+<h3 id="a0000001230">3.4.3 Insertion Sort</h3>
+<div class="highlight"><pre><span></span><span class="linenos">1</span>for i in range(1, n):
+<span class="linenos">2</span>    for j in range(i, 0, -1):
+<span class="linenos">3</span>        if a[j] &lt; a[j-1]:
+<span class="linenos">4</span>            a[i], a[j] = a[j], a[i]
+<span class="linenos">5</span>        else:
+<span class="linenos">6</span>            break
+</pre></div>
+<p>
+This Python code performs insertion sort. 
+</p>
+<ul class="itemize" id="a0000001231">
+<li id="a0000001232"> <p>
+Line 1 loops <script type="math/tex">n-1</script> times over: 
+</p>
+<ul class="itemize" id="a0000001233">
+<li id="a0000001234"> <p>
+Line 2 loops <script type="math/tex">i</script> times over: 
+</p>
+<ul class="itemize" id="a0000001235">
+<li id="a0000001236"> <p>
+Line 3 does one comparison (1 EO); 
+</p>
+</li>
+<li id="a0000001237"> <p>
+Line 4 does one swap (1 EO); 
+</p>
+</li>
+<li id="a0000001238"> <p>
+Lines 5 and 6 never occur in the worst case. 
+</p>
+</li>
+</ul>
+<p>
+ The total cost of the loop is <script type="math/tex">2 (i - i)</script> EOs; 
+</p>
+</li>
+</ul>
+<p>
+ The total cost of the loop is 
+</p>
+<div id="a0000001239">
+<div class="eqnarrayid" id="a0000001240"></div><div class="eqnarrayid" id="a0000001241"></div><div class="eqnarrayid" id="a0000001242"></div><div class="eqnarrayid" id="a0000001243"></div><script type="math/tex; mode=display">
+\begin{align}
+\tag{3.8} \sum _{i=2}^{n} 2 (i - 1) & = \sum _{i=1}^{n} 2 (i - 1) \\ 
+\tag{3.9}& = 2 \sum _{i=1}^ n i - 2 \sum _{i=1}^ n 1 \\ 
+\tag{3.10}& = \frac{n (n+1)}{2} - 2 n \\ 
+\tag{3.11}& = n^2 - n. 
+\end{align}
+</script>
+</div>
+</li>
+</ul>
+<p>
+We see that the analysis gives the worst case of insertion sort as <script type="math/tex">\sim n^2</script>. For large <script type="math/tex">n</script> we expect insertion sort to be slightly faster than selection sort. 
+</p>
+</section>
+</section><section class="section">
+<h2 id="a0000001244">3.5 Computational complexity</h2>
+<p>
+In general, comparing algorithms by computing the number of elementary operations explicitly can be painfully hard to do. Also, it is often not useful. What we care about is how the cost (the number of elementary operations) grows as the instance size <script type="math/tex">n</script> grows. We therefore only care about the <em>largest</em> term in the <em>worst case</em> as <script type="math/tex">n \to \infty </script>. 
+</p>
+<section class="subsection">
+<h3 id="a0000001245">3.5.1 Big <script type="math/tex">\mathcal{O}</script> notation</h3>
+<p>
+Given two functions <script type="math/tex">f, g \colon \mathbb {R} \to \mathbb {R}</script>, we say that <script type="math/tex">f = \mathcal{O}(g)</script>, or <script type="math/tex">f</script> is of the same order as <script type="math/tex">g</script>, if <script type="math/tex">\exists n_0, c \in \mathbb {R}^+ \setminus \{ 0\} </script> such that 
+</p>
+<div class="eqn" id="a0000001246">
+<script type="math/tex; mode=display">\begin{equation}f(n) \le c g(n) \quad \forall n \ge n_0.\tag{3.12}\end{equation}</script>
+</div>
+<p>
+ In other words, for large enough values <script type="math/tex">f</script> can be bounded by scaling <script type="math/tex">g</script> by a constant. This is illustrated in figure <a class="ref" href="../../../notes/course_notes/index.html#fig:complexity:big_O">3.1</a>. 
+</p>
+<figure id="fig:complexity:big_O">
+<p>
+<img alt="The function f is of the same order as the function g if it can be bounded by some constant multiple of g for all positive real numbers." src="../../../notes/notes_by_chapter/sorting/images/img-0002.png" style="width:469.755pt"/>
+</p>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">3.1</span>
+<span class="caption_text">The function <script type="math/tex">f</script> is of the same order as the function <script type="math/tex">g</script> if it can be bounded by some constant multiple of <script type="math/tex">g</script> for all positive real numbers.</span>
+</figcaption>
+</figure>
+<p>
+The purpose of computational complexity analysis is to bound any function <script type="math/tex">f</script> in terms of a small, simple set of functions <script type="math/tex">g</script>. We want the functions to be simple to make the analysis easier. Equally, we want the specific function used to be as close as possible to <script type="math/tex">f</script>, so the bound does not over-estimate too much. 
+</p>
+</section><section class="subsection">
+<h3 id="a0000001247">3.5.2 Computational complexity</h3>
+<p>
+Consider two algorithms <script type="math/tex">A</script> and <script type="math/tex">B</script> that solve the same problem <script type="math/tex">P</script>. Let <script type="math/tex">f_ A(n), f_ B(n)</script> be the number of elementary operations needed for each algorithm as a function of the instance size. Then <script type="math/tex">\mathcal{O}(f_ A)</script> is the <em>computational complexity</em> of algorithm <script type="math/tex">A</script> (similarly for algorithm <script type="math/tex">B</script>), and we consider <script type="math/tex">A</script> to be <em>more efficient</em> than <script type="math/tex">B</script> if 
+</p>
+<div class="eqn" id="a0000001248">
+<script type="math/tex; mode=display">\begin{equation}\mathcal{O}(f_ A) < \mathcal{O}(f_ B)\tag{3.13}\end{equation}</script>
+</div>
+<p>
+ asymptotically, in the limit as <script type="math/tex">n \to \infty </script>. 
+</p>
+<p>
+Examples include 
+</p>
+<ul class="itemize" id="a0000001249">
+<li id="a0000001250"> <p>
+An <script type="math/tex">\mathcal{O}(\log n)</script> algorithm is more efficient than an <script type="math/tex">\mathcal{O}(n)</script> algorithm. 
+</p>
+</li>
+<li id="a0000001251"> <p>
+An <script type="math/tex">\mathcal{O}(n^2)</script> algorithm is more efficient than an <script type="math/tex">\mathcal{O}(n^3)</script> algorithm. 
+</p>
+</li>
+<li id="a0000001252"> <p>
+An <script type="math/tex">\mathcal{O}(n^ k)</script> algorithm is more efficient than an <script type="math/tex">\mathcal{O}(2^ n)</script> algorithm, if <script type="math/tex">k \in \mathbb {N}</script>. 
+</p>
+</li>
+</ul>
+<p>
+There are two implicit assumptions we have to make about the functions <script type="math/tex">f(n)</script> to make progress. One is that the number of elementary operations is strictly non-negative so that <script type="math/tex">f \colon \mathbb {R}^+ \setminus \{  0 \} </script>. This seems natural. The other is that <script type="math/tex">f</script> is strictly increasing. This need not be true in general, but is usually a very good approximation. 
+</p>
+</section><section class="subsection">
+<h3 id="a0000001253">3.5.3 Properties of the asymptotic model</h3>
+<section class="subsubsection">
+<h4 id="a0000001254">When functions are the same order</h4>
+<p>
+<div class="thmwrapper prop_thmwrapper" id="thm:complexity:limits">
+<div class="thmheading prop_thmheading">
+<span class="thmcaption prop_thmcaption">
+    Property
+    </span>
+<span class="thmlabel prop_thmlabel">5.1</span>
+</div>
+<div class="thmcontent prop_thmcontent">
+<p>
+ Let <script type="math/tex">f, g \colon \mathbb {R}^+ \setminus \{  0 \}  \to \mathbb {R}^+ \setminus \{  0 \} </script>. If 
+</p>
+<div class="eqn" id="a0000001255">
+<script type="math/tex; mode=display">\begin{equation}\lim _{n \to \infty } \frac{f(n)}{g(n)} = l \in (0, \infty )\tag{3.14}\end{equation}</script>
+</div>
+<p>
+ then <script type="math/tex">f = \mathcal{O}(g)</script> and <script type="math/tex">g = \mathcal{O}(f)</script>. 
+</p>
+</div>
+</div>
+</p>
+<div class="proof_wrapper" id="a0000001256">
+<div class="proof_heading">
+<span class="proof_caption">
+    Proof.
+    </span>
+</div>
+<div class="proof_content">
+<p>
+The definition of the limit implies <script type="math/tex">\exists \epsilon > 0, N > 0</script> such that 
+</p>
+<div class="eqn" id="a0000001257">
+<script type="math/tex; mode=display">\begin{equation}\left| \frac{f(n)}{g(n)} - l \right| < \epsilon , \quad \forall n \ge N.\tag{3.15}\end{equation}</script>
+</div>
+<p>
+ This is equivalent to 
+</p>
+<div class="eqn" id="a0000001258">
+<script type="math/tex; mode=display">\begin{equation}l - \epsilon < \frac{f(n)}{g(n)} < l + \epsilon , \quad \forall n \ge N.\tag{3.16}\end{equation}</script>
+</div>
+<p>
+ We now have two cases. 
+</p>
+<ol class="enumerate" id="a0000001259" style="list-style: none">
+<li id="a0000001260" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		1.
+	</span>
+<p>
+From the upper bound we have <script type="math/tex">f(n) < (l + \epsilon ) g(n)</script> for all <script type="math/tex">n \ge N</script>. By setting <script type="math/tex">n_0 = N</script> and <script type="math/tex">c = (l + \epsilon )</script>, the definition gives that <script type="math/tex">f = \mathcal{O}(g)</script>. 
+</p>
+</li>
+<li id="a0000001261" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		2.
+	</span>
+<p>
+From the lower bound we have (assuming, without loss of generality, that <script type="math/tex">\epsilon < l</script>) <script type="math/tex">g(n) < (l - \epsilon )^{-1} f(n)</script>. By setting <script type="math/tex">n_0 = N</script> and <script type="math/tex">c = (l - \epsilon )^{-1}</script>, the definition gives that <script type="math/tex">g = \mathcal{O}(f)</script>. 
+</p>
+</li>
+</ol>
+</div>
+</div>
+<p>
+This shows that (non-zero!) constant factors are essentially irrelevant. 
+</p>
+</section><section class="subsubsection">
+<h4 id="a0000001262">When one function is of lower order</h4>
+<p>
+<div class="thmwrapper prop_thmwrapper" id="a0000001263">
+<div class="thmheading prop_thmheading">
+<span class="thmcaption prop_thmcaption">
+    Property
+    </span>
+<span class="thmlabel prop_thmlabel">5.2</span>
+</div>
+<div class="thmcontent prop_thmcontent">
+<p>
+Let <script type="math/tex">f, g \colon \mathbb {R}^+ \setminus \{  0 \}  \to \mathbb {R}^+ \setminus \{  0 \} </script>. If 
+</p>
+<div class="eqn" id="a0000001264">
+<script type="math/tex; mode=display">\begin{equation}\lim _{n \to \infty } \frac{f(n)}{g(n)} = 0\tag{3.17}\end{equation}</script>
+</div>
+<p>
+ then <script type="math/tex">f = \mathcal{O}(g)</script> but <script type="math/tex">g \ne \mathcal{O}(f)</script>. 
+</p>
+</div>
+</div>
+</p>
+<div class="proof_wrapper" id="a0000001265">
+<div class="proof_heading">
+<span class="proof_caption">
+    Proof.
+    </span>
+</div>
+<div class="proof_content">
+<p>
+This is very similar to the previous proof. 
+</p>
+<p>
+The definition of the limit implies <script type="math/tex">\exists \epsilon > 0, N > 0</script> such that 
+</p>
+<div class="eqn" id="a0000001266">
+<script type="math/tex; mode=display">\begin{equation}\left| \frac{f(n)}{g(n)} - 0 \right| < \epsilon , \quad \forall n \ge N.\tag{3.18}\end{equation}</script>
+</div>
+<p>
+ This is equivalent to 
+</p>
+<div class="eqn" id="a0000001267">
+<script type="math/tex; mode=display">\begin{equation}- \epsilon < \frac{f(n)}{g(n)} < \epsilon , \quad \forall n \ge N.\tag{3.19}\end{equation}</script>
+</div>
+<p>
+ We now have two cases. 
+</p>
+<ol class="enumerate" id="a0000001268" style="list-style: none">
+<li id="a0000001269" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		1.
+	</span>
+<p>
+From the upper bound we have <script type="math/tex">f(n) < \epsilon g(n)</script> for all <script type="math/tex">n \ge N</script>. By setting <script type="math/tex">n_0 = N</script> and <script type="math/tex">c = \epsilon </script>, the definition gives that <script type="math/tex">f = \mathcal{O}(g)</script>. 
+</p>
+</li>
+<li id="a0000001270" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		2.
+	</span>
+<p>
+By contradiction, assume <script type="math/tex">g = \mathcal{O}(f)</script>. By definition, there must exist <script type="math/tex">n_0, c \in \mathbb {R}^+ \setminus \{  0 \} </script> such that <script type="math/tex">g(n) \le c f(n)</script> for all <script type="math/tex">n \ge n_0</script>. Thus 
+</p>
+<div class="eqn" id="a0000001271">
+<script type="math/tex; mode=display">\begin{equation}\frac{f(n)}{g(n)} \ge \frac{1}{c} > 0, \quad \forall n \ge n_0.\tag{3.20}\end{equation}</script>
+</div>
+<p>
+ This contradicts the limit <script type="math/tex">\lim _{n\to \infty } \frac{f(n)}{g(n)} = 0</script>. Therefore <script type="math/tex">g \ne \mathcal{O}(f)</script>. 
+</p>
+</li>
+</ol>
+</div>
+</div>
+<p>
+In this case we say that <script type="math/tex">f</script> is of <em>lower order</em> than <script type="math/tex">g</script>. 
+</p>
+</section><section class="subsubsection">
+<h4 id="a0000001272">Constants are irrelevant</h4>
+<p>
+<div class="thmwrapper prop_thmwrapper" id="a0000001273">
+<div class="thmheading prop_thmheading">
+<span class="thmcaption prop_thmcaption">
+    Property
+    </span>
+<span class="thmlabel prop_thmlabel">5.3</span>
+</div>
+<div class="thmcontent prop_thmcontent">
+<p>
+Assume <script type="math/tex">a, b \in \mathbb {R}^+ \setminus \{  0 \} </script>. Then 
+</p>
+<div class="eqn" id="a0000001274">
+<script type="math/tex; mode=display">\begin{equation}a f(n) + b = \mathcal{O}(f(n))\tag{3.21}\end{equation}</script>
+</div>
+</div>
+</div>
+</p>
+<div class="proof_wrapper" id="a0000001275">
+<div class="proof_heading">
+<span class="proof_caption">
+    Proof.
+    </span>
+</div>
+<div class="proof_content">
+<p>
+This follows from theorem <a class="ref" href="../../../notes/notes_by_chapter/sorting/index.html#thm:complexity:limits">5.1</a>, as 
+</p>
+<div class="eqn" id="a0000001276">
+<script type="math/tex; mode=display">\begin{equation}\lim _{n\to \infty } \frac{a f(n) + b}{f(n)} = a \in (0, \infty ).\tag{3.22}\end{equation}</script>
+</div>
+</div>
+</div>
+</section><section class="subsubsection">
+<h4 id="a0000001277">All logarithms are the same</h4>
+<p>
+<div class="thmwrapper prop_thmwrapper" id="a0000001278">
+<div class="thmheading prop_thmheading">
+<span class="thmcaption prop_thmcaption">
+    Property
+    </span>
+<span class="thmlabel prop_thmlabel">5.4</span>
+</div>
+<div class="thmcontent prop_thmcontent">
+<p>
+Assume <script type="math/tex">a, b \in \mathbb {R}^+ \setminus \{  0 \} </script>. Then 
+</p>
+<div class="eqn" id="a0000001279">
+<script type="math/tex; mode=display">\begin{equation}\log _ a n = \mathcal{O} \left( \log _ b n \right).\tag{3.23}\end{equation}</script>
+</div>
+</div>
+</div>
+</p>
+<div class="proof_wrapper" id="a0000001280">
+<div class="proof_heading">
+<span class="proof_caption">
+    Proof.
+    </span>
+</div>
+<div class="proof_content">
+<p>
+This follows from the previous case, as 
+</p>
+<div class="eqn" id="a0000001281">
+<script type="math/tex; mode=display">\begin{equation}\log _ a n = (\frac{1}{\log _ b a}) \log _ b n\tag{3.24}\end{equation}</script>
+</div>
+<p>
+ and the term in brackets is a constant. 
+</p>
+</div>
+</div>
+</section><section class="subsubsection">
+<h4 id="a0000001282">Lower order terms are irrelevant</h4>
+<p>
+<div class="thmwrapper prop_thmwrapper" id="a0000001283">
+<div class="thmheading prop_thmheading">
+<span class="thmcaption prop_thmcaption">
+    Property
+    </span>
+<span class="thmlabel prop_thmlabel">5.5</span>
+</div>
+<div class="thmcontent prop_thmcontent">
+<p>
+If <script type="math/tex">g</script> is of lower order than <script type="math/tex">f</script> then 
+</p>
+<div class="eqn" id="a0000001284">
+<script type="math/tex; mode=display">\begin{equation}f(n) + g(n) = \mathcal{O}(f).\tag{3.25}\end{equation}</script>
+</div>
+</div>
+</div>
+</p>
+<div class="proof_wrapper" id="a0000001285">
+<div class="proof_heading">
+<span class="proof_caption">
+    Proof.
+    </span>
+</div>
+<div class="proof_content">
+<div id="a0000001286">
+<div class="eqnarrayid" id="a0000001287"></div><div class="eqnarrayid" id="a0000001288"></div><script type="math/tex; mode=display">
+\begin{align}
+\tag{3.26} \lim _{n\to \infty } \frac{f(n) + g(n)}{f(n)} & = \lim _{n\to \infty } \left( 1 + \frac{g(n)}{f(n)} \right) \\ 
+\tag{3.27}& = 1. 
+\end{align}
+</script>
+</div>
+<p>
+ Hence theorem <a class="ref" href="../../../notes/notes_by_chapter/sorting/index.html#thm:complexity:limits">5.1</a> gives the result. 
+</p>
+</div>
+</div>
+</section><section class="subsubsection">
+<h4 id="a0000001289">Shifts are irrelevant</h4>
+<p>
+<div class="thmwrapper prop_thmwrapper" id="a0000001290">
+<div class="thmheading prop_thmheading">
+<span class="thmcaption prop_thmcaption">
+    Property
+    </span>
+<span class="thmlabel prop_thmlabel">5.6</span>
+</div>
+<div class="thmcontent prop_thmcontent">
+<p>
+For a monotone increasing function <script type="math/tex">f</script>, 
+</p>
+<div class="eqn" id="a0000001291">
+<script type="math/tex; mode=display">\begin{equation}f(n + a) = \mathcal{O}(f).\tag{3.28}\end{equation}</script>
+</div>
+</div>
+</div>
+</p>
+</section><section class="subsubsection">
+<h4 id="a0000001292">Rounding operators are irrelevant</h4>
+<p>
+<div class="thmwrapper prop_thmwrapper" id="a0000001293">
+<div class="thmheading prop_thmheading">
+<span class="thmcaption prop_thmcaption">
+    Property
+    </span>
+<span class="thmlabel prop_thmlabel">5.7</span>
+</div>
+<div class="thmcontent prop_thmcontent">
+<p>
+The ceiling operator <script type="math/tex">\lceil n \rceil </script> returns the smallest integer greater than <script type="math/tex">n</script>. We have 
+</p>
+<div class="eqn" id="a0000001294">
+<script type="math/tex; mode=display">\begin{equation}\lceil f(n) \rceil = \mathcal{O}(f).\tag{3.29}\end{equation}</script>
+</div>
+</div>
+</div>
+</p>
+<div class="proof_wrapper" id="a0000001295">
+<div class="proof_heading">
+<span class="proof_caption">
+    Proof.
+    </span>
+</div>
+<div class="proof_content">
+<p>
+This follows from 
+</p>
+<div class="eqn" id="a0000001296">
+<script type="math/tex; mode=display">\begin{equation}\lceil f(n) \rceil \le f(n) + 1 = \mathcal{O}(f).\tag{3.30}\end{equation}</script>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section><section class="section">
+<h2 id="a0000001297">3.6 Cobham-Edmonds thesis</h2>
+<p>
+A suggestion from 1965 by Alan Cobham and Jack Edmonds is that a problem <script type="math/tex">P</script> is <em>tractable</em> if 
+</p>
+<ol class="enumerate" id="a0000001298" style="list-style: none">
+<li id="a0000001299" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		1.
+	</span>
+<p>
+there is an algorithm <script type="math/tex">A</script> that solves <script type="math/tex">P</script>; 
+</p>
+</li>
+<li id="a0000001300" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		2.
+	</span>
+<p>
+<script type="math/tex">A</script> has computational complexity at most polynomial in the size of instances of <script type="math/tex">P</script>. 
+</p>
+</li>
+</ol>
+<p>
+ Generally we think of tractable problems as solvable on a computer, whilst problems that are not tractable are not. In many specific cases this is untrue, as “average” instances of problems may be solved by the algorithm <script type="math/tex">A</script> much faster than the worst case suggests. 
+</p>
+<p>
+This chapter has shown that the sorting problem is tractable, by constructing two algorithms (selection and insertion sort) that are <script type="math/tex">\mathcal{O}(n^2)</script>. Neither are the fastest sorting algorithm available. It is important to note that the existence of a slower algorithm (such as brute-force sort, with complexity <script type="math/tex">\mathcal{O}(n!)</script>) does not mean that the <em>problem</em> in intractable.  
+</p>
+</section>
+
+            </div>
+        </div>
+    </div>
+
+        </main>
+		
+		<footer class="text-muted">
+	<hr>
+	<div class="container">
+		<div class="float-right">
+			<ul style="list-style: none">
+			<li><a href="#">Back to top</a></li>
+			
+			
+			<li><a href="../../../notes/notes_by_chapter/sorting/sorting.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;Download as PDF</a></li>
+			
+			</ul>
+		</div>
+		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
+		<p>This page last generated: 2022-01-20</p>
+	</div>
+</footer>
+		
+    </body>
+</html>

@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        
+            <meta charset="utf-8">
+            <meta name="robots" content="noindex">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="author" content="Ian Hawke" />
+            <meta name="date" content="2022-01-25" />
+        
+
+        <title>Sheet 6 | Operational Research and Mathematical Computing</title>
+
+        
+    
+    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../../static/styles.css">
+            <link rel="stylesheet" id="customiseCSS" href="../../static/light.css">
+            
+            
+        
+    <link rel="stylesheet" id="customiseCodeCSS" href="../../static/pygmentize.light.css">
+    <link rel="stylesheet" href="../../static/codemirror-5.26.0/lib/codemirror.css">
+    <link rel="stylesheet" href="../../static/boole.css">
+    <link rel="stylesheet" href="../../static/numbasEmbed.css">
+
+    <link rel="stylesheet" href="../../static/bootstrap-toc.css?v=3">
+    <link rel="stylesheet" href="../../static/print.css">
+
+
+        
+    
+    
+            <script defer src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <script defer src="../../static/mathjax_config.js"></script>
+            <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+            <script defer src="../../static/customisation.js"></script>
+            <script defer src="../../static/mp4.js"></script>
+            
+            
+        
+    <script defer src="../../static/jquery.flexibleArea.js"></script>
+    <script defer src="../../static/spin.min.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/lib/codemirror.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/octave/octave.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/python/python.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/r/r.js"></script>
+    <script defer src="../../static/boole.js"></script>
+    <script defer src="../../static/numbasEmbed.js"></script>
+
+    <script defer src="../../static/bootstrap-toc.js"></script>
+
+    </head>
+    <body data-spy="scroll" data-target="#chapterTOC" data-offset="50">
+        
+<div class="collapse" id="navbarToggleCustomise">
+	<div class="bg-secondary text-white p-3">
+		<form onsubmit="return false;" id="navbarCustomise">
+			<div class="form-row">
+				<label>Theme Customisation</label>
+				<div id="themeSelector" class="form-group col-md-12">
+					<button class="btn btn-dark mr-2" value="dark">Dark</button>
+					<button class="btn btn-pastel mr-2" value="pastel">Pastel</button>
+					<button class="btn btn-light mr-4" value="light">Light</button>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label style="display: block" for="font-scale">Font size (<span id="font-size-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="font-scale" min="50" max="600" value="100">
+					<button id="font-scale-reset" class="btn btn-sm">Reset</button>
+				</div>
+				<div class="form-group col-md-4">
+					<label style="display: block" for="p-space">Spacing (<span id="p-space-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="p-space" min="0" max="600" value="100">
+					<button id="p-space-reset" class="btn btn-sm">Reset</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<nav aria-label="breadcrumb">
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="../../index.html">Operational Research and Mathematical Computing</a>
+		</li>
+		
+		<li class="breadcrumb-item">
+			<a href="../../problem_sheets/index.html">Problem Sheets</a>
+		</li>
+		
+		<li class="breadcrumb-item active">
+			Sheet 6
+		</li>
+		<li class="ml-auto">
+			<button class="navbar-toggler p0" type="button" data-toggle="collapse" data-target="#navbarToggleCustomise" aria-controls="navbarToggleCustomise" aria-expanded="false" aria-label="Toggle customisations panel">
+				<i class="fa fa-cog" aria-hidden="true" title="Toggle customisations panel"></i> <span class="sr-only">Toggle customisations panel</span>
+			</button>
+		</li>
+	</ul>
+</nav>
+
+
+        <header>
+            
+            
+        </header>
+        <main>
+            
+    <div class="container mt-3">
+        <div class="row">
+            
+            <div id="sidebar" class="col-md-3">
+                <nav class="mb-3" id="chapterTOC" data-toggle="toc">
+                    <ul class="nav navbar-nav">
+                        
+                        
+                        
+                        <li><a id="pdf-link" class="nav-link" href="../../problem_sheets/sheet_6/sheet_6.pdf" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" title="Download as PDF"></i>&nbsp;Download as PDF</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+            <div id="content" class="col-md-9"> 
+            
+            <section class="section">
+<h2 id="a0000000025">MATH1058: Problem Sheet 6</h2>
+<p>
+<div class="thmwrapper problem_thmwrapper" id="a0000000026">
+<div class="thmheading problem_thmheading">
+<span class="thmcaption problem_thmcaption">
+    Problem
+    </span>
+<span class="thmlabel problem_thmlabel">1</span>
+<span class="thmtitle problem_thmtitle">(Production planning (subject to uncertainty))</span>
+</div>
+<div class="thmcontent problem_thmcontent">
+<p>
+ Consider a production planning problem for a single good over a time period of <script type="math/tex">\tau </script> time steps. An intensive marketing campaign has revealed that, at each time period <script type="math/tex">t = 1, \dots , \tau </script>, no more than <script type="math/tex">d_ t</script> units can be sold. The production of a unit requires assembling components of <script type="math/tex">n</script> types, with <script type="math/tex">a_{i}</script> representing the number of components of type <script type="math/tex">i \in 1, \dots , n</script> that are needed to produce one unit of the single good and <script type="math/tex">q_ i</script> representing their availability during the whole time period. 
+</p>
+<p>
+We are asked to determine a production plan which maximizes the revenue of the company over the time period, subject to availability and demand constraints. 
+</p>
+<ol class="enumerate" id="a0000000027" style="list-style: none">
+<li id="a0000000028" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		1.
+	</span>
+<p>
+Propose a linear programming model for the problem where <script type="math/tex">c_ t</script>, for all <script type="math/tex">t = 1, \dots , \tau </script>, denotes the price at which a unit of the single good is sold. 
+</p>
+</li>
+<li id="a0000000029" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		2.
+	</span>
+<p>
+Consider now the case where, rather than knowing <script type="math/tex">c</script> with absolute precision, we have a set of <script type="math/tex">\kappa </script> estimates (<em>scenarios</em>) of it, where each estimate is a vector <script type="math/tex">c^ k \in \mathbb {R}^\tau </script>, with <script type="math/tex">k = 1, \dots , \kappa </script>, corresponding to the time series of unit prices that was forecast for the whole time period. Propose a linear programming formulation to find a production plan by which the profit is maximized <em>in the worst case</em>, i.e., a production plan <script type="math/tex">x \in \mathbb {R}^\tau </script> by which, rather than <script type="math/tex">cx</script>, the following function is maximized: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\phi (x) := \min _{k \in \{ 1, \dots , \kappa \} } c^ k x.</script></span>
+<p>
+ Note that, for any <script type="math/tex">x \in \mathbb {R}^\tau </script>, <script type="math/tex">\phi (x)</script> corresponds to the smallest profit achieved with the production plan corresponding to <script type="math/tex">x</script> over all scenarios <script type="math/tex">k = 1, \dots , \kappa </script>. 
+</p>
+</li>
+</ol>
+</div>
+</div>
+</p>
+<p>
+<div class="thmwrapper problem_thmwrapper" id="a0000000030">
+<div class="thmheading problem_thmheading">
+<span class="thmcaption problem_thmcaption">
+    Problem
+    </span>
+<span class="thmlabel problem_thmlabel">2</span>
+<span class="thmtitle problem_thmtitle">(Simplex method with Bland’s rule I)</span>
+</div>
+<div class="thmcontent problem_thmcontent">
+<p>
+ Solve the following linear program with the two-phase simplex method, applying Bland’s rule: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\begin{equation*} \begin{array}{rc*4{cr}l} \min \  \  &  z= & &  x_1 &  - &  2x_2 \\ & & &  2x_1 & & &  + &  3 x_3 &  = 1 \\ & & &  3x_1 &  + &  2x_2 &  - &  x_3 &  = 5 \\ & & &  x_1 & ,x_2 & ,x_3 &  \ge 0 . \end{array}\end{equation*}</script></span>
+</div>
+</div>
+</p>
+<p>
+<div class="thmwrapper problem_thmwrapper" id="a0000000031">
+<div class="thmheading problem_thmheading">
+<span class="thmcaption problem_thmcaption">
+    Problem
+    </span>
+<span class="thmlabel problem_thmlabel">3</span>
+<span class="thmtitle problem_thmtitle">(Simplex method with Bland’s rule II)</span>
+</div>
+<div class="thmcontent problem_thmcontent">
+<p>
+ Solve the following LP with the two-phase simplex method, adopting Bland’s rule: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\begin{array}{cccccccc} \min &  x_1 &  +x_2 &  +x_3\\ \text{s.t.} &  x_1 &  + 2x_2 &  + 3x_3 & & &  = 3\\ &  -x_1 &  + 2x_2 &  + 6 x_3 & & &  = 2\\ & &  - 3x_2 &  - 9 x_3 & & &  = -5\\ &  x_1,x_2,x_3 \geq 0 \hspace{-3cm} \end{array}</script></span>
+</div>
+</div>
+</p>
+</section>
+
+            </div>
+        </div>
+    </div>
+
+        </main>
+		
+		<footer class="text-muted">
+	<hr>
+	<div class="container">
+		<div class="float-right">
+			<ul style="list-style: none">
+			<li><a href="#">Back to top</a></li>
+			
+			
+			<li><a href="../../problem_sheets/sheet_6/sheet_6.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;Download as PDF</a></li>
+			
+			</ul>
+		</div>
+		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
+		<p>This page last generated: 2022-01-25</p>
+	</div>
+</footer>
+		
+    </body>
+</html>

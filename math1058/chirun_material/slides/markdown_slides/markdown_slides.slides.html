@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<meta charset="utf-8">
+		<meta name="robots" content="noindex">
+		<meta name="author" content="Ian Hawke" />
+		<meta name="date" content="2022-01-20" />
+		
+
+		<title>Markdown Slides</title>
+
+		
+		<link rel="stylesheet" id="customiseCodeCSS" href="../../static/pygmentize.light.css">
+		<link rel="stylesheet" href="../../static/reveal.js/dist/reveal.css">
+		<link id="customiseCSS" rel="stylesheet" href="../../static/reveal.js/dist/theme/light.css">
+		<link rel="stylesheet" href="../../static/slides.css">
+		<link rel="stylesheet" href="../../static/codemirror-5.26.0/lib/codemirror.css">
+		<link rel="stylesheet" href="../../static/boole.css">
+		
+		
+		
+
+		
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+		<script defer src="../../static/mathjax_config.js"></script>
+		<script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+		<script defer src="../../static/jquery.flexibleArea.js"></script>
+		<script defer src="../../static/spin.min.js"></script>
+		<script src="../../static/customisation.js"></script>
+		<script defer src="../../static/mp4.js"></script>
+		<script src="../../static/boole.js"></script>
+		<script>
+			if( window.location.search.match( /print-pdf/gi )){
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = "../../static/reveal.js/css/print/pdf.css";
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = "../../static/slides_print.css";
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+		
+		
+		
+
+	</head>
+	<body >
+		<div class="reveal">
+
+			
+			<div class="header-l">Markdown Slides</div>
+			<div class="header-r">Ian Hawke</div>
+			
+
+			<div class="slides">
+				
+					
+					<section id="title-slide">
+						<h1 class="title">Markdown Slides</h1>
+						<p class="author">Ian Hawke</p>
+					</section>
+					
+				
+
+				
+				<section data-splitter data-separator="<hr/?>" data-separator-notes="^Data-Note:">
+					<textarea data-template>
+						<section class="section1"><h1>Introduction to OR</h1>
+<section class="section4"><h4>Ian Hawke</h4>
+</section><section class="section4"><h4>Michael Kenna-Allison</h4>
+<aside class="notes">
+  Welcome to MATH1058, an Introduction to Operational Research and Mathematical Computing. My name is Ian Hawke; I am the module lead. Michael Kenna-Allison will also be instructing on the module. We will get into the course structure and who is doing what later. For now, I want to outline the problems we are going to tackle in this module.
+</aside>
+<hr/>
+</section></section><section class="section1"><h1>A meet up</h1>
+<p>A hard year.</p>
+<aside class="notes">
+  Imagine - it should not be difficult - that you've had a hard year, spending far too much time away from friends and family, and that you desperately want to meet up with a group of friends and just relax. So, you start planning.
+  <br/>
+  However, this is complicated. Your group of friends is scattered across the country. The differing work and study commitments narrow down the times you are all available. Some have other family commitments, adding more constraints. Travel may be difficult, or costly, or uncertain, constraining where the meet up can take place. Add in personality clashes, differences in what people want to do, and random last minute problems, we see that planning any meet up for a large group can be a lot of work.
+  <br/>
+  However, this is important. It can be done; it must be done. The question is how to do it best. This leads to two questions. What do we mean by "best"? Once we know what that means, can we find a "best", or "optimal", solution?
+</aside>
+<hr/>
+<section _=";" class="section2" data-background-image="images/describe_predict.png" data-background-position="bottom" data-background-size="80%"><h2>Describe, predict, prescribe?</h2>
+<hr/>
+</section><section _=";" class="section2" float="left" width="50%"><h2>Describe, predict, prescribe?</h2>
+<p><em>Operational Research</em> (OR) belongs to <em>analytics</em>:</p>
+<ul>
+<li>What is happening? (<em>Describe</em>)</li>
+<li>What will happen? (<em>Predict</em>)</li>
+<li>What should we do? (<em>Prescribe</em>)</li>
+</ul>
+<p>OR tools are prescriptive.</p>
+<figure class="figure1" data-title="Describe, predict, or prescribe."><img _=";" alt="Describe, predict, or prescribe." float="right" src="images/describe_predict.png" width="45%"/></figure><aside class="notes">
+  Analytics covers a huge range of applied mathematics and statistics, including modelling, forecasting, machine learning, and a range of other fields and tools. In the context of our meet-up problem, we need to know what our group is doing (describe), what they, and their connections, work, travel options and so on, are going to be doing (predict), and what we should do for the best (prescribe).
+  <br/>
+  The operational research tools that we will introduce, analyse, and code are all prescriptive. Once we know what the problem is and what it means for a solution to be the best, or to be optimal, the tools and algorithms of operational research will find that solution. Of course, there are cases where such a solution does not exist, or there are many such solutions. Our analysis should tell us when this happens as well.
+</aside>
+<hr/>
+</section><section class="section2"><h2>Algorithms</h2>
+<ul>
+<li>A description</li>
+<li>of a <em>finite</em> set of operations</li>
+<li>that solve a <em>given problem</em></li>
+<li>for <strong>all</strong> of its <em>instances</em>.</li>
+</ul>
+<div class="fragment">
+<ul>
+<li><em>Problem</em>: solve <script type="math/tex">a x^2 + b x + c = 0</script> for <script type="math/tex">x \in \mathbb{C}</script>.</li>
+<li><em>Instance</em>: <script type="math/tex">a = 2, b = 8, c = 5</script>.</li>
+<li><em>Algorithm</em>:<ol>
+<li>Compute <script type="math/tex">b^2-4ac</script> and <script type="math/tex">2a</script>;</li>
+<li>Compute <script type="math/tex">\sqrt{b^2-4ac}</script>
+</li>
+<li>Compute <script type="math/tex">(-b\pm\sqrt{b^2-4ac})/(2a)</script>.</li>
+</ol>
+</li>
+</ul>
+<aside class="notes">
+  An algorithm is a description in some formal language. Mathematics is one such formal language. A computer code is another. One key aspect of this module is transforming problems between informal specifications (in natural language) and formal specifications (in mathematics or in code). Different formal languages emphasise different aspects of the problem, as so are useful in different ways.
+  <br/>
+  The example algorithm of computing the roots of a quadratic equation is standard. We see how, mathematically, it can be reduced to a limited number of explicit calculations. Depending on the detail level and implicit assumptions you are willing to allow you could write it on one line; here it is written in three, although the first and last lines both describe two calculations each. There remains the implicit assumption that $a$ is non-zero. Mathematically we would often think that this assumption is obvious. It may need to be explicitly dealt with in a computer code.
+</aside>
+</div><hr/>
+</section></section><section class="section1"><h1>Summary</h1>
+</section>
+					</textarea>
+				</section>
+				
+
+			</div>
+
+		</div>
+		<script src="../../static/reveal.js/dist/reveal.js"></script>
+		<script>
+			Reveal.initialize({
+				hash: true,
+				history: true,
+				dependencies: [
+					{ src: "../../static/reveal.js/plugin/splitter/splitter.js" },
+					{ src: "../../static/reveal.js/plugin/notes/notes.js", async: true },
+					{ src: "../../static/reveal.js/plugin/highlight/highlight.js", async: true }
+				]
+			});
+			Reveal.on( 'ready', event => {
+				try {
+					MathJax.typeset();
+				} catch(err) {
+					console.log('Problem running MathJax.typeset()');
+				}
+				mp4ImageFallback();
+				updateThemeBodyTag();
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        
+            <meta charset="utf-8">
+            <meta name="robots" content="noindex">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="author" content="Ian Hawke" />
+            <meta name="date" content="2022-01-25" />
+        
+
+        <title>Lab 8 outline | Operational Research and Mathematical Computing</title>
+
+        
+    
+    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../../static/styles.css">
+            <link rel="stylesheet" id="customiseCSS" href="../../static/light.css">
+            
+            
+        
+    <link rel="stylesheet" id="customiseCodeCSS" href="../../static/pygmentize.light.css">
+    <link rel="stylesheet" href="../../static/codemirror-5.26.0/lib/codemirror.css">
+    <link rel="stylesheet" href="../../static/boole.css">
+    <link rel="stylesheet" href="../../static/numbasEmbed.css">
+
+    <link rel="stylesheet" href="../../static/bootstrap-toc.css?v=3">
+    <link rel="stylesheet" href="../../static/print.css">
+
+
+        
+    
+    
+            <script defer src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <script defer src="../../static/mathjax_config.js"></script>
+            <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+            <script defer src="../../static/customisation.js"></script>
+            <script defer src="../../static/mp4.js"></script>
+            
+            
+        
+    <script defer src="../../static/jquery.flexibleArea.js"></script>
+    <script defer src="../../static/spin.min.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/lib/codemirror.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/octave/octave.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/python/python.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/r/r.js"></script>
+    <script defer src="../../static/boole.js"></script>
+    <script defer src="../../static/numbasEmbed.js"></script>
+
+    <script defer src="../../static/bootstrap-toc.js"></script>
+
+    </head>
+    <body data-spy="scroll" data-target="#chapterTOC" data-offset="50">
+        
+<div class="collapse" id="navbarToggleCustomise">
+	<div class="bg-secondary text-white p-3">
+		<form onsubmit="return false;" id="navbarCustomise">
+			<div class="form-row">
+				<label>Theme Customisation</label>
+				<div id="themeSelector" class="form-group col-md-12">
+					<button class="btn btn-dark mr-2" value="dark">Dark</button>
+					<button class="btn btn-pastel mr-2" value="pastel">Pastel</button>
+					<button class="btn btn-light mr-4" value="light">Light</button>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label style="display: block" for="font-scale">Font size (<span id="font-size-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="font-scale" min="50" max="600" value="100">
+					<button id="font-scale-reset" class="btn btn-sm">Reset</button>
+				</div>
+				<div class="form-group col-md-4">
+					<label style="display: block" for="p-space">Spacing (<span id="p-space-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="p-space" min="0" max="600" value="100">
+					<button id="p-space-reset" class="btn btn-sm">Reset</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<nav aria-label="breadcrumb">
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="../../index.html">Operational Research and Mathematical Computing</a>
+		</li>
+		
+		<li class="breadcrumb-item">
+			<a href="../../lab_notes/index.html">Lab notes</a>
+		</li>
+		
+		<li class="breadcrumb-item active">
+			Lab 8 outline
+		</li>
+		<li class="ml-auto">
+			<button class="navbar-toggler p0" type="button" data-toggle="collapse" data-target="#navbarToggleCustomise" aria-controls="navbarToggleCustomise" aria-expanded="false" aria-label="Toggle customisations panel">
+				<i class="fa fa-cog" aria-hidden="true" title="Toggle customisations panel"></i> <span class="sr-only">Toggle customisations panel</span>
+			</button>
+		</li>
+	</ul>
+</nav>
+
+
+        <header>
+            
+            
+        </header>
+        <main>
+            
+    <div class="container mt-3">
+        <div class="row">
+            
+            <div id="sidebar" class="col-md-3">
+                <nav class="mb-3" id="chapterTOC" data-toggle="toc">
+                    <ul class="nav navbar-nav">
+                        
+                        
+                        <li><a id="notebook-link" class="nav-link" href="../../lab_notes/lab_8_outline/lab_8_outline.ipynb" download><i class="fa fa-book" aria-hidden="true" title="Download Notebook"></i>&nbsp;Download Notebook</a></li>
+                        
+                        
+                        <li><a id="pdf-link" class="nav-link" href="../../lab_notes/lab_8_outline/lab_8_outline.pdf" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" title="Download as PDF"></i>&nbsp;Download as PDF</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+            <div id="content" class="col-md-9"> 
+            
+            <section class="section1"><h1>Lab week 8</h1>
+<p>We have seen control flow, loops, and <code>numpy</code> arrays. Now we are going to use them on the simplex method.</p>
+<section class="section2"><h2>Script</h2>
+<p>Linear programming is a core part of operational research. We'll look at solving the following linear program
+<script type="math/tex; mode=display">
+\begin{array}{cccc}
+  \max & x_1    & + x_2  \\
+       & 2 x_1  & - x_2 & \le 4 \\
+       & x_1    & + 2 x_2 & \le 3
+\end{array}
+</script>
+where <script type="math/tex">x_1, x_2 \ge 0</script>. We'll code up the simplex method.</p>
+<p>Let us bring the problem to standard form by introducing slack variables <script type="math/tex">s_1, s_2 \ge 0</script> and transforming the problem into a minimization problem:</p>
+<script type="math/tex; mode=display">
+\begin{array}{cccccc}
+  \min & -x_1   & -x_2  \\
+       & 2 x_1  & - x_2   & + s_1 &       & = 4 \\
+       & x_1    & + 2 x_2 &       & + s_2 & = 3
+\end{array}
+</script>
+<p>The corresponding tableau reads:
+<script type="math/tex; mode=display">
+\left(\begin{array}{c|cccc}
+0 & -1 & -1 & 0 & 0 \\
+\hline
+4 &  2 & -1 & 1 & 0 \\
+3 &  1 &  2 & 0 & 1
+\end{array}
+\right)
+</script>
+</p>
+<p>Recall that we count rows and columns from zero here.</p>
+<p>The tableau contains the reduced cost coefficients (row <script type="math/tex">0</script>), the right-hand side (RHS) coefficients (column <script type="math/tex">0</script>, ignoring its first component), which should be kept nonnegative at all times, and the coefficients of the various constraints. To be basic feasible, a collection of its columns should form an identity matrix (which is the case here: consider columns <script type="math/tex">3,4</script>).</p>
+<p>From an algebraic perspective (slightly more abstract than the one adopted in the lectures), the simplex method performs a sequence of row operations (pivoting operations) to remove all negative numbers from the top row (row <script type="math/tex">0</script>), at each stage choosing a pivot which guarantees that the nonnegativity of the RHS coefficients (column <script type="math/tex">0</script>, ignoring is first entry, i.e., the entry in position <script type="math/tex">(0, 0)</script>) is preserved.</p>
+<p>First, we want to store the tableau. We'll do this using <code>numpy.</code></p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="n">tableau</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                        <span class="p">[</span><span class="mi">4</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                        <span class="p">[</span><span class="mi">3</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tableau</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[[ 0. -1. -1.  0.  0.]
+ [ 4.  2. -1.  1.  0.]
+ [ 3.  1.  2.  0.  1.]]
+</pre></div>
+<p>We've explicitly said that the tableau entries are floating point numbers here, as we know we'll end up with non-integer results.</p>
+<p>Note that the vector of right-hand sides has been stored in column <code>0</code>, from row <code>1</code> to row <code>2</code>. The entry in position <code>(0,0)</code> corresponds to the opposite of the objective function value.</p>
+<p>First, we inspect the row of reduced costs (row <code>0</code>).</p>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[ 0. -1. -1.  0.  0.]
+</pre></div>
+<p>We see negative entries in columns <code>1</code> and <code>2</code>. Applying Bland's rule, we pivot on the left-most column: column <code>1</code>. As, carrying out the min ratio test, we observe <code>4/2 &lt; 3/1</code>, we select row <code>1</code>, pivoting in position <code>(1,1)</code>.</p>
+<p>First, we divide row 1 through by 2 (the entry in the pivot position):</p>
+<div class="highlight"><pre><span></span><span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">/</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tableau</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[[ 0.  -1.  -1.   0.   0. ]
+ [ 2.   1.  -0.5  0.5  0. ]
+ [ 3.   1.   2.   0.   1. ]]
+</pre></div>
+<p>Next, we subtract the new row <code>1</code> scaled by <code>-1</code> (the entry in position <code>(0,1)</code>) from row <code>0</code>:</p>
+<div class="highlight"><pre><span></span><span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tableau</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[[ 2.   0.  -1.5  0.5  0. ]
+ [ 2.   1.  -0.5  0.5  0. ]
+ [ 3.   1.   2.   0.   1. ]]
+</pre></div>
+<p>Next, we subtract the new row <code>1</code> scaled by <code>1</code> (the entry in position <code>(2,1)</code>) from row <code>2</code>:</p>
+<div class="highlight"><pre><span></span><span class="n">tableau</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tableau</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[[ 2.   0.  -1.5  0.5  0. ]
+ [ 2.   1.  -0.5  0.5  0. ]
+ [ 1.   0.   2.5 -0.5  1. ]]
+</pre></div>
+<p>After this, a column of the identity matrix shows up in colum <code>1</code>.
+Row <code>0</code> (the reduced costs row) still contains a negative value in column <code>2</code>. As the column contains a single positive coefficient, the minumum ratio test is not necessary. Pivoting takes place in position <code>(2,2)</code>.
+First, we divide row <code>2</code> by <code>2.5</code>:</p>
+<div class="highlight"><pre><span></span><span class="n">tableau</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span> <span class="o">/</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tableau</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[[ 2.   0.  -1.5  0.5  0. ]
+ [ 2.   1.  -0.5  0.5  0. ]
+ [ 0.4  0.   1.  -0.2  0.4]]
+</pre></div>
+<p>Then, we subtract the new row <code>2</code> from rows <code>0</code> and <code>1</code>, scaled by, respectively, <code>-1.5</code> and <code>-0.5</code>. We obtain:</p>
+<div class="highlight"><pre><span></span><span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tableau</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[[ 2.6  0.   0.   0.2  0.6]
+ [ 2.2  1.   0.   0.4  0.2]
+ [ 0.4  0.   1.  -0.2  0.4]]
+</pre></div>
+<p>Since the reduce cost vector (row <code>0</code>) is now componentwise nonnegative, we have found an optimal solution. Note that, as the two columns of the identity matrix are in columns <code>1</code> (corresponding to <script type="math/tex">x_1</script>) and <code>2</code> (corresponding to <script type="math/tex">x_2</script>), we deduce <script type="math/tex">x_B = (x_1, x_2)</script>. We can read the value of both variables and the corresponding objective function value as follows (remember to flip the sign of the element in position <code>(0,0)</code> as the value in <code>(0,0)</code> is the opposite of the objective function value):</p>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"z ="</span><span class="p">,</span> <span class="o">-</span><span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"x_1 ="</span><span class="p">,</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"x_2 ="</span><span class="p">,</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+</pre></div>
+<div class="highlight"><pre><span></span>z = -2.6
+x_1 = 2.2
+x_2 = 0.4
+</pre></div>
+<section class="section3"><h3>Working with parts of the tableau</h3>
+<p>To turn the steps above into a <em>general</em> function we need to find the candidate column on which we can pivot, and then the best row (out of the set of candidate rows) on which to actually pivot. This means getting a list, or array, containing the row and/or column indexes that we want to use.</p>
+<p>With <code>numpy</code> directly we can check whether something is true or false using standard logical comparison operations. For example, let us rebuild our <code>tableau</code> and check for negative cost coefficients:</p>
+<div class="highlight"><pre><span></span><span class="n">tableau</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                        <span class="p">[</span><span class="mi">4</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                        <span class="p">[</span><span class="mi">3</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[ True  True False False]
+</pre></div>
+<p>We excluded the first column, as that is the objective function, not a cost coefficient.</p>
+<p>To get the indexes, we can then use the <code>nonzero</code> function (as <code>False</code> is equivalent to <code>0</code>, this tells us the indexes where the comparison is <code>True</code>):</p>
+<div class="highlight"><pre><span></span><span class="n">negative_cost_idxs</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">negative_cost_idxs</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[0 1]
+</pre></div>
+<p><code>nonzero</code> returns a tuple, giving us the index in each dimension of the array. As we're dealing with a 1d array we only care about the first dimension, hence the <code>[0]</code> at the end.</p>
+<p>Note that we could (should!) check that any costs are negative. If not, then we have reached optimality. We can do this by using <code>len</code> to check the number of appropriate columns.</p>
+<p>This tells us that the first and second cost coefficients are negative, and therefore are candidate columns. We can therefore choose the first of these as the column on which to pivot:</p>
+<div class="highlight"><pre><span></span><span class="n">column</span> <span class="o">=</span> <span class="n">negative_cost_idxs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+<p>We had to add <code>1</code> in order to get the index into the <code>tableau</code>, as we had ignored the first column (as it corresponds to the objective function).</p>
+<p>We can perform similar operations to find the row on which to pivot. First, store the row indexes where the entry is positive (as this is a requirement for Bland's algorithm):</p>
+<div class="highlight"><pre><span></span><span class="n">positive_tableau_idxs</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="n">column</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">positive_tableau_idxs</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[0 1]
+</pre></div>
+<p>We can now use <code>argmin</code> to find the index with the minimum ratio, in order to do the minimum ratio test:</p>
+<div class="highlight"><pre><span></span><span class="n">ratio</span> <span class="o">=</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="n">column</span><span class="p">]</span>  <span class="c1"># Compute all ratios</span>
+<span class="n">row_argmin</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">ratio</span><span class="p">[</span><span class="n">positive_tableau_idxs</span><span class="p">])</span>  <span class="c1"># Only check positive entries</span>
+<span class="n">row</span> <span class="o">=</span> <span class="n">positive_tableau_idxs</span><span class="p">[</span><span class="n">row_argmin</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1"># Correct for ignoring first row</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>1
+</pre></div>
+<section class="section5"><h5>Exercise</h5>
+<p>Turn the operations we carried out above into a function <code>simplex_method</code> which takes a basic feasible tableau as input and returns 1) the status (as a string) of the problem (either optimal or unbounded) and, for bounded problems, 2) the optimal solution value and 3) an optimal solution. It's up to you to decide what to return for unbounded problems. The method should apply Bland's rule when choosing what the pivoting pair of row and column.</p>
+<p>Remember that, given a <code>numpy</code> array <code>tableau</code>, <code>tableau.shape</code> is a list of the sizes of each dimension.</p>
+</section><section class="section5"><h5>Exercise</h5>
+<p>Check the correctness of your function by running on the problems seen in the lectures and problem classes/sheets.</p>
+</section></section></section></section>
+            </div>
+        </div>
+    </div>
+
+        </main>
+		
+		<footer class="text-muted">
+	<hr>
+	<div class="container">
+		<div class="float-right">
+			<ul style="list-style: none">
+			<li><a href="#">Back to top</a></li>
+			
+			
+			<li><a href="../../lab_notes/lab_8_outline/lab_8_outline.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;Download as PDF</a></li>
+			
+			</ul>
+		</div>
+		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
+		<p>This page last generated: 2022-01-25</p>
+	</div>
+</footer>
+		
+    </body>
+</html>

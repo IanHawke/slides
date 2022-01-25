@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        
+            <meta charset="utf-8">
+            <meta name="robots" content="noindex">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="author" content="Ian Hawke" />
+            <meta name="date" content="2022-01-25" />
+        
+
+        <title>Lab 1 outline | Operational Research and Mathematical Computing</title>
+
+        
+    
+    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../../static/styles.css">
+            <link rel="stylesheet" id="customiseCSS" href="../../static/light.css">
+            
+            
+        
+    <link rel="stylesheet" id="customiseCodeCSS" href="../../static/pygmentize.light.css">
+    <link rel="stylesheet" href="../../static/codemirror-5.26.0/lib/codemirror.css">
+    <link rel="stylesheet" href="../../static/boole.css">
+    <link rel="stylesheet" href="../../static/numbasEmbed.css">
+
+    <link rel="stylesheet" href="../../static/bootstrap-toc.css?v=3">
+    <link rel="stylesheet" href="../../static/print.css">
+
+
+        
+    
+    
+            <script defer src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <script defer src="../../static/mathjax_config.js"></script>
+            <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+            <script defer src="../../static/customisation.js"></script>
+            <script defer src="../../static/mp4.js"></script>
+            
+            
+        
+    <script defer src="../../static/jquery.flexibleArea.js"></script>
+    <script defer src="../../static/spin.min.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/lib/codemirror.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/octave/octave.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/python/python.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/r/r.js"></script>
+    <script defer src="../../static/boole.js"></script>
+    <script defer src="../../static/numbasEmbed.js"></script>
+
+    <script defer src="../../static/bootstrap-toc.js"></script>
+
+    </head>
+    <body data-spy="scroll" data-target="#chapterTOC" data-offset="50">
+        
+<div class="collapse" id="navbarToggleCustomise">
+	<div class="bg-secondary text-white p-3">
+		<form onsubmit="return false;" id="navbarCustomise">
+			<div class="form-row">
+				<label>Theme Customisation</label>
+				<div id="themeSelector" class="form-group col-md-12">
+					<button class="btn btn-dark mr-2" value="dark">Dark</button>
+					<button class="btn btn-pastel mr-2" value="pastel">Pastel</button>
+					<button class="btn btn-light mr-4" value="light">Light</button>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label style="display: block" for="font-scale">Font size (<span id="font-size-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="font-scale" min="50" max="600" value="100">
+					<button id="font-scale-reset" class="btn btn-sm">Reset</button>
+				</div>
+				<div class="form-group col-md-4">
+					<label style="display: block" for="p-space">Spacing (<span id="p-space-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="p-space" min="0" max="600" value="100">
+					<button id="p-space-reset" class="btn btn-sm">Reset</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<nav aria-label="breadcrumb">
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="../../index.html">Operational Research and Mathematical Computing</a>
+		</li>
+		
+		<li class="breadcrumb-item">
+			<a href="../../lab_notes/index.html">Lab notes</a>
+		</li>
+		
+		<li class="breadcrumb-item active">
+			Lab 1 outline
+		</li>
+		<li class="ml-auto">
+			<button class="navbar-toggler p0" type="button" data-toggle="collapse" data-target="#navbarToggleCustomise" aria-controls="navbarToggleCustomise" aria-expanded="false" aria-label="Toggle customisations panel">
+				<i class="fa fa-cog" aria-hidden="true" title="Toggle customisations panel"></i> <span class="sr-only">Toggle customisations panel</span>
+			</button>
+		</li>
+	</ul>
+</nav>
+
+
+        <header>
+            
+            
+        </header>
+        <main>
+            
+    <div class="container mt-3">
+        <div class="row">
+            
+            <div id="sidebar" class="col-md-3">
+                <nav class="mb-3" id="chapterTOC" data-toggle="toc">
+                    <ul class="nav navbar-nav">
+                        
+                        
+                        <li><a id="notebook-link" class="nav-link" href="../../lab_notes/lab_1_outline/lab_1_outline.ipynb" download><i class="fa fa-book" aria-hidden="true" title="Download Notebook"></i>&nbsp;Download Notebook</a></li>
+                        
+                        
+                        <li><a id="pdf-link" class="nav-link" href="../../lab_notes/lab_1_outline/lab_1_outline.pdf" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" title="Download as PDF"></i>&nbsp;Download as PDF</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+            <div id="content" class="col-md-9"> 
+            
+            <section class="section1"><h1>Python lab, lecture 1</h1>
+<p>Welcome to the labs for MATH1058, Operational Research I and Mathematical Computing. We are going to introduce Python, which will accompany you throughout the module (and in the assessments!).</p>
+<p>You will need to open <code>spyder</code>. On the bench PC, go to the Start menu, All Programs, Programming Languages, Anaconda3 (64 bit), and then choose <code>spyder</code>. You may try searching for it but there may be multiple versions installed: you need to ensure that the version you use has Python version 3, not version 2.</p>
+<p>You may use your own laptop if you want. Python is free: follow the instructions on Blackboard for how to install on your own machine. This may take 15 minutes or so, so please <em>don't</em> do it right now (although you may want to download the installer on campus - it is not small).</p>
+<section class="section3"><h3>First steps</h3>
+<p>Once you have opened <code>spyder</code>, we will first look at the <em>console</em> in the bottom right part of the screen. That allows us to type in Python commands and get an <em>immediate</em> response. Let's use it like a calculator:</p>
+<div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+<div class="highlight"><pre><span></span>2
+</pre></div>
+<div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span>
+</pre></div>
+<div class="highlight"><pre><span></span>0.5
+</pre></div>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">2.3</span> <span class="o">*</span> <span class="mf">4.5</span><span class="p">)</span> <span class="o">/</span> <span class="mf">6.7</span>
+</pre></div>
+<div class="highlight"><pre><span></span>1.6940298507462686
+</pre></div>
+<div class="highlight"><pre><span></span><span class="mi">3</span><span class="o">**</span><span class="mi">2</span>
+</pre></div>
+<div class="highlight"><pre><span></span>9
+</pre></div>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"Hello"</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>Hello 3
+</pre></div>
+<p>Things to note: the <code>**</code> command raises one number to the power of another. The <code>print</code> function displays something to the screen.</p>
+<p>Using the console is fine, but has problems. We want to keep our work for future re-use. We want to systematically build up a lot of code. Neither of these is easy within the console. Instead, we can use the <em>editor</em> on the left half of the screen. This acts like a word-processor, allowing us to type in commands that we can then use or run later.</p>
+<p>In the editor, remove any existing text and type in some of the commands you've previously used:</p>
+<div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Hello"</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+<p>Save the file in a sensible location (your filestore, or the Desktop) under the name <code>lab1.py</code>.</p>
+<p>We then want to run the commands in the file. To do this, choose "Run" from the Run menu, <em>or</em> press the big green play button on the toolbar, <em>or</em> press <code>F5</code>.</p>
+<p>The output you see should look like:</p>
+<div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Hello"</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>Hello 3
+</pre></div>
+<p>This shows one key difference between files and the console: only output that is <em>explicitly</em> <code>print</code>ed appears on the screen.</p>
+<section class="section5"><h5>Exercise</h5>
+<p>Break for a quick exploration. For example, explicitly compute <script type="math/tex">6! = 6 \times 5 \times 4 \times 3 \times 2 \times 1</script> in the console. Then do the same in the editor, printing it out with explanatory text.</p>
+</section></section><section class="section3"><h3>Variables (and tab completion)</h3>
+<section class="section4"><h4>Variables</h4>
+<p>We want to be able to store results of calculations in ways we can re-use. For this we define variables:</p>
+<div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>3
+</pre></div>
+<p>A variable is a <em>label</em> that's put on a thing somewhere in the computer's memory. Think of it like a post-it note with <code>x</code> written on it. The above lines locate <code>3</code> in the computer's memory and attach the label <code>x</code> to it. Then, when asked to <code>print</code> the value of <code>x</code>, it <code>print</code>s the value with that label on it.</p>
+<p>In Python we can assign "things" of almost any type to avariable and Python doesn't care:</p>
+<div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mf">1.2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="s2">"Hello"</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>1.2
+Hello
+</pre></div>
+<p>This is not true in all programming languages, so take care.</p>
+<p>There are certain rules and conventions for variable names. To keep it short:</p>
+<ul>
+<li>always start with a letter;</li>
+<li>only use lower case Latin letters, or numbers, or underscores;</li>
+<li>in particular, never use spaces or hyphens (which can be interpreted as a new variable or a minus sign respectively).</li>
+</ul>
+</section><section class="section4"><h4>Tab completion</h4>
+<p>To save time in the console you can access previous commands by pressing the "up" arrow cursor key. You can then edit the command you typed. To find a previous command that started with a certain letter, first type that letter and then press the "up" key.</p>
+<p>To save time and reduce errors in both console and editor, particularly when using long variable names, you can use the TAB key to auto-complete variable names (and later function names etc). For example, define the variable</p>
+<div class="highlight"><pre><span></span><span class="n">width</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+<p>Then type the first two (say) letters, <code>wi</code>, and press TAB. You will <em>either</em> see it automatically complete this to show <code>width</code>, or you will see a list of options starting <code>wi</code> from which you can choose.</p>
+<section class="section5"><h5>Exercise</h5>
+<p>A rectangular box has width 2, height 3, and depth 2. Create a variable for each. Compute the volume of the box, assigning that to a variable. Print the result with explanatory text.</p>
+</section></section></section><section class="section3"><h3>Functions and import</h3>
+<p>We won't get very far with just basic algebraic operations. We want to compute more complicated mathematical things. Let's try computing the <script type="math/tex">\sin</script> of some number:</p>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+<div class="highlight"><pre><span></span>---------------------------------------------------------------------------
+
+NameError                                 Traceback (most recent call last)
+
+&lt;ipython-input-12-40b0bf07e290&gt; in &lt;module&gt;
+----&gt; 1 print(sin(1))
+
+
+NameError: name 'sin' is not defined
+</pre></div>
+<p>Python has given us an error because it doesn't know the <script type="math/tex">\sin</script> function. The core part of Python, in fact, knows very little.</p>
+<p>We can get access to lots of additional functions (and variables, and other things) using the <code>import</code> statement. We're going to <code>import</code> the "numerical Python" package <code>numpy</code> that we will use often for this course. We can then <em>use</em> the contents of this package - its variables and functions - in our own code. So try:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>0.8414709848078965
+3.141592653589793
+</pre></div>
+<p>We see that, to use anything from within the <code>numpy</code> package, we type <code>numpy</code>, then the dot or full stop, and then the name of the function (like <code>sin</code>) or variable (like <code>pi</code>) that we want to use.</p>
+<p>To call a function, like <code>print</code> or <code>numpy.sin</code>, we pass along any arguments (the thing to <code>print</code>, or the number to <code>sin</code>) within round brackets <code>()</code>. If there are multiple arguments we separate them with commas (as in the <code>print</code> examples).</p>
+<p>We can use <code>import</code> on <em>our own</em> files: it works exactly the same as on other Python packages. For example, make sure that your file <code>lab1.py</code> has the line
+<div class="highlight"><pre><span></span><span class="n">width</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+somewhere within it. Then open a new file and save it as <code>lab1v2.py</code>. Make sure it's saved in the same directory as <code>lab1.py</code>. In the new file type
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">lab1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"The width from lab1 is"</span><span class="p">,</span> <span class="n">lab1</span><span class="o">.</span><span class="n">width</span><span class="p">)</span>
+</pre></div></p>
+<p>The output should be <code>The width from lab1 is 2</code>.</p>
+<section class="section4"><h4>Tab completion again</h4>
+<p>When you <code>import</code> packages you can usefully use TAB completion to rapidly find out about its useful functions. For example, type <code>numpy.co</code> and press TAB to see its <script type="math/tex">\cos</script> and <script type="math/tex">\cosh</script> functions, amongst many others.</p>
+<section class="section5"><h5>Exercise</h5>
+<p>Import the <code>math</code> library. Find, using the help or TAB completion, how it computes factorials, and use that to check your calculation of <script type="math/tex">6!</script>.</p>
+</section></section></section><section class="section3"><h3>Defining your own functions</h3>
+<p>Using other people's functions is essential, but we will also want to define our own. Let us define a simple function to start:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Add two numbers.</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</pre></div>
+<p>The Python keyword to <em>define</em> a function is <code>def</code>. The thing that comes next is the name that we will assign to the function: in this case <code>my_add</code>. As the name is a label to something that lives within the computer's memory, this should obey the same rules as variables.</p>
+<p>The arguments to the function are then a comma-separated list between round brackets <code>()</code>. This is in the same format as calling the function, but we are inventing the variable names to refer to the input within the function. So, however the user calls the function, the first argument that is passed in will be assigned the label <code>a</code> within the function itself.</p>
+<p>Finally there is a colon <code>:</code> to end the line. That says that whatever follows is the content, or body, of the function: the lines that will be executed when the function is called. All lines within the function to be executed <strong>must</strong> then be indented by four spaces. <code>spyder</code> should start doing this automatically.</p>
+<p>Note that in most programming languages (e.g. C, C++, Java) indendations <em>do not</em> carry any semantical meaning. Keep in mind that in Python <em>they do</em>!</p>
+<p>The three quotes are <em>documentation</em> for the function: they have no effect. However, <strong>from a perspective of code usability and maintainability, any undocumented function is broken</strong>. We can see the documentation by using the <code>help</code> function:</p>
+<div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">my_add</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>Help on function my_add in module __main__:
+
+my_add(a, b)
+    Add two numbers.
+</pre></div>
+<p>We then include all the commands with the function that we want to run each time the function is called. Once we have a result that we want to send back to the place that called the function, we <code>return</code> it: this sends back the appropriate value(s).</p>
+<p>We can now call our function:</p>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">my_add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_add</span><span class="p">(</span><span class="mf">1.23</span><span class="p">,</span> <span class="mf">4.56</span><span class="p">))</span>
+</pre></div>
+<div class="highlight"><pre><span></span>2
+5.789999999999999
+</pre></div>
+<section class="section5"><h5>Exercise</h5>
+<p>Define a function that computes the volume of a rectangular box with input arguments <code>width</code>, <code>height</code>, and <code>depth</code>. Check that it works as in the exercise above.</p>
+</section></section><section class="section3"><h3>Assessed lab exercises</h3>
+<p>For future labs and for weekly work there will be exercises set. To complete those exercises you have to write functions. These will be tested <em>automatically</em>: you will provide your functions to a software system which will automatically <code>import</code> your file and call the functions within in, checking that they <code>return</code> correct output for specified input. You will need to get used to writing functions in files and testing that they work as intended.</p>
+<p><em>When you are asked to write a function that computes something in the assignments, that function must <strong>return</strong> that something, rather than just print it on screen!</em></p>
+</section></section>
+            </div>
+        </div>
+    </div>
+
+        </main>
+		
+		<footer class="text-muted">
+	<hr>
+	<div class="container">
+		<div class="float-right">
+			<ul style="list-style: none">
+			<li><a href="#">Back to top</a></li>
+			
+			
+			<li><a href="../../lab_notes/lab_1_outline/lab_1_outline.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;Download as PDF</a></li>
+			
+			</ul>
+		</div>
+		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
+		<p>This page last generated: 2022-01-25</p>
+	</div>
+</footer>
+		
+    </body>
+</html>

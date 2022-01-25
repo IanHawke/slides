@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        
+            <meta charset="utf-8">
+            <meta name="robots" content="noindex">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="author" content="Ian Hawke" />
+            <meta name="date" content="2022-01-25" />
+        
+
+        <title>Lab 4 outline | Operational Research and Mathematical Computing</title>
+
+        
+    
+    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../../static/styles.css">
+            <link rel="stylesheet" id="customiseCSS" href="../../static/light.css">
+            
+            
+        
+    <link rel="stylesheet" id="customiseCodeCSS" href="../../static/pygmentize.light.css">
+    <link rel="stylesheet" href="../../static/codemirror-5.26.0/lib/codemirror.css">
+    <link rel="stylesheet" href="../../static/boole.css">
+    <link rel="stylesheet" href="../../static/numbasEmbed.css">
+
+    <link rel="stylesheet" href="../../static/bootstrap-toc.css?v=3">
+    <link rel="stylesheet" href="../../static/print.css">
+
+
+        
+    
+    
+            <script defer src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <script defer src="../../static/mathjax_config.js"></script>
+            <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+            <script defer src="../../static/customisation.js"></script>
+            <script defer src="../../static/mp4.js"></script>
+            
+            
+        
+    <script defer src="../../static/jquery.flexibleArea.js"></script>
+    <script defer src="../../static/spin.min.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/lib/codemirror.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/octave/octave.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/python/python.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/r/r.js"></script>
+    <script defer src="../../static/boole.js"></script>
+    <script defer src="../../static/numbasEmbed.js"></script>
+
+    <script defer src="../../static/bootstrap-toc.js"></script>
+
+    </head>
+    <body data-spy="scroll" data-target="#chapterTOC" data-offset="50">
+        
+<div class="collapse" id="navbarToggleCustomise">
+	<div class="bg-secondary text-white p-3">
+		<form onsubmit="return false;" id="navbarCustomise">
+			<div class="form-row">
+				<label>Theme Customisation</label>
+				<div id="themeSelector" class="form-group col-md-12">
+					<button class="btn btn-dark mr-2" value="dark">Dark</button>
+					<button class="btn btn-pastel mr-2" value="pastel">Pastel</button>
+					<button class="btn btn-light mr-4" value="light">Light</button>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label style="display: block" for="font-scale">Font size (<span id="font-size-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="font-scale" min="50" max="600" value="100">
+					<button id="font-scale-reset" class="btn btn-sm">Reset</button>
+				</div>
+				<div class="form-group col-md-4">
+					<label style="display: block" for="p-space">Spacing (<span id="p-space-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="p-space" min="0" max="600" value="100">
+					<button id="p-space-reset" class="btn btn-sm">Reset</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<nav aria-label="breadcrumb">
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="../../index.html">Operational Research and Mathematical Computing</a>
+		</li>
+		
+		<li class="breadcrumb-item">
+			<a href="../../lab_notes/index.html">Lab notes</a>
+		</li>
+		
+		<li class="breadcrumb-item active">
+			Lab 4 outline
+		</li>
+		<li class="ml-auto">
+			<button class="navbar-toggler p0" type="button" data-toggle="collapse" data-target="#navbarToggleCustomise" aria-controls="navbarToggleCustomise" aria-expanded="false" aria-label="Toggle customisations panel">
+				<i class="fa fa-cog" aria-hidden="true" title="Toggle customisations panel"></i> <span class="sr-only">Toggle customisations panel</span>
+			</button>
+		</li>
+	</ul>
+</nav>
+
+
+        <header>
+            
+            
+        </header>
+        <main>
+            
+    <div class="container mt-3">
+        <div class="row">
+            
+            <div id="sidebar" class="col-md-3">
+                <nav class="mb-3" id="chapterTOC" data-toggle="toc">
+                    <ul class="nav navbar-nav">
+                        
+                        
+                        <li><a id="notebook-link" class="nav-link" href="../../lab_notes/lab_4_outline/lab_4_outline.ipynb" download><i class="fa fa-book" aria-hidden="true" title="Download Notebook"></i>&nbsp;Download Notebook</a></li>
+                        
+                        
+                        <li><a id="pdf-link" class="nav-link" href="../../lab_notes/lab_4_outline/lab_4_outline.pdf" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" title="Download as PDF"></i>&nbsp;Download as PDF</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+            <div id="content" class="col-md-9"> 
+            
+            <section class="section1"><h1>Lab Week 4</h1>
+<p>In weeks 2 and 3 we did</p>
+<ul>
+<li>lists: definition, slicing;</li>
+<li><code>for</code> loops;</li>
+<li><code>numpy</code> arrays;</li>
+<li><code>numpy</code> linear algebra operations.</li>
+</ul>
+<section class="section2"><h2>Script</h2>
+<p>In previous weeks we introduced containers such as lists and <code>numpy</code> arrays. These can be used for one essential operation in Mathematics, and particularly Operational Research: ordering and sorting things.</p>
+<p>For example, let us take an <em>un-ordered</em> list:</p>
+<div class="highlight"><pre><span></span><span class="n">list_1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</pre></div>
+<p>There are two ways that we can sort this. There is the <code>sorted</code> function:</p>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">list_1</span><span class="p">))</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[1, 2, 3, 4, 5]
+</pre></div>
+<p>This function returns a <em>new list</em>. We can check that the original list is unchanged:</p>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">list_1</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[3, 2, 5, 1, 4]
+</pre></div>
+<p>There is also the <code>sort</code> <em>method</em>:</p>
+<div class="highlight"><pre><span></span><span class="n">list_1</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">list_1</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[1, 2, 3, 4, 5]
+</pre></div>
+<p>This changes the values of the original list. It's usually slightly faster, but also usually not what we want to do.</p>
+<p>If using a <code>numpy</code> array, there are similar functions and methods:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="n">array_1</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">array_1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">array_1</span><span class="p">)</span>
+<span class="n">array_1</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">array_1</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[1 2 3 4 5]
+[3 2 5 1 4]
+[1 2 3 4 5]
+</pre></div>
+<p>The in-built functions are efficient and useful. What we want to do is to implement our own sorting algorithms to show how this can be done.</p>
+<section class="section3"><h3>Unpacking and multiple assignment</h3>
+<p>We will start with a small, two-element list:</p>
+<div class="highlight"><pre><span></span><span class="n">list_1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+<p>We want to sort it in ascending order. We see that to do this we need to switch the first (<code>0</code>) and second (<code>1</code>) entries.</p>
+<p>How would you do this?</p>
+<p>If you tried:</p>
+<div class="highlight"><pre><span></span><span class="n">list_1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">list_1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">list_1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">list_1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+<p>then it will fail:</p>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">list_1</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[1, 1]
+</pre></div>
+<p>The first assignment throws away the entry <code>2</code>, and it can't be recovered.</p>
+<p>We could use a temporary variable:</p>
+<div class="highlight"><pre><span></span><span class="n">list_1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">tmp</span> <span class="o">=</span> <span class="n">list_1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">list_1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">list_1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">list_1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">list_1</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[1, 2]
+</pre></div>
+<p>This works, but involves more lines of code than we would like.</p>
+<p>We can take advantage of some Python features with multiple variables. If you have multiple variables, or a container (like a list) containing multiple objects, on one side of the assignment (<code>=</code>), then Python will expand each individually.</p>
+<p>For example, we can assign to multiple variables using unpacking:</p>
+<div class="highlight"><pre><span></span><span class="n">list_1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">list_1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>2
+1
+</pre></div>
+<p>We can use the same variable on both sides, and Python will "do the right thing":</p>
+<div class="highlight"><pre><span></span><span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>1
+2
+</pre></div>
+<p>So we can use this to flip the entries of <code>list_1</code> as needed:</p>
+<div class="highlight"><pre><span></span><span class="n">list_1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">list_1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">list_1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">list_1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">list_1</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[1, 2]
+</pre></div>
+<section class="section5"><h5>Exercise</h5>
+<p>Write a function <code>swap</code> that takes a list, <code>unswapped</code>, and two integers <code>i, j</code>. It should swap the <code>i</code>th and <code>j</code>th entries of the list and return the swapped list.</p>
+</section></section><section class="section3"><h3>Conditional statements</h3>
+<p>We still need to get the computer to check when it should swap the entries in a list. That is, how do we make it do the swap <em>only if</em> a certain condition holds?</p>
+<p>This is the Python <code>if</code> statement. The syntax is similar to that for functions (which used the <code>def</code> keyword) and loops (which used the <code>for</code> keyword):</p>
+<div class="highlight"><pre><span></span><span class="n">list_1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">list_2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="n">list_1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">list_1</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Swapping entries in list 1"</span><span class="p">)</span>
+    <span class="n">list_1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">list_1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">list_1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">list_1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="n">list_2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">list_2</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Swapping entries in list 2"</span><span class="p">)</span>
+    <span class="n">list_2</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">list_2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">list_2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">list_2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">list_1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">list_2</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>Swapping entries in list 1
+[1, 2]
+[3, 4]
+</pre></div>
+<p>We see that <em>only the indented code</em> for <code>list_1</code> was executed. The syntax is to use the <code>if</code> keyword followed by some logical (Boolean, true of false) statement. After the condition a colon <code>:</code> is used to indicate the lines that should be executed. The lines to be executed are then indented by four spaces. Again, this follows the syntax for functions and loops.</p>
+<section class="section5"><h5>Exercise</h5>
+<p>Write a function <code>max_swap</code> that takes the unswapped list, <code>unswapped</code>, and two integers <code>n</code> and <code>nmax</code>. It should compute two integers <code>child1 = 2*n+1</code> and <code>child2 = 2*(n+1)</code>, find which is the largest entry <code>unswapped[i]</code>, where <code>i</code> can be <code>n</code> or <code>child1</code> or <code>child2</code>. If the largest entry is not <code>unswapped[n]</code>, the <code>swap</code> function should be used to make it the largest. The <code>child*</code> entries should only be used if <code>child*</code> is less than <code>nmax</code>.</p>
+</section><section class="section5"><h5>Exercise</h5>
+<p>The function <code>max_swap</code> is part of setting up a <em>heap</em>, as required for the <em>heap sort</em> algorithm seen in lectures. Two modifications are needed to create the heap. First, it should be called on all the entries. Second, if it swaps entries, it must call itself again, to check if any of the new children of the current maximum are larger. So write a function <code>heapify</code> that adds this one line to <code>max_swap</code>.</p>
+<p>In a heap sort, we first construct the heap. We start from the <em>middle</em> of our list, work backwards, and ensure that the children of all points in the first half of the list are smaller than their parents. With our <code>heapify</code> function, we can do that with a loop:</p>
+<div class="highlight"><pre><span></span><span class="n">list_1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">list_1</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">list_1</span> <span class="o">=</span> <span class="n">heapify</span><span class="p">(</span><span class="n">list_1</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">list_1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">list_1</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[5, 4, 3, 1, 2]
+</pre></div>
+<p>Let us check that we have a heap. The first entry (<code>0</code>) is the largest, as required. Its children (entries <code>2 n + 1 = 1</code>, with value <code>4</code> and <code>2 (n + 1) = 2</code> with value <code>3</code>) are both smaller than it, as required. The first child has children (entries <code>2 n + 1 = 3</code>, with value <code>1</code>, and <code>2 (n + 1) = 4</code>, with value <code>2</code>) that are both smaller than it, as required. The second child has no children within the list (both <code>2 n + 1 = 5</code> and <code>2 (n + 1) = 6</code> are too large).</p>
+<p>As soon as we have a heap we can work from the end of the list to the beginning, swapping the entries as we go. We then recreate the heap, but only for the entries that haven't been swapped: that is, for the start of the array.</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">list_1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">list_1</span> <span class="o">=</span> <span class="n">swap</span><span class="p">(</span><span class="n">list_1</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">list_1</span> <span class="o">=</span> <span class="n">heapify</span><span class="p">(</span><span class="n">list_1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">list_1</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[1, 2, 3, 4, 5]
+</pre></div>
+</section><section class="section5"><h5>Exercise</h5>
+<p>Convert this into a <code>heap_sort</code> function that sorts a list in place.</p>
+</section></section><section class="section3"><h3>Functions and documentation</h3>
+<p>When we defined the functions above we gave them minimal documentation. We can see this documentation on the screen using the <code>help</code> function:</p>
+<div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">heap_sort</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>Help on function heap_sort in module __main__:
+
+heap_sort(unsorted)
+    The heap sort algorithm
+</pre></div>
+<p>Alternatively, in <code>spyder</code>, go to the "Help" pane in the top right and type <code>bubble_sort</code> into the box. The help text should appear.</p>
+<p>The documentation is needed to explain to the next person to use the function</p>
+<ul>
+<li>what it does</li>
+<li>how it does it</li>
+<li>how it should be used</li>
+<li>what values it returns.</li>
+</ul>
+<p>A function without documentation is <strong>fundamentally broken</strong>, as the next person to use it will not (easily) be able to understand it. As this person is most likely to be you, the person that wrote it, then you are helping yourself by writing proper documentation.</p>
+<p>There are various conventions for how to document functions in Python. We recommend the "numpydoc" convention, which is used within <code>numpy</code>. We will now improve the documentation for the <code>bubble_sort</code> function to illustrate:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">heap_sort</span><span class="p">(</span><span class="n">unsorted</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    The heap sort algorithm</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    unsorted: list of float</span>
+<span class="sd">        The unsorted list</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+
+<span class="sd">    sorted: list of float</span>
+<span class="sd">        The sorted list (which is unsorted, sorted in place)</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+
+<span class="sd">    This algorithm sorts the list in place, replacing the original entries.</span>
+<span class="sd">    The worst case speed is O(n log(n)).</span>
+<span class="sd">    """</span>
+    <span class="c1"># Create the heap</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">unsorted</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">unsorted</span> <span class="o">=</span> <span class="n">heapify</span><span class="p">(</span><span class="n">unsorted</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">unsorted</span><span class="p">))</span>
+    <span class="c1"># Flatten the heap</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">unsorted</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">unsorted</span> <span class="o">=</span> <span class="n">swap</span><span class="p">(</span><span class="n">unsorted</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">unsorted</span> <span class="o">=</span> <span class="n">heapify</span><span class="p">(</span><span class="n">unsorted</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">unsorted</span>
+</pre></div>
+<p>The documentation starts with a brief description of the algorithm. There is then a section describing the input arguments, or parameters, to the function. The name of each is given, along with its expected type, and what it means. Next is a section on the variables returned from the function, using the same conventions. Finally, a notes section allows us to add more details of the algorithm, when there may be problems, references to the literature, or examples of how to use it.</p>
+<p>Check how this documentation appears using the <code>help</code> function, and also when using <code>spyder</code>'s help facility.</p>
+<section class="section5"><h5>Exercise</h5>
+<p>Think of documentation like a contract. The documentation guarantees that <em>if</em> the input follows the specified form, <em>then</em> the function will return correct output in the specified form.</p>
+<p>For the <code>heap_sort</code> function, what input causes the function to fail? Test various inputs (empty lists, single values, strings, lists of lists, etc) and see what happens. How would you tighten and/or improve the documentation to make this clear?</p>
+</section></section></section></section>
+            </div>
+        </div>
+    </div>
+
+        </main>
+		
+		<footer class="text-muted">
+	<hr>
+	<div class="container">
+		<div class="float-right">
+			<ul style="list-style: none">
+			<li><a href="#">Back to top</a></li>
+			
+			
+			<li><a href="../../lab_notes/lab_4_outline/lab_4_outline.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;Download as PDF</a></li>
+			
+			</ul>
+		</div>
+		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
+		<p>This page last generated: 2022-01-25</p>
+	</div>
+</footer>
+		
+    </body>
+</html>

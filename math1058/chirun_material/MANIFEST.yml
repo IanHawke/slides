@@ -1,0 +1,202 @@
+author: Ian Hawke
+base_dir: math1058
+build_pdf: true
+code: MATH1058
+format_version: 2
+mathjax_url: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+num_pdf_runs: 1
+root_url: /{base}/{code}/
+structure:
+- build_pdf: false
+  content: []
+  pdf_url: index.pdf
+  slug: index
+  source: intro.tex
+  title: index
+  type: introduction
+- build_pdf: false
+  content:
+  - build_pdf: false
+    content: []
+    pdf_url: notes/course_notes/course_notes.pdf
+    slug: course_notes
+    source: latex/course_notes.tex
+    splitlevel: -2
+    title: Course Notes
+    type: document
+  - build_pdf: false
+    content:
+    - build_pdf: true
+      pdf_url: notes/notes_by_chapter/introduction/introduction.pdf
+      slug: introduction
+      source: latex/01-intro.tex
+      title: Introduction
+      type: chapter
+    - build_pdf: true
+      pdf_url: notes/notes_by_chapter/linear_programming/linear_programming.pdf
+      slug: linear_programming
+      source: latex/02-lp.tex
+      title: Linear programming
+      type: chapter
+    - build_pdf: true
+      pdf_url: notes/notes_by_chapter/sorting/sorting.pdf
+      slug: sorting
+      source: latex/03-sorting.tex
+      title: Sorting
+      type: chapter
+    - build_pdf: true
+      pdf_url: notes/notes_by_chapter/simplex_method/simplex_method.pdf
+      slug: simplex_method
+      source: latex/04-simplex.tex
+      title: Simplex Method
+      type: chapter
+    - build_pdf: true
+      pdf_url: notes/notes_by_chapter/integer_linear_progr/integer_linear_progr.pdf
+      slug: integer_linear_progr
+      source: latex/05-integer-lp.tex
+      title: Integer Linear Programming
+      type: chapter
+    - build_pdf: true
+      pdf_url: notes/notes_by_chapter/graphs/graphs.pdf
+      slug: graphs
+      source: latex/06-graphs.tex
+      title: Graphs
+      type: chapter
+    pdf_url: notes/notes_by_chapter/notes_by_chapter.pdf
+    slug: notes_by_chapter
+    source: .
+    title: Notes by chapter
+    type: part
+  pdf_url: notes/notes.pdf
+  slug: notes
+  source: .
+  title: Notes
+  type: part
+- build_pdf: false
+  content:
+  - build_pdf: true
+    pdf_url: problem_sheets/sheet_0/sheet_0.pdf
+    slug: sheet_0
+    source: latex/problems/problems_0.tex
+    title: Sheet 0
+    type: chapter
+  - build_pdf: true
+    pdf_url: problem_sheets/sheet_1/sheet_1.pdf
+    slug: sheet_1
+    source: latex/problems/problems_1.tex
+    title: Sheet 1
+    type: chapter
+  - build_pdf: true
+    pdf_url: problem_sheets/sheet_2/sheet_2.pdf
+    slug: sheet_2
+    source: latex/problems/problems_2.tex
+    title: Sheet 2
+    type: chapter
+  - build_pdf: true
+    pdf_url: problem_sheets/sheet_3/sheet_3.pdf
+    slug: sheet_3
+    source: latex/problems/problems_3.tex
+    title: Sheet 3
+    type: chapter
+  - build_pdf: true
+    pdf_url: problem_sheets/sheet_4/sheet_4.pdf
+    slug: sheet_4
+    source: latex/problems/problems_4.tex
+    title: Sheet 4
+    type: chapter
+  - build_pdf: true
+    pdf_url: problem_sheets/sheet_5/sheet_5.pdf
+    slug: sheet_5
+    source: latex/problems/problems_5.tex
+    title: Sheet 5
+    type: chapter
+  - build_pdf: true
+    pdf_url: problem_sheets/sheet_6/sheet_6.pdf
+    slug: sheet_6
+    source: latex/problems/problems_6.tex
+    title: Sheet 6
+    type: chapter
+  - build_pdf: true
+    pdf_url: problem_sheets/sheet_7/sheet_7.pdf
+    slug: sheet_7
+    source: latex/problems/problems_7.tex
+    title: Sheet 7
+    type: chapter
+  - build_pdf: true
+    pdf_url: problem_sheets/sheet_8/sheet_8.pdf
+    slug: sheet_8
+    source: latex/problems/problems_8.tex
+    title: Sheet 8
+    type: chapter
+  pdf_url: problem_sheets/problem_sheets.pdf
+  slug: problem_sheets
+  source: .
+  title: Problem Sheets
+  type: part
+- build_pdf: false
+  content:
+  - build_pdf: true
+    pdf_url: lab_notes/lab_1_outline/lab_1_outline.pdf
+    slug: lab_1_outline
+    source: notebooks/01-Lab-Week-1.md
+    title: Lab 1 outline
+    type: notebook
+  - build_pdf: true
+    pdf_url: lab_notes/lab_2_outline/lab_2_outline.pdf
+    slug: lab_2_outline
+    source: notebooks/02-Lab-Week-2.md
+    title: Lab 2 outline
+    type: notebook
+  - build_pdf: true
+    pdf_url: lab_notes/lab_3_outline/lab_3_outline.pdf
+    slug: lab_3_outline
+    source: notebooks/03-Lab-Week-3.md
+    title: Lab 3 outline
+    type: notebook
+  - build_pdf: true
+    pdf_url: lab_notes/lab_4_outline/lab_4_outline.pdf
+    slug: lab_4_outline
+    source: notebooks/04-Lab-Week-4.md
+    title: Lab 4 outline
+    type: notebook
+  - build_pdf: true
+    pdf_url: lab_notes/lab_5_outline/lab_5_outline.pdf
+    slug: lab_5_outline
+    source: notebooks/05-Lab-Week-5.md
+    title: Lab 5 outline
+    type: notebook
+  - build_pdf: true
+    pdf_url: lab_notes/lab_6_outline/lab_6_outline.pdf
+    slug: lab_6_outline
+    source: notebooks/06-Lab-Week-6.md
+    title: Lab 6 outline
+    type: notebook
+  - build_pdf: true
+    pdf_url: lab_notes/lab_7_outline/lab_7_outline.pdf
+    slug: lab_7_outline
+    source: notebooks/07-Lab-Week-7.md
+    title: Lab 7 outline
+    type: notebook
+  - build_pdf: true
+    pdf_url: lab_notes/lab_8_outline/lab_8_outline.pdf
+    slug: lab_8_outline
+    source: notebooks/08-Lab-Week-8.md
+    title: Lab 8 outline
+    type: notebook
+  - build_pdf: true
+    pdf_url: lab_notes/lab_9_outline/lab_9_outline.pdf
+    slug: lab_9_outline
+    source: notebooks/09-Lab-Week-9.md
+    title: Lab 9 outline
+    type: notebook
+  pdf_url: lab_notes/lab_notes.pdf
+  slug: lab_notes
+  source: .
+  title: Lab notes
+  type: part
+themes:
+- path: default
+  source: default
+  title: Default
+title: Operational Research and Mathematical Computing
+year: 2022

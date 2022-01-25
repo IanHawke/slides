@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        
+            <meta charset="utf-8">
+            <meta name="robots" content="noindex">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="author" content="Ian Hawke" />
+            <meta name="date" content="2022-01-25" />
+        
+
+        <title>Lab 6 outline | Operational Research and Mathematical Computing</title>
+
+        
+    
+    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../../static/styles.css">
+            <link rel="stylesheet" id="customiseCSS" href="../../static/light.css">
+            
+            
+        
+    <link rel="stylesheet" id="customiseCodeCSS" href="../../static/pygmentize.light.css">
+    <link rel="stylesheet" href="../../static/codemirror-5.26.0/lib/codemirror.css">
+    <link rel="stylesheet" href="../../static/boole.css">
+    <link rel="stylesheet" href="../../static/numbasEmbed.css">
+
+    <link rel="stylesheet" href="../../static/bootstrap-toc.css?v=3">
+    <link rel="stylesheet" href="../../static/print.css">
+
+
+        
+    
+    
+            <script defer src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <script defer src="../../static/mathjax_config.js"></script>
+            <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+            <script defer src="../../static/customisation.js"></script>
+            <script defer src="../../static/mp4.js"></script>
+            
+            
+        
+    <script defer src="../../static/jquery.flexibleArea.js"></script>
+    <script defer src="../../static/spin.min.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/lib/codemirror.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/octave/octave.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/python/python.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/r/r.js"></script>
+    <script defer src="../../static/boole.js"></script>
+    <script defer src="../../static/numbasEmbed.js"></script>
+
+    <script defer src="../../static/bootstrap-toc.js"></script>
+
+    </head>
+    <body data-spy="scroll" data-target="#chapterTOC" data-offset="50">
+        
+<div class="collapse" id="navbarToggleCustomise">
+	<div class="bg-secondary text-white p-3">
+		<form onsubmit="return false;" id="navbarCustomise">
+			<div class="form-row">
+				<label>Theme Customisation</label>
+				<div id="themeSelector" class="form-group col-md-12">
+					<button class="btn btn-dark mr-2" value="dark">Dark</button>
+					<button class="btn btn-pastel mr-2" value="pastel">Pastel</button>
+					<button class="btn btn-light mr-4" value="light">Light</button>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label style="display: block" for="font-scale">Font size (<span id="font-size-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="font-scale" min="50" max="600" value="100">
+					<button id="font-scale-reset" class="btn btn-sm">Reset</button>
+				</div>
+				<div class="form-group col-md-4">
+					<label style="display: block" for="p-space">Spacing (<span id="p-space-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="p-space" min="0" max="600" value="100">
+					<button id="p-space-reset" class="btn btn-sm">Reset</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<nav aria-label="breadcrumb">
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="../../index.html">Operational Research and Mathematical Computing</a>
+		</li>
+		
+		<li class="breadcrumb-item">
+			<a href="../../lab_notes/index.html">Lab notes</a>
+		</li>
+		
+		<li class="breadcrumb-item active">
+			Lab 6 outline
+		</li>
+		<li class="ml-auto">
+			<button class="navbar-toggler p0" type="button" data-toggle="collapse" data-target="#navbarToggleCustomise" aria-controls="navbarToggleCustomise" aria-expanded="false" aria-label="Toggle customisations panel">
+				<i class="fa fa-cog" aria-hidden="true" title="Toggle customisations panel"></i> <span class="sr-only">Toggle customisations panel</span>
+			</button>
+		</li>
+	</ul>
+</nav>
+
+
+        <header>
+            
+            
+        </header>
+        <main>
+            
+    <div class="container mt-3">
+        <div class="row">
+            
+            <div id="sidebar" class="col-md-3">
+                <nav class="mb-3" id="chapterTOC" data-toggle="toc">
+                    <ul class="nav navbar-nav">
+                        
+                        
+                        <li><a id="notebook-link" class="nav-link" href="../../lab_notes/lab_6_outline/lab_6_outline.ipynb" download><i class="fa fa-book" aria-hidden="true" title="Download Notebook"></i>&nbsp;Download Notebook</a></li>
+                        
+                        
+                        <li><a id="pdf-link" class="nav-link" href="../../lab_notes/lab_6_outline/lab_6_outline.pdf" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" title="Download as PDF"></i>&nbsp;Download as PDF</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+            <div id="content" class="col-md-9"> 
+            
+            <section class="section1"><h1>Lab week 6</h1>
+<p>We have seen lists and <code>numpy</code> arrays. However, we can best describe things like graphs by using other types of structure.</p>
+<section class="section2"><h2>Script</h2>
+<p>We have seen two types of <em>container</em>, a thing that holds multiple objects. The <code>list</code> behaves a bit like a mathematical set; a <code>numpy</code> <code>array</code> behaves like a linear algebra vector, or matrix.</p>
+<p>There are other containers that Python includes that are useful in particular contexts.</p>
+<section class="section3"><h3>Tuples</h3>
+<p>A tuple is <em>technically</em> a list which can't be changed. It is defined using round brackets:</p>
+<div class="highlight"><pre><span></span><span class="n">tuple_1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tuple_1</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>(1, 2, 3, 4, 5)
+</pre></div>
+<p>It is accessed the same way as a list:</p>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tuple_1</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tuple_1</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>
+</pre></div>
+<div class="highlight"><pre><span></span>2
+(3, 4)
+</pre></div>
+<p>But none of its values can be modified, and its size cannot be changed:</p>
+<div class="highlight"><pre><span></span><span class="n">tuple_1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+<div class="highlight"><pre><span></span>---------------------------------------------------------------------------
+
+TypeError                                 Traceback (most recent call last)
+
+&lt;ipython-input-3-187e83546d31&gt; in &lt;module&gt;()
+----&gt; 1 tuple_1[0] = 0
+
+
+TypeError: 'tuple' object does not support item assignment
+</pre></div>
+<p>The <em>cultural</em> difference is more subtle (sidenote for demonstrators or people with more expertise: see <a href="https://nedbatchelder.com/blog/201608/lists_vs_tuples.html">this description by Batchelder</a>). A tuple should be used when you know</p>
+<ul>
+<li>exactly how many entries you need, and</li>
+<li>what the difference in <em>meaning</em> between the entries is.</li>
+</ul>
+<p>For example, if you had a polynomial of order <script type="math/tex">3</script> with coefficients <script type="math/tex">a_n</script>, you would store the coefficients in a tuple.</p>
+<p>We have already seen tuples. When returning multiple values from a function Python uses a tuple:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">swap</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span>
+
+<span class="n">values</span> <span class="o">=</span> <span class="n">swap</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+</pre></div>
+<div class="highlight"><pre><span></span>2
+
+
+
+---------------------------------------------------------------------------
+
+TypeError                                 Traceback (most recent call last)
+
+&lt;ipython-input-4-0cdd07c720d2&gt; in &lt;module&gt;()
+      4 values = swap(1, 2)
+      5 print(values[0])
+----&gt; 6 values[0] = 3
+
+
+TypeError: 'tuple' object does not support item assignment
+</pre></div>
+<p>Tuples should not be used just to stop somebody changing something, as it's easy to convert between lists and tuples:</p>
+<div class="highlight"><pre><span></span><span class="n">list_1</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">tuple_1</span><span class="p">)</span>
+<span class="n">list_1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">tuple_2</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">list_1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tuple_2</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>(3, 2, 3, 4, 5)
+</pre></div>
+<section class="section5"><h5>Exercise</h5>
+<p>Write a function that takes two tuples of the same length and adds the entries together, as if they were <code>numpy</code> <code>array</code>s, returning a tuple. You may want to use <code>numpy</code> <code>array</code>s for this.</p>
+</section></section><section class="section3"><h3>Dictionaries</h3>
+<p>All our containers so far have been <em>ordered</em>: we access them using a number starting from zero. However, it doesn't always make sense for the container to be ordered. Instead we may want the entries, for example, to be named.</p>
+<p>This is where the dictionary, or <code>dict</code>, comes in. It contains many objects (usually referred to as <em>values</em>), but links each with a unique <em>key</em>. The key can be anything that doesn't change, but is usually a string, or a number.</p>
+<p>Consider the following group of functions:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="n">dict_1</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"sin"</span> <span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sin</span><span class="p">,</span>
+          <span class="s2">"cos"</span> <span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">cos</span><span class="p">,</span>
+          <span class="s2">"log"</span> <span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">log</span><span class="p">,</span>
+          <span class="s2">"exp"</span> <span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">exp</span><span class="p">}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">dict_1</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>{'log': &lt;ufunc 'log'&gt;, 'exp': &lt;ufunc 'exp'&gt;, 'cos': &lt;ufunc 'cos'&gt;, 'sin': &lt;ufunc 'sin'&gt;}
+</pre></div>
+<p>The key is the string. The value is the function. We have used this example in the lab where we introduced lists, but there was no logic to the order. In this case the dictionary is not ordered: when you print the dictionary the order may be different each time, and different on different machines.</p>
+<p>To access a dictionary we use square brackets, but index using the key:</p>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">dict_1</span><span class="p">[</span><span class="s2">"sin"</span><span class="p">])</span>
+</pre></div>
+<div class="highlight"><pre><span></span>&lt;ufunc 'sin'&gt;
+</pre></div>
+<p>To loop over a dictionary, we typically want to know both the key and the value. The <code>items()</code> method gives us both, and we use multiple unpacking:</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">dict_1</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Key:"</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="s2">". Value:"</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>Key: log . Value: &lt;ufunc 'log'&gt;
+Key: exp . Value: &lt;ufunc 'exp'&gt;
+Key: cos . Value: &lt;ufunc 'cos'&gt;
+Key: sin . Value: &lt;ufunc 'sin'&gt;
+</pre></div>
+<p>We can then use this more descriptively:</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">dict_1</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"The"</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="s2">"function evaluated at 1 is"</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+<div class="highlight"><pre><span></span>The log function evaluated at 1 is 0.0
+The exp function evaluated at 1 is 2.71828182846
+The cos function evaluated at 1 is 0.540302305868
+The sin function evaluated at 1 is 0.841470984808
+</pre></div>
+<p>Dictionaries are extremely useful when ascribing meaning or structure to your code. You can directly associate names or meanings to values instead of keeping two lists. Consider the use of dictionaries when describing a network, or a graph.</p>
+<section class="section5"><h5>Exercise</h5>
+<p>A graph can be represented by the nodes, indexed by integers <script type="math/tex">0, \dots</script>, and the weight (or cost) of the edge. In code we will represent this by a dictionary whose keys are the nodes connected by the edge and are values are the weights of the edge. So</p>
+<div class="highlight"><pre><span></span>g1 = {(0, 1) : 1, (1, 0) : 2}
+</pre></div>
+<p>is a graph with two nodes, <code>0</code> and <code>1</code>, with weight <code>1</code> going from <code>0</code> to <code>1</code> and weight <code>2</code> going from <code>1</code> to <code>0</code>.</p>
+<p>Write a function that takes the dictionary graph <code>graph</code> and a path <code>path</code>, a list of nodes visited in order, and returns the total weight or cost of the path.</p>
+</section></section><section class="section3"><h3>Sets</h3>
+<p>Python has another useful container: the <em>set</em>. This is closer to the mathematical ideal of a set than a <code>list</code> is, as</p>
+<ul>
+<li>it is unordered, like a dictionary;</li>
+<li>all its entries are <em>unique</em>.</li>
+</ul>
+<p>A set is defined using curly brackets like a dictionary, but no key is given.</p>
+<div class="highlight"><pre><span></span><span class="n">set_1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set_1</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>{1, 2, 3, 4}
+</pre></div>
+<p>You can rapidly convert a list or a tuple to a set:</p>
+<div class="highlight"><pre><span></span><span class="n">set_2</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">tuple_2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set_2</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>{2, 3, 4, 5}
+</pre></div>
+<p>This removes all the duplicate entries, allowing you to rapidly count the number of unique entries of a container (using <code>len(set(...))</code>).</p>
+<p>The other advantage of sets is that it is <em>extremely</em> fast to check if an entry appears in the list. We check if an entry appears in a container using <code>in</code>:</p>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="mi">1</span> <span class="ow">in</span> <span class="n">list_1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">1</span> <span class="ow">in</span> <span class="n">tuple_1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">1</span> <span class="ow">in</span> <span class="n">set_1</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>False
+True
+True
+</pre></div>
+<p>Whilst all work, this is much faster in the case of a <code>set</code> than for a <code>list</code> or a <code>tuple</code>.</p>
+</section><section class="section3"><h3>Further looping with lists</h3>
+<p>We have seen two ways of looping over containers. If we just want the values in the container, we use <code>in</code> to pull those values out:</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">list_1</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>3
+2
+3
+4
+5
+</pre></div>
+<p>If we needed to use the ordering of the container, we can use the index. For this we've seen the <code>range</code> function:</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tuple_1</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">tuple_1</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+<div class="highlight"><pre><span></span>1
+2
+3
+4
+5
+</pre></div>
+<p>We can combine the safety and simplicity of getting the values with the ability to use the ordering via the index. This is particularly important if we have two lists (or similar) with the same length, and we want to set one using the other. To do this use <code>enumerate</code>:</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tuple_1</span><span class="p">):</span>
+    <span class="n">list_1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">number</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">list_1</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[1, 2, 3, 4, 5]
+</pre></div>
+<p>The <code>enumerate</code> function returns the index into the container, <em>and also</em> the value of the element.</p>
+<p>Alternatively, if you have multiple lists (or other containers) which you want to loop through, but don't explicitly need the index, you can get the values from multiple lists using <code>zip</code>:</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">number1</span><span class="p">,</span> <span class="n">number2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">tuple_1</span><span class="p">,</span> <span class="n">tuple_2</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">number1</span><span class="p">,</span> <span class="n">number2</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>1 3
+2 2
+3 3
+4 4
+5 5
+</pre></div>
+<p>When looping over lists using more complex data structures, the <code>enumerate</code> command is particularly useful.</p>
+<section class="section5"><h5>Exercise</h5>
+<p>Take two lists <code>list_1</code> and <code>list_2</code>. Using both <code>zip</code> and <code>enumerate</code> together, print <code>(index, result)</code> where <code>index</code> should count the entry into <code>list_1</code> and <code>result = list_1[index] + index * list_2[index]</code>.</p>
+</section></section></section></section>
+            </div>
+        </div>
+    </div>
+
+        </main>
+		
+		<footer class="text-muted">
+	<hr>
+	<div class="container">
+		<div class="float-right">
+			<ul style="list-style: none">
+			<li><a href="#">Back to top</a></li>
+			
+			
+			<li><a href="../../lab_notes/lab_6_outline/lab_6_outline.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;Download as PDF</a></li>
+			
+			</ul>
+		</div>
+		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
+		<p>This page last generated: 2022-01-25</p>
+	</div>
+</footer>
+		
+    </body>
+</html>

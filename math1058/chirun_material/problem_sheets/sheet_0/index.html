@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        
+            <meta charset="utf-8">
+            <meta name="robots" content="noindex">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="author" content="Ian Hawke" />
+            <meta name="date" content="2022-01-20" />
+        
+
+        <title>Sheet 0 | Operational Research and Mathematical Computing</title>
+
+        
+    
+    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../../static/styles.css">
+            <link rel="stylesheet" id="customiseCSS" href="../../static/light.css">
+            
+            
+        
+    <link rel="stylesheet" id="customiseCodeCSS" href="../../static/pygmentize.light.css">
+    <link rel="stylesheet" href="../../static/codemirror-5.26.0/lib/codemirror.css">
+    <link rel="stylesheet" href="../../static/boole.css">
+    <link rel="stylesheet" href="../../static/numbasEmbed.css">
+
+    <link rel="stylesheet" href="../../static/bootstrap-toc.css?v=3">
+    <link rel="stylesheet" href="../../static/print.css">
+
+
+        
+    
+    
+            <script defer src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <script defer src="../../static/mathjax_config.js"></script>
+            <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+            <script defer src="../../static/customisation.js"></script>
+            <script defer src="../../static/mp4.js"></script>
+            
+            
+        
+    <script defer src="../../static/jquery.flexibleArea.js"></script>
+    <script defer src="../../static/spin.min.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/lib/codemirror.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/octave/octave.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/python/python.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/r/r.js"></script>
+    <script defer src="../../static/boole.js"></script>
+    <script defer src="../../static/numbasEmbed.js"></script>
+
+    <script defer src="../../static/bootstrap-toc.js"></script>
+
+    </head>
+    <body data-spy="scroll" data-target="#chapterTOC" data-offset="50">
+        
+<div class="collapse" id="navbarToggleCustomise">
+	<div class="bg-secondary text-white p-3">
+		<form onsubmit="return false;" id="navbarCustomise">
+			<div class="form-row">
+				<label>Theme Customisation</label>
+				<div id="themeSelector" class="form-group col-md-12">
+					<button class="btn btn-dark mr-2" value="dark">Dark</button>
+					<button class="btn btn-pastel mr-2" value="pastel">Pastel</button>
+					<button class="btn btn-light mr-4" value="light">Light</button>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label style="display: block" for="font-scale">Font size (<span id="font-size-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="font-scale" min="50" max="600" value="100">
+					<button id="font-scale-reset" class="btn btn-sm">Reset</button>
+				</div>
+				<div class="form-group col-md-4">
+					<label style="display: block" for="p-space">Spacing (<span id="p-space-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="p-space" min="0" max="600" value="100">
+					<button id="p-space-reset" class="btn btn-sm">Reset</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<nav aria-label="breadcrumb">
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="../../index.html">Operational Research and Mathematical Computing</a>
+		</li>
+		
+		<li class="breadcrumb-item">
+			<a href="../../problem_sheets/index.html">Problem Sheets</a>
+		</li>
+		
+		<li class="breadcrumb-item active">
+			Sheet 0
+		</li>
+		<li class="ml-auto">
+			<button class="navbar-toggler p0" type="button" data-toggle="collapse" data-target="#navbarToggleCustomise" aria-controls="navbarToggleCustomise" aria-expanded="false" aria-label="Toggle customisations panel">
+				<i class="fa fa-cog" aria-hidden="true" title="Toggle customisations panel"></i> <span class="sr-only">Toggle customisations panel</span>
+			</button>
+		</li>
+	</ul>
+</nav>
+
+
+        <header>
+            
+            
+        </header>
+        <main>
+            
+    <div class="container mt-3">
+        <div class="row">
+            
+            <div id="sidebar" class="col-md-3">
+                <nav class="mb-3" id="chapterTOC" data-toggle="toc">
+                    <ul class="nav navbar-nav">
+                        
+                        
+                        
+                        <li><a id="pdf-link" class="nav-link" href="../../problem_sheets/sheet_0/sheet_0.pdf" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" title="Download as PDF"></i>&nbsp;Download as PDF</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+            <div id="content" class="col-md-9"> 
+            
+            <section class="section">
+<h2 id="a0000001562">MATH1058: Problem Sheet 0</h2>
+<p>
+<div class="thmwrapper problem_thmwrapper" id="a0000001563">
+<div class="thmheading problem_thmheading">
+<span class="thmcaption problem_thmcaption">
+    Problem
+    </span>
+<span class="thmlabel problem_thmlabel">1</span>
+<span class="thmtitle problem_thmtitle">(Diet problem, reprise)</span>
+</div>
+<div class="thmcontent problem_thmcontent">
+<p>
+ Let us consider an extension of the diet problem seen in the lectures to the case with a limited food availability. 
+</p>
+<p>
+Let <script type="math/tex">I</script> be the set of nutrients, <script type="math/tex">J</script> the set of of foods, <script type="math/tex">a_{ij}</script> the amount (in grams) of nutrient <script type="math/tex">i</script> in a unit of food <script type="math/tex">j</script>, for all <script type="math/tex">(i,j) \in I \times J</script>, <script type="math/tex">b_ i</script> the least amount (in grams) of nutrient <script type="math/tex">i \in I</script> the diet should contain, <script type="math/tex">q_ j</script> the availability (in units) of food of type <script type="math/tex">j \in J</script>, and <script type="math/tex">c_ j</script> its cost (in pounds per unit). 
+</p>
+<p>
+Also assume that: 
+</p>
+<ul class="itemize" id="a0000001564">
+<li id="a0000001565"> <p>
+the amount (in units) of food <script type="math/tex">1</script> should be no more than 50% of the total (amount of units). 
+</p>
+</li>
+<li id="a0000001566"> <p>
+the amount (in units) of food <script type="math/tex">2</script> should be at least two times the total amount of all foods except for foods 1, 2, and 3. 
+</p>
+</li>
+</ul>
+<p>
+Propose a linear programming formulation for this problem (where the total cost should be minimized). 
+</p>
+</div>
+</div>
+</p>
+<p>
+<div class="thmwrapper problem_thmwrapper" id="a0000001567">
+<div class="thmheading problem_thmheading">
+<span class="thmcaption problem_thmcaption">
+    Problem
+    </span>
+<span class="thmlabel problem_thmlabel">2</span>
+<span class="thmtitle problem_thmtitle">(Shoes)</span>
+</div>
+<div class="thmcontent problem_thmcontent">
+<p>
+ We own a small shoe factory, producing 5 types of shoes. Three people work for us. The time needed by each of them to create a ready-to-sell pair of shoes of each type is reported in the following table (in hours per pair): 
+</p>
+<div class="centered"> <table class="tabular">
+<tr><td colspan="" rowspan="" style="text-align:center; border-right:1px solid black"><p>
+ Type/employee 
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+ 1 
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+ 2 
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+ 3
+</p>
+</td>
+</tr>
+<tr><td colspan="" rowspan="" style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:center; border-right:1px solid black"><p>
+1 
+</p>
+</td>
+<td colspan="" rowspan="" style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:center"><p>
+ 1.5 
+</p>
+</td>
+<td colspan="" rowspan="" style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:center"><p>
+ 3.5 
+</p>
+</td>
+<td colspan="" rowspan="" style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:center"><p>
+ 4
+</p>
+</td>
+</tr>
+<tr><td colspan="" rowspan="" style="text-align:center; border-right:1px solid black"><p>
+2 
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+ 1.8 
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+ 2 
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+ 3
+</p>
+</td>
+</tr>
+<tr><td colspan="" rowspan="" style="text-align:center; border-right:1px solid black"><p>
+3 
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+ 2 
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+ 1 
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+ 2.5
+</p>
+</td>
+</tr>
+<tr><td colspan="" rowspan="" style="text-align:center; border-right:1px solid black"><p>
+4 
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+ 2.5 
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+ 1.5 
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+ 3.5
+</p>
+</td>
+</tr>
+<tr><td colspan="" rowspan="" style="text-align:center; border-right:1px solid black"><p>
+5 
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+ 3.5 
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+ 3.5 
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+ 4.2 
+</p>
+</td>
+</tr>
+</table> </div>
+<p>
+Due to production constraints imposed by the unions, each employee must work no less than 8 hours a day, but no more than 10. 
+</p>
+<p>
+The next table indicates, for each type of shoes, the selling price and an estimate of the corresponding demand on the market: 
+</p>
+<div class="centered"> <table class="tabular">
+<tr><td colspan="" rowspan="" style="text-align:center; border-right:1px solid black"><p>
+ Type 
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+ Price 
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+ Demand 
+</p>
+</td>
+</tr>
+<tr><td colspan="" rowspan="" style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:center; border-right:1px solid black"><p>
+1 
+</p>
+</td>
+<td colspan="" rowspan="" style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:center"><p>
+ 56 
+</p>
+</td>
+<td colspan="" rowspan="" style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:center"><p>
+ 4
+</p>
+</td>
+</tr>
+<tr><td colspan="" rowspan="" style="text-align:center; border-right:1px solid black"><p>
+2 
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+ 86 
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+ 3
+</p>
+</td>
+</tr>
+<tr><td colspan="" rowspan="" style="text-align:center; border-right:1px solid black"><p>
+3 
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+ 45 
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+ 3
+</p>
+</td>
+</tr>
+<tr><td colspan="" rowspan="" style="text-align:center; border-right:1px solid black"><p>
+4 
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+ 42 
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+ 5
+</p>
+</td>
+</tr>
+<tr><td colspan="" rowspan="" style="text-align:center; border-right:1px solid black"><p>
+5 
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+ 65 
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+ 8 
+</p>
+</td>
+</tr>
+</table> </div>
+<p>
+Propose a mathematical programming formulation for the problem of choosing how many pairs of each shoe to manufacture so as to maximizing the total revenue, subject to production and demand constraints. 
+</p>
+</div>
+</div>
+</p>
+</section>
+
+            </div>
+        </div>
+    </div>
+
+        </main>
+		
+		<footer class="text-muted">
+	<hr>
+	<div class="container">
+		<div class="float-right">
+			<ul style="list-style: none">
+			<li><a href="#">Back to top</a></li>
+			
+			
+			<li><a href="../../problem_sheets/sheet_0/sheet_0.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;Download as PDF</a></li>
+			
+			</ul>
+		</div>
+		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
+		<p>This page last generated: 2022-01-20</p>
+	</div>
+</footer>
+		
+    </body>
+</html>

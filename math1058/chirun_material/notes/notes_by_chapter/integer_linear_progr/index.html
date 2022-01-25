@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        
+            <meta charset="utf-8">
+            <meta name="robots" content="noindex">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="author" content="Ian Hawke" />
+            <meta name="date" content="2022-01-20" />
+        
+
+        <title>Integer Linear Programming | Operational Research and Mathematical Computing</title>
+
+        
+    
+    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../../../static/styles.css">
+            <link rel="stylesheet" id="customiseCSS" href="../../../static/light.css">
+            
+            
+        
+    <link rel="stylesheet" id="customiseCodeCSS" href="../../../static/pygmentize.light.css">
+    <link rel="stylesheet" href="../../../static/codemirror-5.26.0/lib/codemirror.css">
+    <link rel="stylesheet" href="../../../static/boole.css">
+    <link rel="stylesheet" href="../../../static/numbasEmbed.css">
+
+    <link rel="stylesheet" href="../../../static/bootstrap-toc.css?v=3">
+    <link rel="stylesheet" href="../../../static/print.css">
+
+
+        
+    
+    
+            <script defer src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <script defer src="../../../static/mathjax_config.js"></script>
+            <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+            <script defer src="../../../static/customisation.js"></script>
+            <script defer src="../../../static/mp4.js"></script>
+            
+            
+        
+    <script defer src="../../../static/jquery.flexibleArea.js"></script>
+    <script defer src="../../../static/spin.min.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/lib/codemirror.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/octave/octave.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/python/python.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/r/r.js"></script>
+    <script defer src="../../../static/boole.js"></script>
+    <script defer src="../../../static/numbasEmbed.js"></script>
+
+    <script defer src="../../../static/bootstrap-toc.js"></script>
+
+    </head>
+    <body data-spy="scroll" data-target="#chapterTOC" data-offset="50">
+        
+<div class="collapse" id="navbarToggleCustomise">
+	<div class="bg-secondary text-white p-3">
+		<form onsubmit="return false;" id="navbarCustomise">
+			<div class="form-row">
+				<label>Theme Customisation</label>
+				<div id="themeSelector" class="form-group col-md-12">
+					<button class="btn btn-dark mr-2" value="dark">Dark</button>
+					<button class="btn btn-pastel mr-2" value="pastel">Pastel</button>
+					<button class="btn btn-light mr-4" value="light">Light</button>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label style="display: block" for="font-scale">Font size (<span id="font-size-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="font-scale" min="50" max="600" value="100">
+					<button id="font-scale-reset" class="btn btn-sm">Reset</button>
+				</div>
+				<div class="form-group col-md-4">
+					<label style="display: block" for="p-space">Spacing (<span id="p-space-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="p-space" min="0" max="600" value="100">
+					<button id="p-space-reset" class="btn btn-sm">Reset</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<nav aria-label="breadcrumb">
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="../../../index.html">Operational Research and Mathematical Computing</a>
+		</li>
+		
+		<li class="breadcrumb-item">
+			<a href="../../../notes/notes_by_chapter/index.html">Notes by chapter</a>
+		</li>
+		
+		<li class="breadcrumb-item active">
+			Integer Linear Programming
+		</li>
+		<li class="ml-auto">
+			<button class="navbar-toggler p0" type="button" data-toggle="collapse" data-target="#navbarToggleCustomise" aria-controls="navbarToggleCustomise" aria-expanded="false" aria-label="Toggle customisations panel">
+				<i class="fa fa-cog" aria-hidden="true" title="Toggle customisations panel"></i> <span class="sr-only">Toggle customisations panel</span>
+			</button>
+		</li>
+	</ul>
+</nav>
+
+
+        <header>
+            
+            
+        </header>
+        <main>
+            
+    <div class="container mt-3">
+        <div class="row">
+            
+            <div id="sidebar" class="col-md-3">
+                <nav class="mb-3" id="chapterTOC" data-toggle="toc">
+                    <ul class="nav navbar-nav">
+                        
+                        
+                        
+                        <li><a id="pdf-link" class="nav-link" href="../../../notes/notes_by_chapter/integer_linear_progr/integer_linear_progr.pdf" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" title="Download as PDF"></i>&nbsp;Download as PDF</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+            <div id="content" class="col-md-9"> 
+            
+            
+<!-- Latex Chapter/Part -->
+<h1 id="chap:ilp">Integer linear programs</h1>
+<p>
+So far we have considered linear programs of the form 
+</p>
+<div class="eqn" id="a0000001467">
+<script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl} \min &  c x & & \\ \text{subject to} &  A x &  \ge &  b \\ &  x &  \ge &  0 \\ &  x &  \in &  \mathbb {R}^ n. \end{array}\tag{5.1}\end{equation}</script>
+</div>
+<p>
+ We have here made explicit that each component of <script type="math/tex">x</script> is a real number. In addition we have <script type="math/tex">A \in \mathbb {R}^{m \times n}, b \in \mathbb {R}^ m, c, x \in \mathbb {R}^ n</script> being matrices and vectors in the appropriate real spaces. 
+</p>
+<p>
+There are a lot of applications where this does not make perfect sense. There are many situations where talking about half a person, or a third of a car, or similar, is meaningless. In these cases we instead need to consider the <em>integer linear program</em>
+</p>
+<div class="eqn" id="a0000001468">
+<script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl} \min &  c x & & \\ \text{subject to} &  A x &  \ge &  b \\ &  x &  \ge &  0 \\ &  x &  \in &  \mathbb {Z}^ n, \end{array}\tag{5.2}\end{equation}</script>
+</div>
+<p>
+ where <script type="math/tex">A \in \mathbb {Q}^{m \times n}, b \in \mathbb {Q}^ m, c, x \in \mathbb {Q}^ n</script> are now matrices and vectors in the appropriate <em>rational</em> spaces. 
+</p>
+<p>
+Another special case is where we have to make yes/no or true/false decisions. For this weconsider the <em>integer linear program</em>
+</p>
+<div class="eqn" id="a0000001469">
+<script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl} \min &  c x & & \\ \text{subject to} &  A x &  \ge &  b \\ &  x &  \ge &  0 \\ &  x &  \in &  \{  0, 1 \} ^ n, \end{array}\tag{5.3}\end{equation}</script>
+</div>
+<p>
+ where again <script type="math/tex">A \in \mathbb {Q}^{m \times n}, b \in \mathbb {Q}^ m, c \in \mathbb {Q}^ n</script> are now matrices and vectors in the appropriate <em>rational</em> spaces. 
+</p>
+<section class="section">
+<h2 id="a0000001470">5.1 Optimal solutions</h2>
+<p>
+The feasible region of an integer linear program is not a polyhedron. It is instead the intersection of a polyhedron with a lattice, where the lattice is a grid of integer points. This immediately implies that, in general, an integer linear program cannot be solved by the simplex method (as the “vertices” need not be optimal). This is illustrated in figure <a class="ref" href="../../../notes/notes_by_chapter/integer_linear_progr/index.html#fig:ilp:lattice">5.1</a>. 
+</p>
+<figure id="fig:ilp:lattice">
+<p>
+<img alt="The feasible region for an integer linear program is given by the intersection of the feasible region for the standard linear program (the blue shaded region) and the integer lattice. The black dots here form that restricted feasible region. The optimal solution for the standard problem (shown by the red dot) does not lie in this feasible region, although it is close to the optimal integer solution (as seen by the level curves of the objective function, given by the dashed lines)." src="../../../notes/notes_by_chapter/integer_linear_progr/images/img-0002.png" style="width:469.755pt"/>
+</p>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">5.1</span>
+<span class="caption_text">The feasible region for an integer linear program is given by the intersection of the feasible region for the standard linear program (the blue shaded region) and the integer lattice. The black dots here form that restricted feasible region. The optimal solution for the standard problem (shown by the red dot) does not lie in this feasible region, although it is close to the optimal integer solution (as seen by the level curves of the objective function, given by the dashed lines).</span>
+</figcaption>
+</figure>
+<p>
+We can, however, solve the linear program <em>relaxation</em> of an integer linear program. This is obtained by dropping the restriction <script type="math/tex">x \in \mathbb {Z}^ n</script>, replacing it with <script type="math/tex">x \in \mathbb {R}^ n</script>. Essentially, we pretend that an integer linear program is a standard linear program. This can be solved by the simplex method as before. 
+</p>
+<p>
+Unfortunately, solutions of the relaxation problem can be a long way from the optimal solution of the integer linear program. If the feasible region near the optimal solution <script type="math/tex">x^*</script> to the relaxation problem is “long and thin”, then points on the integer lattice surrounding <script type="math/tex">x^*</script> can easily be infeasible. It is possible to construct cases where the difference in the objective function value between the integer linear program and it relaxation problem are arbitrarily large. This is illustrated in figure <a class="ref" href="../../../notes/notes_by_chapter/integer_linear_progr/index.html#fig:ilp:relaxation">5.2</a>. 
+</p>
+<figure id="fig:ilp:relaxation">
+<p>
+<img alt="A pathological integer linear program. The feasible region of the standard problem (blue shaded region) is “long and thin”. The integer solutions (blue dots) that neighbour the solution to the standard problem (red dot) are not close to any feasible solution to the integer problem (green dots)." src="../../../notes/notes_by_chapter/integer_linear_progr/images/img-0004.png" style="width:469.755pt"/>
+</p>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">5.2</span>
+<span class="caption_text">A pathological integer linear program. The feasible region of the standard problem (blue shaded region) is “long and thin”. The integer solutions (blue dots) that neighbour the solution to the standard problem (red dot) are not close to any feasible solution to the integer problem (green dots).</span>
+</figcaption>
+</figure>
+<p>
+Typical methods for solving integer problems do use the simplex method to solve linear programs, typically applied to many pieces of the feasible region individually (later courses will cover this). The simplex method remains a key building block. 
+</p>
+</section><section class="section">
+<h2 id="a0000001471">5.2 Total unimodularity</h2>
+<section class="subsection">
+<h3 id="a0000001472">5.2.1 When relaxation works</h3>
+<p>
+There are, however, problems where the relaxation problem works. Consider the problem 
+</p>
+<div class="eqn" id="a0000001473">
+<script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl} \min &  c x & & \\ \text{subject to} &  A x &  = &  b \\ &  x &  \ge &  0 \\ &  x &  \in &  \mathbb {Z}^ n, \end{array}\tag{5.4}\end{equation}</script>
+</div>
+<p>
+ where <script type="math/tex">b \in \mathbb {Z}^ n</script>. This can be constructed by scaling each row of <script type="math/tex">A x = b</script> to make <script type="math/tex">b</script> integer. 
+</p>
+<p>
+Consider the relaxation problem where all restrictions are dropped. For any optimal (basic) solution of the relaxation problem we have 
+</p>
+<div class="eqn" id="a0000001474">
+<script type="math/tex; mode=display">\begin{equation}x_ B = A_ B^{-1} b, \quad x_ N = 0.\tag{5.5}\end{equation}</script>
+</div>
+<p>
+ We have that <script type="math/tex">b</script> is integer. If <script type="math/tex">A_ B^{-1}</script> is also integer it follows that <script type="math/tex">x_ B</script> is integer. Therefore the solution to the linear program is also a solution to the <em>integer</em> linear program, and the simplex method will work. 
+</p>
+</section><section class="subsection">
+<h3 id="a0000001475">5.2.2 Total unimodularity</h3>
+<p>
+We want some criteria that checks when the inverse of a matrix is integer, without having to compute it and enumerate the entries. We say that a matrix <script type="math/tex">A \in \mathbb {R}^{m \times n}</script> is called <em>total unimodular</em> if the determinant of all its square submatrices takes values in <script type="math/tex">\{ -1, 0, 1\} </script>. 
+</p>
+<p>
+<div class="thmwrapper thm_thmwrapper" id="a0000001476">
+<div class="thmheading thm_thmheading">
+<span class="thmcaption thm_thmcaption">
+    Theorem
+    </span>
+<span class="thmlabel thm_thmlabel">2.1</span>
+</div>
+<div class="thmcontent thm_thmcontent">
+<p>
+If <script type="math/tex">A</script> is total unimodular then <script type="math/tex">A_ B^{-1}</script> is integer. 
+</p>
+</div>
+</div>
+</p>
+<div class="proof_wrapper" id="a0000001477">
+<div class="proof_heading">
+<span class="proof_caption">
+    Proof.
+    </span>
+</div>
+<div class="proof_content">
+<p>
+The inverse of <script type="math/tex">A_ B</script> can be written as 
+</p>
+<div class="eqn" id="a0000001478">
+<script type="math/tex; mode=display">\begin{equation}A_ B^{-1} = \frac{1}{\det (A_ B)} \begin{pmatrix}  \alpha _{1 B_1} 
+
+&  \dots 
+
+&  \alpha _{1 B_ m} 
+
+\\ \vdots 
+
+&  \ddots 
+
+&  \vdots 
+
+\\ \alpha _{m B_1} 
+
+&  \dots 
+
+&  \alpha _{m B_ m} 
+
+\end{pmatrix},\tag{5.6}\end{equation}</script>
+</div>
+<p>
+ where <script type="math/tex">\alpha _{ij} = (-1)^{i+j} \det (M_{ij})</script> and <script type="math/tex">M_{ij}</script> is the submatrix obtained from <script type="math/tex">A_ B</script> by deleting row <script type="math/tex">i</script> and column <script type="math/tex">j</script>. 
+</p>
+<p>
+Since <script type="math/tex">A</script> is total unimodular <script type="math/tex">\det (M_{ij}) \in \{ -1, 0, 1\} </script> and hence <script type="math/tex">\alpha _{ij} \in \{ -1, 0, 1\} </script>, and also <script type="math/tex">\frac{1}{\det (A_ B)} \in \{ -1, 0, 1\} </script>. Therefore <script type="math/tex">A_ B^{-1}</script> is integer. 
+</p>
+</div>
+</div>
+<p>
+It is possible to frame the shortest path problem as an integer linear program, and to prove that the constraint matrix <script type="math/tex">A</script> is total unimodular so that it can be solved using the simplex method. However, more efficient methods are available as we will see next.  
+</p>
+</section>
+</section>
+
+            </div>
+        </div>
+    </div>
+
+        </main>
+		
+		<footer class="text-muted">
+	<hr>
+	<div class="container">
+		<div class="float-right">
+			<ul style="list-style: none">
+			<li><a href="#">Back to top</a></li>
+			
+			
+			<li><a href="../../../notes/notes_by_chapter/integer_linear_progr/integer_linear_progr.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;Download as PDF</a></li>
+			
+			</ul>
+		</div>
+		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
+		<p>This page last generated: 2022-01-20</p>
+	</div>
+</footer>
+		
+    </body>
+</html>

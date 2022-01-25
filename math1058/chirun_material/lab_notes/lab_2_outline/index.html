@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        
+            <meta charset="utf-8">
+            <meta name="robots" content="noindex">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="author" content="Ian Hawke" />
+            <meta name="date" content="2022-01-25" />
+        
+
+        <title>Lab 2 outline | Operational Research and Mathematical Computing</title>
+
+        
+    
+    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../../static/styles.css">
+            <link rel="stylesheet" id="customiseCSS" href="../../static/light.css">
+            
+            
+        
+    <link rel="stylesheet" id="customiseCodeCSS" href="../../static/pygmentize.light.css">
+    <link rel="stylesheet" href="../../static/codemirror-5.26.0/lib/codemirror.css">
+    <link rel="stylesheet" href="../../static/boole.css">
+    <link rel="stylesheet" href="../../static/numbasEmbed.css">
+
+    <link rel="stylesheet" href="../../static/bootstrap-toc.css?v=3">
+    <link rel="stylesheet" href="../../static/print.css">
+
+
+        
+    
+    
+            <script defer src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <script defer src="../../static/mathjax_config.js"></script>
+            <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+            <script defer src="../../static/customisation.js"></script>
+            <script defer src="../../static/mp4.js"></script>
+            
+            
+        
+    <script defer src="../../static/jquery.flexibleArea.js"></script>
+    <script defer src="../../static/spin.min.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/lib/codemirror.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/octave/octave.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/python/python.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/r/r.js"></script>
+    <script defer src="../../static/boole.js"></script>
+    <script defer src="../../static/numbasEmbed.js"></script>
+
+    <script defer src="../../static/bootstrap-toc.js"></script>
+
+    </head>
+    <body data-spy="scroll" data-target="#chapterTOC" data-offset="50">
+        
+<div class="collapse" id="navbarToggleCustomise">
+	<div class="bg-secondary text-white p-3">
+		<form onsubmit="return false;" id="navbarCustomise">
+			<div class="form-row">
+				<label>Theme Customisation</label>
+				<div id="themeSelector" class="form-group col-md-12">
+					<button class="btn btn-dark mr-2" value="dark">Dark</button>
+					<button class="btn btn-pastel mr-2" value="pastel">Pastel</button>
+					<button class="btn btn-light mr-4" value="light">Light</button>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label style="display: block" for="font-scale">Font size (<span id="font-size-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="font-scale" min="50" max="600" value="100">
+					<button id="font-scale-reset" class="btn btn-sm">Reset</button>
+				</div>
+				<div class="form-group col-md-4">
+					<label style="display: block" for="p-space">Spacing (<span id="p-space-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="p-space" min="0" max="600" value="100">
+					<button id="p-space-reset" class="btn btn-sm">Reset</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<nav aria-label="breadcrumb">
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="../../index.html">Operational Research and Mathematical Computing</a>
+		</li>
+		
+		<li class="breadcrumb-item">
+			<a href="../../lab_notes/index.html">Lab notes</a>
+		</li>
+		
+		<li class="breadcrumb-item active">
+			Lab 2 outline
+		</li>
+		<li class="ml-auto">
+			<button class="navbar-toggler p0" type="button" data-toggle="collapse" data-target="#navbarToggleCustomise" aria-controls="navbarToggleCustomise" aria-expanded="false" aria-label="Toggle customisations panel">
+				<i class="fa fa-cog" aria-hidden="true" title="Toggle customisations panel"></i> <span class="sr-only">Toggle customisations panel</span>
+			</button>
+		</li>
+	</ul>
+</nav>
+
+
+        <header>
+            
+            
+        </header>
+        <main>
+            
+    <div class="container mt-3">
+        <div class="row">
+            
+            <div id="sidebar" class="col-md-3">
+                <nav class="mb-3" id="chapterTOC" data-toggle="toc">
+                    <ul class="nav navbar-nav">
+                        
+                        
+                        <li><a id="notebook-link" class="nav-link" href="../../lab_notes/lab_2_outline/lab_2_outline.ipynb" download><i class="fa fa-book" aria-hidden="true" title="Download Notebook"></i>&nbsp;Download Notebook</a></li>
+                        
+                        
+                        <li><a id="pdf-link" class="nav-link" href="../../lab_notes/lab_2_outline/lab_2_outline.pdf" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" title="Download as PDF"></i>&nbsp;Download as PDF</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+            <div id="content" class="col-md-9"> 
+            
+            <section class="section1"><h1>Python lab, lecture 2</h1>
+<p>Last week we introduced the basics of doing calculations in Python, using Python packages such as <code>numpy</code> via the <code>import</code> command, and defining our own functions. This allows us to do a single calculation using the computer. In particular, we covered:
+* <code>spyder</code> basics
+* variables
+* <code>import</code>
+* the very basics of defining functions</p>
+<p>However, the power of using a computer is its ability to do many calculations rapidly (without getting bored). We need to be able to work with lots of things in one go in order to make Python do these many operations.</p>
+<section class="section3"><h3>Lists</h3>
+<p>To start with, we need an object that holds many things. Mathematically, there are many such objects: sets, groups, vectors, matrices are some examples. Each of these <em>contains</em> a number of other things. For example, the simple vector <script type="math/tex">{\bf v} = (0, 1, 2, 3)</script> contains the four numbers <script type="math/tex">0, 1, 2, 3</script>.</p>
+<p>The first Python object that we'll encounter that allows us to hold many things is a <em>list</em>. Define it as:</p>
+<div class="highlight"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[0, 1, 2, 3]
+</pre></div>
+<p>The square brackets <code>[]</code> say that what follows will be a list: a collection of objects. The commas separate the different objects contained within the list.</p>
+<p>In Python, a list can hold <em>anything</em>: it is like a mathematical set (but one which allows repetitions and which is ordered). For example:</p>
+<div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="s2">"hello"</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[0, 1.2, 'hello', [3, 4]]
+</pre></div>
+<p>This list holds an integer, a real number (or at least a floating point number), a string, and another list.</p>
+<p>We can find the length of a list using <code>len</code>:</p>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+</pre></div>
+<div class="highlight"><pre><span></span>4
+</pre></div>
+<p>To access individual elements of a list, use square brackets again. The elements are ordered left-to-right, <strong>and the first element has number (or index) <code>0</code>(in Python we count starting from 0!)</strong>:</p>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+<div class="highlight"><pre><span></span>0
+3
+1.2
+[3, 4]
+</pre></div>
+<p>If we try to access an element that isn't in the list we get an error:</p>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+</pre></div>
+<div class="highlight"><pre><span></span>---------------------------------------------------------------------------
+
+IndexError                                Traceback (most recent call last)
+
+&lt;ipython-input-5-6f9feae2ef3a&gt; in &lt;module&gt;
+----&gt; 1 print(v[4])
+
+
+IndexError: list index out of range
+</pre></div>
+<p>Notice that <code>v[4]</code> asks for the element in position 4 <code>v</code> (which would be the 5th if we counted from 1). <code>v</code> only contains <code>len(v)</code> = 4 items though.</p>
+<p>We can assign the value of elements of a list in the same way as any variable:</p>
+<div class="highlight"><pre><span></span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[0, 10, 2, 3]
+</pre></div>
+<p>We can work with multiple elements of a list at once using the <em>slicing</em> notation:</p>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">[::</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[0, 10]
+[0, 10]
+[10, 2, 3]
+[0, 2]
+[0, 2]
+</pre></div>
+<p>The notation <code>[start:end:step]</code> means to return the entries from the <code>start</code>, up to <strong>but not including</strong> the <code>end</code>, in steps of length <code>step</code>. If the <code>start</code> is not included (e.g. <code>[:2]</code>) it defaults to the start, i.e. <code>0</code>. If the <code>end</code> is not included (e.g. <code>[1:]</code>) it defaults to the end (i.e., <code>len(...)</code>). If the <code>step</code> is not included it defaults to <code>1</code>.</p>
+<p>Finally, we can use negative numbers to count from the end of the list:</p>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+<div class="highlight"><pre><span></span>3
+2
+[3, 2, 10]
+</pre></div>
+<p>We can access strings (i.e. sequences of characters) in the same way:</p>
+<div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s2">"hello"</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+<div class="highlight"><pre><span></span>llo
+</pre></div>
+<section class="section5"><h5>Exercise (not for the lab)</h5>
+<p>Write a function that takes a single string <code>s</code> as input and returns its characters in reverse order, except for the first.</p>
+</section></section><section class="section3"><h3>Loops</h3>
+<p>We now have an object that collects lots of things together. Now we want to perform a calculation on each object in the list.</p>
+<p>Suppose we want to know <script type="math/tex">x^2 \sin(x)</script> for every integer <script type="math/tex">x</script> from <script type="math/tex">1</script> to <script type="math/tex">5</script>.</p>
+<p>We start by <code>import</code>ing the <code>numpy</code> library to get the <script type="math/tex">\sin</script> function:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+</pre></div>
+<p>Then we would create a list representing the numbers <script type="math/tex">x</script>:</p>
+<div class="highlight"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</pre></div>
+<p>Then, <strong>for each</strong> number <strong>in</strong> our list of <code>numbers</code>, we want to perform the calculation. The Python syntax for this <em>loop</em> is:</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">number</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Outside the loop"</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>1 0.8414709848078965
+2 3.637189707302727
+3 1.2700800725388048
+4 -12.108839924926851
+Outside the loop
+</pre></div>
+<p>The Python code says to take the list <code>numbers</code> and, one at a time, set the variable <code>number</code> equal to each element within <code>numbers</code> in order. The keyword <code>for</code> says to do it in order; the keyword <code>in</code> says to take the values from within the list.</p>
+<p>The colon <code>:</code> means that the lines that follow are to be executed every time the code goes through the loop. This is exactly the syntax as was used when defining functions.</p>
+<p>The lines to be executed are indented by four spaces. We can have many lines to be executed within the loop, as above: all must be indented. To exit the loop, stop indenting the code (as with the final <code>print</code> statement above).</p>
+<p>We can also <em>nest</em> loops. That is, we can have loops inside loops.</p>
+<div class="highlight"><pre><span></span><span class="n">exponents</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Within first loop"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">exponent</span> <span class="ow">in</span> <span class="n">exponents</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="s2">"to the power of"</span><span class="p">,</span> <span class="n">exponent</span><span class="p">,</span> <span class="s2">"is"</span><span class="p">,</span> <span class="n">number</span><span class="o">**</span><span class="n">exponent</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Finished inner loop"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Finished all loops"</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>Within first loop
+1 to the power of 2 is 1
+1 to the power of 3 is 1
+1 to the power of 5 is 1
+Finished inner loop
+Within first loop
+2 to the power of 2 is 4
+2 to the power of 3 is 8
+2 to the power of 5 is 32
+Finished inner loop
+Within first loop
+3 to the power of 2 is 9
+3 to the power of 3 is 27
+3 to the power of 5 is 243
+Finished inner loop
+Within first loop
+4 to the power of 2 is 16
+4 to the power of 3 is 64
+4 to the power of 5 is 1024
+Finished inner loop
+Finished all loops
+</pre></div>
+<p>In the above we have often created a list of consecutive integers and looped over that. We can use the <code>range</code> function for this. When used within a loop, <code>range(start, end, step)</code> produces integers that run from <code>start</code> up to, <strong>but not including</strong>, the <code>end</code>, with steps of <code>step</code>. For example</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>1
+3
+5
+7
+9
+</pre></div>
+<section class="section5"><h5>Exercise</h5>
+<p>Using nested loops, compute
+<script type="math/tex; mode=display">
+\sum_{n=1}^{1000} n^{-p}
+</script>
+for <script type="math/tex">p=2, 3, 4, 5</script>.</p>
+</section></section><section class="section3"><h3>Conditional statements</h3>
+<p>At some point in our code, we may want to do a certain operation only if our variables satisfy a certain condition. This is done with the <code>if</code> statement. The syntax is similar to that for functions (which used the <code>def</code> keyword) and loops (which used the <code>for</code> keyword).</p>
+<p>Given a list of numbers, let us use <code>if</code> to count the occurrences of the number <code>6</code>.</p>
+<div class="highlight"><pre><span></span><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+<span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">number</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
+        <span class="n">counter</span> <span class="o">=</span> <span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Found"</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="s2">"occurrences of the number 6"</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>Found 3 occurrences of the number 6
+</pre></div>
+<p>The instruction <code>counter = counter + 1</code> is executed only if the condition <code>v == 6</code> is satisfied. The syntax is to use the <code>if</code> keyword followed by some logical (Boolean, true of false) statement. After the condition a colon <code>:</code> is used to indicate the lines that should be executed. The lines to be executed are then indented by four spaces. Again, this follows the syntax for functions and loops. In the condition we used the <code>==</code> operator. This is different from <code>=</code>,as <code>==</code> compares two objects whereas <code>=</code> assings the value of one object to another one.</p>
+<section class="section5"><h5>Exercise</h5>
+<p>Write a function <code>find_min</code> that takes a list <code>list</code> as input and returns the smallest number it contains.</p>
+</section></section></section>
+            </div>
+        </div>
+    </div>
+
+        </main>
+		
+		<footer class="text-muted">
+	<hr>
+	<div class="container">
+		<div class="float-right">
+			<ul style="list-style: none">
+			<li><a href="#">Back to top</a></li>
+			
+			
+			<li><a href="../../lab_notes/lab_2_outline/lab_2_outline.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;Download as PDF</a></li>
+			
+			</ul>
+		</div>
+		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
+		<p>This page last generated: 2022-01-25</p>
+	</div>
+</footer>
+		
+    </body>
+</html>

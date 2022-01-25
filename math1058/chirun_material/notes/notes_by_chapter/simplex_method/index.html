@@ -1,0 +1,1219 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        
+            <meta charset="utf-8">
+            <meta name="robots" content="noindex">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="author" content="Ian Hawke" />
+            <meta name="date" content="2022-01-20" />
+        
+
+        <title>Simplex Method | Operational Research and Mathematical Computing</title>
+
+        
+    
+    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../../../static/styles.css">
+            <link rel="stylesheet" id="customiseCSS" href="../../../static/light.css">
+            
+            
+        
+    <link rel="stylesheet" id="customiseCodeCSS" href="../../../static/pygmentize.light.css">
+    <link rel="stylesheet" href="../../../static/codemirror-5.26.0/lib/codemirror.css">
+    <link rel="stylesheet" href="../../../static/boole.css">
+    <link rel="stylesheet" href="../../../static/numbasEmbed.css">
+
+    <link rel="stylesheet" href="../../../static/bootstrap-toc.css?v=3">
+    <link rel="stylesheet" href="../../../static/print.css">
+
+
+        
+    
+    
+            <script defer src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <script defer src="../../../static/mathjax_config.js"></script>
+            <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+            <script defer src="../../../static/customisation.js"></script>
+            <script defer src="../../../static/mp4.js"></script>
+            
+            
+        
+    <script defer src="../../../static/jquery.flexibleArea.js"></script>
+    <script defer src="../../../static/spin.min.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/lib/codemirror.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/octave/octave.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/python/python.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/r/r.js"></script>
+    <script defer src="../../../static/boole.js"></script>
+    <script defer src="../../../static/numbasEmbed.js"></script>
+
+    <script defer src="../../../static/bootstrap-toc.js"></script>
+
+    </head>
+    <body data-spy="scroll" data-target="#chapterTOC" data-offset="50">
+        
+<div class="collapse" id="navbarToggleCustomise">
+	<div class="bg-secondary text-white p-3">
+		<form onsubmit="return false;" id="navbarCustomise">
+			<div class="form-row">
+				<label>Theme Customisation</label>
+				<div id="themeSelector" class="form-group col-md-12">
+					<button class="btn btn-dark mr-2" value="dark">Dark</button>
+					<button class="btn btn-pastel mr-2" value="pastel">Pastel</button>
+					<button class="btn btn-light mr-4" value="light">Light</button>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label style="display: block" for="font-scale">Font size (<span id="font-size-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="font-scale" min="50" max="600" value="100">
+					<button id="font-scale-reset" class="btn btn-sm">Reset</button>
+				</div>
+				<div class="form-group col-md-4">
+					<label style="display: block" for="p-space">Spacing (<span id="p-space-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="p-space" min="0" max="600" value="100">
+					<button id="p-space-reset" class="btn btn-sm">Reset</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<nav aria-label="breadcrumb">
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="../../../index.html">Operational Research and Mathematical Computing</a>
+		</li>
+		
+		<li class="breadcrumb-item">
+			<a href="../../../notes/notes_by_chapter/index.html">Notes by chapter</a>
+		</li>
+		
+		<li class="breadcrumb-item active">
+			Simplex Method
+		</li>
+		<li class="ml-auto">
+			<button class="navbar-toggler p0" type="button" data-toggle="collapse" data-target="#navbarToggleCustomise" aria-controls="navbarToggleCustomise" aria-expanded="false" aria-label="Toggle customisations panel">
+				<i class="fa fa-cog" aria-hidden="true" title="Toggle customisations panel"></i> <span class="sr-only">Toggle customisations panel</span>
+			</button>
+		</li>
+	</ul>
+</nav>
+
+
+        <header>
+            
+            
+        </header>
+        <main>
+            
+    <div class="container mt-3">
+        <div class="row">
+            
+            <div id="sidebar" class="col-md-3">
+                <nav class="mb-3" id="chapterTOC" data-toggle="toc">
+                    <ul class="nav navbar-nav">
+                        
+                        
+                        
+                        <li><a id="pdf-link" class="nav-link" href="../../../notes/notes_by_chapter/simplex_method/simplex_method.pdf" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" title="Download as PDF"></i>&nbsp;Download as PDF</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+            <div id="content" class="col-md-9"> 
+            
+            
+<!-- Latex Chapter/Part -->
+<h1 id="chap:simplex">The Simplex Method</h1>
+<section class="section">
+<h2 id="a0000001302">4.1 Recap</h2>
+<p>
+In the previous chapters we introduced the linear programming problem. We saw how this could be solved (graphically) for two variables, and also constructed an impractical, brute-force method that would work (very slowly) for the general case. 
+</p>
+<p>
+Problems of current interest can have thousands of constraints and millions of variables. To solve these we want to introduce and analyse the <em>simplex method</em>. Introduced by Dantzig in 1947, it builds on the fundamental theorem by giving a method of moving, step by step, from one vertex to an adjacent one until the optimal solution is found. 
+</p>
+<p>
+There are a number of steps we need to complete. 
+</p>
+<ol class="enumerate" id="a0000001303" style="list-style: none">
+<li id="a0000001304" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		1.
+	</span>
+<p>
+How do we characterise a vertex (algebraically)? 
+</p>
+</li>
+<li id="a0000001305" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		2.
+	</span>
+<p>
+How do we find a vertex to start from? 
+</p>
+</li>
+<li id="a0000001306" value="3">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		3.
+	</span>
+<p>
+How do we verify if the current vertex is optimal? 
+</p>
+</li>
+<li id="a0000001307" value="4">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		4.
+	</span>
+<p>
+How do we move from one vertex to the next? 
+</p>
+</li>
+</ol>
+</section><section class="section">
+<h2 id="a0000001308">4.2 Setup and assumptions</h2>
+<p>
+In this chapter we will use the standard matrix form, 
+</p>
+<div class="eqn" id="eq:simplex:std-form">
+<script type="math/tex; mode=display">\begin{equation}\label{eq:simplex:std-form} \begin{array}{l@{\quad }rcl} \min &  c x & & \\ \text{subject to} &  A x &  = &  b \\ &  x &  \ge &  0. \end{array}\tag{4.1}\end{equation}</script>
+</div>
+<p>
+ Here <script type="math/tex">A \in \mathbb {R}^{m \times n}, c, x \in \mathbb {R}^ n, b \in \mathbb {R}^ m</script> are the given coefficients that define the problem. As usual <script type="math/tex">m</script> is the number of constraints and <script type="math/tex">n</script> the number of variables. 
+</p>
+<p>
+We make three assumptions: 
+</p>
+<ol class="enumerate" id="a0000001309" style="list-style: none">
+<li id="a0000001310" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		1.
+	</span>
+<p>
+<script type="math/tex">b \ge 0</script>. If this is not true for some row <script type="math/tex">i</script> so that <script type="math/tex">b_ i < 0</script> we can multiply that row (both <script type="math/tex">b_ i</script> and <script type="math/tex">A_{ij}</script> for all columns <script type="math/tex">j</script>) by <script type="math/tex">-1</script>. 
+</p>
+</li>
+<li id="a0000001311" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		2.
+	</span>
+<p>
+<script type="math/tex">m < n</script>. That is, the number of constraints is less than the number of variables. If this is not true then the linear system defined by <script type="math/tex">A x = b</script> is either square or overdetermined, implying one or no solutions (the feasible region is a single point or empty). 
+</p>
+</li>
+<li id="a0000001312" value="3">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		3.
+	</span>
+<p>
+<script type="math/tex">A</script> has full row rank so its rows are linearly independent. 
+</p>
+</li>
+</ol>
+<p>
+The second assumption may seem to contradict earlier examples where there were more constraints than variables. However, in all those cases the constraints were <em>inequalities</em>. To transform to standard form we need to increase the number of variables (using slack or surplus variables). This will change all those problems to ones with <script type="math/tex">m < n</script>. 
+</p>
+<p>
+The use of the third assumption can be checked by assuming <script type="math/tex">A</script> is not of full row rank. In that case we can use row operations to transform the system to <script type="math/tex">A' x = b'</script>, where the matrix <script type="math/tex">A'</script> contains two rows <script type="math/tex">i</script> and <script type="math/tex">k</script> such that 
+</p>
+<div id="a0000001313">
+<div class="eqnarrayid" id="a0000001314"></div><div class="eqnarrayid" id="a0000001315"></div><div class="eqnarrayid" id="a0000001316"></div><script type="math/tex; mode=display">
+\begin{align}
+\tag{4.2} a’_ i x & = b’_ i, \\ 
+\tag{4.3}a’_ k x & = b’_ k, \\ 
+\tag{4.4}a’_ i & = a’_ k. 
+\end{align}
+</script>
+</div>
+<p>
+ There are then two cases. 
+</p>
+<ol class="enumerate" id="a0000001317" style="list-style: none">
+<li id="a0000001318" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		1.
+	</span>
+<p>
+<script type="math/tex">b'_ i = b'_ k</script>: the two constraints are identical and one can be dropped from the problem. 
+</p>
+</li>
+<li id="a0000001319" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		2.
+	</span>
+<p>
+<script type="math/tex">b'_ i \ne b'_ k</script>: the constraints are inconsistent and so the linear problem is infeasible. 
+</p>
+</li>
+</ol>
+<p>
+ So the third assumption stops us from considering infeasible problems and ensures constraints are not repeating information. 
+</p>
+</section><section class="section">
+<h2 id="a0000001320">4.3 Basic matrices</h2>
+<p>
+There is a general mathematical strategy of solving a complex problem by first solving a simple case, then transforming the general case to the simple one. This can seem indirect. The next few sections will build up a simple case for linear programs. 
+</p>
+<p>
+Let <script type="math/tex">B \subseteq \{  1, \dots , n \} </script> be a subset of the column indexes of <script type="math/tex">A</script>, with <script type="math/tex">|B| = m</script>. That is, <script type="math/tex">B</script> will identify a number of columns of <script type="math/tex">A</script>, corresponding to variables in the linear program, and the number of columns identified will match the number of constraints. 
+</p>
+<p>
+A <em>basic matrix</em> <script type="math/tex">A_ B</script> is the submatrix of <script type="math/tex">A</script> with <em>linearly independent columns</em> that is obtained by dropping every column with index not in <script type="math/tex">B</script>. If <script type="math/tex">A_ B</script> is a basic matrix then 
+</p>
+<ul class="itemize" id="a0000001321">
+<li id="a0000001322"> <p>
+<script type="math/tex">A_ B</script> is square; 
+</p>
+</li>
+<li id="a0000001323"> <p>
+<script type="math/tex">A_ B</script> has full row and column rank (by the assumptions); 
+</p>
+</li>
+<li id="a0000001324"> <p>
+<script type="math/tex">A_ B</script> is invertible, as it has full row and column rank. 
+</p>
+</li>
+</ul>
+<p>
+We can use this construction to split, of <em>partition</em>, the linear program. Let <script type="math/tex">N = \{ 1, \dots , n\}  \setminus B</script> be the complement of <script type="math/tex">B</script>. Let <script type="math/tex">c_ B, x_ B, A_ B</script> be the components (for the vectors <script type="math/tex">c, x</script>) or columns (for the matrix <script type="math/tex">A</script>) that are indexed by <script type="math/tex">B</script>, and <script type="math/tex">c_ N, x_ N, A_ N</script> be the components (for the vectors <script type="math/tex">c, x</script>) or columns (for the matrix <script type="math/tex">A</script>) that are indexed by <script type="math/tex">N</script>. Then we can use column operations on the linear program to re-order the vectors and matrices, writing 
+</p>
+<div id="a0000001325">
+<div class="eqnarrayid" id="a0000001326"></div><div class="eqnarrayid" id="a0000001327"></div><div class="eqnarrayid" id="a0000001328"></div><script type="math/tex; mode=display">
+\begin{align}
+\tag{4.5} c & = (c_ B, c_ N), \\ 
+\tag{4.6}A & = (A_ B, A_ N), \\ 
+\tag{4.7}x & = (x_ B, x_ N). 
+\end{align}
+</script>
+</div>
+<p>
+This means that our standard matrix form description of the linear program becomes 
+</p>
+<div class="eqn" id="a0000001329">
+<script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl} \min & \begin{pmatrix}  c_ B 
+
+&  c_ N 
+
+\end{pmatrix}\begin{pmatrix}  x_ B 
+
+\\ x_ N 
+
+\end{pmatrix}& & \\ \text{subject to} & \begin{pmatrix}  A_ B 
+
+&  A_ N 
+
+\end{pmatrix}\begin{pmatrix}  x_ B 
+
+\\ x_ N 
+
+\end{pmatrix}&  = &  b \\ & \begin{pmatrix}  x_ B 
+
+\\ x_ N 
+
+\end{pmatrix}&  \ge & \begin{pmatrix}  0 
+
+\\ 0 
+
+\end{pmatrix}. \end{array}\tag{4.8}\end{equation}</script>
+</div>
+<p>
+ Rewriting this by expanding out the matrix multiplications gives 
+</p>
+<div class="eqn" id="a0000001330">
+<script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl} \min &  c_ B x_ B + c_ N x_ N & & \\ \text{subject to} &  A_ B x_ B + A_ N x_ N &  = &  b \\ &  x_ B &  \ge &  0 \\ &  x_ N &  \ge &  0. \end{array}\tag{4.9}\end{equation}</script>
+</div>
+<p>
+Why have we made the problem more complicated? Because the basic matrix is invertible, we can <em>directly solve</em> for the optimal basic solution. We have 
+</p>
+<div id="a0000001331">
+<div class="eqnarrayid" id="a0000001332"></div><div class="eqnarrayid" id="a0000001333"></div><div class="eqnarrayid" id="a0000001334"></div><script type="math/tex; mode=display">
+\begin{align}
+\tag{4.10}& &  A x & = b \\ 
+\tag{4.11}\iff & &  A_ B x_ B + A_ N x_ N & = b \\ 
+\tag{4.12}\iff & &  x_ B & = A_ B^{-1} b - A_ B^{-1} A_ N x_ N. 
+\end{align}
+</script>
+</div>
+<p>
+ This allows us to write the objective function as 
+</p>
+<div id="a0000001335">
+<div class="eqnarrayid" id="a0000001336"></div><div class="eqnarrayid" id="a0000001337"></div><script type="math/tex; mode=display">
+\begin{align}
+\tag{4.13} c x & = c_ B x_ B + c_ N x_ N \\ 
+\tag{4.14}& = c_ B A_ B^{-1} b + \left( c_ N - c_ B A_ B^{-1} A_ N \right) x_ N. 
+\end{align}
+</script>
+</div>
+<p>
+ We can also add the term <script type="math/tex">(c_ B - c_ B A_ B^{-1} A_ B ) x_ B</script> to the objective function as it vanishes. This is useful later. 
+</p>
+<p>
+This defines the <em>basic form</em> of a standard form linear program: if <script type="math/tex">A_ B</script> is a basic matrix then the basic form is 
+</p>
+<div class="eqn" id="eq:simplex:basic-form">
+<script type="math/tex; mode=display">\begin{equation}\label{eq:simplex:basic-form} \begin{array}{l@{\quad }rcl} \min &  c_ B A_ B^{-1} b + \left( c_ N - c_ B A_ B^{-1} A_ N \right) x_ N & +&  \left( c_ B - c_ B A_ B^{-1} A_ B \right) x_ B \\ \text{subject to} &  x_ B + A_ B^{-1} A_ N x_ N &  = &  A_ B^{-1} b \\ &  x_ B &  \ge &  0 \\ &  x_ N &  \ge &  0. \end{array}\tag{4.15}\end{equation}</script>
+</div>
+</section><section class="section">
+<h2 id="a0000001338">4.4 Basic solutions</h2>
+<p>
+When the linear program is in basic form we call <script type="math/tex">x_ B</script> the <em>basic variables</em> and <script type="math/tex">x_ N</script> the <em>non-basic variables</em>. If there is a solution with <script type="math/tex">x_ N = 0</script> we call it a <em>basic solution</em>. A basic solution need not satisfy <script type="math/tex">x_ B \ge 0</script> and so it may not fall in the feasible region. If there is a solution <script type="math/tex">x = (x_ B, x_ N)</script> with <script type="math/tex">x_ N = 0</script> and also <script type="math/tex">x_ B \ge 0</script> then it is called <em>basic feasible</em>. 
+</p>
+<p>
+Note that the constraints automatically imply that if the solution is basic and so <script type="math/tex">x_ N = 0</script>, then 
+</p>
+<div class="eqn" id="a0000001339">
+<script type="math/tex; mode=display">\begin{equation}x_ B = A_ B^{-1} b.\tag{4.16}\end{equation}</script>
+</div>
+<p>
+ Basic solutions can be constructed by solving the linear system defined by the basic matrix. 
+</p>
+<section class="subsection">
+<h3 id="a0000001340">4.4.1 Basic solutions and vertices</h3>
+<p>
+There is a direct link between basic solutions and vertices. 
+</p>
+<p>
+<div class="thmwrapper thm_thmwrapper" id="a0000001341">
+<div class="thmheading thm_thmheading">
+<span class="thmcaption thm_thmcaption">
+    Theorem
+    </span>
+<span class="thmlabel thm_thmlabel">4.1</span>
+</div>
+<div class="thmcontent thm_thmcontent">
+<p>
+<script type="math/tex">x</script> is a basic feasible solution if, and only if, it is a vertex of the feasible region. 
+</p>
+</div>
+</div>
+</p>
+<div class="proof_wrapper" id="a0000001342">
+<div class="proof_heading">
+<span class="proof_caption">
+    Proof.
+    </span>
+</div>
+<div class="proof_content">
+<p>
+First prove the implication using contradiction. 
+</p>
+<p>
+Let <script type="math/tex">x</script> be a basic feasible solution with <script type="math/tex">x = (x_ B, x_ N)</script>. Assume, by contradiction, that <script type="math/tex">x</script> is not a vertex. As the feasible region is convex, if <script type="math/tex">x</script> is not a vertex then there are two distinct points <script type="math/tex">y, z</script>, both distinct from <script type="math/tex">x</script>, such that 
+</p>
+<div class="eqn" id="a0000001343">
+<script type="math/tex; mode=display">\begin{equation}x = \lambda y + (1 - \lambda ) z, \quad \lambda \in (0, 1).\tag{4.17}\end{equation}</script>
+</div>
+<p>
+ We can split both points in the same way as the basic feasible solution <script type="math/tex">x</script>, as <script type="math/tex">y = (y_ B, y_ N)</script> and <script type="math/tex">z = (z_ B, z_ N)</script>. This gives 
+</p>
+<div class="eqn" id="a0000001344">
+<script type="math/tex; mode=display">\begin{equation}x_ N = \lambda y_ N + (1 - \lambda ) z_ N, \quad \lambda \in (0, 1).\tag{4.18}\end{equation}</script>
+</div>
+<p>
+ As <script type="math/tex">x</script> is a basic feasible solution we have <script type="math/tex">x_ N = 0</script>. As <script type="math/tex">\lambda \in (0, 1)</script> we have <script type="math/tex">\lambda > 0</script> and <script type="math/tex">1 - \lambda > 0</script>. As <script type="math/tex">y</script> and <script type="math/tex">z</script> are feasible we have <script type="math/tex">y_ N, z_ N \ge 0</script>. This requires that <script type="math/tex">y_ N = 0 = z_ N</script>. 
+</p>
+<p>
+Similarly, as <script type="math/tex">y</script> and <script type="math/tex">z</script> are feasible, we also have that <script type="math/tex">A y = b</script> and <script type="math/tex">A z = b</script>. As all the non-basic pieces must vanish, we have that <script type="math/tex">A_ B x_ B = b = A_ B y_ B = A_ B z_ B</script>. Since <script type="math/tex">A_ B</script> is non-singular (as it is a basic matrix), any linear system defined by it has a unique solution. Therefore <script type="math/tex">x_ B = y_ B = z_ B</script>. As all the non-basic pieces vanish, we have that <script type="math/tex">x = y = z</script>. This contradicts the assumption that they are all distinct. Therefore a basic feasible solution is a vertex. 
+</p>
+<p>
+Next prove that a vertex is a basic feasible solution. Define <script type="math/tex">\hat{B} \subseteq \{ 1, \dots , n \} </script> as the set of indexes of the components of the vertex <script type="math/tex">x</script> which are positive, <script type="math/tex">\hat{B} = \{  i \colon x_ i > 0 \} </script>. Let <script type="math/tex">\hat{N}</script> be the complement, <script type="math/tex">\hat{N} = \{ 1, \dots , n \}  \setminus \hat{B}</script>. Write <script type="math/tex">x = (x_{\hat{B}}, x_{\hat{N}})</script> and re-write <script type="math/tex">A x = b</script> as 
+</p>
+<div class="eqn" id="a0000001345">
+<script type="math/tex; mode=display">\begin{equation}A_{\hat{B}} x_{\hat{B}} + A_{\hat{N}} x_{\hat{N}} = b.\tag{4.19}\end{equation}</script>
+</div>
+<p>
+ By construction <script type="math/tex">x_{\hat{N}} = 0</script> and so <script type="math/tex">A_{\hat{B}} x_{\hat{B}} = b</script>. 
+</p>
+<p>
+We need to show that <script type="math/tex">A_{\hat{B}}</script> is a basic matrix. We do this by contradiction. Assume the columns of <script type="math/tex">A_{\hat{B}}</script> are not linearly independent. Then there is some <script type="math/tex">y_{\hat{B}} \ne 0</script> such that <script type="math/tex">A_{\hat{B}} y_{\hat{B}} = 0</script>. By construction <script type="math/tex">x_{\hat{B}} > 0</script>. Therefore there is some constant <script type="math/tex">\epsilon > 0</script> such that 
+</p>
+<div class="eqn" id="a0000001346">
+<script type="math/tex; mode=display">\begin{equation}x_{\hat{B}} - \epsilon y_{\hat{B}} \ge 0 \;  \text{and} \;  x_{\hat{B}} + \epsilon y_{\hat{B}} \ge 0.\tag{4.20}\end{equation}</script>
+</div>
+<p>
+ Also by construction we have 
+</p>
+<div class="eqn" id="a0000001347">
+<script type="math/tex; mode=display">\begin{equation}A_{\hat{B}} \left( x_{\hat{B}} \pm \epsilon y_{\hat{B}} \right) = b.\tag{4.21}\end{equation}</script>
+</div>
+<p>
+ Thus the two distinct points <script type="math/tex">(x_{\hat{B}} \pm \epsilon y_{\hat{B}}, 0)</script> are feasible solutions to <script type="math/tex">A x = b</script>. Finally, note that 
+</p>
+<div class="eqn" id="a0000001348">
+<script type="math/tex; mode=display">\begin{equation}x = (x_{\hat{B}}, 0) = \frac{1}{2} \left( x_{\hat{B}} - \epsilon y_{\hat{B}} \right) + \frac{1}{2} \left( x_{\hat{B}} + \epsilon y_{\hat{B}} \right)\tag{4.22}\end{equation}</script>
+</div>
+<p>
+ This shows that <script type="math/tex">x</script> can be written as the convex combination of two distinct feasible points. This contradicts <script type="math/tex">x</script> being a vertex. Therefore the columns of <script type="math/tex">A_{\hat{B}}</script> are linearly independent. 
+</p>
+<p>
+To show that <script type="math/tex">A_{\hat{B}}</script> is basic we need to show that it is a square matrix. If <script type="math/tex">| \hat{B} | = m</script> then the proof is complete. If not, we can select more indices from <script type="math/tex">\hat{N}</script> so that the columns of the enlarged <script type="math/tex">A_{\hat{B}}</script> are linearly independent. This is possible as <script type="math/tex">A</script> has full row rank. The solution will then be degenerate - it will have basic variables with zero value - but remain basic. 
+</p>
+</div>
+</div>
+</section>
+</section><section class="section">
+<h2 id="a0000001349">4.5 Optimality</h2>
+<p>
+The previous sections have shown how to algebraically characterise a vertex (and we remember that the optimal solution must lie on some vertex): a vertex corresponds to a basic feasible solution. We now want to understand how to check if a vertex (or equivalently a basic feasible solution) is optimal, without enumerating all cases. 
+</p>
+<section class="subsection">
+<h3 id="a0000001350">4.5.1 Reduced costs</h3>
+<p>
+Remember that the linear program can be written in basic form, with some basic matrix <script type="math/tex">A_ B</script>, as 
+</p>
+<div class="eqn" id="a0000001351">
+<script type="math/tex; mode=display">\begin{equation}\tag{\ref{eq:simplex:basic-form}} \begin{array}{l@{\quad }rcl} \min &  c_ B A_ B^{-1} b + \left( c_ N - c_ B A_ B^{-1} A_ N \right) x_ N & +&  \left( c_ B - c_ B A_ B^{-1} A_ B \right) x_ B \\ \text{subject to} &  x_ B + A_ B^{-1} A_ N x_ N &  = &  A_ B^{-1} b \\ &  x_ B &  \ge &  0 \\ &  x_ N &  \ge &  0. \end{array}\tag{4.23}\end{equation}</script>
+</div>
+<p>
+ Certain terms are sufficiently important to get names, which are all types of <em>reduced costs</em>: 
+</p>
+<div id="a0000001352">
+<div class="eqnarrayid" id="a0000001353"></div><div class="eqnarrayid" id="a0000001354"></div><div class="eqnarrayid" id="a0000001355"></div><script type="math/tex; mode=display">
+\begin{align}
+\tag{4.24} \bar{c}_ N & = c_ N - c_ B A_ B^{-1} A_ N &  \text{reduced costs of non-basic variables}, \\ 
+\tag{4.25}\bar{c}_ B & = c_ B - c_ B A_ B^{-1} A_ B &  \text{reduced costs of basic variables}, \\ 
+\tag{4.26}\bar{c} & = c - c_ B A_ B^{-1} A &  \text{reduced costs (of the variables)}. 
+\end{align}
+</script>
+</div>
+<p>
+ Note that by construction <script type="math/tex">\bar{c}_ B = 0</script> automatically. We also note that <script type="math/tex">\bar{c} = (\bar{c}_ B, \bar{c}_ N)</script> in a similar fashion to the split of a solution into basic and non-basic pieces (this can be checked explicitly using the matrix form split). 
+</p>
+<p>
+In terms of the reduced costs the basic form linear program is 
+</p>
+<div class="eqn" id="eq:simplex:basic-reduced-form">
+<script type="math/tex; mode=display">\begin{equation}\label{eq:simplex:basic-reduced-form} \begin{array}{l@{\quad }rcl} \min &  c_ B A_ B^{-1} b + \bar{c}_ N x_ N + \bar{c}_ B x_ B & & \\ \text{subject to} &  x_ B + A_ B^{-1} A_ N x_ N &  = &  A_ B^{-1} b \\ &  x_ B &  \ge &  0 \\ &  x_ N &  \ge &  0. \end{array}\tag{4.27}\end{equation}</script>
+</div>
+<p>
+ This emphasises, as <script type="math/tex">\bar{c}_ B = 0</script>, that <script type="math/tex">x_ B</script> has no impact on the objective function. It also gives us an interpretation of the reduced costs of the non-basic variables: the component <script type="math/tex">(\bar{c}_ N)_ j</script> is equal to the change in the objective function value when changing the non-basic variable <script type="math/tex">(x_ N)_ j</script> by one unit. 
+</p>
+<p>
+Therefore, if we start from a basic feasible solution (where, by construction, <script type="math/tex">x_ N = 0</script>), we can improve (make smaller) the objective function by increasing any component <script type="math/tex">(x_ N)_ j</script> where the corresponding component of the reduced cost is negative, <script type="math/tex">(\bar{c}_ N)_ j < 0</script>. 
+</p>
+</section><section class="subsection">
+<h3 id="a0000001356">4.5.2 Optimality test</h3>
+<p>
+<div class="thmwrapper thm_thmwrapper" id="a0000001357">
+<div class="thmheading thm_thmheading">
+<span class="thmcaption thm_thmcaption">
+    Theorem
+    </span>
+<span class="thmlabel thm_thmlabel">5.1</span>
+</div>
+<div class="thmcontent thm_thmcontent">
+<p>
+If, given a basic feasible solution <script type="math/tex">x</script> with basis <script type="math/tex">B</script>, the reduced cost vector <script type="math/tex">\bar{c}</script> is non-negative, then <script type="math/tex">x</script> is optimal. 
+</p>
+</div>
+</div>
+</p>
+<div class="proof_wrapper" id="a0000001358">
+<div class="proof_heading">
+<span class="proof_caption">
+    Proof.
+    </span>
+</div>
+<div class="proof_content">
+<p>
+We show that, for any other feasible solution <script type="math/tex">y</script>, <script type="math/tex">c y \ge c x</script>. To do this define <script type="math/tex">d = y - x</script>. As 
+</p>
+<div id="a0000001359">
+<div class="eqnarrayid" id="a0000001360"></div><div class="eqnarrayid" id="a0000001361"></div><div class="eqnarrayid" id="a0000001362"></div><script type="math/tex; mode=display">
+\begin{align}
+\tag{4.28}& &  c y & \ge c x \\ 
+\tag{4.29}\iff & &  c (y - x) & \ge 0 \\ 
+\tag{4.30}\iff & &  c d \ge 0, 
+\end{align}
+</script>
+</div>
+<p>
+ we are looking to prove <script type="math/tex">c d \ge 0</script>. 
+</p>
+<p>
+Since <script type="math/tex">x</script> and <script type="math/tex">y</script> are both feasable solutions we have <script type="math/tex">A x = b</script> and <script type="math/tex">A y = b</script>, implying 
+</p>
+<div id="a0000001363">
+<div class="eqnarrayid" id="a0000001364"></div><div class="eqnarrayid" id="a0000001365"></div><div class="eqnarrayid" id="a0000001366"></div><script type="math/tex; mode=display">
+\begin{align}
+\tag{4.31} A d & = A(x - y) \\ 
+\tag{4.32}& = A x - A y \\ 
+\tag{4.33}& = 0. 
+\end{align}
+</script>
+</div>
+<p>
+ Writing <script type="math/tex">d = (d_ B, d_ N)</script> as usual we have 
+</p>
+<div id="a0000001367">
+<div class="eqnarrayid" id="a0000001368"></div><div class="eqnarrayid" id="a0000001369"></div><script type="math/tex; mode=display">
+\begin{align}
+\tag{4.34}& &  A d & = 0 \\ 
+\tag{4.35}\iff & &  A_ B d_ B + A_ N d_ N & = 0. 
+\end{align}
+</script>
+</div>
+<p>
+ The basic matrix <script type="math/tex">A_ B</script> is non-singular by construction, so 
+</p>
+<div class="eqn" id="a0000001370">
+<script type="math/tex; mode=display">\begin{equation}d_ B = - A_ B^{-1} A_ N d_ N.\tag{4.36}\end{equation}</script>
+</div>
+<p>
+ We can then evaluate 
+</p>
+<div id="a0000001371">
+<div class="eqnarrayid" id="a0000001372"></div><div class="eqnarrayid" id="a0000001373"></div><div class="eqnarrayid" id="a0000001374"></div><div class="eqnarrayid" id="a0000001375"></div><script type="math/tex; mode=display">
+\begin{align}
+\tag{4.37} c d & = c_ B d_ B + c_ N d_ N \\ 
+\tag{4.38}& = c_ B \left(- A_ B^{-1} A_ N d_ N\right) + c_ N d_ N \\ 
+\tag{4.39}& = \left( c_ N - c_ B A_ B^{-1} A_ N \right) d_ N \\ 
+\tag{4.40}& = \bar{c}_ N d_ N. 
+\end{align}
+</script>
+</div>
+<p>
+ By assumption we have <script type="math/tex">\bar{c}_ N \ge 0</script>. To show that <script type="math/tex">c d \ge 0</script> we need to show that <script type="math/tex">d_ N = y_ N - x_ N \ge 0</script>. 
+</p>
+<p>
+We note that <script type="math/tex">y</script> is a feasible solution which implies that <script type="math/tex">y_ N \ge 0</script>. Similarly <script type="math/tex">x</script> is a <em>basic</em> feasible solution which requires that <script type="math/tex">x_ N = 0</script>. Hence <script type="math/tex">d_ N \ge 0</script>, implying that <script type="math/tex">c d \ge 0</script> and hence <script type="math/tex">c y \ge c x</script>. Thus any feasible solution that is not <script type="math/tex">x</script> increases the value of the objective function, meaning <script type="math/tex">x</script> is optimal. 
+</p>
+</div>
+</div>
+</section>
+</section><section class="section">
+<h2 id="a0000001376">4.6 Moving between vertices</h2>
+<p>
+We now have both a characterisation of vertices (as basic feasible solutions) and a test of their optimality (the associated reduced cost vector is non-negative). If we can easily move from one vertex to another then we have (most of) the ingredients of an algorithm. 
+</p>
+<p>
+We know intuitively that a vertex is connected to a neighbouring vertex by an edge; a one dimensional boundary line of the feasible region. We know a vertex corresponds to a basic feasible solution. The basis <script type="math/tex">B</script> is the set of indices defining which variables are basic at a particular vertex, and has complement <script type="math/tex">N</script>. If we move along an edge we might expect to only be changing two variables (in an appropriate coordinate system the one dimensional line defining the edge lies in a two dimensional plane spanned by two basis vectors). Therefore, moving along an edge from one vertex to another corresponds to <em>swapping one non-basic variable with one basic variable</em>. This is equivalent to swapping one entry of <script type="math/tex">N</script> with one entry of <script type="math/tex">B</script>. 
+</p>
+<section class="subsection">
+<h3 id="a0000001377">4.6.1 Minimum ratio test</h3>
+<p>
+We go back to our linear program 
+</p>
+<div class="eqn" id="a0000001378">
+<script type="math/tex; mode=display">\begin{equation}\tag{\ref{eq:simplex:basic-reduced-form}} \begin{array}{l@{\quad }rcl} \min &  c_ B A_ B^{-1} b + \bar{c}_ N x_ N + \bar{c}_ B x_ B & & \\ \text{subject to} &  x_ B + A_ B^{-1} A_ N x_ N &  = &  A_ B^{-1} b \\ &  x_ B &  \ge &  0 \\ &  x_ N &  \ge &  0. \end{array}\tag{4.41}\end{equation}</script>
+</div>
+<p>
+ For compactness define <script type="math/tex">\bar{A} = A_ B^{-1} A_ N</script> and <script type="math/tex">\bar{b} = A_ B^{-1} b</script>, so the system of equations becomes 
+</p>
+<div class="eqn" id="a0000001379">
+<script type="math/tex; mode=display">\begin{equation}x_ B + \bar{A} x_ N = \bar{b}.\tag{4.42}\end{equation}</script>
+</div>
+<p>
+ For each single row <script type="math/tex">i \in \{  1, \dots , m \} </script> we can write this explicitly as 
+</p>
+<div class="eqn" id="a0000001380">
+<script type="math/tex; mode=display">\begin{equation}(x_ B)_ i + \sum _{j \in N} \bar{a}_{ij} (x_ N)_ j = \bar{b}_ i.\tag{4.43}\end{equation}</script>
+</div>
+<p>
+Now, if <script type="math/tex">x</script> corresponds to a vertex then it is a basic feasible solution so that <script type="math/tex">x_ N = 0</script>. We assume at this point that some component has negative reduced cost. That is, <script type="math/tex">\exists s \in N</script> such that <script type="math/tex">\bar{c}_ s < 0</script>. It must be the case that <script type="math/tex">s \in N</script> (if one exists) as <script type="math/tex">\bar{c}_ B = 0</script> automatically. Therefore we can improve the value of the objective function by increasing the value of <script type="math/tex">x_ s</script> (and hence removing <script type="math/tex">s</script> from <script type="math/tex">N</script>). The constraints then require that 
+</p>
+<div class="eqn" id="a0000001381">
+<script type="math/tex; mode=display">\begin{equation}(x_ B)_ i = \bar{b}_ i - \bar{a}_{is} x_ s.\tag{4.44}\end{equation}</script>
+</div>
+<p>
+ There is no sum as all terms in <script type="math/tex">N</script> are still basic, so <script type="math/tex">(x_ N)_ j = 0</script> for all <script type="math/tex">j \in N \setminus \{  s \} </script>. 
+</p>
+<p>
+We also need to retain all the positivity constraints <script type="math/tex">(x_ B)_ i \ge 0</script>. This requires that 
+</p>
+<div class="eqn" id="a0000001382">
+<script type="math/tex; mode=display">\begin{equation}\bar{b}_ i - \bar{a}_{is} x_ s \ge 0.\tag{4.45}\end{equation}</script>
+</div>
+<p>
+ If <script type="math/tex">\bar{a}_{is} \le 0</script> this cannot cause a problem: increasing <script type="math/tex">x_ s</script> can never violate this constraint. However, if <script type="math/tex">\bar{a}_{is} > 0</script> then this implies that we must impose 
+</p>
+<div class="eqn" id="a0000001383">
+<script type="math/tex; mode=display">\begin{equation}x_ s \le \frac{\bar{b}_ i}{\bar{a}_{is}} .\tag{4.46}\end{equation}</script>
+</div>
+<p>
+ As we need this condition to hold for all constraints, this means we must impose 
+</p>
+<div class="eqn" id="a0000001384">
+<script type="math/tex; mode=display">\begin{equation}x_ s \le \min _{i \in B \colon \bar{a}_{is} > 0} \frac{\bar{b}_ i}{\bar{a}_{is}} .\tag{4.47}\end{equation}</script>
+</div>
+<p>
+We use this to define the intermediate variable 
+</p>
+<div class="eqn" id="a0000001385">
+<script type="math/tex; mode=display">\begin{equation}\theta ^* = \min _{i \in B \colon \bar{a}_{is} > 0} \frac{\bar{b}_ i}{\bar{a}_{is}} .\tag{4.48}\end{equation}</script>
+</div>
+<p>
+ If <script type="math/tex">\theta ^* > 0</script> then setting <script type="math/tex">x_ s = \theta ^*</script> ensures that 
+</p>
+<ul class="itemize" id="a0000001386">
+<li id="a0000001387"> <p>
+<script type="math/tex">x_ s</script> becomes basic (so that <script type="math/tex">s</script> moves from <script type="math/tex">N</script> to <script type="math/tex">B</script>); 
+</p>
+</li>
+<li id="a0000001388"> <p>
+The value of every variable <script type="math/tex">(x_ B)_ r</script> with 
+</p>
+<div class="eqn" id="a0000001389">
+<script type="math/tex; mode=display">\begin{equation}r \in \operatorname*{argmin}_{i \in B \colon \bar{a}_{is} > 0} \frac{\bar{b}_ i}{\bar{a}_{is}}\tag{4.49}\end{equation}</script>
+</div>
+<p>
+ is decreased to zero. We can select any one of these variables to leave the basis (so that <script type="math/tex">r</script> moves from <script type="math/tex">B</script> to <script type="math/tex">N</script>), whilst the others remain (with value zero). 
+</p>
+</li>
+</ul>
+<p>
+This gives us a recipe for moving from vertex to vertex: find the value of <script type="math/tex">\theta ^*</script> for given index <script type="math/tex">s</script> and an index <script type="math/tex">r</script> that gives the minimum. Swap <script type="math/tex">s</script> and <script type="math/tex">r</script>. This is the <em>minimum ratio test</em>. 
+</p>
+<p>
+We restricted to the case where <script type="math/tex">\bar{a}_{is} > 0</script> when computing the minimum ratio as the other case does not violate the positivity constraint. However, we also need to consider the objective function. <div class="thmwrapper thm_thmwrapper" id="a0000001390">
+<div class="thmheading thm_thmheading">
+<span class="thmcaption thm_thmcaption">
+    Theorem
+    </span>
+<span class="thmlabel thm_thmlabel">6.1</span>
+</div>
+<div class="thmcontent thm_thmcontent">
+<p>
+If there is an index <script type="math/tex">s</script> such that <script type="math/tex">\bar{c}+s < 0</script> with <script type="math/tex">\bar{a}_{is} \le 0</script> for every row <script type="math/tex">i \in \{  1, \dots , m \} </script>, the linear program is unbounded. 
+</p>
+</div>
+</div>
+</p>
+<div class="proof_wrapper" id="a0000001391">
+<div class="proof_heading">
+<span class="proof_caption">
+    Proof.
+    </span>
+</div>
+<div class="proof_content">
+<p>
+Since <script type="math/tex">\bar{a}_{is} \le 0</script> for all <script type="math/tex">i</script>, <script type="math/tex">x_ s</script> can be increased indefinitely without violating any constraint. As <script type="math/tex">\bar{c}_ s < 0</script> the objective function can be improved indefinitely. 
+</p>
+</div>
+</div>
+</section><section class="subsection">
+<h3 id="a0000001392">4.6.2 Degeneracy</h3>
+<p>
+We have seen with the minimum ratio test that it possible to have a basic feasible solution with at least one basic variable having zero value. These solutions are called <em>degenerate</em>. 
+</p>
+<p>
+Degenerate solutions can cause problems as different degenerate basic feasible solutions can correspond to the same vertex. To show this, consider a basic feasible solution which is degenerate for some row, index <script type="math/tex">\hat{\imath }</script>, so that 
+</p>
+<div class="eqn" id="a0000001393">
+<script type="math/tex; mode=display">\begin{equation}(x_ B)_{\hat{\imath }} = \bar{b}_{\hat{\imath }} = 0.\tag{4.50}\end{equation}</script>
+</div>
+<p>
+ Assume we want to increase the value of the non-basic variable <script type="math/tex">x_ s</script>, <script type="math/tex">s \in N</script>, which starts from zero. As usual we need 
+</p>
+<div class="eqn" id="a0000001394">
+<script type="math/tex; mode=display">\begin{equation}\bar{b}_{\hat{\imath }} - \bar{a}_{\hat{\imath }s} x_ s \ge 0\tag{4.51}\end{equation}</script>
+</div>
+<p>
+ to ensure that <script type="math/tex">(x_ B)_{\hat{\imath }} \ge 0</script>. If the problem is not unbounded then the minimum ratio test gives 
+</p>
+<div class="eqn" id="a0000001395">
+<script type="math/tex; mode=display">\begin{equation}\theta ^* = \min _{i \in B \colon \bar{a}_{is} > 0} \frac{\bar{b}_ i}{\bar{a}_{is}} = 0,\tag{4.52}\end{equation}</script>
+</div>
+<p>
+ as <script type="math/tex">\hat{\imath } \in B</script> and <script type="math/tex">\bar{b}_{\hat{\imath }} = 0</script>. 
+</p>
+<p>
+Thus the non-basic variable <script type="math/tex">x_ s</script> enters the basis but remains at value zero, whilst the basic variable <script type="math/tex">(x_ B)_{\hat{\imath }}</script> leaves the basis and also remains at value zero. So, in spite of changing the basis <script type="math/tex">B</script> the values of <script type="math/tex">x</script> are unchanged. Therefore we have not actually moved to a different vertex. 
+</p>
+</section><section class="subsection">
+<h3 id="a0000001396">4.6.3 Cycling and Bland’s rule</h3>
+<p>
+If there is a degenerate solution the simplex method (using the minimum ratio test to move from one vertex to another) my enter an endless loop in which the the same basic and non-basic variables are swapped in and out of the basis forever. <script type="math/tex">B</script> and <script type="math/tex">N</script> would be changing but <script type="math/tex">x</script> would remain the same. 
+</p>
+<p>
+The problem arises as there are multiple choices of indexes to move out of the basis. We need a rule to choose which indexes to use, so that this rule ensures a cycle cannot occur. 
+</p>
+<p>
+<em>Bland’s rule</em> is the following method: 
+</p>
+<ul class="itemize" id="a0000001397">
+<li id="a0000001398"> <p>
+Among all <script type="math/tex">s \in \{  1, \dots , n \} </script> with <script type="math/tex">\bar{c}_ s < 0</script>, choose the smallest <script type="math/tex">s</script>. 
+</p>
+</li>
+<li id="a0000001399"> <p>
+Among all <script type="math/tex">r \in \operatorname*{argmin}_{i \in B \colon \bar{a}_{is} > 0} \frac{\bar{b}_ i}{\bar{a}_{is}}</script>, choose the smallest <script type="math/tex">r</script>. 
+</p>
+</li>
+</ul>
+<p>
+<div class="thmwrapper thm_thmwrapper" id="a0000001400">
+<div class="thmheading thm_thmheading">
+<span class="thmcaption thm_thmcaption">
+    Theorem
+    </span>
+<span class="thmlabel thm_thmlabel">6.2</span>
+</div>
+<div class="thmcontent thm_thmcontent">
+<p>
+With Bland’s rule, the simplex method converges in a finite number of iterations. 
+</p>
+</div>
+</div> We will not show the proof here - there is some discussion in Chvátal. 
+</p>
+</section>
+</section><section class="section">
+<h2 id="a0000001401">4.7 Summary</h2>
+<p>
+The simplex method with Bland’s rule starts from the linear program 
+</p>
+<div class="eqn" id="a0000001402">
+<script type="math/tex; mode=display">\begin{equation}\tag{\ref{eq:simplex:basic-reduced-form}} \begin{array}{l@{\quad }rcl} \min &  c_ B A_ B^{-1} b + \bar{c}_ N x_ N + \bar{c}_ B x_ B & & \\ \text{subject to} &  x_ B + \bar{A} x_ N &  = &  \bar{b} \\ &  x_ B &  \ge &  0 \\ &  x_ N &  \ge &  0. \end{array}\tag{4.53}\end{equation}</script>
+</div>
+<p>
+ Start the algorithm with a basis <script type="math/tex">B \subseteq \{  1, \dots , n \} </script> with a basic matrix <script type="math/tex">A_ B</script> yielding a basic feasible solution <script type="math/tex">x_ B = A_ B^{-1} b \ge 0</script> with <script type="math/tex">x_ N = 0</script>. 
+</p>
+<p>
+At each step of the simplex method, then 
+</p>
+<ol class="enumerate" id="a0000001403" style="list-style: none">
+<li id="a0000001404" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		1.
+	</span>
+<p>
+Compute 
+</p>
+<ul class="itemize" id="a0000001405">
+<li id="a0000001406"> <p>
+<script type="math/tex">A_ B^{-1}</script>, 
+</p>
+</li>
+<li id="a0000001407"> <p>
+<script type="math/tex">\bar{A} = A_ B^{-1} A_ N</script>, 
+</p>
+</li>
+<li id="a0000001408"> <p>
+<script type="math/tex">\bar{b} = A_ B^{-1} b</script>, 
+</p>
+</li>
+<li id="a0000001409"> <p>
+<script type="math/tex">\bar{c} = c - c_ B A_ B^{-1} A</script>. 
+</p>
+</li>
+</ul>
+</li>
+<li id="a0000001410" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		2.
+	</span>
+<p>
+If <script type="math/tex">| \{  s \in \{  1, \dots , n \}  \colon \bar{c}_ s < 0 \}  | > 0</script>, then 
+</p>
+<ul class="itemize" id="a0000001411">
+<li id="a0000001412"> <p>
+Pick the smallest index <script type="math/tex">s \in \{  1, \dots , n \} </script> with <script type="math/tex">\bar{c}_ s < 0</script>; 
+</p>
+</li>
+<li id="a0000001413"> <p>
+Pick the smallest index <script type="math/tex">r</script> where 
+</p>
+<div class="eqn" id="a0000001414">
+<script type="math/tex; mode=display">\begin{equation}r \in \operatorname*{argmin}_{i \in B \colon \bar{a}_{is} > 0} \frac{\bar{b}_ i}{\bar{a}_{is}}.\tag{4.54}\end{equation}</script>
+</div>
+<p>
+ If there is no such index then the problem is unbounded; 
+</p>
+</li>
+<li id="a0000001415"> <p>
+Let <script type="math/tex">B \to B \setminus \{  r \}  \cup \{  s \} </script>. 
+</p>
+</li>
+</ul>
+</li>
+<li id="a0000001416" value="3">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		3.
+	</span>
+<p>
+Else we have reached the optimal solution. Stop, returning <script type="math/tex">x = (x_ B, x_ N)</script> with <script type="math/tex">x_ B = A_ B^{-1}</script> and <script type="math/tex">x_ N = 0</script>. 
+</p>
+</li>
+</ol>
+</section><section class="section">
+<h2 id="a0000001417">4.8 Tableau form</h2>
+<p>
+The simplex method as summarised above is a working algorithm. However, it is not in the most efficient form to implement on a computer. In part this is because there are many different variables to compute and manipulate. In part it is because some of the calculations (such as the explicit matrix inversion of <script type="math/tex">A_ B</script>) are expensive. 
+</p>
+<p>
+We can build on a number of concepts from linear algebra to make the algorithm more efficiently implemented. 
+</p>
+<section class="subsection">
+<h3 id="a0000001418">4.8.1 The problem as a block matrix</h3>
+<p>
+We again start from the standard basic form linear program 
+</p>
+<div class="eqn" id="a0000001419">
+<script type="math/tex; mode=display">\begin{equation}\tag{\ref{eq:simplex:basic-reduced-form}} \begin{array}{l@{\quad }rcl} \min &  c_ B A_ B^{-1} b + \bar{c}_ N x_ N + \bar{c}_ B x_ B & & \\ \text{subject to} &  x_ B + \bar{A} x_ N &  = &  \bar{b} \\ &  x_ B &  \ge &  0 \\ &  x_ N &  \ge &  0. \end{array}\tag{4.55}\end{equation}</script>
+</div>
+<p>
+ We transfer the problem to the <em>tableau</em>
+</p>
+<div class="eqn" id="a0000001420">
+<script type="math/tex; mode=display">\begin{equation}\begin{array}{|c|c|c|} \hline -c_ B A_ B^{-1} b &  \bar{c}_ B &  \bar{c}_ N \\ \hline \bar{b} &  I &  \bar{A} \\ \end{array}\tag{4.56}\end{equation}</script>
+</div>
+<p>
+ The objective function is contained in the first row, row <script type="math/tex">0</script>. The value in position <script type="math/tex">(0, 0)</script> is the (negative of the) objective function value of the current basic solution. Rows <script type="math/tex">1</script> to <script type="math/tex">m</script> contain the constraints. The right hand side <script type="math/tex">\bar{b}</script> is in column <script type="math/tex">0</script>. The <script type="math/tex">m</script> rows and columns corresponding to the basic variables are those of the identity matrix <script type="math/tex">I</script>, as the constraints have been written as <script type="math/tex">x_ B + \bar{A} x_ N = \bar{b}</script> in this form of the linear program. Each row corresponds to a specific basic variable. 
+</p>
+<p>
+To complete the simplex method we need to apply Bland’s rule and the minimum ratio test and then swap our chosen basic and non-basic variables. 
+</p>
+<ol class="enumerate" id="a0000001421" style="list-style: none">
+<li id="a0000001422" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		1.
+	</span>
+<p>
+Look at row zero, all columns except column zero. This contains the reduced costs. If any entry is negative we are not optimal and must continue. 
+</p>
+</li>
+<li id="a0000001423" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		2.
+	</span>
+<p>
+Using Bland’s rule, set <script type="math/tex">s</script> as the index of the first column containing a negative reduced cost. 
+</p>
+</li>
+<li id="a0000001424" value="3">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		3.
+	</span>
+<p>
+Using Bland’s rule and the minimum rate test, set <script type="math/tex">r</script> as the row index with the minimum ratio, only considering rows <script type="math/tex">i</script> where <script type="math/tex">\bar{a}_{is} > 0</script>, and taking the ratio with <script type="math/tex">\bar{b}_ i</script>, which is in column zero of the tableau. 
+</p>
+</li>
+<li id="a0000001425" value="4">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		4.
+	</span>
+<p>
+Perform a <em>pivot</em> operation so that the tableau entry <script type="math/tex">\bar{a}_{rs} = 1</script> and every other entry in column <script type="math/tex">s</script>, corresponding to <script type="math/tex">\bar{a}_{is}</script>, is set to zero. This swaps the basis and non-basis entries. 
+</p>
+</li>
+</ol>
+</section><section class="subsection">
+<h3 id="a0000001426">4.8.2 Pivoting</h3>
+<p>
+Pivoting is the operation used in Gaussian Elimination to solve linear systems. It is highly efficient allowing us to move from one basic solution to another without explicitly constructing a lot of intermediate terms. Pivoting consists of two steps. Given a matrix <script type="math/tex">A</script> and a pair of row-column indexes <script type="math/tex">(r, s)</script> with <script type="math/tex">a_{rs} \ne 0</script>, the steps are 
+</p>
+<ol class="enumerate" id="a0000001427" style="list-style: none">
+<li id="a0000001428" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		1.
+	</span>
+<p>
+Divide the <script type="math/tex">r^{\text{th}}</script> row by <script type="math/tex">a_{rs}</script>; 
+</p>
+</li>
+<li id="a0000001429" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		2.
+	</span>
+<p>
+For each row with index <script type="math/tex">i \ne r</script>, subtract the <script type="math/tex">r^{\text{th}}</script> row multiplied by <script type="math/tex">a_{is}</script>
+</p>
+</li>
+</ol>
+<p>
+ The first step ensures that <script type="math/tex">a_{rs} \to 1</script>. The second step ensures that <script type="math/tex">a_{is} \to 0</script> for all <script type="math/tex">i \ne r</script>. 
+</p>
+<p>
+After the pivoting operation the column with index <script type="math/tex">s</script> becomes equal to a column of the identity matrix. That means that the variable <script type="math/tex">s</script> is now basic. Because the basic variables have columns that match those in the identity matrix, the pivoting operation will only change the contents of column <script type="math/tex">r</script>. Therefore the pivoting operation swaps <script type="math/tex">(x_ B)_ r</script> and <script type="math/tex">x_ s</script> as expected. 
+</p>
+</section>
+</section><section class="section">
+<h2 id="a0000001430">4.9 Two-phase simplex method</h2>
+<p>
+We now, via the simplex method in tableau form, have an efficient algorithm for solving a linear program. However, it is not a general algorithm: it requires that the linear program is in basic form, 
+</p>
+<div class="eqn" id="a0000001431">
+<script type="math/tex; mode=display">\begin{equation}\tag{\ref{eq:simplex:basic-reduced-form}} \begin{array}{l@{\quad }rcl} \min &  c_ B A_ B^{-1} b + \bar{c}_ N x_ N + \bar{c}_ B x_ B & & \\ \text{subject to} &  x_ B + \bar{A} x_ N &  = &  \bar{b} \\ &  x_ B &  \ge &  0 \\ &  x_ N &  \ge &  0, \end{array}\tag{4.57}\end{equation}</script>
+</div>
+<p>
+ before it can start. We need to work out how to get a linear program in, for example, the standard form 
+</p>
+<div class="eqn" id="a0000001432">
+<script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl} \min &  c x & & \\ \text{subject to} &  A x &  = &  b \\ &  x &  \ge &  0, \end{array}\tag{4.58}\end{equation}</script>
+</div>
+<p>
+ into the basic form before we can use the simplex method. 
+</p>
+<p>
+The two-phase simplex method is the approach to use. This 
+</p>
+<ol class="enumerate" id="a0000001433" style="list-style: none">
+<li id="a0000001434" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		1.
+	</span>
+<p>
+iteratively constructs <em>some</em> basic feasible solution and from it the associated basic feasible tableau; 
+</p>
+</li>
+<li id="a0000001435" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		2.
+	</span>
+<p>
+applies the tableau simplex method to find the optimal solution. 
+</p>
+</li>
+</ol>
+<p>
+ An important part of the first phase is that, by constructing <em>some</em> basic feasible solution it shows that the problem is feasible. If the first phase fails it means the problem is infeasible. 
+</p>
+<section class="subsection">
+<h3 id="a0000001436">4.9.1 Auxiliary problem</h3>
+<p>
+Define the vector <script type="math/tex">e = (1, \dots , 1)</script> with <script type="math/tex">m</script> components. Starting from the linear program in standard form, 
+</p>
+<div class="eqn" id="a0000001437">
+<script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl} \min &  c x & & \\ \text{subject to} &  A x &  = &  b \\ &  x &  \ge &  0, \end{array}\tag{4.59}\end{equation}</script>
+</div>
+<p>
+ define the <em>auxiliary problem</em>
+</p>
+<div class="eqn" id="a0000001438">
+<script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl} \min &  e y & & \\ \text{subject to} &  A x + I y &  = &  b \\ &  x &  \ge &  0, \\ &  y &  \ge &  0. \end{array}\tag{4.60}\end{equation}</script>
+</div>
+<p>
+ Note that <script type="math/tex">e y = \|  y \| _1</script> as <script type="math/tex">y \ge 0</script>. This problem is trying to find the “smallest” <script type="math/tex">y</script> (in the one norm) such that <script type="math/tex">A x + I y = b</script>. 
+</p>
+<p>
+<div class="thmwrapper thm_thmwrapper" id="a0000001439">
+<div class="thmheading thm_thmheading">
+<span class="thmcaption thm_thmcaption">
+    Theorem
+    </span>
+<span class="thmlabel thm_thmlabel">9.1</span>
+</div>
+<div class="thmcontent thm_thmcontent">
+<p>
+The auxiliary problem admits an optimal solution <script type="math/tex">(x^*, y^*)</script> with <script type="math/tex">e y^* = 0</script> if, and only if, the original problem is feasible. 
+</p>
+</div>
+</div>
+</p>
+<div class="proof_wrapper" id="a0000001440">
+<div class="proof_heading">
+<span class="proof_caption">
+    Proof.
+    </span>
+</div>
+<div class="proof_content">
+<p>
+For the implication, work by contradiction. Assume there is an optimal solution <script type="math/tex">(x^*, y^*)</script> with <script type="math/tex">e y^* > 0</script>. Therefore there is no solution <script type="math/tex">(x', y')</script> with <script type="math/tex">x' \ge 0</script> and <script type="math/tex">y' = 0</script> satisfying <script type="math/tex">A x' + I y' = A x' = b</script>. This is because any such solution would have objective function value <script type="math/tex">e y' = 0 < e y^*</script>, which is a contradiction. 
+</p>
+<p>
+Finally, if the original problem admits a feasible solution <script type="math/tex">x'</script> then the pair <script type="math/tex">(x', y')</script> with <script type="math/tex">y' = 0</script> is feasible for the auxiliary problem. It is also optimal as the objective function <script type="math/tex">e y' = 0</script>, which is the minimum as <script type="math/tex"> e, y' \ge 0</script>. 
+</p>
+</div>
+</div>
+<p>
+ Note that it immediately follows from the proof that if the auxiliary problem does not admit an optimal solution the linear program is infeasible. 
+</p>
+</section><section class="subsection">
+<h3 id="a0000001441">4.9.2 Phase 1 tableau</h3>
+<p>
+The auxiliary problem as constructed automatically contains an identity matrix corresponding to the columns associated with <script type="math/tex">y</script>. It immediately follows that <script type="math/tex">y</script> is basic. Therefore we can immediately write down the tableau 
+</p>
+<div class="eqn" id="a0000001442">
+<script type="math/tex; mode=display">\begin{equation}\begin{array}{|c|c|c|} \hline 0 &  0 &  1, \dots , 1 \\ \hline b &  A &  I \\ \end{array}\tag{4.61}\end{equation}</script>
+</div>
+<p>
+ This is, however, not completely in the tableau form that we require for the simplex method. The issue is the reduced cost vector of the basic variables. To start the simplex method we need the reduced costs to be <script type="math/tex">0</script>: here they are <script type="math/tex">1</script>. This has been caused by expressing the objective function in terms of the basic variables. We instead want to express the objective function solely in terms of the non-basic variables. To do this, use 
+</p>
+<div id="a0000001443">
+<div class="eqnarrayid" id="a0000001444"></div><div class="eqnarrayid" id="a0000001445"></div><div class="eqnarrayid" id="a0000001446"></div><script type="math/tex; mode=display">
+\begin{align}
+\tag{4.62}& &  A x + I y & = b \\ 
+\tag{4.63}\implies & &  y & = b - A x \\ 
+\tag{4.64}\implies & &  e y & = e b - e A x. 
+\end{align}
+</script>
+</div>
+<p>
+ By re-writing the objective function in this form we have the tableau 
+</p>
+<div class="eqn" id="a0000001447">
+<script type="math/tex; mode=display">\begin{equation}\begin{array}{|c|c|c|} \hline -e b &  -e A &  0, \dots , 0 \\ \hline b &  A &  I \\ \end{array}\tag{4.65}\end{equation}</script>
+</div>
+<p>
+ We can now apply the simplex method to the auxiliary problem. 
+</p>
+</section><section class="subsection">
+<h3 id="a0000001448">4.9.3 Outline of two-phase method</h3>
+<p>
+Assume we are starting from the standard form of the linear program, 
+</p>
+<div class="eqn" id="a0000001449">
+<script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl} \min &  c x & & \\ \text{subject to} &  A x &  = &  b \\ &  x &  \ge &  0, \end{array}\tag{4.66}\end{equation}</script>
+</div>
+<p>
+ construct the tableau for the auxiliary problem as 
+</p>
+<div class="eqn" id="a0000001450">
+<script type="math/tex; mode=display">\begin{equation}\begin{array}{|c|c|c|} \hline -e b &  -e A &  0, \dots , 0 \\ \hline b &  A &  I \\ \end{array}\tag{4.67}\end{equation}</script>
+</div>
+<p>
+Then 
+</p>
+<ol class="enumerate" id="a0000001451" style="list-style: none">
+<li id="a0000001452" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		1.
+	</span>
+<p>
+Solve the auxiliary problem. Let <script type="math/tex">(x^*, y^*)</script> be an optimal solution. 
+</p>
+<ol class="enumerate" id="a0000001453" style="list-style: none">
+<li id="a0000001454" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(a)
+	</span>
+<p>
+If the optimal objective function value <script type="math/tex">e y^* > 0</script> the original problem is infeasible. Stop at this point. 
+</p>
+</li>
+<li id="a0000001455" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		(b)
+	</span>
+<p>
+If <script type="math/tex">e y^* = 0</script> then 
+</p>
+<ol class="enumerate" id="a0000001456" style="list-style: none">
+<li id="a0000001457" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		i.
+	</span>
+<p>
+If there is some basic variable <script type="math/tex">y_ i</script> with zero value the auxiliary problem is degenerate. Each such basic <script type="math/tex">y_ i</script> can be made non-basic by pivoting on any non-zero component of its row. 
+</p>
+</li>
+<li id="a0000001458" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		ii.
+	</span>
+<p>
+Delete all columns corresponding to the basic <script type="math/tex">y_ i</script> variables. 
+</p>
+</li>
+<li id="a0000001459" value="3">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		iii.
+	</span>
+<p>
+Re-write the objective function in terms of the non-basic <script type="math/tex">x_ j</script> variables. 
+</p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li id="a0000001460" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		2.
+	</span>
+<p>
+Rewrite the objective function of the original problem in terms of only the non-basic variables. 
+</p>
+</li>
+<li id="a0000001461" value="3">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		3.
+	</span>
+<p>
+Write the basic feasible tableau for the original problem using the basic solution found in phase 1. Apply the simplex method to it. 
+</p>
+</li>
+</ol>
+<p>
+The issue of degeneracy in the auxiliary problem needs more explanation. If there is a degeneracy for <script type="math/tex">y_ i</script> then the tableau is in the form 
+</p>
+<div class="eqn" id="a0000001462">
+<script type="math/tex; mode=display">\begin{equation}\begin{array}{c|c|c|c|}& &  x_1 \dots x_ j \dots x_ n &  y_1 \dots y_ i \dots y_ m \\ \hline &  0 &  \dots &  \dots \\ \hline & & &  0 \\ & & &  \vdots \\ y_ i &  0 &  \bar{a}_{i1} \dots \bar{a}_{ij} \dots \bar{a}_{in} &  1 \\ & & &  \vdots \\ & & &  0 \\ \end{array}\tag{4.68}\end{equation}</script>
+</div>
+<p>
+ Here we have added information about which rows and columns correspond to which variables at the top and left. This is the tableau once the simplex method has been run on the auxiliary problem, and the objective function is zero meaning a feasible solution exists. 
+</p>
+<p>
+We can pivot on any <script type="math/tex">\bar{a}_{ij}</script> that is non-zero. The reason is that the value changes by <script type="math/tex">\bar{b_ i} / \bar{a}_{ij}</script>, and <script type="math/tex">\bar{b}_ i = 0</script>. This pivot operation ensures that <script type="math/tex">x_ j</script> enters the basis with value zero, and <script type="math/tex">y_ i</script> leaves the basis (also with value zero). 
+</p>
+<p>
+If, however, there is no entry <script type="math/tex">\bar{a}_{ij}</script> that is non-zero, then the matrix <script type="math/tex">A</script> is not full rank. In this case the entire row (and hence variable <script type="math/tex">y_ i</script>) can be removed from the tableau immediately. 
+</p>
+</section>
+</section><section class="section">
+<h2 id="a0000001463">4.10 Efficiency and complexity</h2>
+<p>
+Our aim in deriving the simplex method was to avoid enumerating all the vertexes of the feasible region. The reason is that enumerating all vertexes has computational complexity <script type="math/tex">\mathcal{O}(n!)</script> which is not tractable. 
+</p>
+<p>
+The simplex method works by finding one vertex and then moving to neighbouring vertexes one at a time. If the simplex method has to visit every vertex to find the optimal solution then it also has complexity <script type="math/tex">\mathcal{O}(n!)</script>. Unfortunately there are “pathological” cases where this can occur. 
+</p>
+<p>
+<div class="thmwrapper thm_thmwrapper" id="a0000001464">
+<div class="thmheading thm_thmheading">
+<span class="thmcaption thm_thmcaption">
+    Theorem
+    </span>
+<span class="thmlabel thm_thmlabel">10.1</span>
+<span class="thmtitle thm_thmtitle">(Klee and Minty, 1972)</span>
+</div>
+<div class="thmcontent thm_thmcontent">
+<p>
+ The linear program 
+</p>
+<div class="eqn" id="a0000001465">
+<script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl@{\quad }l} \max &  \sum _{j=1}^ n 10^{n-j} x_ j & & & \\ \text{subject to} &  \left( 2 \sum _{j=1}^{i-1} 10^{i-j} x_ j \right) + x_ i &  \le &  100^{i-1}, &  i \in \{  1, \dots , n \}  \\ &  x_ j &  \ge &  0, &  j \in \{  1, \dots , n \} , \end{array}\tag{4.69}\end{equation}</script>
+</div>
+<p>
+ requires <script type="math/tex">2^ n - 1</script> iterations to solve with the simplex method. 
+</p>
+</div>
+</div>
+</p>
+<p>
+Therefore the worst case analysis of the simplex method shows that it is intractable. <em>However</em>, when applied to “generic” problems in practical use the simplex method is (nearly always) fast. Empirically the computational complexity of the average case is <script type="math/tex">\mathcal{O}(m \log (n))</script>.  
+</p>
+</section>
+
+            </div>
+        </div>
+    </div>
+
+        </main>
+		
+		<footer class="text-muted">
+	<hr>
+	<div class="container">
+		<div class="float-right">
+			<ul style="list-style: none">
+			<li><a href="#">Back to top</a></li>
+			
+			
+			<li><a href="../../../notes/notes_by_chapter/simplex_method/simplex_method.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;Download as PDF</a></li>
+			
+			</ul>
+		</div>
+		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
+		<p>This page last generated: 2022-01-20</p>
+	</div>
+</footer>
+		
+    </body>
+</html>

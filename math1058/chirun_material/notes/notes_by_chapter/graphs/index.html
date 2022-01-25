@@ -1,0 +1,786 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        
+            <meta charset="utf-8">
+            <meta name="robots" content="noindex">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="author" content="Ian Hawke" />
+            <meta name="date" content="2022-01-20" />
+        
+
+        <title>Graphs | Operational Research and Mathematical Computing</title>
+
+        
+    
+    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../../../static/styles.css">
+            <link rel="stylesheet" id="customiseCSS" href="../../../static/light.css">
+            
+            
+        
+    <link rel="stylesheet" id="customiseCodeCSS" href="../../../static/pygmentize.light.css">
+    <link rel="stylesheet" href="../../../static/codemirror-5.26.0/lib/codemirror.css">
+    <link rel="stylesheet" href="../../../static/boole.css">
+    <link rel="stylesheet" href="../../../static/numbasEmbed.css">
+
+    <link rel="stylesheet" href="../../../static/bootstrap-toc.css?v=3">
+    <link rel="stylesheet" href="../../../static/print.css">
+
+
+        
+    
+    
+            <script defer src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <script defer src="../../../static/mathjax_config.js"></script>
+            <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+            <script defer src="../../../static/customisation.js"></script>
+            <script defer src="../../../static/mp4.js"></script>
+            
+            
+        
+    <script defer src="../../../static/jquery.flexibleArea.js"></script>
+    <script defer src="../../../static/spin.min.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/lib/codemirror.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/octave/octave.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/python/python.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/r/r.js"></script>
+    <script defer src="../../../static/boole.js"></script>
+    <script defer src="../../../static/numbasEmbed.js"></script>
+
+    <script defer src="../../../static/bootstrap-toc.js"></script>
+
+    </head>
+    <body data-spy="scroll" data-target="#chapterTOC" data-offset="50">
+        
+<div class="collapse" id="navbarToggleCustomise">
+	<div class="bg-secondary text-white p-3">
+		<form onsubmit="return false;" id="navbarCustomise">
+			<div class="form-row">
+				<label>Theme Customisation</label>
+				<div id="themeSelector" class="form-group col-md-12">
+					<button class="btn btn-dark mr-2" value="dark">Dark</button>
+					<button class="btn btn-pastel mr-2" value="pastel">Pastel</button>
+					<button class="btn btn-light mr-4" value="light">Light</button>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label style="display: block" for="font-scale">Font size (<span id="font-size-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="font-scale" min="50" max="600" value="100">
+					<button id="font-scale-reset" class="btn btn-sm">Reset</button>
+				</div>
+				<div class="form-group col-md-4">
+					<label style="display: block" for="p-space">Spacing (<span id="p-space-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="p-space" min="0" max="600" value="100">
+					<button id="p-space-reset" class="btn btn-sm">Reset</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<nav aria-label="breadcrumb">
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="../../../index.html">Operational Research and Mathematical Computing</a>
+		</li>
+		
+		<li class="breadcrumb-item">
+			<a href="../../../notes/notes_by_chapter/index.html">Notes by chapter</a>
+		</li>
+		
+		<li class="breadcrumb-item active">
+			Graphs
+		</li>
+		<li class="ml-auto">
+			<button class="navbar-toggler p0" type="button" data-toggle="collapse" data-target="#navbarToggleCustomise" aria-controls="navbarToggleCustomise" aria-expanded="false" aria-label="Toggle customisations panel">
+				<i class="fa fa-cog" aria-hidden="true" title="Toggle customisations panel"></i> <span class="sr-only">Toggle customisations panel</span>
+			</button>
+		</li>
+	</ul>
+</nav>
+
+
+        <header>
+            
+            
+        </header>
+        <main>
+            
+    <div class="container mt-3">
+        <div class="row">
+            
+            <div id="sidebar" class="col-md-3">
+                <nav class="mb-3" id="chapterTOC" data-toggle="toc">
+                    <ul class="nav navbar-nav">
+                        
+                        
+                        
+                        <li><a id="pdf-link" class="nav-link" href="../../../notes/notes_by_chapter/graphs/graphs.pdf" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" title="Download as PDF"></i>&nbsp;Download as PDF</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+            <div id="content" class="col-md-9"> 
+            
+            
+<!-- Latex Chapter/Part -->
+<h1 id="chap:graphs">Graphs</h1>
+<section class="section">
+<h2 id="a0000001480">6.1 Introduction</h2>
+<p>
+The idea of a graph (not in the figure or plotting sense, but as a structure) was introduced in the <script type="math/tex">18^{\text{th}}</script> century to ask questions about paths. The idea now appears everywhere, but transport maps remain one of the key examples. A graph will abstract away all of the details and only show destinations (usually as points) and connecting paths between destinations (usually as lines), together with minimal extra information (such as the distance along a path, or the cost to travel along it). 
+</p>
+<p>
+The mathematical structure can be used to answer a number of detailed questions, but one key question is fundamental. Given a graph with paths linked to distances, what is the shortest distance between two given points? 
+</p>
+</section><section class="section">
+<h2 id="a0000001481">6.2 Directed graphs</h2>
+<p>
+The mathematical definition of a <em>(directed) graph</em> is the ordered pair <script type="math/tex">G = (V, A)</script>, where the sets are 
+</p>
+<ul class="itemize" id="a0000001482">
+<li id="a0000001483"> <p>
+the set of <em>vertices</em> (or <em>nodes</em>) <script type="math/tex">V</script>, with <script type="math/tex">|V| = n</script>; 
+</p>
+</li>
+<li id="a0000001484"> <p>
+a set of ordered pairs <script type="math/tex">A \subseteq V \times V</script>, excluding self loops, called <em>arcs</em>, with <script type="math/tex">|A| = m</script>. 
+</p>
+</li>
+</ul>
+<p>
+ Given an arc <script type="math/tex">(i, j) \in A</script>, the node <script type="math/tex">i</script> is called the <em>tail</em> and node <script type="math/tex">j</script> the <em>head</em>. In a directed graph, travel is only possible from the tail to the head (so imagine drawing an arrow on the arc). 
+</p>
+<p>
+We have not explicitly said what space the nodes are drawn from. In general it does not matter. When giving mathematical examples it is typical to use the natural numbers, so <script type="math/tex">V = \{  1, \dots , n \} </script>, and the node number labels the destination. When thinking about concrete transport examples, it can make more sense to use a name or an alphanumeric code. A simple directed graph using integers is illustrated in figure <a class="ref" href="../../../notes/course_notes/index.html#fig:graph:intro">6.1</a>. 
+</p>
+<figure id="fig:graph:intro">
+<p>
+<img alt="A simple directed graph. The vertices or nodes are the circles, here labelled by natural numbers. The edges are illustrated as arrows." src="../../../notes/notes_by_chapter/graphs/images/img-0002.png" style="width:469.755pt"/>
+</p>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">6.1</span>
+<span class="caption_text">A simple directed graph. The vertices or nodes are the circles, here labelled by natural numbers. The edges are illustrated as arrows.</span>
+</figcaption>
+</figure>
+<section class="subsection">
+<h3 id="a0000001485">6.2.1 Definitions</h3>
+<p>
+We call a node <script type="math/tex">j \in V</script> <em>adjacent</em> to another node <script type="math/tex">i \in V</script> if <script type="math/tex">(i, j) \in A</script>. As, by construction, there are no self-loops allowed, a node cannot be adjacent to itself. 
+</p>
+<p>
+We call an arc <script type="math/tex">a \in A</script> <em>incident</em> to a node <script type="math/tex">j \in V</script> if <script type="math/tex">a = (i, j)</script> for some node <script type="math/tex">i \in V</script>. So an arc is incident on a node if there is some other node in the graph that uses the arc to move to the node. 
+</p>
+<p>
+We call a directed graph <script type="math/tex">G</script> <em>complete</em> if <script type="math/tex">A</script> contains an arc for each distinct pair of nodes, 
+</p>
+<div class="eqn" id="a0000001486">
+<script type="math/tex; mode=display">\begin{equation}A = \left\{  (i, j) \colon \forall i \in V, j \in V, i \ne j \right\} .\tag{6.1}\end{equation}</script>
+</div>
+<p>
+ If the graph is complete we can immediately travel from any node to any other node using just one arc. 
+</p>
+</section><section class="subsection">
+<h3 id="a0000001487">6.2.2 Number of arcs</h3>
+<p>
+<div class="thmwrapper thm_thmwrapper" id="a0000001488">
+<div class="thmheading thm_thmheading">
+<span class="thmcaption thm_thmcaption">
+    Theorem
+    </span>
+<span class="thmlabel thm_thmlabel">2.1</span>
+</div>
+<div class="thmcontent thm_thmcontent">
+<p>
+In any directed graph, <script type="math/tex">m \le n (n - 1)</script>, with <script type="math/tex">m = n (n - 1)</script> in the complete case. 
+</p>
+</div>
+</div>
+</p>
+<div class="proof_wrapper" id="a0000001489">
+<div class="proof_heading">
+<span class="proof_caption">
+    Proof.
+    </span>
+</div>
+<div class="proof_content">
+<p>
+In the complete case, each of the <script type="math/tex">n</script> nodes is adjacent to all of the other <script type="math/tex">(n - 1)</script> nodes: we have <script type="math/tex">m = n (n - 1)</script> arcs. 
+</p>
+<p>
+If the graph is not complete, some arcs are missing. Hence <script type="math/tex">m \le n (n - 1)</script>. 
+</p>
+</div>
+</div>
+<p>
+We called a directed graph <em>sparse</em> if <script type="math/tex">m \ll n (n - 1)</script>. 
+</p>
+</section><section class="subsection">
+<h3 id="a0000001490">6.2.3 Paths</h3>
+<p>
+If the graph is not complete then traversing a single arc may not be enough to get us from our start point to the desired end point. Instead we may have to traverse multiple arcs. 
+</p>
+<p>
+We define a <em>path</em> as a sequence 
+</p>
+<div class="eqn" id="a0000001491">
+<script type="math/tex; mode=display">\begin{equation}P = (i_1, i_2), (i_2, i_3), \dots , (i_{k-1}, i_ k), (i_ k, i_{k+1})\tag{6.2}\end{equation}</script>
+</div>
+<p>
+ of <script type="math/tex">k \ge 1</script> consecutive and distinct arcs. Note that the head of each arc in the sequence matches the tail of the next arc, making the arcs consecutive. 
+</p>
+<p>
+Given a path, we say that a node <script type="math/tex">v \in V</script> is <em>connected</em> to a node <script type="math/tex">w \in V</script> if there is a path <script type="math/tex">P</script> with <script type="math/tex">i_1 = v</script> and <script type="math/tex">i_{k+1} = w</script>. 
+</p>
+<p>
+Finally, we say that a graph is <em>connected</em> if every pair of its nodes is connected. This is illustrated in figure <a class="ref" href="../../../notes/course_notes/index.html#fig:graph:connected">6.2</a>. 
+</p>
+<figure id="fig:graph:connected">
+<p>
+<img alt="The graph on the left is connected but not complete. The graph on the right is not connected, as no edge goes in to node 1." src="../../../notes/notes_by_chapter/graphs/images/img-0004.png" style="width:469.755pt"/>
+</p>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">6.2</span>
+<span class="caption_text">The graph on the left is connected but not complete. The graph on the right is not connected, as no edge goes in to node <script type="math/tex">1</script>.</span>
+</figcaption>
+</figure>
+</section><section class="subsection">
+<h3 id="a0000001492">6.2.4 Cuts</h3>
+<p>
+So far everything has been set either at the level of individual nodes or at the level of the whole graph. For building algorithms that allow us to analyse paths as they move through the graph, we need to look at subsets of the graph, and how we might move into or out of those subsets. 
+</p>
+<p>
+Let <script type="math/tex">S \subseteq V</script> be some part of graph (by looking at some suset of the vertices). We define the <em>forward cut induced by <script type="math/tex">S</script></em> to be the set of arcs “leaving <script type="math/tex">S</script>”. That is 
+</p>
+<div class="eqn" id="a0000001493">
+<script type="math/tex; mode=display">\begin{equation}\delta ^+(S) = \left\{  (i, j) \in A \colon i \in S \text{ and } j \in V \setminus S \right\} .\tag{6.3}\end{equation}</script>
+</div>
+<p>
+ Similarly, we define the <em>backward cut induced by <script type="math/tex">S</script></em> to be the set of arcs “entering <script type="math/tex">S</script>”. That is 
+</p>
+<div class="eqn" id="a0000001494">
+<script type="math/tex; mode=display">\begin{equation}\delta ^+(S) = \left\{  (i, j) \in A \colon i \in V \setminus S \text{ and } j \in S \right\} .\tag{6.4}\end{equation}</script>
+</div>
+<p>
+ These are illustrated in figure <a class="ref" href="../../../notes/course_notes/index.html#fig:graph:cuts">6.3</a>. 
+</p>
+<figure id="fig:graph:cuts">
+<p>
+<img alt="The set S={4, 5} is shaded in blue. Its forward cut δ+(S) is every edge (highlighted in blue in the left plot) that leaves S. Its backward cut δ-(S) is every edge (highlighted in green in the right plot) that enters S." src="../../../notes/notes_by_chapter/graphs/images/img-0006.png" style="width:469.755pt"/>
+</p>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">6.3</span>
+<span class="caption_text">The set <script type="math/tex">S=\{ 4, 5\} </script> is shaded in blue. Its forward cut <script type="math/tex">\delta ^+(S)</script> is every edge (highlighted in blue in the left plot) that leaves <script type="math/tex">S</script>. Its backward cut <script type="math/tex">\delta ^-(S)</script> is every edge (highlighted in green in the right plot) that enters <script type="math/tex">S</script>.</span>
+</figcaption>
+</figure>
+<p>
+Of course, we can apply these definitions to the case to single nodes, by setting <script type="math/tex">S = \{  i \} </script> for any node <script type="math/tex">i \in V</script>. These have special names: the <em>forward star</em> of the node <script type="math/tex">i</script> is <script type="math/tex">\delta ^+(i)</script>, whilst the <em>backward star</em> of the node <script type="math/tex">i</script> is <script type="math/tex">\delta ^-(i)</script>. The sizes of these sets also have special names, with the <em>out-degree</em> of node <script type="math/tex">i</script> being <script type="math/tex">|\delta ^+(i)|</script>, and the <em>in-degree</em> of node <script type="math/tex">i</script> being <script type="math/tex">|\delta ^-(i)|</script>. 
+</p>
+</section><section class="subsection">
+<h3 id="a0000001495">6.2.5 Representations</h3>
+<p>
+So far we have represented the graph using the vertices <script type="math/tex">V</script> and the arcs <script type="math/tex">A</script>. However, as in the linear programming case, there are multiple ways of representing the problem, each of which has its own advantages. 
+</p>
+<p>
+For simplicity these additional representations will assume that <script type="math/tex">V</script> is given by consecutive integers labelling the nodes. Depending on choice these can either start from <script type="math/tex">1</script> (so <script type="math/tex">V = \{  1, \dots , n \} </script>) or <script type="math/tex">0</script> (so <script type="math/tex">V = \{  0, \dots , n-1 \} </script>). The latter is more natural for a Python implementation, but the former more natural in many mathematical texts. With this assumption we only need to consider different representations of the arcs, <script type="math/tex">A</script>. 
+</p>
+<section class="subsubsection">
+<h4 id="a0000001496">Adjacency list</h4>
+<p>
+In the <em>adjacency list</em> approach we construct a list <script type="math/tex">L</script> of size <script type="math/tex">n</script>. Each component of the list <script type="math/tex">L_ i</script> contains a list of size at most <script type="math/tex">n-1</script>, containing the indices of the nodes adjacent to <script type="math/tex">i</script>. In terms of the stars, we have 
+</p>
+<div class="eqn" id="a0000001497">
+<script type="math/tex; mode=display">\begin{equation}L_ i = \{  j \colon (i, j) \in \delta ^*(i) \} .\tag{6.5}\end{equation}</script>
+</div>
+<p>
+ The advantage of the adjacency list approach is that it is easy to use to navigate the graph. The component <script type="math/tex">L_ i</script> gives every node that is reachable from node <script type="math/tex">i</script> using a single arc. 
+</p>
+</section><section class="subsubsection">
+<h4 id="a0000001498">Adjacency matrix</h4>
+<p>
+In the <em>adjacency matrix</em> approach we construct a single matrix of size <script type="math/tex">n \times n</script> that contains only zeros and ones. The matrix entry is one if the associated arc exists and zero otherwise. Explicitly, 
+</p>
+<div class="eqn" id="a0000001499">
+<script type="math/tex; mode=display">\begin{equation}m_{ij} = \begin{cases}  1 &  \text{if } (i, j) \in A \\ 0 &  \text{otherwise} \end{cases}.\tag{6.6}\end{equation}</script>
+</div>
+<p>
+ The adjacency matrix is less efficient for navigating the graph, but more efficient if we need to check if an arc exists. 
+</p>
+</section>
+</section>
+</section><section class="section">
+<h2 id="a0000001500">6.3 Shortest paths</h2>
+<p>
+Now that we have the terminology to represent and discuss graphs, we want to turn the word problem “Find the shortest path connecting two points” into something precise. 
+</p>
+<section class="subsection">
+<h3 id="a0000001501">6.3.1 The problem</h3>
+<p>
+The <em>shortest path problem</em> is as follows. Given a directed graph <script type="math/tex">G = (V, A)</script> with a (non-negative) length function <script type="math/tex">l \colon A \to \mathbb {R}^+</script> and two nodes <script type="math/tex">s, t \in V</script>, find an <script type="math/tex">s-t</script> path of shortest total length. 
+</p>
+<p>
+The length function tells us the distance along any one single arc: equivalently, the distance between any two nodes or vertices when moving in a specific direction. This need not be the same in both directions (hence the notion of a <em>directed</em> graph): think about one-way streets, for example. As a notational shortcut we will often talk about lengths of paths in addition to lengths of arcs. As a path is a sequence of consecutive arcs without loops and the length function is non-negative, it follows that 
+</p>
+<div class="eqn" id="a0000001502">
+<script type="math/tex; mode=display">\begin{equation}l(P) = \sum _{a \in P} l(a).\tag{6.7}\end{equation}</script>
+</div>
+<p>
+ If the arc <script type="math/tex">a = (i, j)</script> then sometimes the notation <script type="math/tex">l_{ij} = l((i, j)) = l(a)</script> is used, and so we can write 
+</p>
+<div class="eqn" id="a0000001503">
+<script type="math/tex; mode=display">\begin{equation}l(P) = \sum _{(i, j) \in P} l_{ij}.\tag{6.8}\end{equation}</script>
+</div>
+<p>
+The two nodes in the problem are the <em>source</em> node <script type="math/tex">s</script> from which we start and the <em>target</em> node <script type="math/tex">t</script> that we are trying to get to. 
+</p>
+<p>
+There is a generalisation of the problem which is, in fact, no harder to solve. The <em>single source shortest path problem</em> is as follows. Given a directed graph <script type="math/tex">G = (V, A)</script> with a (non-negative) length function <script type="math/tex">l \colon A \to \mathbb {R}^+</script> and one node <script type="math/tex">s \in V</script>, find a path between <script type="math/tex">s</script> and every other node in <script type="math/tex">V \setminus \{  s \} </script> of shortest total length. 
+</p>
+<p>
+We note that it only makes sense to solve the shortest path problem if the source and target nodes are connected. Therefore it only makes sense to solve the single source shortest path problem if the entire graph is connected. Throughout the rest of this chapter we will assume that the graph is connected. 
+</p>
+<figure id="fig:graph:shortest:intro">
+<p>
+<img alt="A graph with its shortest path. Each node is annotated with its label (a natural number here). Each edge (i, j) is annotated with its length lij. The bold lines show the shortest 0-5 path, P=(0,3),(3,2),(2,5)." src="../../../notes/notes_by_chapter/graphs/images/img-0008.png" style="width:469.755pt"/>
+</p>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">6.4</span>
+<span class="caption_text">A graph with its shortest path. Each node is annotated with its label (a natural number here). Each edge <script type="math/tex">(i, j)</script> is annotated with its length <script type="math/tex">l_{ij}</script>. The bold lines show the shortest <script type="math/tex">0-5</script> path, <script type="math/tex">P=(0,3),(3,2),(2,5)</script>.</span>
+</figcaption>
+</figure>
+</section><section class="subsection">
+<h3 id="a0000001504">6.3.2 Subpath optimality</h3>
+<p>
+The key result in finding the shortest path is intuitively stated as “shortest paths are composed of shortest paths”. This seems either obvious or trivial. The precise result is <div class="thmwrapper thm_thmwrapper" id="a0000001505">
+<div class="thmheading thm_thmheading">
+<span class="thmcaption thm_thmcaption">
+    Theorem
+    </span>
+<span class="thmlabel thm_thmlabel">3.1</span>
+<span class="thmtitle thm_thmtitle">(Subpath Optimality)</span>
+</div>
+<div class="thmcontent thm_thmcontent">
+<p>
+ Let <script type="math/tex">P = (i_1, i_2), (i_2, i_3), \dots , (i_{k-1}, i_ k)</script> be an <script type="math/tex">i_1-i_ k</script> shortest path. For any pair of nodes <script type="math/tex">i_ u, i_ v</script> visited by <script type="math/tex">P</script>, with <script type="math/tex">u < v</script>, the subpath <script type="math/tex">S</script> from <script type="math/tex">i_ u</script> to <script type="math/tex">i_ v</script> is a shortest <script type="math/tex">i_ u-i_ v</script> path. 
+</p>
+</div>
+</div>
+</p>
+<div class="proof_wrapper" id="a0000001506">
+<div class="proof_heading">
+<span class="proof_caption">
+    Proof.
+    </span>
+</div>
+<div class="proof_content">
+<p>
+This follows by contradiction. if <script type="math/tex">S</script> is not a shortest <script type="math/tex">i_ u-i_ v</script> path then there is another <script type="math/tex">i_ u-i_ v</script> path <script type="math/tex">S'</script> that is strictly shorter than <script type="math/tex">S</script>, <script type="math/tex">l(S') < l(S)</script>. We can therefore define a new <script type="math/tex">i_1-i_ k</script> path <script type="math/tex">P'</script> by using the “shortcut” <script type="math/tex">S'</script>, 
+</p>
+<div class="eqn" id="a0000001507">
+<script type="math/tex; mode=display">\begin{equation}P' = P \setminus S \cup S'.\tag{6.9}\end{equation}</script>
+</div>
+<p>
+ From the positivity of the length function it immediately follows that 
+</p>
+<div class="eqn" id="a0000001508">
+<script type="math/tex; mode=display">\begin{equation}l(P') = l(P) - l(S) + l(S') < l(P).\tag{6.10}\end{equation}</script>
+</div>
+<p>
+ Therefore <script type="math/tex">P</script> was not the shortest path, and we have a contradiction. 
+</p>
+</div>
+</div>
+<p>
+ The original characterisation can now be more precisely stated as “every subpath of a shortest path is itself a shortest path”. 
+</p>
+</section>
+</section><section class="section">
+<h2 id="a0000001509">6.4 Dijkstra’s theorem</h2>
+<p>
+This is the central result that allow us to build an algorithm to solve the shortest path problem. <div class="thmwrapper thm_thmwrapper" id="a0000001510">
+<div class="thmheading thm_thmheading">
+<span class="thmcaption thm_thmcaption">
+    Theorem
+    </span>
+<span class="thmlabel thm_thmlabel">4.1</span>
+<span class="thmtitle thm_thmtitle">(Dijkstra’s theorem)</span>
+</div>
+<div class="thmcontent thm_thmcontent">
+<p>
+ Let <script type="math/tex">S \subseteq V</script> be a subset of the vertices that contains the source <script type="math/tex">s</script>. Let <script type="math/tex">Y(i)</script>, for all <script type="math/tex">i \in V</script>, be the length of the corresponding shortest <script type="math/tex">s-i</script> path. Let 
+</p>
+<div class="eqn" id="a0000001511">
+<script type="math/tex; mode=display">\begin{equation}(v, w) \in \operatorname*{argmin}_{(i, j) \in \delta ^+(S)} \left[ Y(i) + l_{ij} \right].\tag{6.11}\end{equation}</script>
+</div>
+<p>
+ Then <script type="math/tex">\varphi = P_{(s-v)} \cup \{  (v, w) \} </script> is a shortest <script type="math/tex">s-w</script> path, where <script type="math/tex">P_{(s-v)}</script> is a shortest <script type="math/tex">s-v</script> path. 
+</p>
+</div>
+</div>
+</p>
+<div class="proof_wrapper" id="a0000001512">
+<div class="proof_heading">
+<span class="proof_caption">
+    Proof.
+    </span>
+</div>
+<div class="proof_content">
+<p>
+We show that any other path <script type="math/tex">\pi </script> to any other vertex <script type="math/tex">u \in V \setminus S</script> has either the same length as <script type="math/tex">\varphi </script> or a strictly larger one. 
+</p>
+<p>
+First, decompose the path <script type="math/tex">\pi </script> as 
+</p>
+<div class="eqn" id="a0000001513">
+<script type="math/tex; mode=display">\begin{equation}\pi = \pi _1 \cup \{  (i, j) \}  \cup \pi _2,\tag{6.12}\end{equation}</script>
+</div>
+<p>
+ where <script type="math/tex">i \in S</script>, <script type="math/tex">j \in V \setminus S</script>, <script type="math/tex">\pi _1</script> is a shortest <script type="math/tex">s-i</script> path, <script type="math/tex">(i, j) \in \delta ^+(S)</script>, and <script type="math/tex">\pi _2</script> is a shortest <script type="math/tex">j-u</script> path. This is always possible due to the subpath optimality theorem. It allows us to concentrate on the arc <script type="math/tex">(i, j)</script> that leaves the set <script type="math/tex">S</script>. It follows that 
+</p>
+<div class="eqn" id="a0000001514">
+<script type="math/tex; mode=display">\begin{equation}l(\pi ) = l(\pi _1) + l_{ij} + l(\pi _2).\tag{6.13}\end{equation}</script>
+</div>
+<p>
+Since we have chosen <script type="math/tex">(v, w) \in \delta ^+(S)</script> to minimise <script type="math/tex">Y(i) + l_{ij}</script> it must be true that 
+</p>
+<div class="eqn" id="a0000001515">
+<script type="math/tex; mode=display">\begin{equation}l(\pi _1) + l_{ij} \ge Y(v) + l_{vw}.\tag{6.14}\end{equation}</script>
+</div>
+<p>
+ Since <script type="math/tex">l(\pi _2) \ge 0</script> it follows that 
+</p>
+<div id="a0000001516">
+<div class="eqnarrayid" id="a0000001517"></div><div class="eqnarrayid" id="a0000001518"></div><div class="eqnarrayid" id="a0000001519"></div><div class="eqnarrayid" id="a0000001520"></div><script type="math/tex; mode=display">
+\begin{align}
+\tag{6.15} l(\pi ) & = l(\pi _1) + l_{ij} + l(\pi _2) \\ 
+\tag{6.16}& \ge l(\pi _1) + l_{ij} \\ 
+\tag{6.17}& \ge Y(v) + l_{vw} \\ 
+\tag{6.18}& = l(\varphi ). 
+\end{align}
+</script>
+</div>
+<p>
+ Therefore <script type="math/tex">l(\pi ) \ge l(\varphi )</script> for all such paths, and therefore <script type="math/tex">\varphi </script> is a shortest <script type="math/tex">s-w</script> path. 
+</p>
+</div>
+</div>
+<figure id="fig:graph:dijkstra:proof">
+<p>
+<img alt="The key idea used in proving Dijkstra’s theorem. We want to show that the shortest path from s to w is given by the shortest s-v path (already found an in S, by assumption) linked to the v-w edge. This must be true if the length of this path is no greater than the length of any other path connecting any point not in S to s." src="../../../notes/notes_by_chapter/graphs/images/img-0010.png" style="width:469.755pt"/>
+</p>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">6.5</span>
+<span class="caption_text">The key idea used in proving Dijkstra’s theorem. We want to show that the shortest path from <script type="math/tex">s</script> to <script type="math/tex">w</script> is given by the shortest <script type="math/tex">s-v</script> path (already found an in <script type="math/tex">S</script>, by assumption) linked to the <script type="math/tex">v-w</script> edge. This must be true if the length of this path is no greater than the length of any other path connecting any point not in <script type="math/tex">S</script> to <script type="math/tex">s</script>.</span>
+</figcaption>
+</figure>
+<section class="subsection">
+<h3 id="a0000001521">6.4.1 Dijkstra’s algorithm</h3>
+<p>
+We can now use subpath optimality and iteratively apply Dijkstra’s theorem to give us an algorithm. Starting from the source node, we keep adding nodes to the set of nodes we have “seen” so that we have the shortest path in that set. 
+</p>
+<p>
+Being more precise, but still sketching in words. We want to find the shortest path from the source node <script type="math/tex">s</script> to every other node in the graph. We construct a set <script type="math/tex">S \subseteq V</script>, starting from <script type="math/tex">S = \{  s \} </script>, of all the nodes we have so far “seen”. We also need two <em>labels</em>. The first is <script type="math/tex">Y(i)</script>, the shortest path length from <script type="math/tex">s</script> to <script type="math/tex">i</script>. The second is <script type="math/tex">P(i)</script>, the predecessor of <script type="math/tex">i</script> in the <script type="math/tex">s-i</script> path. At the start <script type="math/tex">Y(s) = 0</script> and <script type="math/tex">P(s)</script> is undefined (as it makes no sense). 
+</p>
+<p>
+We then iterate as long as <script type="math/tex">|S| < n</script>, so that <script type="math/tex">V \setminus S</script> is not empty. For each iteration we 
+</p>
+<ol class="enumerate" id="a0000001522" style="list-style: none">
+<li id="a0000001523" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		1.
+	</span>
+<p>
+find <script type="math/tex">(v, w) \in \delta ^+(s)</script> that minimises <script type="math/tex">Y(v) + l_{vw}</script>; 
+</p>
+</li>
+<li id="a0000001524" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		2.
+	</span>
+<p>
+set <script type="math/tex">Y(w) = Y(v) + l_{vw}</script>; 
+</p>
+</li>
+<li id="a0000001525" value="3">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		3.
+	</span>
+<p>
+set <script type="math/tex">P(w) = v</script>; 
+</p>
+</li>
+<li id="a0000001526" value="4">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		4.
+	</span>
+<p>
+set <script type="math/tex">S \to S \cup \{  w \} </script>. 
+</p>
+</li>
+</ol>
+<p>
+ Note that, for every node <script type="math/tex">i</script>, the shortest path length from the source <script type="math/tex">Y(i)</script> adn the predecessor node on the shortest path <script type="math/tex">P(i)</script> are set only once, when the final shortest arc to <script type="math/tex">i</script> is found and <script type="math/tex">i</script> is added to <script type="math/tex">S</script>. 
+</p>
+<p>
+This solves the <em>single source</em> shortest path problem. To solve the shortest path problem when the target <script type="math/tex">t</script> is specified we can check to see if <script type="math/tex">w = t</script> and, if so, stop at the end of that iteration. This makes no difference to the code complexity as, in the worst case that has to be considered, <script type="math/tex">t</script> will be the last node added to <script type="math/tex">S</script>. 
+</p>
+</section><section class="subsection">
+<h3 id="a0000001527">6.4.2 Representing the length</h3>
+<p>
+We have seen multiple methods for representing the topology of the graph, each of which has their individual advantages. As Dijkstra’s algorithm depends crucially on minimising a length and looking up <script type="math/tex">l_{vw}</script>, it is important to have an easy and efficient way of representing the arc lengths. 
+</p>
+<section class="subsubsection">
+<h4 id="a0000001528">Adjacency list</h4>
+<p>
+As in the graph case, we construct a list <script type="math/tex">L_ l</script> of size <script type="math/tex">n</script>, where each component <script type="math/tex">i</script> contains another list of size at most <script type="math/tex">n-1</script>, containing the <em>lengths</em> of all arcs <script type="math/tex">(i, j) \in \delta ^+(i)</script>, in order of index <script type="math/tex">j</script>. 
+</p>
+<p>
+This representation needs the adjacency list <script type="math/tex">L</script> as well in order to give the index <script type="math/tex">j</script>. Assuming that <script type="math/tex">V</script> is a set of consecutive integers of size <script type="math/tex">n</script>, the whole graph (including arc length information) is given once <script type="math/tex">L, L_ l</script> are given. The size of the graph <script type="math/tex">n</script> is implicit in the length of the lists. 
+</p>
+</section><section class="subsubsection">
+<h4 id="a0000001529">Adjacency matrix</h4>
+<p>
+Again this is similar to the graph case. We construct a matrix <script type="math/tex">M_ l \in \left\{  \mathbb {R} \cup \{  \infty \}  \right\} ^{n \times n}</script> where, for each <script type="math/tex">i, j \in V</script>, the component <script type="math/tex">(m_ l)_{ij}</script> is the length of the <script type="math/tex">(i, j)</script> arc, or is infinity if no such arc exists. 
+</p>
+<p>
+This representation implicitly stores all the information about the graph, including its topology, so the adjacency matrix <script type="math/tex">M</script> is not needed. 
+</p>
+</section>
+</section><section class="subsection">
+<h3 id="a0000001530">6.4.3 Implementing Dijkstra’s algorithm</h3>
+<p>
+The adjacency list form is the most efficient for checking whether an arc exists. The adjacency matrix form is the most efficient for checking what the length of the arc is. We assume that we are not limited by the amount of memory that each form takes, so we will use both forms in our implementation. In the code snippet below, <span class="ttfamily">L</span> is the adjacency list representing the topology of the graph and <span class="ttfamily">Ml</span> is the adjacency matrix representation of the length function. 
+</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span>S = [s]
+<span class="linenos"> 2</span>Y = np.empty(n)  # Value does not matter
+<span class="linenos"> 3</span>P = np.empty(n)  # Only size matters
+<span class="linenos"> 4</span>Y[s] = 0
+<span class="linenos"> 5</span>while len(S) &lt; n:
+<span class="linenos"> 6</span>    min_Y = np.inf
+<span class="linenos"> 7</span>    v, w = -1, -1
+<span class="linenos"> 8</span>    for i in S:
+<span class="linenos"> 9</span>        if j in S:  # Only consider arcs leaving S
+<span class="linenos">10</span>            continue
+<span class="linenos">11</span>        if min_Y &gt; Y[i] + Ml[i][j]:
+<span class="linenos">12</span>            min_Y = Y[i] + Ml[i][j]
+<span class="linenos">13</span>            v, w = i, j
+<span class="linenos">14</span>    Y[w] = Y[v] + Ml[v][w]
+<span class="linenos">15</span>    P[w] = v
+<span class="linenos">16</span>    S.append(w)
+</pre></div>
+</section><section class="subsection">
+<h3 id="a0000001531">6.4.4 Complexity</h3>
+<p>
+To compute the complexity we consider the order of each line or block of the code above. We have 
+</p>
+<ul class="itemize" id="a0000001532">
+<li id="a0000001533"> <p>
+Line 1 writes a single value, taking <script type="math/tex">\mathcal{O}(1)</script>; 
+</p>
+</li>
+<li id="a0000001534"> <p>
+Lines 2-3 write <script type="math/tex">n</script> values, taking <script type="math/tex">\mathcal{O}(n)</script> each; 
+</p>
+</li>
+<li id="a0000001535"> <p>
+Line 4 writes a single value, taking <script type="math/tex">\mathcal{O}(1)</script>; 
+</p>
+</li>
+<li id="a0000001536"> <p>
+Line 5 loops over the whole graph, so is executed <script type="math/tex">n</script> times. Each block takes: 
+</p>
+<ul class="itemize" id="a0000001537">
+<li id="a0000001538"> <p>
+Lines 6-7 write single values, taking <script type="math/tex">\mathcal{O}(1)</script>; 
+</p>
+</li>
+<li id="a0000001539"> <p>
+Lines 8-10 correspond to looping over <script type="math/tex">\delta ^+(S)</script> in its entirety. This is executed <script type="math/tex">m</script> times, where <script type="math/tex">m</script> is the out degree of <script type="math/tex">S</script>. Earlier results show <script type="math/tex">m \le n (n - 1)</script>. In the worst case <script type="math/tex">m = \mathcal{O}(n^2)</script>. Each block takes: 
+</p>
+<ul class="itemize" id="a0000001540">
+<li id="a0000001541"> <p>
+Lines 11-13 are single comparisons or single writes, each taking <script type="math/tex">\mathcal{O}(1)</script>; 
+</p>
+</li>
+</ul>
+<p>
+ Therefore this inner loop has complexity <script type="math/tex">\mathcal{O}(m) = \mathcal{O}(n^2)</script>. 
+</p>
+</li>
+<li id="a0000001542"> <p>
+Lines 14-16 are single writes, each taking <script type="math/tex">\mathcal{O}(1)</script>; 
+</p>
+</li>
+</ul>
+<p>
+ Therefore this outer loop has complexity <script type="math/tex">\mathcal{O}(n) \mathcal{O}(n^2) = \mathcal{O}(n^3)</script>. 
+</p>
+</li>
+</ul>
+<p>
+ Therefore the whole algorithm has complexity <script type="math/tex">\mathcal{O}(n^3)</script>. 
+</p>
+<p>
+This is considerably faster than the complexity of the simplex algorithm (in its worst case). 
+</p>
+</section><section class="subsection">
+<h3 id="a0000001543">6.4.5 A faster method</h3>
+<p>
+Finding the shortest path is a sufficiently important practical problem that we want to find an algorithm faster than <script type="math/tex">\mathcal{O}(n^3)</script>. This can be done. The key issue is that by repeatedly scanning <script type="math/tex">\delta ^*(S)</script> we are recomputing particular shortest path lengths multiple times. With additional structures we can reduce that computation. 
+</p>
+<p>
+We need the following observation: 
+</p>
+<div id="a0000001544">
+<div class="eqnarrayid" id="a0000001545"></div><div class="eqnarrayid" id="a0000001546"></div><script type="math/tex; mode=display">
+\begin{align}
+\tag{6.19}& &  (v, w) & \in \operatorname*{argmin}_{(i, j) \in \delta ^+(S)} \left\{  Y(i) + l_{ij} \right\}  \\ 
+\tag{6.20}\iff & &  (v, w)& \in \operatorname*{argmin}_{j \in V \setminus S} \left\{  \operatorname*{argmin}_{(i, j) \in \delta ^-(S) \colon i \in S} \left\{  Y(i) + l_{ij} \right\}  \right\} . 
+\end{align}
+</script>
+</div>
+<p>
+ The point here is that if we already know, for given node <script type="math/tex">j \in V \setminus S</script>, which arc minimises <script type="math/tex">Y(i) + l_{ij}</script>, then we can find the arc <script type="math/tex">(v, w)</script> giving the shortest path by looking at the <script type="math/tex">\mathcal{O}(n)</script> vertices <script type="math/tex">j \in V \setminus S</script>, rather than looking at the <script type="math/tex">\mathcal{O}(m) = \mathcal{O}(n^2)</script> arcs in <script type="math/tex">\delta ^+(S)</script>. 
+</p>
+<figure id="fig:graph:dijkstra:n2:idea">
+<p>
+<img alt="The key idea used in constructing the faster O(n2) version of Dijkstra’s algorithm. When trying to add to the set S (blue shaded region) we must compute the shortest path and predecessors to the points not in S, given the current S (red edges). By storing these values and updating them when needed, instead of re-computing every iteration, we save lots of computation." src="../../../notes/notes_by_chapter/graphs/images/img-0012.png" style="width:469.755pt"/>
+</p>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">6.6</span>
+<span class="caption_text">The key idea used in constructing the faster <script type="math/tex">\mathcal{O}(n^2)</script> version of Dijkstra’s algorithm. When trying to add to the set <script type="math/tex">S</script> (blue shaded region) we must compute the shortest path and predecessors to the points not in <script type="math/tex">S</script>, given the current <script type="math/tex">S</script> (red edges). By storing these values and updating them when needed, instead of re-computing every iteration, we save lots of computation.</span>
+</figcaption>
+</figure>
+<p>
+To use this observation to construct an algorithm, we change the way we think about the labels <script type="math/tex">Y(j), P(j)</script>, representing the length of the shortest <script type="math/tex">s-j</script> path and the predecessor index in that shortest path respectively. In the original algorithm they were set <em>only when</em> <script type="math/tex">j</script> enters <script type="math/tex">S</script>. Until that point they had no value, or their value was meaningless. 
+</p>
+<p>
+In the new algorithm, the meaning of the labels will remain the same <em>as long as</em> <script type="math/tex">j \in S</script>. If <script type="math/tex">j \in V \setminus S</script> then the value of <script type="math/tex">Y(j)</script> and <script type="math/tex">P(j)</script> will represent the length and predecessor index of the shortest <script type="math/tex">s-j</script> path found <em>up to the current iteration</em>. At each iteration we will check <em>and update</em> the value of the labels when a new vertex enters <script type="math/tex">S</script>. 
+</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span>S = [s]
+<span class="linenos"> 2</span>Y = np.copy(Ml[s][:])  # These values now matter
+<span class="linenos"> 3</span>P = np.zeros(n)        # These also now matter
+<span class="linenos"> 4</span>Y[s] = 0
+<span class="linenos"> 5</span>while len(S) &lt; n:
+<span class="linenos"> 6</span>    min_Y = np.inf
+<span class="linenos"> 7</span>    w = -1             # Note: only w, not v
+<span class="linenos"> 8</span>    for j in V:        # Note: change here
+<span class="linenos"> 9</span>        if j in S:  # Only consider arcs leaving S
+<span class="linenos">10</span>            continue
+<span class="linenos">11</span>        if min_Y &gt; Y[j]:
+<span class="linenos">12</span>            min_Y = Y[j]
+<span class="linenos">13</span>            w = j
+<span class="linenos">14</span>    S.append(w)
+<span class="linenos">15</span>    for h in L[w]:  # New step: update labels
+<span class="linenos">16</span>        if h in S:
+<span class="linenos">17</span>            continue
+<span class="linenos">18</span>        if Y[h] &gt; Y[w] + Ml[w][h]:
+<span class="linenos">19</span>            Y[h] = Y[w] + Ml[w][h]
+<span class="linenos">20</span>            P[h] = w
+</pre></div>
+<p>
+The explicit complexity calculation is 
+</p>
+<ul class="itemize" id="a0000001547">
+<li id="a0000001548"> <p>
+Line 1 writes a single value, taking <script type="math/tex">\mathcal{O}(1)</script>; 
+</p>
+</li>
+<li id="a0000001549"> <p>
+Lines 2-3 write <script type="math/tex">n</script> values, taking <script type="math/tex">\mathcal{O}(n)</script> each; 
+</p>
+</li>
+<li id="a0000001550"> <p>
+Line 4 writes a single value, taking <script type="math/tex">\mathcal{O}(1)</script>; 
+</p>
+</li>
+<li id="a0000001551"> <p>
+Line 5 loops over the whole graph, so is executed <script type="math/tex">n</script> times. Each block takes: 
+</p>
+<ul class="itemize" id="a0000001552">
+<li id="a0000001553"> <p>
+Lines 6-7 write single values, taking <script type="math/tex">\mathcal{O}(1)</script>; 
+</p>
+</li>
+<li id="a0000001554"> <p>
+Lines 8-10 correspond to looping over <script type="math/tex">V \setminus S</script> in its entirety. In the worst case this is <script type="math/tex">\mathcal{O}(n)</script>. Each block takes: 
+</p>
+<ul class="itemize" id="a0000001555">
+<li id="a0000001556"> <p>
+Lines 11-13 are single comparisons or single writes, each taking <script type="math/tex">\mathcal{O}(1)</script>; 
+</p>
+</li>
+</ul>
+<p>
+ Therefore this inner loop has complexity <script type="math/tex">\mathcal{O}(n)</script>. 
+</p>
+</li>
+<li id="a0000001557"> <p>
+Lines 14 is a single write taking <script type="math/tex">\mathcal{O}(1)</script>; 
+</p>
+</li>
+<li id="a0000001558"> <p>
+Lines 15-17 correspond to looping over <script type="math/tex">V \setminus S</script> in its entirety again. In the worst case this is <script type="math/tex">\mathcal{O}(n)</script>. Each block takes: 
+</p>
+<ul class="itemize" id="a0000001559">
+<li id="a0000001560"> <p>
+Lines 18-20 are single comparisons or single writes, each taking <script type="math/tex">\mathcal{O}(1)</script>; 
+</p>
+</li>
+</ul>
+<p>
+ Therefore this inner loop has complexity <script type="math/tex">\mathcal{O}(n)</script>. 
+</p>
+</li>
+</ul>
+<p>
+ Therefore this outer loop has complexity <script type="math/tex">\mathcal{O}(n) \mathcal{O}(n) = \mathcal{O}(n^2)</script>. 
+</p>
+</li>
+</ul>
+<p>
+ Therefore this algorithm has complexity <script type="math/tex">\mathcal{O}(n^2)</script>. When the graph is large this can be a substantial improvement in efficiency. 
+</p>
+<p>
+Note that this is not the fastest algorithm that exists. It is possible to construct algorithms with complexities <script type="math/tex">\sim \mathcal{O}(n \log (n))</script>.  
+</p>
+</section>
+</section>
+
+            </div>
+        </div>
+    </div>
+
+        </main>
+		
+		<footer class="text-muted">
+	<hr>
+	<div class="container">
+		<div class="float-right">
+			<ul style="list-style: none">
+			<li><a href="#">Back to top</a></li>
+			
+			
+			<li><a href="../../../notes/notes_by_chapter/graphs/graphs.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;Download as PDF</a></li>
+			
+			</ul>
+		</div>
+		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
+		<p>This page last generated: 2022-01-20</p>
+	</div>
+</footer>
+		
+    </body>
+</html>
