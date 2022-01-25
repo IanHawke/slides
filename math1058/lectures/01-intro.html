@@ -84,6 +84,21 @@
 			}
 		</style>
 	-->
+	<style type="text/css">
+	  .reveal p {
+	    text-align: left;
+	  }
+	  .reveal ul {
+	    display: block;
+	  }
+	  .reveal ol {
+	    display: block;
+	  }
+	</style>
+
+
+
+
 	</head>
 
 	<body>
@@ -97,16 +112,16 @@
 
 					<section>
 
-						<div>
-							<h2 class="r-fit-text">Introduction to OR</h2>
-							<img width="80%" src="images/01_intro/graph_dijkstra_n2_example_6.svg" style="background-color:white;">
-							<p>
-								<ul style="list-style: none;">
-									<li> Ian Hawke
-									<li> Michael Kenna-Allison
-								</ul>
-							</p>
-						</div>
+
+						<h2 class="r-fit-text">Introduction to OR</h2>
+						<img class="r-stretch" src="images/01_intro/graph_dijkstra_n2_example_6.svg" style="background-color:white;">
+						<p>
+							<ul style="list-style: none;">
+								<li> Ian Hawke
+								<li> Michael Kenna-Allison
+							</ul>
+						</p>
+
 
 						<aside class="notes">
 							Welcome to MATH1058, an Introduction to Operational Research and Mathematical Computing. My name is Ian Hawke; I am the module lead. Michael Kenna-Allison will also be instructing on the module. We will get into the course structure and who is doing what later. For now, I want to outline the problems we are going to tackle in this module.
@@ -132,19 +147,17 @@
 
 						<div>
 							<h2>Operational Research</h2>
-							<p>
-								<ul>
-									<li>
-										Describe;
-									</li>
-									<li>
-										Predict;
-									</li>
-									<li>
-										<em>Prescribe</em>.
-									</li>
-								</ul>
-							</p>
+							<ul>
+								<li>
+									Describe;
+								</li>
+								<li>
+									Predict;
+								</li>
+								<li>
+									<em>Prescribe</em>.
+								</li>
+							</ul>
 						</div>
 						<div>
 							<img src="images/01_intro/describe_predict.png">
@@ -163,10 +176,10 @@
 
 					<section>
 
-						<div>
-							<h2>Algorithms</h2>
-							<p>
-								<ul>
+						<h3>Algorithms</h3>
+						<div class="r-stack">
+							<div class="fragment fade-out" data-fragment-index="1">
+								<ul style="float: left;">
 									<li>
 										A description
 									</li>
@@ -180,12 +193,10 @@
 										for <em>all</em> of its <em>instances</em>.
 									</li>
 								</ul>
-							</p>
-						</div>
-						<div class="fragment">
-							<h4>Example</h4>
-							<p>
-								<ul>
+							</div>
+							<div class="fragment fade-in" data-fragment-index="1">
+								<h4>Example</h4>
+								<ul style="float: left;">
 									<li>
 										<em>Problem</em>: solve $a x^2 + b x + c = 0$ for $x \in \mathbb{C}$.
 									</li>
@@ -207,7 +218,7 @@
 										</ol>
 									</li>
 								</ul>
-							</p>
+							</div>
 						</div>
 
 						<aside class="notes">
@@ -223,28 +234,31 @@
 							<h2>Decision making</h2>
 							<p>
 								Find
-								<ul>
-									<li>
-										among a (very large) set (<em>feasible region</em>);
-									</li>
-									<li>
-										the best case (according to <em>quantitative objectives</em>).
-									</li>
-								</ul>
 							</p>
+							<ul>
+								<li>
+									among a (very large) set (<em>feasible region</em>);
+								</li>
+								<li>
+									the best case (according to <em>quantitative objectives</em>).
+								</li>
+							</ul>
 						</div>
 						<div class="fragment">
 							<p>
 								Typically consider
-								<ul>
-									<li>
-										cost minimization;
-									</li>
-									<li>
- 										profit maximization;
-									</li>
-								</ul>
+							</p>
+							<ul>
+								<li>
+									cost minimization;
+								</li>
+								<li>
+										profit maximization;
+								</li>
+							</ul>
+							<p>
 								subject to <em>constraints</em>.
+							</p>
 						</div>
 
 						<aside class="notes">
@@ -265,19 +279,17 @@
 
 						<div style="width:45%; float:'left'">
 							<h2>Production planning</h2>
-							<p>
-								<ul>
-									<li>
-										<em>Decision</em>: how many units of X to make per day;
-									</li>
-									<li>
-										<em>Objective</em>: minimise production costs;
-									</li>
-									<li>
-										<em>Constraints</em>: daily demand.
-									</li>
-								</ul>
-							</p>
+							<ul>
+								<li>
+									<em>Decision</em>: how many units of X to make per day;
+								</li>
+								<li>
+									<em>Objective</em>: minimise production costs;
+								</li>
+								<li>
+									<em>Constraints</em>: daily demand.
+								</li>
+							</ul>
 						</div>
 
 						<aside class="notes">
@@ -290,19 +302,17 @@
 
 						<div style="width:45%; float:'left'">
 							<h2>Shortest path problem</h2>
-							<p>
-								<ul>
-									<li>
-										<em>Decision</em>: what route to take from A to B;
-									</li>
-									<li>
-										<em>Objective</em>: minimise travel distance or time;
-									</li>
-									<li>
-										<em>Constraints</em>: traffic, road quality.
-									</li>
-								</ul>
-							</p>
+							<ul>
+								<li>
+									<em>Decision</em>: what route to take from A to B;
+								</li>
+								<li>
+									<em>Objective</em>: minimise travel distance or time;
+								</li>
+								<li>
+									<em>Constraints</em>: traffic, road quality.
+								</li>
+							</ul>
 						</div>
 
 						<aside class="notes">
@@ -315,19 +325,17 @@
 
 						<div style="width:45%; float:'left'">
 							<h2>Maximum clique problem</h2>
-							<p>
-								<ul>
-									<li>
-										<em>Decision</em>: what people form a group;
-									</li>
-									<li>
-										<em>Objective</em>: find groups of friends;
-									</li>
-									<li>
-										<em>Constraints</em>: limited information.
-									</li>
-								</ul>
-							</p>
+							<ul>
+								<li>
+									<em>Decision</em>: what people form a group;
+								</li>
+								<li>
+									<em>Objective</em>: find groups of friends;
+								</li>
+								<li>
+									<em>Constraints</em>: limited information.
+								</li>
+							</ul>
 						</div>
 
 						<aside class="notes">
@@ -340,19 +348,17 @@
 
 						<div style="width:45%; float:'left'">
 							<h2>Traveling Salesman Problem</h2>
-							<p>
-								<ul>
-									<li>
-										<em>Decision</em>: what route to travel between many points;
-									</li>
-									<li>
-										<em>Objective</em>: minimise travel distance or time;
-									</li>
-									<li>
-										<em>Constraints</em>: go through each destination once.
-									</li>
-								</ul>
-							</p>
+							<ul>
+								<li>
+									<em>Decision</em>: what route to travel between many points;
+								</li>
+								<li>
+									<em>Objective</em>: minimise travel distance;
+								</li>
+								<li>
+									<em>Constraints</em>: go through each destination once.
+								</li>
+							</ul>
 						</div>
 
 						<aside class="notes">
@@ -365,11 +371,10 @@
 
 				<section id="Taxonomy">
 
-					<section data-background="images/01_intro/taxonomy.png" data-background-size="80%" data-background-position="bottom">
+					<section>
 
-						<div>
-							<h2>Taxonomy</h2>
-						</div>
+						<h2>Taxonomy</h2>
+						<img class="r-stretch" src="images/01_intro/taxonomy.png"  style="background-color:white;">
 
 						<aside class="notes">
 							As discussed in the meet-up problem, there are many aspects to OR problems. How many quantifiable objectives do you want to optimise? How many independent people are making decisions? Are you considering sources of uncertainty? The more things you consider, the more complex the solution methods become, and the more fragile the solution methods often are.
@@ -385,10 +390,12 @@
 
 					<section>
 
-						<div>
-							<h2>This module</h2>
-							<p>
-								Each week:
+						<h2>This module</h2>
+						<div class="r-stack">
+							<div class="fragment fade-out" data-fragment-index="1">
+								<p>
+									Each week:
+								</p>
 								<ul>
 									<li>
 										Two lectures  (M, W);
@@ -400,12 +407,12 @@
 										One computer lab (M, W, Th, Fr).
 									</li>
 								</ul>
-							</p>
-						</div>
+							</div>
 
-						<div class="fragment">
-							<p>
-								Theory:
+							<div class="fragment fade-in" data-fragment-index="1">
+								<p>
+									Theory:
+								</p>
 								<ul>
 									<li>
 										Linear programming, simplex method;
@@ -414,9 +421,9 @@
 										Shortest paths, Dijkstra's algorithm.
 									</li>
 								</ul>
-							</p>
-							<p>
-								Computing:
+								<p>
+									Computing:
+								</p>
 								<ul>
 									<li>
 										Python;
@@ -428,7 +435,7 @@
 										LaTeX.
 									</li>
 								</ul>
-							</p>
+							</div>
 						</div>
 
 						<aside class="notes">
@@ -443,57 +450,41 @@
 
 					<section>
 
-						<div>
-							<h2>Assessment</h2>
-							<p>
+						<h2>Assessment</h2>
+						<ul>
+							<li>
+								Theory worksheets:
 								<ul>
 									<li>
-										Theory worksheets:
-										<ul>
-											<li>
-												formative;
-											</li>
-											<li>
-												Discussed from week 2.
-											</li>
-										</ul>
-									</li>
-									<li>
-										Python assignments:
-										<ul>
-											<li>
-    										total of 20%;
-											</li>
-											<li>
-    									  biweekly from week 3.
-											</li>
-										</ul>
-									</li>
-									<li>
-										OR+Coding coursework:
-										<ul>
-											<li>
-    										total of 40%;
-											</li>
-											<li>
-    										released at Easter, submit week 12.
-											</li>
-										</ul>
-									</li>
-									<li>
-										Exam:
-										<ul>
-											<li>
-    										total of 40%;
-											</li>
-											<li>
-    										written, theory based.
-											</li>
-										</ul>
+										formative; discussed from week 2.
 									</li>
 								</ul>
-							</p>
-						</div>
+							</li>
+							<li>
+								Python assignments:
+								<ul>
+									<li>
+										total of 20%; biweekly from week 3.
+									</li>
+								</ul>
+							</li>
+							<li>
+								OR+Coding coursework:
+								<ul>
+									<li>
+										total of 40%; released at Easter, submit week 12.
+									</li>
+								</ul>
+							</li>
+							<li>
+								Exam:
+								<ul>
+									<li>
+										total of 40%; written, theory based.
+									</li>
+								</ul>
+							</li>
+						</ul>
 
 						<aside class="notes">
 							The assessments are as listed here. All week numbers correspond to teaching weeks.
@@ -524,6 +515,7 @@
 				progress: true,
 				center: true,
 				hash: true,
+				transition: 'none',
 
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath.KaTeX ]
