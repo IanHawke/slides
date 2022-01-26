@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Lecture 2</title>
+
+		<meta name="description" content="Math1058">
+		<meta name="author" content="Ian Hawke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css">
+
+		<!-- Printing and PDF exports
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../reveal.js/css/print/pdf.css' : '../reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	-->
+
+		<!--MathJax stuff
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}, TeX: { extensions: ["autobold.js"] }});
+		</script>
+		<script type="text/javascript"
+		  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+-->
+		<!--Left align-
+		<style type="text/css">
+			.reveal p { text-align: left; }
+			.reveal ol,
+			.reveal dl,
+			.reveal ul {
+			  display: block;
+			  text-align: left;
+			  margin: 0 0 0 1em; }
+			.reveal h1 {
+				text-transform: none;
+				line-height: 2.0
+			}
+			.reveal h2,
+			.reveal h3,
+			.reveal h4 {
+				text-transform: none;
+			}
+			.reveal table td {
+				border-bottom: none;
+			}
+			.reveal.slide .slides > section, .reveal.slide .slides > section > section {
+			  min-height: 100% !important;
+			  display: flex !important;
+			  flex-direction: column !important;
+			  justify-content: center !important;
+			  position: absolute !important;
+			  top: 0 !important;
+			  align-items: center !important;
+			}
+			section > h1, section > h2 {
+			  position: absolute !important;
+			  top: 0 !important;
+			  margin-left: auto !important;
+			  margin-right: auto !important;
+			  left: 0 !important;
+			  right: 0 !important;
+			  text-align: center !important;
+			}
+			.print-pdf .reveal.slide .slides > section, .print-pdf .reveal.slide .slides > section > section {
+			  min-height: 770px !important;
+			  position: relative !important;
+			}
+		</style>
+	-->
+	<style type="text/css">
+	  .reveal p {
+	    text-align: left;
+	  }
+	  .reveal ul {
+	    display: block;
+	  }
+	  .reveal ol {
+	    display: block;
+	  }
+	</style>
+
+
+
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="Title">
+
+					<section>
+						<h2 class="r-fit-text">Introduction to Linear Programming</h2>
+						<p>
+							<ul style="list-style: none;">
+								<li> Ian Hawke
+								<li> Michael Kenna-Allison
+							</ul>
+						</p>
+
+						<aside class="notes">
+							Our focus for the first part of the course is Linear Programming.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Diet problem">
+
+					<section>
+						<h2>Diet Problem</h2>
+
+						<p>
+							Sam can only buy eggs (£1 each) and ham (£10 each).
+						</p>
+						<p>
+							Every day Sam needs carbs (300g), protein (600g), and vitamins (1g) to live.
+						</p>
+						<table>
+						<thead>
+						  <tr>
+						    <th>Food</th>
+						    <th>Carbs</th>
+						    <th>Protein</th>
+						    <th>Vitamins</th>
+						  </tr>
+						</thead>
+						<tbody>
+						  <tr>
+						    <td>Eggs</td>
+						    <td>20</td>
+						    <td>90</td>
+						    <td>0.02</td>
+						  </tr>
+						  <tr>
+						    <td>Ham</td>
+						    <td>10</td>
+						    <td>200</td>
+						    <td>0.5</td>
+						  </tr>
+						</tbody>
+						</table>
+
+						<ul class="fragment fade-in">
+							<li>
+								<em>Decision</em>: How much of each to buy.
+							</li>
+							<li>
+								<em>Objective</em>: Minimise cost.
+							</li>
+							<li>
+								<em>Constraints</em>: Get enough nutrition.
+							</li>
+						</ul>
+
+						<aside class="notes">
+							The diet problem is a serious, real world case that was hugely important in the development of operational research, or mathematical programming. It was a live problem in the early to mid twentieth century. It had obvious implications for the health of the population, particularly when rationing was needed. In these cases the number of foodstuffs and nutrients considered was considerably larger - 77 foodstuffs and 9 nutrients, so this toy problem needs expanding considerably.
+							<br>
+							It still remains an important problem in a wide range of applications. Aid delivery and the provisioning of expeditions to remote locations (such as space) are typical examples. Often in these cases the focus is on minimising weight rather than cost, or some combination of the two. The mathematics of the problem formulation and solution is essentially unchanged.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Formulation</h2>
+
+						<ul>
+							<li>
+								<em>Variables</em>: $x_E, x_H \ge 0$. Amount of portions of eggs, ham, bought.
+							</li>
+							<li>
+								<em>Constraints</em>:
+								\[
+								\begin{array}{rlcrlclcl}
+								20 & x_E & + & 10 & x_H & \ge & 300 & \colon & \text{min. carbs,} \\
+								90 & x_E & + & 20 & x_H & \ge & 600 & \colon & \text{min. protein,} \\
+								0.02 & x_E & + & 0.5 & x_H & \ge & 1 & \colon & \text{min. vitamins}
+								\end{array}
+								\]
+							</li>
+							<li>
+								<em>Objective function</em>: $\min 1 x_E + 10 x_H$.
+							</li>
+						</ul>
+						<div class="fragment">
+							<p>
+								Compact form:
+							</p>
+							\[
+							\begin{array}{lrlcrlcl}
+							\min & 1 & x_E & + & 10 & x_H && \\
+							\text{subject to} & 20 & x_E & + & 10 & x_H & \ge & 300 \\
+							& 90 & x_E & + & 20 & x_H & \ge & 600 \\
+							& 0.02 & x_E & + & 0.5 & x_H & \ge & 1 \\
+							&& x_E, &&& x_H & \ge & 0.
+							\end{array}
+							\]
+						</div>
+
+						<aside class="notes">
+							We now want to abstract away the details of the problem into something we can solve. This is the typical steps of turning a "word problem" into something that a set of mathematical steps can tackle. There are a sequence of steps to take.
+							<br>
+							First, we need to identify the variables. That is, what properties of the problem can we change in order to meet our objectives? In this case it is the amount of each foodstuff that we buy. We give each of these variables a label. We then consider all variables as a collection, or vector: the vector of decision variables. Here we have put a subscript on each to link it directly to the name of the food, either eggs or ham. As we move to larger problems, or more abstract cases, we will number the subscripts to make the link with components of the vector of decision variables more explicit.
+							<br>
+							Next we identify the constraints. These will be framed as functions of the variables. In general there will be $m$ constraints. Here there are three: one for each nutrient. We do not label these explicitly: as all need to be satisfied, it does not matter which is which. In this case the constraints are linear - each variable is multiplied by a constant value and the total is checked.
+							<br>
+							Finally, we need to identify the objective. What are we trying to optimise? Again we want to frame this in terms of the variables. The is the objective function: the function of the variables whose value we want to optimise. In this case we are trying to minimise the cost, and the cost is a linear function of the variables.
+							<br>
+							Having identified all of the components of the problem we want to write it in a standard, compact form. This puts the objective function first, then the constraints from the problem, and finally constraints resulting from the definitions of the variables. In our case we must have the variables being positive, as we cannot buy a negative amount of food.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Abstraction</h2>
+						<p>
+							Go from our compact example
+						</p>
+						\[
+						\begin{array}{lrlcrlcl}
+						\min & 1 & x_E & + & 10 & x_H && \\
+						\text{subject to} & 20 & x_E & + & 10 & x_H & \ge & 300 \\
+						& 90 & x_E & + & 20 & x_H & \ge & 600 \\
+						& 0.02 & x_E & + & 0.5 & x_H & \ge & 1 \\
+						&& x_E, &&& x_H & \ge & 0
+						\end{array}
+						\]
+						<p>
+							to the general form
+						</p>
+						\[
+						\begin{array}{lrlcrlclrcl}
+						\min & \sum_{j=1}^n c_{j} & x_j & \\
+						\text{subject to} & \sum_{j=1}^n a_{ij} & x_j & \ge & b_i, & \quad \forall i & \in & \{ 1, \dots, m \} \\
+						&& x_j & \ge & 0, & \quad \forall j & \in & \{ 1, \dots, n \}.
+						\end{array}
+						\]
+					</section>
+
+					<aside class="notes">
+						We have abstracted our simplified diet problem, with two variables (eggs and ham) and three constraints from the problem (linked to the nutrients) and two positivity constraints (from the definition of the variables), and ended up with the compact example form.
+						<br>
+						A more general linear programming problem can be framed in a similar fashion. Here we show the compact form for a problem with $n$ variables and $n$ constraints. The coefficients $c_j$ define the objective function to optimise. The coefficients $a_{ij}$ define the problem constraints. For now, we are still imposing positivity.
+					</aside>
+
+				</section>
+
+				<section id="Generalities">
+
+					<section>
+
+						<h2>Mathematical Programming</h2>
+						<p>
+							General structure:
+						</p>
+						\[
+						\begin{array}{lrcl}
+						[\min|\max] & f(x) && \\
+						\text{subject to} & g_1(x) & [\ge|\le|=]_1 & b_1, \\
+						& \vdots & \vdots & \vdots \\
+						& g_m(x) & [\ge|\le|=]_m & b_m, \\
+						& x \in X \subseteq \mathbb{R}^n & &
+						\end{array}
+						\]
+
+
+
+						<aside class="notes">
+
+						</aside>
+
+					</section>
+
+					<section>
+
+						<h2>Linear Programming</h2>
+						<ol>
+							<li>
+								Objective function $f$ is linear;
+							</li>
+							<li>
+								Constraints $g_i$ are linear;
+							</li>
+							<li>
+								Decision variables $x$ are real.
+							</li>
+						</ol>
+						\[
+						\begin{array}{lrlcccrlcl}
+						[\min|\max] & c_1 & x_1 & + & \dots & + & c_n & x_n && \\
+						\text{subject to} & a_{11} & x_1 & + & \dots & + & a_{1n} & x_n & [\ge|\le|=]_1 & b_1, \\
+						& \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+						& a_{m1} & x_1 & + & \dots & + & a_{mn} & x_n & [\ge|\le|=]_m & b_m, \\
+						& x \in \mathbb{R}^n & &&&&&&&
+						\end{array}
+						\]
+
+
+						<aside class="notes">
+
+						</aside>
+
+					</section>
+
+				</section>
+
+				<section id="Graphical Solution">
+
+					<section>
+						<h2>A profit problem</h2>
+
+						<p>
+							Two tasks $A, B$, different profits, complex contract.
+						</p>
+						\[
+						\begin{array}{lrlcrlcl}
+						\max & 0.02 & x_A & + & 0.03 & x_B && \\
+						\text{subject to} & & x_A & + &  & x_B & \le & 10 \\
+						&  & x_A &  &  &  & \le & 7 \\
+						& &  &  &  & x_B & \le & 5 \\
+						&& x_A, &&& x_B & \ge & 0.
+						\end{array}
+						\]
+
+						<aside class="notes">
+							We'll now look at a different linear programming problem. A worker has two tasks to do with different payments, and hence profit, for each. However, the contract requires them to spend a maximum amount of time on each one. Here the variables are the amount of time (in, say, hours) spent on each task. The worker wants to maximise the profits.
+							<br>
+							The objective function is the total profit to maximise. The constraints limit the time spent on each task. As usual the variables, which are the amount of time spent, must be positive.
+							<br>
+							We'll see in later lectures that the mathematics does not care if the problem is a maximization instead of a minimization, nor if the constraints are bounded above or below. This form is slightly easier to visualise for our first solution method.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Feasible region</h2>
+
+
+						<div style="position:absolute; width:768px; top:150px; left:0px" class="r-stack">
+							<div class="fragment fade-out" data-fragment-index="1">
+								<p>
+									<em>Feasible region</em>: set of points $x$ obeying all constraints.
+								</p>
+								\[
+								\begin{array}{rcrcl}
+									&& \color{blue}{x_B} & \color{blue}{\ge} & \color{blue}{0} \\
+									x_A &&& \ge & 0 \\
+									x_A &&& \le & 7 \\
+									&&x_B & \le & 5 \\
+									x_A & + & x_B & \le & 10
+								\end{array}
+								\]
+							</div>
+							<div class="fragment fade-in-out" data-fragment-index="1">
+								<p>
+									<em>Feasible region</em>: set of points $x$ obeying all constraints.
+								</p>
+								\[
+								\begin{array}{rcrcl}
+									&& x_B & \ge & 0 \\
+									\color{blue}{x_A} &&& \color{blue}{\ge} & \color{blue}{0} \\
+									x_A &&& \le & 7 \\
+									&&x_B & \le & 5 \\
+									x_A & + & x_B & \le & 10
+								\end{array}
+								\]
+							</div>
+							<div class="fragment fade-in-out" data-fragment-index="2">
+								<p>
+									<em>Feasible region</em>: set of points $x$ obeying all constraints.
+								</p>
+								\[
+								\begin{array}{rcrcl}
+									&& x_B & \ge & 0 \\
+									x_A &&& \ge & 0 \\
+									\color{blue}{x_A} &&& \color{blue}{\le} & \color{blue}{7} \\
+									&&x_B & \le & 5 \\
+									x_A & + & x_B & \le & 10
+								\end{array}
+								\]
+							</div>
+							<div class="fragment fade-in-out" data-fragment-index="3">
+								<p>
+									<em>Feasible region</em>: set of points $x$ obeying all constraints.
+								</p>
+								\[
+								\begin{array}{rcrcl}
+									&& x_B & \ge & 0 \\
+									x_A &&& \ge & 0 \\
+									x_A &&& \le & 7 \\
+									&& \color{blue}{x_B} & \color{blue}{\le} & \color{blue}{5} \\
+									x_A & + & x_B & \le & 10
+								\end{array}
+								\]
+							</div>
+							<div class="fragment fade-in-out" data-fragment-index="4">
+								<p>
+									<em>Feasible region</em>: set of points $x$ obeying all constraints.
+								</p>
+								\[
+								\begin{array}{rcrcl}
+									&& x_B & \ge & 0 \\
+									x_A &&& \ge & 0 \\
+									x_A &&& \le & 7 \\
+									&&x_B & \le & 5 \\
+									\color{blue}{x_A} & + & \color{blue}{x_B} & \color{blue}{\le} & \color{blue}{10}
+								\end{array}
+								\]
+							</div>
+							<div class="fragment fade-in" data-fragment-index="5">
+								<p>
+									<em>Feasible region</em>: set of points $x$ obeying all constraints.
+								</p>
+								\[
+								\begin{array}{rcrcl}
+									&& x_B & \ge & 0 \\
+									x_A &&& \ge & 0 \\
+									x_A &&& \le & 7 \\
+									&&x_B & \le & 5 \\
+									x_A & + & x_B & \le & 10
+								\end{array}
+								\]
+							</div>
+						</div>
+						<div style="position:absolute; width:768px; top:100px; left:768px" class="r-stack">
+							<img style="width:768px" src="images/02_lp_intro/lp_graphical_step_1.svg" class="fragment fade-out" data-fragment-index=1>
+							<img style="width:768px" src="images/02_lp_intro/lp_graphical_step_2.svg" class="fragment fade-in-out" data-fragment-index=1>
+							<img style="width:768px" src="images/02_lp_intro/lp_graphical_step_3.svg" class="fragment fade-in-out" data-fragment-index=2>
+							<img style="width:768px" src="images/02_lp_intro/lp_graphical_step_4.svg" class="fragment fade-in-out" data-fragment-index=3>
+							<img style="width:768px" src="images/02_lp_intro/lp_graphical_step_5.svg" class="fragment fade-in-out" data-fragment-index=4>
+							<img style="width:768px" src="images/02_lp_intro/lp_graphical_all.svg" class="fragment fade-in-out" data-fragment-index=5>
+						</div>
+
+						<aside class="notes">
+							We build up the feasible region by considering each constraint in turn. The final shaded region contains all points that can be <em>feasible</em> solutions, so is called the feasible region. We "only" have to check all of these points to see which is optimal.
+						</aside>
+					</section>
+
+
+					<section>
+						<h2>Level curves</h2>
+
+						<div style="position:absolute; width:768px; top:150px; left:0px">
+								<ul>
+									<li>
+										<em>Objective</em>:
+										\[
+										\max z = f(x) = 0.02  x_A  +  0.03  x_B;
+										\]
+									</li>
+									<li class="fragment" data-fragment-index="1">
+										Draw <em>level curves</em> where $z=\text{constant}$.
+									</li>
+									<li class="fragment" data-fragment-index="2">
+										Follow normal to level curves, increasing $z$.
+									</li>
+									<li class="fragment" data-fragment-index="5">
+										Last feasible point crossing level curve is optimal.
+									</li>
+								</ul>
+						</div>
+						<div style="position:absolute; width:768px; top:100px; left:768px" class="r-stack">
+							<img style="width:768px" src="images/02_lp_intro/lp_level_curves_1.svg" class="fragment fade-in-out" data-fragment-index=1>
+							<img style="width:768px" src="images/02_lp_intro/lp_level_curves_2.svg" class="fragment fade-in-out" data-fragment-index=2>
+							<img style="width:768px" src="images/02_lp_intro/lp_level_curves_3.svg" class="fragment fade-in-out" data-fragment-index=3>
+							<img style="width:768px" src="images/02_lp_intro/lp_level_curves_4.svg" class="fragment fade-in-out" data-fragment-index=4>
+							<img style="width:768px" src="images/02_lp_intro/lp_level_curves.svg" class="fragment fade-in-out" data-fragment-index=5>
+						</div>
+
+						<aside class="notes">
+							Now we have the feasible region we can think about how to change the value of the objective function. In our problem we want to maximise it.
+							<br>
+							We start by drawing a level curve. That is, we draw a line on which the objective function is constant. As our problem is linear, this will be a straight line.  The precise value we pick isn't too important, but we've chosen a value to go through the feasible region here. So any solution $x = (x_A, x_B)$ that lies on this line will have the same value of the objective function.
+							<br>
+							We want to increase the value of the objective function. If we move <em>normal</em> to the level curve this will change its value. By following the arrow it will increase its value; in the other direction it increases. As we are trying to maximise the objective function, we follow the arrow.
+							<br>
+							We can then draw another level curve, having followed the normal to the previous one. Again, as the problem is linear, these level curves are parallel. By construction the objective function on this new curve will have a larger value.
+							<br>
+							We keep drawing level curves with ever larger values of the objective function until we reach the final point in the feasible region that can intersect a level curve. At this point we have found our feasible solution: if we try to increase the value of the objective function, we would move out of the feasible region.
+							<br>
+							The graphical solution method only works for two variables. However, a lot of the intuition we build up carries over to the general case. In addition to level curves and their normals, another important point to note is that the optimal value always appears at a corner, or vertex, of the feasible region.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Summary">
+					<section>
+						<h1>Summary</h1>
+
+						<ul>
+							<li>
+								Mathematical programming formulates and solves decision problems.
+							</li>
+							<li>
+								Linear programs are specified by the coefficients of the objective functions and constraints.
+							</li>
+							<li>
+								The feasible region is the set of all solutions satisfying the constraints.
+							</li>
+							<li>
+								The graphical solution works with two variables, gives intuition for general case:
+								<ul>
+									<li>
+										Follow normal to improve objective function.
+									</li>
+									<li>
+										Optimal solution at vertex of feasible region.
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+				</section>
+
+			</div>
+
+		</div>
+
+
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/zoom/zoom.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/search/search.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../reveal.js/plugin/math/math.js"></script>
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				width: 1536,
+			  height: 960,
+			  margin: 0.04,
+				controls: false,
+				progress: true,
+				center: true,
+				hash: true,
+				transition: 'none',
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath.KaTeX ]
+			});
+
+		</script>
+
+
+	</body>
+</html>
