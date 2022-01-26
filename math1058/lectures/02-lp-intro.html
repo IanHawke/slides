@@ -285,9 +285,29 @@
 
 
 						<aside class="notes">
-
+							In this more general form we have general functions for the objective functions and constraints, and the set in which the solutions lie can be any subset of the real numbers (such as the positive integers). This leads to a number of very hard problems to solve.
 						</aside>
 
+					</section>
+
+					<section>
+
+						<h2>Optima</h2>
+						<img style="width:1000px;" src="images/02_lp_intro/global_local_optima.svg">
+						<ul>
+							<li>
+								Local optima are easier to find.
+							</li>
+							<li>
+								Global optima are what we want.
+							</li>
+						</ul>
+
+						<aside class="notes">
+							A local optima exists if, in a small region around that point, the objective function is "better" for all points in that small region. For example, in a minimization problem, all points near the local optimum have a larger objective function value.
+							<br>
+							The global optima is the best feasible solution over the entire feasible region. Finding global optima can be hard and slow, particularly in high dimensional problems. However, for this module at least, it is the problem we're interested in solving.
+						</aside>
 					</section>
 
 					<section>
@@ -326,10 +346,10 @@
 				<section id="Graphical Solution">
 
 					<section>
-						<h2>A profit problem</h2>
+						<h2>Optimal portfolio problem</h2>
 
 						<p>
-							Two tasks $A, B$, different profits, complex contract.
+							Two assets $A, B$, different returns, diversify investments to hedge risk.
 						</p>
 						\[
 						\begin{array}{lrlcrlcl}
@@ -342,9 +362,9 @@
 						\]
 
 						<aside class="notes">
-							We'll now look at a different linear programming problem. A worker has two tasks to do with different payments, and hence profit, for each. However, the contract requires them to spend a maximum amount of time on each one. Here the variables are the amount of time (in, say, hours) spent on each task. The worker wants to maximise the profits.
+							We'll now look at a different linear programming problem. We want to invest a client's money in two assets. There's a total of 10 units (say 10 thousand pounds, for example). The expected returns are linked to the expected risk: asset $A$ returns 2 percent but is safer, whilst asset $B$ returns 3 percent. To reduce our exposure to risk we put limits on how much of the money we are willing to invest in either asset; so at most 70%, or 7 thousand pounds, in asset $A$, and 50%, or 5 thousand pounds, in asset $B$. We then want to maximise the expected return.
 							<br>
-							The objective function is the total profit to maximise. The constraints limit the time spent on each task. As usual the variables, which are the amount of time spent, must be positive.
+							The objective function is the total return to maximise. The constraints limit the amount invested in each asset. As usual the variables, which are the amount of invested in each asset, must be positive.
 							<br>
 							We'll see in later lectures that the mathematics does not care if the problem is a maximization instead of a minimization, nor if the constraints are bounded above or below. This form is slightly easier to visualise for our first solution method.
 						</aside>
