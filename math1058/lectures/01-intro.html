@@ -307,9 +307,10 @@
 							b = 8
 							c = 5
 							discriminant = b**2 - 4*a*c
+							root = discriminant**(0.5)
 							two_a = 2*a
-							root_plus  = (-b + discriminant) / two_a
-							root_minus = (-b - discriminant) / two_a
+							root_plus  = (-b + root) / two_a
+							root_minus = (-b - root) / two_a
 							print(root_plus, root_minus)
 							</code></pre>
 						</div>
