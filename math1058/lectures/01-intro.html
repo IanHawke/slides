@@ -225,7 +225,7 @@
 						<h3>Algorithms</h3>
 						<div class="r-stack">
 							<div class="fragment fade-out" data-fragment-index="1">
-								<ul style="float: left;">
+								<ul>
 									<li>
 										A description
 									</li>
@@ -240,9 +240,9 @@
 									</li>
 								</ul>
 							</div>
-							<div class="fragment fade-in" data-fragment-index="1">
+							<div class="fragment fade-in-out" data-fragment-index="1">
 								<h4>Example</h4>
-								<ul style="float: left;">
+								<ul>
 									<li>
 										<em>Problem</em>: solve $a x^2 + b x + c = 0$ for $x \in \mathbb{C}$.
 									</li>
@@ -271,6 +271,51 @@
 						  An algorithm is a description in some formal language. Mathematics is one such formal language. A computer code is another. One key aspect of this module is transforming problems between informal specifications (in natural language) and formal specifications (in mathematics or in code). Different formal languages emphasise different aspects of the problem, as so are useful in different ways.
 						  <br>
 						  The example algorithm of computing the roots of a quadratic equation is standard. We see how, mathematically, it can be reduced to a limited number of explicit calculations. Depending on the detail level and implicit assumptions you are willing to allow you could write it on one line; here it is written in three, although the first and last lines both describe two calculations each. There remains the implicit assumption that $a$ is non-zero. Mathematically we would often think that this assumption is obvious. It may need to be explicitly dealt with in a computer code.
+						</aside>
+
+					</section>
+
+					<section>
+						<h2>Algorithms Example</h2>
+						<div style="position:absolute; width:768px; top:150px; left:0px">
+							<ul>
+								<li>
+									<em>Problem</em>: solve $a x^2 + b x + c = 0$ for $x \in \mathbb{C}$.
+								</li>
+								<li>
+									<em>Instance</em>: $a = 2, b = 8, c = 5$.
+								</li>
+								<li>
+									<em>Algorithm</em>:
+									<ol>
+										<li>
+											Compute $b^2-4ac$ and $2a$;
+										</li>
+										<li>
+											Compute $\sqrt{b^2-4ac}$;
+										</li>
+										<li>
+											Compute $(-b\pm\sqrt{b^2-4ac})/(2a)$.
+										</li>
+									</ol>
+								</li>
+							</ul>
+						</div>
+						<div style="position:absolute; width:768px; top:150px; left:768px">
+							<pre><code class="language-python" data-trim data-noescape data-line-numbers>
+							a = 2
+							b = 8
+							c = 5
+							discriminant = b**2 - 4*a*c
+							two_a = 2*a
+							root_plus  = (-b + discriminant) / two_a
+							root_minus = (-b - discriminant) / two_a
+							print(root_plus, root_minus)
+							</code></pre>
+						</div>
+
+						<aside class="notes">
+						  Here we give the algorithm in code. This is Python code, converting the mathematical operations to an explicit calculation. Compare the number of lines, or operations, and the explicit and implicit assumptions made.
 						</aside>
 
 					</section>
@@ -565,7 +610,6 @@
 				center: true,
 				hash: true,
 				transition: 'none',
-
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath.KaTeX ]
 			});
