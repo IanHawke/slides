@@ -130,8 +130,54 @@
 
 					<section>
 
-						<div>
-							<h1>A meeting</h1>
+
+						<h2>A meeting</h2>
+
+						<div style="position:absolute; width:768px; top:150px; left:0px">
+							<ul>
+								<li>
+									Want to arrange a meet up.
+								</li>
+								<li class="fragment" data-fragment-index="1">
+									But everyone is scattered.
+								</li>
+								<li class="fragment" data-fragment-index="2">
+									Where to meet?
+									<ul>
+										<li>
+											costs;
+										</li>
+										<li>
+											free time;
+										</li>
+										<li>
+											risks;
+										</li>
+										<li>
+											preferences; ...
+										</li>
+									</ul>
+								</li>
+								<li class="fragment" data-fragment-index="3">
+									When to meet?
+									<ul>
+										<li>
+											other obligations;
+										</li>
+										<li>
+											work;
+										</li>
+										<li>
+											travel time; ...
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+						<div style="position:absolute; width:768px; top:150px; left:768px" class="r-stack">
+							<img style="height:810px" src="images/01_intro/rail_network_annotated.png" class="fragment fade-in" data-fragment-index="1">
+							<img style="height:810px" src="images/01_intro/rail_network_annotated_2.png" class="fragment fade-in" data-fragment-index="2">
+							<img style="width:700px" src="images/01_intro/Calendar.svg" class="fragment fade-in" data-fragment-index="3">
 						</div>
 						<aside class="notes">
 						  Imagine - it should not be difficult - that you've had a hard year, spending far too much time away from friends and family, and that you desperately want to meet up with a group of friends and just relax. So, you start planning.
@@ -374,7 +420,7 @@
 					<section>
 
 						<h2>Taxonomy</h2>
-						<img class="r-stretch" src="images/01_intro/taxonomy.png"  style="background-color:white;">
+						<img class="r-stretch" src="images/01_intro/taxonomy.svg"  style="background-color:white;">
 
 						<aside class="notes">
 							As discussed in the meet-up problem, there are many aspects to OR problems. How many quantifiable objectives do you want to optimise? How many independent people are making decisions? Are you considering sources of uncertainty? The more things you consider, the more complex the solution methods become, and the more fragile the solution methods often are.
@@ -511,6 +557,9 @@
 			// Also available as an ES module, see:
 			// https://revealjs.com/initialization/
 			Reveal.initialize({
+				width: 1536,
+			  height: 960,
+			  margin: 0.04,
 				controls: false,
 				progress: true,
 				center: true,
