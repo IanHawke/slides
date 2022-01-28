@@ -95,6 +95,10 @@
 	    display: block;
 	  }
 
+		.reveal pre code {
+			font-size: 1.4em !important;
+			line-height: 1.4 !important;
+		}
 	</style>
 
 
@@ -192,8 +196,8 @@
 
 					<section>
 
-						<div>
-							<h2>Operational Research</h2>
+						<h2>Operational Research</h2>
+						<div style="position:absolute; width:768px; top:150px; left:0px">
 							<ul>
 								<li>
 									Describe;
@@ -205,10 +209,14 @@
 									<em>Prescribe</em>.
 								</li>
 							</ul>
+							<p>
+								Modelling and forecasting are largely ignored in this module.
+							</p>
 						</div>
-						<div>
-							<img src="images/01_intro/describe_predict.png">
+						<div style="position:absolute; width:768px; top:150px; left:768px">
+							<img style="width:768px;" src="images/01_intro/describe_predict.png">
 						</div>
+
 						<aside class="notes">
 							Analytics covers a huge range of applied mathematics and statistics, including modelling, forecasting, machine learning, and a range of other fields and tools. In the context of our meet-up problem, we need to know what our group is doing (describe), what they, and their connections, work, travel options and so on, are going to be doing (predict), and what we should do for the best (prescribe).
 						  <br>
@@ -303,7 +311,7 @@
 							</ul>
 						</div>
 						<div style="position:absolute; width:768px; top:150px; left:768px">
-							<pre><code class="language-python" data-trim data-noescape data-line-numbers>
+							<pre><code class="language-python" data-trim data-noescape data-line-numbers="4-8">
 							a = 2
 							b = 8
 							c = 5
@@ -613,6 +621,7 @@
 				center: true,
 				hash: true,
 				transition: 'none',
+				pdfSeparateFragments: true,
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath.KaTeX, RevealSpotlight ],
 				spotlight: {
