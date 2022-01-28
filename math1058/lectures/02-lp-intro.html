@@ -129,50 +129,56 @@
 				<section id="Diet problem">
 
 					<section>
+
 						<h2>Diet Problem</h2>
 
-						<p>
-							Sam can only buy eggs (£1 each) and ham (£10 each).
-						</p>
-						<p>
-							Every day Sam needs carbs (300g), protein (600g), and vitamins (1g) to live.
-						</p>
-						<table>
-						<thead>
-						  <tr>
-						    <th>Food</th>
-						    <th>Carbs</th>
-						    <th>Protein</th>
-						    <th>Vitamins</th>
-						  </tr>
-						</thead>
-						<tbody>
-						  <tr>
-						    <td>Eggs</td>
-						    <td>20</td>
-						    <td>90</td>
-						    <td>0.02</td>
-						  </tr>
-						  <tr>
-						    <td>Ham</td>
-						    <td>10</td>
-						    <td>200</td>
-						    <td>0.5</td>
-						  </tr>
-						</tbody>
-						</table>
+						<div style="position:absolute; width:900px; top:150px; left:0px">
+							<p>
+								Sam can only buy eggs (£1 each) and ham (£10 each).
+							</p>
+							<p>
+								Every day Sam needs carbs (300g), protein (600g), and vitamins (1g) to live.
+							</p>
+							<table>
+							<thead>
+							  <tr>
+							    <th>Food</th>
+							    <th>Carbs</th>
+							    <th>Protein</th>
+							    <th>Vitamins</th>
+							  </tr>
+							</thead>
+							<tbody>
+							  <tr>
+							    <td>Eggs</td>
+							    <td>20</td>
+							    <td>90</td>
+							    <td>0.02</td>
+							  </tr>
+							  <tr>
+							    <td>Ham</td>
+							    <td>10</td>
+							    <td>200</td>
+							    <td>0.5</td>
+							  </tr>
+							</tbody>
+							</table>
 
-						<ul class="fragment fade-in">
-							<li>
-								<em>Decision</em>: How much of each to buy.
-							</li>
-							<li>
-								<em>Objective</em>: Minimise cost.
-							</li>
-							<li>
-								<em>Constraints</em>: Get enough nutrition.
-							</li>
-						</ul>
+							<ul class="fragment fade-in">
+								<li>
+									<em>Decision</em>: How much of each to buy.
+								</li>
+								<li>
+									<em>Objective</em>: Minimise cost.
+								</li>
+								<li>
+									<em>Constraints</em>: Get enough nutrition.
+								</li>
+							</ul>
+						</div>
+						<div style="position:absolute; width:636px; top:150px; left:900px">
+							<img style="width:'636px'" src="images/02_lp_intro/diet.jpeg">
+						</div>
 
 						<aside class="notes">
 							The diet problem is a serious, real world case that was hugely important in the development of operational research, or mathematical programming. It was a live problem in the early to mid twentieth century. It had obvious implications for the health of the population, particularly when rationing was needed. In these cases the number of foodstuffs and nutrients considered was considerably larger - 77 foodstuffs and 9 nutrients, so this toy problem needs expanding considerably.
@@ -343,7 +349,7 @@
 
 				</section>
 
-				<section id="Graphical Solution">
+				<section id="Other examples">
 
 					<section>
 						<h2>Optimal portfolio problem</h2>
@@ -351,15 +357,28 @@
 						<p>
 							Two assets $A, B$, different returns, diversify investments to hedge risk.
 						</p>
-						\[
-						\begin{array}{lrlcrlcl}
-						\max & 0.02 & x_A & + & 0.03 & x_B && \\
-						\text{subject to} & & x_A & + &  & x_B & \le & 10 \\
-						&  & x_A &  &  &  & \le & 7 \\
-						& &  &  &  & x_B & \le & 5 \\
-						&& x_A, &&& x_B & \ge & 0.
-						\end{array}
-						\]
+						<ul>
+							<li>
+								Expected returns of 2% ($A$) and 3% ($B$);
+							</li>
+							<li>
+								Total to invest of $10$ units;
+							</li>
+							<li>
+								Invest at most 70% of total in $A$ (safe) and 50% of total in $B$ (risky).
+							</li>
+						</ul>
+						<div class="fragment fade-in">
+							\[
+							\begin{array}{lrlcrlcl}
+							\max & 0.02 & x_A & + & 0.03 & x_B && \\
+							\text{subject to} & & x_A & + &  & x_B & \le & 10 \\
+							&  & x_A &  &  &  & \le & 7 \\
+							& &  &  &  & x_B & \le & 5 \\
+							&& x_A, &&& x_B & \ge & 0.
+							\end{array}
+							\]
+						</div>
 
 						<aside class="notes">
 							We'll now look at a different linear programming problem. We want to invest a client's money in two assets. There's a total of 10 units (say 10 thousand pounds, for example). The expected returns are linked to the expected risk: asset $A$ returns 2 percent but is safer, whilst asset $B$ returns 3 percent. To reduce our exposure to risk we put limits on how much of the money we are willing to invest in either asset; so at most 70%, or 7 thousand pounds, in asset $A$, and 50%, or 5 thousand pounds, in asset $B$. We then want to maximise the expected return.
@@ -371,153 +390,50 @@
 					</section>
 
 					<section>
-						<h2>Feasible region</h2>
 
-
-						<div style="position:absolute; width:768px; top:150px; left:0px" class="r-stack">
-							<div class="fragment fade-out" data-fragment-index="1">
-								<p>
-									<em>Feasible region</em>: set of points $x$ obeying all constraints.
-								</p>
+						<h2>Optimal transport</h2>
+						<div style="position:absolute; width:968px; top:100px; left:0px">
+							<ul>
+								<li>
+									Two boxes contain dirt, amounts
+									\[
+										\mu_1=0.3, \mu_2=0.7.
+									\]
+								</li>
+								<li>
+									Need to move dirt to boxes on the right, so that
+									<ul>
+										<li>
+											$\nu_1=0.6, \nu_2=0.4$;
+										</li>
+										<li>
+											minimise distance travelled, $\min |i-j|^2$.
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<div class="fragment fade-in" data-fragment-index="1">
 								\[
-								\begin{array}{rcrcl}
-									&& \color{blue}{x_B} & \color{blue}{\ge} & \color{blue}{0} \\
-									x_A &&& \ge & 0 \\
-									x_A &&& \le & 7 \\
-									&&x_B & \le & 5 \\
-									x_A & + & x_B & \le & 10
-								\end{array}
-								\]
-							</div>
-							<div class="fragment fade-in-out" data-fragment-index="1">
-								<p>
-									<em>Feasible region</em>: set of points $x$ obeying all constraints.
-								</p>
-								\[
-								\begin{array}{rcrcl}
-									&& x_B & \ge & 0 \\
-									\color{blue}{x_A} &&& \color{blue}{\ge} & \color{blue}{0} \\
-									x_A &&& \le & 7 \\
-									&&x_B & \le & 5 \\
-									x_A & + & x_B & \le & 10
-								\end{array}
-								\]
-							</div>
-							<div class="fragment fade-in-out" data-fragment-index="2">
-								<p>
-									<em>Feasible region</em>: set of points $x$ obeying all constraints.
-								</p>
-								\[
-								\begin{array}{rcrcl}
-									&& x_B & \ge & 0 \\
-									x_A &&& \ge & 0 \\
-									\color{blue}{x_A} &&& \color{blue}{\le} & \color{blue}{7} \\
-									&&x_B & \le & 5 \\
-									x_A & + & x_B & \le & 10
-								\end{array}
-								\]
-							</div>
-							<div class="fragment fade-in-out" data-fragment-index="3">
-								<p>
-									<em>Feasible region</em>: set of points $x$ obeying all constraints.
-								</p>
-								\[
-								\begin{array}{rcrcl}
-									&& x_B & \ge & 0 \\
-									x_A &&& \ge & 0 \\
-									x_A &&& \le & 7 \\
-									&& \color{blue}{x_B} & \color{blue}{\le} & \color{blue}{5} \\
-									x_A & + & x_B & \le & 10
-								\end{array}
-								\]
-							</div>
-							<div class="fragment fade-in-out" data-fragment-index="4">
-								<p>
-									<em>Feasible region</em>: set of points $x$ obeying all constraints.
-								</p>
-								\[
-								\begin{array}{rcrcl}
-									&& x_B & \ge & 0 \\
-									x_A &&& \ge & 0 \\
-									x_A &&& \le & 7 \\
-									&&x_B & \le & 5 \\
-									\color{blue}{x_A} & + & \color{blue}{x_B} & \color{blue}{\le} & \color{blue}{10}
-								\end{array}
-								\]
-							</div>
-							<div class="fragment fade-in" data-fragment-index="5">
-								<p>
-									<em>Feasible region</em>: set of points $x$ obeying all constraints.
-								</p>
-								\[
-								\begin{array}{rcrcl}
-									&& x_B & \ge & 0 \\
-									x_A &&& \ge & 0 \\
-									x_A &&& \le & 7 \\
-									&&x_B & \le & 5 \\
-									x_A & + & x_B & \le & 10
-								\end{array}
+								\small
+								\begin{alignat*}{5}
+								& \min & 0 & x_{11}  + & |1-2|^2 & x_{12}  + & |2-1|^2 & x_{21}  + & 0 & x_{22}  \\
+								& \text{subject to} &  & x_{11}  + &  & x_{12} & & & & \phantom{x_{22}} =  0.3 \quad (= \mu_1) \\
+							  & & & &&&& x_{21} & + & x_{22}  =  0.7 \quad (= \mu_2) \\
+								& & & x_{11} &  &  &  + & x_{21} &  & \phantom{x_{22}} =  0.6 \quad (= \nu_1) \\
+								& & &  &  & x_{12} & & & + & x_{22}  =  0.4 \quad (= \nu_2) \\
+								&& & x_{11} , & & x_{12} , & &  x_{21} , & &  x_{22}  \ge  0.
+								\end{alignat*}
 								\]
 							</div>
 						</div>
-						<div style="position:absolute; width:768px; top:100px; left:768px" class="r-stack">
-							<img style="width:768px" src="images/02_lp_intro/lp_graphical_step_1.svg" class="fragment fade-out" data-fragment-index=1>
-							<img style="width:768px" src="images/02_lp_intro/lp_graphical_step_2.svg" class="fragment fade-in-out" data-fragment-index=1>
-							<img style="width:768px" src="images/02_lp_intro/lp_graphical_step_3.svg" class="fragment fade-in-out" data-fragment-index=2>
-							<img style="width:768px" src="images/02_lp_intro/lp_graphical_step_4.svg" class="fragment fade-in-out" data-fragment-index=3>
-							<img style="width:768px" src="images/02_lp_intro/lp_graphical_step_5.svg" class="fragment fade-in-out" data-fragment-index=4>
-							<img style="width:768px" src="images/02_lp_intro/lp_graphical_all.svg" class="fragment fade-in-out" data-fragment-index=5>
+						<div style="position:absolute; width:668px; top:50px; left:868px">
+							<img style="width:'668px'" src="images/02_lp_intro/optimal_transport.svg">
+							<img style="width:'668px'" src="images/02_lp_intro/digger.jpeg" class="fragment fade-out" data-fragment-index="1">
 						</div>
 
 						<aside class="notes">
-							We build up the feasible region by considering each constraint in turn. The final shaded region contains all points that can be <em>feasible</em> solutions, so is called the feasible region. We "only" have to check all of these points to see which is optimal.
 						</aside>
-					</section>
 
-
-					<section>
-						<h2>Level curves</h2>
-
-						<div style="position:absolute; width:768px; top:150px; left:0px">
-								<ul>
-									<li>
-										<em>Objective</em>:
-										\[
-										\max z = f(x) = 0.02  x_A  +  0.03  x_B;
-										\]
-									</li>
-									<li class="fragment" data-fragment-index="1">
-										Draw <em>level curves</em> where $z=\text{constant}$.
-									</li>
-									<li class="fragment" data-fragment-index="2">
-										Follow normal to level curves, increasing $z$.
-									</li>
-									<li class="fragment" data-fragment-index="5">
-										Last feasible point crossing level curve is optimal.
-									</li>
-								</ul>
-						</div>
-						<div style="position:absolute; width:768px; top:100px; left:768px" class="r-stack">
-							<img style="width:768px" src="images/02_lp_intro/lp_level_curves_1.svg" class="fragment fade-in-out" data-fragment-index=1>
-							<img style="width:768px" src="images/02_lp_intro/lp_level_curves_2.svg" class="fragment fade-in-out" data-fragment-index=2>
-							<img style="width:768px" src="images/02_lp_intro/lp_level_curves_3.svg" class="fragment fade-in-out" data-fragment-index=3>
-							<img style="width:768px" src="images/02_lp_intro/lp_level_curves_4.svg" class="fragment fade-in-out" data-fragment-index=4>
-							<img style="width:768px" src="images/02_lp_intro/lp_level_curves.svg" class="fragment fade-in-out" data-fragment-index=5>
-						</div>
-
-						<aside class="notes">
-							Now we have the feasible region we can think about how to change the value of the objective function. In our problem we want to maximise it.
-							<br>
-							We start by drawing a level curve. That is, we draw a line on which the objective function is constant. As our problem is linear, this will be a straight line.  The precise value we pick isn't too important, but we've chosen a value to go through the feasible region here. So any solution $x = (x_A, x_B)$ that lies on this line will have the same value of the objective function.
-							<br>
-							We want to increase the value of the objective function. If we move <em>normal</em> to the level curve this will change its value. By following the arrow it will increase its value; in the other direction it increases. As we are trying to maximise the objective function, we follow the arrow.
-							<br>
-							We can then draw another level curve, having followed the normal to the previous one. Again, as the problem is linear, these level curves are parallel. By construction the objective function on this new curve will have a larger value.
-							<br>
-							We keep drawing level curves with ever larger values of the objective function until we reach the final point in the feasible region that can intersect a level curve. At this point we have found our feasible solution: if we try to increase the value of the objective function, we would move out of the feasible region.
-							<br>
-							The graphical solution method only works for two variables. However, a lot of the intuition we build up carries over to the general case. In addition to level curves and their normals, another important point to note is that the optimal value always appears at a corner, or vertex, of the feasible region.
-						</aside>
 					</section>
 
 				</section>
@@ -534,16 +450,16 @@
 								Linear programs are specified by the coefficients of the objective functions and constraints.
 							</li>
 							<li>
-								The feasible region is the set of all solutions satisfying the constraints.
-							</li>
-							<li>
-								The graphical solution works with two variables, gives intuition for general case:
+								Linear programs are powerful and widespread, and cover
 								<ul>
 									<li>
-										Follow normal to improve objective function.
+										minimization and maximization problems;
 									</li>
 									<li>
-										Optimal solution at vertex of feasible region.
+										constraints with all types of (in)equalities;
+									</li>
+									<li>
+										arbitrary numbers of variables and constraints.
 									</li>
 								</ul>
 							</li>

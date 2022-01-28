@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Lecture 3</title>
+
+		<meta name="description" content="Math1058">
+		<meta name="author" content="Ian Hawke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css">
+
+
+	<style type="text/css">
+	  .reveal p {
+	    text-align: left;
+	  }
+	  .reveal ul {
+	    display: block;
+	  }
+	  .reveal ol {
+	    display: block;
+	  }
+	</style>
+
+
+
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="Title">
+
+					<section>
+						<h2 class="r-fit-text">Graphical solution to Linear Programs</h2>
+						<p>
+							<ul style="list-style: none;">
+								<li> Ian Hawke
+								<li> Michael Kenna-Allison
+							</ul>
+						</p>
+
+						<aside class="notes">
+							We will look at one solution method for some small Linear Programs.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Graphical Solution">
+
+					<section>
+						<h2>Optimal portfolio problem</h2>
+
+						<p>
+							Two assets $A, B$, different returns, diversify investments to hedge risk.
+						</p>
+						\[
+						\begin{array}{lrlcrlcl}
+						\max & 0.02 & x_A & + & 0.03 & x_B && \\
+						\text{subject to} & & x_A & + &  & x_B & \le & 10 \\
+						&  & x_A &  &  &  & \le & 7 \\
+						& &  &  &  & x_B & \le & 5 \\
+						&& x_A, &&& x_B & \ge & 0.
+						\end{array}
+						\]
+
+						<aside class="notes">
+							This is a recap of the optimal portfolio problem covered in the last lecture. We want to invest a client's money in two assets. There's a total of 10 units (say 10 thousand pounds, for example). The expected returns are linked to the expected risk: asset $A$ returns 2 percent but is safer, whilst asset $B$ returns 3 percent. To reduce our exposure to risk we put limits on how much of the money we are willing to invest in either asset; so at most 70%, or 7 thousand pounds, in asset $A$, and 50%, or 5 thousand pounds, in asset $B$. We then want to maximise the expected return.
+							<br>
+							The objective function is the total return to maximise. The constraints limit the amount invested in each asset. As usual the variables, which are the amount of invested in each asset, must be positive.
+							<br>
+							We'll see in later lectures that the mathematics does not care if the problem is a maximization instead of a minimization, nor if the constraints are bounded above or below. This form is slightly easier to visualise for our first solution method.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Feasible region</h2>
+
+
+						<div style="position:absolute; width:768px; top:150px; left:0px" class="r-stack">
+							<div class="fragment fade-out" data-fragment-index="1">
+								<p>
+									<em>Feasible region</em>: set of points $x$ obeying all constraints.
+								</p>
+								\[
+								\begin{array}{rcrcl}
+									&& \color{blue}{x_B} & \color{blue}{\ge} & \color{blue}{0} \\
+									x_A &&& \ge & 0 \\
+									x_A &&& \le & 7 \\
+									&&x_B & \le & 5 \\
+									x_A & + & x_B & \le & 10
+								\end{array}
+								\]
+							</div>
+							<div class="fragment fade-in-out" data-fragment-index="1">
+								<p>
+									<em>Feasible region</em>: set of points $x$ obeying all constraints.
+								</p>
+								\[
+								\begin{array}{rcrcl}
+									&& x_B & \ge & 0 \\
+									\color{blue}{x_A} &&& \color{blue}{\ge} & \color{blue}{0} \\
+									x_A &&& \le & 7 \\
+									&&x_B & \le & 5 \\
+									x_A & + & x_B & \le & 10
+								\end{array}
+								\]
+							</div>
+							<div class="fragment fade-in-out" data-fragment-index="2">
+								<p>
+									<em>Feasible region</em>: set of points $x$ obeying all constraints.
+								</p>
+								\[
+								\begin{array}{rcrcl}
+									&& x_B & \ge & 0 \\
+									x_A &&& \ge & 0 \\
+									\color{blue}{x_A} &&& \color{blue}{\le} & \color{blue}{7} \\
+									&&x_B & \le & 5 \\
+									x_A & + & x_B & \le & 10
+								\end{array}
+								\]
+							</div>
+							<div class="fragment fade-in-out" data-fragment-index="3">
+								<p>
+									<em>Feasible region</em>: set of points $x$ obeying all constraints.
+								</p>
+								\[
+								\begin{array}{rcrcl}
+									&& x_B & \ge & 0 \\
+									x_A &&& \ge & 0 \\
+									x_A &&& \le & 7 \\
+									&& \color{blue}{x_B} & \color{blue}{\le} & \color{blue}{5} \\
+									x_A & + & x_B & \le & 10
+								\end{array}
+								\]
+							</div>
+							<div class="fragment fade-in-out" data-fragment-index="4">
+								<p>
+									<em>Feasible region</em>: set of points $x$ obeying all constraints.
+								</p>
+								\[
+								\begin{array}{rcrcl}
+									&& x_B & \ge & 0 \\
+									x_A &&& \ge & 0 \\
+									x_A &&& \le & 7 \\
+									&&x_B & \le & 5 \\
+									\color{blue}{x_A} & + & \color{blue}{x_B} & \color{blue}{\le} & \color{blue}{10}
+								\end{array}
+								\]
+							</div>
+							<div class="fragment fade-in" data-fragment-index="5">
+								<p>
+									<em>Feasible region</em>: set of points $x$ obeying all constraints.
+								</p>
+								\[
+								\begin{array}{rcrcl}
+									&& x_B & \ge & 0 \\
+									x_A &&& \ge & 0 \\
+									x_A &&& \le & 7 \\
+									&&x_B & \le & 5 \\
+									x_A & + & x_B & \le & 10
+								\end{array}
+								\]
+							</div>
+						</div>
+						<div style="position:absolute; width:768px; top:100px; left:768px" class="r-stack">
+							<img style="width:768px" src="images/02_lp_intro/lp_graphical_step_1.svg" class="fragment fade-out" data-fragment-index=1>
+							<img style="width:768px" src="images/02_lp_intro/lp_graphical_step_2.svg" class="fragment fade-in-out" data-fragment-index=1>
+							<img style="width:768px" src="images/02_lp_intro/lp_graphical_step_3.svg" class="fragment fade-in-out" data-fragment-index=2>
+							<img style="width:768px" src="images/02_lp_intro/lp_graphical_step_4.svg" class="fragment fade-in-out" data-fragment-index=3>
+							<img style="width:768px" src="images/02_lp_intro/lp_graphical_step_5.svg" class="fragment fade-in-out" data-fragment-index=4>
+							<img style="width:768px" src="images/02_lp_intro/lp_graphical_all.svg" class="fragment fade-in-out" data-fragment-index=5>
+						</div>
+
+						<aside class="notes">
+							We build up the feasible region by considering each constraint in turn. The final shaded region contains all points that can be <em>feasible</em> solutions, so is called the feasible region. We "only" have to check all of these points to see which is optimal.
+							<br>
+							We can immediately see some important points solely from the feasible region. First, is it non-empty? If the feasible region is empty then, by definition, there are no points that satisfy all of the constraints. In that case the problem has no solution. We can easily imagine flipping the sign of one of the inequalities in order to make the feasible region empty. Checking whether a solution exists will need to be part of any algorithm for solving the problem.
+							<br>
+							Second, we can see that the feasible region is bounded. That is, the solutions only exist in a closed region of the plane. This is useful as it gives us a limited range of solutions within which we can look for the optimal one. Of course, it's not necessary that the feasible region be bounded in order for an optimal solution to exist. Equally, we can imagine the objective function value diverging to infinity if the feasible region is not bounded. Checking for boundedness is another part of any algorithm.
+							<br>
+							We'll talk a lot more about the geometry of the feasible region in general in later lectures. It's very important for developing useful algorithms, both in the linear and nonlinear cases.
+						</aside>
+					</section>
+
+
+					<section>
+						<h2>Level curves</h2>
+
+						<div style="position:absolute; width:768px; top:150px; left:0px">
+								<ul>
+									<li>
+										<em>Objective</em>:
+										\[
+										\max z = f(x) = 0.02  x_A  +  0.03  x_B;
+										\]
+									</li>
+									<li class="fragment" data-fragment-index="1">
+										Draw <em>level curves</em> where $z=\text{constant}$.
+									</li>
+									<li class="fragment" data-fragment-index="2">
+										Follow normal to level curves, increasing $z$.
+									</li>
+									<li class="fragment" data-fragment-index="5">
+										Last feasible point crossing level curve is optimal.
+									</li>
+								</ul>
+						</div>
+						<div style="position:absolute; width:768px; top:100px; left:768px" class="r-stack">
+							<img style="width:768px" src="images/02_lp_intro/lp_level_curves_1.svg" class="fragment fade-in-out" data-fragment-index=1>
+							<img style="width:768px" src="images/02_lp_intro/lp_level_curves_2.svg" class="fragment fade-in-out" data-fragment-index=2>
+							<img style="width:768px" src="images/02_lp_intro/lp_level_curves_3.svg" class="fragment fade-in-out" data-fragment-index=3>
+							<img style="width:768px" src="images/02_lp_intro/lp_level_curves_4.svg" class="fragment fade-in-out" data-fragment-index=4>
+							<img style="width:768px" src="images/02_lp_intro/lp_level_curves.svg" class="fragment fade-in-out" data-fragment-index=5>
+						</div>
+
+						<aside class="notes">
+							Now we have the feasible region we can think about how to change the value of the objective function. In our problem we want to maximise it.
+							<br>
+							We start by drawing a level curve. That is, we draw a line on which the objective function is constant. As our problem is linear, this will be a straight line.  The precise value we pick isn't too important, but we've chosen a value to go through the feasible region here. So any solution $x = (x_A, x_B)$ that lies on this line will have the same value of the objective function.
+							<br>
+							We want to increase the value of the objective function. If we move <em>normal</em> to the level curve this will change its value. By following the arrow it will increase its value; in the other direction it increases. As we are trying to maximise the objective function, we follow the arrow.
+							<br>
+							We can then draw another level curve, having followed the normal to the previous one. Again, as the problem is linear, these level curves are parallel. By construction the objective function on this new curve will have a larger value.
+							<br>
+							We keep drawing level curves with ever larger values of the objective function until we reach the final point in the feasible region that can intersect a level curve. At this point we have found our feasible solution: if we try to increase the value of the objective function, we would move out of the feasible region.
+							<br>
+							The graphical solution method only works for two variables. However, a lot of the intuition we build up carries over to the general case. In addition to level curves and their normals, another important point to note is that the optimal value always appears at a corner, or vertex, of the feasible region.
+							<br>
+							Note that we've used the "nabla" notation (the upside down triangle) to denote the multi-dimensional, coordinate-invariant, derivative of the objective function. In the linear case this is always a vector, a straight line pointing in the direction of increase of the objective function. This notation and approach generalises to higher dimensions, nonlinear problems, and arbitrary coordinates. However, in this linear case we can always read off the values of this vector directly from the coefficients of the objective function. We will discuss this more in future lectures as well.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Summary">
+					<section>
+						<h1>Summary</h1>
+
+						<ul>
+							<li>
+								Mathematical programming formulates and solves decision problems.
+							</li>
+							<li>
+								Linear programs are specified by the coefficients of the objective functions and constraints.
+							</li>
+							<li>
+								The feasible region is the set of all solutions satisfying the constraints.
+							</li>
+							<li>
+								The graphical solution works with two variables, gives intuition for general case:
+								<ul>
+									<li>
+										Follow normal to improve objective function.
+									</li>
+									<li>
+										Optimal solution at vertex of feasible region.
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+				</section>
+
+			</div>
+
+		</div>
+
+
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/zoom/zoom.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/search/search.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../reveal.js/plugin/math/math.js"></script>
+		<script src="../reveal.js/plugin/spotlight/spotlight.js"></script>
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				width: 1536,
+			  height: 960,
+			  margin: 0.04,
+				controls: false,
+				progress: true,
+				center: true,
+				hash: true,
+				transition: 'none',
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath.KaTeX, RevealSpotlight ],
+				spotlight: {
+					presentingCursor: 'default',
+				}
+			});
+
+		</script>
+
+
+	</body>
+</html>
