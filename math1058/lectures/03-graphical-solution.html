@@ -162,7 +162,7 @@
 									x_A &&& \ge & 0 \\
 									x_A &&& \le & 7 \\
 									&&x_B & \le & 5 \\
-									\color{blue}{x_A} & + & \color{blue}{x_B} & \color{blue}{\le} & \color{blue}{10}
+									\color{blue}{x_A} & \color{blue}{+} & \color{blue}{x_B} & \color{blue}{\le} & \color{blue}{10}
 								\end{array}
 								\]
 							</div>
@@ -246,6 +246,151 @@
 							The graphical solution method only works for two variables. However, a lot of the intuition we build up carries over to the general case. In addition to level curves and their normals, another important point to note is that the optimal value always appears at a corner, or vertex, of the feasible region.
 							<br>
 							Note that we've used the "nabla" notation (the upside down triangle) to denote the multi-dimensional, coordinate-invariant, derivative of the objective function. In the linear case this is always a vector, a straight line pointing in the direction of increase of the objective function. This notation and approach generalises to higher dimensions, nonlinear problems, and arbitrary coordinates. However, in this linear case we can always read off the values of this vector directly from the coefficients of the objective function. We will discuss this more in future lectures as well.
+						</aside>
+					</section>
+
+
+					<section>
+						<h2>Diet problem</h2>
+
+						<p>
+							Sam only eats eggs ($E$) and ham ($H$).
+						</p>
+						\[
+						\begin{array}{lrlcrlcl}
+						\min & 1 & x_E & + & 10 & x_H && \\
+						\text{subject to} & 20 & x_E & + & 10 & x_H & \ge & 300 \\
+						& 90 & x_E & + & 20 & x_H & \ge & 600 \\
+						& 0.02 & x_E & + & 0.5 & x_H & \ge & 1 \\
+						&& x_E, &&& x_H & \ge & 0
+						\end{array}
+						\]
+
+						<aside class="notes">
+							This is a recap of the diet problem, where Sam has to get enough nutrients to survive whilst only eating eggs and ham, and do it for minimum cost.
+							<br>
+							The objective function is the total cost to minimise. Compared to the optimal portfolio problem we have a minimization rather than a maximization problem. We also see that all the inequalities are now greater than.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Feasible region</h2>
+
+
+						<div style="position:absolute; width:768px; top:150px; left:0px" class="r-stack">
+							<div class="fragment fade-out" data-fragment-index="1">
+								<p>
+									<em>Feasible region</em>: set of points $x$ obeying all constraints.
+								</p>
+								\[
+								\begin{array}{rcrcl}
+									&& \color{blue}{x_H} & \color{blue}{\ge} & \color{blue}{0} \\
+									x_E &&& \ge & 0 \\
+									90  x_E & + & 20 x_H & \ge & 600 \\
+									20  x_E & + & 10 x_H & \ge & 300 \\
+									0.02 x_E & + & 0.5 x_H & \ge & 1
+								\end{array}
+								\]
+							</div>
+							<div class="fragment fade-in-out" data-fragment-index="1">
+								<p>
+									<em>Feasible region</em>: set of points $x$ obeying all constraints.
+								</p>
+								\[
+								\begin{array}{rcrcl}
+									&& x_H & \ge & 0 \\
+									\color{blue}{x_E} &&& \color{blue}{\ge} & \color{blue}{0} \\
+									90  x_E & + & 20 x_H & \ge & 600 \\
+									20  x_E & + & 10 x_H & \ge & 300 \\
+									0.02 x_E & + & 0.5 x_H & \ge & 1
+								\end{array}
+								\]
+							</div>
+							<div class="fragment fade-in-out" data-fragment-index="2">
+								<p>
+									<em>Feasible region</em>: set of points $x$ obeying all constraints.
+								</p>
+								\[
+								\begin{array}{rcrcl}
+									&& x_H & \ge & 0 \\
+									x_E &&& \ge & 0 \\
+									\color{blue}{90  x_E} & \color{blue}{+} & \color{blue}{20 x_H} & \color{blue}{\ge} & \color{blue}{600} \\
+									20  x_E & + & 10 x_H & \ge & 300 \\
+									0.02 x_E & + & 0.5 x_H & \ge & 1
+								\end{array}
+								\]
+							</div>
+							<div class="fragment fade-in-out" data-fragment-index="3">
+								<p>
+									<em>Feasible region</em>: set of points $x$ obeying all constraints.
+								</p>
+								\[
+								\begin{array}{rcrcl}
+									&& x_H & \ge & 0 \\
+									x_E &&& \ge & 0 \\
+									90  x_E & + & 20 x_H & \ge & 600 \\
+									\color{blue}{20  x_E} & \color{blue}{+} & \color{blue}{10 x_H} & \color{blue}{\ge} & \color{blue}{300} \\
+									0.02 x_E & + & 0.5 x_H & \ge & 1
+								\end{array}
+								\]
+							</div>
+							<div class="fragment fade-in" data-fragment-index="4">
+								<p>
+									<em>Feasible region</em>: set of points $x$ obeying all constraints.
+								</p>
+								\[
+								\begin{array}{rcrcl}
+									&& x_H & \ge & 0 \\
+									x_E &&& \ge & 0 \\
+									90  x_E & + & 20 x_H & \ge & 600 \\
+									20  x_E & + & 10 x_H & \ge & 300 \\
+									\color{blue}{0.02 x_E} & \color{blue}{+} & \color{blue}{0.5 x_H} & \color{blue}{\ge} & \color{blue}{1}
+								\end{array}
+								\]
+							</div>
+						</div>
+						<div style="position:absolute; width:768px; top:100px; left:768px" class="r-stack">
+							<img style="width:768px" src="images/03_graphical_solution/lp_graphical_diet_step_1.svg" class="fragment fade-out" data-fragment-index=1>
+							<img style="width:768px" src="images/03_graphical_solution/lp_graphical_diet_step_2.svg" class="fragment fade-in-out" data-fragment-index=1>
+							<img style="width:768px" src="images/03_graphical_solution/lp_graphical_diet_step_3.svg" class="fragment fade-in-out" data-fragment-index=2>
+							<img style="width:768px" src="images/03_graphical_solution/lp_graphical_diet_step_4.svg" class="fragment fade-in-out" data-fragment-index=3>
+							<img style="width:768px" src="images/03_graphical_solution/lp_graphical_diet_step_5.svg" class="fragment fade-in-out" data-fragment-index=4>
+						</div>
+
+						<aside class="notes">
+							The key difference to the portfolio problem is that the problem is not bounded. We will see that this does not matter in this case!
+						</aside>
+					</section>
+
+
+					<section>
+						<h2>Level curves</h2>
+
+						<div style="position:absolute; width:768px; top:150px; left:0px">
+								<ul>
+									<li>
+										<em>Objective</em>:
+										\[
+										\min z = f(x) = x_E  +  10  x_H;
+										\]
+									</li>
+									<li>
+										Draw <em>level curves</em> where $z=\text{constant}$.
+									</li>
+									<li>
+										Follow normal to level curves, increasing $z$.
+									</li>
+									<li>
+										Last feasible point crossing level curve is optimal.
+									</li>
+								</ul>
+						</div>
+						<div style="position:absolute; width:768px; top:100px; left:768px">
+							<img style="width:768px" src="images/03_graphical_solution/lp_diet_level_curves.svg">
+						</div>
+
+						<aside class="notes">
+							The construction of the level curves works as before. Even though the feasible region is unbounded towards the top right, we can still see the graphical solution working as the normal to the level curves pushes us down and to the left. This does raise concerns about how general this is. We'll discuss boundedness later at length for the general case.
 						</aside>
 					</section>
 
