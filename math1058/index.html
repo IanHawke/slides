@@ -1,9 +1,126 @@
-<!DOCTYPE html>
-<html>
-<body>
+<!doctype html>
+<html lang="en">
 
-<h1>My First Heading</h1>
-<p>My first paragraph.</p>
+	<head>
+		<meta charset="utf-8">
 
-</body>
+		<title>MATH1058 Lectures</title>
+
+		<meta name="description" content="Math1058">
+		<meta name="author" content="Ian Hawke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="reveal.js/plugin/highlight/monokai.css">
+
+
+	<style type="text/css">
+	  .reveal p {
+	    text-align: left;
+	  }
+	  .reveal ul {
+	    display: block;
+	  }
+	  .reveal ol {
+	    display: block;
+	  }
+
+		.reveal pre code {
+			font-size: 1.4em !important;
+			line-height: 1.4 !important;
+		}
+	</style>
+
+
+
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="Title">
+
+					<section>
+            <h2 class="r-fit-text">MATH1058 lectures</h2>
+
+            <ul>
+              <li>
+                Use cursors keys or space bar to navigate.
+              </li>
+              <li>
+                Use '<code>s</code>' for speaker notes.
+              </li>
+              <li>
+                Use '<code>alt</code>'/'<code>option</code>' key plus mouse click to zoom on a particular point.
+              </li>
+            </ul>
+
+          </section>
+
+          <section>
+            <h2 class="r-fit-text">Linear programming</h2>
+            <ul style="list-style: none;">
+              <li>
+                <a href="lectures/01-intro.html">Introduction to OR</a>.
+              </li>
+              <li>
+                <a href="lectures/02-lp-intro.html">Introduction to Linear Programming</a>.
+              </li>
+              <li>
+                <a href="lectures/03-graphical.html">The Graphical Solution</a>.
+              </li>
+            </ul>
+          </section>
+				</section>
+
+			</div>
+
+		</div>
+
+
+		<script src="reveal.js/dist/reveal.js"></script>
+		<script src="reveal.js/plugin/zoom/zoom.js"></script>
+		<script src="reveal.js/plugin/notes/notes.js"></script>
+		<script src="reveal.js/plugin/search/search.js"></script>
+		<script src="reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="reveal.js/plugin/math/math.js"></script>
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				width: 1536,
+			  height: 960,
+			  margin: 0.04,
+				controls: false,
+				progress: true,
+				center: true,
+				hash: true,
+				transition: 'none',
+				pdfSeparateFragments: true,
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath.KaTeX ],
+				spotlight: {
+					presentingCursor: 'default',
+				}
+			});
+
+		</script>
+
+
+	</body>
 </html>
