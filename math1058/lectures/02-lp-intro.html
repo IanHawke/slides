@@ -260,13 +260,14 @@
 						&& x_j & \ge & 0, & \quad \forall j & \in & \{ 1, \dots, n \}.
 						\end{array}
 						\]
-					</section>
 
-					<aside class="notes">
-						We have abstracted our simplified diet problem, with two variables (eggs and ham) and three constraints from the problem (linked to the nutrients) and two positivity constraints (from the definition of the variables), and ended up with the compact example form.
-						<br>
-						A more general linear programming problem can be framed in a similar fashion. Here we show the compact form for a problem with $n$ variables and $n$ constraints. The coefficients $c_j$ define the objective function to optimise. The coefficients $a_{ij}$ define the problem constraints. For now, we are still imposing positivity.
-					</aside>
+						<aside class="notes">
+							We have abstracted our simplified diet problem, with two variables (eggs and ham) and three constraints from the problem (linked to the nutrients) and two positivity constraints (from the definition of the variables), and ended up with the compact example form.
+							<br>
+							A more general linear programming problem can be framed in a similar fashion. Here we show the compact form for a problem with $n$ variables and $n$ constraints. The coefficients $c_j$ define the objective function to optimise. The coefficients $a_{ij}$ define the problem constraints. For now, we are still imposing positivity.
+						</aside>
+
+					</section>
 
 				</section>
 
@@ -342,7 +343,9 @@
 
 
 						<aside class="notes">
-
+							The linear programming case makes three restrictions compared to the full mathematical programming case. Specifically, both the objective function and (all of the) constraints are linear. That is, they are linear functions of the decision variables $x$. This means they can be expressed as sums of constant coefficients multiplied by the value of the decision variables. The final restriction is that the decision variables themselves must be real and not belong to some special subset of the reals (such as the integers, which makes life much harder).
+							<br>
+							It may seem that we have restricted the problem so far that it will have little use. However, it is often the case that a general problem can be repesented <em>locally</em> as a linear problem using a Taylor series expansion (the multi-variable case needed is covered in MATH1060, for example).
 						</aside>
 
 					</section>
@@ -384,6 +387,8 @@
 							We'll now look at a different linear programming problem. We want to invest a client's money in two assets. There's a total of 10 units (say 10 thousand pounds, for example). The expected returns are linked to the expected risk: asset $A$ returns 2 percent but is safer, whilst asset $B$ returns 3 percent. To reduce our exposure to risk we put limits on how much of the money we are willing to invest in either asset; so at most 70%, or 7 thousand pounds, in asset $A$, and 50%, or 5 thousand pounds, in asset $B$. We then want to maximise the expected return.
 							<br>
 							The objective function is the total return to maximise. The constraints limit the amount invested in each asset. As usual the variables, which are the amount of invested in each asset, must be positive.
+							<br>
+							As with the diet problem this toy example can be generalised to an arbitrary number of assets and a complex investment strategy. As a real financial investment approach it will almost certainly fail as it ignores statistical effects, particularly the volatility of the assets and their correlations and covariances. However, the linear programming problem here is a first step in financial optimisation.
 							<br>
 							We'll see in later lectures that the mathematics does not care if the problem is a maximization instead of a minimization, nor if the constraints are bounded above or below. This form is slightly easier to visualise for our first solution method.
 						</aside>
@@ -432,6 +437,13 @@
 						</div>
 
 						<aside class="notes">
+							In the optimal transport problem we have a prosaic problem with deep implications for probability. Suppose we have two boxes containing given amounts of dirt, and that we want to move the dirt to two other boxes that start off empty. The filled $\mu$ boxes have correspond $\nu$ boxes which are close enough that it costs nothing to move the dirt between each. However, there are constraints on exactly how much dirt each $\nu$ box should receive. When shifting dirt between, for example, filled box $\mu_1$ to initially empty box $\nu_2$, the distance between them incurs a cost (which is the square of the difference between the box numbers).
+							<br>
+							Here we give each decision variable two indexes. The first denotes the $\mu$ box the dirt is moved from. The second denotes the $\nu$ box the dirt is moved to. This notation does not stop us from thinking of the decision variables $x$ as forming a vector.
+							<br>
+							With this notation we can consider each box in turn to write down the corresponding constraint. For example, the dirt removed from box $\mu_1$ must equal 0.3. Equally, that dirt removed is $x_{11}+x_{12}$. As another example, the dirt placed in box $\nu_2$ must equal 0.4. Equally, that dirt placed must be $x_{12} + x_{22}$.
+							<br>
+							We see we now have the final case: the constraints are expressed as <em>equalities</em>.
 						</aside>
 
 					</section>
