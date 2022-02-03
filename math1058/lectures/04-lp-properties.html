@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Lecture 4</title>
+
+		<meta name="description" content="Math1058">
+		<meta name="author" content="Ian Hawke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css">
+
+
+	<style type="text/css">
+	  .reveal p {
+	    text-align: left;
+	  }
+	  .reveal ul {
+	    display: block;
+	  }
+	  .reveal ol {
+	    display: block;
+	  }
+	</style>
+
+
+
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="Title">
+
+					<section>
+						<h2 class="r-fit-text">Properties of Linear Programs</h2>
+						<p>
+							<ul style="list-style: none;">
+								<li> Ian Hawke
+								<li> Michael Kenna-Allison
+							</ul>
+						</p>
+
+						<aside class="notes">
+							We will look general properties of Linear Programs.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Forms">
+
+					<section>
+
+						<div style="position:absolute; width:768px; top:150px; left:0px">
+							<h3>Diet problem</h3>
+							\[
+							\begin{array}{lrlcrlclrcl}
+							\min & \sum_{j=1}^n c_{j} & x_j & \\
+							\text{subject to} & \sum_{j=1}^n a_{ij} & x_j & \ge & b_i, & \quad \forall i & \in & \{ 1, \dots, m \} \\
+							&& x_j & \ge & 0, & \quad \forall j & \in & \{ 1, \dots, n \}.
+							\end{array}
+							\]
+						</div>
+						<div style="position:absolute; width:768px; top:150px; left:768px">
+							<h3>Portfolio problem</h3>
+							\[
+							\begin{array}{lrlcrlclrcl}
+							\max & \sum_{j=1}^n c_{j} & x_j & \\
+							\text{subject to} & \sum_{j=1}^n a_{ij} & x_j & \le & b_i, & \quad \forall i & \in & \{ 1, \dots, m \} \\
+							&& x_j & \ge & 0, & \quad \forall j & \in & \{ 1, \dots, n \}.
+							\end{array}
+							\]
+						</div>
+
+						<aside class="notes">
+							In the introduction to LPs we discussed three separate problems: the diet problem, the portfolio problem, and the transport problem. Each can be generalised to large size: for example, in the portfolio problem we can consider an arbitrarily large number of assets and a complex investment strategy.
+							<br>
+							In the general form, two of which are shown here, there are minor differences. The diet and transport problems are minimization cases, whilst the portfolio problem is a maximization. In the diet problem all inequalities are greater than or equals; in the transport problem all (except the non-negativity constraints) are less than or equals; and in the transport case they are equalities.
+							<br>
+							To construct general theorems and algorithms for all LPs it is useful to work with one, single form. However, each different form has different advantages. So we first need to identify the useful forms, and work out how to translate a problem between each form.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Summary">
+					<section>
+						<h1>Summary</h1>
+
+						<ul>
+							<li>
+								Mathematical programming formulates and solves decision problems.
+							</li>
+							<li>
+								Linear programs are specified by the coefficients of the objective functions and constraints.
+							</li>
+							<li>
+								The feasible region is the set of all solutions satisfying the constraints.
+							</li>
+							<li>
+								The graphical solution works with two variables, gives intuition for general case:
+								<ul>
+									<li>
+										Follow normal to improve objective function.
+									</li>
+									<li>
+										Optimal solution at vertex of feasible region.
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+				</section>
+
+			</div>
+
+		</div>
+
+
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/zoom/zoom.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/search/search.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../reveal.js/plugin/math/math.js"></script>
+		<script src="../reveal.js/plugin/spotlight/spotlight.js"></script>
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				width: 1536,
+			  height: 960,
+			  margin: 0.04,
+				controls: false,
+				progress: true,
+				center: true,
+				hash: true,
+				transition: 'none',
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath.KaTeX, RevealSpotlight ],
+				spotlight: {
+					presentingCursor: 'default',
+				}
+			});
+
+		</script>
+
+
+	</body>
+</html>
