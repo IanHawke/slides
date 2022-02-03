@@ -68,26 +68,32 @@
 
 					<section>
 
-						<div style="position:absolute; width:768px; top:150px; left:0px">
-							<h3>Diet problem</h3>
-							\[
-							\begin{array}{lrlcrlclrcl}
-							\min & \sum_{j=1}^n c_{j} & x_j & \\
-							\text{subject to} & \sum_{j=1}^n a_{ij} & x_j & \ge & b_i, & \quad \forall i & \in & \{ 1, \dots, m \} \\
-							&& x_j & \ge & 0, & \quad \forall j & \in & \{ 1, \dots, n \}.
-							\end{array}
-							\]
-						</div>
-						<div style="position:absolute; width:768px; top:150px; left:768px">
-							<h3>Portfolio problem</h3>
-							\[
-							\begin{array}{lrlcrlclrcl}
-							\max & \sum_{j=1}^n c_{j} & x_j & \\
-							\text{subject to} & \sum_{j=1}^n a_{ij} & x_j & \le & b_i, & \quad \forall i & \in & \{ 1, \dots, m \} \\
-							&& x_j & \ge & 0, & \quad \forall j & \in & \{ 1, \dots, n \}.
-							\end{array}
-							\]
-						</div>
+						<h4>Diet problem</h4>
+						\[
+						\begin{array}{lrlcrlclrcl}
+						\min & \sum_{j=1}^n c_{j} & x_j & \\
+						\text{subject to} & \sum_{j=1}^n a_{ij} & x_j & \ge & b_i, & \quad \forall i & \in & \{ 1, \dots, m \} \\
+						&& x_j & \ge & 0, & \quad \forall j & \in & \{ 1, \dots, n \}.
+						\end{array}
+						\]
+
+						<h4>Portfolio problem</h4>
+						\[
+						\begin{array}{lrlcrlclrcl}
+						\max & \sum_{j=1}^n c_{j} & x_j & \\
+						\text{subject to} & \sum_{j=1}^n a_{ij} & x_j & \le & b_i, & \quad \forall i & \in & \{ 1, \dots, m \} \\
+						&& x_j & \ge & 0, & \quad \forall j & \in & \{ 1, \dots, n \}.
+						\end{array}
+						\]
+
+						<h4>Transport problem</h4>
+						\[
+						\begin{array}{lrlcrlclrcl}
+						\min & \sum_{j=1}^n c_{j} & x_j & \\
+						\text{subject to} & \sum_{j=1}^n a_{ij} & x_j & = & b_i, & \quad \forall i & \in & \{ 1, \dots, m \} \\
+						&& x_j & \ge & 0, & \quad \forall j & \in & \{ 1, \dots, n \}.
+						\end{array}
+						\]
 
 						<aside class="notes">
 							In the introduction to LPs we discussed three separate problems: the diet problem, the portfolio problem, and the transport problem. Each can be generalised to large size: for example, in the portfolio problem we can consider an arbitrarily large number of assets and a complex investment strategy.
@@ -95,6 +101,83 @@
 							In the general form, two of which are shown here, there are minor differences. The diet and transport problems are minimization cases, whilst the portfolio problem is a maximization. In the diet problem all inequalities are greater than or equals; in the transport problem all (except the non-negativity constraints) are less than or equals; and in the transport case they are equalities.
 							<br>
 							To construct general theorems and algorithms for all LPs it is useful to work with one, single form. However, each different form has different advantages. So we first need to identify the useful forms, and work out how to translate a problem between each form.
+						</aside>
+					</section>
+
+					<section>
+						<div style="position:absolute; width:1536px; top:150px; left:0px" class="r-stack">
+							<div class="fragment fade-out" data-fragment-index="1">
+								<h2>Canonical form</h2>
+								\[
+								\begin{array}{lrlcrlclrcl}
+								\color{blue}{\max} & \sum_{j=1}^n c_{j} & x_j & \\
+								\text{subject to} & \sum_{j=1}^n a_{ij} & x_j & \color{blue}{\le} & b_i, & \quad \forall i & \in & \{ 1, \dots, m \} \\
+								&& x_j & \ge & 0, & \quad \forall j & \in & \{ 1, \dots, n \}.
+								\end{array}
+								\]
+							</div>
+							<div class="fragment fade-in-out" data-fragment-index="1">
+								<h2>Standard form</h2>
+								\[
+								\begin{array}{lrlcrlclrcl}
+								\color{blue}{\min} & \sum_{j=1}^n c_{j} & x_j & \\
+								\text{subject to} & \sum_{j=1}^n a_{ij} & x_j & \color{blue}{=} & b_i, & \quad \forall i & \in & \{ 1, \dots, m \} \\
+								&& x_j & \ge & 0, & \quad \forall j & \in & \{ 1, \dots, n \}.
+								\end{array}
+								\]
+							</div>
+						</div>
+
+						<aside class="notes">
+							The canonical form is that used in the portfolio problem. It is a maximization with the inequalities being less than or equals. It is most useful, as seen in the last lecture, when working with the geometry of the problem, discussing the feasible region, and thinking about moving the solution around. As such it will be the focus early on when discussing essential theorems linked to geometrical concepts.
+							<br>
+							The standard form is that used in the transport problem. It is a minimization with equalities. It is most useful when looking at algebraic operations: we see how the constraints now explicitly look exactly like the sort of linear system problem used in Linear Algebra. This is most useful when doing calculations and discussing and building algorithms.
+							<br>
+							There are other, related, forms that we will touch on as needed later.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Transformation">
+
+					<section>
+
+						<h2>Transformation rules</h2>
+
+						<ol>
+							<li class="fragment fade-in">
+								\[\max f(x) \quad \longleftrightarrow \quad - \min (- f(x));\]
+							</li>
+							<li class="fragment fade-in">
+								\[a x \le b \quad \longleftrightarrow \quad -a x \ge -b;\]
+							</li>
+							<li class="fragment fade-in">
+								\[a x = b \quad \longleftrightarrow \quad a x \ge b \text{ and } a x \le b;\]
+							</li>
+							<li class="fragment fade-in">
+								\[a x \le b \quad \longleftrightarrow \quad a x + s = b, \quad \text{with } s \ge 0;\]
+							</li>
+							<li class="fragment fade-in">
+								$x$ unrestricted: \[x \to x^+ - x^- \text{ with } x^{\pm} \ge 0.\]
+							</li>
+						</ol>
+
+
+						<aside class="notes">
+							To transform between our different classes of problems we need to be able to switch minimization and maximization, we need to be able to switch the "sign" of inequalities, we need to transform between equalities and inequalities, and we need to turn unrestricted variables into constrained variables.
+							<br>
+							We'll talk through many of these rules with an example in a second. However, there is a key general point to make first. Note that the rules may introduce either new constraints (rule 3) or new variables (rules 4 and 5). This is not a problem (in theory). There is nothing that say that the number of variables or constraints has to be fixed. It may have practical implementations in terms of the cost of solving the problem. However, there is no point in worrying about the cost until we have first shown that there is a solution and worked out how it can be found.
+						</aside>
+
+					</section>
+
+					<section>
+						<h2>Transformation example</h2>
+
+						
+
+						<aside class="notes">
 						</aside>
 					</section>
 
