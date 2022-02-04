@@ -194,6 +194,25 @@ structure:
   source: .
   title: Lab notes
   type: part
+- build_pdf: false
+  content:
+  - build_pdf: true
+    pdf_url: computing_assignment/replit_introduction/replit_introduction.pdf
+    slug: replit_introduction
+    source: markdown/computing/00-repl.md
+    title: repl.it introduction
+    type: chapter
+  - build_pdf: true
+    pdf_url: computing_assignment/example_assignment/example_assignment.pdf
+    slug: example_assignment
+    source: markdown/computing/00-example.md
+    title: Example assignment
+    type: chapter
+  pdf_url: computing_assignment/computing_assignment.pdf
+  slug: computing_assignment
+  source: .
+  title: Computing assignments
+  type: part
 themes:
 - path: default
   source: default
