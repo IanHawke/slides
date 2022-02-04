@@ -175,7 +175,74 @@
 					<section>
 						<h2>Transformation example</h2>
 
-						
+						<div style="position:absolute; width:1500px; top:100px; left:10px" class="r-stack">
+							<div class="fragment fade-out" data-fragment-index="1">
+								<p>
+									Original problem:
+								</p>
+								\[
+								\begin{array}{lrlcrlcl}
+									\max \quad & 9 & x_1 & - & 3 & x_2 && \\
+									\text{s.t} \quad & 8 & x_1 & + & 4 & x_2 & \le & 41 \\
+									& 6 & x_1 & - & 2 & x_2 & \ge & 23 \\
+									&   & x_1 &   &   &     & \ge & 0 \\
+									&   &     &   &   & x_2 & \text{unrestricted.}
+								\end{array}
+								\]
+							</div>
+							<div class="fragment fade-in-then-out" data-fragment-index="1">
+								<p>
+									Add restriction: $x_2 \to x_2^+ - x_2^-$:
+								</p>
+								\[
+								\begin{array}{lrlcrlcrlcl}
+									\max \quad & 9 & x_1 & - & \color{blue}{3} & \color{blue}{x_2^+} & + & \color{blue}{3} & \color{blue}{x_2^-} && \\
+									\text{s.t} \quad & 8 & x_1 & + & \color{blue}{4} & \color{blue}{x_2} & - & \color{blue}{4} & \color{blue}{x_2^-} & \le & 41 \\
+									& 6 & x_1 & - & \color{blue}{2} & \color{blue}{x_2^+} & + & \color{blue}{2} & \color{blue}{x_2^-} & \ge & 23 \\
+									&   & x_1, &   &   & \color{blue}{x_2^+}, & & & \color{blue}{x_2^-}  & \ge & 0.
+								\end{array}
+								\]
+							</div>
+							<div class="fragment fade-in-then-out" data-fragment-index="2">
+								<p>
+									Add slack variable $s_1$ for first constraint:
+								</p>
+								\[
+								\begin{array}{lrlcrlcrlclcl}
+									\max \quad & 9 & x_1 & - & 3 & x_2^+ & + & 3 & x_2^- && && \\
+									\text{s.t} \quad & 8 & x_1 & + & 4 & x_2 & - & 4 & x_2^- & + &  \color{blue}{s_1} & \color{blue}{=} & 41 \\
+									& 6 & x_1 & - & 2 & x_2^+ & + & 2 & x_2^- & && \ge & 23 \\
+									&   & x_1, &   &   & x_2^+, & & & x_2^-, & &  s_1 & \ge & 0.
+								\end{array}
+								\]
+							</div>
+							<div class="fragment fade-in-then-out" data-fragment-index="3">
+								<p>
+									Add surplus variable $s_2$ for second constraint:
+								</p>
+								\[
+								\begin{array}{lrlcrlcrlclclcl}
+									\max \quad & 9 & x_1 & - & 3 & x_2^+ & + & 3 & x_2^- && && && \\
+									\text{s.t} \quad & 8 & x_1 & + & 4 & x_2 & - & 4 & x_2^- & + &  s_1 & && = & 41 \\
+									& 6 & x_1 & - & 2 & x_2^+ & + & 2 & x_2^- & && - &  \color{blue}{s_2} & \color{blue}{=} & 23 \\
+									&   & x_1, &   &   & x_2^+, & & & x_2^-, & &  s_1, & &  \color{blue}{s_2} & \ge & 0.
+								\end{array}
+								\]
+							</div>
+							<div class="fragment fade-in" data-fragment-index="4">
+								<p>
+									Change $\max \to \min$:
+								</p>
+								\[
+								\begin{array}{lrlcrlcrlclclcl}
+									\min \quad & \color{blue}{-9} & x_1 & \color{blue}{+} & 3 & x_2^+ & \color{blue}{-} & 3 & x_2^- && && && \\
+									\text{s.t} \quad & 8 & x_1 & + & 4 & x_2 & - & 4 & x_2^- & + &  s_1 & && = & 41 \\
+									& 6 & x_1 & - & 2 & x_2^+ & + & 2 & x_2^- & && - & s_2 & = & 23 \\
+									&   & x_1, &   &   & x_2^+, & & & x_2^-, & &  s_1, & &  s_2 & \ge & 0.
+								\end{array}
+								\]
+							</div>
+						</div>
 
 						<aside class="notes">
 						</aside>
