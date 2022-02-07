@@ -208,6 +208,12 @@ structure:
     source: markdown/computing/00-example.md
     title: Example assignment
     type: chapter
+  - build_pdf: true
+    pdf_url: computing_assignment/assigment_1/assigment_1.pdf
+    slug: assigment_1
+    source: markdown/computing/01-week3.md
+    title: Assigment 1
+    type: chapter
   pdf_url: computing_assignment/computing_assignment.pdf
   slug: computing_assignment
   source: .
