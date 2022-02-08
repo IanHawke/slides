@@ -167,7 +167,7 @@
 						<aside class="notes">
 							To transform between our different classes of problems we need to be able to switch minimization and maximization, we need to be able to switch the "sign" of inequalities, we need to transform between equalities and inequalities, and we need to turn unrestricted variables into constrained variables.
 							<br>
-							We'll talk through many of these rules with an example in a second. However, there is a key general point to make first. Note that the rules may introduce either new constraints (rule 3) or new variables (rules 4 and 5). This is not a problem (in theory). There is nothing that say that the number of variables or constraints has to be fixed. It may have practical implementations in terms of the cost of solving the problem. However, there is no point in worrying about the cost until we have first shown that there is a solution and worked out how it can be found.
+							We'll talk through many of these rules with an example in a second. However, there is a key general point to make first. Note that the rules may introduce either new constraints (rule 3) or new variables (rules 4 and 5). This is not a problem (in theory). There is nothing that say that the number of variables or constraints has to be fixed. It may have practical implications in terms of the cost of solving the problem. However, there is no point in worrying about the cost until we have first shown that there is a solution and worked out how it can be found.
 						</aside>
 
 					</section>
@@ -197,7 +197,7 @@
 								\[
 								\begin{array}{lrlcrlcrlcl}
 									\max \quad & 9 & x_1 & - & \color{blue}{3} & \color{blue}{x_2^+} & + & \color{blue}{3} & \color{blue}{x_2^-} && \\
-									\text{s.t} \quad & 8 & x_1 & + & \color{blue}{4} & \color{blue}{x_2} & - & \color{blue}{4} & \color{blue}{x_2^-} & \le & 41 \\
+									\text{s.t} \quad & 8 & x_1 & + & \color{blue}{4} & \color{blue}{x_2^+} & - & \color{blue}{4} & \color{blue}{x_2^-} & \le & 41 \\
 									& 6 & x_1 & - & \color{blue}{2} & \color{blue}{x_2^+} & + & \color{blue}{2} & \color{blue}{x_2^-} & \ge & 23 \\
 									&   & x_1, &   &   & \color{blue}{x_2^+}, & & & \color{blue}{x_2^-}  & \ge & 0.
 								\end{array}
@@ -210,7 +210,7 @@
 								\[
 								\begin{array}{lrlcrlcrlclcl}
 									\max \quad & 9 & x_1 & - & 3 & x_2^+ & + & 3 & x_2^- && && \\
-									\text{s.t} \quad & 8 & x_1 & + & 4 & x_2 & - & 4 & x_2^- & + &  \color{blue}{s_1} & \color{blue}{=} & 41 \\
+									\text{s.t} \quad & 8 & x_1 & + & 4 & x_2^+ & - & 4 & x_2^- & + &  \color{blue}{s_1} & \color{blue}{=} & 41 \\
 									& 6 & x_1 & - & 2 & x_2^+ & + & 2 & x_2^- & && \ge & 23 \\
 									&   & x_1, &   &   & x_2^+, & & & x_2^-, & &  \color{blue}{s_1} & \ge & 0.
 								\end{array}
@@ -223,7 +223,7 @@
 								\[
 								\begin{array}{lrlcrlcrlclclcl}
 									\max \quad & 9 & x_1 & - & 3 & x_2^+ & + & 3 & x_2^- && && && \\
-									\text{s.t} \quad & 8 & x_1 & + & 4 & x_2 & - & 4 & x_2^- & + &  s_1 & && = & 41 \\
+									\text{s.t} \quad & 8 & x_1 & + & 4 & x_2^+ & - & 4 & x_2^- & + &  s_1 & && = & 41 \\
 									& 6 & x_1 & - & 2 & x_2^+ & + & 2 & x_2^- & && - &  \color{blue}{s_2} & \color{blue}{=} & 23 \\
 									&   & x_1, &   &   & x_2^+, & & & x_2^-, & &  s_1, & &  \color{blue}{s_2} & \ge & 0.
 								\end{array}
@@ -236,7 +236,7 @@
 								\[
 								\begin{array}{lrlcrlcrlclclcl}
 									\min \quad & \color{blue}{-}9 & x_1 & \color{blue}{+} & 3 & x_2^+ & \color{blue}{-} & 3 & x_2^- && && && \\
-									\text{s.t} \quad & 8 & x_1 & + & 4 & x_2 & - & 4 & x_2^- & + &  s_1 & && = & 41 \\
+									\text{s.t} \quad & 8 & x_1 & + & 4 & x_2^+ & - & 4 & x_2^- & + &  s_1 & && = & 41 \\
 									& 6 & x_1 & - & 2 & x_2^+ & + & 2 & x_2^- & && - & s_2 & = & 23 \\
 									&   & x_1, &   &   & x_2^+, & & & x_2^-, & &  s_1, & &  s_2 & \ge & 0.
 								\end{array}
@@ -245,7 +245,133 @@
 						</div>
 
 						<aside class="notes">
+							In this example we start from a very mixed problem and convert to standard form. In standard form the problem is a minimisation, all decision variables are non-negative, and all other constraints are equalities.
+							<br>
+							It does not matter which order we apply the transformation rules. Here we will first ensure all decision variables are non-negative. This first requires rule 5, where $x_2$ is replaced by two non-negative decision variables. This modifies all the constraints and the objective function, and the problem is now written in terms of three decision variables.
+							<br>
+							Next we convert the first constraint to an equality. This involves introducing a (non-negative) slack variable. We see it does not contribute to the objective function, and its coefficient is always one.
+							<br>
+							The second constraint is a greater than rather than a less than. So we convert it to an equality by introducing a (non-negative) surplus variable. Again it does not contribute to the objective function, and its coefficient is minus one.
+							<br>
+							Finally we convert to a minimisation problem. The is rule 1, and requires us to flip the sign of the coefficients in the objective function. Note that if you care about the value of the original objective function there should also be a minus sign in front of the min. Conventionally this is often ignored, as in most cases it is the solution that matters, not the value of the objective function.
 						</aside>
+					</section>
+
+				</section>
+
+				<section id="Convexity">
+
+					<section>
+
+						<h2>Hyperplanes</h2>
+						<div style="position:absolute; width:768px; top:150px; left:0px">
+							<p>
+								Take one inequality $a_i x \le b_i$.
+							</p>
+							<ul>
+								<li>
+									<em>Halfspace</em>: points satisfying inequality.
+								</li>
+								<li>
+									<em>Hyperplane</em>: points satisfying inequality <em>as equation</em>.
+								</li>
+								<li>
+									Vector $a_i$
+									<ul>
+										<li>
+											orthogonal to hyperplane,
+										</li>
+										<li>
+											points <em>out</em> of halfspace.
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+						<div style="position:absolute; width:768px; top:150px; left:768px">
+							<img style="width:768px" src="images/04_properties/lp_geom_hyperplane.svg">
+						</div>
+
+						<aside class="notes">
+							For this section we're going to discuss geometry. For this we are interested in canonical form, where all the constraints are inequalities.
+							<br>
+							Take one single constraint, as an inequality. We have $n$ decision variables so the general space of (potential) solutions is $\mathbb{R}^n$. The set of points satisfying this single constraint is called the halfspace, which is a subset of $\mathbb{R}^n$. The set of points where the constraint is satisfied as an equality is called the hyperplane.
+							<br>
+							Because the problem is linear the hyperplane is "straight" and splits the solution space $\mathbb{R}^n$ into two semi-infinite pieces. It is "straight" in the sense that the normal vector to the hyperplane $a_i$ is constant (as it is the set of coefficients defining the constraint). To see that $a_i$ is normal, imagine constructing an orthogonal basis of $\mathbb{R}^n$ where the first basis vector is $a_i$. Then write $x$ in terms of this basis. Changing the coefficient of any basis vector that is not $a_i$ will have no impact on the value of the constraint (as the basis is orthogonal), and so will "move the point within the hyperplane". Only changing the coefficient of $a_i$ moves off the hyperplane.
+							<br>
+							Note that this convention has $a_i$ pointing out of the halfspace, which is opposite to the convention we used in the graphical solution.
+						</aside>
+
+					</section>
+
+					<section>
+
+						<h2>Feasible region</h2>
+						<div style="position:absolute; width:768px; top:150px; left:0px">
+							<p>
+								Take <em>every</em> inequality $a_i x \le b_i$.
+							</p>
+							<ul>
+								<li>
+									<em>Feasible region</em>: points satisfying all inequalities.
+								</li>
+								<li>
+									Feasible region is the intersection of $m$ halfspaces.
+								</li>
+								<li>
+									<em>Polyhedron</em>: another name for the intersection of halfspaces.
+								</li>
+							</ul>
+						</div>
+						<div style="position:absolute; width:768px; top:150px; left:768px">
+							<img style="width:768px" src="images/03_graphical_solution/lp_graphical_all.svg">
+						</div>
+
+						<aside class="notes">
+							For now we will work with the <em>simplified</em> canonical form, where we ignore the non-negativity constraints on the decision variables.
+							<br>
+							This means that the $m$ constraints defined the set of all solutions to the problem, which is the feasible region.
+							<br>
+							As each constraint geometrically constructs a halfspace within which it is satisfied, the feasible region is the intersection of all the halfspaces that come from the constraints. This is exactly the situation that we saw in two dimensions with the graphical solution in the last lecture.
+							<br>
+							In wider geometrical theory an object formed from the intersection of halfspaces is call a polyhedron. For this reason the set corresponding to the feasible region is often denoted $P$.
+						</aside>
+
+					</section>
+
+					<section>
+
+						<h2>Convexity</h2>
+						<ul>
+							<li>
+								Set $S$ is convex if all lines connecting points in $S$ remain in $S$.
+							</li>
+							<li>
+								<em>Theorem</em>: the feasible region of an LP is convex.
+							</li>
+							<li>
+								Idea of proof:
+								<ul>
+									<li>
+										work by contradiction;
+									</li>
+									<li>
+										note each halfspace splits $\mathbb{R}^n$ in two, so cannot leave and re-enter feasible region.
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<img style="width:760px" src="images/04_properties/lp_geom_convex_set.svg">
+						<img style="width:760px" src="images/04_properties/lp_geom_nonconvex_set.svg">
+
+						<aside class="notes">
+							Our final result for today concerns convexity. Any set is called convex if any pair of points within the set is connected by a straight line that lies within the set.
+							<br>
+							Why do we care? Well, we are going to construct an algorithm to solve a mathematical program. That means starting from a point within the feasible region and then trying to move to another point within the feasible region that is "better". If the feasible region is convex this is easily done. If the feasible region is not convex then we have to keep checking, at every step, if any potential solution point is feasible, or if we have moved out of the feasible region. Solving problems with non-convex feasible regions is much harder.
+							<br>
+							For linear problems the feasible region is convex. Proving this is one reason why introducing the geometric viewpoint is useful. Work by contradiction. We assume the feasible region is not convex. That means there is a pair of points $x_1, x_2$, within the feasible region, connected by a straight line, and a point $y$ between those two point lying on the straight line that is not in the feasible region. Start at $x_1$. Move along the straight line towards $x_2$. There must be a hyperplane linked to a constraint at some point, call it $z$, along this line. By construction the halfspace corresponding to this constraint must include $x_1$. Also by construction it cannot include $x_2$. As $x_2$ cannot lie in the intersection of all the hyperplanes it cannot lie in the feasible region. We have a contradiction: the feasible region of an LP must be convex.
+						</aside>
+
 					</section>
 
 				</section>
@@ -256,24 +382,27 @@
 
 						<ul>
 							<li>
-								Mathematical programming formulates and solves decision problems.
-							</li>
-							<li>
 								Linear programs are specified by the coefficients of the objective functions and constraints.
 							</li>
 							<li>
-								The feasible region is the set of all solutions satisfying the constraints.
+								Linear programs can be transformed between forms.
 							</li>
 							<li>
-								The graphical solution works with two variables, gives intuition for general case:
+								There are two key forms:
 								<ul>
 									<li>
-										Follow normal to improve objective function.
+										Canonical form has constraints (like the optimal portfolio problem).
 									</li>
 									<li>
-										Optimal solution at vertex of feasible region.
+										Standard form has equalities (like the optimal transport problem).
 									</li>
 								</ul>
+							</li>
+							<li>
+								The geometrical viewpoint generalises the graphical solution.
+							</li>
+							<li>
+								The feasible region of a linear program is convex.
 							</li>
 						</ul>
 					</section>
