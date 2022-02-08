@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Lecture 5</title>
+
+		<meta name="description" content="Math1058">
+		<meta name="author" content="Ian Hawke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css">
+
+
+	<style type="text/css">
+	  .reveal p {
+	    text-align: left;
+	  }
+	  .reveal ul {
+	    display: block;
+	  }
+	  .reveal ol {
+	    display: block;
+	  }
+	</style>
+
+
+
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="Title">
+
+					<section>
+						<h2 class="r-fit-text">Fundamental Theorem of Linear Programming</h2>
+						<p>
+							<ul style="list-style: none;">
+								<li> Ian Hawke
+								<li> Michael Kenna-Allison
+							</ul>
+						</p>
+
+						<aside class="notes">
+							We will look central theorem of Linear Programs.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Goal">
+
+					<section>
+
+						<h2>Fundamental theorem</h2>
+						<p>
+							<b>Theorem:</b> Let $P = \{ x \in \mathbb{R}^n \colon A x \le b \}$ be the feasible region of the linear program $\max \{ c x \colon x \in P \}$. If $P$ is non-empty, the linear program <em>either</em> admits an optimal solution $x^*$ corresponding to a vertex of $P$, <em>or</em> is unbounded.
+						</p>
+
+						<p class="fragment" data-fragment-index=1>
+							Rephrase: a linear program has either
+						</p>
+						<ul class="fragment" data-fragment-index=1>
+							<li>
+								no solutions ($P$ empty), or
+							</li>
+							<li>
+								an unbounded solution (objective function "gets better" to infinity), or
+							</li>
+							<li>
+								an optimal solution at a corner of $P$.
+							</li>
+						</ul>
+
+						<aside class="notes">
+							This is the formal statement of the key theorem of linear programming that we introduced when talking about the graphical solution. We see the three potential cases. The goal of today is to link the geometric intuition to formal algebraic structures to see how this would be explicitly proved.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Cases</h2>
+						<img style="height:800px" src="images/05_theorem/lp_types.svg">
+
+						<aside class="notes">
+							We can recap how the different cases in the fundamental theorem map on to the different images constructed in the graphical solution.
+							<br>
+							The figures in the top row both link to cases where there is an optimal solution at a corner, or vertex, of the feasible region. In the top left there is a unique solution. In the top right there are infinitely many solutions, so either vertex on the blue line will be an optimal solution.
+							<br>
+							In the bottom row we cannot find finite optimal solutions. In the bottom left the feasible region is unbounded, and the objective function "improves" continually towards the top right, so the optimal solution is also unbounded. In the bottom right the constraints are not consistent and the feasible region is empty, so there are no solutions to the problem.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Geometry">
+
+					<section>
+						<h2>Strategy</h2>
+						<p>
+							Want to write $x \in P$ in terms of $v_i$, vertices of $P$. Then show any non-corner point cannot improve objective function.
+						</p>
+						<p class="fragment" data-fragment-index=1>
+							Key result: <b>Weyl-Minkowski theorem:</b>
+							\[
+							\begin{aligned}
+							x & \in P & \implies && \exists \, \lambda_1, \dots \lambda_k & \ge 0 \\
+							\text{with} &&&& \sum_{i=i}^k \lambda_i & = 1 \\
+							\text{and} &&&& \exists \, \mu_1, \dots \mu_h & \ge 0 \\
+							\text{such that} &&&& x & = \sum_{i=1}^k \lambda_i v_i + \sum_{j=1}^h \mu_j r_j.
+							\end{aligned}
+							\]
+						</p>
+
+						<aside class="notes">
+							The method of proof is to link an arbitrary point within the feasible region to points at the corners, which are the vertices. Having done that we want to show that, as we move away from the vertices, the objective function cannot improve (if we choose the right set of vertices).
+							<br>
+							There is a key stepping stone to get to this proof, which is the dual representation theorem, also known as the Weyl-Minkowski theorem. This is a geometric theory that works for any polyhedron. Remember that a polyhedron is a subset of $\mathbb{R}^n$ formed by intersecting halfspaces. In particular, the feasible region is a polyhedron.
+							<br>
+							The theorem links makes the link to the vertices explicit. We'll spend much of the lecture defining the key terms used here. The key point is that the $v_i$ terms are some subset of the vertices of $P$. The linear combination of these vertices is set up to move within the hypersurface on which these vertices lie. So this part typically describes points within a face, or edge, of $P$. The $r_j$ vectors are rays, which are linked to edges of the feasible region. This term moves us away from the boundary of the feasible region and into the interior.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Weyl-Minkowski</h2>
+						<img style="height:800px" src="images/05_theorem/lp_geom_weyl_minkowski.svg">
+
+						<aside class="notes">
+							This figure illustrates the dual representation theory. To get to a point in the interior, we pick a face on the boundary, move within that, and then move directly away from the face towards the interior.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Convex combinations</h2>
+						<div style="position:absolute; width:868px; top:150px; left:0px">
+							<p>
+								Take $x_1, \dots x_k \in \mathbb{R}^n$. <em>Convex combinations</em>:
+								\[
+								\begin{aligned}
+								  && y & = \sum_{i=1}^k \lambda_i x_i \\
+									\text{with} && \lambda_i & \ge 0 \\
+									\text{and} && \sum_{i=1}^k \lambda_i & = 1.
+								\end{aligned}
+								\]
+							</p>
+							<ul>
+								<li class="fragment" data-fragment-index=1>
+									Convex combinations "fill in" between the $x_i$.
+								</li>
+								<li class="fragment" data-fragment-index=1>
+									In 1d get a line <em>segment</em>.
+								</li>
+								<li class="fragment" data-fragment-index=2>
+									In higher dimensions get a "triangle".
+								</li>
+							</ul>
+						</div>
+						<div style="position:absolute; width:668px; top:150px; left:868px" class="r-stack">
+							<img style="width:668px" src="images/05_theorem/lp_geom_convex1.svg" class="fragment fade-in-then-out" data-fragment-index=1>
+							<img style="width:668px" src="images/05_theorem/lp_geom_convex2.svg" class="fragment fade-in" data-fragment-index=2>
+						</div>
+
+						<aside class="notes">
+							To describe a face, or an edge, of the polyhedron that corresponds to the feasible region we need to think of a bounded surface. The vertices or corners are going to form the bounds. We want to be able to get any point within the (relative) interior of that face or edge purely in terms of those vertices.
+							<br>
+							To do that we introduce the convex combinations. This is a restriction of a linear combination. You have seen these in Linear Algebra. Each vertex is a vector in $\mathbb{R}^n$ whose components give the coordinate location of the vertex. A linear combination is the sum of these vectors, multiplied by some constant. The constant is different for each vector. The idea of a <em>convex</em> combination is that the sum of the constants must be exactly one. This means that the set of all convex combinations "fills in" between the vertices used.
+							<br>
+							This is most straightforwardly seen with two vertices (thinking in two dimensions, but this works in any dimensions). The two vertices are $x_1$ and $x_2$. The convex combinations are any points on the dashed line. We cannot extend this line segment "outside" of the original vertices, as the restriction that the coefficients sum to one would require one of the coefficients to be negative, violating one of the constraints.
+							<br>
+							Note that it is possible (and standard) to replace $\lambda_2$ with $1 - \lambda_1$, so only a single coefficient is needed. Then this single coefficient varies between zero and one.
+							<br>
+							When moving to higher dimensions the "filled in" region looks like a triangle, or a pyramid, or a higher dimensional generalisation of that. When multiple vertices live within the same plane we can think of the convex combinations as filling in a square by splitting it into triangles.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Vertices, faces, facets</h2>
+
+
+						<div style="position:absolute; width:668px; top:150px; left:0px">
+							<ul>
+								<li>
+									<em>Vertex:</em> a $v \in P$ that cannot be expressed as a convex combination of $x, y \in P$, with $x, y, v$ distinct.
+								</li>
+								<li>
+									<em>Face:</em> any planar surface in the boundary of $P$.
+								</li>
+								<li>
+									<em>Facet:</em> any $n-1$ dimensional face.
+								</li>
+							</ul>
+						</div>
+						<div style="position:absolute; width:868px; top:150px; left:668px">
+							<img style="width:868px" src="images/05_theorem/lp_geom_vertices_facets.svg">
+						</div>
+
+						<aside class="notes">
+							So far I have relied on intuitive notions of edges, faces, corners and vertices. But we need to be more precise for what follows.
+							<br>
+							The key point is that we can't "fill in" between other points in the feasible region to get to a vertex. When working with convex combinations (which is our plan here) we can go from vertices to other points, but not the other way around. We can see this from the pictures on the previous slide, or think about the picture here: to combine two points (in a convex combination) to get a vertex, at least one of those points would have to be outside the feasible region.
+							<br>
+							The use of the terminology of face and facet is needed when we move to very high dimensions. Faces are any part of the boundary formed by a plane: so an edge is a face. A facet, however, has to be the highest possible dimension for a piece of the boundary. We can see how any point in a facet can be described as a convex combination of the vertices of that facet.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Conic combinations</h2>
+						<div style="position:absolute; width:868px; top:150px; left:0px">
+							<p>
+								Take $x_1, \dots x_h \in \mathbb{R}^n$. <em>Conic combinations</em>:
+								\[
+								\begin{aligned}
+								  && y & = \sum_{j=1}^h \mu_j x_j \\
+									\text{with} && \mu_j & \ge 0.
+								\end{aligned}
+								\]
+							</p>
+							<ul class="fragment" data-fragment-index=1>
+								<li>
+									Conic combinations "sweep out" between the $x_i$ and the origin.
+								</li>
+								<li>
+									In 1d get a <em>line</em>.
+								</li>
+								<li>
+									In higher dimensions get a "cone".
+								</li>
+							</ul>
+						</div>
+						<div style="position:absolute; width:668px; top:150px; left:868px" class="r-stack">
+							<img style="width:668px" src="images/05_theorem/lp_geom_conic.svg" class="fragment" data-fragment-index=1>
+						</div>
+
+						<aside class="notes">
+							We can now move within the boundary of the feasible region by taking convex combinations of the vertices. However, we also want to move within the interior.
+							<br>
+							Conic combinations look very like convex combinations. However, there is no restriction that the coefficients sum to one. This means a convex combination can "sweep out" over a much larger range. It will always include the origin - set all of the coefficients to zero. In one dimension, with a single vertex, we get the line going through the origin and the vertex (stretching off to infinity in both directions). In higher dimensions we get infinite triangles and their higher dimensional generalisations, which are often called "cones".
+						</aside>
+					</section>
+
+					<section>
+						<h2>Rays</h2>
+						<div style="position:absolute; width:768px; top:150px; left:0px">
+							<p>
+								For $S \subseteq \mathbb{R}^n$, vector $r \in \mathbb{R}^n$ is a <em>ray</em> if
+								\[
+								\begin{aligned}
+									&& x_0 + \mu r & \in S \\
+									&& \forall x_0 & \in S \\
+									\text{and} &&  \forall \mu & \ge 0.
+								\end{aligned}
+								\]
+							</p>
+							<ul>
+								<li class="fragment" data-fragment-index=1>
+									Start from any point in $S$. Move in the direction of $r$, and you remain in $S$.
+								</li>
+								<li class="fragment" data-fragment-index=2>
+									<em>Extreme</em> rays cannot be written as conic combinations of other rays.
+								</li>
+								<li class="fragment" data-fragment-index=2>
+									Extreme rays are roughly edges.
+								</li>
+							</ul>
+						</div>
+						<div style="position:absolute; width:768px; top:150px; left:768px" class="r-stack">
+							<img style="width:768px" src="images/05_theorem/lp_geom_rays.svg" class="fragment fade-in-then-out" data-fragment-index=1>
+							<img style="width:768px" src="images/05_theorem/lp_geom_extreme_rays.svg" class="fragment fade-in" data-fragment-index=2>
+						</div>
+
+						<aside class="notes">
+						Instead of thinking of the $x_j$ as being points, it can be better (for conic combinations) to think of them as vectors giving a direction.
+						<br>
+						This leads into the idea of a ray. A ray is essentially any vector that always keeps you inside a set. Start from a point within the set. Move in the direction of the ray. Then you have to stay within the set.
+						<br>
+						We can take conic combinations of rays, which "fills in" the set of rays between any pair (or combination). Just as a vertex cannot be written as a convex combination of points with the set, an extreme ray cannot be written as a conic combination of other rays. In that sense the extreme rays are the natural choices to "move about" within the feasible region, as we can take a conic combination of the extreme rays to get any other ray.
+						</aside>
+
+					</section>
+
+				</section>
+
+				<section id="Fundamental Theorem">
+
+					<section>
+
+						<h3>Weyl-Minkowski</h3>
+						<div style="position:absolute; width:868px; top:50px; left:0px">
+							\[
+							x \in P \implies \; x = \sum_{i=1}^k \lambda_i v_i + \sum_{j=1}^h \mu_j r_j.
+							\]
+							<p class="fragment">
+								Change LP variables to $(\lambda, \mu)$:
+								\[
+									\max c x \longleftrightarrow \max \sum_{i=1}^k \lambda_i \left( c v_i \right) + \sum_{j=1}^h \mu_j \left( c r_j \right).
+								\]
+							</p>
+							<p class="fragment">
+								Constraints:
+								\[
+								\begin{aligned}
+									\lambda_1, \dots, \lambda_k, \mu_1, \dots, \mu_h & \ge 0, \\
+									\sum_{i=1}^k \lambda_i & = 1.
+								\end{aligned}
+								\]
+						</div>
+						<div style="position:absolute; width:668px; top:150px; left:868px">
+							<img style="width:668px" src="images/05_theorem/lp_geom_weyl_minkowski.svg">
+						</div>
+
+						<aside class="notes">
+							Now we formally know what all the terms in the Weyl-Minkowski theorem say. This explicitly links a point in the interior to a point in the boundary (given by a convex combination of the vertices) and a ray from the boundary to the interior (given by a conic combination of the extreme rays, which are linked to the edges, and the edges are linked to vertices - they are the difference between two vertices).
+							<br>
+							This allows us to do the essential trick for proving the fundamental theorem: change variables from the decision variables $x$ to the coefficients $(\lambda, \mu)$.
+							<br>
+							Writing the objective function in terms of the new decision variables $(\lambda, \mu)$ follows by subsitituting the expression in from the Weyl-Minkowski theorem.
+							<br>
+							The constraints in the original LP were encoded in the geometry of the feasible region. The geometry of the feasible region is now encoded in the constraints on the coefficients which have become our new decision variables. These are standard non-negativity constraints, plus the convexity restriction on $\lambda$.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Fundamental Theorem</h2>
+						\[
+							\max_{(\lambda, \mu)}  \sum_{i=1}^k \lambda_i \left( c v_i \right) + \sum_{j=1}^h \mu_j \left( c r_j \right) \quad
+							\text{s.t.} \quad \lambda, \mu  \ge 0 \quad \sum_{i=1}^k \lambda_i =  1.
+						\]
+						<p>
+							Two cases:
+						</p>
+						<ol>
+							<li class="fragment">
+								$(c r_j) > 0$ for some $j$. Increasing $\mu_j$ increases objective. Problem unbounded.
+							</li>
+							<li class="fragment">
+								$(c r_j) \le 0$ for all $j$.
+								<ul>
+									<li class="fragment">
+										Optimal at $\mu = 0$.
+									</li>
+									<li class="fragment">
+										Hence optimal $x^*$ when $c x^* = \sum_{i=1}^k \lambda_i \left( c v_i \right)$.
+									</li>
+									<li class="fragment">
+										Enumerate vertices:
+										\[
+										c x^* = \max_{i} \left( c v_i \right).
+										\]
+									</li>
+								</ul>
+							</li>
+						</ol>
+
+						<aside class="notes">
+							Now we have changed variables our linear program is written solely in terms of the vertices (and the rays, which can be linked to the vertices).
+							<br>
+							Now we consider the objective function. We want to vary the decision variables (the coefficients in the convex and conic combinations) to maximise our objective. There are two summations in the objective function. Consider only the term containing the rays.
+							<br>
+							Remember the $\mu$ coefficients - now our decision variables - cannot be negative, but are not bounded above. Therefore if any combination $c r_j$ is positive then the objective function can be increased without bound. In this case the problem is unbounded.
+							<br>
+							The other case is when every combination $c r_j$ is negative or zero. In this case the objective function is maximised when every $\mu$ coefficient is zero. This means we can drop the term corresponding to the rays: the only term that contributes is the convex combination of vertices.
+							<br>
+							Now, as all the vertices are bounded we can find an optimal solution. The optimal must be given by some convex combination of vertices. We can enumerate the combination $c v_i$ for every vertex. The maximum must be attained at one (or more) of the vertices. Therefore we find the optimal solution precisely at a vertex.
+						</aside>
+
+					</section>
+
+				</section>
+
+				<section id="Summary">
+					<section>
+						<h1>Summary</h1>
+
+						<ul>
+							<li>
+								Linear programs in canonical form can be interpreted geometrically.
+							</li>
+							<li>
+								The fundamental theorem shows that linear programs have
+								<ol>
+									<li>
+										no solutions (feasible region is empty), or
+									</li>
+									<li>
+										are unbounded (objective function can be improved to infinity), or
+									</li>
+									<li>
+										the optimal solution is at a vertex of the feasible region.
+									</li>
+							</li>
+						</ul>
+					</section>
+				</section>
+
+			</div>
+
+		</div>
+
+
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/zoom/zoom.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/search/search.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../reveal.js/plugin/math/math.js"></script>
+		<script src="../reveal.js/plugin/spotlight/spotlight.js"></script>
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				width: 1536,
+			  height: 960,
+			  margin: 0.04,
+				controls: false,
+				progress: true,
+				center: true,
+				hash: true,
+				transition: 'none',
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath.KaTeX, RevealSpotlight ],
+				spotlight: {
+					presentingCursor: 'default',
+				}
+			});
+
+		</script>
+
+
+	</body>
+</html>
