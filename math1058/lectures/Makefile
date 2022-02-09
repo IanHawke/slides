@@ -1,5 +1,5 @@
 lectures: *.html
-	make $(patsubst %.html,%.pdf,$?)
+	make $(patsubst %.html,pdfs/%.pdf,$?)
 
-%.pdf: %.html
+pdfs/%.pdf: %.html
 	decktape -s 3072x1920 reveal "$<?fragments=true" $@
