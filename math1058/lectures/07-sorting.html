@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Lecture 7</title>
+
+		<meta name="description" content="Math1058">
+		<meta name="author" content="Ian Hawke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css">
+
+
+	<style type="text/css">
+	  .reveal p {
+	    text-align: left;
+	  }
+	  .reveal ul {
+	    display: block;
+	  }
+	  .reveal ol {
+	    display: block;
+	  }
+	</style>
+
+
+
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="Title">
+
+					<section>
+						<h2 class="r-fit-text">Sorting</h2>
+						<p>
+							<ul style="list-style: none;">
+								<li> Ian Hawke
+								<li> Michael Kenna-Allison
+							</ul>
+						</p>
+
+						<aside class="notes">
+							We will discuss costs by looking at sorting.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Problem">
+
+					<section>
+
+						<h2>The sorting problem</h2>
+						<div>
+							<p>
+								Given a list $a$ and a <em>partial order</em> $\le$, sort $a$ in non-decreasing order.
+							</p>
+							\[
+							\begin{pmatrix}
+							7 & 2 & 2 & 6 & 4
+							\end{pmatrix}
+							\to
+							\begin{pmatrix}
+							2 & 2 & 4 & 6 & 7
+							\end{pmatrix} .
+							\]
+						</div>
+						<div class="fragment">
+							Formally, find <em>permutation</em> $\pi \colon \{ 1, \dots, n \} \to \{ 1, \dots, n \}$ such that
+							\[
+							a_{\pi(i)} \le a_{\pi(i+1)} \quad \forall i \in \{ 1, \dots, n \}.
+							\]
+						</div>
+						<div class="fragment">
+							\[
+							  \begin{array}{ccccccc}
+							    a & \colon & 7 & 2 & 2 & 6 & 4 \\
+							    \text{index} & \colon & 1 & 2 & 3 & 4 & 5
+							  \end{array} \to
+							  \begin{array}{ccccccc}
+							    s & \colon & 2 & 2 & 4 & 6 & 7 \\
+							    \pi(\text{index}) & \colon & 2 & 3 & 5 & 4 & 1
+							  \end{array}
+							\]
+						</div>
+
+						<aside class="notes">
+							The sorting problem is needed in our case for the brute force approach to solving the linear program. We will enumerate the vertices, labelling them from 1 to n, and compute the objective function at each. We then need to find the largest, which is a sub-problem of sorting all the values.
+							<br>
+							As it is easier to measure costs when talking about the sorting problem we will concentrate on that larger case for now.
+							<br>
+							The formal way of talking about sorting is to introduce a partial order - essentially a less-than-or-equals operator - that compares members of the list. The members can be anything: numbers, strings, cakes, whatever. The ordering tells us when one is larger than another.
+							<br>
+							We then want to find a re-arrangement, or <em>permutation</em>, of the indexes 1 to n that sort the list. That is, we want to order the indexes in such a way that each list element (in that order) is never bigger than the next. The permutation is formally a bijective function of the indexes.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Brute force">
+
+					<section>
+						<h2>Brute force sorting</h2>
+						<div style="position:absolute; width:868px; top:150px; left:0px">
+							<ol>
+								<li>
+									Enumerate all possible $\pi$;
+								</li>
+								<li>
+									Return once $a_{\pi(i)} \le a_{\pi(i+1)} \quad \forall i$.
+							</ol>
+							<p class="fragment" data-fragment-index=1>
+								How many permutations exist?
+							</p>
+							<ul>
+								<li class="fragment" data-fragment-index=2>
+									Item $1$ can take $n$ positions;
+								</li>
+								<li class="fragment" data-fragment-index=3>
+									item $2$ can take $n-1$ positions;
+								</li>
+								<li class="fragment" data-fragment-index=4>
+									item $j$ can take $n-j+1$ positions;
+								</li>
+								<li class="fragment" data-fragment-index=5>
+									item $n$ can take $1$ position.
+								</li>
+								<li class="fragment" data-fragment-index=6>
+									Total of $n!$ combinations.
+								</li>
+							</ul>
+						</div>
+						<div style="position:absolute; width:668px; top:150px; left:868px" class="r-stack">
+							<img style="width:668px" src="images/06_costs/complexity_growth4.svg" class="fragment fade-in" data-fragment-index=6>
+						</div>
+
+						<aside class="notes">
+							Brute force sort constructs every possible permutation. It then goes through each one in turn and checks if it solves the sorting problem. If we are lucky the first permutation constructed works. However, in the worst case, only the very last possible permutation constructed will work.
+							<br>
+							We consider the cost by working out what is the worst case. How many permutations would we have to construct if only the very last one solved the problem? This involves the sort of combinatorics you see in MATH1024, Intro to Probability and Statistics.
+							<br>
+							The first index in the permutation can be any from the full set of indexes, so there are $n$ possibilites. The second index must come from the remaining $n-1$ possibilites, as each index can only appear once. The third index comes from the remaining $n-2$ possibilites, and the $j$th index from the remaining $n-j+1$ possibilites. To get the total number of cases we have to multiply together the number of possibilities at each stage. This is $n!$ total different possible permutations.
+							<br>
+							We showed at the end of the last lecture that factorial growth is far too fast for this to be a useful algorithm.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Selection">
+
+					<section>
+						<h2>Selection sort</h2>
+						<ol>
+							<li>
+								Find smallest item; swap with position $1$.
+							</li>
+							<li class="fragment">
+								Find next smallest item; swap with position $2$.
+							</li>
+							<li class="fragment">
+								Repeat up to position $n-1$.
+							</li>
+						</ol>
+						<p class="fragment">
+							More formally, introduce sorted list $s$, unsorted $u$. Start with $s$ empty, $u=a$. Each step finds smallest item in $u$ and moves to the end of $s$.
+						</p>
+						<div class="fragment">
+							\[
+							\begin{aligned}
+							\left(
+							\begin{array}{|ccccc}
+							7 & 2 & 2 & 6 & 4
+							\end{array}
+							\right)
+							& \to
+							\left(
+							\begin{array}{c|cccc}
+						  2 & 7 & 2 & 6 & 4
+							\end{array}
+							\right)
+							&& \to
+							\left(
+							\begin{array}{cc|ccc}
+						  2 & 2 & 7 & 6 & 4
+							\end{array}
+							\right) \\
+							& \to
+							\left(
+							\begin{array}{ccc|cc}
+						  2 & 2 & 4 & 6 & 7
+							\end{array}
+							\right)
+							&& \to
+							\left(
+							\begin{array}{cccc|c}
+						  2 & 2 & 4 & 6 & 7
+							\end{array}
+							\right)
+							\end{aligned}
+							\]
+						</div>
+
+						<aside class="notes">
+							Selection sort and most sorting algorithms work directly on the list rather than thinking about the permutations.
+							<br>
+							The idea of selection sort is to <em>select</em> the small item we have not yet sorted, and move that to the start of the list. The sorts from the beginning of the list. We have to keep track of which elements in the list have been sorted to this point.
+							<br>
+							It is often useful to formally split the list into two parts, the start of the list (which will be sorted), and the end (which will be unsorted). At the start of the algorithm the sorted part is empty and the unsorted contains the original list. Each step in the algorithm has two steps. First, find the smallest unsorted entry. Next, move it (if necessary) to the start of the unsorted list, or equivalently the end of the sorted list. The marker that distinguishes the separation location between the lists is then moved.
+							<br>
+							This is most easily seen by stepping through an example. The vertical line marks the separator between the sorted and unsorted lists. At the start there is nothing in the sorted list. We first find the smallest element, which is the first $2$, which is the second element (with Python index <code>1</code>). We swap this to the start of the unsorted list, so swap it with the $7$, and then move the separator (vertical line). We are now at the second step.
+							<br>
+							For the second step the first entry of the unsorted list is already the smallest. No swaps are needed. We move the separator.
+							<br>
+							We continue until there is only one element in the unsorted list. At this point the whole list is in the correct order.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Selection sort: code and costs</h2>
+						<div style="position:absolute; width:968px; top:150px; left:0px">
+							<ul>
+								<li class="fragment" data-fragment-index="1">
+									Setup instance; $n$ operations.
+								</li>
+								<li class="fragment" data-fragment-index="2">
+									Iterate over all $n-1$ positions;
+									<ul>
+										<li class="fragment" data-fragment-index="3">
+											Find index of smallest element <code>j</code>; $1 + 2(n-i)$ operations.
+										</li>
+										<li class="fragment" data-fragment-index="4">
+											Swap entries if needed; 2 operations.
+										</li>
+									</ul>
+								</li>
+								<li class="fragment" data-fragment-index="5">
+									Total operation count:
+									\[
+									\sum_{i=0}^{n-2} (1 + 2(n-i) + 2) = (n-1)(n+3).
+									\]
+								</li>
+							</ul>
+						</div>
+						<div style="position:absolute; width:568px; top:150px; left:968px" class="r-stack">
+							<pre><code class="language-python" data-trim data-noescape data-line-numbers>
+							a = [7, 2, 2, 6, 4]
+							for i in range(n-1):
+									j = i
+									for k in range(i+1, n):
+											if a[k] < a[j]:
+													j = k
+									if a[j] < a[i]:
+											a = swap(a, i, j)
+							</code></pre>
+							<pre class="fragment" data-fragment-index="1"><code class="language-python" data-trim data-noescape data-line-numbers="1">
+							a = [7, 2, 2, 6, 4]
+							for i in range(n-1):
+									j = i
+									for k in range(i+1, n):
+											if a[k] < a[j]:
+													j = k
+									if a[j] < a[i]:
+											a = swap(a, i, j)
+							</code></pre>
+							<pre class="fragment" data-fragment-index="2"><code class="language-python" data-trim data-noescape data-line-numbers="2">
+							a = [7, 2, 2, 6, 4]
+							for i in range(n-1):
+									j = i
+									for k in range(i+1, n):
+											if a[k] < a[j]:
+													j = k
+									if a[j] < a[i]:
+											a = swap(a, i, j)
+							</code></pre>
+							<pre class="fragment" data-fragment-index="3"><code class="language-python" data-trim data-noescape data-line-numbers="3-6">
+							a = [7, 2, 2, 6, 4]
+							for i in range(n-1):
+									j = i
+									for k in range(i+1, n):
+											if a[k] < a[j]:
+													j = k
+									if a[j] < a[i]:
+											a = swap(a, i, j)
+							</code></pre>
+							<pre class="fragment" data-fragment-index="4"><code class="language-python" data-trim data-noescape data-line-numbers="7-8">
+							a = [7, 2, 2, 6, 4]
+							for i in range(n-1):
+									j = i
+									for k in range(i+1, n):
+											if a[k] < a[j]:
+													j = k
+									if a[j] < a[i]:
+											a = swap(a, i, j)
+							</code></pre>
+							<pre class="fragment" data-fragment-index="5"><code class="language-python" data-trim data-noescape data-line-numbers>
+							a = [7, 2, 2, 6, 4]
+							for i in range(n-1):
+									j = i
+									for k in range(i+1, n):
+											if a[k] < a[j]:
+													j = k
+									if a[j] < a[i]:
+											a = swap(a, i, j)
+							</code></pre>
+						</div>
+
+						<aside class="notes">
+							Here is some code for the selection sort algorithm. We write this out explicitly so we can count how many operations are needed. A single operation is counted whenever we write a value, or do a comparison, or do a swap.
+							<br>
+							The first line sets up the instance. It takes $n$ writes so $n$ operations. We won't count the cost of setting up the instance in the operation count for the algorithm.
+							<br>
+							The second line if effectively moving the separator between the sorted and unsorted list. Every entry to the left of <code>i</code> is in the sorted list, and every entry to the right is in the unsorted. At the start we see that everything is unsorted. This loop iterates <code>n-1</code> times, so multiplies the operation count of the block inside the loop by <code>n-1</code>.
+							<br>
+							The first group of lines inside the loop is finding the smallest unsorted item, which will (eventually) have index <code>j</code>. We start by assuming that the smallest item is at the start of the unsorted list. We then iterate through the whole unsorted list, compare every element to the smallest yet found, and if the new element is smaller we note that and keep going.
+							<br>
+							The cost of this block is one write which sets up <code>j</code>, and then two operations (one comparison and possibly one write) for each step in the loop. The loop iterates <code>n-i</code> times, which is the (current) length of the unsorted list.
+							<br>
+							Finally we perform the swap if needed. Again, in this worst case, this always needs counting, and costs two operations.
+							<br>
+							Totalling this all up we see that the operation count is quadratic in the size of the list. This is much more practical than brute force.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Insertion">
+
+					<section>
+						<h2>Insertion sort</h2>
+						<ol>
+							<li>
+								Find first unsorted item;
+							</li>
+							<li class="fragment">
+								Swap right-to-left into sorted list until correctly placed.
+							</li>
+							<li class="fragment">
+								Repeat for each element in unsorted list.
+							</li>
+						</ol>
+						<div class="fragment">
+							\[
+							\begin{aligned}
+							\left(
+							\begin{array}{c|cccc}
+							7 & \color{blue}{2} & 2 & 6 & 4
+							\end{array}
+							\right)
+							& \to
+							\left(
+							\begin{array}{cc|ccc}
+						  \color{blue}{2} & 7 & 2 & 6 & 4
+							\end{array}
+							\right) \\
+							\left(
+							\begin{array}{cc|ccc}
+						  2 & 7 & \color{blue}{2} & 6 & 4
+							\end{array}
+							\right) & \to
+							\left(
+							\begin{array}{ccc|cc}
+						  2 & \color{blue}{2} & 7 & 6 & 4
+							\end{array}
+							\right) \\
+							\left(
+							\begin{array}{ccc|cc}
+						  2 & 2 & 7 & \color{blue}{6} & 4
+							\end{array}
+							\right) & \to
+							\left(
+							\begin{array}{cccc|c}
+						  2 & 2 & \color{blue}{6} & 7 & 4
+							\end{array}
+							\right) \\
+							\left(
+							\begin{array}{cccc|c}
+						  2 & 2 & 6 & 7 & \color{blue}{4}
+							\end{array}
+							\right) & \to
+							\left(
+							\begin{array}{ccccc|}
+						  2 & 2 &  6 & \color{blue}{4} & 7
+							\end{array}
+							\right) & \to
+							\left(
+							\begin{array}{ccccc|}
+						  2 & 2 &  \color{blue}{4} & 6 & 7
+							\end{array}
+							\right).
+							\end{aligned}
+							\]
+						</div>
+
+						<aside class="notes">
+							Insertion sort works from right to left, where selection sort works from left to right.
+							<br>
+							The idea of insertion sort is to take <em>any</em> element, particularly the first, from the unsorted list. This is cheaper than selection sort as we do not have the cost of searching in the unsorted list. We then move the element from right (largest) to left (smallest) until it is in the right place. This is more expensive than selection sort, as we do not instantly know the right location to put it.
+							<br>
+							In the example, the vertical line marks the separator between the sorted and unsorted lists again, and the blue coloured element is the item moved from the unsorted list into the sorted one. Every step is straightforward except for the last in this example.
+							<br>
+							At each step we check the first element in the unsorted list with the last in the sorted list. If it is smaller - in this example it always is - we swap them. We then move the separator line. We then compare the element that was in the unsorted list with the next element in the sorted list. If it is smaller we swap again. We keep doing this until the sorted list is properly sorted.
+							<br>
+							The last step is the only one where a single swap is needed. However, imagine if the last element of the original list was 1. In that case it would need to be swapped all the way from right to left.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Insertion sort: code and costs</h2>
+						<div style="position:absolute; width:968px; top:150px; left:0px">
+							<ul>
+								<li class="fragment" data-fragment-index="1">
+									Setup instance; $n$ operations.
+								</li>
+								<li class="fragment" data-fragment-index="2">
+									Iterate over all $n-1$ unsorted positions;
+									<ul>
+										<li class="fragment" data-fragment-index="3">
+											Swap first element through $i$ positions in sorted list.
+										</li>
+									</ul>
+								</li>
+								<li class="fragment" data-fragment-index="4">
+									Total operation count:
+									\[
+									\sum_{i=1}^{n} 2(i-1) = n (n-1).
+									\]
+								</li>
+							</ul>
+						</div>
+						<div style="position:absolute; width:568px; top:150px; left:968px" class="r-stack">
+							<pre><code class="language-python" data-trim data-noescape data-line-numbers>
+							a = [7, 2, 2, 6, 4]
+							for i in range(1, n):
+									for j in range(i, 0, -1):
+											if a[j-1] < a[j]:
+													a = swap(a, j-1, j)
+											else:
+													break
+							</code></pre>
+							<pre class="fragment" data-fragment-index="1"><code class="language-python" data-trim data-noescape data-line-numbers="1">
+							a = [7, 2, 2, 6, 4]
+							for i in range(1, n):
+									for j in range(i, 0, -1):
+											if a[j-1] < a[j]:
+													a = swap(a, j-1, j)
+											else:
+													break
+							</code></pre>
+							<pre class="fragment" data-fragment-index="2"><code class="language-python" data-trim data-noescape data-line-numbers="2">
+							a = [7, 2, 2, 6, 4]
+							for i in range(1, n):
+									for j in range(i, 0, -1):
+											if a[j-1] < a[j]:
+													a = swap(a, j-1, j)
+											else:
+													break
+							</code></pre>
+							<pre class="fragment" data-fragment-index="3"><code class="language-python" data-trim data-noescape data-line-numbers="3-7">
+							a = [7, 2, 2, 6, 4]
+							for i in range(1, n):
+									for j in range(i, 0, -1):
+											if a[j-1] < a[j]:
+													a = swap(a, j-1, j)
+											else:
+													break
+							</code></pre>
+							<pre class="fragment" data-fragment-index="4"><code class="language-python" data-trim data-noescape data-line-numbers>
+							a = [7, 2, 2, 6, 4]
+							for i in range(1, n):
+									for j in range(i, 0, -1):
+											if a[j-1] < a[j]:
+													a = swap(a, j-1, j)
+											else:
+													break
+							</code></pre>
+						</div>
+
+						<aside class="notes">
+							Here is some code for the insertion sort algorithm. We write this out explicitly so we can count how many operations are needed. A single operation is counted whenever we write a value, or do a comparison, or do a swap.
+							<br>
+							The first line sets up the instance. It takes $n$ writes so $n$ operations. We won't count the cost of setting up the instance in the operation count for the algorithm.
+							<br>
+							The second line if effectively moving the separator between the sorted and unsorted list, or identifying the first element in the unsorted list. Every entry to the left of <code>i</code> is in the sorted list, and every entry to the right is in the unsorted. At the start we see that the first entry is in the sorted list, even though it is not yet sorted. This loop iterates <code>n-1</code> times, so multiplies the operation count of the block inside the loop by <code>n-1</code>.
+							<br>
+							The first group of lines inside the loop is finding the smallest unsorted item, which will (eventually) have index <code>j</code>. We start by assuming that the smallest item is at the start of the unsorted list. We then iterate through the whole unsorted list, compare every element to the smallest yet found, and if the new element is smaller we note that and keep going.
+							<br>
+							The cost of this block is one write which sets up <code>j</code>, and then two operations (one comparison and possibly one write) for each step in the loop. The loop iterates <code>n-i</code> times, which is the (current) length of the unsorted list.
+							<br>
+							Finally we perform the swap if needed. Again, in this worst case, this always needs counting, and costs two operations.
+							<br>
+							Totalling this all up we see that the operation count is quadratic in the size of the list. This is much more practical than brute force.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Comparisons">
+
+					<section>
+
+						<h2>Cost comparison</h2>
+						<div style="position:absolute; width:768px; top:250px; left:0px">
+							<ul>
+								<li>
+									Brute force only competitive for tiny problems.
+								</li>
+								<li>
+									Factorial growth impractical.
+								</li>
+								<li class="fragment" data-fragment-index=1>
+									Insertion sort always fastest.
+								</li>
+								<li class="fragment" data-fragment-index=1>
+									Difference irrelevant for large lists.
+								</li>
+							</ul>
+						</div>
+						<div style="position:absolute; width:768px; top:150px; left:768px" class="r-stack">
+							<img style="width:768px" src="images/07_sorting/sorting_comparison_1.svg" class="fragment fade-out" data-fragment-index=1>
+							<img style="width:768px" src="images/07_sorting/sorting_comparison_2.svg" class="fragment" data-fragment-index=1>
+						</div>
+
+						<aside class="notes">
+							This slide puts into practice the steps we've discussed in the past. The fundamental theorem says that the optimal solution must lie at a vertex. So we can enumerate all the vertices. That means we have to find each one. Once we have found each vertex, we can compute the objective function at each and see which is best.
+							<br>
+							This example is for the optimal portfolio problem which we solved earlier using the graphical method. We immediately see that this enumeration approach is not as smart as what  we did in the graphical case. We know that we don't need to consider every vertex, but only those in the direction of the gradient to the objective function that actually improves it. By enumerating all the vertices we are wasting a lot of effort. On the other hand, we don't have to put in all the effort to check whether each new vertex is in a particular direction.
+							<br>
+							We see that even with a small number of constraints we have a fair number of vertices. How many do we actually get?
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Summary">
+					<section>
+						<h1>Summary</h1>
+
+						<ul>
+							<li>
+								Sorting problems are linked to permutations.
+							</li>
+							<li>
+								Brute force sort is (again) factorial in cost, so impractical.
+							</li>
+							<li>
+								Selection and insertion sort are quadratic in cost, so practical.
+							</li>
+						</ul>
+					</section>
+				</section>
+
+			</div>
+
+		</div>
+
+
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/zoom/zoom.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/search/search.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../reveal.js/plugin/math/math.js"></script>
+		<script src="../reveal.js/plugin/spotlight/spotlight.js"></script>
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				width: 1536,
+			  height: 960,
+			  margin: 0.04,
+				controls: false,
+				progress: true,
+				center: true,
+				hash: true,
+				transition: 'none',
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath.KaTeX, RevealSpotlight ],
+				spotlight: {
+					presentingCursor: 'default',
+				}
+			});
+
+		</script>
+
+
+	</body>
+</html>
