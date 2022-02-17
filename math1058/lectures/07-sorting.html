@@ -49,7 +49,7 @@
 				<section id="Title">
 
 					<section>
-						<h2 class="r-fit-text">Sorting</h2>
+						<h2 class="r-fit-text">Sorting and costs</h2>
 						<p>
 							<ul style="list-style: none;">
 								<li> Ian Hawke
@@ -88,7 +88,7 @@
 								Formally, find <em>permutation</em> $\pi \colon \{ 1, \dots, n \} \to \{ 1, \dots, n \}$ such that
 							</p>
 							\[
-							a_{\pi(i)} \le a_{\pi(i+1)} \quad \forall i \in \{ 1, \dots, n \}.
+							a_{\pi(i)} \le a_{\pi(i+1)} \quad \forall i \in \{ 1, \dots, n-1 \}.
 							\]
 						</div>
 						<div class="fragment">
@@ -233,6 +233,46 @@
 							For the second step the first entry of the unsorted list is already the smallest. No swaps are needed. We move the separator.
 							<br>
 							We continue until there is only one element in the unsorted list. At this point the whole list is in the correct order.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Elementary operations</h2>
+						<p>
+							Measure cost by <em>elementary operations</em>.
+						</p>
+						<ul>
+							<li>
+								One elementary operation:
+								<ul>
+									<li>
+										addition (<code>a+b</code>);
+									</li>
+									<li>
+										multiplication (<code>a*b</code>);
+									</li>
+									<li>
+										assignment (<code>a=b</code>);
+									</li>
+									<li>
+										comparison (<code>if a < b:</code>);
+									</li>
+									<li>
+										swap.
+									</li>
+								</ul>
+							</li>
+							<li>
+								Where multiple cases possible, take worst case.
+							</li>
+						</ul>
+
+						<aside class="notes">
+							We are going to measure the cost of an algorithm by counting the number of elementary operations it uses. This is more reliable than using time, as it does not vary between different real-world setups. It also allows us to reason about cases that cannot yet be implemented on a real machine.
+							<br>
+							An elementary operation is a single operation that takes roughly the same amount of work. All the standard mathematical operations are of this form, as are assignment to a variable label (of a single value) and the comparison of two single variables. Swapping the value of two variables is also roughly the same.
+							<br>
+							Often code is constructed to take one of many possibilities depending on values of the input data or parameters. As we are trying to do a generic analysis we have to pick a specific branch through the code to follow. As we are trying to bound the cost we always pick the worst, or most expensive, case.
 						</aside>
 					</section>
 
