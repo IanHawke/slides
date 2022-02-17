@@ -238,7 +238,7 @@
 
 					<section>
 						<h2>Selection sort: code and costs</h2>
-						<div style="position:absolute; width:968px; top:150px; left:0px">
+						<div style="position:absolute; width:868px; top:150px; left:0px">
 							<ul>
 								<li class="fragment" data-fragment-index="1">
 									Setup instance; $n$ operations.
@@ -262,8 +262,8 @@
 								</li>
 							</ul>
 						</div>
-						<div style="position:absolute; width:568px; top:150px; left:968px" class="r-stack">
-							<pre><code class="language-python" data-trim data-noescape data-line-numbers>
+						<div style="position:absolute; width:668px; top:150px; left:868px" class="r-stack">
+							<pre><code class="language-python" data-trim data-noescape data-line-numbers style="font-size:140%; line-height:140%">
 							a = [7, 2, 2, 6, 4]
 							for i in range(n-1):
 									j = i
@@ -273,7 +273,7 @@
 									if a[j] < a[i]:
 											a = swap(a, i, j)
 							</code></pre>
-							<pre class="fragment" data-fragment-index="1"><code class="language-python" data-trim data-noescape data-line-numbers="1">
+							<pre class="fragment" data-fragment-index="1"><code class="language-python" data-trim data-noescape data-line-numbers="1" style="font-size:140%; line-height:140%">
 							a = [7, 2, 2, 6, 4]
 							for i in range(n-1):
 									j = i
@@ -283,7 +283,7 @@
 									if a[j] < a[i]:
 											a = swap(a, i, j)
 							</code></pre>
-							<pre class="fragment" data-fragment-index="2"><code class="language-python" data-trim data-noescape data-line-numbers="2">
+							<pre class="fragment" data-fragment-index="2"><code class="language-python" data-trim data-noescape data-line-numbers="2" style="font-size:140%; line-height:140%">
 							a = [7, 2, 2, 6, 4]
 							for i in range(n-1):
 									j = i
@@ -293,7 +293,7 @@
 									if a[j] < a[i]:
 											a = swap(a, i, j)
 							</code></pre>
-							<pre class="fragment" data-fragment-index="3"><code class="language-python" data-trim data-noescape data-line-numbers="3-6">
+							<pre class="fragment" data-fragment-index="3"><code class="language-python" data-trim data-noescape data-line-numbers="3-6" style="font-size:140%; line-height:140%">
 							a = [7, 2, 2, 6, 4]
 							for i in range(n-1):
 									j = i
@@ -303,7 +303,7 @@
 									if a[j] < a[i]:
 											a = swap(a, i, j)
 							</code></pre>
-							<pre class="fragment" data-fragment-index="4"><code class="language-python" data-trim data-noescape data-line-numbers="7-8">
+							<pre class="fragment" data-fragment-index="4"><code class="language-python" data-trim data-noescape data-line-numbers="7-8" style="font-size:140%; line-height:140%">
 							a = [7, 2, 2, 6, 4]
 							for i in range(n-1):
 									j = i
@@ -313,7 +313,7 @@
 									if a[j] < a[i]:
 											a = swap(a, i, j)
 							</code></pre>
-							<pre class="fragment" data-fragment-index="5"><code class="language-python" data-trim data-noescape data-line-numbers>
+							<pre class="fragment" data-fragment-index="5"><code class="language-python" data-trim data-noescape data-line-numbers style="font-size:140%; line-height:140%">
 							a = [7, 2, 2, 6, 4]
 							for i in range(n-1):
 									j = i
@@ -427,7 +427,7 @@
 
 					<section>
 						<h2>Insertion sort: code and costs</h2>
-						<div style="position:absolute; width:968px; top:150px; left:0px">
+						<div style="position:absolute; width:768px; top:150px; left:0px">
 							<ul>
 								<li class="fragment" data-fragment-index="1">
 									Setup instance; $n$ operations.
@@ -443,13 +443,13 @@
 								<li class="fragment" data-fragment-index="4">
 									Total operation count:
 									\[
-									\sum_{i=1}^{n-1} 2(i-1) = n (n-1).
+									\sum_{i=1}^{n-1} 2 i = n (n-1).
 									\]
 								</li>
 							</ul>
 						</div>
-						<div style="position:absolute; width:568px; top:150px; left:968px" class="r-stack">
-							<pre><code class="language-python" data-trim data-noescape data-line-numbers>
+						<div style="position:absolute; width:768px; top:150px; left:768px" class="r-stack">
+							<pre><code class="language-python" data-trim data-noescape data-line-numbers style="font-size:140%; line-height:140%">
 							a = [7, 2, 2, 6, 4]
 							for i in range(1, n):
 									for j in range(i, 0, -1):
@@ -458,7 +458,7 @@
 											else:
 													break
 							</code></pre>
-							<pre class="fragment" data-fragment-index="1"><code class="language-python" data-trim data-noescape data-line-numbers="1">
+							<pre class="fragment" data-fragment-index="1"><code class="language-python" data-trim data-noescape data-line-numbers="1" style="font-size:140%; line-height:140%">
 							a = [7, 2, 2, 6, 4]
 							for i in range(1, n):
 									for j in range(i, 0, -1):
@@ -467,7 +467,7 @@
 											else:
 													break
 							</code></pre>
-							<pre class="fragment" data-fragment-index="2"><code class="language-python" data-trim data-noescape data-line-numbers="2">
+							<pre class="fragment" data-fragment-index="2"><code class="language-python" data-trim data-noescape data-line-numbers="2" style="font-size:140%; line-height:140%">
 							a = [7, 2, 2, 6, 4]
 							for i in range(1, n):
 									for j in range(i, 0, -1):
@@ -476,7 +476,7 @@
 											else:
 													break
 							</code></pre>
-							<pre class="fragment" data-fragment-index="3"><code class="language-python" data-trim data-noescape data-line-numbers="3-7">
+							<pre class="fragment" data-fragment-index="3"><code class="language-python" data-trim data-noescape data-line-numbers="3-7" style="font-size:140%; line-height:140%">
 							a = [7, 2, 2, 6, 4]
 							for i in range(1, n):
 									for j in range(i, 0, -1):
@@ -485,7 +485,7 @@
 											else:
 													break
 							</code></pre>
-							<pre class="fragment" data-fragment-index="4"><code class="language-python" data-trim data-noescape data-line-numbers>
+							<pre class="fragment" data-fragment-index="4"><code class="language-python" data-trim data-noescape data-line-numbers style="font-size:140%; line-height:140%">
 							a = [7, 2, 2, 6, 4]
 							for i in range(1, n):
 									for j in range(i, 0, -1):
