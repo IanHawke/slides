@@ -247,7 +247,7 @@
 									Iterate over all $n-1$ positions;
 									<ul>
 										<li class="fragment" data-fragment-index="3">
-											Find index of smallest element <code>j</code>; $1 + 2(n-i)$ operations.
+											Find index of smallest element <code>j</code>; $1 + 2(n-i-1)$ operations.
 										</li>
 										<li class="fragment" data-fragment-index="4">
 											Swap entries if needed; 2 operations.
@@ -257,7 +257,7 @@
 								<li class="fragment" data-fragment-index="5">
 									Total operation count:
 									\[
-									\sum_{i=0}^{n-2} (1 + 2(n-i) + 2) = (n-1)(n+3).
+									\sum_{i=0}^{n-2} (1 + 2(n-i-1) + 2) = (n-1)(n+3).
 									\]
 								</li>
 							</ul>
@@ -443,7 +443,7 @@
 								<li class="fragment" data-fragment-index="4">
 									Total operation count:
 									\[
-									\sum_{i=1}^{n} 2(i-1) = n (n-1).
+									\sum_{i=1}^{n-1} 2(i-1) = n (n-1).
 									\]
 								</li>
 							</ul>
