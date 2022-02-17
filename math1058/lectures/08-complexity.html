@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Lecture 8</title>
+
+		<meta name="description" content="Math1058">
+		<meta name="author" content="Ian Hawke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css">
+
+
+	<style type="text/css">
+	  .reveal p {
+	    text-align: left;
+	  }
+	  .reveal ul {
+	    display: block;
+	  }
+	  .reveal ol {
+	    display: block;
+	  }
+	</style>
+
+
+
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="Title">
+
+					<section>
+						<h2 class="r-fit-text">Computational complexity</h2>
+						<p>
+							<ul style="list-style: none;">
+								<li> Ian Hawke
+								<li> Michael Kenna-Allison
+							</ul>
+						</p>
+
+						<aside class="notes">
+							We will classify algorithms based on their complexity.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Analysis">
+
+					<section>
+
+						<h2>Meaningful differences</h2>
+						<div style="position:absolute; width:768px; top:250px; left:0px">
+							<ul>
+								<li>
+									Brute force only competitive for tiny problems.
+								</li>
+								<li>
+									Factorial growth impractical.
+								</li>
+								<li class="fragment" data-fragment-index=1>
+									Insertion sort always fastest.
+								</li>
+								<li class="fragment" data-fragment-index=1>
+									Difference irrelevant for large lists.
+								</li>
+							</ul>
+							<p class="fragment" data-fragment-index=2>
+								When is a cost difference meaningful?
+							</p>
+						</div>
+						<div style="position:absolute; width:768px; top:150px; left:768px" class="r-stack">
+							<img style="width:768px" src="images/07_sorting/sorting_comparison_1.svg" class="fragment fade-out" data-fragment-index=1>
+							<img style="width:768px" src="images/07_sorting/sorting_comparison_2.svg" class="fragment" data-fragment-index=1>
+						</div>
+
+						<aside class="notes">
+							We are using the sorting problem as an important toy problem to discuss the cost of an algorithm. We have practically seen that the factorial growth of the cost with problem size for brute force sort is not achievable on a real world computer. Equally, we have seen that (in the worst case) insertion sort is always slightly better than selection sort, but that both are practical and the relative difference reduces as the problem size increases.
+							<br>
+							The question we want to tackle is which differences are meaningful. For the methods seen so far, we would want an analysis method to class brute force sort as worse than the others, but the two quadratic sort methods as roughly the same.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Big O">
+
+					<section>
+						<h2>Big O notation</h2>
+						<div style="position:absolute; width:768px; top:150px; left:0px">
+							<p>
+								<b>Definition:</b> Given two functions $f, g$, say $f = \mathcal{O}(g)$ if $\exists n_0, c > 0$ such that
+							</p>
+							\[
+								f(n) \le c g(n) \quad \forall n \ge n_0.
+							\]
+							<p class="fragment" data-fragment-index=1>
+								$f$ is "the order" of $g$. Asymptotically, find $g$ that is
+							</p>
+							<ol class="fragment" data-fragment-index=1>
+								<li>
+									simple;
+								</li>
+								<li>
+									as close to $f$ as possible.
+								</li>
+							</ol>
+						</div>
+						<div style="position:absolute; width:768px; top:150px; left:868px">
+							<img style="width:768px" src="images/08_complexity/complexity_big_O.svg">
+						</div>
+
+						<aside class="notes">
+							Big O notation is our key analysis tool. It (ab)uses notation to put functions into equivalence classes. The equals sign her is really saying that the function $f$ is not growing much faster than $g$; it says nothing about the other way around.
+							<br>
+							Our goal is to use relations like this in both directions to construct groups or sets of functions that behave the same way. This is the idea behind an equivalence class.  It's also the general goal we were after: functions in the same class, which have the "same big-O order", will (asymptotically) behave in roughly the same fashion.
+							<br>
+							We then label each equivalence class in terms of the simplest function within that class. Obviously, there's some personal preference as to what is the simplest function.
+						</aside>
+					</section>
+
+					<section>
+
+						<h2>Asymptotic model</h2>
+
+						<p>
+							Take problem $P$ with instance, size $n$. Take two algorithms $A, B$ with cost $f_{A, B}(n)$ elementary operations.
+						</p>
+						<p>
+							<b>Definition:</b> $\mathcal{O}(f_A)$ is the <em>computational complexity</em> of $A$. Algorithm $A$ is more efficient than $B$ if
+						</p>
+						\[
+						\mathcal{O}(f_A) < \mathcal{O}(f_B) \quad \longleftrightarrow \quad f_A = \mathcal{O}(f_B) \quad \text{and} \quad f_B \ne \mathcal{O}(f_A).
+						\]
+						<ul class="fragment">
+							<li>
+								$\mathcal{O}(\log(n)) < \mathcal{O}(n)$;
+							</li>
+							<li>
+								$\mathcal{O}(n^2) < \mathcal{O}(n^3)$;
+							</li>
+							<li>
+								$\mathcal{O}(n^k) < \mathcal{O}(2^n)$, for $k$ constant, natural.
+							</li>
+						</ul>
+
+						<aside class="notes">
+							Big O notation applied to individual functions is fine, but not exactly what we need. We want to apply it to the cost of the algorithms that solve a particular problem. In particular we are going to be interested in how the number of elementary operations, as discussed in the last lecture, varies with the instance size of the problem. Restricting this to the sorting problem, it's the size of the list. For a linear program it can be linked to the number of decision variables or the number of constraints.
+							<br>
+							The formal definition of computational complexity takes the functional form of this cost as a function of the instance size and finds its equivalence class. That equivalence class gives us the idea of how expensive, or complex, the algorithm is asymptotically as the instance size gets large.
+							<br>
+							We note that the definition we've used so far puts functions that can be wildly different in the same class, as it's a one-way bound. Instead, consider the bound in both directions; is $f$ the same order as $g$, <em>and</em> is $g$ the same order as $f$. If not, then one algorithm will be more efficient than the other.
+							<br>
+							The list of examples show features that we would like to hold. We now have to show that they actually do.
+						</aside>
+
+					</section>
+
+				</section>
+
+				<section id="Properties">
+
+					<section>
+						<h2>When are functions the same</h2>
+						<p>
+							<b>Theorem:</b> Let $f, g \colon \mathbb{R}^+\setminus\{0\} \to \mathbb{R}^+\setminus\{0\}$. Then
+						</p>
+						\[
+						\lim_{n \to \infty} \frac{f(n)}{g(n)} = l \in (0, \infty) \quad \implies \quad f = \mathcal{O}(g) \quad \text{and} \quad g = \mathcal{O}(f).
+						\]
+						<div class="fragment">
+							<p>
+								<b>Proof:</b> Limit requires $\exists \epsilon > 0, N > 0$ such that
+							</p>
+							\[
+							l - \epsilon < \frac{f(n)}{g(n)} < l + \epsilon \quad \forall n \ge N.
+							\]
+							<ol>
+								<li class="fragment">
+									Upper bound gives $f(n) < (l+\epsilon) g(n)$. Let $n_0=N$ and $c=(l+\epsilon)$, gives $f = \mathcal{O}(g)$.
+								</li>
+								<li class="fragment">
+									Lower bound gives $g(n) < (l-\epsilon)^{-1} f(n)$ (wlog). Similarly gives $g = \mathcal{O}(f)$.
+								</li>
+							</ol>
+						</div>
+
+						<aside class="notes">
+							Two functions are the same efficiency if asymptotically they have the same cost, which means that each is the same order as the other. This theorem shows that two functions are the same (in this sense) if their asymptotic ratio is finite and non-zero.
+							<br>
+							The proof relies on the definition of the limit. It needs us to consider the two bounds separately. From each bound we then need to link the constants, small and large, given by the limit definition, to the constant appearing in the big O definition.
+							<br>
+							In the first case this happens straightforwardly. In the second we have to assume that $\epsilon$ is smaller than $l$ so that we can invert the constant into the appropriate form. If this is not the case we would need to perform a similar, but different, re-arrangment.
+						</aside>
+					</section>
+
+					<section>
+						<h2>When are functions different</h2>
+						<p>
+							<b>Theorem:</b> Let $f, g \colon \mathbb{R}^+\setminus\{0\} \to \mathbb{R}^+\setminus\{0\}$. Then
+						</p>
+						\[
+						\lim_{n \to \infty} \frac{f(n)}{g(n)} = 0 \quad \implies \quad f = \mathcal{O}(g) \quad \text{but} \quad g \ne \mathcal{O}(f).
+						\]
+						<div class="fragment">
+							<p>
+								<b>Proof:</b> Limit requires $\exists \epsilon > 0, N > 0$ such that
+							</p>
+							\[
+							- \epsilon < \frac{f(n)}{g(n)} < + \epsilon \quad \forall n \ge N.
+							\]
+							<ol>
+								<li class="fragment">
+									Upper bound gives $f(n) < \epsilon g(n)$. Let $n_0=N$ and $c=\epsilon$, gives $f = \mathcal{O}(g)$.
+								</li>
+								<li class="fragment">
+									Assume $g = \mathcal{O}(f)$. Then $g(n) \le c f(n) \implies \tfrac{f(n)}{g(n)} \ge c^{-1} > 0$: contradicts lower bound.
+								</li>
+							</ol>
+						</div>
+
+						<aside class="notes">
+							Two functions are the same efficiency if asymptotically they have the same cost, which means that each is the same order as the other. This theorem shows that two functions are the same (in this sense) if their asymptotic ratio is finite and non-zero.
+							<br>
+							The proof relies on the definition of the limit. It needs us to consider the two bounds separately. From each bound we then need to link the constants, small and large, given by the limit definition, to the constant appearing in the big O definition.
+							<br>
+							In the first case this happens straightforwardly. In the second we have to assume that $\epsilon$ is smaller than $l$ so that we can invert the constant into the appropriate form. If this is not the case we would need to perform a similar, but different, re-arrangment.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Shortcuts</h2>
+						<ol>
+							<li>
+								Positive constants can be ignored:
+								\[
+								a f(n) + b = \mathcal{O}(f).
+								\]
+							</li>
+							<li class="fragment">
+								All logarithms are the same:
+								\[
+								\log_a(n) = \mathcal{O}(\log_b(n)).
+								\]
+							</li>
+							<li class="fragment">
+								Lower order terms can be ignored:
+								\[
+								\lim_{n \to \infty} \frac{g(n)}{f(n)} \to 0 \quad \implies \quad f(n) + g(n) = \mathcal{O}(f).
+								\]
+							</li>
+							<li class="fragment">
+								Shifts in monotone increasing functions can be ignored:
+								\[
+								f(n + a) = \mathcal{O}(f).
+								\]
+							</li>
+						</ol>
+					</section>
+
+				</section>
+
+				<section id="Examples">
+
+					<section>
+						<h2>Selection sort: complexity</h2>
+						<div style="position:absolute; width:868px; top:150px; left:0px">
+							<ul>
+								<li class="fragment" data-fragment-index="1">
+									Setup instance; $\mathcal{O}(n)$.
+								</li>
+								<li class="fragment" data-fragment-index="2">
+									Iterate over all $\mathcal{O}(n)$ positions;
+									<ul>
+										<li class="fragment" data-fragment-index="3">
+											Find index of smallest element <code>j</code>; $\mathcal{O}(n)$ operations.
+										</li>
+										<li class="fragment" data-fragment-index="4">
+											Swap entries if needed; $\mathcal{O}(1)$ operations.
+										</li>
+									</ul>
+								</li>
+								<li class="fragment" data-fragment-index="5">
+									Total operation count:
+									\[
+									\mathcal{O}(n) + \mathcal{O}(n) \times \mathcal{O}(n) = \mathcal{O}(n^2).
+									\]
+								</li>
+							</ul>
+						</div>
+						<div style="position:absolute; width:668px; top:150px; left:868px" class="r-stack">
+							<pre><code class="language-python" data-trim data-noescape data-line-numbers style="font-size:140%; line-height:140%">
+							a = [7, 2, 2, 6, 4]
+							for i in range(n-1):
+									j = i
+									for k in range(i+1, n):
+											if a[k] < a[j]:
+													j = k
+									if a[j] < a[i]:
+											a = swap(a, i, j)
+							</code></pre>
+							<pre class="fragment" data-fragment-index="1"><code class="language-python" data-trim data-noescape data-line-numbers="1" style="font-size:140%; line-height:140%">
+							a = [7, 2, 2, 6, 4]
+							for i in range(n-1):
+									j = i
+									for k in range(i+1, n):
+											if a[k] < a[j]:
+													j = k
+									if a[j] < a[i]:
+											a = swap(a, i, j)
+							</code></pre>
+							<pre class="fragment" data-fragment-index="2"><code class="language-python" data-trim data-noescape data-line-numbers="2" style="font-size:140%; line-height:140%">
+							a = [7, 2, 2, 6, 4]
+							for i in range(n-1):
+									j = i
+									for k in range(i+1, n):
+											if a[k] < a[j]:
+													j = k
+									if a[j] < a[i]:
+											a = swap(a, i, j)
+							</code></pre>
+							<pre class="fragment" data-fragment-index="3"><code class="language-python" data-trim data-noescape data-line-numbers="3-6" style="font-size:140%; line-height:140%">
+							a = [7, 2, 2, 6, 4]
+							for i in range(n-1):
+									j = i
+									for k in range(i+1, n):
+											if a[k] < a[j]:
+													j = k
+									if a[j] < a[i]:
+											a = swap(a, i, j)
+							</code></pre>
+							<pre class="fragment" data-fragment-index="4"><code class="language-python" data-trim data-noescape data-line-numbers="7-8" style="font-size:140%; line-height:140%">
+							a = [7, 2, 2, 6, 4]
+							for i in range(n-1):
+									j = i
+									for k in range(i+1, n):
+											if a[k] < a[j]:
+													j = k
+									if a[j] < a[i]:
+											a = swap(a, i, j)
+							</code></pre>
+							<pre class="fragment" data-fragment-index="5"><code class="language-python" data-trim data-noescape data-line-numbers style="font-size:140%; line-height:140%">
+							a = [7, 2, 2, 6, 4]
+							for i in range(n-1):
+									j = i
+									for k in range(i+1, n):
+											if a[k] < a[j]:
+													j = k
+									if a[j] < a[i]:
+											a = swap(a, i, j)
+							</code></pre>
+						</div>
+
+						<aside class="notes">
+							Doing the complexity analysis is much more straightforward than an explicit count of the elementary operations. We need to argue if each line, or block, of code fits in each equivalence class. Then we multiply up any terms and ignore the lower orders.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Summary">
+					<section>
+						<h1>Summary</h1>
+
+						<ul>
+							<li>
+								Complexity analysis gives the asymptotic behaviour.
+							</li>
+							<li>
+								Anything polynomial is termed practical or tractable.
+							</li>
+							<li>
+								Anything faster than polynomial is intractable.
+							</li>
+						</ul>
+					</section>
+				</section>
+
+			</div>
+
+		</div>
+
+
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/zoom/zoom.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/search/search.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../reveal.js/plugin/math/math.js"></script>
+		<script src="../reveal.js/plugin/spotlight/spotlight.js"></script>
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				width: 1536,
+			  height: 960,
+			  margin: 0.04,
+				controls: false,
+				progress: true,
+				center: true,
+				hash: true,
+				transition: 'none',
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath.KaTeX, RevealSpotlight ],
+				spotlight: {
+					presentingCursor: 'default',
+				}
+			});
+
+		</script>
+
+
+	</body>
+</html>
