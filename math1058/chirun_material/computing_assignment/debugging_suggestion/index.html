@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        
+            <meta charset="utf-8">
+            <meta name="robots" content="noindex">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="author" content="Ian Hawke" />
+            <meta name="date" content="2022-02-10" />
+        
+
+        <title>Debugging Suggestions | Operational Research and Mathematical Computing</title>
+
+        
+    
+    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../../static/styles.css">
+            <link rel="stylesheet" id="customiseCSS" href="../../static/light.css">
+            
+            
+        
+    <link rel="stylesheet" id="customiseCodeCSS" href="../../static/pygmentize.light.css">
+    <link rel="stylesheet" href="../../static/codemirror-5.26.0/lib/codemirror.css">
+    <link rel="stylesheet" href="../../static/boole.css">
+    <link rel="stylesheet" href="../../static/numbasEmbed.css">
+
+    <link rel="stylesheet" href="../../static/bootstrap-toc.css?v=3">
+    <link rel="stylesheet" href="../../static/print.css">
+
+
+        
+    
+    
+            <script defer src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <script defer src="../../static/mathjax_config.js"></script>
+            <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+            <script defer src="../../static/customisation.js"></script>
+            <script defer src="../../static/mp4.js"></script>
+            
+            
+        
+    <script defer src="../../static/jquery.flexibleArea.js"></script>
+    <script defer src="../../static/spin.min.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/lib/codemirror.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/octave/octave.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/python/python.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/r/r.js"></script>
+    <script defer src="../../static/boole.js"></script>
+    <script defer src="../../static/numbasEmbed.js"></script>
+
+    <script defer src="../../static/bootstrap-toc.js"></script>
+
+    </head>
+    <body data-spy="scroll" data-target="#chapterTOC" data-offset="50">
+        
+<div class="collapse" id="navbarToggleCustomise">
+	<div class="bg-secondary text-white p-3">
+		<form onsubmit="return false;" id="navbarCustomise">
+			<div class="form-row">
+				<label>Theme Customisation</label>
+				<div id="themeSelector" class="form-group col-md-12">
+					<button class="btn btn-dark mr-2" value="dark">Dark</button>
+					<button class="btn btn-pastel mr-2" value="pastel">Pastel</button>
+					<button class="btn btn-light mr-4" value="light">Light</button>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label style="display: block" for="font-scale">Font size (<span id="font-size-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="font-scale" min="50" max="600" value="100">
+					<button id="font-scale-reset" class="btn btn-sm">Reset</button>
+				</div>
+				<div class="form-group col-md-4">
+					<label style="display: block" for="p-space">Spacing (<span id="p-space-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="p-space" min="0" max="600" value="100">
+					<button id="p-space-reset" class="btn btn-sm">Reset</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<nav aria-label="breadcrumb">
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="../../index.html">Operational Research and Mathematical Computing</a>
+		</li>
+		
+		<li class="breadcrumb-item">
+			<a href="../../computing_assignment/index.html">Computing assignments</a>
+		</li>
+		
+		<li class="breadcrumb-item active">
+			Debugging Suggestions
+		</li>
+		<li class="ml-auto">
+			<button class="navbar-toggler p0" type="button" data-toggle="collapse" data-target="#navbarToggleCustomise" aria-controls="navbarToggleCustomise" aria-expanded="false" aria-label="Toggle customisations panel">
+				<i class="fa fa-cog" aria-hidden="true" title="Toggle customisations panel"></i> <span class="sr-only">Toggle customisations panel</span>
+			</button>
+		</li>
+	</ul>
+</nav>
+
+
+        <header>
+            
+            
+        </header>
+        <main>
+            
+    <div class="container mt-3">
+        <div class="row">
+            
+            <div id="sidebar" class="col-md-3">
+                <nav class="mb-3" id="chapterTOC" data-toggle="toc">
+                    <ul class="nav navbar-nav">
+                        
+                        
+                        
+                        <li><a id="pdf-link" class="nav-link" href="../../computing_assignment/debugging_suggestion/debugging_suggestion.pdf" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" title="Download as PDF"></i>&nbsp;Download as PDF</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+            <div id="content" class="col-md-9"> 
+            
+            <section class="section1"><h1>Debugging</h1>
+<p>When writing code mistakes are a certainty. We need to rapidly recover from mistakes to avoid frustration.</p>
+<p>Most of tips here work in either Spyder or repl.it.</p>
+<p>The main tip: <strong>read the error message</strong>. It will tell you (roughly) where in the code the problem is (the line number) and some general reason for the error. This may not be understandable at first, but once the problem is found, try linking the error message to the problem in your mind. That way the next time you see the same error message the easier it will be to find the problem.</p>
+<section class="section2"><h2>Asking for help</h2>
+<p>If the tips below do not work then you may want to ask other students, demonstrators, or module leads. Please go ahead. However, please note two points about asking by email:</p>
+<ol>
+<li>It's really hard to answer a problem without sufficient detail. Writing out the detail is tedious. It's always best to <em>email the code</em>. Copy-pasting code into email is error prone (particularly Python that relies on spacing). Including screen shots is very rarely helpful, as the person receiving the message wants to run the code, not type it in again (and make their own mistakes, or accidentally correct yours without noticing).</li>
+<li>The university email server blocks attached files that end <code>.py</code>. To email a Python script as an attachment either compress it in an archive (<code>.zip</code> by preference) or change the file extension (for example to <code>.txt</code>).</li>
+</ol>
+</section><section class="section2"><h2>Code does not run</h2>
+<p>Python will not run scripts that have syntax errors that it can spot.</p>
+<p>Syntax errors often result from</p>
+<ul>
+<li>mis-spelling a variable name (<code>witdh</code> instead of <code>width</code>);</li>
+<li>an error in assignment (<code>v + 3</code> instead of <code>v = 3</code>, when <code>v</code> has not yet been assigned);</li>
+<li>not closing a bracket.</li>
+</ul>
+<section class="section3"><h3>Strategies</h3>
+<section class="section4"><h4>Use editor features</h4>
+<p>In most cases the error message will give you the line with the problem. The IDE editor will also highlight problems (look for red lines in the margins, or red underlines of code).</p>
+</section><section class="section4"><h4>Check earlier lines</h4>
+<p>Sometimes Python isn't smart enough. This happens often when a bracket isn't closed. If you can't spot the error on the indicated line, always check the lines <em>before</em> that indicated for problems with brackets.</p>
+</section><section class="section4"><h4>Comment lines out</h4>
+<p>Sometimes code can be very confusing and it's hard to spot where the syntax error is. Try commenting out lines that don't appear relevant to the error. If they do change or remove the error that can indicate the (or a) problem was in the line just commented out.</p>
+</section></section></section><section class="section2"><h2>Code runs but gives error</h2>
+<p>Standard reasons for this are</p>
+<ul>
+<li>the code tries to do the right thing with the wrong input;</li>
+<li>the code uses features in the wrong way.</li>
+</ul>
+<section class="section3"><h3>Examples</h3>
+<p>An example of the first would be
+<div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">x</span>
+</pre></div>
+It's fine to divide by a number that's not zero: it's just the particular value of <code>x</code> that's the problem.</p>
+<p>An example of the second would be
+<div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">v</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+</pre></div>
+The final line tries to index into a list using another list. The code may have wanted to get certain entries of the list, in which case slicing or some <code>numpy</code> features would be better. Alternatively, the code may have intended to loop over the indexes encoded in <code>x</code>.</p>
+<p>A final example would be
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">my_add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">x</span>
+</pre></div>
+The issue here is that the function has no <code>return</code> statement. This means nothing is returned, so the variable <code>x</code> is set to <code>None</code>. It makes no sense to use this in Python mathematical expressions, so an error results.</p>
+</section><section class="section3"><h3>Strategies</h3>
+<section class="section4"><h4><code>print</code> stuff out</h4>
+<p>The examples above occurred because, when writing a line of code (say <code>y = 1 / x</code>) the coder had assumed "sensible" input. When the code actually runs the value of <code>x</code> turned out not to match the assumptions (so <code>x</code> was zero, or not a number).</p>
+<p>Once you know what values cause problems you can track back through your code to find where the assumptions failed.</p>
+<p>To find the values, add <code>print</code> statements before the line causing the problem. When you know which term is causing the problem, work back and add more <code>print</code> statements to discover how it was set. For example, in the final example, change the code to
+<div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">my_add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"x is"</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">x</span>
+</pre></div>
+We then see
+<div class="highlight"><pre><span></span>x is None
+</pre></div>
+output to the screen. This tells us something is up with the <code>my_add</code> function; we could add <code>print</code> statements to the function internals to check what it's doing, and (hopefully) then see the missing <code>return</code>.</p>
+</section><section class="section4"><h4>Variable explorer</h4>
+<p>This works in Spyder only. There is a tab in the top right (with Help, and Plots) called the Variable Explorer that shows the current values of all variables. You can run the whole script, or some lines of the script (highlight them, right-click, "Run selection"), and then see the values collected in one window.</p>
+<p>The advantage of this approach is that you don't have to change your code, and you can see all the values you might need. The disadvantage is that it's tedious to select lines to run if dealing with a problem in, say, the middle of a long loop.</p>
+</section><section class="section4"><h4>Debuggers</h4>
+<p>Both repl.it and Spyder include debuggers. This combine the previous strategies and allow to get information about the state of your code, particularly the values of your variables, even in complex situations. There is <a href="https://docs.spyder-ide.org/3/debugging.html">documentation for Spyder</a> and <a href="https://docs.replit.com/programming-ide/debugging">briefer documentation for repl.it</a>.</p>
+<p>The idea is to add a <em>breakpoint</em> to the code. This is done by clicking in the margin of the editor next to the line number. In Spyder this will add a red dot; in repl.it a blue dot. When the code is then run <em>using the debugger</em>, it will pause every time it reaches the breakpoint. The value of any and all variables can be checked at this point.</p>
+<p>The code pauses <em>before</em> executing the line that the breakpoint is on. We can also step the code forward one line at a time to check the effect of each.</p>
+<p>Breakpoints are particularly useful when there is a problem with loops. Add a breakpoint inside the loop and check the values at each stage.</p>
+</section></section></section><section class="section2"><h2>Code runs, gives no errors, but the wrong result</h2>
+<p>This usually results from no implementing an algorithm exactly right.</p>
+<p>Many of the strategies needed match those above: check the values of the variables at each step. The difference is that the computer will not tell you where the problem is. You need to know what the result should be.</p>
+<section class="section3"><h3>Example</h3>
+<p>Compute the sum of <script type="math/tex">2^{-n}</script> for <script type="math/tex">n \in 0, 1, \dots, \infty</script>. The answer should be 2. We can't go to infinity, so go to a large number.
+<div class="highlight"><pre><span></span><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">summand</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+  <span class="n">summand</span> <span class="o">=</span> <span class="n">summand</span> <span class="o">/</span> <span class="mi">2</span>
+  <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="n">summand</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+</pre></div>
+Each time through the loop we compute the next term within the sum, the <code>summand</code>, by dividing the previous one by 2. We accumulate that.</p>
+<p>If you run this code you will find the total being 1. Changing the range of the sum makes no difference if it is large enough. The problem with the code is that we should add the <code>summand</code> to the <code>total</code> <em>before</em> updating it.</p>
+</section><section class="section3"><h3>Strategies</h3>
+<section class="section4"><h4>Test in the simplest possible cases</h4>
+<p>We want to find the step that is going wrong. This is hard when there are many complex steps. So first check in the easiest cases.</p>
+<p>What happens in the example if the range for <script type="math/tex">n</script> is restricted to <script type="math/tex">n = 0</script> only? Analytically we immediately see that the sum is <script type="math/tex">2^{-0} = 1</script>. Changing the <code>range</code> statement  in the code to <code>range(1)</code>, which runs from zero up to (but not including) one, the code outputs <code>0.5</code>. We see the loop fails at the first step. This tells us that <code>summand</code> must have the wrong value, or <code>total</code> is incorrectly initialised. These can be checked with <code>print</code> statements or in a debugger.</p>
+</section><section class="section4"><h4>Test classes of problems</h4>
+<p>If the simple tests work, think about what <em>qualitatively</em> changes in the "real" problem you are trying to solve. Then find a simple test for your qualitative change.</p>
+<p>As a toy example, look at
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_first</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+This function returns the first element of a list. It works fine when a list has one object or five objects. But if an <em>empty</em> list is passed in it will give an error.</p>
+<p>This is linked to the "zero, one, infinity" rule. Unless there is a very special case, your function should work (or should check) if an object exists (is not zero), if it's unique (just one of them), or if it could contain arbitrarily many things. That gives three qualitative cases the code should work on (or exclude as possible inputs).</p>
+</section></section></section></section>
+            </div>
+        </div>
+    </div>
+
+        </main>
+		
+		<footer class="text-muted">
+	<hr>
+	<div class="container">
+		<div class="float-right">
+			<ul style="list-style: none">
+			<li><a href="#">Back to top</a></li>
+			
+			
+			<li><a href="../../computing_assignment/debugging_suggestion/debugging_suggestion.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;Download as PDF</a></li>
+			
+			</ul>
+		</div>
+		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
+		<p>This page last generated: 2022-02-10</p>
+	</div>
+</footer>
+		
+    </body>
+</html>

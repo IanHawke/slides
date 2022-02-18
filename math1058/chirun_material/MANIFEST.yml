@@ -209,10 +209,22 @@ structure:
     title: Example assignment
     type: chapter
   - build_pdf: true
+    pdf_url: computing_assignment/debugging_suggestion/debugging_suggestion.pdf
+    slug: debugging_suggestion
+    source: markdown/computing/00-debugging.md
+    title: Debugging Suggestions
+    type: chapter
+  - build_pdf: true
     pdf_url: computing_assignment/assigment_1/assigment_1.pdf
     slug: assigment_1
     source: markdown/computing/01-week3.md
     title: Assigment 1
+    type: chapter
+  - build_pdf: true
+    pdf_url: computing_assignment/assigment_2/assigment_2.pdf
+    slug: assigment_2
+    source: markdown/computing/02-week5.md
+    title: Assigment 2
     type: chapter
   pdf_url: computing_assignment/computing_assignment.pdf
   slug: computing_assignment
