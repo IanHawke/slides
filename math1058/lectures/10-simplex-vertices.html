@@ -285,15 +285,50 @@
 							<p>
 								Write constraints $A x = b$ as $A_{\hat{B}} x_{\hat{B}} = b$, as $x_{\hat{N}} = 0$.
 							</p>
-
 						</div>
-						<div class="fragment">
+						<div class="fragment fade-in-then-out" style="position:absolute; width:1536px; top:330px; left:0px">
+							<p>
+								By contradiction show columns of $A_{\hat{B}}$ are linearly independent. If not, $\exists y_{\hat{B}} \ne 0$ such that $A_{\hat{B}} y_{\hat{B}} = 0$.
+							</p>
+							<p>
+								By construction $x_{\hat{B}} > 0$, so $\exists \epsilon > 0$ such that $x_{\hat{B}} \pm \epsilon y_{\hat{B}} \ge 0$.
+							</p>
+							<p>
+								As $x_{\hat{B}} = \tfrac{1}{2} ( x_{\hat{B}} + \epsilon y_{\hat{B}} )	+ \tfrac{1}{2} ( x_{\hat{B}} - \epsilon y_{\hat{B}} )$ and $A_{\hat{B}} ( x_{\hat{B}} \pm \epsilon y_{\hat{B}} ) = b$, we have
+							</p>
+							\[
+							x = (x_{\hat{B}}, 0) = \tfrac{1}{2} ( x_{\hat{B}} + \epsilon y_{\hat{B}} , 0 ) +  \tfrac{1}{2} ( x_{\hat{B}} - \epsilon y_{\hat{B}} , 0 ).
+							\]
+							<p>
+								$x$ is a convex combination of two distinct feasible points: contradicts $x$ being a vertex.
+							</p>
+						</div>
+						<div class="fragment fade-in-then-out" style="position:absolute; width:1536px; top:330px; left:0px">
+							<p>
+								Columns of $A_{\hat{B}}$ are linearly independent. If $|\hat{B}|=m$ then $A_{\hat{B}}$ is a basic matrix (square, invertible), so $x$ is basic feasible.
+							</p>
+						</div>
+						<div class="fragment fade-in-then-out" style="position:absolute; width:1536px; top:330px; left:0px">
+							<p>
+								Columns of $A_{\hat{B}}$ are linearly independent. If $|\hat{B}|=m$ then $A_{\hat{B}}$ is a basic matrix (square, invertible), so $x$ is basic feasible.
+							</p>
+							<p>
+								If $|\hat{B}| < m$, add indexes from $\hat{N}$ such that columns are linearly independent (always possible as $A$ has full row rank).
+							</p>
+							<p>
+								If we need to add indexes from $\hat{N}$ then some basic variables have zero value. The solution is <em>degenerate</em>.
 						</div>
 
 						<aside class="notes">
 							Now prove that if x is a vertex then it is basic feasible.
 							<br>
-
+							By the non-negativity constraints all components of the vertex are non-negative. Put all the strictly positive ones in the basic set. Use this to partition the problem as usual.
+							<br>
+							We need to show that the matrix formed by this partitioning is a basic matrix. If that is true then the vertex is a basic feasible solution. The problem boils down to showing that the resulting matrix is invertible, which relies on all the colus being linearly independent and the matrix being square.
+							<br>
+							Concentrate first on the linear independence. Prove by contradiction as shown. The key point is to use that x is a vertex, so cannot be written as a convex combination of points in the feasible region.
+							<br>
+							We then have to show that the matrix is square. There cannot be more basic indexes than constraints, as this would violate the full row rank property. If there are exactly the right number then we are done. If there are not enough, we can always choose to add more indexes from the non-basic set. These will have zero value, which makes the solution degenerate, but it is still a basic feasible solution.
 						</aside>
 					</section>
 
