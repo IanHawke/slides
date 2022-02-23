@@ -143,7 +143,7 @@
 						<h2>Asymptotic model</h2>
 
 						<p>
-							Take problem $P$ with instance, size $n$. Take two algorithms $A, B$ with cost $f_{A, B}(n)$ elementary operations.
+							Take problem $P$ with instance $I$, size $n$. Take two algorithms $A, B$ with cost $f_{A, B}(n)$ elementary operations.
 						</p>
 						<p>
 							<b>Definition:</b> $\mathcal{O}(f_A)$ is the <em>computational complexity</em> of $A$. Algorithm $A$ is more efficient than $B$ if
@@ -209,7 +209,7 @@
 							<br>
 							The proof relies on the definition of the limit. It needs us to consider the two bounds separately. From each bound we then need to link the constants, small and large, given by the limit definition, to the constant appearing in the big O definition.
 							<br>
-							In the first case this happens straightforwardly. In the second we have to assume that $\epsilon$ is smaller than $l$ so that we can invert the constant into the appropriate form. If this is not the case we would need to perform a similar, but different, re-arrangment.
+							In the first case this happens straightforwardly. In the second we have to assume that $\epsilon$ is smaller than $l$ so that we can invert the constant into the appropriate form. As we just need $\epsilon$ to exist, we can always do this by, for example, choosing $\epsilon = l/2$.
 						</aside>
 					</section>
 
@@ -239,11 +239,9 @@
 						</div>
 
 						<aside class="notes">
-							Two functions are the same efficiency if asymptotically they have the same cost, which means that each is the same order as the other. This theorem shows that two functions are the same (in this sense) if their asymptotic ratio is finite and non-zero.
+							The proof that two functions have different efficiency follows very similar lines. In fact, the proof that f is bounded by g is essentially identical.
 							<br>
-							The proof relies on the definition of the limit. It needs us to consider the two bounds separately. From each bound we then need to link the constants, small and large, given by the limit definition, to the constant appearing in the big O definition.
-							<br>
-							In the first case this happens straightforwardly. In the second we have to assume that $\epsilon$ is smaller than $l$ so that we can invert the constant into the appropriate form. If this is not the case we would need to perform a similar, but different, re-arrangment.
+							However, the proof that g cannot be bounded by f has to be different. The fact that l is zero means that no matter how small $\epsilon$ is, it cannot be the case that the lower bound of the limit gives a positive bound. Therefore we work by contradiction. We assume that g can be bounded by f and check what this means for the sign of the ratio. We then compare that to the sign given by the lower bound in the limit definition, giving the needed contradiction.
 						</aside>
 					</section>
 
@@ -275,6 +273,20 @@
 								\]
 							</li>
 						</ol>
+
+						<aside class="notes">
+							Working with limit theorems is tedious, so general shortcuts that follow from them are useful to construct.
+							<br>
+							In each case we take the ratio of the two sides and then take the limit. It is standard to assume that f is diverging as n tends to infinity, although to be strict we should also check the case where it asymptotes to a constant value.
+							<br>
+							In the first case the ratio is essentially a + b / f. In the limit this tends to a, which is constant, so the first theorem applies and both sides are of the same order and efficiency.
+							<br>
+							In the second case we write both logs in the same base, and they differ by a multiplicative constant, so the first shortcut holds.
+							<br>
+							In the third case the second limit theorem holds. This is the most important shortcut as it allows for huge simplifications.
+							<br>
+							The last case we do not prove, but consider polynomials as an example. When the polynomial is expanded the shift gives lower order terms, which by the previous shortcut can be ignored.
+						</aside>
 					</section>
 
 				</section>
@@ -372,6 +384,8 @@
 
 						<aside class="notes">
 							Doing the complexity analysis is much more straightforward than an explicit count of the elementary operations. We need to argue if each line, or block, of code fits in each equivalence class. Then we multiply up any terms and ignore the lower orders.
+							<br>
+							It is the shortcut of ignoring the lower order terms that leads to the major simplifications.
 						</aside>
 					</section>
 
@@ -392,6 +406,10 @@
 								Anything faster than polynomial is intractable.
 							</li>
 						</ul>
+
+						<aside class="notes">
+							Having done costs, we can now go back to looking at linear programs via the simplex method.
+						</aside>
 					</section>
 				</section>
 
