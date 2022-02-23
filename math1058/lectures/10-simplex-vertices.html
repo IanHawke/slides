@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Lecture 10</title>
+
+		<meta name="description" content="Math1058">
+		<meta name="author" content="Ian Hawke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css">
+
+
+	<style type="text/css">
+	  .reveal p {
+	    text-align: left;
+	  }
+	  .reveal ul {
+	    display: block;
+	  }
+	  .reveal ol {
+	    display: block;
+	  }
+	</style>
+
+
+
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="Title">
+
+					<section>
+						<h2 class="r-fit-text">Simplex Method and Vertices</h2>
+						<p>
+							<ul style="list-style: none;">
+								<li> Ian Hawke
+								<li> Michael Kenna-Allison
+							</ul>
+						</p>
+
+						<aside class="notes">
+							We introduce the Simplex Method.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Simplex">
+
+					<section>
+
+						<h2>Simplex Method</h2>
+						<div style="position:absolute; width:768px; top:150px; left:0px">
+							<ul>
+								<li>
+									Solutions to linear programs at vertices.
+								</li>
+								<li>
+									Simplex method: move from one vertex to adjacent until optimal found.
+								</li>
+								<li>
+									Ingredients:
+									<ol>
+										<li>
+											How to characterize vertex algebraically?
+										</li>
+										<li>
+											How to check vertex is optimal?
+										</li>
+										<li>
+											How to move from vertex to better vertex?
+										</li>
+									</ol>
+								</li>
+							</ul>
+							<p>
+								How to start? How much does it cost?
+							</p>
+						</div>
+						<div style="position:absolute; width:768px; top:150px; left:768px">
+							<img style="width:768px" src="images/09_simplex_basics/lp_simplex_vertex.svg">
+						</div>
+
+						<aside class="notes">
+							To briefly recap, the simplex method algebraically finds a vertex then moves from one vertex to a better vertex. We introduced partitioning and basic matrices, but still have not actually proved that a basic solution actually corresponds to a vertex.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Basic matrix and partitioning</h2>
+
+						<p>
+							Write LP in standard form:
+						</p>
+						\[
+						\begin{array}{rcrcl}
+						\min_x & \quad & c x && \\
+						\text{subject to} & & A x & = & b \\
+						& & x & \ge & 0.
+						\end{array}
+						\]
+						<p>
+							Pick $B \subseteq \{ 1, \dots, n\}$ which $\implies$ submatrix $A_B$, and partition
+						</p>
+						\[
+						\begin{array}{rcrcl}
+						\min_x & \; & c_B x_B + c_N x_N && \\
+						\text{s.t.} & & A_B x_B + A_N x_N & = & b \\
+						& & x_B, x_N & \ge & 0.
+						\end{array}
+						\]
+
+						<aside class="notes">
+							We also remember that there are multiple ways that we can partition the problem into basic and non-basic variables. The basic variables are chosen so that the associated basic matrix is invertible. A basic solution is one that solves the linear system $A_B x_B = b$ and sets the non-basic variables to zero. This basic solution, if feasible, gives us the solution at a vertex.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Forms">
+
+					<section>
+						<h2>Basic form</h2>
+
+						<p>
+							For given, invertible, $A_B$, need
+						</p>
+						\[
+							A x = b \iff A_B x_B + A_N x_N = b \iff x_B = A_B^{-1} b - A_B^{-1} A_N x_N.
+						\]
+						<div class="fragment">
+							<p>
+								Go from partitioned form
+							</p>
+							\[
+							\begin{array}{rcrcl}
+							\min_x & \; & c_B x_B + c_N x_N && \\
+							\text{s.t.} & & A_B x_B + A_N x_N & = & b \\
+							& & x_B, x_N & \ge & 0
+							\end{array}
+							\]
+							<p>
+								to <em>basic form</em>:
+							</p>
+							\[
+							\begin{array}{rrcl}
+							\min_x & c_B A_B^{-1} b + \overbrace{(c_B - c_B A_B^{-1} A_B )}^{\smash{=0}} x_B + (c_N - c_B A_B^{-1} A_N) x_N && \\
+							\text{s.t.} & x_B + A_B^{-1} A_N x_N & = & A_B^{-1} b \\
+							 & x_B, x_N & \ge & 0.
+							\end{array}
+							\]
+						</div>
+
+						<aside class="notes">
+							As the basic matrix is invertible we can directly write down the basic decision variables in terms of the right-hand-side vector b and the non-basic variables.
+							<br>
+							We can then replace the basic decision variables in the objective function with these terms. This leads to the first and last term in the final objective function. It is useful for later purposes to add in a term that includes the basic variables whose appearance is similar to that of the non-basic variables. We do this by adding zero: the term in brackets vanishes because of the matrix multiplications.
+							<br>
+							We also want to write the constraints directly in terms of the basic decision variables. We do this by pre-multiplying by the invertible basic matrix.
+							<br>
+							This basic form relies on the choice of the basic matrix. Each new choice of basic matrix leads to a different basic form.
+						</aside>
+					</section>
+
+					<section>
+
+						<h2>Basic solutions revisited</h2>
+
+						<p>
+							Start from basic form
+						</p>
+						\[
+						\begin{array}{rrcl}
+						\min_x & c_B A_B^{-1} b + \overbrace{(c_B - c_B A_B^{-1} A_B )}^{\smash{=0}} x_B + (c_N - c_B A_B^{-1} A_N) x_N && \\
+						\text{s.t.} & x_B + A_B^{-1} A_N x_N & = & A_B^{-1} b \\
+						 & x_B, x_N & \ge & 0.
+						\end{array}
+						\]
+						<p>
+							Set $x_N = 0$. Basic form becomes
+						</p>
+						\[
+						\begin{array}{rrcl}
+						\min_x & c_B A_B^{-1} b + \overbrace{(c_B - c_B A_B^{-1} A_B )}^{\smash{=0}} x_B && \\
+						\text{s.t.} & x_B & = & A_B^{-1} b \\
+						 & x_B & \ge & 0.
+						\end{array}
+						\]
+						<p>
+							Basic <em>feasible</em> solutions satisfy all constraints.
+						</p>
+
+						<aside class="notes">
+							We introduced basic (feasible) solutions last time. However, they are closely linked to the basic form. In a basic solution we have the decision variables partitioned into basic and non-basic parts. We set the non-basic parts to vanish. This immediately gives us that the basic variables must solve the linear system.
+							<br>
+							We also see the way the basic variables will now give the value of the objective function.
+						</aside>
+
+					</section>
+
+				</section>
+
+				<section id="Vertices">
+
+					<section>
+						<h2>Basic solutions are vertices</h2>
+
+						<p>
+							<b>Theorem:</b> $x$ is basic feasible solution if and only if it is a vertex.
+						</p>
+						<div class="fragment">
+							<p>
+								<b>Proof of "only if":</b> By contradiction. $x$ not a vertex means
+							</p>
+							\[
+							x = \lambda y + (1 - \lambda) z, \quad \lambda \in (0, 1), \quad x \ne y \ne z.
+							\]
+						</div>
+						<div class="fragment">
+							<p>
+								$x$ basic, so $x_N = 0$, so $y_N + (1 - \lambda) z_N = 0$.
+							</p>
+							<p>
+								$y, z$ feasible so $y_N, z_N \ge 0$. Previous gives $y_N = 0 = z_N$.
+							</p>
+						</div>
+						<div class="fragment">
+							<p>
+								$y, z$ feasible so $A_B y_B = b = A_B z_B$. $x$ (basic) feasible so $A_B x_B = b$.
+							</p>
+							<p>
+								$A_B$ invertible gives $x_B = y_B = z_B$.
+							</p>
+						</div>
+						<div class="fragment">
+							<p>
+								Hence $x = y = z$. Contradiction, so $x$ is a vertex.
+							</p>
+						</div>
+
+						<aside class="notes">
+							First prove that if x is basic feasible then it must be a vertex.
+							<br>
+							Do this by contradiction. If x is not a vertex, but is in the feasible region, then by definition it must be possible to write x as a convex combination of two other points within the feasible region, y and z, and all three points must be distinct.
+							<br>
+							For the rest of the proof we partition all variables into basic and non-basic parts. As x is basic its non-basic variables must vanish. Since y and z are feasible all their components must be non-negative. As the $\lambda$ and $1-\lambda$ terms are both positive, this must mean that the non-basic parts of y and z also vanish.
+							<br>
+							Now look at the basic parts. As y and z are feasible, they must satisfy the constraints. The partitioned constraints all give the same result, as the non-basic parts vanish. Therefore, by inverting the basic matrix, the basic parts of all the variables must match.
+							<br>
+							This means that both the non-basic and basic parts of all of x, y and z must be the same. This contradicts our requirement that they are distinct, needed for x not to be a vertex. Hence x is a vertex.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Basic solutions are vertices</h2>
+
+						<p>
+							<b>Theorem:</b> $x$ is basic feasible solution if and only if it is a vertex.
+						</p>
+						<div class="fragment">
+							<p>
+								<b>Proof of "if":</b> Let $\hat{B} \subseteq \{ 1, \dots, n \}$ be indices $i \colon x_i > 0$. Let $\hat{N} = \{ 1, \dots, n \} \setminus \hat{B}$.
+							</p>
+						</div>
+						<div class="fragment">
+							<p>
+								Write constraints $A x = b$ as $A_{\hat{B}} x_{\hat{B}} = b$, as $x_{\hat{N}} = 0$.
+							</p>
+
+						</div>
+						<div class="fragment">
+						</div>
+
+						<aside class="notes">
+							Now prove that if x is a vertex then it is basic feasible.
+							<br>
+
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Summary">
+					<section>
+						<h1>Summary</h1>
+
+						<ul>
+							<li>
+								Simplex method relies on standard form.
+							</li>
+							<li>
+								A basic matrix $A_B$ is an invertible submatrix of $A$.
+							</li>
+							<li>
+								A basic solution is $(A_B^{-1} | 0 )$.
+							</li>
+							<li>
+								Basic form linked to basic solutions.
+							</li>
+							<li>
+								Basic feasible solutions are vertices.
+							</li>
+						</ul>
+					</section>
+				</section>
+
+			</div>
+
+		</div>
+
+
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/zoom/zoom.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/search/search.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../reveal.js/plugin/math/math.js"></script>
+		<script src="../reveal.js/plugin/spotlight/spotlight.js"></script>
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				width: 1536,
+			  height: 960,
+			  margin: 0.04,
+				controls: false,
+				progress: true,
+				center: true,
+				hash: true,
+				transition: 'none',
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath.KaTeX, RevealSpotlight ],
+				spotlight: {
+					presentingCursor: 'default',
+				}
+			});
+
+		</script>
+
+
+	</body>
+</html>
