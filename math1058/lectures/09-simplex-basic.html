@@ -111,278 +111,401 @@
 						</aside>
 					</section>
 
-				</section>
-
-				<section id="Big O">
-
 					<section>
-						<h2>Big O notation</h2>
-						<div style="position:absolute; width:768px; top:150px; left:0px">
+						<h2>Form and goal</h2>
+
+						<p>
+							Write LP in standard form:
+						</p>
+						\[
+						\begin{array}{rcrcl}
+						\min_x & \quad & c x && \\
+						\text{subject to} & & A x & = & b \\
+						& & x & \ge & 0.
+						\end{array}
+						\]
+						<div class="fragment">
 							<p>
-								<b>Definition:</b> Given two functions $f, g$, say $f = \mathcal{O}(g)$ if $\exists n_0, c > 0$ such that
+								Want to pick submatrix $A_B$ so that
 							</p>
 							\[
-								f(n) \le c g(n) \quad \forall n \ge n_0.
+							x = A_B^{-1} b
 							\]
-							<p class="fragment" data-fragment-index=1>
-								$f$ is "the order" of $g$. Asymptotically, find $g$ that is
+							<p>
+								makes sense. These <em>basic solutions</em> "are" vertices.
 							</p>
-							<ol class="fragment" data-fragment-index=1>
-								<li>
-									simple;
-								</li>
-								<li>
-									as close to $f$ as possible.
-								</li>
-							</ol>
-						</div>
-						<div style="position:absolute; width:768px; top:150px; left:868px">
-							<img style="width:768px" src="images/08_complexity/complexity_big_O.svg">
 						</div>
 
 						<aside class="notes">
-							Big O notation is our key analysis tool. It (ab)uses notation to put functions into equivalence classes. The equals sign her is really saying that the function $f$ is not growing much faster than $g$; it says nothing about the other way around.
+							Because we want to do algebraic operations the best form to use is the standard form. Remember the transformation rules allow us to convert any linear program to this form.
 							<br>
-							Our goal is to use relations like this in both directions to construct groups or sets of functions that behave the same way. This is the idea behind an equivalence class.  It's also the general goal we were after: functions in the same class, which have the "same big-O order", will (asymptotically) behave in roughly the same fashion.
+							For this lecture we are looking to characterize a vertex algebraically. In general the linear system defined by the standard form has a huge number of solutions. What we want to do is pick specific solutions. To do this we want to construct an invertible submatrix, which will give us a single solution to the problem. The precise assumptions that go into building this submatrix are the key blocks for today.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Basic">
+
+					<section>
+						<h2>Assumptions</h2>
+						\[
+						\begin{array}{rcrcl}
+						\min_x & \quad & c x && \\
+						\text{subject to} & & A x & = & b \\
+						& & x & \ge & 0.
+						\end{array}
+						\]
+						<p>
+							Assumptions:
+						</p>
+						<ol>
+							<li class="fragment">
+								$b \ge 0$. If not, multiply rows by $-1$.
+							</li>
+							<li class="fragment">
+								$m < n$ (fewer constraints than variables). Needed to get multiple solutions.
+							</li>
+							<li class="fragment">
+								$A$ full row rank.
+							</li>
+						</ol>
+						<div class="fragment">
+							<div style="position:absolute; width:768px; left:0px">
+								\[
+								\begin{alignat*}{5}
+								2 & x_1 + & & x_2 + & & x_3 & = & 2 & \quad \text{(I)}   & \\
+							  	& x_1 + & & x_2   & &     & = & 1 & \quad \text{(II)}  & \\
+							  	& x_1   & & \phantom{x_2}    + & & x_3 & = & 1 & \quad \text{(III)} &
+								\end{alignat*}
+								\]
+								<p>
+									Linearly dependent: drop any constraint.
+								</p>
+							</div>
+							<div style="position:absolute; width:668px; left:868px" class="fragment">
+								\[
+								\begin{alignat*}{5}
+								2 & x_1 + & & x_2 + & & x_3 & = & 2 & \quad \text{(I)}   & \\
+							  	& x_1 + & & x_2   & &     & = & 1 & \quad \text{(II)}  & \\
+							  	& x_1   & & \phantom{x_2}    + & & x_3 & = & \color{red}{2} & \quad \text{(III)} &
+								\end{alignat*}
+								\]
+								<p>
+									Inconsistent - problem infeasible.
+								</p>
+							</div>
+						</div>
+
+						<aside class="notes">
+							We make a few assumptions, some of which simplify the solution, and some of which are necessary.
 							<br>
-							We then label each equivalence class in terms of the simplest function within that class. Obviously, there's some personal preference as to what is the simplest function.
+							The assumption that all components of the right-hand-side vector are non-negative is a simplification. If any component is negative, then another transformation rule can be used: multiply that entire row (so, all components of the $A$ matrix and that component of $b$) by -1.
+							<br>
+							The assumption that there are fewer constraints than variables is needed. If there were the same number then we have a linear system with a unique solution (or no solution, or an infinite number), which is neither expected nor useful. If there were more constraints then it would be over-determined, and again we would expect no solution.
+							<br>
+							This may seem surprising as most problems written down so far have had more constraints than variables. Think about the optimal portfolio problem with two variables and five constraints. However, this is because we have used the canonical form up to now. In transforming to standard form we have to introduce a slack or surplus variable for each constraint, guaranteeing more variables than constraints.
+							<br>
+							The final assumption is that $A$ has full row rank, so that the rows are linearly independent. If this were not true we could transform the matrix so that two rows of the matrix had the same coefficients. There are then two possibilities. In the first, the associated right-hand-side coefficients are also identical. In this case one constraint is redundant and can be dropped. In the other case the right-hand-side coefficients are different, and the constraints are inconsistent. This means the problem has no feasible solutions.
 						</aside>
 					</section>
 
 					<section>
 
-						<h2>Asymptotic model</h2>
+						<h2>Basic matrices</h2>
 
 						<p>
-							Take problem $P$ with instance, size $n$. Take two algorithms $A, B$ with cost $f_{A, B}(n)$ elementary operations.
+							<b>Definition:</b> Let $B \subseteq \{ 1, \dots, n \}$ with $|B| = m$. Let $A_B$ be the submatrix of $A$ with column indexes $B$. If the columns are linearly independent, $A_B$ is a <em>basic matrix</em>.
 						</p>
-						<p>
-							<b>Definition:</b> $\mathcal{O}(f_A)$ is the <em>computational complexity</em> of $A$. Algorithm $A$ is more efficient than $B$ if
-						</p>
-						\[
-						\mathcal{O}(f_A) < \mathcal{O}(f_B) \quad \longleftrightarrow \quad f_A = \mathcal{O}(f_B) \quad \text{and} \quad f_B \ne \mathcal{O}(f_A).
-						\]
 						<ul class="fragment">
 							<li>
-								$\mathcal{O}(\log(n)) < \mathcal{O}(n)$;
+								$A_B$ is square.
 							</li>
 							<li>
-								$\mathcal{O}(n^2) < \mathcal{O}(n^3)$;
+								$A_B$ has full row and column rank (by definition).
 							</li>
 							<li>
-								$\mathcal{O}(n^k) < \mathcal{O}(2^n)$, for $k$ constant, natural.
+								$A_B$ is invertible.
 							</li>
 						</ul>
 
 						<aside class="notes">
-							Big O notation applied to individual functions is fine, but not exactly what we need. We want to apply it to the cost of the algorithms that solve a particular problem. In particular we are going to be interested in how the number of elementary operations, as discussed in the last lecture, varies with the instance size of the problem. Restricting this to the sorting problem, it's the size of the list. For a linear program it can be linked to the number of decision variables or the number of constraints.
-							<br>
-							The formal definition of computational complexity takes the functional form of this cost as a function of the instance size and finds its equivalence class. That equivalence class gives us the idea of how expensive, or complex, the algorithm is asymptotically as the instance size gets large.
-							<br>
-							We note that the definition we've used so far puts functions that can be wildly different in the same class, as it's a one-way bound. Instead, consider the bound in both directions; is $f$ the same order as $g$, <em>and</em> is $g$ the same order as $f$. If not, then one algorithm will be more efficient than the other.
-							<br>
-							The list of examples show features that we would like to hold. We now have to show that they actually do.
+							This is our key definition. By assumption the full matrix $A$ has more columns than rows, because each column is associated with a variable and each row with a constraint. We want to extract the right number of rows to get a square matrix. We do this because we want to solve the resulting linear system $A_B x = b$ to give us <em>some</em> solution. In order for this solution to exist and be unique we need the basic matrix to be invertible, which means it has to have full column rank and row rank. The full row rank follows from the full matrix $A$; the linear independence of the columns for the basic matrix is therefore needed in addition.
 						</aside>
 
 					</section>
 
-				</section>
-
-				<section id="Properties">
-
 					<section>
-						<h2>When are functions the same</h2>
-						<p>
-							<b>Theorem:</b> Let $f, g \colon \mathbb{R}^+\setminus\{0\} \to \mathbb{R}^+\setminus\{0\}$. Then
-						</p>
-						\[
-						\lim_{n \to \infty} \frac{f(n)}{g(n)} = l \in (0, \infty) \quad \implies \quad f = \mathcal{O}(g) \quad \text{and} \quad g = \mathcal{O}(f).
-						\]
-						<div class="fragment">
+						<h2>Optimal Portfolio revisited</h2>
+						<div class="fragment fade-out" style="position:absolute; width:1536px; left:0px" data-fragment-index=1>
+							\[
+							\begin{alignat*}{4}
+							\max \quad && 0.02 & x_1 + & 0.03 & x_2 &&  \\
+							\text{subject to} && & x_1 + && x_2 & \le & 10 \\
+							&& & x_1 & && \le & 7 \\
+							&& && & x_2  & \le & 5 \\
+							&& & x_1, && x_2  & \ge & 0.
+							\end{alignat*}
+							\]
+						</div>
+						<div class="fragment fade-in-then-out" style="position:absolute; width:1536px; left:0px" data-fragment-index=1>
+							\[
+							\begin{alignat*}{7}
+							\min \quad && -0.02 & x_1 - & 0.03 & x_2 && && && && \\
+							\text{subject to} && & x_1 + && x_2 + & \phantom{0.00}& x_3 & \phantom{0.00}& & \phantom{0.00}& & = & 10 \\
+							&& & x_1 & & && \phantom{x_3} + && x_4 && & = & 7 \\
+							&& && & x_2 &&  && \phantom{x_4} + && x_5 &  = & 5 \\
+							&& & x_1, && x_2, && x_3, && x_4, && x_5 & \ge & 0.
+							\end{alignat*}
+							\]
+						</div>
+						<div class="fragment fade-in" style="position:absolute; width:1536px; left:0px" data-fragment-index=2>
+							\[
+							\begin{pmatrix}
+							1 & 1 & 1 & 0 & 0 \\
+							1 & 0 & 0 & 1 & 0 \\
+							0 & 1 & 0 & 0 & 1
+							\end{pmatrix}
+							x =
+							\begin{pmatrix}
+							10 \\ 7 \\ 5
+							\end{pmatrix}
+							\]
+						</div>
+						<div class="fragment fade-in-then-out" style="position:absolute; width:1536px; left:0px; top:380px" data-fragment-index=3>
 							<p>
-								<b>Proof:</b> Limit requires $\exists \epsilon > 0, N > 0$ such that
+								$B = \{3, 4, 5\}$:
 							</p>
 							\[
-							l - \epsilon < \frac{f(n)}{g(n)} < l + \epsilon \quad \forall n \ge N.
+								A_B = \begin{pmatrix}
+								1 & 0 & 0 \\
+								0 & 1 & 0 \\
+								0 & 0 & 1
+								\end{pmatrix}.
 							\]
-							<ol>
-								<li class="fragment">
-									Upper bound gives $f(n) < (l+\epsilon) g(n)$. Let $n_0=N$ and $c=(l+\epsilon)$, gives $f = \mathcal{O}(g)$.
-								</li>
-								<li class="fragment">
-									Lower bound gives $g(n) < (l-\epsilon)^{-1} f(n)$ (wlog). Similarly gives $g = \mathcal{O}(f)$.
-								</li>
-							</ol>
+							<p>
+								$A_B$ is invertible: basic matrix.
+							</p>
+						</div>
+						<div class="fragment fade-in" style="position:absolute; width:1536px; left:0px; top:380px" data-fragment-index=4>
+							<p>
+								$B = \{2, 3, 5\}$:
+							</p>
+							\[
+								A_B = \begin{pmatrix}
+								1 & 1 & 0 \\
+								0 & 0 & 0 \\
+								1 & 0 & 1
+								\end{pmatrix}.
+							\]
+							<p>
+								$A_B$ not invertible: not a basic matrix.
+							</p>
 						</div>
 
 						<aside class="notes">
-							Two functions are the same efficiency if asymptotically they have the same cost, which means that each is the same order as the other. This theorem shows that two functions are the same (in this sense) if their asymptotic ratio is finite and non-zero.
+							The optimal portfolio problem was our standard example for the graphical solution method. We first have to get it into standard form. This means switching the sign of the objective function and introducing slack variables for all constraints.
 							<br>
-							The proof relies on the definition of the limit. It needs us to consider the two bounds separately. From each bound we then need to link the constants, small and large, given by the limit definition, to the constant appearing in the big O definition.
+							We see by inspection that the matrix has full row rank. There are many ways that we might choose a candidate basic matrix, by selecting three columns (to match the three constraints). Some are obviously suitable. In particular, the columns associated with the slack variables automatically give an identity matrix which has full column rank. Combining this with the full row rank from the full matrix this makes it invertible.
 							<br>
-							In the first case this happens straightforwardly. In the second we have to assume that $\epsilon$ is smaller than $l$ so that we can invert the constant into the appropriate form. If this is not the case we would need to perform a similar, but different, re-arrangment.
+							However, some column selections are not linearly independent. These cases will not form an invertible matrix, and so neither will they form a basic matrix.
 						</aside>
+
 					</section>
 
 					<section>
-						<h2>When are functions different</h2>
+						<h2>Partitioning</h2>
+
 						<p>
-							<b>Theorem:</b> Let $f, g \colon \mathbb{R}^+\setminus\{0\} \to \mathbb{R}^+\setminus\{0\}$. Then
+							Let $N = \{1, \dots, n\} \setminus B$. Index parts of vectors and matrices by their set:
 						</p>
 						\[
-						\lim_{n \to \infty} \frac{f(n)}{g(n)} = 0 \quad \implies \quad f = \mathcal{O}(g) \quad \text{but} \quad g \ne \mathcal{O}(f).
+						c = \left( \begin{array}{c|c} c_B & c_N \end{array} \right), \quad
+						A = \left( \begin{array}{c|c} A_B & A_N \end{array} \right), \quad
+						x = \left( \begin{array}{c|c} x_B & x_N \end{array} \right).
 						\]
-						<div class="fragment">
+						<div class="fragment fade-in-then-out" style="position:absolute; width:1536px; left:0px; top:280px" >
 							<p>
-								<b>Proof:</b> Limit requires $\exists \epsilon > 0, N > 0$ such that
+								Problem splits:
 							</p>
 							\[
-							- \epsilon < \frac{f(n)}{g(n)} < + \epsilon \quad \forall n \ge N.
+							\begin{aligned}
+							\min \left( \begin{array}{c} c \end{array} \right) \left( \begin{array}{c} x \end{array} \right) & & \to && \min \left( \begin{array}{c|c} c_B & c_N \end{array} \right) \left( \begin{array}{c} x_B \\ \hline x_N \end{array} \right) \\
+							\left( \begin{array}{c} A \end{array} \right) \left( \begin{array}{c} x \end{array} \right) & = \left( \begin{array}{c} b \end{array} \right) & \to && \left( \begin{array}{c|c} A_B & A_N \end{array} \right) \left( \begin{array}{c} x_B \\ \hline x_N \end{array} \right) & = \left( \begin{array}{c} b \end{array} \right) \\
+							\left( \begin{array}{c} x \end{array} \right) & \ge \left( \begin{array}{c} 0 \end{array} \right) & \to && \left( \begin{array}{c} x_B \\ \hline x_N \end{array} \right) & = \left( \begin{array}{c} 0 \\ \hline 0 \end{array} \right).
+							\end{aligned}
 							\]
-							<ol>
-								<li class="fragment">
-									Upper bound gives $f(n) < \epsilon g(n)$. Let $n_0=N$ and $c=\epsilon$, gives $f = \mathcal{O}(g)$.
-								</li>
-								<li class="fragment">
-									Assume $g = \mathcal{O}(f)$. Then $g(n) \le c f(n) \implies \tfrac{f(n)}{g(n)} \ge c^{-1} > 0$: contradicts lower bound.
-								</li>
-							</ol>
+						</div>
+						<div class="fragment fade-in" style="position:absolute; width:1536px; left:0px; top:280px" >
+							<p>
+								Summary form:
+							</p>
+							\[
+							\begin{aligned}
+							\begin{array}{rcrcl}
+							\min_x & \; & c x && \\
+							\text{s.t.} & & A x & = & b \\
+							& & x & \ge & 0
+							\end{array} & \to &
+							\begin{array}{rcrcl}
+							\min_x & \; & c_B x_B + c_N x_N && \\
+							\text{s.t.} & & A_B x_B + A_N x_N & = & b \\
+							& & x_B, x_N & \ge & 0.
+							\end{array}
+							\end{aligned}
+							\]
 						</div>
 
 						<aside class="notes">
-							Two functions are the same efficiency if asymptotically they have the same cost, which means that each is the same order as the other. This theorem shows that two functions are the same (in this sense) if their asymptotic ratio is finite and non-zero.
+							When we have chosen the basic matrix by picking some set of columns, we can perform column swaps to split all of the coefficients in the problems into a partitioned form. We move the columns (and hence variables) corresponding to basic matrix to the beginning. The remaining variables are non-basic.
 							<br>
-							The proof relies on the definition of the limit. It needs us to consider the two bounds separately. From each bound we then need to link the constants, small and large, given by the limit definition, to the constant appearing in the big O definition.
+							This partitioning allows us to write the problem in two pieces. The objective function and all the constraints split into the basic and non-basic parts.
+						</aside>
+
+					</section>
+
+					<section>
+						<h2>Partitioning the optimal portfolio</h2>
+						\[
+						\min -0.02 x_1 - 0.03 x_2 \quad \text{s.t.} \quad
+						\begin{pmatrix}
+						1 & 1 & 1 & 0 & 0 \\
+						1 & 0 & 0 & 1 & 0 \\
+						0 & 1 & 0 & 0 & 1
+						\end{pmatrix}
+						x =
+						\begin{pmatrix}
+						10 \\ 7 \\ 5
+						\end{pmatrix}
+						\]
+						<div class="fragment fade-in-then-out" style="position:absolute; width:1536px; left:0px; top:380px" data-fragment-index=1>
+							<p>
+								$B = \{3, 4, 5\}, N = \{1, 2\}$:
+							</p>
+							\[
+							\begin{aligned}
+								A_B & = \begin{pmatrix}
+								1 & 0 & 0 \\
+								0 & 1 & 0 \\
+								0 & 0 & 1
+								\end{pmatrix}, & A_N & =
+								\begin{pmatrix}
+								1 & 1 \\
+								1 & 0 \\
+								0 & 1
+								\end{pmatrix}, \\
+								c_B & = \begin{pmatrix} 0 & 0 & 0 \end{pmatrix}, & c_N & = \begin{pmatrix} -0.02 & -0.03 \end{pmatrix}.
+								\end{aligned}
+							\]
+						</div>
+						<div class="fragment fade-in-then-out" style="position:absolute; width:1536px; left:0px; top:380px" data-fragment-index=2>
+							<p>
+								Note $x \to (x_3, x_4, x_5 | x_1, x_2)$. Problem becomes:
+							</p>
+							\[
+							\begin{aligned}
+							\begin{array}{rcrlcrlc}
+							\min_x & \; & \begin{pmatrix} 0 & 0 & 0 \end{pmatrix} & \begin{pmatrix} x_3 \\ x_4 \\ x_5 \end{pmatrix} & + & \begin{pmatrix} -0.02 & -0.03 \end{pmatrix} & \begin{pmatrix} x_1 \\ x_2 \end{pmatrix} && \\
+							\text{s.t.} & & \begin{pmatrix}
+							1 & 0 & 0 \\
+							0 & 1 & 0 \\
+							0 & 0 & 1
+							\end{pmatrix} & \begin{pmatrix} x_3 \\ x_4 \\ x_5 \end{pmatrix} & + & \begin{pmatrix}
+							1 & 1 \\
+							1 & 0 \\
+							0 & 1
+							\end{pmatrix} & \begin{pmatrix} x_1 \\ x_2 \end{pmatrix} & = & \begin{pmatrix} 10 \\ 7 \\ 5 \end{pmatrix} \\
+							& & & x_{3,4,5} & , & & x_{1,2} & \ge & 0.
+							\end{array}
+							\end{aligned}
+							\]
+						</div>
+						<div class="fragment fade-in-then-out" style="position:absolute; width:1536px; left:0px; top:380px" data-fragment-index=3>
+							<p>
+								$B = \{1, 2, 5\}, N = \{3, 4\}$:
+							</p>
+							\[
+							\begin{aligned}
+								A_B & = \begin{pmatrix}
+								1 & 1 & 0 \\
+								1 & 0 & 0 \\
+								0 & 1 & 1
+								\end{pmatrix}, & A_N & =
+								\begin{pmatrix}
+								1 & 0 \\
+								0 & 1 \\
+								0 & 0
+								\end{pmatrix}, \\
+								c_B & = \begin{pmatrix} -0.02 & -0.03 & 0 \end{pmatrix}, & c_N & = \begin{pmatrix} 0 & 0 \end{pmatrix}.
+								\end{aligned}
+							\]
+						</div>
+						<div class="fragment fade-in-then-out" style="position:absolute; width:1536px; left:0px; top:380px" data-fragment-index=4>
+							<p>
+								Note $x \to (x_1, x_2, x_5 | x_3, x_4)$. Problem becomes:
+							</p>
+							\[
+							\begin{aligned}
+							\begin{array}{rcrlcrlc}
+							\min_x & \; & \begin{pmatrix} -0.02 & -0.03 & 0 \end{pmatrix} & \begin{pmatrix} x_1 \\ x_2 \\ x_5 \end{pmatrix} & + & \begin{pmatrix} 0 & 0 \end{pmatrix} & \begin{pmatrix} x_3 \\ x_4 \end{pmatrix} && \\
+							\text{s.t.} & & \begin{pmatrix}
+							1 & 1 & 0 \\
+							1 & 0 & 0 \\
+							0 & 1 & 1
+							\end{pmatrix} & \begin{pmatrix} x_1 \\ x_2 \\ x_5 \end{pmatrix} & + & \begin{pmatrix}
+							1 & 0 \\
+							0 & 1 \\
+							0 & 0
+							\end{pmatrix} & \begin{pmatrix} x_3 \\ x_4 \end{pmatrix} & = & \begin{pmatrix} 10 \\ 7 \\ 5 \end{pmatrix} \\
+							& & & x_{1,2,5} & , & & x_{3,4} & \ge & 0.
+							\end{array}
+							\end{aligned}
+							\]
+						</div>
+
+						<aside class="notes">
+							We return to the optimal portfolio problem and look at possible choices of basic matrices and how this partitions the full problem.
 							<br>
-							In the first case this happens straightforwardly. In the second we have to assume that $\epsilon$ is smaller than $l$ so that we can invert the constant into the appropriate form. If this is not the case we would need to perform a similar, but different, re-arrangment.
+							In the first case we choose all the slack variables to be the basic variables. This is the easy choice, as the associated basic matrix is the identity which is clearly invertible. We see that, in this case, the basic variables do not contribute to the objective function at all.
+							<br>
+							In the second case we have all of the non-slack variables in the basic variables, along with one slack variable to ensure linear independence and hence make the basic matrix invertible. In this case the non-basic variables have no impact on the objective function.
 						</aside>
 					</section>
 
 					<section>
-						<h2>Shortcuts</h2>
-						<ol>
+						<h2>Basic solutions</h2>
+						<p>
+							If $x_B = A_B^{-1} b$ and $x_N = 0$ then $x = (x_B | x_N)$ is a <em>basic solution</em>.
+						</p>
+						<ul>
 							<li>
-								Positive constants can be ignored:
-								\[
-								a f(n) + b = \mathcal{O}(f).
-								\]
+								Constraints $A x = b$ all satisfied.
+							</li>
+							<li>
+								Non-negativity constraints need not be satisfied:
+								<ul>
+									<li>
+										$x_N = 0$ meand $x_N \ge 0$;
+									</li>
+									<li>
+										$x_B$ unconstrained.
+									</li>
+								</ul>
 							</li>
 							<li class="fragment">
-								All logarithms are the same:
-								\[
-								\log_a(n) = \mathcal{O}(\log_b(n)).
-								\]
+								If $x_B \ge 0$ the solution is <em>basic feasible</em>.
 							</li>
 							<li class="fragment">
-								Lower order terms can be ignored:
-								\[
-								\lim_{n \to \infty} \frac{g(n)}{f(n)} \to 0 \quad \implies \quad f(n) + g(n) = \mathcal{O}(f).
-								\]
+								All constraints satisfied <em>as equalities</em>, hence a vertex.
 							</li>
-							<li class="fragment">
-								Shifts in monotone increasing functions can be ignored:
-								\[
-								f(n + a) = \mathcal{O}(f).
-								\]
-							</li>
-						</ol>
-					</section>
-
-				</section>
-
-				<section id="Examples">
-
-					<section>
-						<h2>Selection sort: complexity</h2>
-						<div style="position:absolute; width:868px; top:150px; left:0px">
-							<ul>
-								<li class="fragment" data-fragment-index="1">
-									Setup instance; $\mathcal{O}(n)$.
-								</li>
-								<li class="fragment" data-fragment-index="2">
-									Iterate over all $\mathcal{O}(n)$ positions;
-									<ul>
-										<li class="fragment" data-fragment-index="3">
-											Find index of smallest element <code>j</code>; $\mathcal{O}(n)$ operations.
-										</li>
-										<li class="fragment" data-fragment-index="4">
-											Swap entries if needed; $\mathcal{O}(1)$ operations.
-										</li>
-									</ul>
-								</li>
-								<li class="fragment" data-fragment-index="5">
-									Total operation count:
-									\[
-									\mathcal{O}(n) + \mathcal{O}(n) \times \mathcal{O}(n) = \mathcal{O}(n^2).
-									\]
-								</li>
-							</ul>
-						</div>
-						<div style="position:absolute; width:668px; top:150px; left:868px" class="r-stack">
-							<pre><code class="language-python" data-trim data-noescape data-line-numbers style="font-size:140%; line-height:140%">
-							a = [7, 2, 2, 6, 4]
-							for i in range(n-1):
-									j = i
-									for k in range(i+1, n):
-											if a[k] < a[j]:
-													j = k
-									if a[j] < a[i]:
-											a = swap(a, i, j)
-							</code></pre>
-							<pre class="fragment" data-fragment-index="1"><code class="language-python" data-trim data-noescape data-line-numbers="1" style="font-size:140%; line-height:140%">
-							a = [7, 2, 2, 6, 4]
-							for i in range(n-1):
-									j = i
-									for k in range(i+1, n):
-											if a[k] < a[j]:
-													j = k
-									if a[j] < a[i]:
-											a = swap(a, i, j)
-							</code></pre>
-							<pre class="fragment" data-fragment-index="2"><code class="language-python" data-trim data-noescape data-line-numbers="2" style="font-size:140%; line-height:140%">
-							a = [7, 2, 2, 6, 4]
-							for i in range(n-1):
-									j = i
-									for k in range(i+1, n):
-											if a[k] < a[j]:
-													j = k
-									if a[j] < a[i]:
-											a = swap(a, i, j)
-							</code></pre>
-							<pre class="fragment" data-fragment-index="3"><code class="language-python" data-trim data-noescape data-line-numbers="3-6" style="font-size:140%; line-height:140%">
-							a = [7, 2, 2, 6, 4]
-							for i in range(n-1):
-									j = i
-									for k in range(i+1, n):
-											if a[k] < a[j]:
-													j = k
-									if a[j] < a[i]:
-											a = swap(a, i, j)
-							</code></pre>
-							<pre class="fragment" data-fragment-index="4"><code class="language-python" data-trim data-noescape data-line-numbers="7-8" style="font-size:140%; line-height:140%">
-							a = [7, 2, 2, 6, 4]
-							for i in range(n-1):
-									j = i
-									for k in range(i+1, n):
-											if a[k] < a[j]:
-													j = k
-									if a[j] < a[i]:
-											a = swap(a, i, j)
-							</code></pre>
-							<pre class="fragment" data-fragment-index="5"><code class="language-python" data-trim data-noescape data-line-numbers style="font-size:140%; line-height:140%">
-							a = [7, 2, 2, 6, 4]
-							for i in range(n-1):
-									j = i
-									for k in range(i+1, n):
-											if a[k] < a[j]:
-													j = k
-									if a[j] < a[i]:
-											a = swap(a, i, j)
-							</code></pre>
-						</div>
+						</ul>
 
 						<aside class="notes">
-							Doing the complexity analysis is much more straightforward than an explicit count of the elementary operations. We need to argue if each line, or block, of code fits in each equivalence class. Then we multiply up any terms and ignore the lower orders.
+							The key reason for constructing the basic matrix is that it is invertible and hence allows us to construct some part of the solution. In particular, it allows us to set the basic variables $x_B$ in the partitioned system by solving the linear system. If we then choose the non-basic decision variables to zero then it immediately follows that the constraints from $A x = b$ are satisfied. This follows from the partitioned form, where $A x = A_B x_B + A_N x_N$. The first part is $b$ by construction, and the second part vanishes by choice of $x_N$. This is a basic solution.
+							<br>
+							Of course, these are not the only constraints in the system. We also need all the decision variables to be non-negative. By choice the non-basic variables are non-negative as we have set them to zero. However, the basic variables follow from the solution of the linear system, and these could be negative. If they are non-negative then the basic solution is feasible.
+							<br>
+							Intuitively we can see how this construction is linked to a vertex. The indexes in the basis are the indexes of the constraints that have been chosen to be satisfied as equalities. That is, they describe the hyperplanes whose intersection gives the vertex. The non-negativity constraint that makes the basic solution feasible then checks to see that it really is a vertex, not an intersection that cannot lie in the feasible region.
 						</aside>
 					</section>
 
@@ -394,13 +517,16 @@
 
 						<ul>
 							<li>
-								Complexity analysis gives the asymptotic behaviour.
+								Simplex method relies on stanard form.
 							</li>
 							<li>
-								Anything polynomial is termed practical or tractable.
+								A basic matrix $A_B$ is an invertible submatrix of $A$.
 							</li>
 							<li>
-								Anything faster than polynomial is intractable.
+								A basic solution is $(A_B^{-1} | 0 )$.
+							</li>
+							<li>
+								Basic feasible solutions are vertices?
 							</li>
 						</ul>
 					</section>
