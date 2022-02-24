@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Lecture 11</title>
+
+		<meta name="description" content="Math1058">
+		<meta name="author" content="Ian Hawke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css">
+
+
+	<style type="text/css">
+	  .reveal p {
+	    text-align: left;
+	  }
+	  .reveal ul {
+	    display: block;
+	  }
+	  .reveal ol {
+	    display: block;
+	  }
+	</style>
+
+
+
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="Title">
+
+					<section>
+						<h2 class="r-fit-text">Simplex Method and reduced costs</h2>
+						<p>
+							<ul style="list-style: none;">
+								<li> Ian Hawke
+								<li> Michael Kenna-Allison
+							</ul>
+						</p>
+
+						<aside class="notes">
+							We introduce the Simplex Method.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Simplex">
+
+					<section>
+
+						<h2>Simplex Method</h2>
+						<div style="position:absolute; width:768px; top:150px; left:0px">
+							<ul>
+								<li>
+									Solutions to linear programs at vertices.
+								</li>
+								<li>
+									Simplex method: move from one vertex to adjacent until optimal found.
+								</li>
+								<li>
+									Ingredients:
+									<ol>
+										<li>
+											How to characterize vertex algebraically? <b>Done</b>.
+										</li>
+										<li>
+											How to check vertex is optimal?
+										</li>
+										<li>
+											How to move from vertex to better vertex?
+										</li>
+									</ol>
+								</li>
+							</ul>
+							<p>
+								How to start? How much does it cost?
+							</p>
+						</div>
+						<div style="position:absolute; width:768px; top:150px; left:768px">
+							<img style="width:768px" src="images/09_simplex_basics/lp_simplex_vertex.svg">
+						</div>
+
+						<aside class="notes">
+							To briefly recap, the simplex method algebraically finds a vertex then moves from one vertex to a better vertex. We introduced basic feasible solutions and proved that these correspond to vertices. We also gave examples of how basic feasible solutions are found by constructing basic matrices.
+							<br>
+							Our aim for today is to discuss how to check if a basic feasible solution is optimal.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Basic form</h2>
+
+						<p>
+							Starting in standard form, go from partitioned form
+						</p>
+						\[
+						\begin{array}{rcrcl}
+						\min_x & \; & c_B x_B + c_N x_N && \\
+						\text{s.t.} & & A_B x_B + A_N x_N & = & b \\
+						& & x_B, x_N & \ge & 0
+						\end{array}
+						\]
+						<p>
+							to <em>basic form</em>:
+						</p>
+						\[
+						\begin{array}{rrcl}
+						\min_x & c_B A_B^{-1} b + \overbrace{(c_B - c_B A_B^{-1} A_B )}^{\smash{=0}} x_B + (c_N - c_B A_B^{-1} A_N) x_N && \\
+						\text{s.t.} & x_B + A_B^{-1} A_N x_N & = & A_B^{-1} b \\
+						 & x_B, x_N & \ge & 0.
+						\end{array}
+						\]
+
+						<aside class="notes">
+							We introduced the basic form. This is a reduction of the standard form that results from choosing an invertible basic matrix. This basic form relies on the choice of the basic matrix. Each new choice of basic matrix leads to a different basic form.
+							<br>
+							The cost function when written in this form has a term added that is identically zero. This is to aid the notation and proofs that come later.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Reduced costs">
+
+					<section>
+
+						<h2>Reduced costs</h2>
+
+						<p>
+							The objective function in basic form is
+						</p>
+						\[
+						c_B A_B^{-1} b + \underbrace{(c_B - c_B A_B^{-1} A_B )}_{\bar{c}_B} x_B + \underbrace{(c_N - c_B A_B^{-1} A_N)}_{\bar{c}_N} x_N
+						\]
+						<p>
+							This defines the <em>reduced costs</em> $\bar{c}_{N, B}$ of the (non-)basic variables.
+						</p>
+						<div class="fragment">
+							<p>
+								Defining the <em>reduced costs</em> $\bar{c} = (\bar{c}_B | \bar{c}_N) = c - c_B A_B^{-1} A$, objective function is
+							</p>
+							\[
+								c_B A_B^{-1} b + \bar{c} x.
+							\]
+						</div>
+
+						<aside class="notes">
+							We are just considering the objective function here. In the basic form we have (roughly) multiplied the problem through by the inverse of the basic matrix. The objective function now has three pieces: one is independent of the decision variables, one depends on the basic variables, and one on the non-basic. We know that the term multiplying the basic variables always vanishes, and at vertices for a basic solution the non-basic variables vanish.
+							<br>
+							We introduce notation to simplify this. Each term in brackets is identified as the <em>reduced cost</em>, or vector of reduced costs, of the associated variables. We know that the vector of reduced costs of the basic variables always vanishes.
+							<br>
+							Finally, we can glue these reduced costs together to get the vector of reduced costs of all of the variables. This is usually what is referred to as the reduced costs. We can quickly check that the objective function in the basic form can be written as a piece that depends on the basic matrix but not the decision variables, and a piece given by the dot product of the reduced costs vector with the decision variables.
+						</aside>
+
+					</section>
+
+					<section>
+						<h2>Role of reduced costs</h2>
+
+						<p>
+							Problem in basic form is now
+						</p>
+						\[
+						\begin{array}{rrcl}
+						\min_x & c_B A_B^{-1} b + \bar{c}_B x_B + \bar{c}_N x_N && \\
+						\text{s.t.} & x_B + A_B^{-1} A_N x_N & = & A_B^{-1} b \\
+						 & x_B, x_N & \ge & 0.
+						\end{array}
+						\]
+						<ul>
+							<li>
+								As $\bar{c}_B = 0$, changing $x_B$ has no impact on objective.
+							</li>
+							<li class="fragment">
+								Component $\bar{c}_{N_j}$ is the <em>change in objective</em> when changing $x_{N_j}$ by one unit.
+							</li>
+						</ul>
+						<p class="fragment">
+							Suggests an algorithm:
+						</p>
+						<ol>
+							<li class="fragment">
+								Start from basic feasible solution ($x_N=0$).
+							</li>
+							<li class="fragment">
+								Pick component $j$ such that $\bar{c}_{N_j} < 0$.
+							</li>
+							<li class="fragment">
+								Increase $x_{N_j}$ to improve objective function value.
+							</li>
+						</p>
+
+						<aside class="notes">
+							We now see how the reduced costs can be used. For a given basic feasible solution the objective function value can only be changed by modifying the non-basic decision variable coefficients. Because of the non-negativity constraints, we can only increase these (as, when starting from a basic feasible solution, they must start at zero). Therefore, in order to improve the objective function value we have to do this when the associated non-basic reduced cost coefficient is negative.
+							<br>
+							This suggests the algorithm given. Note that as soon as we increase the value of the non-basic coefficient it is no longer non-basic. Therefore we are moving one index (which here is index j in the non-basic set) from the non-basic set into the basic set. As the size of the partition into basic and non-basic is fixed, we will have to swap this index with one already in the basic set.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Optimal portfolio example</h2>
+						<div style="position:absolute; width:968px; left:0px; top:50px">
+							\[
+							\begin{aligned}
+							\min & -0.02 x_1 - 0.03 x_2 & \\
+							\text{s.t.} &
+							\begin{pmatrix}
+							1 & 1 & 1 & 0 & 0 \\
+							1 & 0 & 0 & 1 & 0 \\
+							0 & 1 & 0 & 0 & 1
+							\end{pmatrix}
+							x =
+							\begin{pmatrix}
+							10 \\ 7 \\ 5
+							\end{pmatrix}
+							\end{aligned}
+							\]
+						</div>
+						<div class="fragment fade-in-then-out" style="position:absolute; width:968px; left:0px; top:350px" data-fragment-index=1>
+							<p>
+								$v_5 \colon N = \{1, 2\}, B = \{3, 4, 5\}$:
+							</p>
+							\[
+							\begin{aligned}
+								A_B & = \begin{pmatrix}
+								1 & 0 & 0 \\
+								0 & 1 & 0 \\
+								0 & 0 & 1
+								\end{pmatrix}, & A_N & =
+								\begin{pmatrix}
+								1 & 1 \\
+								1 & 0 \\
+								0 & 1
+								\end{pmatrix}, \\
+								c_B & = \begin{pmatrix} 0 & 0 & 0 \end{pmatrix}, & c_N & = \begin{pmatrix} -0.02 & -0.03 \end{pmatrix}. \\
+								&& \bar{c}_N & = (c_N - c_B A_B^{-1} A_N) \\ &&& = \begin{pmatrix} -0.02 & -0.03 \end{pmatrix}.
+								\end{aligned}
+							\]
+						</div>
+						<div class="fragment fade-in-then-out" style="position:absolute; width:968px; left:0px; top:350px" data-fragment-index=2>
+							<p>
+								$v_1 \colon N = \{1, 5\}, B = \{2, 3, 4\}$:
+							</p>
+							\[
+							\begin{aligned}
+								A_B & = \begin{pmatrix}
+								1 & 1 & 0 \\
+								0 & 0 & 1 \\
+								1 & 0 & 0
+								\end{pmatrix}, & A_N & =
+								\begin{pmatrix}
+								1 & 0 \\
+								1 & 0 \\
+								0 & 1
+								\end{pmatrix}, \\
+								c_B & = \begin{pmatrix} -0.03 & 0 & 0 \end{pmatrix}, & c_N & = \begin{pmatrix} -0.02 & 0 \end{pmatrix}. \\
+								&& \bar{c}_N & = (c_N - c_B A_B^{-1} A_N) \\ &&& = \begin{pmatrix} -0.02 & 0.03 \end{pmatrix}.
+								\end{aligned}
+							\]
+						</div>
+						<div class="fragment fade-in" style="position:absolute; width:968px; left:0px; top:350px" data-fragment-index=3>
+							<p>
+								$v_2 \colon N = \{3, 5\}, B = \{1, 2, 4\}$:
+							</p>
+							\[
+							\begin{aligned}
+								A_B & = \begin{pmatrix}
+								1 & 1 & 0 \\
+								1 & 0 & 1 \\
+								0 & 1 & 0
+								\end{pmatrix}, & A_N & =
+								\begin{pmatrix}
+								1 & 0 \\
+								0 & 0 \\
+								0 & 1
+								\end{pmatrix}, \\
+								c_B & = \begin{pmatrix} -0.02 & -0.03 & 0 \end{pmatrix}, & c_N & = \begin{pmatrix} 0 & 0 \end{pmatrix}. \\
+								&& \bar{c}_N & = (c_N - c_B A_B^{-1} A_N) \\ &&& = \begin{pmatrix} 0.02 & 0.01 \end{pmatrix}.
+								\end{aligned}
+							\]
+						</div>
+						<div style="position:absolute; width:568px; top:150px; left:968px">
+							<img style="width:568px" src="images/06_costs/lp_graphical_vertices.svg">
+						</div>
+
+						<aside class="notes">
+							We go back to the optimal portfolio problem. We remember that each vertex is associated with a basic feasible solution, and the intersecting constraints that give the vertex come from putting those variables that vanish for that constraint within the non-basic set.
+							<br>
+							In the first example we look at the origin. This follows when the first and second variables vanish, so those go into N. That defines our basic matrix, which is the identity and easy to invert. From the partitioning we see that the reduced cost for the non-basic variables is negative in all indexes. That is, we can increase the value of either variable in order to improve the objective function. This should not be a surprise, as the objective function improves up and to the right.
+							<br>
+							In the second example we look at the vertex in the top left. This follows when $x_1 = 0$ and the final slack variable, $x_5=0$. The basic matrix is invertible (although tedious to compute), and in this case only one coefficient is negative. This says that we can increase the value of the first decision variable.
+							<br>
+							In the final example we look at the vertex corresponding to the optimal value. Again, the solution is basic feasible as required. Again the basic matrix is invertible, if tedious to compute. In this case all the coefficients are positive. This tells us that there is no change we can make that improves the objective function, which is to be expected.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Optimality">
+
+					<section>
+						<h2>Optimality test</h2>
+
+						<p>
+							<b>Theorem:</b> If $x$ is basic feasible solution, basis $B$, and $\bar{c} \ge 0$, $x$ is optimal.
+						</p>
+						<div class="fragment">
+							<p>
+								<b>Proof:</b> Show that $c y \ge c x$ for other feasible $y$.
+							</p>
+							<p>
+								Let $d = y - x$, giving $c y \ge c x  \iff c d \ge 0$. Need to show that $c d \ge 0$.
+							</p>
+						</div>
+						<div class="fragment">
+							<p>
+								$x, y$ feasible implies $A x = b = A y$ implies $A d = 0$.
+							</p>
+						</div>
+						<div class="fragment">
+							<p>
+								Partition $d = (d_B | d_N)$: $A d = 0 \iff d_B = -A_B^{-1} A_N d_N$. Thus
+							</p>
+							\[
+								cd = c_B d_B + c_N d_N = (c_N - c_B A_B^{-1} A_N) d_N = \bar{c}_N d_N.
+							\]
+						</div>
+						<div class="fragment">
+							<p>
+								By assumption $\bar{c}_N \ge 0$. Have $d_N = y_N - x_N$.
+							</p>
+							<p>
+								$y$ feasible gives $y_N \ge 0$. $x$ basic gives $x_N = 0$.
+							</p>
+							<p>
+								Thus $d_N \ge 0$, so $\bar{c}_N d_N \ge 0$, so $x$ optimal.
+						</div>
+
+						<aside class="notes">
+							The theorem here follows from the earlier interpretation, as we need coefficients to be negative in order to improve the objective function value. However, this proof lays out the steps explicitly.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Summary">
+					<section>
+						<h1>Summary</h1>
+
+						<ul>
+							<li>
+								Simplex method relies on standard form.
+							</li>
+							<li>
+								A basic matrix $A_B$ is an invertible submatrix of $A$.
+							</li>
+							<li>
+								A basic solution is $(A_B^{-1} | 0 )$.
+							</li>
+							<li>
+								Basic form linked to basic solutions.
+							</li>
+							<li>
+								Basic feasible solutions are vertices.
+							</li>
+						</ul>
+					</section>
+				</section>
+
+			</div>
+
+		</div>
+
+
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/zoom/zoom.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/search/search.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../reveal.js/plugin/math/math.js"></script>
+		<script src="../reveal.js/plugin/spotlight/spotlight.js"></script>
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				width: 1536,
+			  height: 960,
+			  margin: 0.04,
+				controls: false,
+				progress: true,
+				center: true,
+				hash: true,
+				transition: 'none',
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath.KaTeX, RevealSpotlight ],
+				spotlight: {
+					presentingCursor: 'default',
+				}
+			});
+
+		</script>
+
+
+	</body>
+</html>
