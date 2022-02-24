@@ -128,6 +128,9 @@
 						& & x_B, x_N & \ge & 0.
 						\end{array}
 						\]
+						<p>
+							Basic solution: $A_B x_B = b$ and $x_N = 0$.
+						</p>
 
 						<aside class="notes">
 							We also remember that there are multiple ways that we can partition the problem into basic and non-basic variables. The basic variables are chosen so that the associated basic matrix is invertible. A basic solution is one that solves the linear system $A_B x_B = b$ and sets the non-basic variables to zero. This basic solution, if feasible, gives us the solution at a vertex.
@@ -237,7 +240,7 @@
 						</div>
 						<div class="fragment">
 							<p>
-								$x$ basic, so $x_N = 0$, so $y_N + (1 - \lambda) z_N = 0$.
+								$x$ basic, so $x_N = 0$, so $\lambda y_N + (1 - \lambda) z_N = 0$.
 							</p>
 							<p>
 								$y, z$ feasible so $y_N, z_N \ge 0$. Previous gives $y_N = 0 = z_N$.
@@ -332,6 +335,105 @@
 						</aside>
 					</section>
 
+				</section>
+
+				<section id="Example">
+					<section>
+						<h2>Optimal portfolio again</h2>
+						<div style="position:absolute; width:968px; left:0px; top:100px">
+						\[
+						\begin{pmatrix}
+						1 & 1 & 1 & 0 & 0 \\
+						1 & 0 & 0 & 1 & 0 \\
+						0 & 1 & 0 & 0 & 1
+						\end{pmatrix}
+						x =
+						\begin{pmatrix}
+						10 \\ 7 \\ 5
+						\end{pmatrix}
+						\]
+						<div class="fragment fade-in-then-out" style="position:absolute; width:968px; left:0px; top:230px" data-fragment-index=1>
+							<p>
+								$B = \{3, 4, 5\}, N = \{1, 2\}$:
+							</p>
+							\[
+							\begin{aligned}
+								A_B & = \begin{pmatrix}
+								1 & 0 & 0 \\
+								0 & 1 & 0 \\
+								0 & 0 & 1
+								\end{pmatrix}, & A_N & =
+								\begin{pmatrix}
+								1 & 1 \\
+								1 & 0 \\
+								0 & 1
+								\end{pmatrix}, \\
+								x_B & = \begin{pmatrix} 10 & 7 & 5 \end{pmatrix}, & x_N & = \begin{pmatrix} 0 & 0 \end{pmatrix}.
+								\end{aligned}
+							\]
+							<p>
+								Hence $(x_1, x_2) = (0, 0) \to v_5$.
+						</div>
+						<div class="fragment fade-in-then-out" style="position:absolute; width:968px; left:0px; top:230px" data-fragment-index=2>
+							<p>
+								$B = \{1, 2, 4\}, N = \{3, 5\}$:
+							</p>
+							\[
+							\begin{aligned}
+								A_B & = \begin{pmatrix}
+								1 & 1 & 0 \\
+								1 & 0 & 1 \\
+								0 & 1 & 0
+								\end{pmatrix}, & A_N & =
+								\begin{pmatrix}
+								1 & 0 \\
+								0 & 0 \\
+								0 & 1
+								\end{pmatrix}, \\
+								x_B & = \begin{pmatrix} 5 & 5 & 2 \end{pmatrix}, & x_N & = \begin{pmatrix} 0 & 0 \end{pmatrix}.
+								\end{aligned}
+							\]
+							<p>
+								Hence $(x_1, x_2) = (5, 5) \to v_2$.
+						</div>
+						<div class="fragment fade-in" style="position:absolute; width:968px; left:0px; top:230px" data-fragment-index=3>
+							<p>
+								$B = \{2, 4, 5\}, N = \{1, 3\}$:
+							</p>
+							\[
+							\begin{aligned}
+								A_B & = \begin{pmatrix}
+								1 & 0 & 0 \\
+								0 & 1 & 0 \\
+								1 & 0 & 1
+								\end{pmatrix}, & A_N & =
+								\begin{pmatrix}
+								1 & 1 \\
+								1 & 0 \\
+								0 & 0
+								\end{pmatrix}, \\
+								x_B & = \begin{pmatrix} 10 & 7 & -5 \end{pmatrix}, & x_N & = \begin{pmatrix} 0 & 0 \end{pmatrix}.
+								\end{aligned}
+							\]
+							<p>
+								Hence <em>not feasible</em> as $x_5 < 0$.
+						</div>
+						<div style="position:absolute; width:568px; top:150px; left:968px">
+							<img style="width:568px" src="images/06_costs/lp_graphical_vertices.svg">
+						</div>
+
+						<aside class="notes">
+							We can revisit the optimal portfolio to see how picking out basic solutions is linked to vertices. It is important to note that from the geometric point of view it is the <em>non-basic</em> variables that are important. They are linked to the constraints that are intersected to get the solution.
+							<br>
+							In the first case only the slack variables are in the basic set. By definition this means the variables contributing to the objective function, which are the top variables plotted to make the graphical solution, must be non-basic and hence zero. This corresponds to the final vertex in the plot. This follows from intersecting the two non-negativity constraints, which are linked to the first two variables (index 1 and 2).
+							<br>
+							In the second case we intentionally put both variables of interest in the basis. By choosing the fourth variable, or second slack variable, to be in the basis we clearly see that the columns are linearly independent and hence the basic matrix is invertible as required. We can then solve for the basic solution, which gives us the second vertex (which is the optimal solution). This follows from intersecting the constraints found by setting the first slack variable (index 3) and last slack variable (index 5) to zero.
+							<br>
+							It is useful to check other cases. For example, the first non-negativity constraint ($x_1$ vanishing) and the first standard constraint (the first slack variable, which is $x_3$, vanishing) corresponds to indexes 1 and 3 in the non-basic set, so 2, 4 and 5 in the basic set. This corresponds to the infeasible intersection at the top of the figure. The basic matrix is again invertible, but we see that the solution has a negative index, so the solution is infeasible as expected.
+							<br>
+							It is worth checking that constraints that do not intersect lead to linearly dependent columns.
+						</aside>
+					</section>
 				</section>
 
 				<section id="Summary">
