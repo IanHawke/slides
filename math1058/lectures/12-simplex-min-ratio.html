@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Lecture 12</title>
+
+		<meta name="description" content="Math1058">
+		<meta name="author" content="Ian Hawke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css">
+
+
+	<style type="text/css">
+	  .reveal p {
+	    text-align: left;
+	  }
+	  .reveal ul {
+	    display: block;
+	  }
+	  .reveal ol {
+	    display: block;
+	  }
+	</style>
+
+
+
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="Title">
+
+					<section>
+						<h2 class="r-fit-text">Minimum ratio test</h2>
+						<p>
+							<ul style="list-style: none;">
+								<li> Ian Hawke
+								<li> Michael Kenna-Allison
+							</ul>
+						</p>
+
+						<aside class="notes">
+							We introduce the Simplex Method.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Simplex">
+
+					<section>
+
+						<h2>Simplex Method</h2>
+						<div style="position:absolute; width:768px; top:150px; left:0px">
+							<ul>
+								<li>
+									Solutions to linear programs at vertices.
+								</li>
+								<li>
+									Simplex method: move from one vertex to adjacent until optimal found.
+								</li>
+								<li>
+									Ingredients:
+									<ol>
+										<li>
+											How to characterize vertex algebraically? <b>Done</b>.
+										</li>
+										<li>
+											How to check vertex is optimal? <b>Done</b>.
+										</li>
+										<li>
+											How to move from vertex to better vertex?
+										</li>
+									</ol>
+								</li>
+							</ul>
+							<p>
+								How to start? How much does it cost?
+							</p>
+						</div>
+						<div style="position:absolute; width:768px; top:150px; left:768px">
+							<img style="width:768px" src="images/09_simplex_basics/lp_simplex_vertex.svg">
+						</div>
+
+						<aside class="notes">
+							To briefly recap, the simplex method algebraically finds a vertex then moves from one vertex to a better vertex. We introduced basic feasible solutions and proved that these correspond to vertices. We also gave examples of how basic feasible solutions are found by constructing basic matrices. We also introduced the reduced costs, and showed that if they are non-negative then the solution is optimal.
+							<br>
+							Our aim for today is to discuss how to move from one vertex to an adjacent one.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Movement">
+
+					<section>
+
+						<h2>Optimal portfolio and movement</h2>
+
+						<div style="position:absolute; width:968px; left:0px; top:50px">
+							\[
+							\begin{array}{rcrcrcrcrcl}
+							x_1 & + & x_2 & + & \color{blue}{x_3} &   &                   &  & & = & 10 \\
+							x_1 &   &     &   &                   & + & \color{blue}{x_4} &   & & = & 7  \\
+							    &   & x_2 &   &                   &   &                   & +  & \color{blue}{x_5} & = & 5 \\
+							x_1 & , & x_2 & , & x_3 & , & x_4 & , & x_5 & \ge & 0.
+							\end{array}.
+							\]
+						</div>
+						<div class="fragment fade-in" style="position:absolute; width:968px; left:0px; top:350px" data-fragment-index=1>
+							\[
+							\begin{aligned}
+								v_5 & \colon & N & = \{1, 2\}, & B & = \{3, 4, 5\}, \\
+								    &        & 0 = x_N & = (x_1, x_2), & x_B & = ( x_3, x_4, x_5 )
+							\end{aligned}
+							\]
+						</div>
+						<div class="fragment fade-in" style="position:absolute; width:968px; left:0px; top:520px" data-fragment-index=2>
+							\[
+							\begin{aligned}
+								v_1 & \colon & N & = \{1, {\color{red}{5}}\}, & B & = \{3, 4, {\color{red}{2}}\}, \\
+								    &        & 0 = x_N & = (x_1, x_5), & x_B & = ( x_3, x_4, x_2 )
+							\end{aligned}
+							\]
+						</div>
+						<div class="fragment fade-in" style="position:absolute; width:968px; left:0px; top:690px" data-fragment-index=3>
+							\[
+							\begin{aligned}
+								v_2 & \colon & N & = \{{\color{red}{3}}, 5\}, & B & = \{{\color{red}{1}}, 4, 2\}, \\
+								    &        & 0 = x_N & = (x_3, x_5), & x_B & = ( x_1, x_4, x_2 )
+							\end{aligned}
+							\]
+						</div>
+						<div style="position:absolute; width:568px; top:150px; left:968px">
+							<img style="width:568px" src="images/06_costs/lp_graphical_vertices.svg">
+						</div>
+
+						<aside class="notes">
+							We go back to the optimal portfolio problem. We look at how adjacent vertices are described in terms of the basic and non-basic variables. We remember that the vertex is given by intersecting the constraints that result from setting the variables with indexes in the non-basic set to zero.
+							<br>
+							At each step we see that moving to an adjacent vertex means swapping one index in each set.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Optimality">
+
+					<section>
+						<h2>Optimality test</h2>
+
+						<p>
+							<b>Theorem:</b> If $x$ is basic feasible solution, basis $B$, and $\bar{c} \ge 0$, $x$ is optimal.
+						</p>
+						<div class="fragment">
+							<p>
+								<b>Proof:</b> Show that $c y \ge c x$ for other feasible $y$.
+							</p>
+							<p>
+								Let $d = y - x$, giving $c y \ge c x  \iff c d \ge 0$. Need to show that $c d \ge 0$.
+							</p>
+						</div>
+						<div class="fragment">
+							<p>
+								$x, y$ feasible implies $A x = b = A y$ implies $A d = 0$.
+							</p>
+						</div>
+						<div class="fragment">
+							<p>
+								Partition $d = (d_B | d_N)$: $A d = 0 \iff d_B = -A_B^{-1} A_N d_N$. Thus
+							</p>
+							\[
+								cd = c_B d_B + c_N d_N = (c_N - c_B A_B^{-1} A_N) d_N = \bar{c}_N d_N.
+							\]
+						</div>
+						<div class="fragment">
+							<p>
+								By assumption $\bar{c}_N \ge 0$. Have $d_N = y_N - x_N$.
+							</p>
+							<p>
+								$y$ feasible gives $y_N \ge 0$. $x$ basic gives $x_N = 0$.
+							</p>
+							<p>
+								Thus $d_N \ge 0$, so $\bar{c}_N d_N \ge 0$, so $x$ optimal.
+						</div>
+
+						<aside class="notes">
+							The theorem here follows from the earlier interpretation, as we need coefficients to be negative in order to improve the objective function value. However, this proof lays out the steps explicitly.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Summary">
+					<section>
+						<h1>Summary</h1>
+
+						<ul>
+							<li>
+								Reduced costs are constructed from the basic matrix.
+							</li>
+							<li>
+								Can improve the objective function by increasing the value of non-basic variables whose reduced cost coefficient is negative.
+							</li>
+							<li>
+								An optimal solution is basic feasible with a non-negative reduced costs vector.
+							</li>
+						</ul>
+					</section>
+				</section>
+
+			</div>
+
+		</div>
+
+
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/zoom/zoom.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/search/search.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../reveal.js/plugin/math/math.js"></script>
+		<script src="../reveal.js/plugin/spotlight/spotlight.js"></script>
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				width: 1536,
+			  height: 960,
+			  margin: 0.04,
+				controls: false,
+				progress: true,
+				center: true,
+				hash: true,
+				transition: 'none',
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath.KaTeX, RevealSpotlight ],
+				spotlight: {
+					presentingCursor: 'default',
+				}
+			});
+
+		</script>
+
+
+	</body>
+</html>
