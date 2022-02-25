@@ -160,9 +160,40 @@
 						</aside>
 					</section>
 
+					<section>
+						<h2>Movement in general</h2>
+						<p>
+							Constraints in basic form are
+						</p>
+						\[
+							x_B + \overbrace{A_B^{-1} A_N}^{\smash{\bar{A}}} x_N = \overbrace{A_B^{-1} b}^{\smash{\bar{b}}}.
+						\]
+						<p>
+							Pick one constraint $i \in \{1, \dots, m\}$. Then
+						</p>
+						\[
+							x_{B_i} + \sum_{j \in N} \bar{a}_{ij} x_j = \bar{b}_i.
+						\]
+						<p>
+							Start from basic feasible solution, so $x_N = 0$, giving $x_{B_i} = \bar{b}_i$.
+						</p>
+						<p>
+							Pick a non-basic variable $s \in N$ with $\bar{c}_s < 0$. Increase just that value, giving
+						</p>
+						\[
+							x_{B_i} + \bar{a}_{is} x_{s} = \bar{b}_i.
+						\]
+						<p>
+							The non-negativity constraint $x_{B_i} \ge 0$ gives $x_s \le \bar{b}_i / \bar{a}_{is}$.
+						</p>
+
+						<aside class="notes">
+						</aside>
+					</section>
+
 				</section>
 
-				<section id="Optimality">
+				<section id="Minimum ratio">
 
 					<section>
 						<h2>Optimality test</h2>
