@@ -233,7 +233,7 @@
 									Upper bound gives $f(n) < \epsilon g(n)$. Let $n_0=N$ and $c=\epsilon$, gives $f = \mathcal{O}(g)$.
 								</li>
 								<li class="fragment">
-									Assume $g = \mathcal{O}(f)$. Then $g(n) \le c f(n) \implies \tfrac{f(n)}{g(n)} \ge c^{-1} > 0$: contradicts lower bound.
+									Assume $g = \mathcal{O}(f)$. Then $g(n) \le c f(n) \implies \tfrac{f(n)}{g(n)} \ge c^{-1} > 0$: contradicts limit definition.
 								</li>
 							</ol>
 						</div>
@@ -241,7 +241,7 @@
 						<aside class="notes">
 							The proof that two functions have different efficiency follows very similar lines. In fact, the proof that f is bounded by g is essentially identical.
 							<br>
-							However, the proof that g cannot be bounded by f has to be different. The fact that l is zero means that no matter how small $\epsilon$ is, it cannot be the case that the lower bound of the limit gives a positive bound. Therefore we work by contradiction. We assume that g can be bounded by f and check what this means for the sign of the ratio. We then compare that to the sign given by the lower bound in the limit definition, giving the needed contradiction.
+							However, the proof that g cannot be bounded by f has to be different. The fact that l is zero means that no matter how small $\epsilon$ is, it cannot be the case that the lower bound of the limit gives a positive bound. Therefore we work by contradiction. We assume that g can be bounded by f and check what this means for the ratio. As $c$ must be a positive constant, we must be able to bound the ratio a finite amount away from zero, no matter how large $n$ gets. This contradicts the limit.
 						</aside>
 					</section>
 
