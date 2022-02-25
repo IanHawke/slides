@@ -166,78 +166,255 @@
 							Constraints in basic form are
 						</p>
 						\[
-							x_B + \overbrace{A_B^{-1} A_N}^{\smash{\bar{A}}} x_N = \overbrace{A_B^{-1} b}^{\smash{\bar{b}}}.
+							x_B + \smash{\overbrace{A_B^{-1} A_N}^{\bar{A}}} x_N = \smash{\overbrace{A_B^{-1} b}^{\bar{b}}}.
 						\]
-						<p>
-							Pick one constraint $i \in \{1, \dots, m\}$. Then
-						</p>
-						\[
-							x_{B_i} + \sum_{j \in N} \bar{a}_{ij} x_j = \bar{b}_i.
-						\]
-						<p>
-							Start from basic feasible solution, so $x_N = 0$, giving $x_{B_i} = \bar{b}_i$.
-						</p>
-						<p>
-							Pick a non-basic variable $s \in N$ with $\bar{c}_s < 0$. Increase just that value, giving
-						</p>
-						\[
-							x_{B_i} + \bar{a}_{is} x_{s} = \bar{b}_i.
-						\]
-						<p>
-							The non-negativity constraint $x_{B_i} \ge 0$ gives $x_s \le \bar{b}_i / \bar{a}_{is}$.
-						</p>
+						<div class="fragment">
+							<p>
+								Pick one constraint $i \in \{1, \dots, m\}$. Then
+							</p>
+							\[
+								x_{B_i} + \smash{\sum_{j \in N}} \bar{a}_{ij} x_j = \bar{b}_i.
+							\]
+						</div>
+						<div class="fragment">
+							<p>
+								Start from basic feasible solution, so $x_N = 0$, giving $x_{B_i} = \bar{b}_i$.
+							</p>
+							<p>
+								Pick a non-basic variable $s \in N$ with $\bar{c}_s < 0$. Increase just that value, giving
+							</p>
+							\[
+								x_{B_i} + \bar{a}_{is} x_{s} = \bar{b}_i.
+							\]
+						</div>
 
 						<aside class="notes">
+							We are going to move to an adjacent vertex by swapping one index from the basic set with one in the non-basic set. The question is which indexes can we choose.
+							<br>
+							First consider a single basic index. This is non-negative and, when the constraints are written in basic form, there is just one constraint that includes its value. In the basic form the (adjusted) right-hand-side vector and the non-basic variables set the value of this basic variable.
+							<br>
+							If we are starting from a basic feasible solution then, by construction, the non-basic variables all vanish. This means the value of the basic variable is immediately given by the adjusted right-hand-side vector.
+							<br>
+							Now assume that this is the basic variable that we want to move into the non-basic set. Pick a non-basic variable to swap it with. The constraints therefore link the variables that we are looking to swap with a pair of associated coefficients.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Minimum ratio test</h2>
+
+						<p>
+							Given $\bar{A} = A_B^{-1} A_N$ and $\bar{b} = A_B^{-1} b$. Changing $x_{B_i}$.
+						</p>
+						<ul>
+							<li>
+								If $\bar{a}_{is} \le 0$ then $x_{B_i} = \bar{b}_i - \bar{a}_{is} x_s \ge 0$.
+							</li>
+							<li>
+								If $\bar{a}_{is} > 0$ then $x_{B_i} = \bar{b}_i - \bar{a}_{is} x_s \ge 0$ requires $x_s \le \bar{b}_i / \bar{a}_{is}$.
+							</li>
+						</ul>
+						<div class="fragment">
+							<p>
+								Now consider all rows $i$. Non-negativity requires
+							</p>
+							\[
+							x_s \le \theta^* = \min_{i \in B \colon \bar{a}_{is} > 0} \left\{ \frac{\bar{b}_i}{\bar{a}_{is}} \right\}.
+							\]
+						</div>
+						<div class="fragment">
+							<p>
+								If $\theta^* > 0$, setting $x_s = \theta^*$
+							</p>
+							<ul>
+								<li>
+									makes $x_s$ basic (as it is positive);
+								</li>
+								<li>
+									makes $x_{B_r} \to 0$, where $r \in \argmin_{i \in B \colon \bar{a}_{is} > 0} \left\{ \frac{\bar{b}_i}{\bar{a}_{is}} \right\}$.
+								</li>
+							</ul>
+							<p>
+								Choose one such $r$ to leave the basis.
+							</p>
+						</div>
+
+						<aside class="notes">
+							Now we have seen how the value of the basic variable changes as we increase the non-basic variable away from zero. In order for the solution to be feasible, we need the basic variable that we are changing to remain non-negative. However, we are trying to swap this basic variable into the non-basic set, which means we are trying to set it to zero.
+							<br>
+							If the adjusted constraint coefficient is non-positive then the basic variable remains non-negative. This is good in that the solution remains feasible, but if it started positive then it means the variable cannot be set to zero and hence swapped into the non-basic set.
+							<br>
+							If the adjusted constraint coefficient is negative then the change in the non-basic variable is bounded by the ratio in the coefficients, in order that it remains non-negative.
+							<br>
+							Now remember that by changing the non-basic variable value away from zero we are changing the value of <em>every</em> basic variable. In order that the solution remains feasible we need all of the basic variables to remain non-negative. Therefore, for this choice of non-basic variable, we can increase it at most $\theta^*$, which is found by minimizing over all of the ratios.
+							<br>
+							By choosing the non-basic variable to have precisely this bounding value, we are ensuring that at least one variable in the basic set is reduced to zero. We can pick any one of these variables as the index to leave the basic set, whilst our chosen non-basic variable enters the basic set.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Boundedness</h2>
+
+						<p>
+							<b>Proposition:</b> If $\exists s \in N$ such that $\bar{c}_s$ and $\bar{a}_{is} \le 0, \forall i$, the linear program is unbounded.
+						</p>
+						<div class="fragment">
+							<p>
+								<b>Proof:</b> Remember that
+							</p>
+							\[
+								x_{B_i} = \bar{b}_i - \bar{a}_{is} x_s
+							\]
+							<p>
+								for the basic variable associated with constraint index $i$.
+							</p>
+							<p>
+								Since $\bar{a}_{is} \le 0$ we can increase $x_s$ indefinitely.
+							</p>
+							<p>
+								Since $\bar{c}_s < 0$, the objective function
+							</p>
+							\[
+								\min_x \quad c_B A_B^{-1} b + \bar{c}_B x_B + \bar{c}_N x_N
+							\]
+							<p>
+								can be improved (reduced) indefinitely.
+							</p>
+						</div>
+
+						<aside class="notes">
+							This discussion follows from our first discussion on the previous slide when setting up the minimum ratio test. This means that there is an index in the non-basic set that we cannot swap into the basic set, as no matter how we increase its value none of the basic variables go to zero.
 						</aside>
 					</section>
 
 				</section>
 
-				<section id="Minimum ratio">
+				<section id="Problems">
 
 					<section>
-						<h2>Optimality test</h2>
+						<h2>Degeneracy</h2>
 
 						<p>
-							<b>Theorem:</b> If $x$ is basic feasible solution, basis $B$, and $\bar{c} \ge 0$, $x$ is optimal.
+							<b>Definition:</b> A basic feasible solution is <em>degenerate</em> if $x_{B_i} = 0$ for some $i$.
+						</p>
+						<p>
+							If degenerate, different basic feasible solutions correspond to the same vertex.
 						</p>
 						<div class="fragment">
 							<p>
-								<b>Proof:</b> Show that $c y \ge c x$ for other feasible $y$.
+								Let $\hat\imath$ be degenerate index, so $x_{B_{\hat\imath}} = \bar{b}_{\hat\imath} = 0$. Want to increase $x_s, s \in N$.
 							</p>
 							<p>
-								Let $d = y - x$, giving $c y \ge c x  \iff c d \ge 0$. Need to show that $c d \ge 0$.
-							</p>
-						</div>
-						<div class="fragment">
-							<p>
-								$x, y$ feasible implies $A x = b = A y$ implies $A d = 0$.
-							</p>
-						</div>
-						<div class="fragment">
-							<p>
-								Partition $d = (d_B | d_N)$: $A d = 0 \iff d_B = -A_B^{-1} A_N d_N$. Thus
+						 		Minimum ratio test gives
 							</p>
 							\[
-								cd = c_B d_B + c_N d_N = (c_N - c_B A_B^{-1} A_N) d_N = \bar{c}_N d_N.
+								\theta^* = \min_{i \in B \colon \bar{a}_{is} > 0} \left\{ \frac{\bar{b}_i}{\bar{a}_{is}} \right\} = 0,  \quad \hat\imath \in \argmin_{i \in B \colon \bar{a}_{is} > 0} \left\{ \frac{\bar{b}_i}{\bar{a}_{is}} \right\}.
 							\]
-						</div>
-						<div class="fragment">
-							<p>
-								By assumption $\bar{c}_N \ge 0$. Have $d_N = y_N - x_N$.
-							</p>
-							<p>
-								$y$ feasible gives $y_N \ge 0$. $x$ basic gives $x_N = 0$.
-							</p>
-							<p>
-								Thus $d_N \ge 0$, so $\bar{c}_N d_N \ge 0$, so $x$ optimal.
+							<ul>
+								<li>
+									$x_s$ enters basic set but $x_s = \theta^* = 0$;
+								</li>
+								<li>
+									$x_{B_{\hat\imath}}$ leaves basic set, value remains at zero.
+								</li>
+								<li>
+									"Moved to adjacent vertex": no movement, values the same.
+								</li>
+							</ul>
 						</div>
 
 						<aside class="notes">
-							The theorem here follows from the earlier interpretation, as we need coefficients to be negative in order to improve the objective function value. However, this proof lays out the steps explicitly.
+							So far we have argued that in order to move to an adjacent vertex we need to swap an index in the basic set with one in the non-basic set. However, we have not checked that by performing such a swap we are, actually, moving.
+							<br>
+							In the degenerate case we do not necessarily move. The reason this can happen is that multiple constraints can intersect at the same point, leading to multiple basic feasible solutions corresponding to the same vertex.
+							<br>
+							To see the impact of this, see what happens when a degenerate entry exists. In this case the minimum ratio test says that the maximum that the non-basic variable can be increased is zero. This means that, by swapping the basic and non-basic index, we have made no change to the vertex.
+							<br>
+							This does not mean we have made no change to the setup of the problem. We will now be considering a different set of constraints, and hence different (potential) neighbouring vertices. However, this can lead to obvious problems.
 						</aside>
 					</section>
 
+					<section>
+						<h2>Bland's rule</h2>
+
+						<p>
+							Degenerate solution: can swap same index pair $B \leftrightarrow N$ forever.
+						</p>
+						<div class="fragment">
+							<p>
+								<b>Definition:</b> <em>Bland's rule</em> chooses the indexes to swap as
+							</p>
+							<ul>
+								<li>
+									for the non-basic $s \in N$ with $\bar{c}_s < 0$, choose smallest $s$;
+								</li>
+								<li>
+									for the basic $r \in B$ with $r \in \argmin_{i \in B \colon \bar{a}_{is} > 0} \left\{ \frac{\bar{b}_i}{\bar{a}_{is}} \right\}$, choose smallest $r$.
+							</ul>
+						</div>
+						<p class="fragment">
+							<b>Theorem:</b> The Simplex Method with Bland's rule converges in finite iterations.
+						</p>
+
+						<aside class="notes">
+							The issue of degeneracy highlights one key point of the method as we have developed it so far. How do we choose which non-basic index to swap into the basic set? Does it matter? Clearly we can see that it does: if there is a degenerate solution then we could make the poor choice to continually swap between the same two variables indefinitely and the method would never converge.
+							<br>
+							There are many different choices that can be made, with different properties. However, the choice we highlight is known as Bland's rule, or the smallest subscript rule. Whenever there are multiple different indexes that can be chosen, always pick the smallest index.
+							<br>
+							Note that this is the smallest index that matches the constraints on the problem. For the choice of non-basic variable, we need the associated reduced cost coefficient to be negative so that we are improving the objective function. For the basic variable, the index chosen must satisfy the minimum ratio test, so that the basic variables remain feasible.
+							<br>
+							We do not prove the theorem that Bland's method always works, as this is long. See the second and third year modules for a discussion of this.
+						</aside>
+
+					</section>
+
+				</section>
+
+				<section id="Algorithm">
+					<section>
+						<h2>Algorithm</h2>
+
+						\[
+							\begin{array}{rrcrlcrlcl}
+							\min & c_B A_B^{-1} b & + & \bar{c}_B & x_B & + & \bar{c}_N & x_N  & & \\
+							     &                &   &           & x_B & + & A_B^{-1} A_N & x_N & = & A_B^{-1} b \\
+							     &                &   &           & x_B & , &           & x_N & \ge & 0
+						  \end{array}
+						\]
+						<p>
+							Start: $B \subseteq \{ 1, \dots, n \} \implies A_B$, $x = (x_B | x_N), x_B = A_B^{-1} b \ge 0, x_N = 0$.
+						</p>
+						<p class="fragment" data-fragment-index=1>
+							Iterate:
+						</p>
+						<ol class="fragment" data-fragment-index=1>
+							<li>
+								Compute $A_B^{-1}, \bar{A} = A_B^{-1} A_N, \bar{b} = A_B^{-1} b, \bar{c} = c - c_B A_B^{-1} A$.
+							</li>
+							<li>
+								If $| \{ s \in \{ 1, \dots, n \} \colon \bar{c}_s < 0 \} | > 0$:
+								<ol>
+									<li>
+										Pick smallest $s \in \{ 1, \dots, n \}$ with $\bar{c}_s < 0$;
+									</li>
+									<li>
+										Pick smallest $r \in \argmin_{i \in B \colon \bar{a}_{is} > 0} \left\{ \frac{\bar{b}_i}{\bar{a}_{is}} \right\}$. If no such $r$, problem unbounded;
+									</li>
+									<li>
+										Set $B = B \setminus \{ r \} \cup \{ s \}$.
+									</li>
+								</ol>
+							</li>
+							<li>
+								If instead $| \{ s \in \{ 1, \dots, n \} \colon \bar{c}_s < 0 \} | = 0$, optimal solution is found.
+							</li>
+						</ol>
+					</section>
+
+					<aside class="notes">
+						We are almost at the stage where we can code the simplex method. These are the key steps. Note that, in order to start, we need the problem to be framed in the basic form, and we need to have a basic set. Once we have that we can iterate over the steps shown here.
+						<br>
+						There are two points where this code could stop. In one we find that the problem is unbounded. In the second we find that the basic feasible solution, and hence vertex, that we have reached, is optimal.
+					</aside>
 				</section>
 
 				<section id="Summary">
@@ -246,13 +423,22 @@
 
 						<ul>
 							<li>
-								Reduced costs are constructed from the basic matrix.
+								First find a basic matrix.
 							</li>
 							<li>
 								Can improve the objective function by increasing the value of non-basic variables whose reduced cost coefficient is negative.
 							</li>
 							<li>
 								An optimal solution is basic feasible with a non-negative reduced costs vector.
+							</li>
+							<li>
+								Move between vertices by swapping index between basic and non-basic set.
+							</li>
+							<li>
+								Use minimum ratio test to ensure solution stays feasible.
+							</li>
+							<li>
+								Bland's rule is one choice of indexes that avoids cycling.
 							</li>
 						</ul>
 					</section>
