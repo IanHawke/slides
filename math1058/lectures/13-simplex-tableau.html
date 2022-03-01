@@ -1,0 +1,1838 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Lecture 13</title>
+
+		<meta name="description" content="Math1058">
+		<meta name="author" content="Ian Hawke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css">
+
+
+	<style type="text/css">
+	  .reveal p {
+	    text-align: left;
+	  }
+	  .reveal ul {
+	    display: block;
+	  }
+	  .reveal ol {
+	    display: block;
+	  }
+	</style>
+
+
+
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="Title">
+
+					<section>
+						<h2 class="r-fit-text">Simplex - tableau form</h2>
+						<p>
+							<ul style="list-style: none;">
+								<li> Ian Hawke
+								<li> Michael Kenna-Allison
+							</ul>
+						</p>
+
+						<aside class="notes">
+							Practical implementation of the Simplex Method.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Simplex">
+
+					<section>
+
+						<h2>Simplex Method</h2>
+						<div style="position:absolute; width:768px; top:150px; left:0px">
+							<ul>
+								<li>
+									Solutions to linear programs at vertices.
+								</li>
+								<li>
+									Simplex method: move from one vertex to adjacent until optimal found.
+								</li>
+								<li>
+									Ingredients:
+									<ol>
+										<li>
+											How to characterize vertex algebraically? <b>Done</b>.
+										</li>
+										<li>
+											How to check vertex is optimal? <b>Done</b>.
+										</li>
+										<li>
+											How to move from vertex to better vertex? <b>Done</b>.
+										</li>
+									</ol>
+								</li>
+							</ul>
+							<p>
+								How to start? How much does it cost? How to code?
+							</p>
+						</div>
+						<div style="position:absolute; width:768px; top:150px; left:768px">
+							<img style="width:768px" src="images/09_simplex_basics/lp_simplex_vertex.svg">
+						</div>
+
+						<aside class="notes">
+							To briefly recap, the simplex method algebraically finds a vertex then moves from one vertex to a better vertex. We introduced basic feasible solutions and proved that these correspond to vertices. We also gave examples of how basic feasible solutions are found by constructing basic matrices. We also introduced the reduced costs, and showed that if they are non-negative then the solution is optimal.
+							<br>
+							Our aim for today is to discuss how the simplex method can be easily implemented, given a problem in basic form.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Tableau form</h2>
+						<p>
+							Start from basic form.
+						</p>
+						\[
+						\begin{array}{rrcl}
+						\min_x & c_B A_B^{-1} b + (c_B - c_B A_B^{-1} A_B ) x_B + (c_N - c_B A_B^{-1} A_N) x_N && \\
+						\text{s.t.} & x_B + A_B^{-1} A_N x_N & = & A_B^{-1} b \\
+						 & x_B, x_N & \ge & 0.
+						\end{array}
+						\]
+						<p>
+							Transfer to <em>tableau form</em>:
+						</p>
+						<table>
+							<tbody>
+								<tr>
+									<td style="border-bottom:none; border-top:none;">
+									</td>
+									<td>
+									</td>
+									<td style="text-align:center;">
+										$x_{B_1}$
+									</td>
+									<td style="text-align:center;">
+										$\dots$
+									</td>
+									<td style="text-align:center;">
+									  $x_{B_m}$
+									</td>
+									<td style="text-align:center;">
+										$x_{N_1}$
+									</td>
+									<td style="text-align:center;">
+										$\dots$
+									</td>
+									<td style="text-align:center;">
+										$x_{N_{n-m}}$
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;"></td>
+									<td style="text-align:center;border-right:1px solid black;">
+										$-c_B A_B^{-1} b$
+									</td>
+									<td style="text-align:center;">
+									</td>
+									<td style="text-align:center;">
+										$\bar{c}_B$
+									</td>
+									<td style="text-align:center;border-right:1px solid black;">
+									</td>
+									<td style="text-align:center;">
+									</td>
+									<td style="text-align:center;">
+										$\bar{c}_N$
+									</td>
+									<td style="text-align:center;border-right:1px solid black;">
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+										$x_{B_1}$
+									</td>
+									<td style="border-right:1px solid black; border-bottom:none;"></td>
+									<td style="border-bottom:none;">
+									</td>
+									<td style="border-bottom:none;"></td>
+									<td style="border-right:1px solid black; border-bottom:none;">
+									</td>
+									<td style="border-bottom:none;">
+									</td>
+									<td style="border-bottom:none;"></td>
+									<td style="border-right:1px solid black; border-bottom:none;"></td>
+								</tr>
+								<tr>
+									<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+										$\vdots$
+									</td style="border-right:1px solid black; border-bottom:none; border-top:none;">
+									<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+										$\bar{b}$
+									</td>
+									<td style="text-align:center;border-bottom:none; border-top:none;">
+									</td>
+									<td style="text-align:center;border-bottom:none; border-top:none;">
+										$I$
+									</td>
+									<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+									</td>
+									<td style="text-align:center;border-bottom:none; border-top:none;">
+									</td>
+									<td style="text-align:center; border-bottom:none; border-top:none;">
+										$\bar{A}$
+									</td>
+									<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center;border-right:1px solid black;">
+										$x_{B_m}$
+									</td>
+									<td style="border-right:1px solid black; border-bottom:1px solid black; border-top:none"></td>
+									<td style="border-bottom:1px solid black; border-top:none"></td>
+									<td style="border-bottom:1px solid black; border-top:none"></td>
+									<td style="border-right:1px solid black; border-bottom:1px solid black; border-top:none"></td>
+									<td style="border-bottom:1px solid black; border-top:none"></td>
+									<td style="border-bottom:1px solid black; border-top:none"></td>
+									<td style="border-right:1px solid black; border-bottom:1px solid black; border-top:none"></td>
+								</tr>
+							</tbody>
+						</table>
+
+						<aside class="notes">
+							We have talked frequently about the row and column operations that can be used to implement the simplex method. The tableau form makes this explicit by packing all the information into a single array.
+							<br>
+							The numbering is done from zero, which matches Python. The (negative of the current value of the) objective function is entry (0,0). The constraints are given in rows 1 to m, with the right-hand-side vector in column zero. The reduced costs are in row zero, columns 1 to n.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Pivoting</h2>
+						<p>
+							Key expense: inverting $A_B$ for each new $B$.
+						</p>
+						<p class="fragment" data-fragment-index=1>
+							Remember <em>Gaussian elimination</em>; solve linear system via pivoting operations.
+						</p>
+						<p class="fragment" data-fragment-index=2>
+							<b>Definition:</b> Pivoting on $(r, s)$ with $a_{rs} \ne 0$ means
+						</p>
+						<ol class="fragment" data-fragment-index=2>
+							<li>
+								divide row $r$ by $a_{rs}$;
+							</li>
+							<li>
+								subtract $a_{is} \times$ row $r$ from all rows $i \ne r$.
+							</li>
+						</ol>
+						<p class="fragment" data-fragment-index=3>
+							After pivoting column $s$ will be all zeros except $a_{rs} = 1$.
+						</p>
+						<p class="fragment" data-fragment-index=4>
+							After pivoting $x_s$ is in $B$ and $x_{B_r}$ is in $N$.
+						</p>
+
+						<aside class="notes">
+							Inverting matrices is tedious and expensive. Gaussian elimination is one systematics way of doing this, although it is better to think of it as solving a linear system than actually inverting the matrix. That is fine for our purposes, as we do not care about the inverse matrix as such, only about the reduced costs and the change in the basic form.
+							<br>
+							Using the row operations, particularly pivoting, that make up the solution to Gaussian elimiation we can swap variables between the basic and non-basic set. When we pick a (row, column) pair on which to do the pivot we are setting the column to match a column of the identity matrix, and setting its reduced cost to zero. As the reduced cost is zero this means the associated variable is non-basic. By doing this operation we have switched the associated variables between the basic and non-basic sets.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Portfolio example">
+
+					<section>
+						<h2>Optimal portfolio</h2>
+						\[
+						\min -0.02 x_1 - 0.03 x_2 \quad \text{s.t.} \quad
+						\begin{pmatrix}
+						1 & 1 & 1 & 0 & 0 \\
+						1 & 0 & 0 & 1 & 0 \\
+						0 & 1 & 0 & 0 & 1
+						\end{pmatrix}
+						x =
+						\begin{pmatrix}
+						10 \\ 7 \\ 5
+						\end{pmatrix}
+						\]
+						<p>
+							Tableau form is
+						</p>
+						<table>
+							<tbody>
+								<tr>
+									<td style="border-right:none; border-bottom:none; border=top:none">
+									</td>
+									<td style="border-right:none; border-bottom:1px solid black; border=top:none">
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_1$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_2$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_3$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_4$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_5$
+									</td>
+								</tr>
+								<tr>
+									<td style="border-right:1px solid black; border-bottom:none; border=top:none">
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										-0.02
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										-0.03
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										0
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										$x_3$
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										10
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										0
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										$x_4$
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										7
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										0
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										$x_5$
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										5
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										1
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+						<aside class="notes">
+							The optimal portfolio problem is already in basic form. The reason for this is because the slack variables that we add to get the problem into standard form leave us with an identity matrix, which is trivial to invert and leaves the reduced costs being equal to the original cost vector. We also need to check that the right-hand-side vector coefficients are all positive. We can therefore directly transfer all of the coefficients into the tableau.
+							<br>
+							It is worth emphasising that many problems are not given to us in basic form, and we have to convert them to it. We will discuss this further in the two-phase algorithm case.
+						</aside>
+
+					</section>
+
+					<section>
+						<h2>Find Pivot: 1</h2>
+						<p>
+							Identify the pivot:
+						</p>
+						<table>
+							<tbody>
+								<tr>
+									<td style="border-right:none; border-bottom:none; border=top:none">
+									</td>
+									<td style="border-right:none; border-bottom:1px solid black; border=top:none">
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_1$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_2$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_3$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_4$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_5$
+									</td>
+								</tr>
+								<tr>
+									<td style="border-right:1px solid black; border-bottom:none; border=top:none">
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										<span class="fragment highlight-blue" data-fragment-index=1>-0.02</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										-0.03
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										0
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										$x_3$
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										10
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										<span class="fragment highlight-blue" data-fragment-index=1>1</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										0
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										$x_4$
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										<span class="fragment highlight-green" data-fragment-index=2>7</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										<span class="fragment highlight-red" data-fragment-index=2><span class="fragment highlight-current-blue" data-fragment-index=1>1</span></span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										<span class="fragment highlight-green" data-fragment-index=2>0</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										<span class="fragment highlight-green" data-fragment-index=2>0</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										<span class="fragment highlight-green" data-fragment-index=2>1</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										<span class="fragment highlight-green" data-fragment-index=2>0</span>
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										$x_5$
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										5
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										<span class="fragment highlight-blue" data-fragment-index=1>0</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										1
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<ul>
+							<li class="fragment" data-fragment-index=1>
+								Bland's rule: pick first column with negative reduced costs, $s=1$;
+							</li>
+							<li class="fragment" data-fragment-index=2>
+								Minimum ratio: pick row $i$ with smallest ratio $\bar{b}_i / \bar{a}_{is}$ where $\bar{a}_{is} > 0$. Gives $\theta^* = 7/1, r=2$.
+							</li>
+						</ul>
+
+						<aside class="notes">
+							The optimal portfolio problem is already in basic form. The reason for this is because the slack variables that we add to get the problem into standard form leave us with an identity matrix, which is trivial to invert and leaves the reduced costs being equal to the original cost vector. We also need to check that the right-hand-side vector coefficients are all positive. We can therefore directly transfer all of the coefficients into the tableau.
+							<br>
+							It is worth emphasising that many problems are not given to us in basic form, and we have to convert them to it. We will discuss this further in the two-phase algorithm case.
+						</aside>
+
+					</section>
+
+					<section>
+						<h2>Pivoting: 1</h2>
+						<p>
+							Pivot is $(r,s) = (2, 1)$:
+						</p>
+						<table>
+							<tbody>
+								<tr>
+									<td style="border-right:none; border-bottom:none; border=top:none">
+									</td>
+									<td style="border-right:none; border-bottom:1px solid black; border=top:none">
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_1$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_2$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_3$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_4$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_5$
+									</td>
+								</tr>
+								<tr>
+									<td style="border-right:1px solid black; border-bottom:none; border=top:none">
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										<div class="r-stack">
+											<span class="fragment fade-out" data-fragment-index=2>0</span>
+											<span class="fragment fade-in" data-fragment-index=2>0.14</span>
+										</div>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										<div class="r-stack">
+											<span class="fragment fade-out" data-fragment-index=2>-0.02</span>
+											<span class="fragment fade-in" data-fragment-index=2>0</span>
+										</div>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										-0.03
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										<span class="r-stack">
+											<span class="fragment fade-out" data-fragment-index=2>0</span>
+											<span class="fragment fade-in" data-fragment-index=2>0.02</span>
+										</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										0
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										$x_3$
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										<span class="r-stack">
+											<span class="fragment fade-out" data-fragment-index=2>10</span>
+											<span class="fragment fade-in" data-fragment-index=2>3</span>
+										</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										<span class="r-stack">
+											<span class="fragment fade-out" data-fragment-index=2>1</span>
+											<span class="fragment fade-in" data-fragment-index=2>0</span>
+										</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										<div class="r-stack">
+											<span class="fragment fade-out" data-fragment-index=2>0</span>
+											<span class="fragment fade-in" data-fragment-index=2>-1</span>
+										</div>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										0
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										<div class="r-stack">
+											<span class="fragment fade-out" data-fragment-index=3>$x_4$</span>
+											<span class="fragment fade-in" data-fragment-index=3>$x_1$</span>
+										</div>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										7
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										<span style="color:red;">1</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										0
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										$x_5$
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										5
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										1
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<ol>
+							<li class="fragment" data-fragment-index=1>
+								Divide row $r$ by $\bar{a}_{rs}$ (nothing happens as already 1);
+							</li>
+							<li class="fragment" data-fragment-index=2>
+								subtract multiple of row $r$ so column $i$ matches identity;
+							</li>
+							<li class="fragment" data-fragment-index=3>
+								have swapped $x_{B_r} = x_4 \to B$ with $x_s = x_1 \to N$.
+							</li>
+						</ol>
+
+						<aside class="notes">
+						</notes>
+
+					</section>
+
+					<section>
+						<h2>Find Pivot: 2</h2>
+						<p>
+							Identify the pivot:
+						</p>
+						<table>
+							<tbody>
+								<tr>
+									<td style="border-right:none; border-bottom:none; border=top:none">
+									</td>
+									<td style="border-right:none; border-bottom:1px solid black; border=top:none">
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_1$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_2$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_3$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_4$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_5$
+									</td>
+								</tr>
+								<tr>
+									<td style="border-right:1px solid black; border-bottom:none; border=top:none">
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										0.14
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										<span class="fragment highlight-blue" data-fragment-index=1>-0.03</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										0.02
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										0
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										$x_3$
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										<span class="fragment highlight-green" data-fragment-index=2>3</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										<span class="fragment highlight-green" data-fragment-index=2>0</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										<span class="fragment highlight-red" data-fragment-index=2><span class="fragment highlight-current-blue" data-fragment-index=1>1</span></span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										<span class="fragment highlight-green" data-fragment-index=2>1</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										<span class="fragment highlight-green" data-fragment-index=2>-1</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										<span class="fragment highlight-green" data-fragment-index=2>0</span>
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										$x_1$
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										7
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										<span class="fragment highlight-blue" data-fragment-index=1>0</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										0
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										$x_5$
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										5
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										<span class="fragment highlight-blue" data-fragment-index=1>1</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										1
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<ul>
+							<li class="fragment" data-fragment-index=1>
+								Bland's rule: pick first column with negative reduced costs, $s=2$;
+							</li>
+							<li class="fragment" data-fragment-index=2>
+								Minimum ratio: pick row $i$ with smallest ratio $\bar{b}_i / \bar{a}_{is}$ where $\bar{a}_{is} > 0$. Gives $\theta^* = 3/1, r=1$.
+							</li>
+						</ul>
+
+						<aside class="notes">
+							The optimal portfolio problem is already in basic form. The reason for this is because the slack variables that we add to get the problem into standard form leave us with an identity matrix, which is trivial to invert and leaves the reduced costs being equal to the original cost vector. We also need to check that the right-hand-side vector coefficients are all positive. We can therefore directly transfer all of the coefficients into the tableau.
+							<br>
+							It is worth emphasising that many problems are not given to us in basic form, and we have to convert them to it. We will discuss this further in the two-phase algorithm case.
+						</aside>
+
+					</section>
+
+					<section>
+						<h2>Pivoting: 2</h2>
+						<p>
+							Pivot is $(r,s) = (1, 2)$:
+						</p>
+						<table>
+							<tbody>
+								<tr>
+									<td style="border-right:none; border-bottom:none; border=top:none">
+									</td>
+									<td style="border-right:none; border-bottom:1px solid black; border=top:none">
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_1$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_2$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_3$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_4$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_5$
+									</td>
+								</tr>
+								<tr>
+									<td style="border-right:1px solid black; border-bottom:none; border=top:none">
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										<div class="r-stack">
+											<span class="fragment fade-out" data-fragment-index=2>0.14</span>
+											<span class="fragment fade-in" data-fragment-index=2>0.23</span>
+										</div>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										<div class="r-stack">
+											<span class="fragment fade-out" data-fragment-index=2>-0.03</span>
+											<span class="fragment fade-in" data-fragment-index=2>0</span>
+										</div>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										<div class="r-stack">
+											<span class="fragment fade-out" data-fragment-index=2>0</span>
+											<span class="fragment fade-in" data-fragment-index=2>0.03</span>
+										</div>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										<span class="r-stack">
+											<span class="fragment fade-out" data-fragment-index=2>0.02</span>
+											<span class="fragment fade-in" data-fragment-index=2>-0.01</span>
+										</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										0
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										<div class="r-stack">
+											<span class="fragment fade-out" data-fragment-index=3>$x_3$</span>
+											<span class="fragment fade-in" data-fragment-index=3>$x_2$</span>
+										</div>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										3
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										<span style="color:red;">1</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										-1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										0
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										$x_1$
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										7
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										0
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										$x_5$
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										<div class="r-stack">
+											<span class="fragment fade-out" data-fragment-index=2>5</span>
+											<span class="fragment fade-in" data-fragment-index=2>2</span>
+										</div>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										<div class="r-stack">
+											<span class="fragment fade-out" data-fragment-index=2>1</span>
+											<span class="fragment fade-in" data-fragment-index=2>0</span>
+										</div>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										<div class="r-stack">
+											<span class="fragment fade-out" data-fragment-index=2>0</span>
+											<span class="fragment fade-in" data-fragment-index=2>-1</span>
+										</div>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										<div class="r-stack">
+											<span class="fragment fade-out" data-fragment-index=2>0</span>
+											<span class="fragment fade-in" data-fragment-index=2>1</span>
+										</div>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										1
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<ol>
+							<li class="fragment" data-fragment-index=1>
+								Divide row $r$ by $\bar{a}_{rs}$ (nothing happens as already 1);
+							</li>
+							<li class="fragment" data-fragment-index=2>
+								subtract multiple of row $r$ so column $i$ matches identity;
+							</li>
+							<li class="fragment" data-fragment-index=3>
+								have swapped $x_{B_r} = x_3 \to B$ with $x_s = x_2 \to N$.
+							</li>
+						</ol>
+
+						<aside class="notes">
+						</notes>
+
+					</section>
+
+					<section>
+						<h2>Find Pivot: 3</h2>
+						<p>
+							Identify the pivot:
+						</p>
+						<table>
+							<tbody>
+								<tr>
+									<td style="border-right:none; border-bottom:none; border=top:none">
+									</td>
+									<td style="border-right:none; border-bottom:1px solid black; border=top:none">
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_1$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_2$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_3$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_4$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_5$
+									</td>
+								</tr>
+								<tr>
+									<td style="border-right:1px solid black; border-bottom:none; border=top:none">
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										0.23
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										0.03
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										<span class="fragment highlight-blue" data-fragment-index=1>-0.01</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										0
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										$x_2$
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										3
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										<span class="fragment highlight-blue" data-fragment-index=1>-1</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										0
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										$x_1$
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										7
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										<span class="fragment highlight-blue" data-fragment-index=1>1</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										0
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										$x_5$
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										<span class="fragment highlight-green" data-fragment-index=2>2</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										<span class="fragment highlight-green" data-fragment-index=2>0</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										<span class="fragment highlight-green" data-fragment-index=2>0</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										<span class="fragment highlight-green" data-fragment-index=2>-1</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										<span class="fragment highlight-red" data-fragment-index=2><span class="fragment highlight-current-blue" data-fragment-index=1>1</span></span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										<span class="fragment highlight-green" data-fragment-index=2>1</span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<ul>
+							<li class="fragment" data-fragment-index=1>
+								Bland's rule: pick first column with negative reduced costs, $s=4$;
+							</li>
+							<li class="fragment" data-fragment-index=2>
+								Minimum ratio: pick row $i$ with smallest ratio $\bar{b}_i / \bar{a}_{is}$ where $\bar{a}_{is} > 0$. Gives $\theta^* = 2/3, r=5$.
+							</li>
+						</ul>
+
+						<aside class="notes">
+							The optimal portfolio problem is already in basic form. The reason for this is because the slack variables that we add to get the problem into standard form leave us with an identity matrix, which is trivial to invert and leaves the reduced costs being equal to the original cost vector. We also need to check that the right-hand-side vector coefficients are all positive. We can therefore directly transfer all of the coefficients into the tableau.
+							<br>
+							It is worth emphasising that many problems are not given to us in basic form, and we have to convert them to it. We will discuss this further in the two-phase algorithm case.
+						</aside>
+
+					</section>
+
+					<section>
+						<h2>Pivoting: 3</h2>
+						<p>
+							Pivot is $(r,s) = (5, 4)$:
+						</p>
+						<table>
+							<tbody>
+								<tr>
+									<td style="border-right:none; border-bottom:none; border=top:none">
+									</td>
+									<td style="border-right:none; border-bottom:1px solid black; border=top:none">
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_1$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_2$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_3$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_4$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_5$
+									</td>
+								</tr>
+								<tr>
+									<td style="border-right:1px solid black; border-bottom:none; border=top:none">
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										<div class="r-stack">
+											<span class="fragment fade-out" data-fragment-index=2>0.23</span>
+											<span class="fragment fade-in" data-fragment-index=2>0.25</span>
+										</div>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										<div class="r-stack">
+											<span class="fragment fade-out" data-fragment-index=2>0.03</span>
+											<span class="fragment fade-in" data-fragment-index=2>0.02</span>
+										</div>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										<span class="r-stack">
+											<span class="fragment fade-out" data-fragment-index=2>-0.01</span>
+											<span class="fragment fade-in" data-fragment-index=2>0</span>
+										</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										<span class="r-stack">
+											<span class="fragment fade-out" data-fragment-index=2>0</span>
+											<span class="fragment fade-in" data-fragment-index=2>0.01</span>
+										</span>
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										$x_2$
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										<span class="r-stack">
+											<span class="fragment fade-out" data-fragment-index=2>3</span>
+											<span class="fragment fade-in" data-fragment-index=2>5</span>
+										</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										<span class="r-stack">
+											<span class="fragment fade-out" data-fragment-index=2>1</span>
+											<span class="fragment fade-in" data-fragment-index=2>0</span>
+										</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										<span class="r-stack">
+											<span class="fragment fade-out" data-fragment-index=2>-1</span>
+											<span class="fragment fade-in" data-fragment-index=2>0</span>
+										</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										<span class="r-stack">
+											<span class="fragment fade-out" data-fragment-index=2>0</span>
+											<span class="fragment fade-in" data-fragment-index=2>1</span>
+										</span>
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										$x_1$
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										<span class="r-stack">
+											<span class="fragment fade-out" data-fragment-index=2>7</span>
+											<span class="fragment fade-in" data-fragment-index=2>5</span>
+										</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										<span class="r-stack">
+											<span class="fragment fade-out" data-fragment-index=2>0</span>
+											<span class="fragment fade-in" data-fragment-index=2>1</span>
+										</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										<span class="r-stack">
+											<span class="fragment fade-out" data-fragment-index=2>1</span>
+											<span class="fragment fade-in" data-fragment-index=2>0</span>
+										</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										<span class="r-stack">
+											<span class="fragment fade-out" data-fragment-index=2>0</span>
+											<span class="fragment fade-in" data-fragment-index=2>-1</span>
+										</span>
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										<div class="r-stack">
+											<span class="fragment fade-out" data-fragment-index=3>$x_5$</span>
+											<span class="fragment fade-in" data-fragment-index=3>$x_4$</span>
+										</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										2
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										-1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										<span style="color:red;">1</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										1
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<ol>
+							<li class="fragment" data-fragment-index=1>
+								Divide row $r$ by $\bar{a}_{rs}$ (nothing happens as already 1);
+							</li>
+							<li class="fragment" data-fragment-index=2>
+								subtract multiple of row $r$ so column $i$ matches identity;
+							</li>
+							<li class="fragment" data-fragment-index=3>
+								have swapped $x_{B_r} = x_5 \to B$ with $x_s = x_4 \to N$.
+							</li>
+						</ol>
+
+						<aside class="notes">
+						</notes>
+
+					</section>
+
+					<section>
+						<h2>Optimal solution</h2>
+						<p>
+							All reduced costs are non-negative:
+						</p>
+						<table>
+							<tbody>
+								<tr>
+									<td style="border-right:none; border-bottom:none; border=top:none">
+									</td>
+									<td style="border-right:none; border-bottom:1px solid black; border=top:none">
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_1$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_2$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_3$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_4$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_5$
+									</td>
+								</tr>
+								<tr>
+									<td style="border-right:1px solid black; border-bottom:none; border=top:none">
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										<span class="fragment highlight-current-blue" data-fragment-index=1>0.25</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										0.02
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										0.01
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										$x_2$
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										<span class="fragment highlight-current-green" data-fragment-index=2>5</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										1
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										$x_1$
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										<span class="fragment highlight-current-green" data-fragment-index=2>5</span>
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										-1
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										$x_4$
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										2
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										-1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										1
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<ol>
+							<li class="fragment" data-fragment-index=1>
+								Read off objective function as $1/4$;
+							</li>
+							<li class="fragment" data-fragment-index=2>
+								Read off optimal solution as $(x_1, x_2) = (5, 5)$.
+							</li>
+						</ol>
+
+						<aside class="notes">
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Movement">
+
+					<section>
+
+						<h2>Optimal portfolio and movement</h2>
+
+						<div style="position:absolute; width:968px; left:0px; top:50px">
+							\[
+							\begin{array}{rcrcrcrcrcl}
+							x_1 & + & x_2 & + & \color{blue}{x_3} &   &                   &  & & = & 10 \\
+							x_1 &   &     &   &                   & + & \color{blue}{x_4} &   & & = & 7  \\
+							    &   & x_2 &   &                   &   &                   & +  & \color{blue}{x_5} & = & 5 \\
+							x_1 & , & x_2 & , & x_3 & , & x_4 & , & x_5 & \ge & 0.
+							\end{array}.
+							\]
+						</div>
+						<div class="fragment fade-in" style="position:absolute; width:968px; left:0px; top:350px" data-fragment-index=1>
+							\[
+							\begin{aligned}
+								v_5 & \colon & N & = \{1, 2\}, & B & = \{3, 4, 5\}, \\
+								    &        & 0 = x_N & = (x_1, x_2), & x_B & = ( x_3, x_4, x_5 )
+							\end{aligned}
+							\]
+						</div>
+						<div class="fragment fade-in" style="position:absolute; width:968px; left:0px; top:520px" data-fragment-index=2>
+							\[
+							\begin{aligned}
+								v_1 & \colon & N & = \{1, {\color{red}{5}}\}, & B & = \{3, 4, {\color{red}{2}}\}, \\
+								    &        & 0 = x_N & = (x_1, x_5), & x_B & = ( x_3, x_4, x_2 )
+							\end{aligned}
+							\]
+						</div>
+						<div class="fragment fade-in" style="position:absolute; width:968px; left:0px; top:690px" data-fragment-index=3>
+							\[
+							\begin{aligned}
+								v_2 & \colon & N & = \{{\color{red}{3}}, 5\}, & B & = \{{\color{red}{1}}, 4, 2\}, \\
+								    &        & 0 = x_N & = (x_3, x_5), & x_B & = ( x_1, x_4, x_2 )
+							\end{aligned}
+							\]
+						</div>
+						<div style="position:absolute; width:568px; top:150px; left:968px">
+							<img style="width:568px" src="images/06_costs/lp_graphical_vertices.svg">
+						</div>
+
+						<aside class="notes">
+							We go back to the optimal portfolio problem. We look at how adjacent vertices are described in terms of the basic and non-basic variables. We remember that the vertex is given by intersecting the constraints that result from setting the variables with indexes in the non-basic set to zero.
+							<br>
+							At each step we see that moving to an adjacent vertex means swapping one index in each set.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Movement in general</h2>
+						<p>
+							Constraints in basic form are
+						</p>
+						\[
+							x_B + \smash{\overbrace{A_B^{-1} A_N}^{\bar{A}}} x_N = \smash{\overbrace{A_B^{-1} b}^{\bar{b}}}.
+						\]
+						<div class="fragment">
+							<p>
+								Pick one constraint $i \in \{1, \dots, m\}$. Then
+							</p>
+							\[
+								x_{B_i} + \smash{\sum_{j \in N}} \bar{a}_{ij} x_j = \bar{b}_i.
+							\]
+						</div>
+						<div class="fragment">
+							<p>
+								Start from basic feasible solution, so $x_N = 0$, giving $x_{B_i} = \bar{b}_i$.
+							</p>
+							<p>
+								Pick a non-basic variable $s \in N$ with $\bar{c}_s < 0$. Increase just that value, giving
+							</p>
+							\[
+								x_{B_i} + \bar{a}_{is} x_{s} = \bar{b}_i.
+							\]
+						</div>
+
+						<aside class="notes">
+							We are going to move to an adjacent vertex by swapping one index from the basic set with one in the non-basic set. The question is which indexes can we choose.
+							<br>
+							First consider a single basic index. This is non-negative and, when the constraints are written in basic form, there is just one constraint that includes its value. In the basic form the (adjusted) right-hand-side vector and the non-basic variables set the value of this basic variable.
+							<br>
+							If we are starting from a basic feasible solution then, by construction, the non-basic variables all vanish. This means the value of the basic variable is immediately given by the adjusted right-hand-side vector.
+							<br>
+							Now assume that this is the basic variable that we want to move into the non-basic set. Pick a non-basic variable to swap it with. The constraints therefore link the variables that we are looking to swap with a pair of associated coefficients.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Minimum ratio test</h2>
+
+						<p>
+							Given $\bar{A} = A_B^{-1} A_N$ and $\bar{b} = A_B^{-1} b$. Changing $x_{B_i}$.
+						</p>
+						<ul>
+							<li>
+								If $\bar{a}_{is} \le 0$ then $x_{B_i} = \bar{b}_i - \bar{a}_{is} x_s \ge 0$.
+							</li>
+							<li>
+								If $\bar{a}_{is} > 0$ then $x_{B_i} = \bar{b}_i - \bar{a}_{is} x_s \ge 0$ requires $x_s \le \bar{b}_i / \bar{a}_{is}$.
+							</li>
+						</ul>
+						<div class="fragment">
+							<p>
+								Now consider all rows $i$. Non-negativity requires
+							</p>
+							\[
+							x_s \le \theta^* = \min_{i \in B \colon \bar{a}_{is} > 0} \left\{ \frac{\bar{b}_i}{\bar{a}_{is}} \right\}.
+							\]
+						</div>
+						<div class="fragment">
+							<p>
+								If $\theta^* > 0$, setting $x_s = \theta^*$
+							</p>
+							<ul>
+								<li>
+									makes $x_s$ basic (as it is positive);
+								</li>
+								<li>
+									makes $x_{B_r} \to 0$, where $r \in \argmin_{i \in B \colon \bar{a}_{is} > 0} \left\{ \frac{\bar{b}_i}{\bar{a}_{is}} \right\}$.
+								</li>
+							</ul>
+							<p>
+								Choose one such $r$ to leave the basis.
+							</p>
+						</div>
+
+						<aside class="notes">
+							Now we have seen how the value of the basic variable changes as we increase the non-basic variable away from zero. In order for the solution to be feasible, we need the basic variable that we are changing to remain non-negative. However, we are trying to swap this basic variable into the non-basic set, which means we are trying to set it to zero.
+							<br>
+							If the adjusted constraint coefficient is non-positive then the basic variable remains non-negative. This is good in that the solution remains feasible, but if it started positive then it means the variable cannot be set to zero and hence swapped into the non-basic set.
+							<br>
+							If the adjusted constraint coefficient is negative then the change in the non-basic variable is bounded by the ratio in the coefficients, in order that it remains non-negative.
+							<br>
+							Now remember that by changing the non-basic variable value away from zero we are changing the value of <em>every</em> basic variable. In order that the solution remains feasible we need all of the basic variables to remain non-negative. Therefore, for this choice of non-basic variable, we can increase it at most $\theta^*$, which is found by minimizing over all of the ratios.
+							<br>
+							By choosing the non-basic variable to have precisely this bounding value, we are ensuring that at least one variable in the basic set is reduced to zero. We can pick any one of these variables as the index to leave the basic set, whilst our chosen non-basic variable enters the basic set.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Boundedness</h2>
+
+						<p>
+							<b>Proposition:</b> If $\exists s \in N$ such that $\bar{c}_s$ and $\bar{a}_{is} \le 0, \forall i$, the linear program is unbounded.
+						</p>
+						<div class="fragment">
+							<p>
+								<b>Proof:</b> Remember that
+							</p>
+							\[
+								x_{B_i} = \bar{b}_i - \bar{a}_{is} x_s
+							\]
+							<p>
+								for the basic variable associated with constraint index $i$.
+							</p>
+							<p>
+								Since $\bar{a}_{is} \le 0$ we can increase $x_s$ indefinitely.
+							</p>
+							<p>
+								Since $\bar{c}_s < 0$, the objective function
+							</p>
+							\[
+								\min_x \quad c_B A_B^{-1} b + \bar{c}_B x_B + \bar{c}_N x_N
+							\]
+							<p>
+								can be improved (reduced) indefinitely.
+							</p>
+						</div>
+
+						<aside class="notes">
+							This discussion follows from our first discussion on the previous slide when setting up the minimum ratio test. This means that there is an index in the non-basic set that we cannot swap into the basic set, as no matter how we increase its value none of the basic variables go to zero.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Problems">
+
+					<section>
+						<h2>Degeneracy</h2>
+						<div>
+							<p>
+								<b>Definition:</b> A basic feasible solution is <em>degenerate</em> if $x_{B_i} = 0$ for some $i$.
+							</p>
+							<p>
+								If degenerate, different basic feasible solutions correspond to the same vertex.
+							</p>
+						</div>
+						<div style="position:absolute; width:1536px; top:0px; left:0px; z-index:-1" class="r-stack">
+							<img style="width:1200px" src="images/12_simplex_min_ratio/lp_cycling.svg" class="fragment fade-in-then-out" data-fragment-index=1>
+							<div class="fragment" data-fragment-index=2>
+								<p>
+									Let $\hat\imath$ be degenerate index, so $x_{B_{\hat\imath}} = \bar{b}_{\hat\imath} = 0$. Want to increase $x_s, s \in N$.
+								</p>
+								<p>
+							 		Minimum ratio test gives
+								</p>
+								\[
+									\theta^* = \min_{i \in B \colon \bar{a}_{is} > 0} \left\{ \frac{\bar{b}_i}{\bar{a}_{is}} \right\} = 0,  \quad \hat\imath \in \argmin_{i \in B \colon \bar{a}_{is} > 0} \left\{ \frac{\bar{b}_i}{\bar{a}_{is}} \right\}.
+								\]
+								<ul>
+									<li>
+										$x_s$ enters basic set but $x_s = \theta^* = 0$;
+									</li>
+									<li>
+										$x_{B_{\hat\imath}}$ leaves basic set, value remains at zero.
+									</li>
+									<li>
+										"Moved to adjacent vertex": no movement, values the same.
+									</li>
+								</ul>
+							</div>
+						</div>
+
+						<aside class="notes">
+							So far we have argued that in order to move to an adjacent vertex we need to swap an index in the basic set with one in the non-basic set. However, we have not checked that by performing such a swap we are, actually, moving.
+							<br>
+							In the degenerate case we do not necessarily move. The reason this can happen is that multiple constraints can intersect at the same point, leading to multiple basic feasible solutions corresponding to the same vertex.
+							<br>
+							In the figure we have three decision variables and five constraints (linked to facets), so eight total variables in standard form. There must be three non-basic variables. However, at the highlighted vertex the first four facets meet, meaning four constraints are satisfied, so four slack variables vanish, so four of the eight total variables vanish. Therefore more variables are zero than there are non-basic variables.
+							<br>
+							To see the impact of this, see what happens when a degenerate entry exists. In this case the minimum ratio test says that the maximum that the non-basic variable can be increased is zero. This means that, by swapping the basic and non-basic index, we have made no change to the vertex.
+							<br>
+							This does not mean we have made no change to the setup of the problem. We will now be considering a different set of constraints, and hence different (potential) neighbouring vertices. However, this can lead to obvious problems.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Bland's rule</h2>
+
+						<p>
+							Degenerate solution: can swap same index pair $B \leftrightarrow N$ forever.
+						</p>
+						<div class="fragment">
+							<p>
+								<b>Definition:</b> <em>Bland's rule</em> chooses the indexes to swap as
+							</p>
+							<ul>
+								<li>
+									for the non-basic $s \in N$ with $\bar{c}_s < 0$, choose smallest $s$;
+								</li>
+								<li>
+									for the basic $r \in B$ with $r \in \argmin_{i \in B \colon \bar{a}_{is} > 0} \left\{ \frac{\bar{b}_i}{\bar{a}_{is}} \right\}$, choose smallest $r$.
+							</ul>
+						</div>
+						<p class="fragment">
+							<b>Theorem:</b> The Simplex Method with Bland's rule converges in finite iterations.
+						</p>
+
+						<aside class="notes">
+							The issue of degeneracy highlights one key point of the method as we have developed it so far. How do we choose which non-basic index to swap into the basic set? Does it matter? Clearly we can see that it does: if there is a degenerate solution then we could make the poor choice to continually swap between the same two variables indefinitely and the method would never converge.
+							<br>
+							There are many different choices that can be made, with different properties. However, the choice we highlight is known as Bland's rule, or the smallest subscript rule. Whenever there are multiple different indexes that can be chosen, always pick the smallest index.
+							<br>
+							Note that this is the smallest index that matches the constraints on the problem. For the choice of non-basic variable, we need the associated reduced cost coefficient to be negative so that we are improving the objective function. For the basic variable, the index chosen must satisfy the minimum ratio test, so that the basic variables remain feasible.
+							<br>
+							We do not prove the theorem that Bland's method always works, as this is long. See the second and third year modules for a discussion of this.
+						</aside>
+
+					</section>
+
+				</section>
+
+				<section id="Algorithm">
+					<section>
+						<h2>Algorithm</h2>
+
+						\[
+							\begin{array}{rrcrlcrlcl}
+							\min & c_B A_B^{-1} b & + & \bar{c}_B & x_B & + & \bar{c}_N & x_N  & & \\
+							     &                &   &           & x_B & + & A_B^{-1} A_N & x_N & = & A_B^{-1} b \\
+							     &                &   &           & x_B & , &           & x_N & \ge & 0
+						  \end{array}
+						\]
+						<p>
+							Start: $B \subseteq \{ 1, \dots, n \} \implies A_B$, $x = (x_B | x_N), x_B = A_B^{-1} b \ge 0, x_N = 0$.
+						</p>
+						<p class="fragment" data-fragment-index=1>
+							Iterate:
+						</p>
+						<ol class="fragment" data-fragment-index=1>
+							<li>
+								Compute $A_B^{-1}, \bar{A} = A_B^{-1} A_N, \bar{b} = A_B^{-1} b, \bar{c} = c - c_B A_B^{-1} A$.
+							</li>
+							<li>
+								If $| \{ s \in \{ 1, \dots, n \} \colon \bar{c}_s < 0 \} | > 0$:
+								<ol>
+									<li>
+										Pick smallest $s \in \{ 1, \dots, n \}$ with $\bar{c}_s < 0$;
+									</li>
+									<li>
+										Pick smallest $r \in \argmin_{i \in B \colon \bar{a}_{is} > 0} \left\{ \frac{\bar{b}_i}{\bar{a}_{is}} \right\}$. If no such $r$, problem unbounded;
+									</li>
+									<li>
+										Set $B = B \setminus \{ r \} \cup \{ s \}$.
+									</li>
+								</ol>
+							</li>
+							<li>
+								If instead $| \{ s \in \{ 1, \dots, n \} \colon \bar{c}_s < 0 \} | = 0$, optimal solution is found.
+							</li>
+						</ol>
+					</section>
+
+					<aside class="notes">
+						We are almost at the stage where we can code the simplex method. These are the key steps. Note that, in order to start, we need the problem to be framed in the basic form, and we need to have a basic set. Once we have that we can iterate over the steps shown here.
+						<br>
+						There are two points where this code could stop. In one we find that the problem is unbounded. In the second we find that the basic feasible solution, and hence vertex, that we have reached, is optimal.
+					</aside>
+				</section>
+
+				<section id="Summary">
+					<section>
+						<h1>Summary</h1>
+
+						<ul>
+							<li>
+								First find a basic matrix.
+							</li>
+							<li>
+								Can improve the objective function by increasing the value of non-basic variables whose reduced cost coefficient is negative.
+							</li>
+							<li>
+								An optimal solution is basic feasible with a non-negative reduced costs vector.
+							</li>
+							<li>
+								Move between vertices by swapping index between basic and non-basic set.
+							</li>
+							<li>
+								Use minimum ratio test to ensure solution stays feasible.
+							</li>
+							<li>
+								Bland's rule is one choice of indexes that avoids cycling.
+							</li>
+						</ul>
+					</section>
+				</section>
+
+			</div>
+
+		</div>
+
+
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/zoom/zoom.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/search/search.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../reveal.js/plugin/math/math.js"></script>
+		<script src="../reveal.js/plugin/spotlight/spotlight.js"></script>
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				width: 1536,
+			  height: 960,
+			  margin: 0.04,
+				controls: false,
+				progress: true,
+				center: true,
+				hash: true,
+				transition: 'none',
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath.KaTeX, RevealSpotlight ],
+				spotlight: {
+					presentingCursor: 'default',
+				}
+			});
+
+		</script>
+
+
+	</body>
+</html>
