@@ -292,40 +292,46 @@
 
 					<section>
 						<h2>Degeneracy</h2>
-
-						<p>
-							<b>Definition:</b> A basic feasible solution is <em>degenerate</em> if $x_{B_i} = 0$ for some $i$.
-						</p>
-						<p>
-							If degenerate, different basic feasible solutions correspond to the same vertex.
-						</p>
-						<div class="fragment">
+						<div>
 							<p>
-								Let $\hat\imath$ be degenerate index, so $x_{B_{\hat\imath}} = \bar{b}_{\hat\imath} = 0$. Want to increase $x_s, s \in N$.
+								<b>Definition:</b> A basic feasible solution is <em>degenerate</em> if $x_{B_i} = 0$ for some $i$.
 							</p>
 							<p>
-						 		Minimum ratio test gives
+								If degenerate, different basic feasible solutions correspond to the same vertex.
 							</p>
-							\[
-								\theta^* = \min_{i \in B \colon \bar{a}_{is} > 0} \left\{ \frac{\bar{b}_i}{\bar{a}_{is}} \right\} = 0,  \quad \hat\imath \in \argmin_{i \in B \colon \bar{a}_{is} > 0} \left\{ \frac{\bar{b}_i}{\bar{a}_{is}} \right\}.
-							\]
-							<ul>
-								<li>
-									$x_s$ enters basic set but $x_s = \theta^* = 0$;
-								</li>
-								<li>
-									$x_{B_{\hat\imath}}$ leaves basic set, value remains at zero.
-								</li>
-								<li>
-									"Moved to adjacent vertex": no movement, values the same.
-								</li>
-							</ul>
+						</div>
+						<div style="position:absolute; width:1536px; top:0px; left:0px; z-index:-1" class="r-stack">
+							<img style="width:1200px" src="images/12_simplex_min_ratio/lp_cycling.svg" class="fragment fade-in-then-out" data-fragment-index=1>
+							<div class="fragment" data-fragment-index=2>
+								<p>
+									Let $\hat\imath$ be degenerate index, so $x_{B_{\hat\imath}} = \bar{b}_{\hat\imath} = 0$. Want to increase $x_s, s \in N$.
+								</p>
+								<p>
+							 		Minimum ratio test gives
+								</p>
+								\[
+									\theta^* = \min_{i \in B \colon \bar{a}_{is} > 0} \left\{ \frac{\bar{b}_i}{\bar{a}_{is}} \right\} = 0,  \quad \hat\imath \in \argmin_{i \in B \colon \bar{a}_{is} > 0} \left\{ \frac{\bar{b}_i}{\bar{a}_{is}} \right\}.
+								\]
+								<ul>
+									<li>
+										$x_s$ enters basic set but $x_s = \theta^* = 0$;
+									</li>
+									<li>
+										$x_{B_{\hat\imath}}$ leaves basic set, value remains at zero.
+									</li>
+									<li>
+										"Moved to adjacent vertex": no movement, values the same.
+									</li>
+								</ul>
+							</div>
 						</div>
 
 						<aside class="notes">
 							So far we have argued that in order to move to an adjacent vertex we need to swap an index in the basic set with one in the non-basic set. However, we have not checked that by performing such a swap we are, actually, moving.
 							<br>
 							In the degenerate case we do not necessarily move. The reason this can happen is that multiple constraints can intersect at the same point, leading to multiple basic feasible solutions corresponding to the same vertex.
+							<br>
+							In the figure we have three decision variables and five constraints (linked to facets), so eight total variables in standard form. There must be three non-basic variables. However, at the highlighted vertex the first four facets meet, meaning four constraints are satisfied, so four slack variables vanish, so four of the eight total variables vanish. Therefore more variables are zero than there are non-basic variables.
 							<br>
 							To see the impact of this, see what happens when a degenerate entry exists. In this case the minimum ratio test says that the maximum that the non-basic variable can be increased is zero. This means that, by swapping the basic and non-basic index, we have made no change to the vertex.
 							<br>
