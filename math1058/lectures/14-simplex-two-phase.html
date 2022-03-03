@@ -1,0 +1,913 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Lecture 14</title>
+
+		<meta name="description" content="Math1058">
+		<meta name="author" content="Ian Hawke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css">
+
+
+	<style type="text/css">
+	  .reveal p {
+	    text-align: left;
+	  }
+	  .reveal ul {
+	    display: block;
+	  }
+	  .reveal ol {
+	    display: block;
+	  }
+	</style>
+
+
+
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="Title">
+
+					<section>
+						<h2 class="r-fit-text">Two-phase simplex method</h2>
+						<p>
+							<ul style="list-style: none;">
+								<li> Ian Hawke
+								<li> Michael Kenna-Allison
+							</ul>
+						</p>
+
+						<aside class="notes">
+							Starting the Simplex Method.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Simplex">
+
+					<section>
+
+						<h2>Simplex Method</h2>
+						<div style="position:absolute; width:768px; top:150px; left:0px">
+							<ul>
+								<li>
+									Solutions to linear programs at vertices.
+								</li>
+								<li>
+									Simplex method: move from one vertex to adjacent until optimal found.
+								</li>
+								<li>
+									Ingredients:
+									<ol>
+										<li>
+											How to characterize vertex algebraically? <b>Done</b>.
+										</li>
+										<li>
+											How to check vertex is optimal? <b>Done</b>.
+										</li>
+										<li>
+											How to move from vertex to better vertex? <b>Done</b>.
+										</li>
+									</ol>
+								</li>
+							</ul>
+							<p>
+								<b>How to start?</b>
+							</p>
+						</div>
+						<div style="position:absolute; width:768px; top:150px; left:768px">
+							<img style="width:768px" src="images/09_simplex_basics/lp_simplex_vertex.svg">
+						</div>
+
+						<aside class="notes">
+							We have seen how the simplex method works, and its practical implementation using the tableau form. However, we have always assumed that a basic set (and hence basic matrix and basic form) is given to us, so that some sub-matrix of the tableau is in the form of an identity matrix.
+							<br>
+							Today we ask how to take a general problem and put it in that form.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Optimal transport</h2>
+						<p>
+							Two boxes containing dirt; cost to move to other boxes.
+						</p>
+						<p class="fragment fade-in" data-fragment-index=1>
+							Transfer to <em>tableau form</em>:
+						</p>
+						<p class="fragment fade-in" data-fragment-index=2>
+							Where are the basic variables?
+						</p>
+						<div class="r-stack" style="position:absolute; width=1536px; top=100px;left=0px">
+							<div class="fragment fade-out" data-fragment-index=1>
+								\[
+								\begin{array}{rrlcrlcrlcrlcl}
+								\min_x      & 0 & x_1 & + & 1 & x_2 & + & 1 & x_3 & + & 0 & x_4 & & \\
+								\text{s.t.} &   & x_1 & + &   & x_2 &   &   &     &   &   &     & = & 0.3 \\
+								            &   &     &   &   &     &   &   & x_3 & + &   & x_4 & = & 0.7 \\
+								            &   & x_1 & + &   &     &   &   & x_3 &   &   &     & = & 0.6 \\
+								            &   &     &   &   & x_2 & + &   &     &   &   & x_4 & = & 0.4 \\
+								            &   & x_1 & , &   & x_2 & , &   & x_3 & , &   & x_4 & \ge & 0.
+								\end{array}
+								\]
+							</div>
+							<div class="fragment fade-in" data-fragment-index=1>
+								<table style="table-layout:fixed; width:60%">
+									<tbody>
+										<tr>
+											<td style="border-right:none; border-bottom:none; border=top:none">
+											</td>
+											<td style="border-right:none; border-bottom:1px solid black; border=top:none">
+											</td>
+											<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+												$x_1$
+											</td>
+											<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+												$x_2$
+											</td>
+											<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+												$x_3$
+											</td>
+											<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+												$x_4$
+											</td>
+										</tr>
+										<tr>
+											<td style="border-right:1px solid black; border-bottom:none; border=top:none">
+											</td>
+											<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+												0
+											</td>
+											<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+												0
+											</td>
+											<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+												1
+											</td>
+											<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+												1
+											</td>
+											<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+												0
+											</td>
+										</tr>
+										<tr>
+											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+												??
+											</td>
+											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+												0.3
+											</td>
+											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+												1
+											</td>
+											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+												1
+											</td>
+											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+												0
+											</td>
+											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+												0
+											</td>
+										</tr>
+										<tr>
+											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+												??
+											</td>
+											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+												0.7
+											</td>
+											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+												0
+											</td>
+											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+												0
+											</td>
+											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+												1
+											</td>
+											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+												1
+											</td>
+										</tr>
+										<tr>
+											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+												??
+											</td>
+											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+												0.6
+											</td>
+											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+												1
+											</td>
+											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+												0
+											</td>
+											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+												1
+											</td>
+											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+												0
+											</td>
+										</tr>
+										<tr>
+											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+												??
+											</td>
+											<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+												0.4
+											</td>
+											<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+												0
+											</td>
+											<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+												1
+											</td>
+											<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+												0
+											</td>
+											<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+												1
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+						<aside class="notes">
+							The optimal transport problem was introduced in the second lecture. We wanted to move dirt from two boxes into two other boxes, but there was a cost to doing so. This problem is already in standard form. However, we see that it is not in basic form. When we translate to the tableau, there are no columns that match an identity matrix, so we cannot identify the basic set, so we cannot start the method.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Two phase">
+
+					<section>
+						<h2>Two-phase simplex method</h2>
+						<p>
+							Solution: solve two problems.
+						</p>
+						<ol>
+							<li>
+								First minimize error in constraints imposing basic form.
+							</li>
+							<li>
+								Second, transfer solution to tableau, solve standard simplex.
+							</li>
+						</ol>
+						<p class="fragment">
+							If phase one fails the problem is infeasible.
+						</p>
+
+						<aside class="notes">
+
+						</aside>
+
+					</section>
+
+					<section>
+						<h2>Auxiliary problem</h2>
+						<p>
+							Assume standard form
+						</p>
+						\[
+						\begin{array}{rcrcl}
+						\min_x & \quad & c x && \\
+						\text{subject to} & & A x & = & b \\
+						& & x & \ge & 0.
+						\end{array}
+						\]
+						<p>
+							Auxiliary problem is
+						</p>
+						\[
+						\begin{alignat*}{4}
+						\min_y            & \quad &   &      & e & y &   & \\
+						\text{subject to} &       & A & x  + & I & y & = & b \\
+						                  &       &   & x  , &   & y & \ge & 0.
+						\end{alignat*}
+						\]
+						<p>
+							Contains $m$ new variables $y$. New cost vector $e = (1, \dots, 1)$.
+						</p>
+						<p class="fragment">
+							Original constraints satisfied if $y = 0$.
+						</p>
+
+						<aside class="notes">
+							The auxiliary problem is bigger than the original problem as we have to add an additional variable for every constraint. However, the problem is automatically in basic form, as the columns linked to these new variables are automatically in basic form. Therefore we can solve this auxiliary problem using the standard simplex method, where the initial basic solution is given by these new variables.
+							<br>
+							The solution that we want is when all of the new variables vanish. In this case the original constraints are satisfied.
+						</aside>
+
+					</section>
+
+					<section>
+						<h2>Auxiliary solution</h2>
+						<p>
+							<b>Proposition:</b> The auxiliary problem admits an optimal solution $(x^*, y^*)$ with $e y^* = 0$ if and only if the original problem is feasible.
+						</p>
+						<p class="fragment">
+							If the optimal solution has $e y^* > 0$ then $y^* \ne 0$ and the constraints are not satisfied. The original problem is not feasible.
+						</p>
+						<p class="fragment">
+							If the original problem has a feasible solution $x'$, then $(x', 0)$ is feasible for the auxiliary problem with $e y' = 0$.
+						</p>
+
+						<aside class="notes">
+						</aside>
+
+					</section>
+
+					<section>
+						<h2>Reduced costs problem: 1</h2>
+						<p>
+							The auxiliary problem
+						</p>
+						\[
+						\begin{array}{rcrlcrlccl}
+						\min_y            & \quad &   &   &   & e & y &   & \\
+						\text{subject to} &       & A & x & + & I & y & = & b \\
+						                  &       &   & x & , &   & y & \ge & 0.
+						\end{array}
+						\]
+						<p>
+							does not correctly have zero reduced costs:
+						</p>
+						<table>
+							<tbody>
+								<tr>
+									<td style="border-bottom:none; border-top:none;">
+									</td>
+									<td>
+									</td>
+									<td style="text-align:center;">
+										$x_1$
+									</td>
+									<td style="text-align:center;">
+										$\dots$
+									</td>
+									<td style="text-align:center;">
+									  $x_n$
+									</td>
+									<td style="text-align:center;">
+										$y_1$
+									</td>
+									<td style="text-align:center;">
+										$\dots$
+									</td>
+									<td style="text-align:center;">
+										$y_m$
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;"></td>
+									<td style="text-align:center;border-right:1px solid black;">
+										$0$
+									</td>
+									<td style="text-align:center;">
+									</td>
+									<td style="text-align:center;">
+										$0$
+									</td>
+									<td style="text-align:center;border-right:1px solid black;">
+									</td>
+									<td style="text-align:center;">
+										$1$
+									</td>
+									<td style="text-align:center;">
+										$\dots$
+									</td>
+									<td style="text-align:center;border-right:1px solid black;">
+										$1$
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+										$y_1$
+									</td>
+									<td style="border-right:1px solid black; border-bottom:none;"></td>
+									<td style="border-bottom:none;">
+									</td>
+									<td style="border-bottom:none;"></td>
+									<td style="border-right:1px solid black; border-bottom:none;">
+									</td>
+									<td style="border-bottom:none;">
+									</td>
+									<td style="border-bottom:none;"></td>
+									<td style="border-right:1px solid black; border-bottom:none;"></td>
+								</tr>
+								<tr>
+									<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+										$\vdots$
+									</td style="border-right:1px solid black; border-bottom:none; border-top:none;">
+									<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+										$b$
+									</td>
+									<td style="text-align:center;border-bottom:none; border-top:none;">
+									</td>
+									<td style="text-align:center;border-bottom:none; border-top:none;">
+										$A$
+									</td>
+									<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+									</td>
+									<td style="text-align:center;border-bottom:none; border-top:none;">
+									</td>
+									<td style="text-align:center; border-bottom:none; border-top:none;">
+										$I$
+									</td>
+									<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center;border-right:1px solid black;">
+										$y_m$
+									</td>
+									<td style="border-right:1px solid black; border-bottom:1px solid black; border-top:none"></td>
+									<td style="border-bottom:1px solid black; border-top:none"></td>
+									<td style="border-bottom:1px solid black; border-top:none"></td>
+									<td style="border-right:1px solid black; border-bottom:1px solid black; border-top:none"></td>
+									<td style="border-bottom:1px solid black; border-top:none"></td>
+									<td style="border-bottom:1px solid black; border-top:none"></td>
+									<td style="border-right:1px solid black; border-bottom:1px solid black; border-top:none"></td>
+								</tr>
+							</tbody>
+						</table>
+
+
+
+						<aside class="notes">
+						</aside>
+					</section>
+
+					<section>
+						<h2>Reduced costs problem: 2</h2>
+						<p>
+							Using $y = b - A x$, the <em>equivalent</em> auxiliary problem
+						</p>
+						\[
+						\begin{array}{rcrlcrlccl}
+						\min_y            & e b   & -e A & x &   &   &   &   & \\
+						\text{subject to} &       & A    & x & + & I & y & = & b \\
+						                  &       &      & x & , &   & y & \ge & 0.
+						\end{array}
+						\]
+						<p>
+							does have zero reduced costs:
+						</p>
+						<table>
+							<tbody>
+								<tr>
+									<td style="border-bottom:none; border-top:none;">
+									</td>
+									<td>
+									</td>
+									<td style="text-align:center;">
+										$x_1$
+									</td>
+									<td style="text-align:center;">
+										$\dots$
+									</td>
+									<td style="text-align:center;">
+									  $x_n$
+									</td>
+									<td style="text-align:center;">
+										$y_1$
+									</td>
+									<td style="text-align:center;">
+										$\dots$
+									</td>
+									<td style="text-align:center;">
+										$y_m$
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;"></td>
+									<td style="text-align:center;border-right:1px solid black;">
+										$-e b$
+									</td>
+									<td style="text-align:center;">
+									</td>
+									<td style="text-align:center;">
+										$-e A$
+									</td>
+									<td style="text-align:center;border-right:1px solid black;">
+									</td>
+									<td style="text-align:center;">
+										$0$
+									</td>
+									<td style="text-align:center;">
+										$\dots$
+									</td>
+									<td style="text-align:center;border-right:1px solid black;">
+										$0$
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+										$y_1$
+									</td>
+									<td style="border-right:1px solid black; border-bottom:none;"></td>
+									<td style="border-bottom:none;">
+									</td>
+									<td style="border-bottom:none;"></td>
+									<td style="border-right:1px solid black; border-bottom:none;">
+									</td>
+									<td style="border-bottom:none;">
+									</td>
+									<td style="border-bottom:none;"></td>
+									<td style="border-right:1px solid black; border-bottom:none;"></td>
+								</tr>
+								<tr>
+									<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+										$\vdots$
+									</td style="border-right:1px solid black; border-bottom:none; border-top:none;">
+									<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+										$b$
+									</td>
+									<td style="text-align:center;border-bottom:none; border-top:none;">
+									</td>
+									<td style="text-align:center;border-bottom:none; border-top:none;">
+										$A$
+									</td>
+									<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+									</td>
+									<td style="text-align:center;border-bottom:none; border-top:none;">
+									</td>
+									<td style="text-align:center; border-bottom:none; border-top:none;">
+										$I$
+									</td>
+									<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center;border-right:1px solid black;">
+										$y_m$
+									</td>
+									<td style="border-right:1px solid black; border-bottom:1px solid black; border-top:none"></td>
+									<td style="border-bottom:1px solid black; border-top:none"></td>
+									<td style="border-bottom:1px solid black; border-top:none"></td>
+									<td style="border-right:1px solid black; border-bottom:1px solid black; border-top:none"></td>
+									<td style="border-bottom:1px solid black; border-top:none"></td>
+									<td style="border-bottom:1px solid black; border-top:none"></td>
+									<td style="border-right:1px solid black; border-bottom:1px solid black; border-top:none"></td>
+								</tr>
+							</tbody>
+						</table>
+
+
+
+						<aside class="notes">
+						</aside>
+					</section>
+
+					<section>
+						<h2>Algorithm</h2>
+						<ol>
+							<li>
+								Solve auxiliary problem, optimal solution $(x^*, y^*)$.
+								<ol style="list-style-type: lower-alpha;">
+									<li>
+										If $e y^* > 0$, problem infeasible.
+									</li>
+									<li>
+										If $e y^* = 0$:
+										<ol style="list-style-type: lower-roman;">
+											<li>
+												use pivoting to remove degenerate $y_i$ from basis;
+											</li>
+											<li>
+												delete columns corresponding to $y$;
+											</li>
+											<li>
+												re-write objection function in terms of $x_N$.
+											</li>
+										</ol>
+									</li>
+								</ol>
+							</li>
+							<li>
+								Ensure objective function in terms of $x_N$.
+							</li>
+							<li>
+								Write tableau using basic solution found in phase one.
+							</li>
+						</ol>
+					</section>
+
+					<section>
+						<h2>Degeneracy</h2>
+						<p>
+							If auxiliary solution degenerate could have $y_i = 0 = x_j$, but $y_i$ still in $B$.
+						</p>
+						<table>
+							<tr>
+								<td style="text-align:center;border-right: none; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:1px solid black; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:1px solid black; border-top:none;">
+									$x_1$
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:1px solid black; border-top:none;">
+									$\dots$
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:1px solid black; border-top:none;">
+									$x_j$
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:1px solid black; border-top:none;">
+									$\dots$
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:1px solid black; border-top:none;">
+									$x_n$
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:1px solid black; border-top:none;">
+									$y_1$
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:1px solid black; border-top:none;">
+									$\dots$
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:1px solid black; border-top:none;">
+									$y_i$
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:1px solid black; border-top:none;">
+									$\dots$
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:1px solid black; border-top:none;">
+									$y_m$
+								</td>
+							</tr>
+							<tr>
+								<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:1px solid black; border-bottom:1px solid black; border-top:none;">
+									$0$
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:1px solid black; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:1px solid black; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:1px solid black; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:1px solid black; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:1px solid black; border-bottom:1px solid black; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:1px solid black; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:1px solid black; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:1px solid black; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:1px solid black; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:1px solid black; border-bottom:1px solid black; border-top:none;">
+								</td>
+							</tr>
+							<tr>
+								<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+									$0$
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+								</td>
+							</tr>
+							<tr>
+								<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+									$\vdots$
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+								</td>
+							</tr>
+							<tr>
+								<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+									$y_i$
+								</td>
+								<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+									$0$
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+									$\bar{a}_{i1}$
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+									$\dots$
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+									$\bar{a}_{ij}$
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+									$\dots$
+								</td>
+								<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+									$\bar{a}_{in}$
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+									$1$
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+								</td>
+							</tr>
+							<tr>
+								<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+									$\vdots$
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+								</td>
+							</tr>
+							<tr>
+								<td style="text-align:center;border-right:1px solid black; border-bottom:none; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:1px solid black; border-bottom:1px solid black; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:1px solid black; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:1px solid black; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:1px solid black; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:1px solid black; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:1px solid black; border-bottom:1px solid black; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:1px solid black; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:1px solid black; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:1px solid black; border-top:none;">
+									$0$
+								</td>
+								<td style="text-align:center;border-right:none; border-bottom:1px solid black; border-top:none;">
+								</td>
+								<td style="text-align:center;border-right:1px solid black; border-bottom:1px solid black; border-top:none;">
+								</td>
+							</tr>
+						</table>
+						<p class="fragment">
+							Pivot on $\bar{a}_{ij} \ne$, send $x_j \to B, y_i \to N$.
+						</p>
+
+						<aside class="notes">
+							The problem with degenerate solutions in this case is that the final basic solution may not have only variables that we want to keep in the basis. In this case there will be some entry in the matrix that links a non-basic variable that we want to keep with a basic auxiliary variable. We can pivot, even if the entry is negative, to switch these two variables.
+							<br>
+							There is one final case which is where the degenerate solution has an auxiliary variable where every entry in the matrix is zero. In this case the matrix is not full row rank, the auxiliary variable contains no useful information, and it can be directly removed (and hence the entire row can be removed).
+						</aside>
+
+					</section>
+
+				</section>
+
+				<section id="Example">
+					<section>
+						<h2>Optimal transport</h2>
+
+						
+					</section>
+				</section>
+
+				<section id="Summary">
+					<section>
+						<h1>Summary</h1>
+
+						<ul>
+							<li>
+								Tableau form is used for practical calculations.
+							</li>
+							<li>
+								Use Bland's rule and minimum ratio test to identify pivot.
+							</li>
+							<li>
+								Applies pivoting operations as used in Gaussian elimination.
+							</li>
+							<li>
+								To read off solution, need to keep track of variables.
+							</li>
+						</ul>
+					</section>
+				</section>
+
+			</div>
+
+		</div>
+
+
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/zoom/zoom.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/search/search.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../reveal.js/plugin/math/math.js"></script>
+		<script src="../reveal.js/plugin/spotlight/spotlight.js"></script>
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				width: 1536,
+			  height: 960,
+			  margin: 0.04,
+				controls: false,
+				progress: true,
+				center: true,
+				hash: true,
+				transition: 'none',
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath.KaTeX, RevealSpotlight ],
+				spotlight: {
+					presentingCursor: 'default',
+				}
+			});
+
+		</script>
+
+
+	</body>
+</html>
