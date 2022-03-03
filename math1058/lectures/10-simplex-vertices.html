@@ -121,12 +121,21 @@
 						<p>
 							Pick $B \subseteq \{ 1, \dots, n\}$ which $\implies$ submatrix $A_B$, and partition
 						</p>
+						<!--
 						\[
 						\begin{array}{rcrcl}
 						\min_x & \; & c_B x_B + c_N x_N && \\
 						\text{s.t.} & & A_B x_B + A_N x_N & = & b \\
 						& & x_B, x_N & \ge & 0.
 						\end{array}
+						\]
+						-->
+						\[
+						\begin{alignat*}{4}
+						\min_x & \; & c_B & x_B + & c_N & x_N & & \\
+						\text{s.t.} && A_B & x_B + & A_N & x_N & = & b \\
+						&&& x_B, &  & x_N & \ge & 0.
+						\end{alignat*}
 						\]
 						<p>
 							Basic solution: $A_B x_B = b$ and $x_N = 0$.
@@ -165,11 +174,11 @@
 								to <em>basic form</em>:
 							</p>
 							\[
-							\begin{array}{rrcl}
-							\min_x & c_B A_B^{-1} b + \overbrace{(c_B - c_B A_B^{-1} A_B )}^{\smash{=0}} x_B + (c_N - c_B A_B^{-1} A_N) x_N && \\
-							\text{s.t.} & x_B + A_B^{-1} A_N x_N & = & A_B^{-1} b \\
-							 & x_B, x_N & \ge & 0.
-							\end{array}
+							\begin{alignat*}{5}
+							\min_x & \; & c_B A_B^{-1} & b + & \smash{\overbrace{(c_B - c_B A_B^{-1} A_B )}^{=0}} & x_B + & (c_N - c_B A_B^{-1} A_N) & x_N && \\
+							\text{s.t.} & & &&& x_B + & A_B^{-1} A_N & x_N & = & A_B^{-1} b \\
+							 &&& && x_B, && x_N & \ge & 0.
+							\end{alignat*}
 							\]
 						</div>
 
@@ -192,11 +201,11 @@
 							Start from basic form
 						</p>
 						\[
-						\begin{array}{rrcl}
-						\min_x & c_B A_B^{-1} b + \overbrace{(c_B - c_B A_B^{-1} A_B )}^{\smash{=0}} x_B + (c_N - c_B A_B^{-1} A_N) x_N && \\
-						\text{s.t.} & x_B + A_B^{-1} A_N x_N & = & A_B^{-1} b \\
-						 & x_B, x_N & \ge & 0.
-						\end{array}
+						\begin{alignat*}{5}
+						\min_x & \; & c_B A_B^{-1} & b + & \smash{\overbrace{(c_B - c_B A_B^{-1} A_B )}^{=0}} & x_B + & (c_N - c_B A_B^{-1} A_N) & x_N && \\
+						\text{s.t.} & & &&& x_B + & A_B^{-1} A_N & x_N & = & A_B^{-1} b \\
+						 &&& && x_B, && x_N & \ge & 0.
+						\end{alignat*}
 						\]
 						<p>
 							Set $x_N = 0$. Basic form becomes
