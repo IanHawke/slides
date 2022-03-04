@@ -108,6 +108,98 @@
 					</section>
 
 					<section>
+						<h2>A starting problem</h2>
+						\[
+						\begin{array}{rrlcrlcrlcl}
+						\min_x      &    & x_1 & + & & x_2 & & &   &     &   & \\
+						\text{s.t.} &    &     &   & & x_2 & + & 4 & x_3 & = & 2 \\
+						            & -2 & x_1 & + & & x_2 & - & 6 & x_3 & = & 2 \\
+												&    & x_1 & , & & x_2 & , &   & x_3 & \ge & 0.
+						\end{array}
+						\]
+						<div class="fragment">
+							<p>
+								Transfer to <em>tableau form</em>:
+							</p>
+							<table style="table-layout:fixed; width:60%">
+								<tbody>
+									<tr>
+										<td style="border-right:none; border-bottom:none; border=top:none">
+										</td>
+										<td style="border-right:none; border-bottom:1px solid black; border=top:none">
+										</td>
+										<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+											$x_1$
+										</td>
+										<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+											$x_2$
+										</td>
+										<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+											$x_3$
+										</td>
+									</tr>
+									<tr>
+										<td style="border-right:1px solid black; border-bottom:none; border=top:none">
+										</td>
+										<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+											0
+										</td>
+										<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+											1
+										</td>
+										<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+											1
+										</td>
+										<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+											0
+										</td>
+									</tr>
+									<tr>
+										<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+											??
+										</td>
+										<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+											2
+										</td>
+										<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+											0
+										</td>
+										<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+											1
+										</td>
+										<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+											4
+										</td>
+									</tr>
+									<tr>
+										<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+											??
+										</td>
+										<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+											2
+										</td>
+										<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+											-2
+										</td>
+										<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+											1
+										</td>
+										<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+											-6
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<p class="fragment">
+							Where is the basic matrix? Where are the basic variables?
+						</p>
+
+						<aside class="notes">
+						</aside>
+					</section>
+<!--
+					<section>
 						<h2>Optimal transport</h2>
 						<p>
 							Two boxes containing dirt; cost to move to other boxes.
@@ -260,7 +352,7 @@
 							The optimal transport problem was introduced in the second lecture. We wanted to move dirt from two boxes into two other boxes, but there was a cost to doing so. This problem is already in standard form. However, we see that it is not in basic form. When we translate to the tableau, there are no columns that match an identity matrix, so we cannot identify the basic set, so we cannot start the method.
 						</aside>
 					</section>
-
+-->
 				</section>
 
 				<section id="Two phase">
@@ -304,11 +396,11 @@
 							Auxiliary problem is
 						</p>
 						\[
-						\begin{alignat*}{4}
-						\min_y            & \quad &   &      & e & y &   & \\
-						\text{subject to} &       & A & x  + & I & y & = & b \\
-						                  &       &   & x  , &   & y & \ge & 0.
-						\end{alignat*}
+						\begin{array}{rlrlcrlcl}
+						\min_y            & \quad &   &    &   & e & y &   & \\
+						\text{subject to} &       & A & x  & + & I & y & = & b \\
+						                  &       &   & x  & , &   & y & \ge & 0.
+						\end{array}
 						\]
 						<p>
 							Contains $m$ new variables $y$. New cost vector $e = (1, \dots, 1)$.
@@ -348,7 +440,7 @@
 							The auxiliary problem
 						</p>
 						\[
-						\begin{array}{rcrlcrlccl}
+						\begin{array}{rlrlcrlcl}
 						\min_y            & \quad &   &   &   & e & y &   & \\
 						\text{subject to} &       & A & x & + & I & y & = & b \\
 						                  &       &   & x & , &   & y & \ge & 0.
@@ -469,7 +561,7 @@
 							Using $y = b - A x$, the <em>equivalent</em> auxiliary problem
 						</p>
 						\[
-						\begin{array}{rcrlcrlccl}
+						\begin{array}{rlrlcrlcl}
 						\min_y            & e b   & -e A & x &   &   &   &   & \\
 						\text{subject to} &       & A    & x & + & I & y & = & b \\
 						                  &       &      & x & , &   & y & \ge & 0.
@@ -846,10 +938,159 @@
 
 				<section id="Example">
 					<section>
-						<h2>Optimal transport</h2>
+						<h2>The starting problem</h2>
+						<p>
+							<span class="fragment" data-fragment-index=1>Construct auxiliary problem.</span> <span class="fragment" data-fragment-index=2>Re-express objective function, using $y_1 = 2 - x_2 - 4 x_3$ and $y_2 = 2 + 2 x_1 - x_2 + 6 x_3$.</span>
+						</p>
+						<div class="r-stack" style="width:1536px">
+							<div class="fragment fade-out" data-fragment-index=1>
+\[
+\begin{alignat*}{6}
+\min_x      & \; &    & x_1 & + &  & x_2 &   &   &     &  & \\
+\text{s.t.} &    &    &     &   &  & x_2 & + & 4 & x_3 & = & 2 \\
+            &    & -2 & x_1 & + &  & x_2 & - & 6 & x_3 & = & 2 \\
+						&    &    & x_1 & , &  & x_2 & , &   & x_3 & \ge & 0.
+\end{alignat*}
+\]
+							</div>
+							<div class="fragment fade-in-then-out" data-fragment-index=1>
+\[
+\begin{alignat*}{10}
+\min_y & \; &    &    &     &   & &     &   &   &     &   & & y_1 & + & & y_2 &   &   & \\
+\text{s.t.}&&    &    &     &   & & x_2 & + & 4 & x_3 & + & & y_1 &   & &     & = & 2 \\
+       &    &    & -2 & x_1 & + & & x_2 & - & 6 & x_3 &   & &     & + & & y_2 & = & 2 \\
+			 &		&    &    & x_1 & , & & x_2 & , &   & x_3 & , & & y_1 & , & & y_2 &  \ge & 0.
+\end{alignat*}
+\]
+							</div>
+							<div class="fragment fade-in" data-fragment-index=2>
+\[
+\begin{alignat*}{11}
+\min_y & \; &  4 & + & 2 &  x_1   &  -  & 2 & x_2 &  +  & 2 & x_3 &     &   & &  &  & &  &   &   & \\
+\text{s.t.}&&    &   &   &        &     &   & x_2 &   + & 4 & x_3 & + & & y_1 &   & &     & = & 2 \\
+          & &    &    & -2 & x_1 &   + &   & x_2 & -   & 6 & x_3 &   & &     & + & & y_2 & = & 2 \\
+			 &&		&    &    & x_1 & , & & x_2 & , &   & x_3 & , & & y_1 & , & & y_2 &  \ge & 0.
+\end{alignat*}
+\]
+							</div>
+						</div>
 
-						
 					</section>
+
+					<section>
+						<h2>Phase one</h2>
+						<p>
+							Take problem
+						</p>
+						\[
+						\begin{alignat*}{11}
+						\min_y & \; &  4 & + & 2 &  x_1   &  -  & 2 & x_2 &  +  & 2 & x_3 &     &   & &  &  & &  &   &   & \\
+						\text{s.t.}&&    &   &   &        &     &   & x_2 &   + & 4 & x_3 & + & & y_1 &   & &     & = & 2 \\
+						          & &    &    & -2 & x_1 &   + &   & x_2 & -   & 6 & x_3 &   & &     & + & & y_2 & = & 2 \\
+									 &&		&    &    & x_1 & , & & x_2 & , &   & x_3 & , & & y_1 & , & & y_2 &  \ge & 0.
+						\end{alignat*}
+						\]
+						<p>
+							to tableau:
+						</p>
+
+						<table style="table-layout:fixed; width:60%">
+							<tbody>
+								<tr>
+									<td style="border-right:none; border-bottom:none; border=top:none">
+									</td>
+									<td style="border-right:none; border-bottom:1px solid black; border=top:none">
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_1$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_2$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$x_3$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$y_1$
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										$y_2$
+									</td>
+								</tr>
+								<tr>
+									<td style="border-right:1px solid black; border-bottom:none; border=top:none">
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										-4
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:1px solid black">
+										2
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:1px solid black">
+										-2
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										2
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:1px solid black">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
+										0
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										$y_1$
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										2
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:none; border=top:1px solid black">
+										0
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:none; border=top:1px solid black">
+										1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										4
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:none; border=top:1px solid black">
+										1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
+										0
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
+										$y_2$
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										2
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										-2
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										1
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										-6
+									</td>
+									<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
+										0
+									</td>
+									<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
+										1
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+
+					</section>
+
 				</section>
 
 				<section id="Summary">
