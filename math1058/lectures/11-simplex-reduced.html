@@ -180,11 +180,20 @@
 						<p>
 							Problem in basic form is now
 						</p>
+						<!--
 						\[
 						\begin{array}{rrcl}
 						\min_x & c_B A_B^{-1} b + \bar{c}_B x_B + \bar{c}_N x_N && \\
 						\text{s.t.} & x_B + A_B^{-1} A_N x_N & = & A_B^{-1} b \\
 						 & x_B, x_N & \ge & 0.
+						\end{array}
+						\]
+					-->
+						\[
+						\begin{array}{rrcrlcrlcl}
+						\min_x & c_B A_B^{-1} b & +  & \bar{c}_B & x_B & + & \bar{c}_N & x_N && \\
+						\text{s.t.} &&&& x_B & + & A_B^{-1} A_N & x_N & = & A_B^{-1} b \\
+						 &&&& x_B & , && x_N & \ge & 0.
 						\end{array}
 						\]
 						<ul>
