@@ -6,7 +6,7 @@
             <meta name="robots" content="noindex">
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
             <meta name="author" content="Ian Hawke" />
-            <meta name="date" content="2022-01-25" />
+            <meta name="date" content="2022-03-08" />
         
 
         <title>Lab 7 outline | Operational Research and Mathematical Computing</title>
@@ -131,116 +131,55 @@
             <div id="content" class="col-md-9"> 
             
             <section class="section1"><h1>Week 7</h1>
-<p>In previous weeks we have dealt with most of the structures we need. Now we should do some more advanced plotting.</p>
+<p>We have introduced Python. Now we need to discuss Excel.</p>
 <section class="section2"><h2>Script</h2>
-<section class="section3"><h3><code>networkX</code></h3>
-<p>We have seen that algorithms on graphs, such as the shortest path analysis, are important parts of Operational Research. It's useful to visualize these.</p>
-<p>First we want to consider what data structures we need in order to describe a graph. A graph is described by the set of nodes and the edges joining them. Let's consider a simple graph with three nodes <script type="math/tex">1, 2, 3</script> and two edges joining <script type="math/tex">1 \to 2</script> and <script type="math/tex">1 \to 3</script>:</p>
-<div class="highlight"><pre><span></span><span class="n">nodes</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="n">edge1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">edge2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="n">edges</span> <span class="o">=</span> <span class="p">(</span><span class="n">edge1</span><span class="p">,</span> <span class="n">edge2</span><span class="p">)</span>
+<section class="section3"><h3><code>Excel</code></h3>
+<p>Excel, and spreadsheets in general, are a widely used and understood tool. Its strength is that nearly everyone has it available, and it is fast to do basic tasks with.  It's very useful for</p>
+<ul>
+<li>Distributing data</li>
+<li>Performing quick analysis</li>
+<li>Communicating general results rapidly to a broad audience</li>
+</ul>
+<p>However, there are major issues with using spreadsheets. One weakness is that it is easy to make mistakes with spreadsheets and particularly with Excel. Amongst the many examples, the <a href="https://en.wikipedia.org/wiki/Growth_in_a_Time_of_Debt">Reinhart-Rogoff</a> paper on sovereign debt <a href="https://www.bloomberg.com/news/articles/2013-04-18/faq-reinhart-rogoff-and-the-excel-error-that-changed-history">accidentally excluded five rows</a> from a calculation of an average, which qualitatively changed their results. It has been claimed that political austerity measures were strongly motivated by this paper, which in part relies on a spreadsheet error.</p>
+<p>We need to talk about reliable methods for getting data into, and out of, spreadsheets. We also need to talk about data organization principles: how to make it easy for others to re-use your data. Finally, we need to look at the standard Excel mathematical functions for data analysis.</p>
+<p>One advantage of Python over Excel is that, as a full-featured programming language, it can be more easily used for long and complex tasks. The disadvantage is that many people may be interested in the results, but not interested in (or have the knowledge of) the programming details required to follow the Python code. To communicate the results whilst still showing those interested the full data, it's useful to <em>programmatically</em> take results from Python into a spreadsheet.</p>
+<p>For now we will use toy data. As an example,</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
-<p>For now this is just a set of conventions: the container <code>nodes</code> contains the identifiers of the nodes, and the container <code>edges</code> contains pairs of nodes, identifying which nodes are connected by each edge.</p>
-<p>The <code>networkX</code> library allow us to combine the conventions in a single object:</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">networkx</span>
+<p>We now want to create an Excel spreadsheet that contains this data. Working with larger datasets will follow similarly. For this we will use the <code>openpyxl</code> library.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">openpyxl</span>
 </pre></div>
-<div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">networkx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
+<p>We first create an Excel workbook, purely within Python.</p>
+<div class="highlight"><pre><span></span><span class="n">wb</span> <span class="o">=</span> <span class="n">openpyxl</span><span class="o">.</span><span class="n">Workbook</span><span class="p">()</span>
 </pre></div>
-<p>We can then plot the graph object. To do this, <code>networkX</code> uses <code>matplotlib</code> in the background, so many of the commands will be linked to <code>matplotlib</code> commands:</p>
-<div class="highlight"><pre><span></span><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<p>We will then create a worksheet within the workbook. One already exists, but we will create a new worksheet with a name.</p>
+<div class="highlight"><pre><span></span><span class="n">ws</span> <span class="o">=</span> <span class="n">wb</span><span class="o">.</span><span class="n">create_sheet</span><span class="p">(</span><span class="s2">"Data"</span><span class="p">)</span>
 </pre></div>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span>
-
-<span class="n">pyplot</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">networkx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
-<span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<p>We will then add titles in the first row, indicating what the data is going to be. These will be strings.</p>
+<div class="highlight"><pre><span></span><span class="n">ws</span><span class="o">.</span><span class="n">cell</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">"x"</span><span class="p">)</span>
+<span class="n">ws</span><span class="o">.</span><span class="n">cell</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">"sin(x)"</span><span class="p">)</span>
 </pre></div>
-<figure class="figure1" data-title="png"><img alt="png" src="images/07-Lab-Week-7_12_0.png"/></figure><p>This isn't very helpful. We need to add the node labels:</p>
-<div class="highlight"><pre><span></span><span class="n">pyplot</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">networkx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<p>We will now add the actual data. Think carefully about how the loop indexes work here.</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
+   <span class="n">ws</span><span class="o">.</span><span class="n">cell</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="o">+</span><span class="n">i</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+   <span class="n">ws</span><span class="o">.</span><span class="n">cell</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="o">+</span><span class="n">i</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 </pre></div>
-<figure class="figure2" data-title="png"><img alt="png" src="images/07-Lab-Week-7_14_0.png"/></figure><p>This is more understandable. Note that the drawing order makes no use of the label information!</p>
-<p>We will often want to add additional information to the edges. For example, we may want to add a cost to move along an edge. <code>networkX</code> allows us to add general additional information to an edge, or node, using dictionaries.</p>
-<p>Let us create a new graph and add one node at a time:</p>
-<div class="highlight"><pre><span></span><span class="n">H</span> <span class="o">=</span> <span class="n">networkx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
-<span class="n">H</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">city</span><span class="o">=</span><span class="s1">'London'</span><span class="p">)</span>
-<span class="n">H</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">city</span><span class="o">=</span><span class="s1">'Southampton'</span><span class="p">)</span>
-<span class="n">H</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">city</span><span class="o">=</span><span class="s1">'Reading'</span><span class="p">)</span>
+<p>Finally, we will save the workbook.</p>
+<div class="highlight"><pre><span></span><span class="n">wb</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'example.xlsx'</span><span class="p">)</span>
 </pre></div>
-<p>We can now check individual nodes and see how the additional information is stored:</p>
-<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">H</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">H</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">H</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="s1">'city'</span><span class="p">])</span>
-</pre></div>
-<div class="highlight"><pre><span></span>[1, 2, 3]
-{'city': 'London'}
-Southampton
-</pre></div>
-<p>The obejct <code>H.nodes</code> acts like a dictionary. Each label (here a number) is a key, giving access to additional individual node information. This information is itself a dictionary. The <code>city</code> attribute acts as a key to this dictionary in this case.</p>
-<p>We can do similar things with edges:</p>
-<div class="highlight"><pre><span></span><span class="n">H</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">79</span><span class="p">)</span>
-<span class="n">H</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">49</span><span class="p">)</span>
-</pre></div>
-<p>Now when we plot the graph, we can add in the additional information. First we need to decide on a layout; the default is <code>spring_layout</code>. That gives us the positions of the nodes, which we use when adding the labels:</p>
-<div class="highlight"><pre><span></span><span class="n">pyplot</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">positions</span> <span class="o">=</span> <span class="n">networkx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
-<span class="n">networkx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">positions</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">edge_labels</span> <span class="o">=</span> <span class="n">networkx</span><span class="o">.</span><span class="n">get_edge_attributes</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="s1">'distance'</span><span class="p">)</span>
-<span class="n">networkx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">edge_labels</span><span class="o">=</span><span class="n">edge_labels</span><span class="p">)</span>
-<span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-<figure class="figure3" data-title="png"><img alt="png" src="images/07-Lab-Week-7_24_0.png"/></figure><p>We can use similar commands to label the nodes as well as the edges:</p>
-<div class="highlight"><pre><span></span><span class="n">pyplot</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">positions</span> <span class="o">=</span> <span class="n">networkx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
-<span class="n">networkx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">positions</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">node_labels</span> <span class="o">=</span> <span class="n">networkx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="s1">'city'</span><span class="p">)</span>
-<span class="n">edge_labels</span> <span class="o">=</span> <span class="n">networkx</span><span class="o">.</span><span class="n">get_edge_attributes</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="s1">'distance'</span><span class="p">)</span>
-<span class="n">networkx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">node_labels</span><span class="p">)</span>
-<span class="n">networkx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">edge_labels</span><span class="o">=</span><span class="n">edge_labels</span><span class="p">)</span>
-<span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-<figure class="figure4" data-title="png"><img alt="png" src="images/07-Lab-Week-7_26_0.png"/></figure><section class="section5"><h5>Exercise</h5>
-<p>The distances from Southampton to various UK locations, in miles, are (see, e.g, <a href="http://www.driving-distances.com/uk-route-planner-mileage.php">http://www.driving-distances.com/uk-route-planner-mileage.php</a>)</p>
-<table>
-<thead>
-<tr>
-<th>Location</th>
-<th>Miles</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>London</td>
-<td>79</td>
-</tr>
-<tr>
-<td>Reading</td>
-<td>47</td>
-</tr>
-<tr>
-<td>Brighton</td>
-<td>69</td>
-</tr>
-<tr>
-<td>Exeter</td>
-<td>110</td>
-</tr>
-<tr>
-<td>Salisbury</td>
-<td>23</td>
-</tr>
-<tr>
-<td>Bath</td>
-<td>64</td>
-</tr>
-</tbody>
-</table>
-<p>Construct the resulting graph.</p>
-</section></section></section></section>
+<p>We can now open this workbook and check. You should see two sheets within the workbook. The first is blank; the second contains the data from Python.</p>
+<section class="section4"><h4>Exercise</h4>
+<p>Add more columns to the workbook, plotting different functions such as <script type="math/tex">\cos^2(x)</script> or <script type="math/tex">\exp(-x)</script>. Ensure there are suitable headers. How could you use dictionaries to make this more efficient?</p>
+</section></section></section><section class="section2"><h2>Plotting in Excel</h2>
+<p>In the worksheet, highlight all the data including the header row. From the <code>Insert</code> menu, choose <code>Chart &gt; X Y (Scatter)</code>. You should see a chart with different coloured lines, and a legend at the bottom corresponding to the header row. However, there are no axis labels and no title.</p>
+<p>Select the chart by clicking on it. In the ribbon bar, left edge, select <code>Add Chart Element</code> and then <code>Axis Titles</code>. Use this to add axis labels.</p>
+<p>Try modifying the axes to be logarithmic using <code>Add Chart Element</code>, <code>Axes</code>, select one axis, and go through the options until it shows the logarithmic options. Once done, convert back to linear axes.</p>
+<p>By using <code>Ctrl</code> plus clicking (or right-clicking) on the chart, save it as a <code>png</code> file and a <code>pdf</code> file. We will need this to embed in reports.</p>
+<p>Now try modifying the data range so that only the first half of the points are plotted. By <code>Ctrl</code> clicking again, choose <code>Select Data...</code> and modify the range. Note that the <code>$</code> symbols fix the range: this will be important when talking about formulas later.</p>
+<p>Finally, some of our data sets now look roughly like straight lines. We want to add a trend line to measure their slope. In the ribbon menu, go to <code>Chart Design</code> and select <code>Add Chart Element, Trendline, Linear</code>. This should add the best fit line. Can you extract its slope? Can you annotate the plot with the slope?</p>
+</section></section>
             </div>
         </div>
     </div>
@@ -260,7 +199,7 @@ Southampton
 			</ul>
 		</div>
 		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
-		<p>This page last generated: 2022-01-25</p>
+		<p>This page last generated: 2022-03-08</p>
 	</div>
 </footer>
 		

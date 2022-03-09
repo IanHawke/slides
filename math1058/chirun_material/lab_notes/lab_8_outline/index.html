@@ -6,7 +6,7 @@
             <meta name="robots" content="noindex">
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
             <meta name="author" content="Ian Hawke" />
-            <meta name="date" content="2022-01-25" />
+            <meta name="date" content="2022-03-08" />
         
 
         <title>Lab 8 outline | Operational Research and Mathematical Computing</title>
@@ -130,155 +130,72 @@
             </div>
             <div id="content" class="col-md-9"> 
             
-            <section class="section1"><h1>Lab week 8</h1>
-<p>We have seen control flow, loops, and <code>numpy</code> arrays. Now we are going to use them on the simplex method.</p>
+            <section class="section1"><h1>Week 8</h1>
+<p>We have discussed getting data into Excel and plotting it. We need to discuss manipulating and analysing data so that it suitable for plotting.</p>
 <section class="section2"><h2>Script</h2>
-<p>Linear programming is a core part of operational research. We'll look at solving the following linear program
-<script type="math/tex; mode=display">
-\begin{array}{cccc}
-  \max & x_1    & + x_2  \\
-       & 2 x_1  & - x_2 & \le 4 \\
-       & x_1    & + 2 x_2 & \le 3
-\end{array}
-</script>
-where <script type="math/tex">x_1, x_2 \ge 0</script>. We'll code up the simplex method.</p>
-<p>Let us bring the problem to standard form by introducing slack variables <script type="math/tex">s_1, s_2 \ge 0</script> and transforming the problem into a minimization problem:</p>
-<script type="math/tex; mode=display">
-\begin{array}{cccccc}
-  \min & -x_1   & -x_2  \\
-       & 2 x_1  & - x_2   & + s_1 &       & = 4 \\
-       & x_1    & + 2 x_2 &       & + s_2 & = 3
-\end{array}
-</script>
-<p>The corresponding tableau reads:
-<script type="math/tex; mode=display">
-\left(\begin{array}{c|cccc}
-0 & -1 & -1 & 0 & 0 \\
-\hline
-4 &  2 & -1 & 1 & 0 \\
-3 &  1 &  2 & 0 & 1
-\end{array}
-\right)
-</script>
-</p>
-<p>Recall that we count rows and columns from zero here.</p>
-<p>The tableau contains the reduced cost coefficients (row <script type="math/tex">0</script>), the right-hand side (RHS) coefficients (column <script type="math/tex">0</script>, ignoring its first component), which should be kept nonnegative at all times, and the coefficients of the various constraints. To be basic feasible, a collection of its columns should form an identity matrix (which is the case here: consider columns <script type="math/tex">3,4</script>).</p>
-<p>From an algebraic perspective (slightly more abstract than the one adopted in the lectures), the simplex method performs a sequence of row operations (pivoting operations) to remove all negative numbers from the top row (row <script type="math/tex">0</script>), at each stage choosing a pivot which guarantees that the nonnegativity of the RHS coefficients (column <script type="math/tex">0</script>, ignoring is first entry, i.e., the entry in position <script type="math/tex">(0, 0)</script>) is preserved.</p>
-<p>First, we want to store the tableau. We'll do this using <code>numpy.</code></p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
-</pre></div>
-<div class="highlight"><pre><span></span><span class="n">tableau</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-                        <span class="p">[</span><span class="mi">4</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-                        <span class="p">[</span><span class="mi">3</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tableau</span><span class="p">)</span>
-</pre></div>
-<div class="highlight"><pre><span></span>[[ 0. -1. -1.  0.  0.]
- [ 4.  2. -1.  1.  0.]
- [ 3.  1.  2.  0.  1.]]
-</pre></div>
-<p>We've explicitly said that the tableau entries are floating point numbers here, as we know we'll end up with non-integer results.</p>
-<p>Note that the vector of right-hand sides has been stored in column <code>0</code>, from row <code>1</code> to row <code>2</code>. The entry in position <code>(0,0)</code> corresponds to the opposite of the objective function value.</p>
-<p>First, we inspect the row of reduced costs (row <code>0</code>).</p>
-<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
-</pre></div>
-<div class="highlight"><pre><span></span>[ 0. -1. -1.  0.  0.]
-</pre></div>
-<p>We see negative entries in columns <code>1</code> and <code>2</code>. Applying Bland's rule, we pivot on the left-most column: column <code>1</code>. As, carrying out the min ratio test, we observe <code>4/2 &lt; 3/1</code>, we select row <code>1</code>, pivoting in position <code>(1,1)</code>.</p>
-<p>First, we divide row 1 through by 2 (the entry in the pivot position):</p>
-<div class="highlight"><pre><span></span><span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">/</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tableau</span><span class="p">)</span>
-</pre></div>
-<div class="highlight"><pre><span></span>[[ 0.  -1.  -1.   0.   0. ]
- [ 2.   1.  -0.5  0.5  0. ]
- [ 3.   1.   2.   0.   1. ]]
-</pre></div>
-<p>Next, we subtract the new row <code>1</code> scaled by <code>-1</code> (the entry in position <code>(0,1)</code>) from row <code>0</code>:</p>
-<div class="highlight"><pre><span></span><span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tableau</span><span class="p">)</span>
-</pre></div>
-<div class="highlight"><pre><span></span>[[ 2.   0.  -1.5  0.5  0. ]
- [ 2.   1.  -0.5  0.5  0. ]
- [ 3.   1.   2.   0.   1. ]]
-</pre></div>
-<p>Next, we subtract the new row <code>1</code> scaled by <code>1</code> (the entry in position <code>(2,1)</code>) from row <code>2</code>:</p>
-<div class="highlight"><pre><span></span><span class="n">tableau</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tableau</span><span class="p">)</span>
-</pre></div>
-<div class="highlight"><pre><span></span>[[ 2.   0.  -1.5  0.5  0. ]
- [ 2.   1.  -0.5  0.5  0. ]
- [ 1.   0.   2.5 -0.5  1. ]]
-</pre></div>
-<p>After this, a column of the identity matrix shows up in colum <code>1</code>.
-Row <code>0</code> (the reduced costs row) still contains a negative value in column <code>2</code>. As the column contains a single positive coefficient, the minumum ratio test is not necessary. Pivoting takes place in position <code>(2,2)</code>.
-First, we divide row <code>2</code> by <code>2.5</code>:</p>
-<div class="highlight"><pre><span></span><span class="n">tableau</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span> <span class="o">/</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tableau</span><span class="p">)</span>
-</pre></div>
-<div class="highlight"><pre><span></span>[[ 2.   0.  -1.5  0.5  0. ]
- [ 2.   1.  -0.5  0.5  0. ]
- [ 0.4  0.   1.  -0.2  0.4]]
-</pre></div>
-<p>Then, we subtract the new row <code>2</code> from rows <code>0</code> and <code>1</code>, scaled by, respectively, <code>-1.5</code> and <code>-0.5</code>. We obtain:</p>
-<div class="highlight"><pre><span></span><span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span>
-<span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tableau</span><span class="p">)</span>
-</pre></div>
-<div class="highlight"><pre><span></span>[[ 2.6  0.   0.   0.2  0.6]
- [ 2.2  1.   0.   0.4  0.2]
- [ 0.4  0.   1.  -0.2  0.4]]
-</pre></div>
-<p>Since the reduce cost vector (row <code>0</code>) is now componentwise nonnegative, we have found an optimal solution. Note that, as the two columns of the identity matrix are in columns <code>1</code> (corresponding to <script type="math/tex">x_1</script>) and <code>2</code> (corresponding to <script type="math/tex">x_2</script>), we deduce <script type="math/tex">x_B = (x_1, x_2)</script>. We can read the value of both variables and the corresponding objective function value as follows (remember to flip the sign of the element in position <code>(0,0)</code> as the value in <code>(0,0)</code> is the opposite of the objective function value):</p>
-<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"z ="</span><span class="p">,</span> <span class="o">-</span><span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"x_1 ="</span><span class="p">,</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"x_2 ="</span><span class="p">,</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-</pre></div>
-<div class="highlight"><pre><span></span>z = -2.6
-x_1 = 2.2
-x_2 = 0.4
-</pre></div>
-<section class="section3"><h3>Working with parts of the tableau</h3>
-<p>To turn the steps above into a <em>general</em> function we need to find the candidate column on which we can pivot, and then the best row (out of the set of candidate rows) on which to actually pivot. This means getting a list, or array, containing the row and/or column indexes that we want to use.</p>
-<p>With <code>numpy</code> directly we can check whether something is true or false using standard logical comparison operations. For example, let us rebuild our <code>tableau</code> and check for negative cost coefficients:</p>
-<div class="highlight"><pre><span></span><span class="n">tableau</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-                        <span class="p">[</span><span class="mi">4</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-                        <span class="p">[</span><span class="mi">3</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
-</pre></div>
-<div class="highlight"><pre><span></span>[ True  True False False]
-</pre></div>
-<p>We excluded the first column, as that is the objective function, not a cost coefficient.</p>
-<p>To get the indexes, we can then use the <code>nonzero</code> function (as <code>False</code> is equivalent to <code>0</code>, this tells us the indexes where the comparison is <code>True</code>):</p>
-<div class="highlight"><pre><span></span><span class="n">negative_cost_idxs</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">tableau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">negative_cost_idxs</span><span class="p">)</span>
-</pre></div>
-<div class="highlight"><pre><span></span>[0 1]
-</pre></div>
-<p><code>nonzero</code> returns a tuple, giving us the index in each dimension of the array. As we're dealing with a 1d array we only care about the first dimension, hence the <code>[0]</code> at the end.</p>
-<p>Note that we could (should!) check that any costs are negative. If not, then we have reached optimality. We can do this by using <code>len</code> to check the number of appropriate columns.</p>
-<p>This tells us that the first and second cost coefficients are negative, and therefore are candidate columns. We can therefore choose the first of these as the column on which to pivot:</p>
-<div class="highlight"><pre><span></span><span class="n">column</span> <span class="o">=</span> <span class="n">negative_cost_idxs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
-</pre></div>
-<p>We had to add <code>1</code> in order to get the index into the <code>tableau</code>, as we had ignored the first column (as it corresponds to the objective function).</p>
-<p>We can perform similar operations to find the row on which to pivot. First, store the row indexes where the entry is positive (as this is a requirement for Bland's algorithm):</p>
-<div class="highlight"><pre><span></span><span class="n">positive_tableau_idxs</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="n">column</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">positive_tableau_idxs</span><span class="p">)</span>
-</pre></div>
-<div class="highlight"><pre><span></span>[0 1]
-</pre></div>
-<p>We can now use <code>argmin</code> to find the index with the minimum ratio, in order to do the minimum ratio test:</p>
-<div class="highlight"><pre><span></span><span class="n">ratio</span> <span class="o">=</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">tableau</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="n">column</span><span class="p">]</span>  <span class="c1"># Compute all ratios</span>
-<span class="n">row_argmin</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">ratio</span><span class="p">[</span><span class="n">positive_tableau_idxs</span><span class="p">])</span>  <span class="c1"># Only check positive entries</span>
-<span class="n">row</span> <span class="o">=</span> <span class="n">positive_tableau_idxs</span><span class="p">[</span><span class="n">row_argmin</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1"># Correct for ignoring first row</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
-</pre></div>
-<div class="highlight"><pre><span></span>1
-</pre></div>
-<section class="section5"><h5>Exercise</h5>
-<p>Turn the operations we carried out above into a function <code>simplex_method</code> which takes a basic feasible tableau as input and returns 1) the status (as a string) of the problem (either optimal or unbounded) and, for bounded problems, 2) the optimal solution value and 3) an optimal solution. It's up to you to decide what to return for unbounded problems. The method should apply Bland's rule when choosing what the pivoting pair of row and column.</p>
-<p>Remember that, given a <code>numpy</code> array <code>tableau</code>, <code>tableau.shape</code> is a list of the sizes of each dimension.</p>
-</section><section class="section5"><h5>Exercise</h5>
-<p>Check the correctness of your function by running on the problems seen in the lectures and problem classes/sheets.</p>
-</section></section></section></section>
+<section class="section3"><h3>Badly laid out data</h3>
+<p>We will use an existing dataset on which to do some calculations. Look at the dataset linked from Blackboard ("<a href="https://ndownloader.figshare.com/files/2252083">Badly laid out data</a>"), which summarizes some measurements of some observed species. This dataset has some serious problems: we will look at fixing (some of) them in the next session. For now, we take the dataset as given.</p>
+</section><section class="section3"><h3>Assignment</h3>
+<p>Excel is a front-end to a programming language. It has similarities to other languages like Python: there are fundamental types, like integers, floats, strings (but Excel adds dates as well). There are key differences:</p>
+<ul>
+<li>In Excel a <em>cell</em> is like a <em>variable</em>: it is a label, or location, that holds a value.</li>
+<li>In Excel, when a cell is associated with a calculation (a formula, or the output of a function), the it updates <em>immediately</em> when its inputs change.</li>
+</ul>
+<p>To assign a value to a cell, click in the cell and type something in. For example, on the <code>2013</code> sheet, click on cell <code>K22</code> and type <code>Hello</code>. Hit <code>Return</code>. The value will be fixed. Replace this with a number, say <code>3</code>.</p>
+<p>To assign a calculation, or formula, or function output, to a cell, we follow a similar logic. <em>As in Python</em>, assignment uses the <code>=</code> sign. So, in cell <code>K22</code> again, type <code>=K8</code>. This sets the value of cell <code>K22</code> to match that of cell <code>K8</code>. In Python language it cells the value of the variable with label <code>K22</code> to the value of the variable with label <code>K22</code>, which is <code>52</code>.</p>
+<p>The key difference in Excel can now be shown by modifying cell <code>K8</code>. Change that value to <code>1</code> by clicking on <code>K8</code>, typing <code>1</code>, and hitting <code>Return</code>. You see the value in cell <code>K8</code> change, and also the value in cell <code>K22</code>. This is different to Python, where assignment does not form a "permanent link" between the values of two variables.</p>
+</section><section class="section3"><h3>Functions and formulas</h3>
+<p>We use a similar logic to perform calculations on the data. We want to compute the sum of the weights for species <code>DO</code> collected in 2013. So, still on the <code>2013</code> sheet, we assign the value of the sum to the cell <code>K23</code>. Click on <code>K23</code>. The assignment means we need to start with an <code>=</code>. We want the sum, which in Excel is given by the function <code>SUM</code>. (Excel is not case sensitive for functions, but will convert everything to capitals). The function <code>SUM</code> takes a range of cells. As in <code>numpy</code>, this uses slicing notation <code>start:end</code>. <em>Unlike</em> <code>numpy</code>, the end point is <em>inclusive</em>. So our final command is <code>=SUM(K8:K19)</code>.</p>
+<ul>
+<li>Compute the average weight of the same data (function is <code>AVERAGE</code>).</li>
+<li>Compute the standard deviation of the same data (function is <code>STDEV</code>).</li>
+<li>Compute the sum of the weights where the weight is less than 45 (function is <code>SUMIF</code>).</li>
+<li>Compute the sum of the weights of the males in the same dataset (function is again <code>SUMIF</code> but uses all three arguments).</li>
+<li>Compute the percentage of male cases of this species (use the function <code>COUNT</code> to compute the total number of cases, and <code>COUNTIF</code> for the males).</li>
+</ul>
+<p>There are a range of other useful Excel functions for logical operations (<code>IF</code>, <code>AND</code>, <code>OR</code>), for simple (and more complex) statistics (<code>MIN</code>, <code>MAX</code>, <code>MEDIAN</code>, ...), and for linking data together (<code>VLOOKUP</code>, ...).</p>
+</section><section class="section3"><h3>Data organization</h3>
+<p>The general principles are outlined below. Look at the dataset linked from Blackboard ("<a href="https://ndownloader.figshare.com/files/2252083">Badly laid out data</a>"), which summarizes some measurements of some observed species. Think about how you could, would, or should answer some questions?</p>
+<ul>
+<li>What was the heaviest observed case?</li>
+<li>When was the heaviest male observed?</li>
+<li>How much of the data is usable?</li>
+</ul>
+<p>Once you have read through the data organization principles below, work out what the problems are with the existing spreadsheet. How would you modify, or add to, the spreadsheet to make answering these or similar questions more robust?</p>
+</section></section><section class="section2"><h2>Data organization principles</h2>
+<p>This section should follow the paper of <a href="http://www.tandfonline.com/doi/abs/10.1080/00031305.2017.1375989">Broman and Woo</a> (if the journal website is down again, and in case of subscription issues, also use the <a href="https://peerj.com/preprints/3183/">PeerJ link</a>).</p>
+<p>Communicating data via spreadsheets is easy to do, but also easy to do badly.
+By badly, we meant that it's easy for the process to lead to errors, or make it difficult for others to re-use the data.
+A range of principles can help here.</p>
+<section class="section4"><h4>Be consistent</h4>
+<p>Say what you're going to communicate, how you're going to do it, and then stick to it.</p>
+</section><section class="section4"><h4>Use good names</h4>
+<p>Think about Python variable names and use similar principles to allow re-use in other contexts.
+For example, no spaces in file or column names.
+Make sure names are meaningful.</p>
+</section><section class="section4"><h4>Write dates as YYYY-MM-DD</h4>
+<p>This is the ISO format.
+Spreadsheet software like Excel often tries to be too clever about dates, so force this form.</p>
+</section><section class="section4"><h4>Don't leave any cells empty</h4>
+<p>If there is no data, or the data for that cell was invalid in some way, say so.
+Use a standard form (NA, or NULL, or "-") to show this.
+Missing data should be clearly shown to avoid confusion.</p>
+</section><section class="section4"><h4>Put one thing in a cell</h4>
+<p>Don't try to pack too much in.
+Don't merge cells.
+Don't encode information in cell formatting (colour or font).</p>
+</section><section class="section4"><h4>Organize the data as a single rectangle</h4>
+<p>Subjects as rows.
+Variables as columns.
+One single header row.
+If the data doesn't naturally fit a rectangle, think hard before putting it in one file.
+It is likely that it will be more natural as multiple, linked files.</p>
+</section><section class="section4"><h4>Don't make calculations in data files</h4>
+<p>Sometimes when talking about files you may want to think about "sheets" in an Excel workbook.
+However, it is best to have a standalone file with just the data and link to it.
+That way, if the data changes the analysis file does not.
+Cleanly separating data from analysis reduces errors from hand-modifying the data.</p>
+</section></section></section>
             </div>
         </div>
     </div>
@@ -298,7 +215,7 @@ x_2 = 0.4
 			</ul>
 		</div>
 		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
-		<p>This page last generated: 2022-01-25</p>
+		<p>This page last generated: 2022-03-08</p>
 	</div>
 </footer>
 		
