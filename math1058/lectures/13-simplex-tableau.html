@@ -257,9 +257,11 @@
 						</p>
 
 						<aside class="notes">
-							Inverting matrices is tedious and expensive. Gaussian elimination is one systematics way of doing this, although it is better to think of it as solving a linear system than actually inverting the matrix. That is fine for our purposes, as we do not care about the inverse matrix as such, only about the reduced costs and the change in the basic form.
+							Inverting matrices is tedious and expensive. Gaussian elimination is one systematic way of doing this, although it is better to think of it as solving a linear system than actually inverting the matrix. That is fine for our purposes, as we do not care about the inverse matrix as such, only about the reduced costs and the change in the basic form.
 							<br>
 							Using the row operations, particularly pivoting, that make up the solution to Gaussian elimiation we can swap variables between the basic and non-basic set. When we pick a (row, column) pair on which to do the pivot we are setting the column to match a column of the identity matrix, and setting its reduced cost to zero. As the reduced cost is zero this means the associated variable is non-basic. By doing this operation we have switched the associated variables between the basic and non-basic sets.
+							<br>
+							It is important to remember that the pivoting operation that makes one row equal to a column of the identity can be expressed as a left multiplication by non-singular matrices - this step is proved in Linear Algebra. This ensures the new tableau corresponds to a basic solution, as the basic matrix is non-singular.
 						</aside>
 					</section>
 
@@ -540,9 +542,11 @@
 						</ul>
 
 						<aside class="notes">
-							The optimal portfolio problem is already in basic form. The reason for this is because the slack variables that we add to get the problem into standard form leave us with an identity matrix, which is trivial to invert and leaves the reduced costs being equal to the original cost vector. We also need to check that the right-hand-side vector coefficients are all positive. We can therefore directly transfer all of the coefficients into the tableau.
+							The first step is identifying the entry on which to pivot. This uses some pivoting rule, which is a choice.
 							<br>
-							It is worth emphasising that many problems are not given to us in basic form, and we have to convert them to it. We will discuss this further in the two-phase algorithm case.
+							Here we use Bland's rule, which uses the smallest subscript. First find the column of interest, which tells us which non-basic variable to use. We identify the columns with negative reduced costs, which are columns 1 and 2 (remember we count from zero). Using Bland's rule, we choose the column with smallest index, column s=1.
+							<br>
+							We then use the minimum ratio test to identify the row, corresponding to the basic variable to use. Look at all entries in row 1. Only consider positive entries, which are in rows 1 and 2. Look for the minimum ratio of the right hand side vector (in column zero) over the tableau entry (here in column 1). We see that 7/1 is less than 10/1, so we use rwo r=2.
 						</aside>
 
 					</section>
@@ -702,6 +706,13 @@
 						</ol>
 
 						<aside class="notes">
+							Having identified the pivot entry we now need to do the pivoting operation, and use row operations to change column 1 to a column of the identity.
+							<br>
+							First, divide the row by the pivot entry, so the pivot entry becomes 1. In this case nothing changes.
+							<br>
+							Next, subtract an appropriate multiple of row r containing the pivot entry from each other row. For example, row zero (containing the reduced costs and objective function) needs 0.02 times row 2 added to it.
+							<br>
+							Finally, we need to keep track of which entries are in the basis. We swapped $x_1$ (which was not in the basis, from the column index) with the second slack variable $x_4$ (which was in the basis, and was noted to the left of the second row).
 						</aside>
 
 					</section>
@@ -837,9 +848,11 @@
 						</ul>
 
 						<aside class="notes">
-							The optimal portfolio problem is already in basic form. The reason for this is because the slack variables that we add to get the problem into standard form leave us with an identity matrix, which is trivial to invert and leaves the reduced costs being equal to the original cost vector. We also need to check that the right-hand-side vector coefficients are all positive. We can therefore directly transfer all of the coefficients into the tableau.
+							We have now completed one iteration. We first check for optimality. There is a negative reduced cost entry in column three, so we have not found the optimal solution. We continue.
 							<br>
-							It is worth emphasising that many problems are not given to us in basic form, and we have to convert them to it. We will discuss this further in the two-phase algorithm case.
+							Again, we need to identify the pivot entry. There is only the one reduced cost, in column 2, so this is the only option for the choice for s for any pivoting rule that improves the objective function.
+							<br>
+							We then use the minimum ratio test. There are only two rows with positive entries, rows 1 and 3. As 3/1 is less than 5/1, the minimum ratio test gives us r=1.
 						</aside>
 
 					</section>
@@ -1005,6 +1018,13 @@
 						</ol>
 
 						<aside class="notes">
+							Having identified the pivot entry we now need to do the pivoting operation, and use row operations to change column 2 to a column of the identity.
+							<br>
+							First, divide the row by the pivot entry, so the pivot entry becomes 1. In this case nothing changes (again).
+							<br>
+							Next, subtract an appropriate multiple of row r containing the pivot entry from each other row. For example, row zero (containing the reduced costs and objective function) needs 0.03 times row 1 added to it.
+							<br>
+							Finally, we need to keep track of which entries are in the basis. We swapped $x_2$ (which was not in the basis, from the column index) with the first slack variable $x_3$ (which was in the basis, and was noted to the left of the first row).
 						</aside>
 
 					</section>
@@ -1140,9 +1160,11 @@
 						</ul>
 
 						<aside class="notes">
-							The optimal portfolio problem is already in basic form. The reason for this is because the slack variables that we add to get the problem into standard form leave us with an identity matrix, which is trivial to invert and leaves the reduced costs being equal to the original cost vector. We also need to check that the right-hand-side vector coefficients are all positive. We can therefore directly transfer all of the coefficients into the tableau.
+							We have now completed two iterations. We first check for optimality. There is a negative reduced cost entry in column four, showing that pivoting can decrease a reduced cost as well as increase them, so we have not found the optimal solution. We continue.
 							<br>
-							It is worth emphasising that many problems are not given to us in basic form, and we have to convert them to it. We will discuss this further in the two-phase algorithm case.
+							Again, we need to identify the pivot entry. There is only the one reduced cost, in column 4, so this is the only option for the choice for s for any pivoting rule that improves the objective function.
+							<br>
+							We then use the minimum ratio test. There are only two rows with positive entries, rows 2 and 3. As 2/1 is less than 7/1, the minimum ratio test gives us r=3.
 						</aside>
 
 					</section>
@@ -1320,6 +1342,13 @@
 						</ol>
 
 						<aside class="notes">
+							Having identified the pivot entry we now need to do the pivoting operation, and use row operations to change column 4 to a column of the identity.
+							<br>
+							First, divide the row by the pivot entry, so the pivot entry becomes 1. In this case nothing changes (again).
+							<br>
+							Next, subtract an appropriate multiple of row r containing the pivot entry from each other row. For example, row zero (containing the reduced costs and objective function) needs 0.01 times row 3 added to it.
+							<br>
+							Finally, we need to keep track of which entries are in the basis. We swapped $x_4$ (which was not in the basis, from the column index) with the final slack variable $x_5$ (which was in the basis, and was noted to the left of the third row).
 						</aside>
 
 					</section>
@@ -1455,6 +1484,13 @@
 						</ol>
 
 						<aside class="notes">
+							We have now done three iterations. We see that there are no non-positive reduced costs (or, all reduced costs are greater than or equal to zero). The solution is therefore optimal.
+							<br>
+							We can read the objective function off from the top-left coefficient. This tells us that the objective function is $-1/4$ for the standard form problem, which is a minimisation. However, the original optimal portfolio problem was a maximisation. To get to standard form we were optimising the negative of the objective funtion. Therefore the objective function of the original problem is best at value $1/4$, as expected.
+							<br>
+							Similarly, we can read off the optimal solution from the values of the basic solution, $(x_2, x_1, x_4) = (5, 5, 2)$. It is important to note the order. We see that one slack variable is non-zero: we cannot satisfy all constraints tightly for this problem.
+							<br>
+							None of the basic variables are non-positive. Therefore the solution is feasible (not negative) and not degenerate (not zero).
 						</aside>
 					</section>
 
