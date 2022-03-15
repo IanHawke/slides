@@ -196,163 +196,12 @@
 						</p>
 
 						<aside class="notes">
+							Here is a (somewhat random) problem in standard form. With three variables and two constraints, which are linearly independent, the problem can be solved. However, it is not at all obvious which columns should be chosen as the basic variables.
+							<br>
+							In this case we can, in fact, pick any pair. However, we will use this problem as an illustration of how to take an arbitrary problem without an obvious basic set, and to construct a basic solution which we can use to start the simplex method.
 						</aside>
 					</section>
-<!--
-					<section>
-						<h2>Optimal transport</h2>
-						<p>
-							Two boxes containing dirt; cost to move to other boxes.
-						</p>
-						<p class="fragment fade-in" data-fragment-index=1>
-							Transfer to <em>tableau form</em>:
-						</p>
-						<p class="fragment fade-in" data-fragment-index=2>
-							Where are the basic variables?
-						</p>
-						<div class="r-stack" style="position:absolute; width=1536px; top=100px;left=0px">
-							<div class="fragment fade-out" data-fragment-index=1>
-								\[
-								\begin{array}{rrlcrlcrlcrlcl}
-								\min_x      & 0 & x_1 & + & 1 & x_2 & + & 1 & x_3 & + & 0 & x_4 & & \\
-								\text{s.t.} &   & x_1 & + &   & x_2 &   &   &     &   &   &     & = & 0.3 \\
-								            &   &     &   &   &     &   &   & x_3 & + &   & x_4 & = & 0.7 \\
-								            &   & x_1 & + &   &     &   &   & x_3 &   &   &     & = & 0.6 \\
-								            &   &     &   &   & x_2 & + &   &     &   &   & x_4 & = & 0.4 \\
-								            &   & x_1 & , &   & x_2 & , &   & x_3 & , &   & x_4 & \ge & 0.
-								\end{array}
-								\]
-							</div>
-							<div class="fragment fade-in" data-fragment-index=1>
-								<table style="table-layout:fixed; width:60%">
-									<tbody>
-										<tr>
-											<td style="border-right:none; border-bottom:none; border=top:none">
-											</td>
-											<td style="border-right:none; border-bottom:1px solid black; border=top:none">
-											</td>
-											<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
-												$x_1$
-											</td>
-											<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
-												$x_2$
-											</td>
-											<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
-												$x_3$
-											</td>
-											<td style="text-align:center; border-right:none; border-bottom:1px solid black; border=top:none">
-												$x_4$
-											</td>
-										</tr>
-										<tr>
-											<td style="border-right:1px solid black; border-bottom:none; border=top:none">
-											</td>
-											<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
-												0
-											</td>
-											<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
-												0
-											</td>
-											<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
-												1
-											</td>
-											<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
-												1
-											</td>
-											<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:1px solid black">
-												0
-											</td>
-										</tr>
-										<tr>
-											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
-												??
-											</td>
-											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
-												0.3
-											</td>
-											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
-												1
-											</td>
-											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
-												1
-											</td>
-											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
-												0
-											</td>
-											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:1px solid black">
-												0
-											</td>
-										</tr>
-										<tr>
-											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
-												??
-											</td>
-											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
-												0.7
-											</td>
-											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
-												0
-											</td>
-											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
-												0
-											</td>
-											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
-												1
-											</td>
-											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
-												1
-											</td>
-										</tr>
-										<tr>
-											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
-												??
-											</td>
-											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
-												0.6
-											</td>
-											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
-												1
-											</td>
-											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
-												0
-											</td>
-											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
-												1
-											</td>
-											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
-												0
-											</td>
-										</tr>
-										<tr>
-											<td style="text-align:center; border-right:1px solid black; border-bottom:none; border=top:none">
-												??
-											</td>
-											<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
-												0.4
-											</td>
-											<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
-												0
-											</td>
-											<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
-												1
-											</td>
-											<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
-												0
-											</td>
-											<td style="text-align:center; border-right:1px solid black; border-bottom:1px solid black; border=top:none">
-												1
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
 
-						<aside class="notes">
-							The optimal transport problem was introduced in the second lecture. We wanted to move dirt from two boxes into two other boxes, but there was a cost to doing so. This problem is already in standard form. However, we see that it is not in basic form. When we translate to the tableau, there are no columns that match an identity matrix, so we cannot identify the basic set, so we cannot start the method.
-						</aside>
-					</section>
--->
 				</section>
 
 				<section id="Two phase">
@@ -375,7 +224,13 @@
 						</p>
 
 						<aside class="notes">
-
+							We have a hammer, which is the (one phase) simplex method. The question is whether we can write this new problem, of finding the starting vertex, as if it were a nail.
+							<br>
+							The trick is to note that we can start from <em>any</em> point, or any solution (with non-negative values), provided we add additional "slack" variables that encode how much the standard form constraints are violated. As we know, introducing one slack variable per constraint gives us an obvious basis. If we can write a new problem where the optimal solution guarantees that all these variables vanish, then all the constraints must be satisfied.
+							<br>
+							This gives us a two step method. We introduce a new problem with additional variables and a new objective function. We solve this using the simplex method to find an optimal solution where all the new variables vanish, so it must be basic feasible. We then transfer this basic set back to the original problem and solve using the simplex method again.
+							<br>
+							If the optimal solution of the first phase cannot be found, or its solution is not the new variables all vanishing, then this means the original problem is not feasible.
 						</aside>
 
 					</section>
@@ -413,6 +268,8 @@
 							The auxiliary problem is bigger than the original problem as we have to add an additional variable for every constraint. However, the problem is automatically in basic form, as the columns linked to these new variables are automatically in basic form. Therefore we can solve this auxiliary problem using the standard simplex method, where the initial basic solution is given by these new variables.
 							<br>
 							The solution that we want is when all of the new variables vanish. In this case the original constraints are satisfied.
+							<br>
+							Note that we can use the constraints of the auxiliary problem to solve for the new variables y (this is similar to the basic form: y is multiplied by the identity).
 						</aside>
 
 					</section>
@@ -430,6 +287,7 @@
 						</p>
 
 						<aside class="notes">
+							It is straightforward to check that the feasibility of the original problem is equivalent to the optimal solution having vanishing auxiliary variables. Note that this proof does not rely on the exact form of the vector e, as long as all entries are strictly positive.
 						</aside>
 
 					</section>
@@ -549,10 +407,14 @@
 							</tbody>
 						</table>
 
-
-
 						<aside class="notes">
+							We have the tableau form of the auxiliary problem. However, it is not yet in basic form, so we cannot apply the simplex method. The problem is that the basic variables (which we are going to choose to be the auxiliary slack variables) do not have vanishing reduced costs.
+							<br>
+							To get around this, we can use the constraints in the auxiliary problem to rewrite the new variables y in terms of b, A and x. This means the reduced costs are now only non-zero for the non-basic variables, as required. However, we note the objective function now starts from zero.
+							<br>
+							As a useful cross-check for later stages, note that if the vector e is all ones (as is conventional), then the sum of all entries in the columns corresponding to the right-hand-side b and the non-basic variables x must vanish: the terms in the reduced costs row are the sum of the other terms below.
 						</aside>
+
 					</section>
 
 					<section>
@@ -673,6 +535,11 @@
 
 
 						<aside class="notes">
+							In general, we now see how this works. We have a tableau with a basic form. We solve the auxiliary problem, as in the last lecture, to end up with the optimal solution (or we show it is unbounded, in which case the original problem cannot be solved). If the optimal solution is non-zero the original problem is infeasible; if zero, we can use the basis to solve the original problem.
+							<br>
+							However, there are some technical and conceptual issues we need to address. The technical issues are how we re-write the solution of the auxiliary problem to solve the original problem. This needs two steps. The simple one is to throw away the auxiliary information added, which is the columns corresponding to y. The less simple is to rewrite the objective function in terms of only the x variables. This needs the use of the constraints in the final tableau form, as we will show by example.
+							<br>
+							The conceptual problem is to do with the basis. What happens if, in the final solution of the auxiliary problem, there are still y terms within the basis? This can only happen if the problem is infeasible, <em>or</em> if the basic feasible solution is degenerate (so that there are zero entries in both x and y). The latter case is the only one we need care about. In that case we want to keep pivoting to switch all y variables out of the basis in terms of x variables.
 						</aside>
 					</section>
 
@@ -975,6 +842,16 @@
 							</div>
 						</div>
 
+						<aside class="notes">
+							We go back to our original problem. This is not obviously in basic form.
+							<br>
+							We first introduce the auxiliary problem by adding the slack variables y that encode how much the constraints are violated, and writing the objective function that sums these variables.
+							<br>
+							We then have to replace these new decision variables in terms of the original variables and a constant, so that the "obvious" basic variables, the new slack y variables, have zero reduced costs.
+							<br>
+							This allows us to transfer to a tableau and note that the starting basis contains just the auxiliary variables. Note the non-zero objective function to start, and that the first four columns sum to zero.
+						</aside>
+
 					</section>
 
 					<section>
@@ -1087,6 +964,12 @@
 								</tr>
 							</tbody>
 						</table>
+
+						<aside class="notes">
+							We now apply the standard one-phase simplex method to the auxiliary problem. There is only one negative reduced cost, so the column is s=2. Minimum ratio test tells us that any row would work, so Bland's rule says to pick the first, r=1.
+							<br>
+							Pivoting divides through the first row by 1, so it does not change. We then set the other entries in column 2 to zero by row operations. This switches the first slack y with the second original variable x between the basis and non-basis sets.
+						</aside>
 
 					</section>
 
@@ -1475,6 +1358,12 @@
 							</tbody>
 						</table>
 
+						<aside class="notes">
+							At this point the auxiliary problem is optimal as there are no negative reduced costs. The objective function is zero, which means the original problem is feasible. However, the constructed solution is degenerate, as the second auxiliary variable is still in the basis (with value zero).
+							<br>
+							To proceed we need to swap this auxiliary variable with some decision variable. Looking at the row, we can choose either the first or third decision variable on which to pivot, even though the entries are negative (as both variables have value zero, this will not change the objective function). Bland's rule says to choose the first, which leads to the new tableau.
+						</aside>
+
 					</section>
 
 					<section>
@@ -1584,6 +1473,11 @@
 						\end{array}
 						\]
 
+
+						<aside class="notes">
+							We now need to construct the new tableau. The crucial step will be to re-express the objective function solely in terms of the original decision variables x. To do this we read off the constraints as given at this basic feasible solution. We can do this as all the auxiliary variables are non-basic, which means they take value zero. This allows us to express the original objective function at this particular basic solution.
+						</aside>
+
 					</section>
 
 					<section>
@@ -1665,6 +1559,14 @@
 							Already optimal, degenerate; $x^* = (0, 2, 0)$, objective is $2$.
 						</p>
 
+						<aside class="notes">
+							We can now build the tableau. We take the tableau from the first phase and delete the columns related to the auxiliary variables y.
+							<br>
+							However, we now need to fill in the row with the objective function and the reduced costs. The row from the first phase is now irrelevant. We know that the entries corresponding to the basic variables must have zero reduced costs. The non-basic reduced costs and the objective function come from the final step in the first phase, where we re-expressed the objective function purely in terms of the <em>non-basic</em> x variables.
+							<br>
+							At this point we have a tableau in basic form, and we can apply the single-phase simplex method again. However, in this specific case, we can see that there are no negative reduced costs. Therefore this basic feasible solution is already optimal, and we can read off the solution immediately.
+						</aside>
+
 					</section>
 
 				</section>
@@ -1685,6 +1587,9 @@
 							</li>
 							<li>
 								Degenerate solutions make transferring between first and second phase more complex.
+							</li>
+							<li>
+								This approach of "minimising constraint violations" can be used to eg solve systems of equations, or the sorting problem.
 							</li>
 						</ul>
 					</section>
