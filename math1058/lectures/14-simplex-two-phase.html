@@ -575,6 +575,9 @@
 								Write tableau using basic solution found in phase one.
 							</li>
 						</ol>
+						<aside class="notes">
+							This highlighst the additional steps needed; note in particular the issues with degenerate solutions.
+						</aside>
 					</section>
 
 					<section>
@@ -966,9 +969,7 @@
 						</table>
 
 						<aside class="notes">
-							We now apply the standard one-phase simplex method to the auxiliary problem. There is only one negative reduced cost, so the column is s=2. Minimum ratio test tells us that any row would work, so Bland's rule says to pick the first, r=1.
-							<br>
-							Pivoting divides through the first row by 1, so it does not change. We then set the other entries in column 2 to zero by row operations. This switches the first slack y with the second original variable x between the basis and non-basis sets.
+							This allows us to transfer to a tableau and note that the starting basis contains just the auxiliary variables. Note the non-zero objective function to start, and that the first four columns sum to zero.
 						</aside>
 
 					</section>
@@ -1162,6 +1163,12 @@
 								</tr>
 							</tbody>
 						</table>
+
+						<aside class="notes">
+							We now apply the standard one-phase simplex method to the auxiliary problem. There is only one negative reduced cost, so the column is s=2. Minimum ratio test tells us that any row would work, so Bland's rule says to pick the first, r=1.
+							<br>
+							Pivoting divides through the first row by 1, so it does not change. We then set the other entries in column 2 to zero by row operations. This switches the first slack y with the second original variable x between the basis and non-basis sets.
+						</aside>
 
 					</section>
 
@@ -1475,7 +1482,7 @@
 
 
 						<aside class="notes">
-							We now need to construct the new tableau. The crucial step will be to re-express the objective function solely in terms of the original decision variables x. To do this we read off the constraints as given at this basic feasible solution. We can do this as all the auxiliary variables are non-basic, which means they take value zero. This allows us to express the original objective function at this particular basic solution.
+							We now need to construct the new tableau. The crucial step will be to re-express the objective function solely in terms of the original decision variables x. To do this we read off the constraints as given at this basic feasible solution. We can do this as all the auxiliary variables are non-basic, which means they take value zero. This allows us to express the original objective function (which was the sum of the first two decision variables) at this particular basic solution.
 						</aside>
 
 					</section>
