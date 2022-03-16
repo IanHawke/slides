@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Lecture 15</title>
+
+		<meta name="description" content="Math1058">
+		<meta name="author" content="Ian Hawke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css">
+
+
+	<style type="text/css">
+	  .reveal p {
+	    text-align: left;
+	  }
+	  .reveal ul {
+	    display: block;
+	  }
+	  .reveal ol {
+	    display: block;
+	  }
+	</style>
+
+
+
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="Title">
+
+					<section>
+						<h2 class="r-fit-text">Simplex Method costs</h2>
+						<p>
+							<ul style="list-style: none;">
+								<li> Ian Hawke
+								<li> Michael Kenna-Allison
+							</ul>
+						</p>
+
+						<aside class="notes">
+							The cost of the Simplex Method.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Simplex">
+
+					<section>
+
+						<h2>Simplex Method</h2>
+						<div style="position:absolute; width:768px; top:150px; left:0px">
+							<ul>
+								<li>
+									Solutions to linear programs at vertices.
+								</li>
+								<li>
+									Simplex method: move from one vertex to adjacent until optimal found.
+								</li>
+								<li>
+									Ingredients:
+									<ol>
+										<li>
+											How to characterize vertex algebraically? <b>Done</b>.
+										</li>
+										<li>
+											How to check vertex is optimal? <b>Done</b>.
+										</li>
+										<li>
+											How to move from vertex to better vertex? <b>Done</b>.
+										</li>
+									</ol>
+								</li>
+							</ul>
+							<p>
+								How to start? <b>Done</b>.
+							</p>
+							<p>
+								<b>How much does it cost?</b>.
+							</p>
+						</div>
+						<div style="position:absolute; width:768px; top:150px; left:768px">
+							<img style="width:768px" src="images/09_simplex_basics/lp_simplex_vertex.svg">
+						</div>
+
+						<aside class="notes">
+							We have seen how the simplex method works, and its practical implementation using the tableau form, and how to start a general problem using the two-phase approach.
+							<br>
+							Our key reason for spending so long developing the simplex method was that the brute force approach was too costly, as the complexity grows factorially. What is the cost of the simplex method?
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Code">
+
+					<section>
+						<h2>Simplex code</h2>
+						<pre class="stretch"><code class="language-python" data-trim data-noescape data-line-numbers="1-27|11-21|12" style="font-size:110%; line-height:120%">
+							def simplex(tableau, basis):
+							    M, N = tableau.shape
+							    m = M-1  # Number of constraints
+							    n = N-1  # Number of variables
+							    soln = {
+							        'result' : 'infeasible',
+							        'objective' : np.inf,
+							        'solution' : np.zeros((n,)),
+							        'basis' : basis
+							    }
+							    while np.any(tableau[0, 1:] < 0):
+							        r, s = pivot_rule(tableau)
+							        if r == 0:  # No suitable pivot: unbounded
+							            soln['result'] = 'unbounded'
+							            return soln
+							        # Pivot
+							        tableau[r, :] = tableau[r, :] / tableau[r, s]
+							        for row in range(m+1):
+							            if r != row:
+							                tableau[row, :] = tableau[row, :] - tableau[row, s] * tableau[r, :]
+							        basis[r-1] = s  # minus 1 <-> costs row
+							    # All reduced costs non-negative: optimal solution found
+							    soln['result'] = 'optimal'
+							    soln['objective'] = -tableau[0, 0]
+							    soln['solution'] = tableau[1:, 0]
+							    soln['basis'] = basis
+							    return soln
+						</code></pre>
+
+						<aside class="notes">
+							This is the code for the simplex method. At 27 lines it is not long, but neither is it easy to absorb in one go.
+							<br>
+							Split it into three blocks. Up to line 10 it is setting things up: working out how many variables and constraints there are, and putting initial values into the solution dictionary. Similarly, everything from line 22 on is taking the final, optimal, result and putting it into the solution dictionary in a nice form.
+							<br>
+							The core of the algorithm is done between lines 11 and 21. At each iteration, we first find the pivot. If this fails, the problem is unbounded. We then do the pivoting operations, swapping the basis and non-basis entries as needed.
+							<br>
+							The actual pivoting rule has been abstracted out to another function, as it is a choice. Let us look at that first.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Bland's rule code</h2>
+						<pre class="stretch"><code class="language-python" data-trim data-noescape data-line-numbers="1-18|6-8|13-17" style="font-size:140%; line-height:140%">
+def pivot_rule(tableau):
+    M, N = tableau.shape
+    m = M-1  # Number of constraints
+    n = N-1  # Number of variables
+    # Bland's rule: find first negative reduced cost
+    s = 1
+    while tableau[0, s] >= 0:
+        s = s + 1
+    # Minimum ratio test plus Bland's rule:
+    # find the (first) row i minimizing b_i / a_{is}, a_{is} > 0
+    r = 0
+    theta_star = np.inf
+    for i in range(1, m+1):
+        if tableau[i, s] > 0:
+            if tableau[i, 0] / tableau[i, s] < theta_star:
+                r = i
+                theta_star = tableau[i, 0] / tableau[i, s]
+    return r, s
+						</code></pre>
+
+						<aside class="notes">
+							Here we are only considering Bland's rule, which uses the smallest subscript when needed. This is less than 20 lines of code, and again the first few are setting up.
+							<br>
+							Lines 6 through 8 find the pivot column by finding the first column with negative reduced costs. There are many ways of doing this - here a <code>while</code> loop is used for simplicity. This has complexity at worst n, where n is the number of variables (because we have to perform order 1 checks on each column, of which there are order n).
+							<br>
+							Lines 11 through 17 then find the pivot row. This uses the minimum ratio test, picking the first in case there is a tie. The complexity depends on the loop on lines 13 through 17. This runs over order m rows, and performs order 1 assignment and comparison operations each time through the loop.
+							<br>
+							As there are always more variables than constraints, we see the complexity of Bland's rule is order n.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Simplex complexity</h2>
+
+						<div style="position:absolute; width:468px; top:150px; left:0px">
+							<ul>
+								<li class="fragment" data-fragment-index=1>
+									Find pivot:
+									\[ \mathcal{O}(n); \]
+								</li>
+								<li class="fragment" data-fragment-index=2>
+									Scale row:
+									\[ \mathcal{O}(n); \]
+								</li>
+								<li class="fragment" data-fragment-index=3>
+									Set zeros:
+									\[ \mathcal{O}(m n); \]
+								</li>
+								<li class="fragment" data-fragment-index=4>
+									Swap is $\mathcal{O}(1)$, so total
+									\[ \mathcal{O}(m n). \]
+								</li>
+							</ul>
+						</div>
+						<div style="position:absolute; width:1168px; top:150px; left:468px" class="r-stack">
+							<pre class="stretch"><code class="language-python" data-trim data-noescape data-line-numbers="1-15" style="font-size:130%; line-height:140%">
+								def simplex(tableau, basis):
+								    ...
+										while np.any(tableau[0, 1:] < 0):
+												r, s = pivot_rule(tableau)
+												if r == 0:  # No suitable pivot
+														soln['result'] = 'unbounded'
+														return soln
+												# Pivot
+												tableau[r, :] = tableau[r, :] / tableau[r, s]
+												for row in range(m+1):
+														if r != row:
+																tableau[row, :] = (tableau[row, :] -
+																   tableau[row, s] * tableau[r, :])
+												basis[r-1] = s  # minus 1 <-> costs row
+										...
+							</code></pre>
+							<pre class="stretch fragment" data-fragment-index=1><code class="language-python" data-trim data-noescape data-line-numbers="4" style="font-size:130%; line-height:140%">
+								def simplex(tableau, basis):
+								    ...
+										while np.any(tableau[0, 1:] < 0):
+												r, s = pivot_rule(tableau)
+												if r == 0:  # No suitable pivot
+														soln['result'] = 'unbounded'
+														return soln
+												# Pivot
+												tableau[r, :] = tableau[r, :] / tableau[r, s]
+												for row in range(m+1):
+														if r != row:
+																tableau[row, :] = (tableau[row, :] -
+																   tableau[row, s] * tableau[r, :])
+												basis[r-1] = s  # minus 1 <-> costs row
+										...
+							</code></pre>
+							<pre class="stretch fragment" data-fragment-index=2><code class="language-python" data-trim data-noescape data-line-numbers="9" style="font-size:130%; line-height:140%">
+								def simplex(tableau, basis):
+								    ...
+										while np.any(tableau[0, 1:] < 0):
+												r, s = pivot_rule(tableau)
+												if r == 0:  # No suitable pivot
+														soln['result'] = 'unbounded'
+														return soln
+												# Pivot
+												tableau[r, :] = tableau[r, :] / tableau[r, s]
+												for row in range(m+1):
+														if r != row:
+																tableau[row, :] = (tableau[row, :] -
+																   tableau[row, s] * tableau[r, :])
+												basis[r-1] = s  # minus 1 <-> costs row
+										...
+							</code></pre>
+							<pre class="stretch fragment" data-fragment-index=3><code class="language-python" data-trim data-noescape data-line-numbers="10-13" style="font-size:130%; line-height:140%">
+								def simplex(tableau, basis):
+								    ...
+										while np.any(tableau[0, 1:] < 0):
+												r, s = pivot_rule(tableau)
+												if r == 0:  # No suitable pivot
+														soln['result'] = 'unbounded'
+														return soln
+												# Pivot
+												tableau[r, :] = tableau[r, :] / tableau[r, s]
+												for row in range(m+1):
+														if r != row:
+																tableau[row, :] = (tableau[row, :] -
+																   tableau[row, s] * tableau[r, :])
+												basis[r-1] = s  # minus 1 <-> costs row
+										...
+							</code></pre>
+							<pre class="stretch fragment" data-fragment-index=3><code class="language-python" data-trim data-noescape data-line-numbers="14" style="font-size:130%; line-height:140%">
+								def simplex(tableau, basis):
+								    ...
+										while np.any(tableau[0, 1:] < 0):
+												r, s = pivot_rule(tableau)
+												if r == 0:  # No suitable pivot
+														soln['result'] = 'unbounded'
+														return soln
+												# Pivot
+												tableau[r, :] = tableau[r, :] / tableau[r, s]
+												for row in range(m+1):
+														if r != row:
+																tableau[row, :] = (tableau[row, :] -
+																   tableau[row, s] * tableau[r, :])
+												basis[r-1] = s  # minus 1 <-> costs row
+										...
+							</code></pre>
+						</div>
+
+						<aside class="notes">
+							Now we know that Bland's rule is order n. We need to check the rest of the simplex loop.
+							<br>
+							The rest of the method is about the pivoting operation. Scaling the row is also order n. Setting all the other entries in the column to zero is order m times n, as we need to perform operations on the whole row. Swap the elements between the basis and non-basis sets is order one. So the total cost is set by the row operations, and will be order m times n.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Vertices visited</h2>
+
+						<div style="position:absolute; width:468px; top:150px; left:0px">
+							<p>Total cost $\mathcal{O}(m n)$ per vertex visited.</p>
+							<p class="fragment">There are $\mathcal{O}(n!)$ vertices.</p>
+							<p class="fragment">Do cases exist where all vertices are visited?</p>
+						</div>
+						<div style="position:absolute; width:1168px; top:150px; left:468px" class="r-stack">
+							<pre class="stretch"><code class="language-python" data-trim data-noescape data-line-numbers="3" style="font-size:130%; line-height:140%">
+								def simplex(tableau, basis):
+								    ...
+										while np.any(tableau[0, 1:] < 0):
+												r, s = pivot_rule(tableau)
+												if r == 0:  # No suitable pivot
+														soln['result'] = 'unbounded'
+														return soln
+												# Pivot
+												tableau[r, :] = tableau[r, :] / tableau[r, s]
+												for row in range(m+1):
+														if r != row:
+																tableau[row, :] = (tableau[row, :] -
+																   tableau[row, s] * tableau[r, :])
+												basis[r-1] = s  # minus 1 <-> costs row
+										...
+							</code></pre>
+						</div>
+					</section>
+
+				</section>
+
+				<section id="Summary">
+					<section>
+						<h1>Summary</h1>
+
+						<ul>
+							<li>
+								Two phase simplex method finds a starting vertex.
+							</li>
+							<li>
+								First phase solves a related linear program.
+							</li>
+							<li>
+								First phase fails only if problem infeasible.
+							</li>
+							<li>
+								Degenerate solutions make transferring between first and second phase more complex.
+							</li>
+							<li>
+								This approach of "minimising constraint violations" can be used to eg solve systems of equations, or the sorting problem.
+							</li>
+						</ul>
+					</section>
+				</section>
+
+			</div>
+
+		</div>
+
+
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/zoom/zoom.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/search/search.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../reveal.js/plugin/math/math.js"></script>
+		<script src="../reveal.js/plugin/spotlight/spotlight.js"></script>
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				width: 1536,
+			  height: 960,
+			  margin: 0.04,
+				controls: false,
+				progress: true,
+				center: true,
+				hash: true,
+				transition: 'none',
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath.KaTeX, RevealSpotlight ],
+				spotlight: {
+					presentingCursor: 'default',
+				}
+			});
+
+		</script>
+
+
+	</body>
+</html>
