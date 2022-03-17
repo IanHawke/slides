@@ -338,6 +338,22 @@ def pivot_rule(tableau):
 						</div>
 					</section>
 
+					<section>
+						<h2>Klee-Minty cube</h2>
+						<div style="position:absolute; width:768px; top:150px; left:0px">
+							\[
+							\begin{array}{crlcccccrlr}
+							\max_x &&&& x_d &&&&&& \\
+							\text{s.t.} & \epsilon & \le & x_1 & \le & 1 & - & \epsilon &&&& \\
+							& \epsilon & x_j & \le & x_{j+1} & \le & 1 & - & \epsilon & x_j & j \in \{ 1, \dots, d-1 \}.
+							\end{array}
+							\]
+						</div>
+						<div style="position:absolute; width:768px; top:150px; left:768px">
+							<img style="width:768px" src="images/15_costs/lp_klee_minty_cube.svg">
+						</div>
+					</section>
+
 				</section>
 
 				<section id="Summary">
