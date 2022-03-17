@@ -340,20 +340,76 @@ def pivot_rule(tableau):
 
 					<section>
 						<h2>Klee-Minty cube</h2>
-						<div style="position:absolute; width:768px; top:150px; left:0px">
+						<div style="position:absolute; width:868px; top:150px; left:0px">
 							\[
-							\begin{array}{crlcccccrlr}
-							\max_x &&&& x_d &&&&&& \\
-							\text{s.t.} & \epsilon & \le & x_1 & \le & 1 & - & \epsilon &&&& \\
-							& \epsilon & x_j & \le & x_{j+1} & \le & 1 & - & \epsilon & x_j & j \in \{ 1, \dots, d-1 \}.
+							\begin{array}{crccclr}
+							\max_x &&& x_d &&& \\
+							\text{s.t.} & \epsilon & \le & x_1 & \le & 1 - \epsilon && \\
+							& \epsilon x_j & \le & x_{j+1} & \le & 1 - \epsilon x_j \\
+							&&& j & \in & \{ 1, \dots, d-1 \}.
 							\end{array}
 							\]
+							<ul>
+								<li>
+									Two constraints per dimension - "hypercube";
+								</li>
+								<li>
+									Hypercube -  $2^d$ vertices;
+								</li>
+								<li>
+									Order path so that all are visited.
+								</li>
+							</ul>
 						</div>
-						<div style="position:absolute; width:768px; top:150px; left:768px">
-							<img style="width:768px" src="images/15_costs/lp_klee_minty_cube.svg">
+						<div style="position:absolute; width:568px; top:150px; left:968px">
+							<img style="width:668px" src="images/15_costs/lp_klee_minty_cube.svg">
 						</div>
 					</section>
 
+					<aside class="notes">
+						Klee and Minty constructed a proof that can extend to many pivoting rules for the simplex method. The idea is to construct the objective function so that every point is visited in a specific order. We then choose the initial basis so that the starting point is ensures we go through every point.
+						<br>
+						In this specific example any sufficiently small epsilon will do.
+						<br>
+						The existence of this pathological case means the worst case complexity of simplex makes it intractable. So why have we spent so much time on it?
+					</aside>
+
+				</section>
+
+				<section>
+					<h2>Average costs</h2>
+
+					<div style="position:absolute; width:668px; top:150px; left:0px">
+						<p>
+							Measure costs by running random problems.
+						</p>
+						<ul>
+							<li>
+								Fixed number of variables:
+								\[
+								\text{Cost} = \mathcal{O}(m);
+								\]
+							</li>
+							<li>
+								Fixed number of constraints:
+								\[
+								\text{Cost} = \mathcal{O}(\log(n));
+								\]
+							</li>
+							<li>
+								Simplex is tractable.
+							</li>
+						</ul>
+					</div>
+					<div style="position:absolute; width:868px; top:150px; left:668px">
+						<img style="width:868px" src="images/15_costs/lp_simplex_ave_cost_m.svg">
+					</div>
+
+					<aside class="notes">
+						The question is how often do these pathological cases occur. The answer seems to be - not too often.
+						<br>
+						To check this, we randomly generate feasible linear problems. We then apply the simplex method to these problems. We have two parameters controlling the instance size. We first fix the number of variables and vary the number of constraints.
+					</aside>
 				</section>
 
 				<section id="Summary">
@@ -362,19 +418,16 @@ def pivot_rule(tableau):
 
 						<ul>
 							<li>
-								Two phase simplex method finds a starting vertex.
+								Bland's rule is cheap.
 							</li>
 							<li>
-								First phase solves a related linear program.
+								Simplex cost depends on number of vertices visited.
 							</li>
 							<li>
-								First phase fails only if problem infeasible.
+								Pathological cases exist where $\sim 2^n$ vertices visited.
 							</li>
 							<li>
-								Degenerate solutions make transferring between first and second phase more complex.
-							</li>
-							<li>
-								This approach of "minimising constraint violations" can be used to eg solve systems of equations, or the sorting problem.
+								Average cost is $\mathcal{O}(m \log(n))$.
 							</li>
 						</ul>
 					</section>
