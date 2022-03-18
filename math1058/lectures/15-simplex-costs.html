@@ -343,10 +343,10 @@ def pivot_rule(tableau):
 						<div style="position:absolute; width:868px; top:150px; left:0px">
 							\[
 							\begin{array}{crccclr}
-							\max_x &&& x_d &&& \\
+							\max_x &&& x_n &&& \\
 							\text{s.t.} & \epsilon & \le & x_1 & \le & 1 - \epsilon && \\
 							& \epsilon x_j & \le & x_{j+1} & \le & 1 - \epsilon x_j \\
-							&&& j & \in & \{ 1, \dots, d-1 \}.
+							&&& j & \in & \{ 1, \dots, n-1 \}.
 							\end{array}
 							\]
 							<ul>
@@ -354,7 +354,7 @@ def pivot_rule(tableau):
 									Two constraints per dimension - "hypercube";
 								</li>
 								<li>
-									Hypercube -  $2^d$ vertices;
+									Hypercube -  $2^n$ vertices;
 								</li>
 								<li>
 									Order path so that all are visited.
