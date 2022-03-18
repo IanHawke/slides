@@ -380,40 +380,43 @@ def pivot_rule(tableau):
 
 				</section>
 
-				<section>
-					<h2>Average costs</h2>
+				<section id="Average cost">
 
-					<div style="position:absolute; width:668px; top:150px; left:0px">
-						<p>
-							Measure costs by running random problems.
-						</p>
-						<ul>
-							<li>
-								Fixed number of variables:
-								\[
-								\text{Cost} = \mathcal{O}(m);
-								\]
-							</li>
-							<li>
-								Fixed number of constraints:
-								\[
-								\text{Cost} = \mathcal{O}(\log(n));
-								\]
-							</li>
-							<li>
-								Simplex is tractable.
-							</li>
-						</ul>
-					</div>
-					<div style="position:absolute; width:868px; top:150px; left:668px">
-						<img style="width:868px" src="images/15_costs/lp_simplex_ave_cost_m.svg">
-					</div>
+					<section>
+						<h2>Average costs</h2>
 
-					<aside class="notes">
-						The question is how often do these pathological cases occur. The answer seems to be - not too often.
-						<br>
-						To check this, we randomly generate feasible linear problems. We then apply the simplex method to these problems. We have two parameters controlling the instance size. We first fix the number of variables and vary the number of constraints.
-					</aside>
+						<div style="position:absolute; width:668px; top:150px; left:0px">
+							<p>
+								Measure costs by running random problems.
+							</p>
+							<ul>
+								<li>
+									Fixed number of variables:
+									\[
+									\text{Cost} = \mathcal{O}(m);
+									\]
+								</li>
+								<li>
+									Fixed number of constraints:
+									\[
+									\text{Cost} = \mathcal{O}(\log(n));
+									\]
+								</li>
+								<li>
+									Simplex is tractable.
+								</li>
+							</ul>
+						</div>
+						<div style="position:absolute; width:868px; top:150px; left:668px">
+							<img style="width:868px" src="images/15_costs/lp_simplex_ave_cost_m.svg">
+						</div>
+
+						<aside class="notes">
+							The question is how often do these pathological cases occur. The answer seems to be - not too often.
+							<br>
+							To check this, we randomly generate feasible linear problems. We then apply the simplex method to these problems. We have two parameters controlling the instance size. We first fix the number of variables and vary the number of constraints.
+						</aside>
+					</section>
 				</section>
 
 				<section id="Summary">
