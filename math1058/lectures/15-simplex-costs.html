@@ -283,7 +283,7 @@ def pivot_rule(tableau):
 												basis[r-1] = s  # minus 1 <-> costs row
 										...
 							</code></pre>
-							<pre class="stretch fragment" data-fragment-index=3><code class="language-python" data-trim data-noescape data-line-numbers="14" style="font-size:130%; line-height:140%">
+							<pre class="stretch fragment" data-fragment-index=4><code class="language-python" data-trim data-noescape data-line-numbers="14" style="font-size:130%; line-height:140%">
 								def simplex(tableau, basis):
 								    ...
 										while np.any(tableau[0, 1:] < 0):
