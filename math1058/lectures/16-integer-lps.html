@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Lecture 16</title>
+
+		<meta name="description" content="Math1058">
+		<meta name="author" content="Ian Hawke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css">
+
+
+	<style type="text/css">
+	  .reveal p {
+	    text-align: left;
+	  }
+	  .reveal ul {
+	    display: block;
+	  }
+	  .reveal ol {
+	    display: block;
+	  }
+	</style>
+
+
+
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="Title">
+
+					<section>
+						<h2 class="r-fit-text">Integer Linear Programs</h2>
+						<p>
+							<ul style="list-style: none;">
+								<li> Ian Hawke
+								<li> Michael Kenna-Allison
+							</ul>
+						</p>
+
+						<aside class="notes">
+							Integer problems are harder
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Introduction">
+
+					<section>
+
+						<h2>Integer problems</h2>
+						<p>
+							Problems considered so far:
+						</p>
+						<ul>
+							<li>
+								Sheet 0, shoe factory.
+							</li>
+							<li>
+								Sheet 1, glass company.
+							</li>
+							<li>
+								Sheet 2, airline crew.
+							</li>
+							<li>
+								Sheet 3, instrument production.
+							</li>
+							<li>
+								Sheet 4, sorting.
+							</li>
+							<li>
+								Sheet 5, Nurse roster.
+							</li>
+						</ul>
+						<p>
+							<em>Every</em> problem here can be restricted to integers.
+						</p>
+
+						<aside class="notes">
+							The formulation problems seen in the problem classes often involve decision variables that cannot be real: a saleable object that only has value if complete, or the assignment of a person to a task (where a fraction of their itme makes no sense), or similar cases.
+							<br>
+							Usually we think of integer problems as easier than those on the reals (or on the complex numbers). It is a frustrating reality that often problems on restricted, disconnected fields like the integers are in fact much harder to solve.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Formulation">
+
+					<section>
+						<h2>The problem</h2>
+						\[
+						\begin{array}{rcrcl}
+						\min_x & \quad & c x && \\
+						\text{subject to} & & A x & = & b \\
+						& & x & \ge & 0.
+						\end{array}
+						\]
+						<p>
+							Here $x \in \color{red}{\mathbb{Z}^n}$. Also $A, b, c$ are rational.
+						</p>
+						<p class="fragment">
+							The <em>binary</em> linear program restricts $x \in \{0, 1\}^n$. Allows for yes/no or true/false decisions.
+						</p>
+
+						<aside class="notes">
+							The displayed equation that describes the problem is <em>identical</em> to the cases that we have considered so far. The only difference is the restrictions in the text after, where the decision variables are restricted to live in the integers. In order for this to make sense we can restrict all the other coefficients in the problem to be rational numbers. Even if they were real, in order for the solution to be integer we must be able to scale out by a common real factor to leave rational numbers.
+							<br>
+							There is a further useful restriction, which is to the <em>binary</em> linear program case. Here we restrict the decision variables to take only two values. In principle those two values could be anything, but conventionally they are one and zero. However, these typically represent yes/no decisions, or true/false values, or similar pairs.
+							<br>
+							In general we can mix real, integer, and binary decision variables within a problem. However, the key mathematical issues can be seen by considering just a single set of variables, which is where we start.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Relaxation">
+					<section>
+						<h2>Relaxation</h2>
+
+						<div style="position:absolute; width:768px; top:150px; left:0px">
+							<ul>
+								<li>
+									Solution restricted to integer lattice.
+								</li>
+								<li>
+									Feasible region the same.
+								</li>
+								<li>
+									Optimal solution not at vertex.
+								</li>
+								<li>
+									Fundamental theorem fails.
+								</li>
+								<li class="fragment">
+									Relaxation:
+									<ul>
+										<li>
+											relax restriction $x \in \mathbb{Z}^n \to x \in \mathbb{R}^n$;
+										</li>
+										<li>
+											solve standard problem;
+										</li>
+										<li>
+											look at neighbours on lattice.
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+						<div style="position:absolute; width:768px; top:150px; left:768px">
+							<img style="width:868px" src="images/16_ilps/ilp_lattice.svg">
+						</div>
+
+						<aside class="notes">
+						</aside>
+					</section>
+				</section>
+
+				<section id="Summary">
+					<section>
+						<h1>Summary</h1>
+
+						<ul>
+							<li>
+								Bland's rule is cheap.
+							</li>
+							<li>
+								Simplex cost depends on number of vertices visited.
+							</li>
+							<li>
+								Pathological cases exist where $\sim 2^n$ vertices visited.
+							</li>
+							<li>
+								Average cost is $\mathcal{O}(m \log(n))$.
+							</li>
+						</ul>
+					</section>
+				</section>
+
+			</div>
+
+		</div>
+
+
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/zoom/zoom.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/search/search.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../reveal.js/plugin/math/math.js"></script>
+		<script src="../reveal.js/plugin/spotlight/spotlight.js"></script>
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				width: 1536,
+			  height: 960,
+			  margin: 0.04,
+				controls: false,
+				progress: true,
+				center: true,
+				hash: true,
+				transition: 'none',
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath.KaTeX, RevealSpotlight ],
+				spotlight: {
+					presentingCursor: 'default',
+				}
+			});
+
+		</script>
+
+
+	</body>
+</html>
