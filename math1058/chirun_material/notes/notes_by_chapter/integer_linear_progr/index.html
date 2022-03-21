@@ -6,7 +6,7 @@
             <meta name="robots" content="noindex">
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
             <meta name="author" content="Ian Hawke" />
-            <meta name="date" content="2022-01-20" />
+            <meta name="date" content="2022-03-21" />
         
 
         <title>Integer Linear Programming | Operational Research and Mathematical Computing</title>
@@ -134,7 +134,7 @@
 <p>
 So far we have considered linear programs of the form 
 </p>
-<div class="eqn" id="a0000001467">
+<div class="eqn" id="a0000000518">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl} \min &  c x & & \\ \text{subject to} &  A x &  \ge &  b \\ &  x &  \ge &  0 \\ &  x &  \in &  \mathbb {R}^ n. \end{array}\tag{5.1}\end{equation}</script>
 </div>
 <p>
@@ -143,23 +143,23 @@ So far we have considered linear programs of the form
 <p>
 There are a lot of applications where this does not make perfect sense. There are many situations where talking about half a person, or a third of a car, or similar, is meaningless. In these cases we instead need to consider the <em>integer linear program</em>
 </p>
-<div class="eqn" id="a0000001468">
+<div class="eqn" id="a0000000519">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl} \min &  c x & & \\ \text{subject to} &  A x &  \ge &  b \\ &  x &  \ge &  0 \\ &  x &  \in &  \mathbb {Z}^ n, \end{array}\tag{5.2}\end{equation}</script>
 </div>
 <p>
  where <script type="math/tex">A \in \mathbb {Q}^{m \times n}, b \in \mathbb {Q}^ m, c, x \in \mathbb {Q}^ n</script> are now matrices and vectors in the appropriate <em>rational</em> spaces. 
 </p>
 <p>
-Another special case is where we have to make yes/no or true/false decisions. For this weconsider the <em>integer linear program</em>
+Another special case is where we have to make yes/no or true/false decisions. For this we consider the <em>integer linear program</em>
 </p>
-<div class="eqn" id="a0000001469">
+<div class="eqn" id="a0000000520">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl} \min &  c x & & \\ \text{subject to} &  A x &  \ge &  b \\ &  x &  \ge &  0 \\ &  x &  \in &  \{  0, 1 \} ^ n, \end{array}\tag{5.3}\end{equation}</script>
 </div>
 <p>
  where again <script type="math/tex">A \in \mathbb {Q}^{m \times n}, b \in \mathbb {Q}^ m, c \in \mathbb {Q}^ n</script> are now matrices and vectors in the appropriate <em>rational</em> spaces. 
 </p>
 <section class="section">
-<h2 id="a0000001470">5.1 Optimal solutions</h2>
+<h2 id="a0000000521">5.1 Optimal solutions</h2>
 <p>
 The feasible region of an integer linear program is not a polyhedron. It is instead the intersection of a polyhedron with a lattice, where the lattice is a grid of integer points. This immediately implies that, in general, an integer linear program cannot be solved by the simplex method (as the “vertices” need not be optimal). This is illustrated in figure <a class="ref" href="../../../notes/notes_by_chapter/integer_linear_progr/index.html#fig:ilp:lattice">5.1</a>. 
 </p>
@@ -193,13 +193,13 @@ Unfortunately, solutions of the relaxation problem can be a long way from the op
 Typical methods for solving integer problems do use the simplex method to solve linear programs, typically applied to many pieces of the feasible region individually (later courses will cover this). The simplex method remains a key building block. 
 </p>
 </section><section class="section">
-<h2 id="a0000001471">5.2 Total unimodularity</h2>
+<h2 id="a0000000522">5.2 Total unimodularity</h2>
 <section class="subsection">
-<h3 id="a0000001472">5.2.1 When relaxation works</h3>
+<h3 id="a0000000523">5.2.1 When relaxation works</h3>
 <p>
 There are, however, problems where the relaxation problem works. Consider the problem 
 </p>
-<div class="eqn" id="a0000001473">
+<div class="eqn" id="a0000000524">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl} \min &  c x & & \\ \text{subject to} &  A x &  = &  b \\ &  x &  \ge &  0 \\ &  x &  \in &  \mathbb {Z}^ n, \end{array}\tag{5.4}\end{equation}</script>
 </div>
 <p>
@@ -208,19 +208,19 @@ There are, however, problems where the relaxation problem works. Consider the pr
 <p>
 Consider the relaxation problem where all restrictions are dropped. For any optimal (basic) solution of the relaxation problem we have 
 </p>
-<div class="eqn" id="a0000001474">
+<div class="eqn" id="a0000000525">
 <script type="math/tex; mode=display">\begin{equation}x_ B = A_ B^{-1} b, \quad x_ N = 0.\tag{5.5}\end{equation}</script>
 </div>
 <p>
  We have that <script type="math/tex">b</script> is integer. If <script type="math/tex">A_ B^{-1}</script> is also integer it follows that <script type="math/tex">x_ B</script> is integer. Therefore the solution to the linear program is also a solution to the <em>integer</em> linear program, and the simplex method will work. 
 </p>
 </section><section class="subsection">
-<h3 id="a0000001475">5.2.2 Total unimodularity</h3>
+<h3 id="a0000000526">5.2.2 Total unimodularity</h3>
 <p>
 We want some criteria that checks when the inverse of a matrix is integer, without having to compute it and enumerate the entries. We say that a matrix <script type="math/tex">A \in \mathbb {R}^{m \times n}</script> is called <em>total unimodular</em> if the determinant of all its square submatrices takes values in <script type="math/tex">\{ -1, 0, 1\} </script>. 
 </p>
 <p>
-<div class="thmwrapper thm_thmwrapper" id="a0000001476">
+<div class="thmwrapper thm_thmwrapper" id="a0000000527">
 <div class="thmheading thm_thmheading">
 <span class="thmcaption thm_thmcaption">
     Theorem
@@ -234,7 +234,7 @@ If <script type="math/tex">A</script> is total unimodular then <script type="mat
 </div>
 </div>
 </p>
-<div class="proof_wrapper" id="a0000001477">
+<div class="proof_wrapper" id="a0000000528">
 <div class="proof_heading">
 <span class="proof_caption">
     Proof.
@@ -244,7 +244,7 @@ If <script type="math/tex">A</script> is total unimodular then <script type="mat
 <p>
 The inverse of <script type="math/tex">A_ B</script> can be written as 
 </p>
-<div class="eqn" id="a0000001478">
+<div class="eqn" id="a0000000529">
 <script type="math/tex; mode=display">\begin{equation}A_ B^{-1} = \frac{1}{\det (A_ B)} \begin{pmatrix}  \alpha _{1 B_1} 
 
 &  \dots 
@@ -298,7 +298,7 @@ It is possible to frame the shortest path problem as an integer linear program, 
 			</ul>
 		</div>
 		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
-		<p>This page last generated: 2022-01-20</p>
+		<p>This page last generated: 2022-03-21</p>
 	</div>
 </footer>
 		
