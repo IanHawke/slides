@@ -6,7 +6,7 @@
             <meta name="robots" content="noindex">
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
             <meta name="author" content="Ian Hawke" />
-            <meta name="date" content="2022-01-20" />
+            <meta name="date" content="2022-03-22" />
         
 
         <title>Course Notes | Operational Research and Mathematical Computing</title>
@@ -147,8 +147,8 @@ The second is the <em>shortest path problem</em>. We want to travel between two 
 <p>
 These notes will give the minimum expected material for this course. They are mainly here to develop the theory and the analysis. For (much) more detail see the books 
 </p>
-<ol class="enumerate" id="a0000000003" style="list-style: none">
-<li id="a0000000004" value="1">
+<ol class="enumerate" id="a0000000002" style="list-style: none">
+<li id="a0000000003" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		1.
 	</span>
@@ -156,7 +156,7 @@ These notes will give the minimum expected material for this course. They are ma
 <em>Operations Research</em>, Winston, QA264.2 WIN. 
 </p>
 </li>
-<li id="a0000000005" value="2">
+<li id="a0000000004" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		2.
 	</span>
@@ -346,13 +346,13 @@ We will now abstract away the details to construct a problem to solve.
 <p>
 The variables we care about are the number of servings of each food stuff. We denote these <script type="math/tex">x_ B, x_ M, x_ E</script> for the number of servings of bread, milk, and eggs respectively. These are real numbers (we can eat a fraction of a serving), but cannot be negative (we cannot eat a negative amount of food). Hence 
 </p>
-<div class="eqn" id="a0000000006">
+<div class="eqn" id="a0000000005">
 <script type="math/tex; mode=display">\begin{equation}x_ B, x_ M, x_ E \ge 0.\tag{2.1}\end{equation}</script>
 </div>
 <p>
 The total cost of the diet is the sum of the unit costs multiplied by the number of servings in the diet. This is the <em>objective function</em> that we want to minimise. Hence 
 </p>
-<div class="eqn" id="a0000000007">
+<div class="eqn" id="a0000000006">
 <script type="math/tex; mode=display">\begin{equation}\min 2.5 x_ B + 1.2 x_ M + 0.8 x_ E\tag{2.2}\end{equation}</script>
 </div>
 <p>
@@ -361,13 +361,13 @@ The total cost of the diet is the sum of the unit costs multiplied by the number
 <p>
 Finally, we have the constraints, which are the nutritional needs for the diet. Each separate nutrient gets its own equation. The total amount of each nutrient in the diet is the amount of nutrients per unit serving multiplied by the number of servings. Therefore the constraints are 
 </p>
-<div class="eqn" id="a0000000008">
+<div class="eqn" id="a0000000007">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{rcrcrcl@{\quad }l} 300 x_ B & +&  30 x_ M & +&  20 x_ E & \ge &  300 &  \text{: minimum carbs}, \\ 5 x_ B & +&  50 x_ M & +&  90 x_ E & \ge &  600 &  \text{: minimum proteins}, \\ 0.07 x_ B & +&  0.02 x_ M & +&  0.12 x_ E & \ge &  1 &  \text{: minimum vitamins}. \end{array}\tag{2.3}\end{equation}</script>
 </div>
 <p>
 Typically the mathematical problem is summarized as 
 </p>
-<div class="eqn" id="a0000000009">
+<div class="eqn" id="a0000000008">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcrcrcl} \min &  2.5 x_ B & +&  1.2 x_ M & +&  0.8 x_ E & & \\ \text{subject to} &  300 x_ B & +&  30 x_ M & +&  20 x_ E & \ge &  300 \\ &  5 x_ B & +&  50 x_ M & +&  90 x_ E & \ge &  600 \\ &  0.07 x_ B & +&  0.02 x_ M & +&  0.12 x_ E & \ge &  1 \\ &  x_ B, & &  x_ M, & &  x_ E & \ge &  0. \end{array}\tag{2.4}\end{equation}</script>
 </div>
 </section><section class="subsection">
@@ -375,7 +375,7 @@ Typically the mathematical problem is summarized as
 <p>
 The specific coefficients are needed to solve the problem, but obscure some of the mathematical structure. We introduce more general notation to make the structure clearer. First, the number of constraints will be denoted <script type="math/tex">m</script> (this is the number of nutrients in this example). Next, the number of foods will be denoted <script type="math/tex">n</script> (this is the number of variables in the objective function). Then the problem can be written as 
 </p>
-<div class="eqn" id="a0000000010">
+<div class="eqn" id="a0000000009">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl@{\quad }l} \min &  \sum ^ n_{j=1} c_ j x_ j & & & \\ \text{subject to} &  \sum ^ n_{j=1} a_{ij} x_ j &  \ge &  b_ j &  \forall i = 1, \dots , m \\ &  x_ j &  \ge &  0 &  \forall j = 1, \dots , n. \end{array}\tag{2.5}\end{equation}</script>
 </div>
 <p>
@@ -387,7 +387,7 @@ The specific coefficients are needed to solve the problem, but obscure some of t
 <p>
 We will simplify the problem even further to illustrate the key points of the solution method. Restrict to two variables (for example, consider only bread and eggs, as no milk is available). We will look at the simple problem 
 </p>
-<div class="eqn" id="a0000000011">
+<div class="eqn" id="a0000000010">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcrcl} \max &  0.02 x_ A & +&  0.03 x_ B & & \\ \text{subject to} &  x_ A & +&  x_ B & \le &  10 \\ &  x_ A & & & \le &  7 \\ & & &  x_ B & \le &  5 \\ &  x_ A, & &  x_ B & \ge &  0. \end{array}\tag{2.6}\end{equation}</script>
 </div>
 <p>
@@ -433,50 +433,50 @@ Before we construct the general solution method it is useful to look at the form
 <section class="subsection">
 <h3 id="sec:lp:properties:forms">2.3.1 The different forms</h3>
 <section class="subsubsection">
-<h4 id="a0000000012">Canonical form</h4>
+<h4 id="a0000000011">Canonical form</h4>
 <p>
 This is the form used so far: 
 </p>
-<div class="eqn" id="a0000000013">
+<div class="eqn" id="a0000000012">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl@{\quad }l} \max &  \sum ^ n_{j=1} c_ j x_ j & & & \\ \text{subject to} &  \sum ^ n_{j=1} a_{ij} x_ j &  \le &  b_ j &  \forall i = 1, \dots , m \\ &  x_ j &  \ge &  0 &  \forall j = 1, \dots , n. \end{array}\tag{2.7}\end{equation}</script>
 </div>
 <p>
  This is a maximisation problem, with the inequalities being less-than’s. 
 </p>
 </section><section class="subsubsection">
-<h4 id="a0000000014">Standard form</h4>
+<h4 id="a0000000013">Standard form</h4>
 <p>
 This is a new form: 
 </p>
-<div class="eqn" id="a0000000015">
+<div class="eqn" id="a0000000014">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl@{\quad }l} \min &  \sum ^ n_{j=1} c_ j x_ j & & & \\ \text{subject to} &  \sum ^ n_{j=1} a_{ij} x_ j &  = &  b_ j &  \forall i = 1, \dots , m \\ &  x_ j &  \ge &  0 &  \forall j = 1, \dots , n. \end{array}\tag{2.8}\end{equation}</script>
 </div>
 <p>
  This is a minimisation problem. We no longer have inequalities, but only equalities. 
 </p>
 </section><section class="subsubsection">
-<h4 id="a0000000016">Simplified canonical form</h4>
+<h4 id="a0000000015">Simplified canonical form</h4>
 <p>
 This is the simplification of the canonical form we have used so far: 
 </p>
-<div class="eqn" id="a0000000017">
+<div class="eqn" id="a0000000016">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl@{\quad }l} \max &  \sum ^ n_{j=1} c_ j x_ j & & & \\ \text{subject to} &  \sum ^ n_{j=1} a_{ij} x_ j &  \le &  b_ j &  \forall i = 1, \dots , m. \end{array}\tag{2.9}\end{equation}</script>
 </div>
 <p>
  The key difference with canonical form is that we do not impose the variables to be non-negative. 
 </p>
 </section><section class="subsubsection">
-<h4 id="a0000000018">Matrix form</h4>
+<h4 id="a0000000017">Matrix form</h4>
 <p>
 This is the canonical form written in the more compact matrix notation: 
 </p>
-<div class="eqn" id="a0000000019">
+<div class="eqn" id="a0000000018">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl} \max &  c x & & \\ \text{subject to} &  A x &  \le &  b \\ &  x &  \ge &  0. \end{array}\tag{2.10}\end{equation}</script>
 </div>
 <p>
  Here <script type="math/tex">A \in \mathbb {R}^{m \times n}</script> is a matrix with entries <script type="math/tex">a_{ij}</script>, and <script type="math/tex">c, x \in \mathbb {R}^ n</script> and <script type="math/tex">b \in \mathbb {R}^ m</script> are vectors with entries <script type="math/tex">c_ j, x_ j</script> and <script type="math/tex">b_ j</script> respectively. Note that in the objective function we have written 
 </p>
-<div class="eqn" id="a0000000020">
+<div class="eqn" id="a0000000019">
 <script type="math/tex; mode=display">\begin{equation}c x = c \cdot x = \sum _ j c_ j x_ j\tag{2.11}\end{equation}</script>
 </div>
 <p>
@@ -491,16 +491,16 @@ This matrix form is useful for its compactness and the links to Linear Algebra c
 <p>
 There are a range of rules that allow us to transform between, for example, canonical and standard form, or to change a problem in neither standard form into one of the standard forms. 
 </p>
-<ol class="enumerate" id="a0000000021" style="list-style: none">
-<li id="a0000000022" value="1">
+<ol class="enumerate" id="a0000000020" style="list-style: none">
+<li id="a0000000021" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		1.
 	</span>
 <p>
 Convert between maximisation and minimisation: 
 </p>
-<div id="a0000000023">
-<div class="eqnarrayid" id="a0000000024"></div><div class="eqnarrayid" id="a0000000025"></div><script type="math/tex; mode=display">
+<div id="a0000000022">
+<div class="eqnarrayid" id="a0000000023"></div><div class="eqnarrayid" id="a0000000024"></div><script type="math/tex; mode=display">
 \begin{align}
 \tag{2.12} \max c x &  \implies &  - \min ( - c x), \\ 
 \tag{2.13}\min c x &  \implies &  - \max ( - c x). 
@@ -508,15 +508,15 @@ Convert between maximisation and minimisation:
 </script>
 </div>
 </li>
-<li id="a0000000026" value="2">
+<li id="a0000000025" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		2.
 	</span>
 <p>
 Change direction of an inequality: 
 </p>
-<div id="a0000000027">
-<div class="eqnarrayid" id="a0000000028"></div><div class="eqnarrayid" id="a0000000029"></div><script type="math/tex; mode=display">
+<div id="a0000000026">
+<div class="eqnarrayid" id="a0000000027"></div><div class="eqnarrayid" id="a0000000028"></div><script type="math/tex; mode=display">
 \begin{align}
 \tag{2.14} a x & \le b &  \implies & &  - a x &  \ge - b, \\ 
 \tag{2.15}a x & \ge b &  \implies & &  - a x &  \le - b. 
@@ -524,50 +524,50 @@ Change direction of an inequality:
 </script>
 </div>
 </li>
-<li id="a0000000030" value="3">
+<li id="a0000000029" value="3">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		3.
 	</span>
 <p>
 Turn an equation into two inequalities: 
 </p>
-<div class="eqn" id="a0000000031">
+<div class="eqn" id="a0000000030">
 <script type="math/tex; mode=display">\begin{equation}a x = b \implies a x \ge b \;  \text{and} \;  a x \le b.\tag{2.16}\end{equation}</script>
 </div>
 </li>
-<li id="a0000000032" value="4">
+<li id="a0000000031" value="4">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		4.
 	</span>
 <p>
 Turn an inequality into an equation: 
 </p>
-<ol class="enumerate" id="a0000000033" style="list-style: none">
-<li id="a0000000034" value="1">
+<ol class="enumerate" id="a0000000032" style="list-style: none">
+<li id="a0000000033" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(a)
 	</span>
 <p>
 For <script type="math/tex">\le </script> inequalities, introduce <script type="math/tex">s \ge 0</script>, a <em>slack</em> variable. Then 
 </p>
-<div class="eqn" id="a0000000035">
+<div class="eqn" id="a0000000034">
 <script type="math/tex; mode=display">\begin{equation}a x \le b \implies a x + s = b, \;  \text{with} \;  s \ge 0.\tag{2.17}\end{equation}</script>
 </div>
 </li>
-<li id="a0000000036" value="2">
+<li id="a0000000035" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(b)
 	</span>
 <p>
 For <script type="math/tex">\ge </script> inequalities, introduce <script type="math/tex">s \ge 0</script>, a <em>surplus</em> variable. Then 
 </p>
-<div class="eqn" id="a0000000037">
+<div class="eqn" id="a0000000036">
 <script type="math/tex; mode=display">\begin{equation}a x \ge b \implies a x - s = b, \;  \text{with} \;  s \ge 0.\tag{2.18}\end{equation}</script>
 </div>
 </li>
 </ol>
 </li>
-<li id="a0000000038" value="5">
+<li id="a0000000037" value="5">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		5.
 	</span>
@@ -581,20 +581,20 @@ It is important to note that a number of these steps introduce additional variab
 </p>
 </section>
 </section><section class="section">
-<h2 id="a0000000039">2.4 Geometry of linear programming</h2>
+<h2 id="a0000000038">2.4 Geometry of linear programming</h2>
 <section class="subsection">
-<h3 id="a0000000040">2.4.1 Setup</h3>
+<h3 id="a0000000039">2.4.1 Setup</h3>
 <p>
 For this section we will work with the simplified canonical form in matrix notation, 
 </p>
-<div class="eqn" id="a0000000041">
+<div class="eqn" id="a0000000040">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl} \max &  c x & & \\ \text{subject to} &  A x &  \le &  b \\ &  x & &  \text{free}. \end{array}\tag{2.19}\end{equation}</script>
 </div>
 <p>
  We can write any non-negativity constraint as <script type="math/tex">e_{(j)} x \le 0</script>, where <script type="math/tex">e_{(j)}</script> is a vector that is zero in all entries except the <script type="math/tex">j^{\text{th}}</script>, where it is 1. This additional constraint can be embedded in the matrix form as an additional row in <script type="math/tex">A x \le b</script>. 
 </p>
 </section><section class="subsection">
-<h3 id="a0000000042">2.4.2 Purpose</h3>
+<h3 id="a0000000041">2.4.2 Purpose</h3>
 <p>
 Start by remembering the graphical solution method. We argued that the optimal solution had to lie on a vertex of the feasible region. We also argued that we could sort these points using the gradient of the objective function. 
 </p>
@@ -602,9 +602,9 @@ Start by remembering the graphical solution method. We argued that the optimal s
 The purpose of this section is to prove (at some level of rigour) that this intuition extends away two variables, <script type="math/tex">n=2</script>, where the feasible region is a subset of the plane <script type="math/tex">\mathbb {R}^2</script>, to the general case where the feasible region is a subset of <script type="math/tex">\mathbb {R}^ n</script>. That is, we want to show that the optimal solution lies on a vertex of this feasible region. 
 </p>
 </section><section class="subsection">
-<h3 id="a0000000043">2.4.3 Fundamental theorem of Linear Programming</h3>
+<h3 id="a0000000042">2.4.3 Fundamental theorem of Linear Programming</h3>
 <p>
-<div class="thmwrapper thm_thmwrapper" id="a0000000044">
+<div class="thmwrapper thm_thmwrapper" id="a0000000043">
 <div class="thmheading thm_thmheading">
 <span class="thmcaption thm_thmcaption">
     Theorem
@@ -626,7 +626,7 @@ Before we consider the proof let us look at what this says. The region <script t
 To prove this theorem we need to be able to characterise any point in <script type="math/tex">P</script> in terms of its vertices in some way. To do this, we need a number of definitions and preliminary results. 
 </p>
 <section class="subsubsection">
-<h4 id="a0000000045">Definitions</h4>
+<h4 id="a0000000044">Definitions</h4>
 <p>
 Consider a single inequality <script type="math/tex">a_ i x \le b_ i</script>. This splits <script type="math/tex">\mathbb {R}^ n</script> into two pieces. Define <script type="math/tex">\{  x \in \mathbb {R}^ n \colon a_ i x \le b_ i \} </script> to be the <em>halfspace</em> of points satisfying the inequality. Further define <script type="math/tex">\{  x \in \mathbb {R}^ n \colon a_ i x = b_ i \} </script> to be the <em>hyperplane</em> of points satisfying the inequality as an equation. The hyperplane bounds the halfspace. The vector <script type="math/tex">a_ i</script> is orthogonal to the hyperplane and points out of the halfspace. This is illustrated in figure <a class="ref" href="../../notes/course_notes/index.html#fig:lp:geom:hyperplane">2.3</a>. 
 </p>
@@ -646,14 +646,14 @@ The feasible region <script type="math/tex">P = \{  x \in \mathbb {R}^ n \colon 
 <p>
 Given <script type="math/tex">k</script> points <script type="math/tex">x_1, \dots , x_ k \in \mathbb {R}^ n</script>, their <em>convex combinations</em> are all the points <script type="math/tex">\{  y \} </script>, with 
 </p>
-<div class="eqn" id="a0000000046">
+<div class="eqn" id="a0000000045">
 <script type="math/tex; mode=display">\begin{equation}y = \sum _{i=1}^ k \lambda _ i x_ i,\tag{2.20}\end{equation}</script>
 </div>
 <p>
  with the restrictions 
 </p>
-<div id="a0000000047">
-<div class="eqnarrayid" id="a0000000048"></div><div class="eqnarrayid" id="a0000000049"></div><script type="math/tex; mode=display">
+<div id="a0000000046">
+<div class="eqnarrayid" id="a0000000047"></div><div class="eqnarrayid" id="a0000000048"></div><script type="math/tex; mode=display">
 \begin{align}
 \tag{2.21} \sum _{i=1}^ k \lambda _ i & =1, \\ 
 \tag{2.22}\lambda _1, \dots , \lambda _ k &  \ge 0. 
@@ -699,7 +699,7 @@ The <em>conic combinations</em> are all the points without the restriction that 
 <p>
 A set <script type="math/tex">S \subseteq \mathbb {R}^ n</script> is <em>convex</em> if it contains the convex combinations of all of its elements, that is 
 </p>
-<div class="eqn" id="a0000000050">
+<div class="eqn" id="a0000000049">
 <script type="math/tex; mode=display">\begin{equation}\lambda x_1 + (1 - \lambda ) x_2 \in S \quad \forall x_1, x_2 \in S \;  \text{and} \;  \forall \lambda \in [0, 1].\tag{2.23}\end{equation}</script>
 </div>
 <p>
@@ -741,7 +741,7 @@ For a given polyhedron <script type="math/tex">P</script>, a <em>vertex</em> <sc
 <p>
 For a set <script type="math/tex">S \subseteq \mathbb {R}^ n</script>, the vector <script type="math/tex">r \in \mathbb {R}^ n</script> is a <em>ray</em> if 
 </p>
-<div class="eqn" id="a0000000051">
+<div class="eqn" id="a0000000050">
 <script type="math/tex; mode=display">\begin{equation}x_0 + \mu r \in S \quad \forall x_0 \in S \;  \text{and} \;  \forall \mu \ge 0.\tag{2.24}\end{equation}</script>
 </div>
 <p>
@@ -778,12 +778,12 @@ We call a bounded polyhedron a <em>polytope</em>. This is illustrated in figure�
 </figure>
 </section>
 </section><section class="subsection">
-<h3 id="a0000000052">2.4.4 Key results</h3>
+<h3 id="a0000000051">2.4.4 Key results</h3>
 <p>
 After that blizzard of definitions we can prove some key results. 
 </p>
 <p>
-<div class="thmwrapper thm_thmwrapper" id="a0000000053">
+<div class="thmwrapper thm_thmwrapper" id="a0000000052">
 <div class="thmheading thm_thmheading">
 <span class="thmcaption thm_thmcaption">
     Theorem
@@ -797,7 +797,7 @@ Polytopes have no rays.
 </div>
 </div>
 </p>
-<div class="proof_wrapper" id="a0000000054">
+<div class="proof_wrapper" id="a0000000053">
 <div class="proof_heading">
 <span class="proof_caption">
     Proof.
@@ -810,7 +810,7 @@ If a polytope had a ray it would contain a semiline <script type="math/tex">x_0 
 </div>
 </div>
 <p>
-<div class="thmwrapper thm_thmwrapper" id="a0000000055">
+<div class="thmwrapper thm_thmwrapper" id="a0000000054">
 <div class="thmheading thm_thmheading">
 <span class="thmcaption thm_thmcaption">
     Theorem
@@ -824,7 +824,7 @@ The feasible region is convex.
 </div>
 </div>
 </p>
-<div class="proof_wrapper" id="a0000000056">
+<div class="proof_wrapper" id="a0000000055">
 <div class="proof_heading">
 <span class="proof_caption">
     Proof.
@@ -840,7 +840,7 @@ Work by contradiction. Assume that <script type="math/tex">P</script>, the polyh
 Convexity makes constructing an algorithm to solve the linear program much simpler. Non-convex problems are much harder to solve. However, our main concern is linking the vertices to points in the interior in order to prove the fundamental theorem. 
 </p>
 <p>
-<div class="thmwrapper thm_thmwrapper" id="a0000000057">
+<div class="thmwrapper thm_thmwrapper" id="a0000000056">
 <div class="thmheading thm_thmheading">
 <span class="thmcaption thm_thmcaption">
     Theorem
@@ -852,15 +852,15 @@ Convexity makes constructing an algorithm to solve the linear program much simpl
 <p>
  For a subset <script type="math/tex">P \subseteq \mathbb {R}^ n</script>, the following statements are equivalent: 
 </p>
-<ul class="itemize" id="a0000000058">
-<li id="a0000000059"> <p>
+<ul class="itemize" id="a0000000057">
+<li id="a0000000058"> <p>
 <script type="math/tex">P</script> is a non-empty polyhedron; 
 </p>
 </li>
-<li id="a0000000060"> <p>
+<li id="a0000000059"> <p>
 There are two sets, one of <script type="math/tex">k \ge 1</script> vertices <script type="math/tex">v_1, \dots , v_ k</script>, and another of <script type="math/tex">h \ge 0</script> extreme rays <script type="math/tex">r_1, \dots , r_ h</script>, such that any point <script type="math/tex">x \in P</script> can be written 
 </p>
-<div class="eqn" id="a0000000061">
+<div class="eqn" id="a0000000060">
 <script type="math/tex; mode=display">\begin{equation}x = \sum _{i=1}^ k \lambda _ i v_ i + \sum _{j=1}^ h \mu _ j r_ j .\tag{2.25}\end{equation}</script>
 </div>
 </li>
@@ -882,9 +882,9 @@ The proof of this theorem is complex and not our key purpose. The point, for our
 </figcaption>
 </figure>
 </section><section class="subsection">
-<h3 id="a0000000062">2.4.5 Proof of the Fundamental Theorem</h3>
+<h3 id="a0000000061">2.4.5 Proof of the Fundamental Theorem</h3>
 <p>
-<div class="thmwrapper thm_thmwrapper" id="a0000000063">
+<div class="thmwrapper thm_thmwrapper" id="a0000000062">
 <div class="thmheading thm_thmheading">
 <span class="thmcaption thm_thmcaption">
     Theorem
@@ -899,7 +899,7 @@ The proof of this theorem is complex and not our key purpose. The point, for our
 </div>
 </div>
 </p>
-<div class="proof_wrapper" id="a0000000064">
+<div class="proof_wrapper" id="a0000000063">
 <div class="proof_heading">
 <span class="proof_caption">
     Proof.
@@ -909,7 +909,7 @@ The proof of this theorem is complex and not our key purpose. The point, for our
 <p>
 Let <script type="math/tex">x \in P</script> be a point in the feasible region. Write 
 </p>
-<div class="eqn" id="a0000000065">
+<div class="eqn" id="a0000000064">
 <script type="math/tex; mode=display">\begin{equation}x = \sum _{i=1}^ k \lambda _ i v_ i + \sum _{j=1}^ h \mu _ j r_ j\tag{2.26}\end{equation}</script>
 </div>
 <p>
@@ -918,7 +918,7 @@ Let <script type="math/tex">x \in P</script> be a point in the feasible region. 
 <p>
 We now want to <em>change variables</em> from <script type="math/tex">x</script> to <script type="math/tex">\lambda , \mu </script>. That is, we want to re-write our linear program in terms of the vector <script type="math/tex">(\lambda , \mu )</script>. First re-write the objective function as 
 </p>
-<div class="eqn" id="a0000000066">
+<div class="eqn" id="a0000000065">
 <script type="math/tex; mode=display">\begin{equation}c x = \sum _{i=1}^ k \lambda _ i (c v_ i) + \sum _{j=1}^ h \mu _ j (c r_ j) .\tag{2.27}\end{equation}</script>
 </div>
 <p>
@@ -927,8 +927,8 @@ We now want to <em>change variables</em> from <script type="math/tex">x</script>
 <p>
 Next, write the constraints applied to <script type="math/tex">(\lambda , \mu )</script>. These are 
 </p>
-<div id="a0000000067">
-<div class="eqnarrayid" id="a0000000068"></div><div class="eqnarrayid" id="a0000000069"></div><div class="eqnarrayid" id="a0000000070"></div><script type="math/tex; mode=display">
+<div id="a0000000066">
+<div class="eqnarrayid" id="a0000000067"></div><div class="eqnarrayid" id="a0000000068"></div><div class="eqnarrayid" id="a0000000069"></div><script type="math/tex; mode=display">
 \begin{align}
 \tag{2.28} \sum _{i=1}^ k \lambda _ i & =1, \\ 
 \tag{2.29}\lambda _1, \dots , \lambda _ k & \ge 0, \\ 
@@ -945,13 +945,13 @@ Now look at the objective function. If <script type="math/tex">c r_ j > 0</scrip
 <p>
 The alternative is that <script type="math/tex">c r_ j \le 0</script> for all rays. In this case the optimal solution requires <script type="math/tex">\mu _ j = 0</script> for all <script type="math/tex">j</script>, as any non-zero coefficient <script type="math/tex">\mu _ j</script> would only reduce the objective function. Therefore 
 </p>
-<div class="eqn" id="a0000000071">
+<div class="eqn" id="a0000000070">
 <script type="math/tex; mode=display">\begin{equation}c x^* = \sum _{i=1}^ k \lambda _ i (c v_ i)\tag{2.31}\end{equation}</script>
 </div>
 <p>
  and the optimal value has to be a linear combination of the values taken by the objective function at vertices. This gives us a finite number of values to check, and we conclude that 
 </p>
-<div class="eqn" id="a0000000072">
+<div class="eqn" id="a0000000071">
 <script type="math/tex; mode=display">\begin{equation}c x^* = \max _{i = 1, \dots , k} \{  c v_ i \} .\tag{2.32}\end{equation}</script>
 </div>
 <p>
@@ -960,14 +960,14 @@ The alternative is that <script type="math/tex">c r_ j \le 0</script> for all ra
 </div>
 </div>
 </section><section class="subsection">
-<h3 id="a0000000073">2.4.6 Sanity checks</h3>
+<h3 id="a0000000072">2.4.6 Sanity checks</h3>
 <section class="subsubsection">
-<h4 id="a0000000074">Interior points cannot be optimal</h4>
+<h4 id="a0000000073">Interior points cannot be optimal</h4>
 <p>
 An alternative negative proof can show that interior points cannot be optimal. This does not show the link between vertices and optimal points, but gives more confidence. An illustration is in figure <a class="ref" href="../../notes/course_notes/index.html#fig:lp:geom:interior:feasible">2.13</a>. 
 </p>
 <p>
-<div class="thmwrapper thm_thmwrapper" id="a0000000075">
+<div class="thmwrapper thm_thmwrapper" id="a0000000074">
 <div class="thmheading thm_thmheading">
 <span class="thmcaption thm_thmcaption">
     Theorem
@@ -981,7 +981,7 @@ Any point <script type="math/tex">x</script> in the interior of <script type="ma
 </div>
 </div>
 </p>
-<div class="proof_wrapper" id="a0000000076">
+<div class="proof_wrapper" id="a0000000075">
 <div class="proof_heading">
 <span class="proof_caption">
     Proof.
@@ -1007,7 +1007,7 @@ Now consider a point <script type="math/tex">w = x + \epsilon c</script> where <
 </figcaption>
 </figure>
 </section><section class="subsubsection">
-<h4 id="a0000000077">Non-vertices may be optimal</h4>
+<h4 id="a0000000076">Non-vertices may be optimal</h4>
 <p>
 Note that it is possible for <em>multiple</em> vertices to have the same, optimal, value of the objective function. In this case points within the facet (in its <em>relative interior</em>) linking these vertices will have the same optimal value. This may occur when the facet is orthogonal to the gradient of the objective function, <script type="math/tex">c</script>. 
 </p>
@@ -1026,14 +1026,14 @@ However, this does not matter. The theorem guarantees that <em>an</em> optimal s
 </figure>
 </section>
 </section><section class="subsection">
-<h3 id="a0000000078">2.4.7 Brute force solutions</h3>
+<h3 id="a0000000077">2.4.7 Brute force solutions</h3>
 <p>
 The fundamental theorem therefore gives us a method to find the optimal solution of a linear program. That is, we first identify all vertices of the feasible region. We then evaluate the objective region at each vertex. By enumeration we then find which is optimal. 
 </p>
 <p>
 For example, consider the problem from the graphical solution section, 
 </p>
-<div class="eqn" id="a0000000079">
+<div class="eqn" id="a0000000078">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcrcl} \max &  0.02 x_ A & +&  0.03 x_ B & & \\ \text{subject to} &  x_ A & +&  x_ B & \le &  10 \\ &  x_ A & & & \le &  7 \\ & & &  x_ B & \le &  5 \\ &  x_ A, & &  x_ B & \ge &  0. \end{array}\tag{2.33}\end{equation}</script>
 </div>
 <p>
@@ -1042,7 +1042,7 @@ For example, consider the problem from the graphical solution section,
 <p>
 In general we expect a feasible region with <script type="math/tex">n</script> variables and <script type="math/tex">m</script> constraints to be represented by a polyhedron with approximately 
 </p>
-<div class="eqn" id="a0000000080">
+<div class="eqn" id="a0000000079">
 <script type="math/tex; mode=display">\begin{equation}\binom {m}{n} = \frac{m!}{n! (m - n)!} \simeq \frac{m^ m}{n^ n (m - n)^{m-n}}\tag{2.34}\end{equation}</script>
 </div>
 <p>
@@ -1170,28 +1170,28 @@ We assume the list has length <script type="math/tex">n</script> and refer to th
 <p>
 Formally, the problem is to find a permutation <script type="math/tex">\pi </script> such that 
 </p>
-<div class="eqn" id="a0000000081">
+<div class="eqn" id="a0000000080">
 <script type="math/tex; mode=display">\begin{equation}a_{\pi (i)} \le a_{\pi (i+1)} \quad \forall i \in \{ 1, \dots , n \} .\tag{3.1}\end{equation}</script>
 </div>
 <p>
 As a concrete example, consider the list <script type="math/tex">a = (7, 2, 2, 6, 1, 4)</script>. By eye we see the sorted list is <script type="math/tex">s = (1, 2, 2, 4, 6, 7)</script>. Looking at the indices we construct the permutation: 
 </p>
-<div class="eqn" id="a0000000082">
+<div class="eqn" id="a0000000081">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{cccccccc} a &  \colon &  7 &  2 &  2 &  6 &  1 &  4 \\ \text{index} &  \colon &  1 &  2 &  3 &  4 &  5 &  6 \end{array} \to \begin{array}{cccccccc} s &  \colon &  1 &  2 &  2 &  4 &  6 &  7 \\ \pi (\text{index}) &  \colon &  5 &  2 &  3 &  6 &  4 &  1 \end{array}\tag{3.2}\end{equation}</script>
 </div>
 </section>
 </section><section class="section">
-<h2 id="a0000000083">3.3 Algorithms</h2>
+<h2 id="a0000000082">3.3 Algorithms</h2>
 <p>
 We look at three different sorting algorithms before introduing a detailed analysis. 
 </p>
 <section class="subsection">
-<h3 id="a0000000084">3.3.1 Brute Force Sort</h3>
+<h3 id="a0000000083">3.3.1 Brute Force Sort</h3>
 <p>
 This is a two step process. 
 </p>
-<ol class="enumerate" id="a0000000085" style="list-style: none">
-<li id="a0000000086" value="1">
+<ol class="enumerate" id="a0000000084" style="list-style: none">
+<li id="a0000000085" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		1.
 	</span>
@@ -1199,7 +1199,7 @@ This is a two step process.
 Enumerate all possible permutations <script type="math/tex">\pi </script> of length <script type="math/tex">n</script>. 
 </p>
 </li>
-<li id="a0000000087" value="2">
+<li id="a0000000086" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		2.
 	</span>
@@ -1215,12 +1215,12 @@ This is closely linked to the impractical algorithm introduced to solve the line
 It is possible that only one permutation sorts the list, and that (by bad luck) it is the last one constructed. Given a list with <script type="math/tex">n</script> items we can construct <script type="math/tex">n!</script> permutations of that list (consider how many positions the first object can take, then, having fixed the first, how many the second can take, and so on). For large <script type="math/tex">n</script> we have that <script type="math/tex">n! \sim n^ n</script>, and we have seen how rapidly that grows. 
 </p>
 </section><section class="subsection">
-<h3 id="a0000000088">3.3.2 Selection sort</h3>
+<h3 id="a0000000087">3.3.2 Selection sort</h3>
 <p>
 This is an iterative process. 
 </p>
-<ol class="enumerate" id="a0000000089" style="list-style: none">
-<li id="a0000000090" value="1">
+<ol class="enumerate" id="a0000000088" style="list-style: none">
+<li id="a0000000089" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		1.
 	</span>
@@ -1228,7 +1228,7 @@ This is an iterative process.
 Find the smallest object. 
 </p>
 </li>
-<li id="a0000000091" value="2">
+<li id="a0000000090" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		2.
 	</span>
@@ -1236,7 +1236,7 @@ Find the smallest object.
 Swap it with the object in position one (if strictly smaller). 
 </p>
 </li>
-<li id="a0000000092" value="3">
+<li id="a0000000091" value="3">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		3.
 	</span>
@@ -1244,7 +1244,7 @@ Swap it with the object in position one (if strictly smaller).
 Find the next smallest object in the list; alternatively, consider the list <em>except</em> the first object. 
 </p>
 </li>
-<li id="a0000000093" value="4">
+<li id="a0000000092" value="4">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		4.
 	</span>
@@ -1252,7 +1252,7 @@ Find the next smallest object in the list; alternatively, consider the list <em>
 Swap it with the object in position two (if strictly smaller). 
 </p>
 </li>
-<li id="a0000000094" value="5">
+<li id="a0000000093" value="5">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		5.
 	</span>
@@ -1267,13 +1267,13 @@ When implemented in code this algorithm requires two loops. The outer loop runs 
 <p>
 The steps for <script type="math/tex">a = (7, 2, 2, 6, 1, 4)</script> are as follows. When we find the smallest object it will be in the sublist denoted by square brackets: 
 </p>
-<ol class="enumerate" id="a0000000095" style="list-style: none">
-<li id="a0000000096" value="1">
+<ol class="enumerate" id="a0000000094" style="list-style: none">
+<li id="a0000000095" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		1.
 	</span>
-<ol class="enumerate" id="a0000000097" style="list-style: none">
-<li id="a0000000098" value="1">
+<ol class="enumerate" id="a0000000096" style="list-style: none">
+<li id="a0000000097" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(a)
 	</span>
@@ -1281,7 +1281,7 @@ The steps for <script type="math/tex">a = (7, 2, 2, 6, 1, 4)</script> are as fol
 : Smallest object in <script type="math/tex">([7, 2, 2, 6, 1, 4])</script> is <script type="math/tex">1</script> at index <script type="math/tex">5</script>. 
 </p>
 </li>
-<li id="a0000000099" value="2">
+<li id="a0000000098" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(b)
 	</span>
@@ -1291,12 +1291,12 @@ The steps for <script type="math/tex">a = (7, 2, 2, 6, 1, 4)</script> are as fol
 </li>
 </ol>
 </li>
-<li id="a0000000100" value="2">
+<li id="a0000000099" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		2.
 	</span>
-<ol class="enumerate" id="a0000000101" style="list-style: none">
-<li id="a0000000102" value="1">
+<ol class="enumerate" id="a0000000100" style="list-style: none">
+<li id="a0000000101" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(a)
 	</span>
@@ -1304,7 +1304,7 @@ The steps for <script type="math/tex">a = (7, 2, 2, 6, 1, 4)</script> are as fol
 : Smallest object in <script type="math/tex">(1, [2, 2, 6, 7, 4])</script> is <script type="math/tex">2</script> at index <script type="math/tex">2</script>. 
 </p>
 </li>
-<li id="a0000000103" value="2">
+<li id="a0000000102" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(b)
 	</span>
@@ -1314,12 +1314,12 @@ The steps for <script type="math/tex">a = (7, 2, 2, 6, 1, 4)</script> are as fol
 </li>
 </ol>
 </li>
-<li id="a0000000104" value="3">
+<li id="a0000000103" value="3">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		3.
 	</span>
-<ol class="enumerate" id="a0000000105" style="list-style: none">
-<li id="a0000000106" value="1">
+<ol class="enumerate" id="a0000000104" style="list-style: none">
+<li id="a0000000105" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(a)
 	</span>
@@ -1327,7 +1327,7 @@ The steps for <script type="math/tex">a = (7, 2, 2, 6, 1, 4)</script> are as fol
 : Smallest object in <script type="math/tex">(1, 2, [2, 6, 7, 4])</script> is <script type="math/tex">2</script> at index <script type="math/tex">3</script>. 
 </p>
 </li>
-<li id="a0000000107" value="2">
+<li id="a0000000106" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(b)
 	</span>
@@ -1337,12 +1337,12 @@ The steps for <script type="math/tex">a = (7, 2, 2, 6, 1, 4)</script> are as fol
 </li>
 </ol>
 </li>
-<li id="a0000000108" value="4">
+<li id="a0000000107" value="4">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		4.
 	</span>
-<ol class="enumerate" id="a0000000109" style="list-style: none">
-<li id="a0000000110" value="1">
+<ol class="enumerate" id="a0000000108" style="list-style: none">
+<li id="a0000000109" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(a)
 	</span>
@@ -1350,7 +1350,7 @@ The steps for <script type="math/tex">a = (7, 2, 2, 6, 1, 4)</script> are as fol
 : Smallest object in <script type="math/tex">(1, 2, 2, [6, 7, 4])</script> is <script type="math/tex">4</script> at index <script type="math/tex">6</script>. 
 </p>
 </li>
-<li id="a0000000111" value="2">
+<li id="a0000000110" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(b)
 	</span>
@@ -1360,12 +1360,12 @@ The steps for <script type="math/tex">a = (7, 2, 2, 6, 1, 4)</script> are as fol
 </li>
 </ol>
 </li>
-<li id="a0000000112" value="5">
+<li id="a0000000111" value="5">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		5.
 	</span>
-<ol class="enumerate" id="a0000000113" style="list-style: none">
-<li id="a0000000114" value="1">
+<ol class="enumerate" id="a0000000112" style="list-style: none">
+<li id="a0000000113" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(a)
 	</span>
@@ -1373,7 +1373,7 @@ The steps for <script type="math/tex">a = (7, 2, 2, 6, 1, 4)</script> are as fol
 : Smallest object in <script type="math/tex">(1, 2, 2, 4, [7, 6])</script> is <script type="math/tex">6</script> at index <script type="math/tex">6</script>. 
 </p>
 </li>
-<li id="a0000000115" value="2">
+<li id="a0000000114" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(b)
 	</span>
@@ -1383,7 +1383,7 @@ The steps for <script type="math/tex">a = (7, 2, 2, 6, 1, 4)</script> are as fol
 </li>
 </ol>
 </li>
-<li id="a0000000116" value="6">
+<li id="a0000000115" value="6">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		6.
 	</span>
@@ -1393,12 +1393,12 @@ We have reached the last object, so the list is sorted.
 </li>
 </ol>
 </section><section class="subsection">
-<h3 id="a0000000117">3.3.3 Insertion sort</h3>
+<h3 id="a0000000116">3.3.3 Insertion sort</h3>
 <p>
 Conceptually this process splits the list <script type="math/tex">a</script> into two pieces, or sublists. One is sorted and the other unsorted. We write <script type="math/tex">a = (s | u)</script> where <script type="math/tex">|</script> marks the separation between the sublists. At the start <script type="math/tex">s</script> is empty and <script type="math/tex">u = a</script>. Then, while <script type="math/tex">u</script> is not empty, we 
 </p>
-<ol class="enumerate" id="a0000000118" style="list-style: none">
-<li id="a0000000119" value="1">
+<ol class="enumerate" id="a0000000117" style="list-style: none">
+<li id="a0000000118" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		1.
 	</span>
@@ -1406,7 +1406,7 @@ Conceptually this process splits the list <script type="math/tex">a</script> int
 Compare the first entry of the unsorted list <script type="math/tex">u</script> with each entry of the sorted list <script type="math/tex">s</script> in turn <em>from the right</em>. 
 </p>
 </li>
-<li id="a0000000120" value="2">
+<li id="a0000000119" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		2.
 	</span>
@@ -1414,7 +1414,7 @@ Compare the first entry of the unsorted list <script type="math/tex">u</script> 
 If <script type="math/tex">u_1 < s_ i</script>, swap the entry in the sorted list with the first entry in the unsorted list. Do this for each entry in the sorted list until <script type="math/tex">u_1</script> is in order. 
 </p>
 </li>
-<li id="a0000000121" value="3">
+<li id="a0000000120" value="3">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		3.
 	</span>
@@ -1429,13 +1429,13 @@ As with selection sort, when implemented in code we have two loops, one running 
 <p>
 The steps for <script type="math/tex">a = (7, 2, 2, 6, 1, 4)</script> are as follows. 
 </p>
-<ol class="enumerate" id="a0000000122" style="list-style: none">
-<li id="a0000000123" value="1">
+<ol class="enumerate" id="a0000000121" style="list-style: none">
+<li id="a0000000122" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		1.
 	</span>
-<ol class="enumerate" id="a0000000124" style="list-style: none">
-<li id="a0000000125" value="1">
+<ol class="enumerate" id="a0000000123" style="list-style: none">
+<li id="a0000000124" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(a)
 	</span>
@@ -1443,7 +1443,7 @@ The steps for <script type="math/tex">a = (7, 2, 2, 6, 1, 4)</script> are as fol
 <script type="math/tex">(|7, 2, 2, 6, 1, 4)</script> has nothing in the unsorted list. 
 </p>
 </li>
-<li id="a0000000126" value="2">
+<li id="a0000000125" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(b)
 	</span>
@@ -1453,12 +1453,12 @@ Move the separation marker to the right, giving <script type="math/tex">(7 | 2, 
 </li>
 </ol>
 </li>
-<li id="a0000000127" value="2">
+<li id="a0000000126" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		2.
 	</span>
-<ol class="enumerate" id="a0000000128" style="list-style: none">
-<li id="a0000000129" value="1">
+<ol class="enumerate" id="a0000000127" style="list-style: none">
+<li id="a0000000128" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(a)
 	</span>
@@ -1466,7 +1466,7 @@ Move the separation marker to the right, giving <script type="math/tex">(7 | 2, 
 As <script type="math/tex">2 < 7</script>, swap <script type="math/tex">s_1</script> and <script type="math/tex">u_1</script>, giving <script type="math/tex">(2 | 7, 2, 6, 1, 4)</script>. 
 </p>
 </li>
-<li id="a0000000130" value="2">
+<li id="a0000000129" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(b)
 	</span>
@@ -1476,12 +1476,12 @@ Move the separation marker to the right, giving <script type="math/tex">(2, 7 | 
 </li>
 </ol>
 </li>
-<li id="a0000000131" value="3">
+<li id="a0000000130" value="3">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		3.
 	</span>
-<ol class="enumerate" id="a0000000132" style="list-style: none">
-<li id="a0000000133" value="1">
+<ol class="enumerate" id="a0000000131" style="list-style: none">
+<li id="a0000000132" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(a)
 	</span>
@@ -1489,7 +1489,7 @@ Move the separation marker to the right, giving <script type="math/tex">(2, 7 | 
 As <script type="math/tex">2 < 7</script>, swap <script type="math/tex">s_2</script> and <script type="math/tex">u_1</script>, giving <script type="math/tex">(2, 2 | 7, 6, 1, 4)</script>. 
 </p>
 </li>
-<li id="a0000000134" value="2">
+<li id="a0000000133" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(b)
 	</span>
@@ -1497,7 +1497,7 @@ As <script type="math/tex">2 < 7</script>, swap <script type="math/tex">s_2</scr
 As <script type="math/tex">2</script> is not less than <script type="math/tex">2</script> no further sorting is needed. 
 </p>
 </li>
-<li id="a0000000135" value="3">
+<li id="a0000000134" value="3">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(c)
 	</span>
@@ -1507,12 +1507,12 @@ Move the separation marker to the right, giving <script type="math/tex">(2, 2, 7
 </li>
 </ol>
 </li>
-<li id="a0000000136" value="4">
+<li id="a0000000135" value="4">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		4.
 	</span>
-<ol class="enumerate" id="a0000000137" style="list-style: none">
-<li id="a0000000138" value="1">
+<ol class="enumerate" id="a0000000136" style="list-style: none">
+<li id="a0000000137" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(a)
 	</span>
@@ -1520,7 +1520,7 @@ Move the separation marker to the right, giving <script type="math/tex">(2, 2, 7
 As <script type="math/tex">6 < 7</script>, swap <script type="math/tex">s_3</script> and <script type="math/tex">u_1</script>, giving <script type="math/tex">(2, 2, 6 | 7, 1, 4)</script>. 
 </p>
 </li>
-<li id="a0000000139" value="2">
+<li id="a0000000138" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(b)
 	</span>
@@ -1528,7 +1528,7 @@ As <script type="math/tex">6 < 7</script>, swap <script type="math/tex">s_3</scr
 As <script type="math/tex">6</script> is not less than <script type="math/tex">2</script> no further sorting is needed. 
 </p>
 </li>
-<li id="a0000000140" value="3">
+<li id="a0000000139" value="3">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(c)
 	</span>
@@ -1538,12 +1538,12 @@ Move the separation marker to the right, giving <script type="math/tex">(2, 2, 6
 </li>
 </ol>
 </li>
-<li id="a0000000141" value="5">
+<li id="a0000000140" value="5">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		5.
 	</span>
-<ol class="enumerate" id="a0000000142" style="list-style: none">
-<li id="a0000000143" value="1">
+<ol class="enumerate" id="a0000000141" style="list-style: none">
+<li id="a0000000142" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(a)
 	</span>
@@ -1551,7 +1551,7 @@ Move the separation marker to the right, giving <script type="math/tex">(2, 2, 6
 As <script type="math/tex">1 < 7</script>, swap <script type="math/tex">s_4</script> and <script type="math/tex">u_1</script>, giving <script type="math/tex">(2, 2, 6, 1 | 7, 4)</script>. 
 </p>
 </li>
-<li id="a0000000144" value="2">
+<li id="a0000000143" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(b)
 	</span>
@@ -1559,7 +1559,7 @@ As <script type="math/tex">1 < 7</script>, swap <script type="math/tex">s_4</scr
 As <script type="math/tex">1 < 6</script>, swap <script type="math/tex">s_3</script> and (what was) <script type="math/tex">u_1</script>, giving <script type="math/tex">(2, 2, 1, 6 | 7, 4)</script>. 
 </p>
 </li>
-<li id="a0000000145" value="3">
+<li id="a0000000144" value="3">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(c)
 	</span>
@@ -1567,7 +1567,7 @@ As <script type="math/tex">1 < 6</script>, swap <script type="math/tex">s_3</scr
 As <script type="math/tex">1 < 2</script>, swap <script type="math/tex">s_2</script> and (what was) <script type="math/tex">u_1</script>, giving <script type="math/tex">(2, 1, 2, 6 | 7, 4)</script>. 
 </p>
 </li>
-<li id="a0000000146" value="4">
+<li id="a0000000145" value="4">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(d)
 	</span>
@@ -1575,7 +1575,7 @@ As <script type="math/tex">1 < 2</script>, swap <script type="math/tex">s_2</scr
 As <script type="math/tex">1 < 2</script>, swap <script type="math/tex">s_1</script> and (what was) <script type="math/tex">u_1</script>, giving <script type="math/tex">(1, 2, 2, 6 | 7, 4)</script>. 
 </p>
 </li>
-<li id="a0000000147" value="5">
+<li id="a0000000146" value="5">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(e)
 	</span>
@@ -1585,12 +1585,12 @@ Move the separation marker to the right, giving <script type="math/tex">(1, 2, 2
 </li>
 </ol>
 </li>
-<li id="a0000000148" value="6">
+<li id="a0000000147" value="6">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		6.
 	</span>
-<ol class="enumerate" id="a0000000149" style="list-style: none">
-<li id="a0000000150" value="1">
+<ol class="enumerate" id="a0000000148" style="list-style: none">
+<li id="a0000000149" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(a)
 	</span>
@@ -1598,7 +1598,7 @@ Move the separation marker to the right, giving <script type="math/tex">(1, 2, 2
 As <script type="math/tex">4 < 7</script>, swap <script type="math/tex">s_5</script> and <script type="math/tex">u_1</script>, giving <script type="math/tex">(1, 2, 2, 6, 4 | 7)</script>. 
 </p>
 </li>
-<li id="a0000000151" value="2">
+<li id="a0000000150" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(b)
 	</span>
@@ -1606,7 +1606,7 @@ As <script type="math/tex">4 < 7</script>, swap <script type="math/tex">s_5</scr
 As <script type="math/tex">4 < 6</script>, swap <script type="math/tex">s_4</script> and (what was) <script type="math/tex">u_1</script>, giving <script type="math/tex">(1, 2, 2, 4, 6 | 7)</script>. 
 </p>
 </li>
-<li id="a0000000152" value="3">
+<li id="a0000000151" value="3">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(c)
 	</span>
@@ -1614,7 +1614,7 @@ As <script type="math/tex">4 < 6</script>, swap <script type="math/tex">s_4</scr
 As <script type="math/tex">4</script> is not less than <script type="math/tex">2</script> no further sorting is needed. 
 </p>
 </li>
-<li id="a0000000153" value="4">
+<li id="a0000000152" value="4">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(d)
 	</span>
@@ -1624,7 +1624,7 @@ Move the separation marker to the right, giving <script type="math/tex">(1, 2, 2
 </li>
 </ol>
 </li>
-<li id="a0000000154" value="7">
+<li id="a0000000153" value="7">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		7.
 	</span>
@@ -1635,7 +1635,7 @@ The unsorted list is empty, so the sorted list is complete.
 </ol>
 </section>
 </section><section class="section">
-<h2 id="a0000000155">3.4 Analysis of algorithms</h2>
+<h2 id="a0000000154">3.4 Analysis of algorithms</h2>
 <p>
 We have three different algorithms to sort a list, and a rough idea of how they will behave. However, that rough idea could easily be wrong. If the first permutation generated by the brute-force method sorts the list then it is faster than either selection or insertion sort. 
 </p>
@@ -1646,7 +1646,7 @@ Equally, it is generally impractical to work out how long a sorting algorithm ma
 Instead, we will look at the <em>worst case</em>: what is the maximum length of time an algorithm may take? 
 </p>
 <section class="subsection">
-<h3 id="a0000000156">3.4.1 Definitions</h3>
+<h3 id="a0000000155">3.4.1 Definitions</h3>
 <p>
 An <em>elementary operation</em> (EO) is any simple operation an algorithm may take with roughly the same cost. Examples would be comparisons, swaps, additions, multiplications, or assigning a value to a variable. 
 </p>
@@ -1657,22 +1657,22 @@ The <em>instance size</em> is a number <script type="math/tex">n</script> that c
 In the <em>worst case</em> analysis we reduce every choice that the algorithm makes to the one needing the most elementary operations. 
 </p>
 <section class="subsubsection">
-<h4 id="a0000000157">Useful results</h4>
+<h4 id="a0000000156">Useful results</h4>
 <p>
 The <em>Gauss series</em> or arithmetic progression formula is 
 </p>
-<div class="eqn" id="a0000000158">
+<div class="eqn" id="a0000000157">
 <script type="math/tex; mode=display">\begin{equation}1 + 2 + \dots + n = \sum _{i=1}^ n i = \frac{n (n+1)}{2}.\tag{3.3}\end{equation}</script>
 </div>
 <p>
 The size of a set of consecutive integers, <script type="math/tex">\{  i, i+1, \dots , j \} </script> is 
 </p>
-<div class="eqn" id="a0000000159">
+<div class="eqn" id="a0000000158">
 <script type="math/tex; mode=display">\begin{equation}| \{  i, i+1, \dots , j \}  | = j - i + 1.\tag{3.4}\end{equation}</script>
 </div>
 </section>
 </section><section class="subsection">
-<h3 id="a0000000160">3.4.2 Selection Sort</h3>
+<h3 id="a0000000159">3.4.2 Selection Sort</h3>
 <div class="highlight"><pre><span></span><span class="linenos">1</span>for i in range(0, n-1):
 <span class="linenos">2</span>    j = i
 <span class="linenos">3</span>    for k in range(i+1, n):
@@ -1684,24 +1684,24 @@ The size of a set of consecutive integers, <script type="math/tex">\{  i, i+1, \
 <p>
 This Python code performs selection sort. 
 </p>
-<ul class="itemize" id="a0000000161">
-<li id="a0000000162"> <p>
+<ul class="itemize" id="a0000000160">
+<li id="a0000000161"> <p>
 Line 1 loops <script type="math/tex">n-1</script> times over: 
 </p>
-<ul class="itemize" id="a0000000163">
-<li id="a0000000164"> <p>
+<ul class="itemize" id="a0000000162">
+<li id="a0000000163"> <p>
 Line 2 assigns one value (1 EO); 
 </p>
 </li>
-<li id="a0000000165"> <p>
+<li id="a0000000164"> <p>
 Line 3 loops <script type="math/tex">n - (i+1) + 1</script> times over: 
 </p>
-<ul class="itemize" id="a0000000166">
-<li id="a0000000167"> <p>
+<ul class="itemize" id="a0000000165">
+<li id="a0000000166"> <p>
 Line 4 does one comparison (1 EO); 
 </p>
 </li>
-<li id="a0000000168"> <p>
+<li id="a0000000167"> <p>
 Line 5 assigns one value (1 EO); 
 </p>
 </li>
@@ -1710,11 +1710,11 @@ Line 5 assigns one value (1 EO);
  The total cost of the loop is <script type="math/tex">2 (n - i)</script> EOs; 
 </p>
 </li>
-<li id="a0000000169"> <p>
+<li id="a0000000168"> <p>
 Line 6 does one comparison (1 EO); 
 </p>
 </li>
-<li id="a0000000170"> <p>
+<li id="a0000000169"> <p>
 Line 7 does one comparison (1 EO); 
 </p>
 </li>
@@ -1722,8 +1722,8 @@ Line 7 does one comparison (1 EO);
 <p>
  The total cost of the loop is 
 </p>
-<div id="a0000000171">
-<div class="eqnarrayid" id="a0000000172"></div><div class="eqnarrayid" id="a0000000173"></div><div class="eqnarrayid" id="a0000000174"></div><script type="math/tex; mode=display">
+<div id="a0000000170">
+<div class="eqnarrayid" id="a0000000171"></div><div class="eqnarrayid" id="a0000000172"></div><div class="eqnarrayid" id="a0000000173"></div><script type="math/tex; mode=display">
 \begin{align}
 \tag{3.5} \sum _{i=1}^{n-1} (1 + 2(n - i) + 2) & = \sum _{i=1}^{n-1} (2 n + 3) - 2 \sum _{i-1}^{n-1} i \\ 
 \tag{3.6}& = (n-1)(2n+3) - 2 \frac{(n-1) n}{2} \\ 
@@ -1737,7 +1737,7 @@ Line 7 does one comparison (1 EO);
 We see that the analysis gives the worst case of selection sort as <script type="math/tex">\sim n^2</script>. As shown earlier this grows much more slowly that the worst case <script type="math/tex">\sim n^ n</script> for the brute-force algorithm. Selection sort may be practical. 
 </p>
 </section><section class="subsection">
-<h3 id="a0000000175">3.4.3 Insertion Sort</h3>
+<h3 id="a0000000174">3.4.3 Insertion Sort</h3>
 <div class="highlight"><pre><span></span><span class="linenos">1</span>for i in range(1, n):
 <span class="linenos">2</span>    for j in range(i, 0, -1):
 <span class="linenos">3</span>        if a[j] &lt; a[j-1]:
@@ -1748,24 +1748,24 @@ We see that the analysis gives the worst case of selection sort as <script type=
 <p>
 This Python code performs insertion sort. 
 </p>
-<ul class="itemize" id="a0000000176">
-<li id="a0000000177"> <p>
+<ul class="itemize" id="a0000000175">
+<li id="a0000000176"> <p>
 Line 1 loops <script type="math/tex">n-1</script> times over: 
 </p>
-<ul class="itemize" id="a0000000178">
-<li id="a0000000179"> <p>
+<ul class="itemize" id="a0000000177">
+<li id="a0000000178"> <p>
 Line 2 loops <script type="math/tex">i</script> times over: 
 </p>
-<ul class="itemize" id="a0000000180">
-<li id="a0000000181"> <p>
+<ul class="itemize" id="a0000000179">
+<li id="a0000000180"> <p>
 Line 3 does one comparison (1 EO); 
 </p>
 </li>
-<li id="a0000000182"> <p>
+<li id="a0000000181"> <p>
 Line 4 does one swap (1 EO); 
 </p>
 </li>
-<li id="a0000000183"> <p>
+<li id="a0000000182"> <p>
 Lines 5 and 6 never occur in the worst case. 
 </p>
 </li>
@@ -1778,8 +1778,8 @@ Lines 5 and 6 never occur in the worst case.
 <p>
  The total cost of the loop is 
 </p>
-<div id="a0000000184">
-<div class="eqnarrayid" id="a0000000185"></div><div class="eqnarrayid" id="a0000000186"></div><div class="eqnarrayid" id="a0000000187"></div><div class="eqnarrayid" id="a0000000188"></div><script type="math/tex; mode=display">
+<div id="a0000000183">
+<div class="eqnarrayid" id="a0000000184"></div><div class="eqnarrayid" id="a0000000185"></div><div class="eqnarrayid" id="a0000000186"></div><div class="eqnarrayid" id="a0000000187"></div><script type="math/tex; mode=display">
 \begin{align}
 \tag{3.8} \sum _{i=2}^{n} 2 (i - 1) & = \sum _{i=1}^{n} 2 (i - 1) \\ 
 \tag{3.9}& = 2 \sum _{i=1}^ n i - 2 \sum _{i=1}^ n 1 \\ 
@@ -1795,16 +1795,16 @@ We see that the analysis gives the worst case of insertion sort as <script type=
 </p>
 </section>
 </section><section class="section">
-<h2 id="a0000000189">3.5 Computational complexity</h2>
+<h2 id="a0000000188">3.5 Computational complexity</h2>
 <p>
 In general, comparing algorithms by computing the number of elementary operations explicitly can be painfully hard to do. Also, it is often not useful. What we care about is how the cost (the number of elementary operations) grows as the instance size <script type="math/tex">n</script> grows. We therefore only care about the <em>largest</em> term in the <em>worst case</em> as <script type="math/tex">n \to \infty </script>. 
 </p>
 <section class="subsection">
-<h3 id="a0000000190">3.5.1 Big <script type="math/tex">\mathcal{O}</script> notation</h3>
+<h3 id="a0000000189">3.5.1 Big <script type="math/tex">\mathcal{O}</script> notation</h3>
 <p>
 Given two functions <script type="math/tex">f, g \colon \mathbb {R} \to \mathbb {R}</script>, we say that <script type="math/tex">f = \mathcal{O}(g)</script>, or <script type="math/tex">f</script> is of the same order as <script type="math/tex">g</script>, if <script type="math/tex">\exists n_0, c \in \mathbb {R}^+ \setminus \{ 0\} </script> such that 
 </p>
-<div class="eqn" id="a0000000191">
+<div class="eqn" id="a0000000190">
 <script type="math/tex; mode=display">\begin{equation}f(n) \le c g(n) \quad \forall n \ge n_0.\tag{3.12}\end{equation}</script>
 </div>
 <p>
@@ -1824,11 +1824,11 @@ Given two functions <script type="math/tex">f, g \colon \mathbb {R} \to \mathbb 
 The purpose of computational complexity analysis is to bound any function <script type="math/tex">f</script> in terms of a small, simple set of functions <script type="math/tex">g</script>. We want the functions to be simple to make the analysis easier. Equally, we want the specific function used to be as close as possible to <script type="math/tex">f</script>, so the bound does not over-estimate too much. 
 </p>
 </section><section class="subsection">
-<h3 id="a0000000192">3.5.2 Computational complexity</h3>
+<h3 id="a0000000191">3.5.2 Computational complexity</h3>
 <p>
 Consider two algorithms <script type="math/tex">A</script> and <script type="math/tex">B</script> that solve the same problem <script type="math/tex">P</script>. Let <script type="math/tex">f_ A(n), f_ B(n)</script> be the number of elementary operations needed for each algorithm as a function of the instance size. Then <script type="math/tex">\mathcal{O}(f_ A)</script> is the <em>computational complexity</em> of algorithm <script type="math/tex">A</script> (similarly for algorithm <script type="math/tex">B</script>), and we consider <script type="math/tex">A</script> to be <em>more efficient</em> than <script type="math/tex">B</script> if 
 </p>
-<div class="eqn" id="a0000000193">
+<div class="eqn" id="a0000000192">
 <script type="math/tex; mode=display">\begin{equation}\mathcal{O}(f_ A) < \mathcal{O}(f_ B)\tag{3.13}\end{equation}</script>
 </div>
 <p>
@@ -1837,16 +1837,16 @@ Consider two algorithms <script type="math/tex">A</script> and <script type="mat
 <p>
 Examples include 
 </p>
-<ul class="itemize" id="a0000000194">
-<li id="a0000000195"> <p>
+<ul class="itemize" id="a0000000193">
+<li id="a0000000194"> <p>
 An <script type="math/tex">\mathcal{O}(\log n)</script> algorithm is more efficient than an <script type="math/tex">\mathcal{O}(n)</script> algorithm. 
 </p>
 </li>
-<li id="a0000000196"> <p>
+<li id="a0000000195"> <p>
 An <script type="math/tex">\mathcal{O}(n^2)</script> algorithm is more efficient than an <script type="math/tex">\mathcal{O}(n^3)</script> algorithm. 
 </p>
 </li>
-<li id="a0000000197"> <p>
+<li id="a0000000196"> <p>
 An <script type="math/tex">\mathcal{O}(n^ k)</script> algorithm is more efficient than an <script type="math/tex">\mathcal{O}(2^ n)</script> algorithm, if <script type="math/tex">k \in \mathbb {N}</script>. 
 </p>
 </li>
@@ -1855,9 +1855,9 @@ An <script type="math/tex">\mathcal{O}(n^ k)</script> algorithm is more efficien
 There are two implicit assumptions we have to make about the functions <script type="math/tex">f(n)</script> to make progress. One is that the number of elementary operations is strictly non-negative so that <script type="math/tex">f \colon \mathbb {R}^+ \setminus \{  0 \} </script>. This seems natural. The other is that <script type="math/tex">f</script> is strictly increasing. This need not be true in general, but is usually a very good approximation. 
 </p>
 </section><section class="subsection">
-<h3 id="a0000000198">3.5.3 Properties of the asymptotic model</h3>
+<h3 id="a0000000197">3.5.3 Properties of the asymptotic model</h3>
 <section class="subsubsection">
-<h4 id="a0000000199">When functions are the same order</h4>
+<h4 id="a0000000198">When functions are the same order</h4>
 <p>
 <div class="thmwrapper prop_thmwrapper" id="thm:complexity:limits">
 <div class="thmheading prop_thmheading">
@@ -1870,7 +1870,7 @@ There are two implicit assumptions we have to make about the functions <script t
 <p>
  Let <script type="math/tex">f, g \colon \mathbb {R}^+ \setminus \{  0 \}  \to \mathbb {R}^+ \setminus \{  0 \} </script>. If 
 </p>
-<div class="eqn" id="a0000000200">
+<div class="eqn" id="a0000000199">
 <script type="math/tex; mode=display">\begin{equation}\lim _{n \to \infty } \frac{f(n)}{g(n)} = l \in (0, \infty )\tag{3.14}\end{equation}</script>
 </div>
 <p>
@@ -1879,7 +1879,7 @@ There are two implicit assumptions we have to make about the functions <script t
 </div>
 </div>
 </p>
-<div class="proof_wrapper" id="a0000000201">
+<div class="proof_wrapper" id="a0000000200">
 <div class="proof_heading">
 <span class="proof_caption">
     Proof.
@@ -1889,20 +1889,20 @@ There are two implicit assumptions we have to make about the functions <script t
 <p>
 The definition of the limit implies <script type="math/tex">\exists \epsilon > 0, N > 0</script> such that 
 </p>
-<div class="eqn" id="a0000000202">
+<div class="eqn" id="a0000000201">
 <script type="math/tex; mode=display">\begin{equation}\left| \frac{f(n)}{g(n)} - l \right| < \epsilon , \quad \forall n \ge N.\tag{3.15}\end{equation}</script>
 </div>
 <p>
  This is equivalent to 
 </p>
-<div class="eqn" id="a0000000203">
+<div class="eqn" id="a0000000202">
 <script type="math/tex; mode=display">\begin{equation}l - \epsilon < \frac{f(n)}{g(n)} < l + \epsilon , \quad \forall n \ge N.\tag{3.16}\end{equation}</script>
 </div>
 <p>
  We now have two cases. 
 </p>
-<ol class="enumerate" id="a0000000204" style="list-style: none">
-<li id="a0000000205" value="1">
+<ol class="enumerate" id="a0000000203" style="list-style: none">
+<li id="a0000000204" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		1.
 	</span>
@@ -1910,7 +1910,7 @@ The definition of the limit implies <script type="math/tex">\exists \epsilon > 0
 From the upper bound we have <script type="math/tex">f(n) < (l + \epsilon ) g(n)</script> for all <script type="math/tex">n \ge N</script>. By setting <script type="math/tex">n_0 = N</script> and <script type="math/tex">c = (l + \epsilon )</script>, the definition gives that <script type="math/tex">f = \mathcal{O}(g)</script>. 
 </p>
 </li>
-<li id="a0000000206" value="2">
+<li id="a0000000205" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		2.
 	</span>
@@ -1925,9 +1925,9 @@ From the lower bound we have (assuming, without loss of generality, that <script
 This shows that (non-zero!) constant factors are essentially irrelevant. 
 </p>
 </section><section class="subsubsection">
-<h4 id="a0000000207">When one function is of lower order</h4>
+<h4 id="a0000000206">When one function is of lower order</h4>
 <p>
-<div class="thmwrapper prop_thmwrapper" id="a0000000208">
+<div class="thmwrapper prop_thmwrapper" id="a0000000207">
 <div class="thmheading prop_thmheading">
 <span class="thmcaption prop_thmcaption">
     Property
@@ -1938,7 +1938,7 @@ This shows that (non-zero!) constant factors are essentially irrelevant.
 <p>
 Let <script type="math/tex">f, g \colon \mathbb {R}^+ \setminus \{  0 \}  \to \mathbb {R}^+ \setminus \{  0 \} </script>. If 
 </p>
-<div class="eqn" id="a0000000209">
+<div class="eqn" id="a0000000208">
 <script type="math/tex; mode=display">\begin{equation}\lim _{n \to \infty } \frac{f(n)}{g(n)} = 0\tag{3.17}\end{equation}</script>
 </div>
 <p>
@@ -1947,7 +1947,7 @@ Let <script type="math/tex">f, g \colon \mathbb {R}^+ \setminus \{  0 \}  \to \m
 </div>
 </div>
 </p>
-<div class="proof_wrapper" id="a0000000210">
+<div class="proof_wrapper" id="a0000000209">
 <div class="proof_heading">
 <span class="proof_caption">
     Proof.
@@ -1960,20 +1960,20 @@ This is very similar to the previous proof.
 <p>
 The definition of the limit implies <script type="math/tex">\exists \epsilon > 0, N > 0</script> such that 
 </p>
-<div class="eqn" id="a0000000211">
+<div class="eqn" id="a0000000210">
 <script type="math/tex; mode=display">\begin{equation}\left| \frac{f(n)}{g(n)} - 0 \right| < \epsilon , \quad \forall n \ge N.\tag{3.18}\end{equation}</script>
 </div>
 <p>
  This is equivalent to 
 </p>
-<div class="eqn" id="a0000000212">
+<div class="eqn" id="a0000000211">
 <script type="math/tex; mode=display">\begin{equation}- \epsilon < \frac{f(n)}{g(n)} < \epsilon , \quad \forall n \ge N.\tag{3.19}\end{equation}</script>
 </div>
 <p>
  We now have two cases. 
 </p>
-<ol class="enumerate" id="a0000000213" style="list-style: none">
-<li id="a0000000214" value="1">
+<ol class="enumerate" id="a0000000212" style="list-style: none">
+<li id="a0000000213" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		1.
 	</span>
@@ -1981,14 +1981,14 @@ The definition of the limit implies <script type="math/tex">\exists \epsilon > 0
 From the upper bound we have <script type="math/tex">f(n) < \epsilon g(n)</script> for all <script type="math/tex">n \ge N</script>. By setting <script type="math/tex">n_0 = N</script> and <script type="math/tex">c = \epsilon </script>, the definition gives that <script type="math/tex">f = \mathcal{O}(g)</script>. 
 </p>
 </li>
-<li id="a0000000215" value="2">
+<li id="a0000000214" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		2.
 	</span>
 <p>
 By contradiction, assume <script type="math/tex">g = \mathcal{O}(f)</script>. By definition, there must exist <script type="math/tex">n_0, c \in \mathbb {R}^+ \setminus \{  0 \} </script> such that <script type="math/tex">g(n) \le c f(n)</script> for all <script type="math/tex">n \ge n_0</script>. Thus 
 </p>
-<div class="eqn" id="a0000000216">
+<div class="eqn" id="a0000000215">
 <script type="math/tex; mode=display">\begin{equation}\frac{f(n)}{g(n)} \ge \frac{1}{c} > 0, \quad \forall n \ge n_0.\tag{3.20}\end{equation}</script>
 </div>
 <p>
@@ -2002,9 +2002,9 @@ By contradiction, assume <script type="math/tex">g = \mathcal{O}(f)</script>. By
 In this case we say that <script type="math/tex">f</script> is of <em>lower order</em> than <script type="math/tex">g</script>. 
 </p>
 </section><section class="subsubsection">
-<h4 id="a0000000217">Constants are irrelevant</h4>
+<h4 id="a0000000216">Constants are irrelevant</h4>
 <p>
-<div class="thmwrapper prop_thmwrapper" id="a0000000218">
+<div class="thmwrapper prop_thmwrapper" id="a0000000217">
 <div class="thmheading prop_thmheading">
 <span class="thmcaption prop_thmcaption">
     Property
@@ -2015,13 +2015,13 @@ In this case we say that <script type="math/tex">f</script> is of <em>lower orde
 <p>
 Assume <script type="math/tex">a, b \in \mathbb {R}^+ \setminus \{  0 \} </script>. Then 
 </p>
-<div class="eqn" id="a0000000219">
+<div class="eqn" id="a0000000218">
 <script type="math/tex; mode=display">\begin{equation}a f(n) + b = \mathcal{O}(f(n))\tag{3.21}\end{equation}</script>
 </div>
 </div>
 </div>
 </p>
-<div class="proof_wrapper" id="a0000000220">
+<div class="proof_wrapper" id="a0000000219">
 <div class="proof_heading">
 <span class="proof_caption">
     Proof.
@@ -2031,15 +2031,15 @@ Assume <script type="math/tex">a, b \in \mathbb {R}^+ \setminus \{  0 \} </scrip
 <p>
 This follows from theorem <a class="ref" href="../../notes/course_notes/index.html#thm:complexity:limits">5.1</a>, as 
 </p>
-<div class="eqn" id="a0000000221">
+<div class="eqn" id="a0000000220">
 <script type="math/tex; mode=display">\begin{equation}\lim _{n\to \infty } \frac{a f(n) + b}{f(n)} = a \in (0, \infty ).\tag{3.22}\end{equation}</script>
 </div>
 </div>
 </div>
 </section><section class="subsubsection">
-<h4 id="a0000000222">All logarithms are the same</h4>
+<h4 id="a0000000221">All logarithms are the same</h4>
 <p>
-<div class="thmwrapper prop_thmwrapper" id="a0000000223">
+<div class="thmwrapper prop_thmwrapper" id="a0000000222">
 <div class="thmheading prop_thmheading">
 <span class="thmcaption prop_thmcaption">
     Property
@@ -2050,13 +2050,13 @@ This follows from theorem <a class="ref" href="../../notes/course_notes/index.h
 <p>
 Assume <script type="math/tex">a, b \in \mathbb {R}^+ \setminus \{  0 \} </script>. Then 
 </p>
-<div class="eqn" id="a0000000224">
+<div class="eqn" id="a0000000223">
 <script type="math/tex; mode=display">\begin{equation}\log _ a n = \mathcal{O} \left( \log _ b n \right).\tag{3.23}\end{equation}</script>
 </div>
 </div>
 </div>
 </p>
-<div class="proof_wrapper" id="a0000000225">
+<div class="proof_wrapper" id="a0000000224">
 <div class="proof_heading">
 <span class="proof_caption">
     Proof.
@@ -2066,7 +2066,7 @@ Assume <script type="math/tex">a, b \in \mathbb {R}^+ \setminus \{  0 \} </scrip
 <p>
 This follows from the previous case, as 
 </p>
-<div class="eqn" id="a0000000226">
+<div class="eqn" id="a0000000225">
 <script type="math/tex; mode=display">\begin{equation}\log _ a n = (\frac{1}{\log _ b a}) \log _ b n\tag{3.24}\end{equation}</script>
 </div>
 <p>
@@ -2075,9 +2075,9 @@ This follows from the previous case, as
 </div>
 </div>
 </section><section class="subsubsection">
-<h4 id="a0000000227">Lower order terms are irrelevant</h4>
+<h4 id="a0000000226">Lower order terms are irrelevant</h4>
 <p>
-<div class="thmwrapper prop_thmwrapper" id="a0000000228">
+<div class="thmwrapper prop_thmwrapper" id="a0000000227">
 <div class="thmheading prop_thmheading">
 <span class="thmcaption prop_thmcaption">
     Property
@@ -2088,21 +2088,21 @@ This follows from the previous case, as
 <p>
 If <script type="math/tex">g</script> is of lower order than <script type="math/tex">f</script> then 
 </p>
-<div class="eqn" id="a0000000229">
+<div class="eqn" id="a0000000228">
 <script type="math/tex; mode=display">\begin{equation}f(n) + g(n) = \mathcal{O}(f).\tag{3.25}\end{equation}</script>
 </div>
 </div>
 </div>
 </p>
-<div class="proof_wrapper" id="a0000000230">
+<div class="proof_wrapper" id="a0000000229">
 <div class="proof_heading">
 <span class="proof_caption">
     Proof.
     </span>
 </div>
 <div class="proof_content">
-<div id="a0000000231">
-<div class="eqnarrayid" id="a0000000232"></div><div class="eqnarrayid" id="a0000000233"></div><script type="math/tex; mode=display">
+<div id="a0000000230">
+<div class="eqnarrayid" id="a0000000231"></div><div class="eqnarrayid" id="a0000000232"></div><script type="math/tex; mode=display">
 \begin{align}
 \tag{3.26} \lim _{n\to \infty } \frac{f(n) + g(n)}{f(n)} & = \lim _{n\to \infty } \left( 1 + \frac{g(n)}{f(n)} \right) \\ 
 \tag{3.27}& = 1. 
@@ -2115,9 +2115,9 @@ If <script type="math/tex">g</script> is of lower order than <script type="math/
 </div>
 </div>
 </section><section class="subsubsection">
-<h4 id="a0000000234">Shifts are irrelevant</h4>
+<h4 id="a0000000233">Shifts are irrelevant</h4>
 <p>
-<div class="thmwrapper prop_thmwrapper" id="a0000000235">
+<div class="thmwrapper prop_thmwrapper" id="a0000000234">
 <div class="thmheading prop_thmheading">
 <span class="thmcaption prop_thmcaption">
     Property
@@ -2128,16 +2128,16 @@ If <script type="math/tex">g</script> is of lower order than <script type="math/
 <p>
 For a monotone increasing function <script type="math/tex">f</script>, 
 </p>
-<div class="eqn" id="a0000000236">
+<div class="eqn" id="a0000000235">
 <script type="math/tex; mode=display">\begin{equation}f(n + a) = \mathcal{O}(f).\tag{3.28}\end{equation}</script>
 </div>
 </div>
 </div>
 </p>
 </section><section class="subsubsection">
-<h4 id="a0000000237">Rounding operators are irrelevant</h4>
+<h4 id="a0000000236">Rounding operators are irrelevant</h4>
 <p>
-<div class="thmwrapper prop_thmwrapper" id="a0000000238">
+<div class="thmwrapper prop_thmwrapper" id="a0000000237">
 <div class="thmheading prop_thmheading">
 <span class="thmcaption prop_thmcaption">
     Property
@@ -2148,13 +2148,13 @@ For a monotone increasing function <script type="math/tex">f</script>,
 <p>
 The ceiling operator <script type="math/tex">\lceil n \rceil </script> returns the smallest integer greater than <script type="math/tex">n</script>. We have 
 </p>
-<div class="eqn" id="a0000000239">
+<div class="eqn" id="a0000000238">
 <script type="math/tex; mode=display">\begin{equation}\lceil f(n) \rceil = \mathcal{O}(f).\tag{3.29}\end{equation}</script>
 </div>
 </div>
 </div>
 </p>
-<div class="proof_wrapper" id="a0000000240">
+<div class="proof_wrapper" id="a0000000239">
 <div class="proof_heading">
 <span class="proof_caption">
     Proof.
@@ -2164,7 +2164,7 @@ The ceiling operator <script type="math/tex">\lceil n \rceil </script> returns t
 <p>
 This follows from 
 </p>
-<div class="eqn" id="a0000000241">
+<div class="eqn" id="a0000000240">
 <script type="math/tex; mode=display">\begin{equation}\lceil f(n) \rceil \le f(n) + 1 = \mathcal{O}(f).\tag{3.30}\end{equation}</script>
 </div>
 </div>
@@ -2172,12 +2172,12 @@ This follows from
 </section>
 </section>
 </section><section class="section">
-<h2 id="a0000000242">3.6 Cobham-Edmonds thesis</h2>
+<h2 id="a0000000241">3.6 Cobham-Edmonds thesis</h2>
 <p>
 A suggestion from 1965 by Alan Cobham and Jack Edmonds is that a problem <script type="math/tex">P</script> is <em>tractable</em> if 
 </p>
-<ol class="enumerate" id="a0000000243" style="list-style: none">
-<li id="a0000000244" value="1">
+<ol class="enumerate" id="a0000000242" style="list-style: none">
+<li id="a0000000243" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		1.
 	</span>
@@ -2185,7 +2185,7 @@ A suggestion from 1965 by Alan Cobham and Jack Edmonds is that a problem <script
 there is an algorithm <script type="math/tex">A</script> that solves <script type="math/tex">P</script>; 
 </p>
 </li>
-<li id="a0000000245" value="2">
+<li id="a0000000244" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		2.
 	</span>
@@ -2203,7 +2203,7 @@ This chapter has shown that the sorting problem is tractable, by constructing tw
 </section><!-- Latex Chapter/Part -->
 <h1 id="chap:simplex">The Simplex Method</h1>
 <section class="section">
-<h2 id="a0000000246">4.1 Recap</h2>
+<h2 id="a0000000245">4.1 Recap</h2>
 <p>
 In the previous chapters we introduced the linear programming problem. We saw how this could be solved (graphically) for two variables, and also constructed an impractical, brute-force method that would work (very slowly) for the general case. 
 </p>
@@ -2213,8 +2213,8 @@ Problems of current interest can have thousands of constraints and millions of v
 <p>
 There are a number of steps we need to complete. 
 </p>
-<ol class="enumerate" id="a0000000247" style="list-style: none">
-<li id="a0000000248" value="1">
+<ol class="enumerate" id="a0000000246" style="list-style: none">
+<li id="a0000000247" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		1.
 	</span>
@@ -2222,7 +2222,7 @@ There are a number of steps we need to complete.
 How do we characterise a vertex (algebraically)? 
 </p>
 </li>
-<li id="a0000000249" value="2">
+<li id="a0000000248" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		2.
 	</span>
@@ -2230,7 +2230,7 @@ How do we characterise a vertex (algebraically)?
 How do we find a vertex to start from? 
 </p>
 </li>
-<li id="a0000000250" value="3">
+<li id="a0000000249" value="3">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		3.
 	</span>
@@ -2238,7 +2238,7 @@ How do we find a vertex to start from?
 How do we verify if the current vertex is optimal? 
 </p>
 </li>
-<li id="a0000000251" value="4">
+<li id="a0000000250" value="4">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		4.
 	</span>
@@ -2248,7 +2248,7 @@ How do we move from one vertex to the next?
 </li>
 </ol>
 </section><section class="section">
-<h2 id="a0000000252">4.2 Setup and assumptions</h2>
+<h2 id="a0000000251">4.2 Setup and assumptions</h2>
 <p>
 In this chapter we will use the standard matrix form, 
 </p>
@@ -2261,8 +2261,8 @@ In this chapter we will use the standard matrix form,
 <p>
 We make three assumptions: 
 </p>
-<ol class="enumerate" id="a0000000253" style="list-style: none">
-<li id="a0000000254" value="1">
+<ol class="enumerate" id="a0000000252" style="list-style: none">
+<li id="a0000000253" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		1.
 	</span>
@@ -2270,7 +2270,7 @@ We make three assumptions:
 <script type="math/tex">b \ge 0</script>. If this is not true for some row <script type="math/tex">i</script> so that <script type="math/tex">b_ i < 0</script> we can multiply that row (both <script type="math/tex">b_ i</script> and <script type="math/tex">A_{ij}</script> for all columns <script type="math/tex">j</script>) by <script type="math/tex">-1</script>. 
 </p>
 </li>
-<li id="a0000000255" value="2">
+<li id="a0000000254" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		2.
 	</span>
@@ -2278,7 +2278,7 @@ We make three assumptions:
 <script type="math/tex">m < n</script>. That is, the number of constraints is less than the number of variables. If this is not true then the linear system defined by <script type="math/tex">A x = b</script> is either square or overdetermined, implying one or no solutions (the feasible region is a single point or empty). 
 </p>
 </li>
-<li id="a0000000256" value="3">
+<li id="a0000000255" value="3">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		3.
 	</span>
@@ -2293,8 +2293,8 @@ The second assumption may seem to contradict earlier examples where there were m
 <p>
 The use of the third assumption can be checked by assuming <script type="math/tex">A</script> is not of full row rank. In that case we can use row operations to transform the system to <script type="math/tex">A' x = b'</script>, where the matrix <script type="math/tex">A'</script> contains two rows <script type="math/tex">i</script> and <script type="math/tex">k</script> such that 
 </p>
-<div id="a0000000257">
-<div class="eqnarrayid" id="a0000000258"></div><div class="eqnarrayid" id="a0000000259"></div><div class="eqnarrayid" id="a0000000260"></div><script type="math/tex; mode=display">
+<div id="a0000000256">
+<div class="eqnarrayid" id="a0000000257"></div><div class="eqnarrayid" id="a0000000258"></div><div class="eqnarrayid" id="a0000000259"></div><script type="math/tex; mode=display">
 \begin{align}
 \tag{4.2} a’_ i x & = b’_ i, \\ 
 \tag{4.3}a’_ k x & = b’_ k, \\ 
@@ -2305,8 +2305,8 @@ The use of the third assumption can be checked by assuming <script type="math/te
 <p>
  There are then two cases. 
 </p>
-<ol class="enumerate" id="a0000000261" style="list-style: none">
-<li id="a0000000262" value="1">
+<ol class="enumerate" id="a0000000260" style="list-style: none">
+<li id="a0000000261" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		1.
 	</span>
@@ -2314,7 +2314,7 @@ The use of the third assumption can be checked by assuming <script type="math/te
 <script type="math/tex">b'_ i = b'_ k</script>: the two constraints are identical and one can be dropped from the problem. 
 </p>
 </li>
-<li id="a0000000263" value="2">
+<li id="a0000000262" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		2.
 	</span>
@@ -2327,7 +2327,7 @@ The use of the third assumption can be checked by assuming <script type="math/te
  So the third assumption stops us from considering infeasible problems and ensures constraints are not repeating information. 
 </p>
 </section><section class="section">
-<h2 id="a0000000264">4.3 Basic matrices</h2>
+<h2 id="a0000000263">4.3 Basic matrices</h2>
 <p>
 There is a general mathematical strategy of solving a complex problem by first solving a simple case, then transforming the general case to the simple one. This can seem indirect. The next few sections will build up a simple case for linear programs. 
 </p>
@@ -2337,16 +2337,16 @@ Let <script type="math/tex">B \subseteq \{  1, \dots , n \} </script> be a subse
 <p>
 A <em>basic matrix</em> <script type="math/tex">A_ B</script> is the submatrix of <script type="math/tex">A</script> with <em>linearly independent columns</em> that is obtained by dropping every column with index not in <script type="math/tex">B</script>. If <script type="math/tex">A_ B</script> is a basic matrix then 
 </p>
-<ul class="itemize" id="a0000000265">
-<li id="a0000000266"> <p>
+<ul class="itemize" id="a0000000264">
+<li id="a0000000265"> <p>
 <script type="math/tex">A_ B</script> is square; 
 </p>
 </li>
-<li id="a0000000267"> <p>
+<li id="a0000000266"> <p>
 <script type="math/tex">A_ B</script> has full row and column rank (by the assumptions); 
 </p>
 </li>
-<li id="a0000000268"> <p>
+<li id="a0000000267"> <p>
 <script type="math/tex">A_ B</script> is invertible, as it has full row and column rank. 
 </p>
 </li>
@@ -2354,8 +2354,8 @@ A <em>basic matrix</em> <script type="math/tex">A_ B</script> is the submatrix o
 <p>
 We can use this construction to split, of <em>partition</em>, the linear program. Let <script type="math/tex">N = \{ 1, \dots , n\}  \setminus B</script> be the complement of <script type="math/tex">B</script>. Let <script type="math/tex">c_ B, x_ B, A_ B</script> be the components (for the vectors <script type="math/tex">c, x</script>) or columns (for the matrix <script type="math/tex">A</script>) that are indexed by <script type="math/tex">B</script>, and <script type="math/tex">c_ N, x_ N, A_ N</script> be the components (for the vectors <script type="math/tex">c, x</script>) or columns (for the matrix <script type="math/tex">A</script>) that are indexed by <script type="math/tex">N</script>. Then we can use column operations on the linear program to re-order the vectors and matrices, writing 
 </p>
-<div id="a0000000269">
-<div class="eqnarrayid" id="a0000000270"></div><div class="eqnarrayid" id="a0000000271"></div><div class="eqnarrayid" id="a0000000272"></div><script type="math/tex; mode=display">
+<div id="a0000000268">
+<div class="eqnarrayid" id="a0000000269"></div><div class="eqnarrayid" id="a0000000270"></div><div class="eqnarrayid" id="a0000000271"></div><script type="math/tex; mode=display">
 \begin{align}
 \tag{4.5} c & = (c_ B, c_ N), \\ 
 \tag{4.6}A & = (A_ B, A_ N), \\ 
@@ -2366,7 +2366,7 @@ We can use this construction to split, of <em>partition</em>, the linear program
 <p>
 This means that our standard matrix form description of the linear program becomes 
 </p>
-<div class="eqn" id="a0000000273">
+<div class="eqn" id="a0000000272">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl} \min & \begin{pmatrix}  c_ B 
 
 &  c_ N 
@@ -2396,14 +2396,14 @@ This means that our standard matrix form description of the linear program becom
 <p>
  Rewriting this by expanding out the matrix multiplications gives 
 </p>
-<div class="eqn" id="a0000000274">
+<div class="eqn" id="a0000000273">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl} \min &  c_ B x_ B + c_ N x_ N & & \\ \text{subject to} &  A_ B x_ B + A_ N x_ N &  = &  b \\ &  x_ B &  \ge &  0 \\ &  x_ N &  \ge &  0. \end{array}\tag{4.9}\end{equation}</script>
 </div>
 <p>
 Why have we made the problem more complicated? Because the basic matrix is invertible, we can <em>directly solve</em> for the optimal basic solution. We have 
 </p>
-<div id="a0000000275">
-<div class="eqnarrayid" id="a0000000276"></div><div class="eqnarrayid" id="a0000000277"></div><div class="eqnarrayid" id="a0000000278"></div><script type="math/tex; mode=display">
+<div id="a0000000274">
+<div class="eqnarrayid" id="a0000000275"></div><div class="eqnarrayid" id="a0000000276"></div><div class="eqnarrayid" id="a0000000277"></div><script type="math/tex; mode=display">
 \begin{align}
 \tag{4.10}& &  A x & = b \\ 
 \tag{4.11}\iff & &  A_ B x_ B + A_ N x_ N & = b \\ 
@@ -2414,8 +2414,8 @@ Why have we made the problem more complicated? Because the basic matrix is inver
 <p>
  This allows us to write the objective function as 
 </p>
-<div id="a0000000279">
-<div class="eqnarrayid" id="a0000000280"></div><div class="eqnarrayid" id="a0000000281"></div><script type="math/tex; mode=display">
+<div id="a0000000278">
+<div class="eqnarrayid" id="a0000000279"></div><div class="eqnarrayid" id="a0000000280"></div><script type="math/tex; mode=display">
 \begin{align}
 \tag{4.13} c x & = c_ B x_ B + c_ N x_ N \\ 
 \tag{4.14}& = c_ B A_ B^{-1} b + \left( c_ N - c_ B A_ B^{-1} A_ N \right) x_ N. 
@@ -2432,26 +2432,26 @@ This defines the <em>basic form</em> of a standard form linear program: if <scri
 <script type="math/tex; mode=display">\begin{equation}\label{eq:simplex:basic-form} \begin{array}{l@{\quad }rcl} \min &  c_ B A_ B^{-1} b + \left( c_ N - c_ B A_ B^{-1} A_ N \right) x_ N & +&  \left( c_ B - c_ B A_ B^{-1} A_ B \right) x_ B \\ \text{subject to} &  x_ B + A_ B^{-1} A_ N x_ N &  = &  A_ B^{-1} b \\ &  x_ B &  \ge &  0 \\ &  x_ N &  \ge &  0. \end{array}\tag{4.15}\end{equation}</script>
 </div>
 </section><section class="section">
-<h2 id="a0000000282">4.4 Basic solutions</h2>
+<h2 id="a0000000281">4.4 Basic solutions</h2>
 <p>
 When the linear program is in basic form we call <script type="math/tex">x_ B</script> the <em>basic variables</em> and <script type="math/tex">x_ N</script> the <em>non-basic variables</em>. If there is a solution with <script type="math/tex">x_ N = 0</script> we call it a <em>basic solution</em>. A basic solution need not satisfy <script type="math/tex">x_ B \ge 0</script> and so it may not fall in the feasible region. If there is a solution <script type="math/tex">x = (x_ B, x_ N)</script> with <script type="math/tex">x_ N = 0</script> and also <script type="math/tex">x_ B \ge 0</script> then it is called <em>basic feasible</em>. 
 </p>
 <p>
 Note that the constraints automatically imply that if the solution is basic and so <script type="math/tex">x_ N = 0</script>, then 
 </p>
-<div class="eqn" id="a0000000283">
+<div class="eqn" id="a0000000282">
 <script type="math/tex; mode=display">\begin{equation}x_ B = A_ B^{-1} b.\tag{4.16}\end{equation}</script>
 </div>
 <p>
  Basic solutions can be constructed by solving the linear system defined by the basic matrix. 
 </p>
 <section class="subsection">
-<h3 id="a0000000284">4.4.1 Basic solutions and vertices</h3>
+<h3 id="a0000000283">4.4.1 Basic solutions and vertices</h3>
 <p>
 There is a direct link between basic solutions and vertices. 
 </p>
 <p>
-<div class="thmwrapper thm_thmwrapper" id="a0000000285">
+<div class="thmwrapper thm_thmwrapper" id="a0000000284">
 <div class="thmheading thm_thmheading">
 <span class="thmcaption thm_thmcaption">
     Theorem
@@ -2465,7 +2465,7 @@ There is a direct link between basic solutions and vertices.
 </div>
 </div>
 </p>
-<div class="proof_wrapper" id="a0000000286">
+<div class="proof_wrapper" id="a0000000285">
 <div class="proof_heading">
 <span class="proof_caption">
     Proof.
@@ -2478,13 +2478,13 @@ First prove the implication using contradiction.
 <p>
 Let <script type="math/tex">x</script> be a basic feasible solution with <script type="math/tex">x = (x_ B, x_ N)</script>. Assume, by contradiction, that <script type="math/tex">x</script> is not a vertex. As the feasible region is convex, if <script type="math/tex">x</script> is not a vertex then there are two distinct points <script type="math/tex">y, z</script>, both distinct from <script type="math/tex">x</script>, such that 
 </p>
-<div class="eqn" id="a0000000287">
+<div class="eqn" id="a0000000286">
 <script type="math/tex; mode=display">\begin{equation}x = \lambda y + (1 - \lambda ) z, \quad \lambda \in (0, 1).\tag{4.17}\end{equation}</script>
 </div>
 <p>
  We can split both points in the same way as the basic feasible solution <script type="math/tex">x</script>, as <script type="math/tex">y = (y_ B, y_ N)</script> and <script type="math/tex">z = (z_ B, z_ N)</script>. This gives 
 </p>
-<div class="eqn" id="a0000000288">
+<div class="eqn" id="a0000000287">
 <script type="math/tex; mode=display">\begin{equation}x_ N = \lambda y_ N + (1 - \lambda ) z_ N, \quad \lambda \in (0, 1).\tag{4.18}\end{equation}</script>
 </div>
 <p>
@@ -2496,7 +2496,7 @@ Similarly, as <script type="math/tex">y</script> and <script type="math/tex">z</
 <p>
 Next prove that a vertex is a basic feasible solution. Define <script type="math/tex">\hat{B} \subseteq \{ 1, \dots , n \} </script> as the set of indexes of the components of the vertex <script type="math/tex">x</script> which are positive, <script type="math/tex">\hat{B} = \{  i \colon x_ i > 0 \} </script>. Let <script type="math/tex">\hat{N}</script> be the complement, <script type="math/tex">\hat{N} = \{ 1, \dots , n \}  \setminus \hat{B}</script>. Write <script type="math/tex">x = (x_{\hat{B}}, x_{\hat{N}})</script> and re-write <script type="math/tex">A x = b</script> as 
 </p>
-<div class="eqn" id="a0000000289">
+<div class="eqn" id="a0000000288">
 <script type="math/tex; mode=display">\begin{equation}A_{\hat{B}} x_{\hat{B}} + A_{\hat{N}} x_{\hat{N}} = b.\tag{4.19}\end{equation}</script>
 </div>
 <p>
@@ -2505,19 +2505,19 @@ Next prove that a vertex is a basic feasible solution. Define <script type="math
 <p>
 We need to show that <script type="math/tex">A_{\hat{B}}</script> is a basic matrix. We do this by contradiction. Assume the columns of <script type="math/tex">A_{\hat{B}}</script> are not linearly independent. Then there is some <script type="math/tex">y_{\hat{B}} \ne 0</script> such that <script type="math/tex">A_{\hat{B}} y_{\hat{B}} = 0</script>. By construction <script type="math/tex">x_{\hat{B}} > 0</script>. Therefore there is some constant <script type="math/tex">\epsilon > 0</script> such that 
 </p>
-<div class="eqn" id="a0000000290">
+<div class="eqn" id="a0000000289">
 <script type="math/tex; mode=display">\begin{equation}x_{\hat{B}} - \epsilon y_{\hat{B}} \ge 0 \;  \text{and} \;  x_{\hat{B}} + \epsilon y_{\hat{B}} \ge 0.\tag{4.20}\end{equation}</script>
 </div>
 <p>
  Also by construction we have 
 </p>
-<div class="eqn" id="a0000000291">
+<div class="eqn" id="a0000000290">
 <script type="math/tex; mode=display">\begin{equation}A_{\hat{B}} \left( x_{\hat{B}} \pm \epsilon y_{\hat{B}} \right) = b.\tag{4.21}\end{equation}</script>
 </div>
 <p>
  Thus the two distinct points <script type="math/tex">(x_{\hat{B}} \pm \epsilon y_{\hat{B}}, 0)</script> are feasible solutions to <script type="math/tex">A x = b</script>. Finally, note that 
 </p>
-<div class="eqn" id="a0000000292">
+<div class="eqn" id="a0000000291">
 <script type="math/tex; mode=display">\begin{equation}x = (x_{\hat{B}}, 0) = \frac{1}{2} \left( x_{\hat{B}} - \epsilon y_{\hat{B}} \right) + \frac{1}{2} \left( x_{\hat{B}} + \epsilon y_{\hat{B}} \right)\tag{4.22}\end{equation}</script>
 </div>
 <p>
@@ -2530,23 +2530,23 @@ To show that <script type="math/tex">A_{\hat{B}}</script> is basic we need to sh
 </div>
 </section>
 </section><section class="section">
-<h2 id="a0000000293">4.5 Optimality</h2>
+<h2 id="a0000000292">4.5 Optimality</h2>
 <p>
 The previous sections have shown how to algebraically characterise a vertex (and we remember that the optimal solution must lie on some vertex): a vertex corresponds to a basic feasible solution. We now want to understand how to check if a vertex (or equivalently a basic feasible solution) is optimal, without enumerating all cases. 
 </p>
 <section class="subsection">
-<h3 id="a0000000294">4.5.1 Reduced costs</h3>
+<h3 id="a0000000293">4.5.1 Reduced costs</h3>
 <p>
 Remember that the linear program can be written in basic form, with some basic matrix <script type="math/tex">A_ B</script>, as 
 </p>
-<div class="eqn" id="a0000000295">
-<script type="math/tex; mode=display">\begin{equation}\tag{\ref{eq:simplex:basic-form}} \begin{array}{l@{\quad }rcl} \min &  c_ B A_ B^{-1} b + \left( c_ N - c_ B A_ B^{-1} A_ N \right) x_ N & +&  \left( c_ B - c_ B A_ B^{-1} A_ B \right) x_ B \\ \text{subject to} &  x_ B + A_ B^{-1} A_ N x_ N &  = &  A_ B^{-1} b \\ &  x_ B &  \ge &  0 \\ &  x_ N &  \ge &  0. \end{array}\tag{4.23}\end{equation}</script>
+<div class="eqn" id="eq:simplex:basic-form-repeat1">
+<script type="math/tex; mode=display">\begin{equation}\label{eq:simplex:basic-form-repeat1} \begin{array}{l@{\quad }rcl} \min &  c_ B A_ B^{-1} b + \left( c_ N - c_ B A_ B^{-1} A_ N \right) x_ N & +&  \left( c_ B - c_ B A_ B^{-1} A_ B \right) x_ B \\ \text{subject to} &  x_ B + A_ B^{-1} A_ N x_ N &  = &  A_ B^{-1} b \\ &  x_ B &  \ge &  0 \\ &  x_ N &  \ge &  0. \end{array}\tag{4.23}\end{equation}</script>
 </div>
 <p>
  Certain terms are sufficiently important to get names, which are all types of <em>reduced costs</em>: 
 </p>
-<div id="a0000000296">
-<div class="eqnarrayid" id="a0000000297"></div><div class="eqnarrayid" id="a0000000298"></div><div class="eqnarrayid" id="a0000000299"></div><script type="math/tex; mode=display">
+<div id="a0000000294">
+<div class="eqnarrayid" id="a0000000295"></div><div class="eqnarrayid" id="a0000000296"></div><div class="eqnarrayid" id="a0000000297"></div><script type="math/tex; mode=display">
 \begin{align}
 \tag{4.24} \bar{c}_ N & = c_ N - c_ B A_ B^{-1} A_ N &  \text{reduced costs of non-basic variables}, \\ 
 \tag{4.25}\bar{c}_ B & = c_ B - c_ B A_ B^{-1} A_ B &  \text{reduced costs of basic variables}, \\ 
@@ -2570,9 +2570,9 @@ In terms of the reduced costs the basic form linear program is
 Therefore, if we start from a basic feasible solution (where, by construction, <script type="math/tex">x_ N = 0</script>), we can improve (make smaller) the objective function by increasing any component <script type="math/tex">(x_ N)_ j</script> where the corresponding component of the reduced cost is negative, <script type="math/tex">(\bar{c}_ N)_ j < 0</script>. 
 </p>
 </section><section class="subsection">
-<h3 id="a0000000300">4.5.2 Optimality test</h3>
+<h3 id="a0000000298">4.5.2 Optimality test</h3>
 <p>
-<div class="thmwrapper thm_thmwrapper" id="a0000000301">
+<div class="thmwrapper thm_thmwrapper" id="a0000000299">
 <div class="thmheading thm_thmheading">
 <span class="thmcaption thm_thmcaption">
     Theorem
@@ -2586,7 +2586,7 @@ If, given a basic feasible solution <script type="math/tex">x</script> with basi
 </div>
 </div>
 </p>
-<div class="proof_wrapper" id="a0000000302">
+<div class="proof_wrapper" id="a0000000300">
 <div class="proof_heading">
 <span class="proof_caption">
     Proof.
@@ -2596,8 +2596,8 @@ If, given a basic feasible solution <script type="math/tex">x</script> with basi
 <p>
 We show that, for any other feasible solution <script type="math/tex">y</script>, <script type="math/tex">c y \ge c x</script>. To do this define <script type="math/tex">d = y - x</script>. As 
 </p>
-<div id="a0000000303">
-<div class="eqnarrayid" id="a0000000304"></div><div class="eqnarrayid" id="a0000000305"></div><div class="eqnarrayid" id="a0000000306"></div><script type="math/tex; mode=display">
+<div id="a0000000301">
+<div class="eqnarrayid" id="a0000000302"></div><div class="eqnarrayid" id="a0000000303"></div><div class="eqnarrayid" id="a0000000304"></div><script type="math/tex; mode=display">
 \begin{align}
 \tag{4.28}& &  c y & \ge c x \\ 
 \tag{4.29}\iff & &  c (y - x) & \ge 0 \\ 
@@ -2611,8 +2611,8 @@ We show that, for any other feasible solution <script type="math/tex">y</script>
 <p>
 Since <script type="math/tex">x</script> and <script type="math/tex">y</script> are both feasable solutions we have <script type="math/tex">A x = b</script> and <script type="math/tex">A y = b</script>, implying 
 </p>
-<div id="a0000000307">
-<div class="eqnarrayid" id="a0000000308"></div><div class="eqnarrayid" id="a0000000309"></div><div class="eqnarrayid" id="a0000000310"></div><script type="math/tex; mode=display">
+<div id="a0000000305">
+<div class="eqnarrayid" id="a0000000306"></div><div class="eqnarrayid" id="a0000000307"></div><div class="eqnarrayid" id="a0000000308"></div><script type="math/tex; mode=display">
 \begin{align}
 \tag{4.31} A d & = A(x - y) \\ 
 \tag{4.32}& = A x - A y \\ 
@@ -2623,8 +2623,8 @@ Since <script type="math/tex">x</script> and <script type="math/tex">y</script> 
 <p>
  Writing <script type="math/tex">d = (d_ B, d_ N)</script> as usual we have 
 </p>
-<div id="a0000000311">
-<div class="eqnarrayid" id="a0000000312"></div><div class="eqnarrayid" id="a0000000313"></div><script type="math/tex; mode=display">
+<div id="a0000000309">
+<div class="eqnarrayid" id="a0000000310"></div><div class="eqnarrayid" id="a0000000311"></div><script type="math/tex; mode=display">
 \begin{align}
 \tag{4.34}& &  A d & = 0 \\ 
 \tag{4.35}\iff & &  A_ B d_ B + A_ N d_ N & = 0. 
@@ -2634,14 +2634,14 @@ Since <script type="math/tex">x</script> and <script type="math/tex">y</script> 
 <p>
  The basic matrix <script type="math/tex">A_ B</script> is non-singular by construction, so 
 </p>
-<div class="eqn" id="a0000000314">
+<div class="eqn" id="a0000000312">
 <script type="math/tex; mode=display">\begin{equation}d_ B = - A_ B^{-1} A_ N d_ N.\tag{4.36}\end{equation}</script>
 </div>
 <p>
  We can then evaluate 
 </p>
-<div id="a0000000315">
-<div class="eqnarrayid" id="a0000000316"></div><div class="eqnarrayid" id="a0000000317"></div><div class="eqnarrayid" id="a0000000318"></div><div class="eqnarrayid" id="a0000000319"></div><script type="math/tex; mode=display">
+<div id="a0000000313">
+<div class="eqnarrayid" id="a0000000314"></div><div class="eqnarrayid" id="a0000000315"></div><div class="eqnarrayid" id="a0000000316"></div><div class="eqnarrayid" id="a0000000317"></div><script type="math/tex; mode=display">
 \begin{align}
 \tag{4.37} c d & = c_ B d_ B + c_ N d_ N \\ 
 \tag{4.38}& = c_ B \left(- A_ B^{-1} A_ N d_ N\right) + c_ N d_ N \\ 
@@ -2660,7 +2660,7 @@ We note that <script type="math/tex">y</script> is a feasible solution which imp
 </div>
 </section>
 </section><section class="section">
-<h2 id="a0000000320">4.6 Moving between vertices</h2>
+<h2 id="a0000000318">4.6 Moving between vertices</h2>
 <p>
 We now have both a characterisation of vertices (as basic feasible solutions) and a test of their optimality (the associated reduced cost vector is non-negative). If we can easily move from one vertex to another then we have (most of) the ingredients of an algorithm. 
 </p>
@@ -2668,29 +2668,29 @@ We now have both a characterisation of vertices (as basic feasible solutions) an
 We know intuitively that a vertex is connected to a neighbouring vertex by an edge; a one dimensional boundary line of the feasible region. We know a vertex corresponds to a basic feasible solution. The basis <script type="math/tex">B</script> is the set of indices defining which variables are basic at a particular vertex, and has complement <script type="math/tex">N</script>. If we move along an edge we might expect to only be changing two variables (in an appropriate coordinate system the one dimensional line defining the edge lies in a two dimensional plane spanned by two basis vectors). Therefore, moving along an edge from one vertex to another corresponds to <em>swapping one non-basic variable with one basic variable</em>. This is equivalent to swapping one entry of <script type="math/tex">N</script> with one entry of <script type="math/tex">B</script>. 
 </p>
 <section class="subsection">
-<h3 id="a0000000321">4.6.1 Minimum ratio test</h3>
+<h3 id="a0000000319">4.6.1 Minimum ratio test</h3>
 <p>
 We go back to our linear program 
 </p>
-<div class="eqn" id="a0000000322">
-<script type="math/tex; mode=display">\begin{equation}\tag{\ref{eq:simplex:basic-reduced-form}} \begin{array}{l@{\quad }rcl} \min &  c_ B A_ B^{-1} b + \bar{c}_ N x_ N + \bar{c}_ B x_ B & & \\ \text{subject to} &  x_ B + A_ B^{-1} A_ N x_ N &  = &  A_ B^{-1} b \\ &  x_ B &  \ge &  0 \\ &  x_ N &  \ge &  0. \end{array}\tag{4.41}\end{equation}</script>
+<div class="eqn" id="eq:simplex:basic-reduced-form-repeat2">
+<script type="math/tex; mode=display">\begin{equation}\label{eq:simplex:basic-reduced-form-repeat2} \begin{array}{l@{\quad }rcl} \min &  c_ B A_ B^{-1} b + \bar{c}_ N x_ N + \bar{c}_ B x_ B & & \\ \text{subject to} &  x_ B + A_ B^{-1} A_ N x_ N &  = &  A_ B^{-1} b \\ &  x_ B &  \ge &  0 \\ &  x_ N &  \ge &  0. \end{array}\tag{4.41}\end{equation}</script>
 </div>
 <p>
  For compactness define <script type="math/tex">\bar{A} = A_ B^{-1} A_ N</script> and <script type="math/tex">\bar{b} = A_ B^{-1} b</script>, so the system of equations becomes 
 </p>
-<div class="eqn" id="a0000000323">
+<div class="eqn" id="a0000000320">
 <script type="math/tex; mode=display">\begin{equation}x_ B + \bar{A} x_ N = \bar{b}.\tag{4.42}\end{equation}</script>
 </div>
 <p>
  For each single row <script type="math/tex">i \in \{  1, \dots , m \} </script> we can write this explicitly as 
 </p>
-<div class="eqn" id="a0000000324">
+<div class="eqn" id="a0000000321">
 <script type="math/tex; mode=display">\begin{equation}(x_ B)_ i + \sum _{j \in N} \bar{a}_{ij} (x_ N)_ j = \bar{b}_ i.\tag{4.43}\end{equation}</script>
 </div>
 <p>
 Now, if <script type="math/tex">x</script> corresponds to a vertex then it is a basic feasible solution so that <script type="math/tex">x_ N = 0</script>. We assume at this point that some component has negative reduced cost. That is, <script type="math/tex">\exists s \in N</script> such that <script type="math/tex">\bar{c}_ s < 0</script>. It must be the case that <script type="math/tex">s \in N</script> (if one exists) as <script type="math/tex">\bar{c}_ B = 0</script> automatically. Therefore we can improve the value of the objective function by increasing the value of <script type="math/tex">x_ s</script> (and hence removing <script type="math/tex">s</script> from <script type="math/tex">N</script>). The constraints then require that 
 </p>
-<div class="eqn" id="a0000000325">
+<div class="eqn" id="a0000000322">
 <script type="math/tex; mode=display">\begin{equation}(x_ B)_ i = \bar{b}_ i - \bar{a}_{is} x_ s.\tag{4.44}\end{equation}</script>
 </div>
 <p>
@@ -2699,39 +2699,39 @@ Now, if <script type="math/tex">x</script> corresponds to a vertex then it is a 
 <p>
 We also need to retain all the positivity constraints <script type="math/tex">(x_ B)_ i \ge 0</script>. This requires that 
 </p>
-<div class="eqn" id="a0000000326">
+<div class="eqn" id="a0000000323">
 <script type="math/tex; mode=display">\begin{equation}\bar{b}_ i - \bar{a}_{is} x_ s \ge 0.\tag{4.45}\end{equation}</script>
 </div>
 <p>
  If <script type="math/tex">\bar{a}_{is} \le 0</script> this cannot cause a problem: increasing <script type="math/tex">x_ s</script> can never violate this constraint. However, if <script type="math/tex">\bar{a}_{is} > 0</script> then this implies that we must impose 
 </p>
-<div class="eqn" id="a0000000327">
+<div class="eqn" id="a0000000324">
 <script type="math/tex; mode=display">\begin{equation}x_ s \le \frac{\bar{b}_ i}{\bar{a}_{is}} .\tag{4.46}\end{equation}</script>
 </div>
 <p>
  As we need this condition to hold for all constraints, this means we must impose 
 </p>
-<div class="eqn" id="a0000000328">
+<div class="eqn" id="a0000000325">
 <script type="math/tex; mode=display">\begin{equation}x_ s \le \min _{i \in B \colon \bar{a}_{is} > 0} \frac{\bar{b}_ i}{\bar{a}_{is}} .\tag{4.47}\end{equation}</script>
 </div>
 <p>
 We use this to define the intermediate variable 
 </p>
-<div class="eqn" id="a0000000329">
+<div class="eqn" id="a0000000326">
 <script type="math/tex; mode=display">\begin{equation}\theta ^* = \min _{i \in B \colon \bar{a}_{is} > 0} \frac{\bar{b}_ i}{\bar{a}_{is}} .\tag{4.48}\end{equation}</script>
 </div>
 <p>
  If <script type="math/tex">\theta ^* > 0</script> then setting <script type="math/tex">x_ s = \theta ^*</script> ensures that 
 </p>
-<ul class="itemize" id="a0000000330">
-<li id="a0000000331"> <p>
+<ul class="itemize" id="a0000000327">
+<li id="a0000000328"> <p>
 <script type="math/tex">x_ s</script> becomes basic (so that <script type="math/tex">s</script> moves from <script type="math/tex">N</script> to <script type="math/tex">B</script>); 
 </p>
 </li>
-<li id="a0000000332"> <p>
+<li id="a0000000329"> <p>
 The value of every variable <script type="math/tex">(x_ B)_ r</script> with 
 </p>
-<div class="eqn" id="a0000000333">
+<div class="eqn" id="a0000000330">
 <script type="math/tex; mode=display">\begin{equation}r \in \operatorname*{argmin}_{i \in B \colon \bar{a}_{is} > 0} \frac{\bar{b}_ i}{\bar{a}_{is}}\tag{4.49}\end{equation}</script>
 </div>
 <p>
@@ -2743,7 +2743,7 @@ The value of every variable <script type="math/tex">(x_ B)_ r</script> with
 This gives us a recipe for moving from vertex to vertex: find the value of <script type="math/tex">\theta ^*</script> for given index <script type="math/tex">s</script> and an index <script type="math/tex">r</script> that gives the minimum. Swap <script type="math/tex">s</script> and <script type="math/tex">r</script>. This is the <em>minimum ratio test</em>. 
 </p>
 <p>
-We restricted to the case where <script type="math/tex">\bar{a}_{is} > 0</script> when computing the minimum ratio as the other case does not violate the positivity constraint. However, we also need to consider the objective function. <div class="thmwrapper thm_thmwrapper" id="a0000000334">
+We restricted to the case where <script type="math/tex">\bar{a}_{is} > 0</script> when computing the minimum ratio as the other case does not violate the positivity constraint. However, we also need to consider the objective function. <div class="thmwrapper thm_thmwrapper" id="a0000000331">
 <div class="thmheading thm_thmheading">
 <span class="thmcaption thm_thmcaption">
     Theorem
@@ -2757,7 +2757,7 @@ If there is an index <script type="math/tex">s</script> such that <script type="
 </div>
 </div>
 </p>
-<div class="proof_wrapper" id="a0000000335">
+<div class="proof_wrapper" id="a0000000332">
 <div class="proof_heading">
 <span class="proof_caption">
     Proof.
@@ -2770,26 +2770,26 @@ Since <script type="math/tex">\bar{a}_{is} \le 0</script> for all <script type="
 </div>
 </div>
 </section><section class="subsection">
-<h3 id="a0000000336">4.6.2 Degeneracy</h3>
+<h3 id="a0000000333">4.6.2 Degeneracy</h3>
 <p>
 We have seen with the minimum ratio test that it possible to have a basic feasible solution with at least one basic variable having zero value. These solutions are called <em>degenerate</em>. 
 </p>
 <p>
 Degenerate solutions can cause problems as different degenerate basic feasible solutions can correspond to the same vertex. To show this, consider a basic feasible solution which is degenerate for some row, index <script type="math/tex">\hat{\imath }</script>, so that 
 </p>
-<div class="eqn" id="a0000000337">
+<div class="eqn" id="a0000000334">
 <script type="math/tex; mode=display">\begin{equation}(x_ B)_{\hat{\imath }} = \bar{b}_{\hat{\imath }} = 0.\tag{4.50}\end{equation}</script>
 </div>
 <p>
  Assume we want to increase the value of the non-basic variable <script type="math/tex">x_ s</script>, <script type="math/tex">s \in N</script>, which starts from zero. As usual we need 
 </p>
-<div class="eqn" id="a0000000338">
+<div class="eqn" id="a0000000335">
 <script type="math/tex; mode=display">\begin{equation}\bar{b}_{\hat{\imath }} - \bar{a}_{\hat{\imath }s} x_ s \ge 0\tag{4.51}\end{equation}</script>
 </div>
 <p>
  to ensure that <script type="math/tex">(x_ B)_{\hat{\imath }} \ge 0</script>. If the problem is not unbounded then the minimum ratio test gives 
 </p>
-<div class="eqn" id="a0000000339">
+<div class="eqn" id="a0000000336">
 <script type="math/tex; mode=display">\begin{equation}\theta ^* = \min _{i \in B \colon \bar{a}_{is} > 0} \frac{\bar{b}_ i}{\bar{a}_{is}} = 0,\tag{4.52}\end{equation}</script>
 </div>
 <p>
@@ -2799,7 +2799,7 @@ Degenerate solutions can cause problems as different degenerate basic feasible s
 Thus the non-basic variable <script type="math/tex">x_ s</script> enters the basis but remains at value zero, whilst the basic variable <script type="math/tex">(x_ B)_{\hat{\imath }}</script> leaves the basis and also remains at value zero. So, in spite of changing the basis <script type="math/tex">B</script> the values of <script type="math/tex">x</script> are unchanged. Therefore we have not actually moved to a different vertex. 
 </p>
 </section><section class="subsection">
-<h3 id="a0000000340">4.6.3 Cycling and Bland’s rule</h3>
+<h3 id="a0000000337">4.6.3 Cycling and Bland’s rule</h3>
 <p>
 If there is a degenerate solution the simplex method (using the minimum ratio test to move from one vertex to another) my enter an endless loop in which the the same basic and non-basic variables are swapped in and out of the basis forever. <script type="math/tex">B</script> and <script type="math/tex">N</script> would be changing but <script type="math/tex">x</script> would remain the same. 
 </p>
@@ -2809,18 +2809,18 @@ The problem arises as there are multiple choices of indexes to move out of the b
 <p>
 <em>Bland’s rule</em> is the following method: 
 </p>
-<ul class="itemize" id="a0000000341">
-<li id="a0000000342"> <p>
+<ul class="itemize" id="a0000000338">
+<li id="a0000000339"> <p>
 Among all <script type="math/tex">s \in \{  1, \dots , n \} </script> with <script type="math/tex">\bar{c}_ s < 0</script>, choose the smallest <script type="math/tex">s</script>. 
 </p>
 </li>
-<li id="a0000000343"> <p>
+<li id="a0000000340"> <p>
 Among all <script type="math/tex">r \in \operatorname*{argmin}_{i \in B \colon \bar{a}_{is} > 0} \frac{\bar{b}_ i}{\bar{a}_{is}}</script>, choose the smallest <script type="math/tex">r</script>. 
 </p>
 </li>
 </ul>
 <p>
-<div class="thmwrapper thm_thmwrapper" id="a0000000344">
+<div class="thmwrapper thm_thmwrapper" id="a0000000341">
 <div class="thmheading thm_thmheading">
 <span class="thmcaption thm_thmcaption">
     Theorem
@@ -2836,12 +2836,12 @@ With Bland’s rule, the simplex method converges in a finite number of iteratio
 </p>
 </section>
 </section><section class="section">
-<h2 id="a0000000345">4.7 Summary</h2>
+<h2 id="a0000000342">4.7 Summary</h2>
 <p>
 The simplex method with Bland’s rule starts from the linear program 
 </p>
-<div class="eqn" id="a0000000346">
-<script type="math/tex; mode=display">\begin{equation}\tag{\ref{eq:simplex:basic-reduced-form}} \begin{array}{l@{\quad }rcl} \min &  c_ B A_ B^{-1} b + \bar{c}_ N x_ N + \bar{c}_ B x_ B & & \\ \text{subject to} &  x_ B + \bar{A} x_ N &  = &  \bar{b} \\ &  x_ B &  \ge &  0 \\ &  x_ N &  \ge &  0. \end{array}\tag{4.53}\end{equation}</script>
+<div class="eqn" id="eq:simplex:basic-reduced-form-repeat3">
+<script type="math/tex; mode=display">\begin{equation}\label{eq:simplex:basic-reduced-form-repeat3} \begin{array}{l@{\quad }rcl} \min &  c_ B A_ B^{-1} b + \bar{c}_ N x_ N + \bar{c}_ B x_ B & & \\ \text{subject to} &  x_ B + \bar{A} x_ N &  = &  \bar{b} \\ &  x_ B &  \ge &  0 \\ &  x_ N &  \ge &  0. \end{array}\tag{4.53}\end{equation}</script>
 </div>
 <p>
  Start the algorithm with a basis <script type="math/tex">B \subseteq \{  1, \dots , n \} </script> with a basic matrix <script type="math/tex">A_ B</script> yielding a basic feasible solution <script type="math/tex">x_ B = A_ B^{-1} b \ge 0</script> with <script type="math/tex">x_ N = 0</script>. 
@@ -2849,62 +2849,62 @@ The simplex method with Bland’s rule starts from the linear program
 <p>
 At each step of the simplex method, then 
 </p>
-<ol class="enumerate" id="a0000000347" style="list-style: none">
-<li id="a0000000348" value="1">
+<ol class="enumerate" id="a0000000343" style="list-style: none">
+<li id="a0000000344" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		1.
 	</span>
 <p>
 Compute 
 </p>
-<ul class="itemize" id="a0000000349">
-<li id="a0000000350"> <p>
+<ul class="itemize" id="a0000000345">
+<li id="a0000000346"> <p>
 <script type="math/tex">A_ B^{-1}</script>, 
 </p>
 </li>
-<li id="a0000000351"> <p>
+<li id="a0000000347"> <p>
 <script type="math/tex">\bar{A} = A_ B^{-1} A_ N</script>, 
 </p>
 </li>
-<li id="a0000000352"> <p>
+<li id="a0000000348"> <p>
 <script type="math/tex">\bar{b} = A_ B^{-1} b</script>, 
 </p>
 </li>
-<li id="a0000000353"> <p>
+<li id="a0000000349"> <p>
 <script type="math/tex">\bar{c} = c - c_ B A_ B^{-1} A</script>. 
 </p>
 </li>
 </ul>
 </li>
-<li id="a0000000354" value="2">
+<li id="a0000000350" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		2.
 	</span>
 <p>
 If <script type="math/tex">| \{  s \in \{  1, \dots , n \}  \colon \bar{c}_ s < 0 \}  | > 0</script>, then 
 </p>
-<ul class="itemize" id="a0000000355">
-<li id="a0000000356"> <p>
+<ul class="itemize" id="a0000000351">
+<li id="a0000000352"> <p>
 Pick the smallest index <script type="math/tex">s \in \{  1, \dots , n \} </script> with <script type="math/tex">\bar{c}_ s < 0</script>; 
 </p>
 </li>
-<li id="a0000000357"> <p>
+<li id="a0000000353"> <p>
 Pick the smallest index <script type="math/tex">r</script> where 
 </p>
-<div class="eqn" id="a0000000358">
+<div class="eqn" id="a0000000354">
 <script type="math/tex; mode=display">\begin{equation}r \in \operatorname*{argmin}_{i \in B \colon \bar{a}_{is} > 0} \frac{\bar{b}_ i}{\bar{a}_{is}}.\tag{4.54}\end{equation}</script>
 </div>
 <p>
  If there is no such index then the problem is unbounded; 
 </p>
 </li>
-<li id="a0000000359"> <p>
+<li id="a0000000355"> <p>
 Let <script type="math/tex">B \to B \setminus \{  r \}  \cup \{  s \} </script>. 
 </p>
 </li>
 </ul>
 </li>
-<li id="a0000000360" value="3">
+<li id="a0000000356" value="3">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		3.
 	</span>
@@ -2914,7 +2914,7 @@ Else we have reached the optimal solution. Stop, returning <script type="math/te
 </li>
 </ol>
 </section><section class="section">
-<h2 id="a0000000361">4.8 Tableau form</h2>
+<h2 id="a0000000357">4.8 Tableau form</h2>
 <p>
 The simplex method as summarised above is a working algorithm. However, it is not in the most efficient form to implement on a computer. In part this is because there are many different variables to compute and manipulate. In part it is because some of the calculations (such as the explicit matrix inversion of <script type="math/tex">A_ B</script>) are expensive. 
 </p>
@@ -2922,17 +2922,17 @@ The simplex method as summarised above is a working algorithm. However, it is no
 We can build on a number of concepts from linear algebra to make the algorithm more efficiently implemented. 
 </p>
 <section class="subsection">
-<h3 id="a0000000362">4.8.1 The problem as a block matrix</h3>
+<h3 id="a0000000358">4.8.1 The problem as a block matrix</h3>
 <p>
 We again start from the standard basic form linear program 
 </p>
-<div class="eqn" id="a0000000363">
-<script type="math/tex; mode=display">\begin{equation}\tag{\ref{eq:simplex:basic-reduced-form}} \begin{array}{l@{\quad }rcl} \min &  c_ B A_ B^{-1} b + \bar{c}_ N x_ N + \bar{c}_ B x_ B & & \\ \text{subject to} &  x_ B + \bar{A} x_ N &  = &  \bar{b} \\ &  x_ B &  \ge &  0 \\ &  x_ N &  \ge &  0. \end{array}\tag{4.55}\end{equation}</script>
+<div class="eqn" id="eq:simplex:basic-reduced-form-repeat4">
+<script type="math/tex; mode=display">\begin{equation}\label{eq:simplex:basic-reduced-form-repeat4} \begin{array}{l@{\quad }rcl} \min &  c_ B A_ B^{-1} b + \bar{c}_ N x_ N + \bar{c}_ B x_ B & & \\ \text{subject to} &  x_ B + \bar{A} x_ N &  = &  \bar{b} \\ &  x_ B &  \ge &  0 \\ &  x_ N &  \ge &  0. \end{array}\tag{4.55}\end{equation}</script>
 </div>
 <p>
  We transfer the problem to the <em>tableau</em>
 </p>
-<div class="eqn" id="a0000000364">
+<div class="eqn" id="a0000000359">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{|c|c|c|} \hline -c_ B A_ B^{-1} b &  \bar{c}_ B &  \bar{c}_ N \\ \hline \bar{b} &  I &  \bar{A} \\ \end{array}\tag{4.56}\end{equation}</script>
 </div>
 <p>
@@ -2941,8 +2941,8 @@ We again start from the standard basic form linear program
 <p>
 To complete the simplex method we need to apply Bland’s rule and the minimum ratio test and then swap our chosen basic and non-basic variables. 
 </p>
-<ol class="enumerate" id="a0000000365" style="list-style: none">
-<li id="a0000000366" value="1">
+<ol class="enumerate" id="a0000000360" style="list-style: none">
+<li id="a0000000361" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		1.
 	</span>
@@ -2950,7 +2950,7 @@ To complete the simplex method we need to apply Bland’s rule and the minimum r
 Look at row zero, all columns except column zero. This contains the reduced costs. If any entry is negative we are not optimal and must continue. 
 </p>
 </li>
-<li id="a0000000367" value="2">
+<li id="a0000000362" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		2.
 	</span>
@@ -2958,7 +2958,7 @@ Look at row zero, all columns except column zero. This contains the reduced cost
 Using Bland’s rule, set <script type="math/tex">s</script> as the index of the first column containing a negative reduced cost. 
 </p>
 </li>
-<li id="a0000000368" value="3">
+<li id="a0000000363" value="3">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		3.
 	</span>
@@ -2966,7 +2966,7 @@ Using Bland’s rule, set <script type="math/tex">s</script> as the index of the
 Using Bland’s rule and the minimum rate test, set <script type="math/tex">r</script> as the row index with the minimum ratio, only considering rows <script type="math/tex">i</script> where <script type="math/tex">\bar{a}_{is} > 0</script>, and taking the ratio with <script type="math/tex">\bar{b}_ i</script>, which is in column zero of the tableau. 
 </p>
 </li>
-<li id="a0000000369" value="4">
+<li id="a0000000364" value="4">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		4.
 	</span>
@@ -2976,12 +2976,12 @@ Perform a <em>pivot</em> operation so that the tableau entry <script type="math/
 </li>
 </ol>
 </section><section class="subsection">
-<h3 id="a0000000370">4.8.2 Pivoting</h3>
+<h3 id="a0000000365">4.8.2 Pivoting</h3>
 <p>
 Pivoting is the operation used in Gaussian Elimination to solve linear systems. It is highly efficient allowing us to move from one basic solution to another without explicitly constructing a lot of intermediate terms. Pivoting consists of two steps. Given a matrix <script type="math/tex">A</script> and a pair of row-column indexes <script type="math/tex">(r, s)</script> with <script type="math/tex">a_{rs} \ne 0</script>, the steps are 
 </p>
-<ol class="enumerate" id="a0000000371" style="list-style: none">
-<li id="a0000000372" value="1">
+<ol class="enumerate" id="a0000000366" style="list-style: none">
+<li id="a0000000367" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		1.
 	</span>
@@ -2989,7 +2989,7 @@ Pivoting is the operation used in Gaussian Elimination to solve linear systems. 
 Divide the <script type="math/tex">r^{\text{th}}</script> row by <script type="math/tex">a_{rs}</script>; 
 </p>
 </li>
-<li id="a0000000373" value="2">
+<li id="a0000000368" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		2.
 	</span>
@@ -3006,17 +3006,17 @@ After the pivoting operation the column with index <script type="math/tex">s</sc
 </p>
 </section>
 </section><section class="section">
-<h2 id="a0000000374">4.9 Two-phase simplex method</h2>
+<h2 id="a0000000369">4.9 Two-phase simplex method</h2>
 <p>
 We now, via the simplex method in tableau form, have an efficient algorithm for solving a linear program. However, it is not a general algorithm: it requires that the linear program is in basic form, 
 </p>
-<div class="eqn" id="a0000000375">
-<script type="math/tex; mode=display">\begin{equation}\tag{\ref{eq:simplex:basic-reduced-form}} \begin{array}{l@{\quad }rcl} \min &  c_ B A_ B^{-1} b + \bar{c}_ N x_ N + \bar{c}_ B x_ B & & \\ \text{subject to} &  x_ B + \bar{A} x_ N &  = &  \bar{b} \\ &  x_ B &  \ge &  0 \\ &  x_ N &  \ge &  0, \end{array}\tag{4.57}\end{equation}</script>
+<div class="eqn" id="eq:simplex:basic-reduced-form-repeat5">
+<script type="math/tex; mode=display">\begin{equation}\label{eq:simplex:basic-reduced-form-repeat5} \begin{array}{l@{\quad }rcl} \min &  c_ B A_ B^{-1} b + \bar{c}_ N x_ N + \bar{c}_ B x_ B & & \\ \text{subject to} &  x_ B + \bar{A} x_ N &  = &  \bar{b} \\ &  x_ B &  \ge &  0 \\ &  x_ N &  \ge &  0, \end{array}\tag{4.57}\end{equation}</script>
 </div>
 <p>
  before it can start. We need to work out how to get a linear program in, for example, the standard form 
 </p>
-<div class="eqn" id="a0000000376">
+<div class="eqn" id="a0000000370">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl} \min &  c x & & \\ \text{subject to} &  A x &  = &  b \\ &  x &  \ge &  0, \end{array}\tag{4.58}\end{equation}</script>
 </div>
 <p>
@@ -3025,8 +3025,8 @@ We now, via the simplex method in tableau form, have an efficient algorithm for 
 <p>
 The two-phase simplex method is the approach to use. This 
 </p>
-<ol class="enumerate" id="a0000000377" style="list-style: none">
-<li id="a0000000378" value="1">
+<ol class="enumerate" id="a0000000371" style="list-style: none">
+<li id="a0000000372" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		1.
 	</span>
@@ -3034,7 +3034,7 @@ The two-phase simplex method is the approach to use. This
 iteratively constructs <em>some</em> basic feasible solution and from it the associated basic feasible tableau; 
 </p>
 </li>
-<li id="a0000000379" value="2">
+<li id="a0000000373" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		2.
 	</span>
@@ -3047,24 +3047,24 @@ applies the tableau simplex method to find the optimal solution.
  An important part of the first phase is that, by constructing <em>some</em> basic feasible solution it shows that the problem is feasible. If the first phase fails it means the problem is infeasible. 
 </p>
 <section class="subsection">
-<h3 id="a0000000380">4.9.1 Auxiliary problem</h3>
+<h3 id="a0000000374">4.9.1 Auxiliary problem</h3>
 <p>
 Define the vector <script type="math/tex">e = (1, \dots , 1)</script> with <script type="math/tex">m</script> components. Starting from the linear program in standard form, 
 </p>
-<div class="eqn" id="a0000000381">
+<div class="eqn" id="a0000000375">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl} \min &  c x & & \\ \text{subject to} &  A x &  = &  b \\ &  x &  \ge &  0, \end{array}\tag{4.59}\end{equation}</script>
 </div>
 <p>
  define the <em>auxiliary problem</em>
 </p>
-<div class="eqn" id="a0000000382">
+<div class="eqn" id="a0000000376">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl} \min &  e y & & \\ \text{subject to} &  A x + I y &  = &  b \\ &  x &  \ge &  0, \\ &  y &  \ge &  0. \end{array}\tag{4.60}\end{equation}</script>
 </div>
 <p>
  Note that <script type="math/tex">e y = \|  y \| _1</script> as <script type="math/tex">y \ge 0</script>. This problem is trying to find the “smallest” <script type="math/tex">y</script> (in the one norm) such that <script type="math/tex">A x + I y = b</script>. 
 </p>
 <p>
-<div class="thmwrapper thm_thmwrapper" id="a0000000383">
+<div class="thmwrapper thm_thmwrapper" id="a0000000377">
 <div class="thmheading thm_thmheading">
 <span class="thmcaption thm_thmcaption">
     Theorem
@@ -3078,7 +3078,7 @@ The auxiliary problem admits an optimal solution <script type="math/tex">(x^*, y
 </div>
 </div>
 </p>
-<div class="proof_wrapper" id="a0000000384">
+<div class="proof_wrapper" id="a0000000378">
 <div class="proof_heading">
 <span class="proof_caption">
     Proof.
@@ -3097,18 +3097,18 @@ Finally, if the original problem admits a feasible solution <script type="math/t
  Note that it immediately follows from the proof that if the auxiliary problem does not admit an optimal solution the linear program is infeasible. 
 </p>
 </section><section class="subsection">
-<h3 id="a0000000385">4.9.2 Phase 1 tableau</h3>
+<h3 id="a0000000379">4.9.2 Phase 1 tableau</h3>
 <p>
 The auxiliary problem as constructed automatically contains an identity matrix corresponding to the columns associated with <script type="math/tex">y</script>. It immediately follows that <script type="math/tex">y</script> is basic. Therefore we can immediately write down the tableau 
 </p>
-<div class="eqn" id="a0000000386">
+<div class="eqn" id="a0000000380">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{|c|c|c|} \hline 0 &  0 &  1, \dots , 1 \\ \hline b &  A &  I \\ \end{array}\tag{4.61}\end{equation}</script>
 </div>
 <p>
  This is, however, not completely in the tableau form that we require for the simplex method. The issue is the reduced cost vector of the basic variables. To start the simplex method we need the reduced costs to be <script type="math/tex">0</script>: here they are <script type="math/tex">1</script>. This has been caused by expressing the objective function in terms of the basic variables. We instead want to express the objective function solely in terms of the non-basic variables. To do this, use 
 </p>
-<div id="a0000000387">
-<div class="eqnarrayid" id="a0000000388"></div><div class="eqnarrayid" id="a0000000389"></div><div class="eqnarrayid" id="a0000000390"></div><script type="math/tex; mode=display">
+<div id="a0000000381">
+<div class="eqnarrayid" id="a0000000382"></div><div class="eqnarrayid" id="a0000000383"></div><div class="eqnarrayid" id="a0000000384"></div><script type="math/tex; mode=display">
 \begin{align}
 \tag{4.62}& &  A x + I y & = b \\ 
 \tag{4.63}\implies & &  y & = b - A x \\ 
@@ -3119,39 +3119,39 @@ The auxiliary problem as constructed automatically contains an identity matrix c
 <p>
  By re-writing the objective function in this form we have the tableau 
 </p>
-<div class="eqn" id="a0000000391">
+<div class="eqn" id="a0000000385">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{|c|c|c|} \hline -e b &  -e A &  0, \dots , 0 \\ \hline b &  A &  I \\ \end{array}\tag{4.65}\end{equation}</script>
 </div>
 <p>
  We can now apply the simplex method to the auxiliary problem. 
 </p>
 </section><section class="subsection">
-<h3 id="a0000000392">4.9.3 Outline of two-phase method</h3>
+<h3 id="a0000000386">4.9.3 Outline of two-phase method</h3>
 <p>
 Assume we are starting from the standard form of the linear program, 
 </p>
-<div class="eqn" id="a0000000393">
+<div class="eqn" id="a0000000387">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl} \min &  c x & & \\ \text{subject to} &  A x &  = &  b \\ &  x &  \ge &  0, \end{array}\tag{4.66}\end{equation}</script>
 </div>
 <p>
  construct the tableau for the auxiliary problem as 
 </p>
-<div class="eqn" id="a0000000394">
+<div class="eqn" id="a0000000388">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{|c|c|c|} \hline -e b &  -e A &  0, \dots , 0 \\ \hline b &  A &  I \\ \end{array}\tag{4.67}\end{equation}</script>
 </div>
 <p>
 Then 
 </p>
-<ol class="enumerate" id="a0000000395" style="list-style: none">
-<li id="a0000000396" value="1">
+<ol class="enumerate" id="a0000000389" style="list-style: none">
+<li id="a0000000390" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		1.
 	</span>
 <p>
 Solve the auxiliary problem. Let <script type="math/tex">(x^*, y^*)</script> be an optimal solution. 
 </p>
-<ol class="enumerate" id="a0000000397" style="list-style: none">
-<li id="a0000000398" value="1">
+<ol class="enumerate" id="a0000000391" style="list-style: none">
+<li id="a0000000392" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(a)
 	</span>
@@ -3159,15 +3159,15 @@ Solve the auxiliary problem. Let <script type="math/tex">(x^*, y^*)</script> be 
 If the optimal objective function value <script type="math/tex">e y^* > 0</script> the original problem is infeasible. Stop at this point. 
 </p>
 </li>
-<li id="a0000000399" value="2">
+<li id="a0000000393" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		(b)
 	</span>
 <p>
 If <script type="math/tex">e y^* = 0</script> then 
 </p>
-<ol class="enumerate" id="a0000000400" style="list-style: none">
-<li id="a0000000401" value="1">
+<ol class="enumerate" id="a0000000394" style="list-style: none">
+<li id="a0000000395" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		i.
 	</span>
@@ -3175,7 +3175,7 @@ If <script type="math/tex">e y^* = 0</script> then
 If there is some basic variable <script type="math/tex">y_ i</script> with zero value the auxiliary problem is degenerate. Each such basic <script type="math/tex">y_ i</script> can be made non-basic by pivoting on any non-zero component of its row. 
 </p>
 </li>
-<li id="a0000000402" value="2">
+<li id="a0000000396" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		ii.
 	</span>
@@ -3183,7 +3183,7 @@ If there is some basic variable <script type="math/tex">y_ i</script> with zero 
 Delete all columns corresponding to the basic <script type="math/tex">y_ i</script> variables. 
 </p>
 </li>
-<li id="a0000000403" value="3">
+<li id="a0000000397" value="3">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		iii.
 	</span>
@@ -3195,7 +3195,7 @@ Re-write the objective function in terms of the non-basic <script type="math/tex
 </li>
 </ol>
 </li>
-<li id="a0000000404" value="2">
+<li id="a0000000398" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		2.
 	</span>
@@ -3203,7 +3203,7 @@ Re-write the objective function in terms of the non-basic <script type="math/tex
 Rewrite the objective function of the original problem in terms of only the non-basic variables. 
 </p>
 </li>
-<li id="a0000000405" value="3">
+<li id="a0000000399" value="3">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		3.
 	</span>
@@ -3215,7 +3215,7 @@ Write the basic feasible tableau for the original problem using the basic soluti
 <p>
 The issue of degeneracy in the auxiliary problem needs more explanation. If there is a degeneracy for <script type="math/tex">y_ i</script> then the tableau is in the form 
 </p>
-<div class="eqn" id="a0000000406">
+<div class="eqn" id="a0000000400">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{c|c|c|c|}& &  x_1 \dots x_ j \dots x_ n &  y_1 \dots y_ i \dots y_ m \\ \hline &  0 &  \dots &  \dots \\ \hline & & &  0 \\ & & &  \vdots \\ y_ i &  0 &  \bar{a}_{i1} \dots \bar{a}_{ij} \dots \bar{a}_{in} &  1 \\ & & &  \vdots \\ & & &  0 \\ \end{array}\tag{4.68}\end{equation}</script>
 </div>
 <p>
@@ -3229,7 +3229,7 @@ If, however, there is no entry <script type="math/tex">\bar{a}_{ij}</script> tha
 </p>
 </section>
 </section><section class="section">
-<h2 id="a0000000407">4.10 Efficiency and complexity</h2>
+<h2 id="a0000000401">4.10 Efficiency and complexity</h2>
 <p>
 Our aim in deriving the simplex method was to avoid enumerating all the vertexes of the feasible region. The reason is that enumerating all vertexes has computational complexity <script type="math/tex">\mathcal{O}(n!)</script> which is not tractable. 
 </p>
@@ -3237,7 +3237,7 @@ Our aim in deriving the simplex method was to avoid enumerating all the vertexes
 The simplex method works by finding one vertex and then moving to neighbouring vertexes one at a time. If the simplex method has to visit every vertex to find the optimal solution then it also has complexity <script type="math/tex">\mathcal{O}(n!)</script>. Unfortunately there are “pathological” cases where this can occur. 
 </p>
 <p>
-<div class="thmwrapper thm_thmwrapper" id="a0000000408">
+<div class="thmwrapper thm_thmwrapper" id="a0000000402">
 <div class="thmheading thm_thmheading">
 <span class="thmcaption thm_thmcaption">
     Theorem
@@ -3249,7 +3249,7 @@ The simplex method works by finding one vertex and then moving to neighbouring v
 <p>
  The linear program 
 </p>
-<div class="eqn" id="a0000000409">
+<div class="eqn" id="a0000000403">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl@{\quad }l} \max &  \sum _{j=1}^ n 10^{n-j} x_ j & & & \\ \text{subject to} &  \left( 2 \sum _{j=1}^{i-1} 10^{i-j} x_ j \right) + x_ i &  \le &  100^{i-1}, &  i \in \{  1, \dots , n \}  \\ &  x_ j &  \ge &  0, &  j \in \{  1, \dots , n \} , \end{array}\tag{4.69}\end{equation}</script>
 </div>
 <p>
@@ -3266,7 +3266,7 @@ Therefore the worst case analysis of the simplex method shows that it is intract
 <p>
 So far we have considered linear programs of the form 
 </p>
-<div class="eqn" id="a0000000410">
+<div class="eqn" id="a0000000404">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl} \min &  c x & & \\ \text{subject to} &  A x &  \ge &  b \\ &  x &  \ge &  0 \\ &  x &  \in &  \mathbb {R}^ n. \end{array}\tag{5.1}\end{equation}</script>
 </div>
 <p>
@@ -3275,23 +3275,23 @@ So far we have considered linear programs of the form
 <p>
 There are a lot of applications where this does not make perfect sense. There are many situations where talking about half a person, or a third of a car, or similar, is meaningless. In these cases we instead need to consider the <em>integer linear program</em>
 </p>
-<div class="eqn" id="a0000000411">
+<div class="eqn" id="a0000000405">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl} \min &  c x & & \\ \text{subject to} &  A x &  \ge &  b \\ &  x &  \ge &  0 \\ &  x &  \in &  \mathbb {Z}^ n, \end{array}\tag{5.2}\end{equation}</script>
 </div>
 <p>
  where <script type="math/tex">A \in \mathbb {Q}^{m \times n}, b \in \mathbb {Q}^ m, c, x \in \mathbb {Q}^ n</script> are now matrices and vectors in the appropriate <em>rational</em> spaces. 
 </p>
 <p>
-Another special case is where we have to make yes/no or true/false decisions. For this weconsider the <em>integer linear program</em>
+Another special case is where we have to make yes/no or true/false decisions. For this we consider the <em>binary linear program</em>
 </p>
-<div class="eqn" id="a0000000412">
+<div class="eqn" id="a0000000406">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl} \min &  c x & & \\ \text{subject to} &  A x &  \ge &  b \\ &  x &  \ge &  0 \\ &  x &  \in &  \{  0, 1 \} ^ n, \end{array}\tag{5.3}\end{equation}</script>
 </div>
 <p>
  where again <script type="math/tex">A \in \mathbb {Q}^{m \times n}, b \in \mathbb {Q}^ m, c \in \mathbb {Q}^ n</script> are now matrices and vectors in the appropriate <em>rational</em> spaces. 
 </p>
 <section class="section">
-<h2 id="a0000000413">5.1 Optimal solutions</h2>
+<h2 id="a0000000407">5.1 Optimal solutions</h2>
 <p>
 The feasible region of an integer linear program is not a polyhedron. It is instead the intersection of a polyhedron with a lattice, where the lattice is a grid of integer points. This immediately implies that, in general, an integer linear program cannot be solved by the simplex method (as the “vertices” need not be optimal). This is illustrated in figure <a class="ref" href="../../notes/course_notes/index.html#fig:ilp:lattice">5.1</a>. 
 </p>
@@ -3325,13 +3325,13 @@ Unfortunately, solutions of the relaxation problem can be a long way from the op
 Typical methods for solving integer problems do use the simplex method to solve linear programs, typically applied to many pieces of the feasible region individually (later courses will cover this). The simplex method remains a key building block. 
 </p>
 </section><section class="section">
-<h2 id="a0000000414">5.2 Total unimodularity</h2>
+<h2 id="a0000000408">5.2 Total unimodularity</h2>
 <section class="subsection">
-<h3 id="a0000000415">5.2.1 When relaxation works</h3>
+<h3 id="a0000000409">5.2.1 When relaxation works</h3>
 <p>
 There are, however, problems where the relaxation problem works. Consider the problem 
 </p>
-<div class="eqn" id="a0000000416">
+<div class="eqn" id="a0000000410">
 <script type="math/tex; mode=display">\begin{equation}\begin{array}{l@{\quad }rcl} \min &  c x & & \\ \text{subject to} &  A x &  = &  b \\ &  x &  \ge &  0 \\ &  x &  \in &  \mathbb {Z}^ n, \end{array}\tag{5.4}\end{equation}</script>
 </div>
 <p>
@@ -3340,19 +3340,19 @@ There are, however, problems where the relaxation problem works. Consider the pr
 <p>
 Consider the relaxation problem where all restrictions are dropped. For any optimal (basic) solution of the relaxation problem we have 
 </p>
-<div class="eqn" id="a0000000417">
+<div class="eqn" id="a0000000411">
 <script type="math/tex; mode=display">\begin{equation}x_ B = A_ B^{-1} b, \quad x_ N = 0.\tag{5.5}\end{equation}</script>
 </div>
 <p>
  We have that <script type="math/tex">b</script> is integer. If <script type="math/tex">A_ B^{-1}</script> is also integer it follows that <script type="math/tex">x_ B</script> is integer. Therefore the solution to the linear program is also a solution to the <em>integer</em> linear program, and the simplex method will work. 
 </p>
 </section><section class="subsection">
-<h3 id="a0000000418">5.2.2 Total unimodularity</h3>
+<h3 id="a0000000412">5.2.2 Total unimodularity</h3>
 <p>
 We want some criteria that checks when the inverse of a matrix is integer, without having to compute it and enumerate the entries. We say that a matrix <script type="math/tex">A \in \mathbb {R}^{m \times n}</script> is called <em>total unimodular</em> if the determinant of all its square submatrices takes values in <script type="math/tex">\{ -1, 0, 1\} </script>. 
 </p>
 <p>
-<div class="thmwrapper thm_thmwrapper" id="a0000000419">
+<div class="thmwrapper thm_thmwrapper" id="a0000000413">
 <div class="thmheading thm_thmheading">
 <span class="thmcaption thm_thmcaption">
     Theorem
@@ -3366,7 +3366,7 @@ If <script type="math/tex">A</script> is total unimodular then <script type="mat
 </div>
 </div>
 </p>
-<div class="proof_wrapper" id="a0000000420">
+<div class="proof_wrapper" id="a0000000414">
 <div class="proof_heading">
 <span class="proof_caption">
     Proof.
@@ -3376,7 +3376,7 @@ If <script type="math/tex">A</script> is total unimodular then <script type="mat
 <p>
 The inverse of <script type="math/tex">A_ B</script> can be written as 
 </p>
-<div class="eqn" id="a0000000421">
+<div class="eqn" id="a0000000415">
 <script type="math/tex; mode=display">\begin{equation}A_ B^{-1} = \frac{1}{\det (A_ B)} \begin{pmatrix}  \alpha _{1 B_1} 
 
 &  \dots 
@@ -3412,7 +3412,7 @@ It is possible to frame the shortest path problem as an integer linear program, 
 </section><!-- Latex Chapter/Part -->
 <h1 id="chap:graphs">Graphs</h1>
 <section class="section">
-<h2 id="a0000000422">6.1 Introduction</h2>
+<h2 id="a0000000416">6.1 Introduction</h2>
 <p>
 The idea of a graph (not in the figure or plotting sense, but as a structure) was introduced in the <script type="math/tex">18^{\text{th}}</script> century to ask questions about paths. The idea now appears everywhere, but transport maps remain one of the key examples. A graph will abstract away all of the details and only show destinations (usually as points) and connecting paths between destinations (usually as lines), together with minimal extra information (such as the distance along a path, or the cost to travel along it). 
 </p>
@@ -3420,16 +3420,16 @@ The idea of a graph (not in the figure or plotting sense, but as a structure) wa
 The mathematical structure can be used to answer a number of detailed questions, but one key question is fundamental. Given a graph with paths linked to distances, what is the shortest distance between two given points? 
 </p>
 </section><section class="section">
-<h2 id="a0000000423">6.2 Directed graphs</h2>
+<h2 id="a0000000417">6.2 Directed graphs</h2>
 <p>
 The mathematical definition of a <em>(directed) graph</em> is the ordered pair <script type="math/tex">G = (V, A)</script>, where the sets are 
 </p>
-<ul class="itemize" id="a0000000424">
-<li id="a0000000425"> <p>
+<ul class="itemize" id="a0000000418">
+<li id="a0000000419"> <p>
 the set of <em>vertices</em> (or <em>nodes</em>) <script type="math/tex">V</script>, with <script type="math/tex">|V| = n</script>; 
 </p>
 </li>
-<li id="a0000000426"> <p>
+<li id="a0000000420"> <p>
 a set of ordered pairs <script type="math/tex">A \subseteq V \times V</script>, excluding self loops, called <em>arcs</em>, with <script type="math/tex">|A| = m</script>. 
 </p>
 </li>
@@ -3451,7 +3451,7 @@ We have not explicitly said what space the nodes are drawn from. In general it d
 </figcaption>
 </figure>
 <section class="subsection">
-<h3 id="a0000000427">6.2.1 Definitions</h3>
+<h3 id="a0000000421">6.2.1 Definitions</h3>
 <p>
 We call a node <script type="math/tex">j \in V</script> <em>adjacent</em> to another node <script type="math/tex">i \in V</script> if <script type="math/tex">(i, j) \in A</script>. As, by construction, there are no self-loops allowed, a node cannot be adjacent to itself. 
 </p>
@@ -3461,16 +3461,16 @@ We call an arc <script type="math/tex">a \in A</script> <em>incident</em> to a n
 <p>
 We call a directed graph <script type="math/tex">G</script> <em>complete</em> if <script type="math/tex">A</script> contains an arc for each distinct pair of nodes, 
 </p>
-<div class="eqn" id="a0000000428">
+<div class="eqn" id="a0000000422">
 <script type="math/tex; mode=display">\begin{equation}A = \left\{  (i, j) \colon \forall i \in V, j \in V, i \ne j \right\} .\tag{6.1}\end{equation}</script>
 </div>
 <p>
  If the graph is complete we can immediately travel from any node to any other node using just one arc. 
 </p>
 </section><section class="subsection">
-<h3 id="a0000000429">6.2.2 Number of arcs</h3>
+<h3 id="a0000000423">6.2.2 Number of arcs</h3>
 <p>
-<div class="thmwrapper thm_thmwrapper" id="a0000000430">
+<div class="thmwrapper thm_thmwrapper" id="a0000000424">
 <div class="thmheading thm_thmheading">
 <span class="thmcaption thm_thmcaption">
     Theorem
@@ -3484,7 +3484,7 @@ In any directed graph, <script type="math/tex">m \le n (n - 1)</script>, with <s
 </div>
 </div>
 </p>
-<div class="proof_wrapper" id="a0000000431">
+<div class="proof_wrapper" id="a0000000425">
 <div class="proof_heading">
 <span class="proof_caption">
     Proof.
@@ -3503,14 +3503,14 @@ If the graph is not complete, some arcs are missing. Hence <script type="math/te
 We called a directed graph <em>sparse</em> if <script type="math/tex">m \ll n (n - 1)</script>. 
 </p>
 </section><section class="subsection">
-<h3 id="a0000000432">6.2.3 Paths</h3>
+<h3 id="a0000000426">6.2.3 Paths</h3>
 <p>
 If the graph is not complete then traversing a single arc may not be enough to get us from our start point to the desired end point. Instead we may have to traverse multiple arcs. 
 </p>
 <p>
 We define a <em>path</em> as a sequence 
 </p>
-<div class="eqn" id="a0000000433">
+<div class="eqn" id="a0000000427">
 <script type="math/tex; mode=display">\begin{equation}P = (i_1, i_2), (i_2, i_3), \dots , (i_{k-1}, i_ k), (i_ k, i_{k+1})\tag{6.2}\end{equation}</script>
 </div>
 <p>
@@ -3533,20 +3533,20 @@ Finally, we say that a graph is <em>connected</em> if every pair of its nodes is
 </figcaption>
 </figure>
 </section><section class="subsection">
-<h3 id="a0000000434">6.2.4 Cuts</h3>
+<h3 id="a0000000428">6.2.4 Cuts</h3>
 <p>
 So far everything has been set either at the level of individual nodes or at the level of the whole graph. For building algorithms that allow us to analyse paths as they move through the graph, we need to look at subsets of the graph, and how we might move into or out of those subsets. 
 </p>
 <p>
 Let <script type="math/tex">S \subseteq V</script> be some part of graph (by looking at some suset of the vertices). We define the <em>forward cut induced by <script type="math/tex">S</script></em> to be the set of arcs “leaving <script type="math/tex">S</script>”. That is 
 </p>
-<div class="eqn" id="a0000000435">
+<div class="eqn" id="a0000000429">
 <script type="math/tex; mode=display">\begin{equation}\delta ^+(S) = \left\{  (i, j) \in A \colon i \in S \text{ and } j \in V \setminus S \right\} .\tag{6.3}\end{equation}</script>
 </div>
 <p>
  Similarly, we define the <em>backward cut induced by <script type="math/tex">S</script></em> to be the set of arcs “entering <script type="math/tex">S</script>”. That is 
 </p>
-<div class="eqn" id="a0000000436">
+<div class="eqn" id="a0000000430">
 <script type="math/tex; mode=display">\begin{equation}\delta ^+(S) = \left\{  (i, j) \in A \colon i \in V \setminus S \text{ and } j \in S \right\} .\tag{6.4}\end{equation}</script>
 </div>
 <p>
@@ -3566,7 +3566,7 @@ Let <script type="math/tex">S \subseteq V</script> be some part of graph (by loo
 Of course, we can apply these definitions to the case to single nodes, by setting <script type="math/tex">S = \{  i \} </script> for any node <script type="math/tex">i \in V</script>. These have special names: the <em>forward star</em> of the node <script type="math/tex">i</script> is <script type="math/tex">\delta ^+(i)</script>, whilst the <em>backward star</em> of the node <script type="math/tex">i</script> is <script type="math/tex">\delta ^-(i)</script>. The sizes of these sets also have special names, with the <em>out-degree</em> of node <script type="math/tex">i</script> being <script type="math/tex">|\delta ^+(i)|</script>, and the <em>in-degree</em> of node <script type="math/tex">i</script> being <script type="math/tex">|\delta ^-(i)|</script>. 
 </p>
 </section><section class="subsection">
-<h3 id="a0000000437">6.2.5 Representations</h3>
+<h3 id="a0000000431">6.2.5 Representations</h3>
 <p>
 So far we have represented the graph using the vertices <script type="math/tex">V</script> and the arcs <script type="math/tex">A</script>. However, as in the linear programming case, there are multiple ways of representing the problem, each of which has its own advantages. 
 </p>
@@ -3574,22 +3574,22 @@ So far we have represented the graph using the vertices <script type="math/tex">
 For simplicity these additional representations will assume that <script type="math/tex">V</script> is given by consecutive integers labelling the nodes. Depending on choice these can either start from <script type="math/tex">1</script> (so <script type="math/tex">V = \{  1, \dots , n \} </script>) or <script type="math/tex">0</script> (so <script type="math/tex">V = \{  0, \dots , n-1 \} </script>). The latter is more natural for a Python implementation, but the former more natural in many mathematical texts. With this assumption we only need to consider different representations of the arcs, <script type="math/tex">A</script>. 
 </p>
 <section class="subsubsection">
-<h4 id="a0000000438">Adjacency list</h4>
+<h4 id="a0000000432">Adjacency list</h4>
 <p>
 In the <em>adjacency list</em> approach we construct a list <script type="math/tex">L</script> of size <script type="math/tex">n</script>. Each component of the list <script type="math/tex">L_ i</script> contains a list of size at most <script type="math/tex">n-1</script>, containing the indices of the nodes adjacent to <script type="math/tex">i</script>. In terms of the stars, we have 
 </p>
-<div class="eqn" id="a0000000439">
+<div class="eqn" id="a0000000433">
 <script type="math/tex; mode=display">\begin{equation}L_ i = \{  j \colon (i, j) \in \delta ^*(i) \} .\tag{6.5}\end{equation}</script>
 </div>
 <p>
  The advantage of the adjacency list approach is that it is easy to use to navigate the graph. The component <script type="math/tex">L_ i</script> gives every node that is reachable from node <script type="math/tex">i</script> using a single arc. 
 </p>
 </section><section class="subsubsection">
-<h4 id="a0000000440">Adjacency matrix</h4>
+<h4 id="a0000000434">Adjacency matrix</h4>
 <p>
 In the <em>adjacency matrix</em> approach we construct a single matrix of size <script type="math/tex">n \times n</script> that contains only zeros and ones. The matrix entry is one if the associated arc exists and zero otherwise. Explicitly, 
 </p>
-<div class="eqn" id="a0000000441">
+<div class="eqn" id="a0000000435">
 <script type="math/tex; mode=display">\begin{equation}m_{ij} = \begin{cases}  1 &  \text{if } (i, j) \in A \\ 0 &  \text{otherwise} \end{cases}.\tag{6.6}\end{equation}</script>
 </div>
 <p>
@@ -3598,25 +3598,25 @@ In the <em>adjacency matrix</em> approach we construct a single matrix of size <
 </section>
 </section>
 </section><section class="section">
-<h2 id="a0000000442">6.3 Shortest paths</h2>
+<h2 id="a0000000436">6.3 Shortest paths</h2>
 <p>
 Now that we have the terminology to represent and discuss graphs, we want to turn the word problem “Find the shortest path connecting two points” into something precise. 
 </p>
 <section class="subsection">
-<h3 id="a0000000443">6.3.1 The problem</h3>
+<h3 id="a0000000437">6.3.1 The problem</h3>
 <p>
 The <em>shortest path problem</em> is as follows. Given a directed graph <script type="math/tex">G = (V, A)</script> with a (non-negative) length function <script type="math/tex">l \colon A \to \mathbb {R}^+</script> and two nodes <script type="math/tex">s, t \in V</script>, find an <script type="math/tex">s-t</script> path of shortest total length. 
 </p>
 <p>
 The length function tells us the distance along any one single arc: equivalently, the distance between any two nodes or vertices when moving in a specific direction. This need not be the same in both directions (hence the notion of a <em>directed</em> graph): think about one-way streets, for example. As a notational shortcut we will often talk about lengths of paths in addition to lengths of arcs. As a path is a sequence of consecutive arcs without loops and the length function is non-negative, it follows that 
 </p>
-<div class="eqn" id="a0000000444">
+<div class="eqn" id="a0000000438">
 <script type="math/tex; mode=display">\begin{equation}l(P) = \sum _{a \in P} l(a).\tag{6.7}\end{equation}</script>
 </div>
 <p>
  If the arc <script type="math/tex">a = (i, j)</script> then sometimes the notation <script type="math/tex">l_{ij} = l((i, j)) = l(a)</script> is used, and so we can write 
 </p>
-<div class="eqn" id="a0000000445">
+<div class="eqn" id="a0000000439">
 <script type="math/tex; mode=display">\begin{equation}l(P) = \sum _{(i, j) \in P} l_{ij}.\tag{6.8}\end{equation}</script>
 </div>
 <p>
@@ -3639,9 +3639,9 @@ We note that it only makes sense to solve the shortest path problem if the sourc
 </figcaption>
 </figure>
 </section><section class="subsection">
-<h3 id="a0000000446">6.3.2 Subpath optimality</h3>
+<h3 id="a0000000440">6.3.2 Subpath optimality</h3>
 <p>
-The key result in finding the shortest path is intuitively stated as “shortest paths are composed of shortest paths”. This seems either obvious or trivial. The precise result is <div class="thmwrapper thm_thmwrapper" id="a0000000447">
+The key result in finding the shortest path is intuitively stated as “shortest paths are composed of shortest paths”. This seems either obvious or trivial. The precise result is <div class="thmwrapper thm_thmwrapper" id="a0000000441">
 <div class="thmheading thm_thmheading">
 <span class="thmcaption thm_thmcaption">
     Theorem
@@ -3656,7 +3656,7 @@ The key result in finding the shortest path is intuitively stated as “shortest
 </div>
 </div>
 </p>
-<div class="proof_wrapper" id="a0000000448">
+<div class="proof_wrapper" id="a0000000442">
 <div class="proof_heading">
 <span class="proof_caption">
     Proof.
@@ -3666,13 +3666,13 @@ The key result in finding the shortest path is intuitively stated as “shortest
 <p>
 This follows by contradiction. if <script type="math/tex">S</script> is not a shortest <script type="math/tex">i_ u-i_ v</script> path then there is another <script type="math/tex">i_ u-i_ v</script> path <script type="math/tex">S'</script> that is strictly shorter than <script type="math/tex">S</script>, <script type="math/tex">l(S') < l(S)</script>. We can therefore define a new <script type="math/tex">i_1-i_ k</script> path <script type="math/tex">P'</script> by using the “shortcut” <script type="math/tex">S'</script>, 
 </p>
-<div class="eqn" id="a0000000449">
+<div class="eqn" id="a0000000443">
 <script type="math/tex; mode=display">\begin{equation}P' = P \setminus S \cup S'.\tag{6.9}\end{equation}</script>
 </div>
 <p>
  From the positivity of the length function it immediately follows that 
 </p>
-<div class="eqn" id="a0000000450">
+<div class="eqn" id="a0000000444">
 <script type="math/tex; mode=display">\begin{equation}l(P') = l(P) - l(S) + l(S') < l(P).\tag{6.10}\end{equation}</script>
 </div>
 <p>
@@ -3685,9 +3685,9 @@ This follows by contradiction. if <script type="math/tex">S</script> is not a sh
 </p>
 </section>
 </section><section class="section">
-<h2 id="a0000000451">6.4 Dijkstra’s theorem</h2>
+<h2 id="a0000000445">6.4 Dijkstra’s theorem</h2>
 <p>
-This is the central result that allow us to build an algorithm to solve the shortest path problem. <div class="thmwrapper thm_thmwrapper" id="a0000000452">
+This is the central result that allow us to build an algorithm to solve the shortest path problem. <div class="thmwrapper thm_thmwrapper" id="a0000000446">
 <div class="thmheading thm_thmheading">
 <span class="thmcaption thm_thmcaption">
     Theorem
@@ -3699,7 +3699,7 @@ This is the central result that allow us to build an algorithm to solve the shor
 <p>
  Let <script type="math/tex">S \subseteq V</script> be a subset of the vertices that contains the source <script type="math/tex">s</script>. Let <script type="math/tex">Y(i)</script>, for all <script type="math/tex">i \in V</script>, be the length of the corresponding shortest <script type="math/tex">s-i</script> path. Let 
 </p>
-<div class="eqn" id="a0000000453">
+<div class="eqn" id="a0000000447">
 <script type="math/tex; mode=display">\begin{equation}(v, w) \in \operatorname*{argmin}_{(i, j) \in \delta ^+(S)} \left[ Y(i) + l_{ij} \right].\tag{6.11}\end{equation}</script>
 </div>
 <p>
@@ -3708,7 +3708,7 @@ This is the central result that allow us to build an algorithm to solve the shor
 </div>
 </div>
 </p>
-<div class="proof_wrapper" id="a0000000454">
+<div class="proof_wrapper" id="a0000000448">
 <div class="proof_heading">
 <span class="proof_caption">
     Proof.
@@ -3721,26 +3721,26 @@ We show that any other path <script type="math/tex">\pi </script> to any other v
 <p>
 First, decompose the path <script type="math/tex">\pi </script> as 
 </p>
-<div class="eqn" id="a0000000455">
+<div class="eqn" id="a0000000449">
 <script type="math/tex; mode=display">\begin{equation}\pi = \pi _1 \cup \{  (i, j) \}  \cup \pi _2,\tag{6.12}\end{equation}</script>
 </div>
 <p>
  where <script type="math/tex">i \in S</script>, <script type="math/tex">j \in V \setminus S</script>, <script type="math/tex">\pi _1</script> is a shortest <script type="math/tex">s-i</script> path, <script type="math/tex">(i, j) \in \delta ^+(S)</script>, and <script type="math/tex">\pi _2</script> is a shortest <script type="math/tex">j-u</script> path. This is always possible due to the subpath optimality theorem. It allows us to concentrate on the arc <script type="math/tex">(i, j)</script> that leaves the set <script type="math/tex">S</script>. It follows that 
 </p>
-<div class="eqn" id="a0000000456">
+<div class="eqn" id="a0000000450">
 <script type="math/tex; mode=display">\begin{equation}l(\pi ) = l(\pi _1) + l_{ij} + l(\pi _2).\tag{6.13}\end{equation}</script>
 </div>
 <p>
 Since we have chosen <script type="math/tex">(v, w) \in \delta ^+(S)</script> to minimise <script type="math/tex">Y(i) + l_{ij}</script> it must be true that 
 </p>
-<div class="eqn" id="a0000000457">
+<div class="eqn" id="a0000000451">
 <script type="math/tex; mode=display">\begin{equation}l(\pi _1) + l_{ij} \ge Y(v) + l_{vw}.\tag{6.14}\end{equation}</script>
 </div>
 <p>
  Since <script type="math/tex">l(\pi _2) \ge 0</script> it follows that 
 </p>
-<div id="a0000000458">
-<div class="eqnarrayid" id="a0000000459"></div><div class="eqnarrayid" id="a0000000460"></div><div class="eqnarrayid" id="a0000000461"></div><div class="eqnarrayid" id="a0000000462"></div><script type="math/tex; mode=display">
+<div id="a0000000452">
+<div class="eqnarrayid" id="a0000000453"></div><div class="eqnarrayid" id="a0000000454"></div><div class="eqnarrayid" id="a0000000455"></div><div class="eqnarrayid" id="a0000000456"></div><script type="math/tex; mode=display">
 \begin{align}
 \tag{6.15} l(\pi ) & = l(\pi _1) + l_{ij} + l(\pi _2) \\ 
 \tag{6.16}& \ge l(\pi _1) + l_{ij} \\ 
@@ -3765,7 +3765,7 @@ Since we have chosen <script type="math/tex">(v, w) \in \delta ^+(S)</script> to
 </figcaption>
 </figure>
 <section class="subsection">
-<h3 id="a0000000463">6.4.1 Dijkstra’s algorithm</h3>
+<h3 id="a0000000457">6.4.1 Dijkstra’s algorithm</h3>
 <p>
 We can now use subpath optimality and iteratively apply Dijkstra’s theorem to give us an algorithm. Starting from the source node, we keep adding nodes to the set of nodes we have “seen” so that we have the shortest path in that set. 
 </p>
@@ -3775,8 +3775,8 @@ Being more precise, but still sketching in words. We want to find the shortest p
 <p>
 We then iterate as long as <script type="math/tex">|S| < n</script>, so that <script type="math/tex">V \setminus S</script> is not empty. For each iteration we 
 </p>
-<ol class="enumerate" id="a0000000464" style="list-style: none">
-<li id="a0000000465" value="1">
+<ol class="enumerate" id="a0000000458" style="list-style: none">
+<li id="a0000000459" value="1">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		1.
 	</span>
@@ -3784,7 +3784,7 @@ We then iterate as long as <script type="math/tex">|S| < n</script>, so that <sc
 find <script type="math/tex">(v, w) \in \delta ^+(s)</script> that minimises <script type="math/tex">Y(v) + l_{vw}</script>; 
 </p>
 </li>
-<li id="a0000000466" value="2">
+<li id="a0000000460" value="2">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		2.
 	</span>
@@ -3792,7 +3792,7 @@ find <script type="math/tex">(v, w) \in \delta ^+(s)</script> that minimises <sc
 set <script type="math/tex">Y(w) = Y(v) + l_{vw}</script>; 
 </p>
 </li>
-<li id="a0000000467" value="3">
+<li id="a0000000461" value="3">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		3.
 	</span>
@@ -3800,7 +3800,7 @@ set <script type="math/tex">Y(w) = Y(v) + l_{vw}</script>;
 set <script type="math/tex">P(w) = v</script>; 
 </p>
 </li>
-<li id="a0000000468" value="4">
+<li id="a0000000462" value="4">
 <span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
 		4.
 	</span>
@@ -3816,12 +3816,12 @@ set <script type="math/tex">S \to S \cup \{  w \} </script>.
 This solves the <em>single source</em> shortest path problem. To solve the shortest path problem when the target <script type="math/tex">t</script> is specified we can check to see if <script type="math/tex">w = t</script> and, if so, stop at the end of that iteration. This makes no difference to the code complexity as, in the worst case that has to be considered, <script type="math/tex">t</script> will be the last node added to <script type="math/tex">S</script>. 
 </p>
 </section><section class="subsection">
-<h3 id="a0000000469">6.4.2 Representing the length</h3>
+<h3 id="a0000000463">6.4.2 Representing the length</h3>
 <p>
 We have seen multiple methods for representing the topology of the graph, each of which has their individual advantages. As Dijkstra’s algorithm depends crucially on minimising a length and looking up <script type="math/tex">l_{vw}</script>, it is important to have an easy and efficient way of representing the arc lengths. 
 </p>
 <section class="subsubsection">
-<h4 id="a0000000470">Adjacency list</h4>
+<h4 id="a0000000464">Adjacency list</h4>
 <p>
 As in the graph case, we construct a list <script type="math/tex">L_ l</script> of size <script type="math/tex">n</script>, where each component <script type="math/tex">i</script> contains another list of size at most <script type="math/tex">n-1</script>, containing the <em>lengths</em> of all arcs <script type="math/tex">(i, j) \in \delta ^+(i)</script>, in order of index <script type="math/tex">j</script>. 
 </p>
@@ -3829,7 +3829,7 @@ As in the graph case, we construct a list <script type="math/tex">L_ l</script> 
 This representation needs the adjacency list <script type="math/tex">L</script> as well in order to give the index <script type="math/tex">j</script>. Assuming that <script type="math/tex">V</script> is a set of consecutive integers of size <script type="math/tex">n</script>, the whole graph (including arc length information) is given once <script type="math/tex">L, L_ l</script> are given. The size of the graph <script type="math/tex">n</script> is implicit in the length of the lists. 
 </p>
 </section><section class="subsubsection">
-<h4 id="a0000000471">Adjacency matrix</h4>
+<h4 id="a0000000465">Adjacency matrix</h4>
 <p>
 Again this is similar to the graph case. We construct a matrix <script type="math/tex">M_ l \in \left\{  \mathbb {R} \cup \{  \infty \}  \right\} ^{n \times n}</script> where, for each <script type="math/tex">i, j \in V</script>, the component <script type="math/tex">(m_ l)_{ij}</script> is the length of the <script type="math/tex">(i, j)</script> arc, or is infinity if no such arc exists. 
 </p>
@@ -3838,7 +3838,7 @@ This representation implicitly stores all the information about the graph, inclu
 </p>
 </section>
 </section><section class="subsection">
-<h3 id="a0000000472">6.4.3 Implementing Dijkstra’s algorithm</h3>
+<h3 id="a0000000466">6.4.3 Implementing Dijkstra’s algorithm</h3>
 <p>
 The adjacency list form is the most efficient for checking whether an arc exists. The adjacency matrix form is the most efficient for checking what the length of the arc is. We assume that we are not limited by the amount of memory that each form takes, so we will use both forms in our implementation. In the code snippet below, <span class="ttfamily">L</span> is the adjacency list representing the topology of the graph and <span class="ttfamily">Ml</span> is the adjacency matrix representation of the length function. 
 </p>
@@ -3860,36 +3860,36 @@ The adjacency list form is the most efficient for checking whether an arc exists
 <span class="linenos">16</span>    S.append(w)
 </pre></div>
 </section><section class="subsection">
-<h3 id="a0000000473">6.4.4 Complexity</h3>
+<h3 id="a0000000467">6.4.4 Complexity</h3>
 <p>
 To compute the complexity we consider the order of each line or block of the code above. We have 
 </p>
-<ul class="itemize" id="a0000000474">
-<li id="a0000000475"> <p>
+<ul class="itemize" id="a0000000468">
+<li id="a0000000469"> <p>
 Line 1 writes a single value, taking <script type="math/tex">\mathcal{O}(1)</script>; 
 </p>
 </li>
-<li id="a0000000476"> <p>
+<li id="a0000000470"> <p>
 Lines 2-3 write <script type="math/tex">n</script> values, taking <script type="math/tex">\mathcal{O}(n)</script> each; 
 </p>
 </li>
-<li id="a0000000477"> <p>
+<li id="a0000000471"> <p>
 Line 4 writes a single value, taking <script type="math/tex">\mathcal{O}(1)</script>; 
 </p>
 </li>
-<li id="a0000000478"> <p>
+<li id="a0000000472"> <p>
 Line 5 loops over the whole graph, so is executed <script type="math/tex">n</script> times. Each block takes: 
 </p>
-<ul class="itemize" id="a0000000479">
-<li id="a0000000480"> <p>
+<ul class="itemize" id="a0000000473">
+<li id="a0000000474"> <p>
 Lines 6-7 write single values, taking <script type="math/tex">\mathcal{O}(1)</script>; 
 </p>
 </li>
-<li id="a0000000481"> <p>
+<li id="a0000000475"> <p>
 Lines 8-10 correspond to looping over <script type="math/tex">\delta ^+(S)</script> in its entirety. This is executed <script type="math/tex">m</script> times, where <script type="math/tex">m</script> is the out degree of <script type="math/tex">S</script>. Earlier results show <script type="math/tex">m \le n (n - 1)</script>. In the worst case <script type="math/tex">m = \mathcal{O}(n^2)</script>. Each block takes: 
 </p>
-<ul class="itemize" id="a0000000482">
-<li id="a0000000483"> <p>
+<ul class="itemize" id="a0000000476">
+<li id="a0000000477"> <p>
 Lines 11-13 are single comparisons or single writes, each taking <script type="math/tex">\mathcal{O}(1)</script>; 
 </p>
 </li>
@@ -3898,7 +3898,7 @@ Lines 11-13 are single comparisons or single writes, each taking <script type="m
  Therefore this inner loop has complexity <script type="math/tex">\mathcal{O}(m) = \mathcal{O}(n^2)</script>. 
 </p>
 </li>
-<li id="a0000000484"> <p>
+<li id="a0000000478"> <p>
 Lines 14-16 are single writes, each taking <script type="math/tex">\mathcal{O}(1)</script>; 
 </p>
 </li>
@@ -3915,15 +3915,15 @@ Lines 14-16 are single writes, each taking <script type="math/tex">\mathcal{O}(1
 This is considerably faster than the complexity of the simplex algorithm (in its worst case). 
 </p>
 </section><section class="subsection">
-<h3 id="a0000000485">6.4.5 A faster method</h3>
+<h3 id="a0000000479">6.4.5 A faster method</h3>
 <p>
 Finding the shortest path is a sufficiently important practical problem that we want to find an algorithm faster than <script type="math/tex">\mathcal{O}(n^3)</script>. This can be done. The key issue is that by repeatedly scanning <script type="math/tex">\delta ^*(S)</script> we are recomputing particular shortest path lengths multiple times. With additional structures we can reduce that computation. 
 </p>
 <p>
 We need the following observation: 
 </p>
-<div id="a0000000486">
-<div class="eqnarrayid" id="a0000000487"></div><div class="eqnarrayid" id="a0000000488"></div><script type="math/tex; mode=display">
+<div id="a0000000480">
+<div class="eqnarrayid" id="a0000000481"></div><div class="eqnarrayid" id="a0000000482"></div><script type="math/tex; mode=display">
 \begin{align}
 \tag{6.19}& &  (v, w) & \in \operatorname*{argmin}_{(i, j) \in \delta ^+(S)} \left\{  Y(i) + l_{ij} \right\}  \\ 
 \tag{6.20}\iff & &  (v, w)& \in \operatorname*{argmin}_{j \in V \setminus S} \left\{  \operatorname*{argmin}_{(i, j) \in \delta ^-(S) \colon i \in S} \left\{  Y(i) + l_{ij} \right\}  \right\} . 
@@ -3973,32 +3973,32 @@ In the new algorithm, the meaning of the labels will remain the same <em>as long
 <p>
 The explicit complexity calculation is 
 </p>
-<ul class="itemize" id="a0000000489">
-<li id="a0000000490"> <p>
+<ul class="itemize" id="a0000000483">
+<li id="a0000000484"> <p>
 Line 1 writes a single value, taking <script type="math/tex">\mathcal{O}(1)</script>; 
 </p>
 </li>
-<li id="a0000000491"> <p>
+<li id="a0000000485"> <p>
 Lines 2-3 write <script type="math/tex">n</script> values, taking <script type="math/tex">\mathcal{O}(n)</script> each; 
 </p>
 </li>
-<li id="a0000000492"> <p>
+<li id="a0000000486"> <p>
 Line 4 writes a single value, taking <script type="math/tex">\mathcal{O}(1)</script>; 
 </p>
 </li>
-<li id="a0000000493"> <p>
+<li id="a0000000487"> <p>
 Line 5 loops over the whole graph, so is executed <script type="math/tex">n</script> times. Each block takes: 
 </p>
-<ul class="itemize" id="a0000000494">
-<li id="a0000000495"> <p>
+<ul class="itemize" id="a0000000488">
+<li id="a0000000489"> <p>
 Lines 6-7 write single values, taking <script type="math/tex">\mathcal{O}(1)</script>; 
 </p>
 </li>
-<li id="a0000000496"> <p>
+<li id="a0000000490"> <p>
 Lines 8-10 correspond to looping over <script type="math/tex">V \setminus S</script> in its entirety. In the worst case this is <script type="math/tex">\mathcal{O}(n)</script>. Each block takes: 
 </p>
-<ul class="itemize" id="a0000000497">
-<li id="a0000000498"> <p>
+<ul class="itemize" id="a0000000491">
+<li id="a0000000492"> <p>
 Lines 11-13 are single comparisons or single writes, each taking <script type="math/tex">\mathcal{O}(1)</script>; 
 </p>
 </li>
@@ -4007,15 +4007,15 @@ Lines 11-13 are single comparisons or single writes, each taking <script type="m
  Therefore this inner loop has complexity <script type="math/tex">\mathcal{O}(n)</script>. 
 </p>
 </li>
-<li id="a0000000499"> <p>
+<li id="a0000000493"> <p>
 Lines 14 is a single write taking <script type="math/tex">\mathcal{O}(1)</script>; 
 </p>
 </li>
-<li id="a0000000500"> <p>
+<li id="a0000000494"> <p>
 Lines 15-17 correspond to looping over <script type="math/tex">V \setminus S</script> in its entirety again. In the worst case this is <script type="math/tex">\mathcal{O}(n)</script>. Each block takes: 
 </p>
-<ul class="itemize" id="a0000000501">
-<li id="a0000000502"> <p>
+<ul class="itemize" id="a0000000495">
+<li id="a0000000496"> <p>
 Lines 18-20 are single comparisons or single writes, each taking <script type="math/tex">\mathcal{O}(1)</script>; 
 </p>
 </li>
@@ -4058,7 +4058,7 @@ Note that this is not the fastest algorithm that exists. It is possible to const
 			</ul>
 		</div>
 		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
-		<p>This page last generated: 2022-01-20</p>
+		<p>This page last generated: 2022-03-22</p>
 	</div>
 </footer>
 		
