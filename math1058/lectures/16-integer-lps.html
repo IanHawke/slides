@@ -135,6 +135,7 @@
 				</section>
 
 				<section id="Relaxation">
+
 					<section>
 						<h2>Relaxation</h2>
 
@@ -173,8 +174,63 @@
 						</div>
 
 						<aside class="notes">
+							We look at our standard picture, which comes from the optimal portfolio problem, except here all the matrix coefficients are doubled so the size of the feasible region is cut in half.
+							<br>
+							We see the optimal solution to the standard problem, at the vertex in the top right, is not at an integer. Therefore we immediately see that the fundamental theorem fails. The optimal solution does lie on the boundary, but that is luck. In a general problem the boundary of the feasible region may not intersect any point in the integer lattice.
+							<br>
+							However, we can imagine using the standard problem to predict where to look for solutions of the integer problem. So, using the simplex method, or the graphical method, or some other approach, we solve the <em>relaxed</em> problem, or the <em>relaxation</em> of the integer linear program, where we drop the restriction on the decision variables and let them be reals. We can then investigate the $2^n$ neighbours in the integer lattice. This is not a small number to check, and grows intractably fast, but would still be realistic for moderate size problems.
 						</aside>
 					</section>
+
+					<section>
+						<h2>Relaxation fails</h2>
+						\[
+						\begin{array}{rrlcrlcl}
+						\max_{x \in \mathbb{Z}^2}      & 5 & x_1 & + &   & x_2 \\
+						\text{s.t.} &   &     &   &   & x_2 & \le & 2 \\
+						            &   &     &   &   & x_2 & \ge & 1 \\
+												&   & x_1 & + & 10 & x_2 & \ge & 21 \\
+												&   & x_1 & - & 10 & x_2 & \ge & -9
+						\end{array}
+						\]
+						<img style="width:868px" src="images/16_ilps/ilp_relaxation_fails.svg">
+
+						<aside class="notes">
+							From the graphical solution there are only four feasible points, marked in green, or yellow for the optimal solution. However, the feasible region for the relaxed problem is "long and thin". This makes the optimal solution of the relaxed problem a long way away from any of the feasible points of the original problem.
+							<br>
+							By changing the coefficients we can make this "long and thin" region extend arbitrarily far out to the right without ever intersecting a point on the integer lattice.
+							<br>
+							Unlike the Klee-Minty example, these sorts of pathological cases show up too often to make relaxation a robust strategy. Instead it is often better to split the feasible region into multiple regions and apply optimisation methods to each in turn. Finding a good strategy to split the feasible region is easier than finding a general robust method.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Special case</h2>
+
+						<p>
+							Scale $A x = b$ so that $b \in \mathbb{Z}^n$. <em>If</em> optimal $A_B^{-1} \in \mathbb{Z}^{n \times n}$ then simplex works.
+						</p>
+						<ul class="fragment">
+							<li>
+								The solution is $x_B = A_B^{-1} b$ which is integer;
+							</li>
+							<li>
+								the feasible region of the integer program is contained in that of the relaxed problem.
+							</li>
+						</ul>
+						<p class="fragment">
+							If $\det(A_S) \in \{ -1, 0, 1 \}$ for all square submatrices $A_S$ of $A$, then $A$ is <em>total unimodular</em> and $A_B^{-1}$ is integer.
+						</p>
+
+						<aside class="notes">
+							Because the coefficients in the problem are all rational we can always scale the constraint matrix equation so that the right-hand-side vector is integer. From this, we think about the optimal solution of the relaxation problem, written in basic form.
+							<br>
+							In basic form we know the solution is given by the inverse of the basic matrix times the right-hand-side vector b. This will be integer if the inverse matrix is integer. It is also the case that the feasible region of the relaxation problem must contain the feasible points on the integer lattice. Therefore, if the inverse matrix is integer the optimal solution of the relaxation problem will be integer and feasible, and so optimal for the integer problem.
+							<br>
+							This seems like a very restrictive condition, and computing the inverse of a matrix is not ideal. In some cases it can be predicted, as in the total unimodularity case. There is a proof in the notes that if all the square submatrices have determinant of zero or plus/minus one, then the inverse of any basic matrix must be integer. This can be useful; for example, it can be shown that the shortest path problem which we will see next can be phrased as an integer problem which is solvable using relaxation. However, there are more efficient solution methods.
+						</aside>
+					</section>
+
 				</section>
 
 				<section id="Summary">
@@ -183,16 +239,16 @@
 
 						<ul>
 							<li>
-								Bland's rule is cheap.
+								Integer linear programs are harder.
 							</li>
 							<li>
-								Simplex cost depends on number of vertices visited.
+								Relaxing the integer constraint allows eg simplex to be used;
 							</li>
 							<li>
-								Pathological cases exist where $\sim 2^n$ vertices visited.
+								Relaxation often does not work.
 							</li>
 							<li>
-								Average cost is $\mathcal{O}(m \log(n))$.
+								Special cases (total unimodular) allow the relaxation problem to work.
 							</li>
 						</ul>
 					</section>
