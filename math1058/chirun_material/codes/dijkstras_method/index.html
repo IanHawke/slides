@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        
+            <meta charset="utf-8">
+            <meta name="robots" content="noindex">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="author" content="Ian Hawke" />
+            <meta name="date" content="2022-03-23" />
+        
+
+        <title>Dijkstra&#39;s Method | Operational Research and Mathematical Computing</title>
+
+        
+    
+    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../../static/styles.css">
+            <link rel="stylesheet" id="customiseCSS" href="../../static/light.css">
+            
+            
+        
+    <link rel="stylesheet" id="customiseCodeCSS" href="../../static/pygmentize.light.css">
+    <link rel="stylesheet" href="../../static/codemirror-5.26.0/lib/codemirror.css">
+    <link rel="stylesheet" href="../../static/boole.css">
+    <link rel="stylesheet" href="../../static/numbasEmbed.css">
+
+    <link rel="stylesheet" href="../../static/bootstrap-toc.css?v=3">
+    <link rel="stylesheet" href="../../static/print.css">
+
+
+        
+    
+    
+            <script defer src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <script defer src="../../static/mathjax_config.js"></script>
+            <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+            <script defer src="../../static/customisation.js"></script>
+            <script defer src="../../static/mp4.js"></script>
+            
+            
+        
+    <script defer src="../../static/jquery.flexibleArea.js"></script>
+    <script defer src="../../static/spin.min.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/lib/codemirror.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/octave/octave.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/python/python.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/r/r.js"></script>
+    <script defer src="../../static/boole.js"></script>
+    <script defer src="../../static/numbasEmbed.js"></script>
+
+    <script defer src="../../static/bootstrap-toc.js"></script>
+
+    </head>
+    <body data-spy="scroll" data-target="#chapterTOC" data-offset="50">
+        
+<div class="collapse" id="navbarToggleCustomise">
+	<div class="bg-secondary text-white p-3">
+		<form onsubmit="return false;" id="navbarCustomise">
+			<div class="form-row">
+				<label>Theme Customisation</label>
+				<div id="themeSelector" class="form-group col-md-12">
+					<button class="btn btn-dark mr-2" value="dark">Dark</button>
+					<button class="btn btn-pastel mr-2" value="pastel">Pastel</button>
+					<button class="btn btn-light mr-4" value="light">Light</button>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label style="display: block" for="font-scale">Font size (<span id="font-size-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="font-scale" min="50" max="600" value="100">
+					<button id="font-scale-reset" class="btn btn-sm">Reset</button>
+				</div>
+				<div class="form-group col-md-4">
+					<label style="display: block" for="p-space">Spacing (<span id="p-space-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="p-space" min="0" max="600" value="100">
+					<button id="p-space-reset" class="btn btn-sm">Reset</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<nav aria-label="breadcrumb">
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="../../index.html">Operational Research and Mathematical Computing</a>
+		</li>
+		
+		<li class="breadcrumb-item">
+			<a href="../../codes/index.html">Codes</a>
+		</li>
+		
+		<li class="breadcrumb-item active">
+			Dijkstra&#39;s Method
+		</li>
+		<li class="ml-auto">
+			<button class="navbar-toggler p0" type="button" data-toggle="collapse" data-target="#navbarToggleCustomise" aria-controls="navbarToggleCustomise" aria-expanded="false" aria-label="Toggle customisations panel">
+				<i class="fa fa-cog" aria-hidden="true" title="Toggle customisations panel"></i> <span class="sr-only">Toggle customisations panel</span>
+			</button>
+		</li>
+	</ul>
+</nav>
+
+
+        <header>
+            
+            
+        </header>
+        <main>
+            
+    <div class="container mt-3">
+        <div class="row">
+            
+            <div id="sidebar" class="col-md-3">
+                <nav class="mb-3" id="chapterTOC" data-toggle="toc">
+                    <ul class="nav navbar-nav">
+                        
+                        
+                        <li><a id="notebook-link" class="nav-link" href="../../codes/dijkstras_method/dijkstras_method.ipynb" download><i class="fa fa-book" aria-hidden="true" title="Download Notebook"></i>&nbsp;Download Notebook</a></li>
+                        
+                        
+                        <li><a id="pdf-link" class="nav-link" href="../../codes/dijkstras_method/dijkstras_method.pdf" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" title="Download as PDF"></i>&nbsp;Download as PDF</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+            <div id="content" class="col-md-9"> 
+            
+            <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">networkx</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</pre></div>
+<section class="section1"><h1>Dijkstra's algorithm</h1>
+<p>Here we will assume that a graph is given by a dictionary of weighted edges. The keys are the <code>(start, end)</code> pair for the edge, and the values are the weights. For example,</p>
+<div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span> <span class="mi">7</span><span class="p">,</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="mi">7</span><span class="p">,</span>
+    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span> <span class="mi">7</span><span class="p">,</span>
+    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span> <span class="mi">6</span><span class="p">,</span>
+    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="p">}</span>
+</pre></div>
+<section class="section2"><h2>Utilities</h2>
+<p>First write functions to convert from the graph-as-dictionary to get the nodes list, adjacency list, and adjacency matrix.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Get the list of nodes of a graph from the dictionary.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    G : dictionary</span>
+<span class="sd">        Describes the graph as edge-weight pair.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    V : list</span>
+<span class="sd">        The nodes</span>
+<span class="sd">    """</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="n">nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="c1"># Items in sets are unique. So, convert to set then to list, then sort.</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">nodes</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">V</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="n">get_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[0, 1, 2, 3, 4, 5]
+</pre></div>
+<p>Now get the adjacency list. This is a list of lists. The <code>i</code>th entry gives the nodes that can be reached by a single edge starting from <code>i</code>.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">adjacency_list</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Get the adjacency list of a graph from the dictionary.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    G : dictionary</span>
+<span class="sd">        Describes the graph as edge-weight pair.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    adjacency_list : list</span>
+<span class="sd">        The list as described</span>
+<span class="sd">    """</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">get_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="n">adjacency_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">V</span><span class="p">:</span>
+        <span class="n">nodes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">V</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="ow">in</span> <span class="n">G</span><span class="p">:</span>
+                <span class="n">nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+        <span class="n">adjacency_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">adjacency_list</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="n">adjacency_list</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[[1, 3], [2, 3], [1, 3, 4, 5], [1, 2, 4], [2, 3, 5], [2]]
+</pre></div>
+<p>Now get the adjacency matrix. For row <code>i</code> and column <code>j</code> this gives has <script type="math/tex">A_{i,j} = w</script>, where <code>w</code> is the weight of the edge between <code>i</code> and <code>j</code>. If there is no such edge the value is set to infinity.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">adjacency_matrix</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Get the adjacency list of a graph from the dictionary.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    G : dictionary</span>
+<span class="sd">        Describes the graph as edge-weight pair.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    adjacency_matrix : array</span>
+<span class="sd">        The matrix as described</span>
+<span class="sd">    """</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">get_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    <span class="n">adjacency_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">V</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">V</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="ow">in</span> <span class="n">G</span><span class="p">:</span>
+                <span class="n">adjacency_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">G</span><span class="p">[(</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">)]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">adjacency_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+    <span class="k">return</span> <span class="n">adjacency_matrix</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="n">adjacency_matrix</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>array([[inf,  2., inf,  3., inf, inf],
+       [inf, inf,  7.,  4., inf, inf],
+       [inf,  4., inf,  2.,  2.,  1.],
+       [inf,  7.,  1., inf,  8., inf],
+       [inf, inf,  7.,  6., inf,  2.],
+       [inf, inf,  8., inf, inf, inf]])
+</pre></div>
+</section><section class="section2"><h2>The slow version</h2>
+<p>This is the <script type="math/tex">\mathcal{O}(n^3)</script> version.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">dijkstra_n3</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Dijkstra's algorithm finding the shortest paths from s on graph G.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    G : dictionary</span>
+<span class="sd">        Describes the graph as edge-weight pair.</span>
+<span class="sd">    s : integer</span>
+<span class="sd">        The starting node</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Y : list</span>
+<span class="sd">        The cost to reach each node starting from s</span>
+<span class="sd">    P : list</span>
+<span class="sd">        The predecessor on the shortest path</span>
+<span class="sd">    """</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">get_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">adjacency_list</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="n">Ml</span> <span class="o">=</span> <span class="n">adjacency_matrix</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,))</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+
+    <span class="c1"># Start from s.</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span>
+    <span class="n">Y</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">S</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">smallest_seen</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+        <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="c1"># Find shortest total path out of S</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">S</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">S</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="k">if</span> <span class="n">smallest_seen</span> <span class="o">&gt;</span> <span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">Ml</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]:</span>
+                    <span class="n">smallest_seen</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">Ml</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+                    <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span>
+        <span class="c1"># Update path out of S, add node.</span>
+        <span class="n">Y</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">+</span> <span class="n">Ml</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">w</span><span class="p">]</span>
+        <span class="n">P</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="n">S</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">Y</span><span class="p">,</span> <span class="n">P</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="n">dijkstra_n3</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>(array([0., 2., 4., 3., 6., 5.]), array([0., 0., 3., 0., 2., 2.]))
+</pre></div>
+<section class="section3"><h3>Cross-check using <code>networkx</code></h3>
+<div class="highlight"><pre><span></span><span class="n">G_nx</span> <span class="o">=</span> <span class="n">networkx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+<span class="n">G_nx</span><span class="o">.</span><span class="n">add_weighted_edges_from</span><span class="p">([(</span><span class="n">s</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">e</span><span class="p">),</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">target</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">networkx</span><span class="o">.</span><span class="n">dijkstra_path_length</span><span class="p">(</span><span class="n">G_nx</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">target</span><span class="p">),</span> <span class="n">networkx</span><span class="o">.</span><span class="n">dijkstra_path</span><span class="p">(</span><span class="n">G_nx</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">target</span><span class="p">)[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+<div class="highlight"><pre><span></span>1 2 0
+2 4 3
+3 3 0
+4 6 2
+5 5 2
+</pre></div>
+</section></section><section class="section2"><h2>The fast version</h2>
+<p>This is the <script type="math/tex">\mathcal{O}(n^2)</script> version.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">dijkstra_n2</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Dijkstra's algorithm finding the shortest paths from s on graph G.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    G : dictionary</span>
+<span class="sd">        Describes the graph as edge-weight pair.</span>
+<span class="sd">    s : integer</span>
+<span class="sd">        The starting node</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Y : list</span>
+<span class="sd">        The cost to reach each node starting from s</span>
+<span class="sd">    P : list</span>
+<span class="sd">        The predecessor on the shortest path</span>
+<span class="sd">    """</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">get_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">adjacency_list</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="n">Ml</span> <span class="o">=</span> <span class="n">adjacency_matrix</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,))</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Ml</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="c1"># Start from s.</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span>
+    <span class="n">Y</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">S</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">smallest_seen</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="c1"># Update all paths out of S</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">V</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">S</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">smallest_seen</span> <span class="o">&gt;</span> <span class="n">Y</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                <span class="n">smallest_seen</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                <span class="n">w</span> <span class="o">=</span> <span class="n">j</span>
+        <span class="n">S</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">L</span><span class="p">[</span><span class="n">w</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">Y</span><span class="p">[</span><span class="n">h</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Y</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">+</span> <span class="n">Ml</span><span class="p">[</span><span class="n">w</span><span class="p">][</span><span class="n">h</span><span class="p">]:</span>
+                <span class="n">Y</span><span class="p">[</span><span class="n">h</span><span class="p">]</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">+</span> <span class="n">Ml</span><span class="p">[</span><span class="n">w</span><span class="p">][</span><span class="n">h</span><span class="p">]</span>
+                <span class="n">P</span><span class="p">[</span><span class="n">h</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span>
+
+    <span class="k">return</span> <span class="n">Y</span><span class="p">,</span> <span class="n">P</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="n">dijkstra_n2</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>(array([0., 2., 4., 3., 6., 5.]), array([0., 0., 3., 0., 2., 2.]))
+</pre></div>
+</section></section>
+            </div>
+        </div>
+    </div>
+
+        </main>
+		
+		<footer class="text-muted">
+	<hr>
+	<div class="container">
+		<div class="float-right">
+			<ul style="list-style: none">
+			<li><a href="#">Back to top</a></li>
+			
+			
+			<li><a href="../../codes/dijkstras_method/dijkstras_method.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;Download as PDF</a></li>
+			
+			</ul>
+		</div>
+		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
+		<p>This page last generated: 2022-03-23</p>
+	</div>
+</footer>
+		
+    </body>
+</html>

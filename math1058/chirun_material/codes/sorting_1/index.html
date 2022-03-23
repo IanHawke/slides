@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        
+            <meta charset="utf-8">
+            <meta name="robots" content="noindex">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="author" content="Ian Hawke" />
+            <meta name="date" content="2022-03-23" />
+        
+
+        <title>Sorting | Operational Research and Mathematical Computing</title>
+
+        
+    
+    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../../static/styles.css">
+            <link rel="stylesheet" id="customiseCSS" href="../../static/light.css">
+            
+            
+        
+    <link rel="stylesheet" id="customiseCodeCSS" href="../../static/pygmentize.light.css">
+    <link rel="stylesheet" href="../../static/codemirror-5.26.0/lib/codemirror.css">
+    <link rel="stylesheet" href="../../static/boole.css">
+    <link rel="stylesheet" href="../../static/numbasEmbed.css">
+
+    <link rel="stylesheet" href="../../static/bootstrap-toc.css?v=3">
+    <link rel="stylesheet" href="../../static/print.css">
+
+
+        
+    
+    
+            <script defer src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <script defer src="../../static/mathjax_config.js"></script>
+            <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+            <script defer src="../../static/customisation.js"></script>
+            <script defer src="../../static/mp4.js"></script>
+            
+            
+        
+    <script defer src="../../static/jquery.flexibleArea.js"></script>
+    <script defer src="../../static/spin.min.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/lib/codemirror.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/octave/octave.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/python/python.js"></script>
+    <script defer src="../../static/codemirror-5.26.0/mode/r/r.js"></script>
+    <script defer src="../../static/boole.js"></script>
+    <script defer src="../../static/numbasEmbed.js"></script>
+
+    <script defer src="../../static/bootstrap-toc.js"></script>
+
+    </head>
+    <body data-spy="scroll" data-target="#chapterTOC" data-offset="50">
+        
+<div class="collapse" id="navbarToggleCustomise">
+	<div class="bg-secondary text-white p-3">
+		<form onsubmit="return false;" id="navbarCustomise">
+			<div class="form-row">
+				<label>Theme Customisation</label>
+				<div id="themeSelector" class="form-group col-md-12">
+					<button class="btn btn-dark mr-2" value="dark">Dark</button>
+					<button class="btn btn-pastel mr-2" value="pastel">Pastel</button>
+					<button class="btn btn-light mr-4" value="light">Light</button>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label style="display: block" for="font-scale">Font size (<span id="font-size-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="font-scale" min="50" max="600" value="100">
+					<button id="font-scale-reset" class="btn btn-sm">Reset</button>
+				</div>
+				<div class="form-group col-md-4">
+					<label style="display: block" for="p-space">Spacing (<span id="p-space-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="p-space" min="0" max="600" value="100">
+					<button id="p-space-reset" class="btn btn-sm">Reset</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<nav aria-label="breadcrumb">
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="../../index.html">Operational Research and Mathematical Computing</a>
+		</li>
+		
+		<li class="breadcrumb-item">
+			<a href="../../codes/index.html">Codes</a>
+		</li>
+		
+		<li class="breadcrumb-item active">
+			Sorting
+		</li>
+		<li class="ml-auto">
+			<button class="navbar-toggler p0" type="button" data-toggle="collapse" data-target="#navbarToggleCustomise" aria-controls="navbarToggleCustomise" aria-expanded="false" aria-label="Toggle customisations panel">
+				<i class="fa fa-cog" aria-hidden="true" title="Toggle customisations panel"></i> <span class="sr-only">Toggle customisations panel</span>
+			</button>
+		</li>
+	</ul>
+</nav>
+
+
+        <header>
+            
+            
+        </header>
+        <main>
+            
+    <div class="container mt-3">
+        <div class="row">
+            
+            <div id="sidebar" class="col-md-3">
+                <nav class="mb-3" id="chapterTOC" data-toggle="toc">
+                    <ul class="nav navbar-nav">
+                        
+                        
+                        <li><a id="notebook-link" class="nav-link" href="../../codes/sorting_1/sorting_1.ipynb" download><i class="fa fa-book" aria-hidden="true" title="Download Notebook"></i>&nbsp;Download Notebook</a></li>
+                        
+                        
+                        <li><a id="pdf-link" class="nav-link" href="../../codes/sorting_1/sorting_1.pdf" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" title="Download as PDF"></i>&nbsp;Download as PDF</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+            <div id="content" class="col-md-9"> 
+            
+            <section class="section1"><h1>Sorting algorithms as in lectures</h1>
+<section class="section2"><h2>Key helper function</h2>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">swap</span><span class="p">(</span><span class="n">unsorted</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Swap the i and j entries of the list unsorted.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    unsorted : list or array</span>
+<span class="sd">        List whose entries are to be swapped</span>
+<span class="sd">    i, j : integer</span>
+<span class="sd">        Indexes of entries to be swapped</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    sorted : list or array</span>
+<span class="sd">        List with entries swapped</span>
+<span class="sd">    """</span>
+    <span class="n">unsorted</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">unsorted</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">unsorted</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">unsorted</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">unsorted</span>
+</pre></div>
+</section><section class="section2"><h2>Selection sort</h2>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">selection_sort</span><span class="p">(</span><span class="n">unsorted</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Selection sort, sorting in non-decreasing order.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    unsorted: list or array</span>
+<span class="sd">        List to be sorted</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    sorted : list or array</span>
+<span class="sd">        Sorted (in place) list</span>
+<span class="sd">    """</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">unsorted</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">unsorted</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">unsorted</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="n">k</span>
+        <span class="k">if</span> <span class="n">unsorted</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">unsorted</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="n">unsorted</span> <span class="o">=</span> <span class="n">swap</span><span class="p">(</span><span class="n">unsorted</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">unsorted</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">selection_sort</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">]))</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[2, 2, 4, 6, 7]
+</pre></div>
+</section><section class="section2"><h2>Insertion sort</h2>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">insertion_sort</span><span class="p">(</span><span class="n">unsorted</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Insertion sort, sorting in non-decreasing order.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    unsorted: list or array</span>
+<span class="sd">        List to be sorted</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    sorted : list or array</span>
+<span class="sd">        Sorted (in place) list</span>
+<span class="sd">    """</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">unsorted</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">unsorted</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">unsorted</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                <span class="n">unsorted</span> <span class="o">=</span> <span class="n">swap</span><span class="p">(</span><span class="n">unsorted</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">break</span>
+    <span class="k">return</span> <span class="n">unsorted</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">insertion_sort</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">]))</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[2, 2, 4, 6, 7]
+</pre></div>
+</section></section><section class="section1"><h1>Timing</h1>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">import</span> <span class="nn">timeit</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">tqdm</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="n">ns</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="n">times_ave_ss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ns</span><span class="p">))</span>
+<span class="n">times_ave_is</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ns</span><span class="p">))</span>
+<span class="n">times_max_ss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ns</span><span class="p">))</span>
+<span class="n">times_max_is</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ns</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="n">ns</span><span class="p">)):</span>
+    <span class="n">n_times_ss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">n_times_is</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">n_times_ss</span><span class="p">)):</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">100</span><span class="p">)</span>
+        <span class="n">n_times_ss</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="s2">"selection_sort(unsorted)"</span><span class="p">,</span>
+                                   <span class="n">setup</span><span class="o">=</span><span class="sa">f</span><span class="s2">"unsorted = np.random.randint(0, </span><span class="si">{</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="si">}</span><span class="s2">, size=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">)"</span><span class="p">,</span>
+                                   <span class="nb">globals</span><span class="o">=</span><span class="nb">globals</span><span class="p">(),</span>
+                                   <span class="n">number</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">100</span><span class="p">)</span>
+        <span class="n">n_times_is</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="s2">"insertion_sort(unsorted)"</span><span class="p">,</span>
+                                   <span class="n">setup</span><span class="o">=</span><span class="sa">f</span><span class="s2">"unsorted = np.random.randint(0, </span><span class="si">{</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="si">}</span><span class="s2">, size=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">)"</span><span class="p">,</span>
+                                   <span class="nb">globals</span><span class="o">=</span><span class="nb">globals</span><span class="p">(),</span>
+                                   <span class="n">number</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">times_ave_ss</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">n_times_ss</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">times_ave_is</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">n_times_is</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">times_max_ss</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">n_times_ss</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">times_max_is</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">n_times_is</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</pre></div>
+<div class="highlight"><pre><span></span>100%|████████████████████████████████████████████████████████████████████████████████████████████| 8/8 [04:36&lt;00:00, 34.56s/it]
+</pre></div>
+<div class="highlight"><pre><span></span><span class="n">p_ave_ss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ns</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">times_ave_ss</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">p_ave_is</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ns</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">times_ave_is</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">p_max_ss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ns</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">times_max_ss</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">p_max_is</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ns</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">times_max_is</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="n">textsize</span><span class="o">=</span><span class="mi">20</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">times_ave_ss</span><span class="p">,</span> <span class="s1">'kx'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Average"</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">p_ave_ss</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="n">ns</span><span class="o">**</span><span class="n">p_ave_ss</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">'b--'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s2">"$n^</span><span class="se">{{</span><span class="si">{</span><span class="n">p_ave_ss</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="se">}}</span><span class="si">}</span><span class="s2">$"</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">times_max_ss</span><span class="p">,</span> <span class="s1">'r+'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Worst"</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">p_max_ss</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="n">ns</span><span class="o">**</span><span class="n">p_max_ss</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">'g--'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s2">"$n^</span><span class="se">{{</span><span class="si">{</span><span class="n">p_max_ss</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="se">}}</span><span class="si">}</span><span class="s2">$"</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Selection sort"</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">textsize</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">times_ave_is</span><span class="p">,</span> <span class="s1">'kx'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Average"</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">p_ave_is</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="n">ns</span><span class="o">**</span><span class="n">p_ave_is</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">'b--'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s2">"$n^</span><span class="se">{{</span><span class="si">{</span><span class="n">p_ave_is</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="se">}}</span><span class="si">}</span><span class="s2">$"</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">times_max_is</span><span class="p">,</span> <span class="s1">'r+'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Worst"</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">p_max_is</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="n">ns</span><span class="o">**</span><span class="n">p_max_is</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">'g--'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s2">"$n^</span><span class="se">{{</span><span class="si">{</span><span class="n">p_max_is</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="se">}}</span><span class="si">}</span><span class="s2">$"</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Insertion sort"</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">textsize</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">prop</span><span class="o">=</span><span class="p">{</span><span class="s1">'size'</span><span class="p">:</span> <span class="n">textsize</span><span class="p">})</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$n$"</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">textsize</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Time (s)"</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">textsize</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+<figure class="figure1" data-title="png"><img alt="png" src="images/Sorting_13_0.png"/></figure><p>We see that insertion sort is absolutely faster (the times at fixed <script type="math/tex">n</script> are lower than selection sort) and more efficient (the growth rate with <script type="math/tex">n</script> as measured by the best fit lines is smaller).</p>
+</section>
+            </div>
+        </div>
+    </div>
+
+        </main>
+		
+		<footer class="text-muted">
+	<hr>
+	<div class="container">
+		<div class="float-right">
+			<ul style="list-style: none">
+			<li><a href="#">Back to top</a></li>
+			
+			
+			<li><a href="../../codes/sorting_1/sorting_1.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;Download as PDF</a></li>
+			
+			</ul>
+		</div>
+		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
+		<p>This page last generated: 2022-03-23</p>
+	</div>
+</footer>
+		
+    </body>
+</html>
