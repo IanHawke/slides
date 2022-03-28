@@ -6,7 +6,7 @@
             <meta name="robots" content="noindex">
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
             <meta name="author" content="Ian Hawke" />
-            <meta name="date" content="2022-03-23" />
+            <meta name="date" content="2022-03-28" />
         
 
         <title>Coursework | Operational Research and Mathematical Computing</title>
@@ -142,7 +142,7 @@
 <p>The Simplex Method performs pivoting operations swapping an index between the basic set <script type="math/tex">B</script> and its complement <script type="math/tex">N</script>. The pivoting rule chooses a (row, column) pair <script type="math/tex">(r, s)</script>. Given that pivot entry, row operations are performed so that the tableau entry <script type="math/tex">\bar{a}_{rs} \to 1</script>, and all other entries in that column, <script type="math/tex">\bar{a}_{is}, i \ne r \to 0</script>.</p>
 <p>In the theory part of the course the pivoting rule shown was <em>Bland's rule</em>, also called the <em>smallest subscript</em> rule. This first chooses <script type="math/tex">s</script> to be the smallest (column) index with negative reduced costs <script type="math/tex">\bar{c}_s < 0</script>. The rule next chooses <script type="math/tex">r</script> to be the smallest (row) index that satisfies the minimum ratio test.</p>
 <section class="section3"><h3>Largest change rule</h3>
-<p>In the <em>largest change rule</em>, we look at every column <script type="math/tex">j</script> with negative reduced costs <script type="math/tex">\bar{c}_j < 0</script>. Within each column, choose <script type="math/tex">r_j</script> to be the smallest (row) index that satisfies the minimum ratio test (as in Bland's rule). Then choose <script type="math/tex">s</script> to be the smallest (column) index such that the change in the objective function value <script type="math/tex">| \bar{c}_j \bar{b}_j / \bar{a}_{r_j, j}|</script> is maximised.</p>
+<p>In the <em>largest change rule</em>, we look at every column <script type="math/tex">j</script> with negative reduced costs <script type="math/tex">\bar{c}_j < 0</script>. Within each column, choose <script type="math/tex">r_j</script> to be the smallest (row) index that satisfies the minimum ratio test (as in Bland's rule). Then choose <script type="math/tex">s</script> to be the smallest (column) index such that the change in the objective function value <script type="math/tex">| \bar{c}_j \bar{b}_{r_j} / \bar{a}_{r_j, j}|</script> is maximised.</p>
 </section></section><section class="section2"><h2>Python</h2>
 <p>On <code>repl.it</code> you will find code implementing the (one phase) Simplex Method and Bland's rule.</p>
 <p>The function <code>simplex</code> takes as input the tableau (in basic form), the initial basis (as a list of integer indexes), and a function that implements the pivoting rule. It returns the solution as a dictionary containing its status (did it succeed), the optimal solution, and the final basis.</p>
@@ -239,7 +239,7 @@ where <script type="math/tex">t</script> is the timing data and <script type="ma
 			</ul>
 		</div>
 		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
-		<p>This page last generated: 2022-03-23</p>
+		<p>This page last generated: 2022-03-28</p>
 	</div>
 </footer>
 		
