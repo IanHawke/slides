@@ -99,6 +99,12 @@
 			font-size: 1.4em !important;
 			line-height: 1.4 !important;
 		}
+		.container{
+		    display: flex;
+		}
+		.col{
+		    flex: 1;
+		}
 	</style>
 
 
@@ -138,6 +144,55 @@
 
 						<h2>A meeting</h2>
 
+						<div class="container">
+							<div class="col">
+								<ul>
+									<li>
+										Want to arrange a meet up.
+									</li>
+									<li class="fragment" data-fragment-index="1">
+										But everyone is scattered.
+									</li>
+									<li class="fragment" data-fragment-index="2">
+										Where to meet?
+										<ul>
+											<li>
+												costs;
+											</li>
+											<li>
+												free time;
+											</li>
+											<li>
+												risks;
+											</li>
+											<li>
+												preferences; ...
+											</li>
+										</ul>
+									</li>
+									<li class="fragment" data-fragment-index="3">
+										When to meet?
+										<ul>
+											<li>
+												other obligations;
+											</li>
+											<li>
+												work;
+											</li>
+											<li>
+												travel time; ...
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+							<div class="col r-stack">
+								<img style="height:810px" src="images/01_intro/rail_network_annotated.png" class="fragment fade-in" data-fragment-index="1">
+								<img style="height:810px" src="images/01_intro/rail_network_annotated_2.png" class="fragment fade-in" data-fragment-index="2">
+								<img style="width:700px" src="images/01_intro/Calendar.svg" class="fragment fade-in" data-fragment-index="3">
+							</div>
+						</div>
+<!--
 						<div style="position:absolute; width:768px; top:150px; left:0px">
 							<ul>
 								<li>
@@ -184,6 +239,7 @@
 							<img style="height:810px" src="images/01_intro/rail_network_annotated_2.png" class="fragment fade-in" data-fragment-index="2">
 							<img style="width:700px" src="images/01_intro/Calendar.svg" class="fragment fade-in" data-fragment-index="3">
 						</div>
+-->
 						<aside class="notes">
 						  Imagine - it should not be difficult - that you've had a hard year, spending far too much time away from friends and family, and that you desperately want to meet up with a group of friends and just relax. So, you start planning.
 						  <br>
@@ -197,24 +253,26 @@
 					<section>
 
 						<h2>Operational Research</h2>
-						<div style="position:absolute; width:768px; top:150px; left:0px">
-							<ul>
-								<li>
-									Describe;
-								</li>
-								<li>
-									Predict;
-								</li>
-								<li>
-									<em>Prescribe</em>.
-								</li>
-							</ul>
-							<p>
-								Modelling and forecasting are largely ignored in this module.
-							</p>
-						</div>
-						<div style="position:absolute; width:768px; top:150px; left:768px">
-							<img style="width:768px;" src="images/01_intro/describe_predict.png">
+						<div class="container">
+							<div class="col">
+								<ul>
+									<li>
+										Describe;
+									</li>
+									<li>
+										Predict;
+									</li>
+									<li>
+										<em>Prescribe</em>.
+									</li>
+								</ul>
+								<p>
+									Modelling and forecasting are largely ignored in this module.
+								</p>
+							</div>
+							<div class="col">
+								<img style="width:768px;" src="images/01_intro/describe_predict.png">
+							</div>
 						</div>
 
 						<aside class="notes">
@@ -286,42 +344,44 @@
 
 					<section>
 						<h2>Algorithms Example</h2>
-						<div style="position:absolute; width:768px; top:150px; left:0px">
-							<ul>
-								<li>
-									<em>Problem</em>: solve $a x^2 + b x + c = 0$ for $x \in \mathbb{C}$.
-								</li>
-								<li>
-									<em>Instance</em>: $a = 2, b = 8, c = 5$.
-								</li>
-								<li>
-									<em>Algorithm</em>:
-									<ol>
-										<li>
-											Compute $b^2-4ac$ and $2a$;
-										</li>
-										<li>
-											Compute $\sqrt{b^2-4ac}$;
-										</li>
-										<li>
-											Compute $(-b\pm\sqrt{b^2-4ac})/(2a)$.
-										</li>
-									</ol>
-								</li>
-							</ul>
-						</div>
-						<div style="position:absolute; width:768px; top:150px; left:768px">
-							<pre><code class="language-python" data-trim data-noescape data-line-numbers="4-8">
-							a = 2
-							b = 8
-							c = 5
-							discriminant = b**2 - 4*a*c
-							root = discriminant**(0.5)
-							two_a = 2*a
-							root_plus  = (-b + root) / two_a
-							root_minus = (-b - root) / two_a
-							print(root_plus, root_minus)
-							</code></pre>
+						<div class="container">
+							<div class="col">
+								<ul>
+									<li>
+										<em>Problem</em>: solve $a x^2 + b x + c = 0$ for $x \in \mathbb{C}$.
+									</li>
+									<li>
+										<em>Instance</em>: $a = 2, b = 8, c = 5$.
+									</li>
+									<li>
+										<em>Algorithm</em>:
+										<ol>
+											<li>
+												Compute $b^2-4ac$ and $2a$;
+											</li>
+											<li>
+												Compute $\sqrt{b^2-4ac}$;
+											</li>
+											<li>
+												Compute $(-b\pm\sqrt{b^2-4ac})/(2a)$.
+											</li>
+										</ol>
+									</li>
+								</ul>
+							</div>
+							<div class="col">
+								<pre><code class="language-python" data-trim data-noescape data-line-numbers="4-8">
+								a = 2
+								b = 8
+								c = 5
+								discriminant = b**2 - 4*a*c
+								root = discriminant**(0.5)
+								two_a = 2*a
+								root_plus  = (-b + root) / two_a
+								root_minus = (-b - root) / two_a
+								print(root_plus, root_minus)
+								</code></pre>
+							</div>
 						</div>
 
 						<aside class="notes">
