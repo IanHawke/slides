@@ -9,7 +9,7 @@
             <meta name="date" content="2022-03-25" />
         
 
-        <title>Lab 9 outline | Operational Research and Mathematical Computing</title>
+        <title>Lab 10 outline | Operational Research and Mathematical Computing</title>
 
         
     
@@ -95,7 +95,7 @@
 		</li>
 		
 		<li class="breadcrumb-item active">
-			Lab 9 outline
+			Lab 10 outline
 		</li>
 		<li class="ml-auto">
 			<button class="navbar-toggler p0" type="button" data-toggle="collapse" data-target="#navbarToggleCustomise" aria-controls="navbarToggleCustomise" aria-expanded="false" aria-label="Toggle customisations panel">
@@ -120,78 +120,59 @@
                     <ul class="nav navbar-nav">
                         
                         
-                        <li><a id="notebook-link" class="nav-link" href="../../lab_notes/lab_9_outline/lab_9_outline.ipynb" download><i class="fa fa-book" aria-hidden="true" title="Download Notebook"></i>&nbsp;Download Notebook</a></li>
+                        <li><a id="notebook-link" class="nav-link" href="../../lab_notes/lab_10_outline/lab_10_outline.ipynb" download><i class="fa fa-book" aria-hidden="true" title="Download Notebook"></i>&nbsp;Download Notebook</a></li>
                         
                         
-                        <li><a id="pdf-link" class="nav-link" href="../../lab_notes/lab_9_outline/lab_9_outline.pdf" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" title="Download as PDF"></i>&nbsp;Download as PDF</a></li>
+                        <li><a id="pdf-link" class="nav-link" href="../../lab_notes/lab_10_outline/lab_10_outline.pdf" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" title="Download as PDF"></i>&nbsp;Download as PDF</a></li>
                         
                     </ul>
                 </nav>
             </div>
             <div id="content" class="col-md-9"> 
             
-            <section class="section1"><h1>Week 9</h1>
-<p>We have discussed producing data (using algorithms in Python) and analysing data (using Excel). We now need to discuss mathematical communication: how do we explain our results to other professionals in a clear, robust, unambiguous fashion.</p>
+            <section class="section1"><h1>Week 10</h1>
+<p>We have seen the basic commands for producing a LaTeX document, with some mathematics and cross-references. Now we want to add more complexity.</p>
 <section class="section2"><h2>Script</h2>
-<section class="section3"><h3>LaTeX</h3>
-<p>A mathematical calculation or argument needs to be <em>communicated</em>.
-Being able to do, or understand, the mathematics is not enough: you also need to be able to explain it to others.</p>
-<p>A central tenet of communicating a mathematical argument is that each step must be clear and supported with evidence.
-The evidence can come from many sources: a previous equation or theorem, a section of text, a figure, or table, or external source.
-To make a mathematical argument a sequence of steps must be given and clearly linked so that the reader can follow each step and see how it is supported.</p>
-<p>The purpose of LaTeX is to make it easier to produce a document containing a mathematical argument.
-In particular, it makes it easier to write equations and theorems, and to reference figures, tables and external sources.
-Its use is ubiquitous in scientific fields which use a lot of mathematics as it remains the best tool for making these sorts of arguments.</p>
-<p>LaTeX can be used more broadly to produce Powerpoint-like presentations, CVs, letters, and so on.
-This is not necessarily recommended: choose the right tool for your purposes.</p>
-</section><section class="section3"><h3>First steps</h3>
-<p>Using <a href="https://overleaf.com">Overleaf</a> or a local LaTeX editor:</p>
+<section class="section3"><h3>Packages</h3>
+<p>As your document grows in size you will want to improve its appearance and to use shortcuts for doing more complicated tasks.</p>
+<p>External packages may alter the appearance of the document, or provide useful commands.
+This is similar to packages or modules in Python.
+To include an external package then, in the preamble, use the command <code>\usepackage{...}</code>.
+For example, the command <code>\usepackage{amsmath}</code> imports the standard typesetting of the American Mathematical Society, which is particularly useful for mathematicians.
+A brief list of useful packages includes</p>
 <ul>
-<li>Open the <code>BasicLatex.tex</code> document.</li>
-<li>Compare the text between the <code>\begin{document}</code> and <code>\end{document}</code> to the <code>pdf</code> output.</li>
-<li>Look at whitespace.</li>
-<li>See how special commands start with a backslash</li>
-<li>See how <em>environments</em> form structures: the document, an itemized (or enumerated) list, equations, figures, and so on. These are indicated with the special <code>\begin{...}</code> and <code>\end{...}</code> commands.</li>
-<li>See how sections have their own special type of commands. Note the <code>\label</code> command after the section command. This produces no output, but is essential for cross-referencing as we will see.</li>
+<li><code>graphicx</code>: include graphics files for figures in your document.</li>
+<li><code>amsmath</code>, <code>amssymb</code>, <code>amsthm</code>: mathematical typesetting.</li>
+<li><code>hyperref</code>: add internal and external hyperlinks to the PDF document.</li>
+<li><code>fancyhdr</code>, <code>enumerate</code>, <code>caption</code>, <code>geometry</code>: control the document layout and appearance more transparently.</li>
+<li><code>physics</code>: helps with, e.g., differential equations.</li>
 </ul>
 <section class="section4"><h4>Exercise</h4>
 <ol>
-<li>Modify the document by typing in some of your own text.</li>
-<li>Add a new section, or subsection.</li>
-</ol>
-</section></section><section class="section3"><h3>Cross-referencing</h3>
-<p>As we've said, we want to make a mathematical argument.
-We do this by adding equations, and references to previous steps in our document.</p>
-<ul>
-<li>Open the <code>BasicLatexBibtex.tex</code> document.</li>
-<li>Look at the labelled equation and the <code>\ref</code> command.</li>
-<li>Compare to the output.</li>
-<li>Look at the <code>\cite</code> command.</li>
-<li>Compare to the references at the end of the output.</li>
-<li>Compare to the content of the <code>references.bib</code> file.</li>
-</ul>
-<section class="section4"><h4>Exercise</h4>
-<ol>
-<li>Add cross-references to other sections.</li>
-<li>Add a new equation:
+<li>Using the <code>amsmath</code> package, investigate the <code>align</code> environment. Typeset
 <script type="math/tex; mode=display">
-\lim_{n \to \infty} \frac{f(n)}{g(n)} = l \in (0, \infty).
+\begin{aligned} x + y &= z, \\ c_1 + 2 c_2 &= z. \end{aligned}
 </script>
-If you need to know the command for a LaTeX symbol, try the <a href="http://detexify.kirelabs.org/classify.html">symbol finder</a>.</li>
-<li>Give your equation a label and cross-reference it.</li>
-<li>Copy the citation below, add it to the <code>.bib</code> file, and cite it in the document.</li>
+</li>
+<li>Investigate the <code>pmatrix</code> environment. Typeset
+<script type="math/tex; mode=display">
+A = \begin{pmatrix} a & b \\ c & d \end{pmatrix}.
+</script>
+</li>
+<li>Label and cross-reference your equations.</li>
 </ol>
-<div class="highlight"><pre><span></span>@article{coniglio2018lot,
- title={Lot sizing with storage losses under demand uncertainty},
- author={Coniglio, Stefano and Koster, Arie MCA and Spiekermann, Nils},
- journal={Journal of Combinatorial Optimization},
- volume={36},
- number={3},
- pages={763--788},
- year={2018},
- publisher={Springer}
-}
-</pre></div>
+</section></section><section class="section3"><h3>Figures</h3>
+<p>Figures and tables are <em>floating</em> objects in LaTeX. That is, LaTeX will position them where it feels they look best. However, they have captions and can be cross-referenced in a range of clever ways.</p>
+<ul>
+<li>Look at the <code>BasicLatexFigure.tex</code> document.</li>
+<li>Look at the <code>graphicx</code> package, and the <code>\includegraphics</code> command to include figures.</li>
+</ul>
+<section class="section4"><h4>Exercise</h4>
+<ol>
+<li>Include a figure from your own computer in the document (for Overleaf, you need to upload the figure first).</li>
+<li>Ensure all figures have captions and cross-references.</li>
+<li>Experiment with changing the size of the figures. See what <code>width=\textwidth</code> does, for example.</li>
+</ol>
 </section></section></section></section>
             </div>
         </div>
@@ -207,7 +188,7 @@ If you need to know the command for a LaTeX symbol, try the <a href="http://dete
 			<li><a href="#">Back to top</a></li>
 			
 			
-			<li><a href="../../lab_notes/lab_9_outline/lab_9_outline.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;Download as PDF</a></li>
+			<li><a href="../../lab_notes/lab_10_outline/lab_10_outline.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;Download as PDF</a></li>
 			
 			</ul>
 		</div>
