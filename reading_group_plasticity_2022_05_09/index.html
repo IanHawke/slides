@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Relativistic Plasticity</title>
+
+		<meta name="description" content="Reading group">
+		<meta name="author" content="Ian Hawke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="../math1058/reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../math1058/reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../math1058/reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../math1058/reveal.js/plugin/highlight/monokai.css">
+
+	<style type="text/css">
+	  .reveal p {
+	    text-align: left;
+	  }
+	  .reveal ul {
+	    display: block;
+	  }
+	  .reveal ol {
+	    display: block;
+	  }
+
+		.reveal pre code {
+			font-size: 1.4em !important;
+			line-height: 1.4 !important;
+		}
+		.container{
+		    display: flex;
+		}
+		.col{
+		    flex: 1;
+		}
+	</style>
+
+
+
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="Title">
+
+					<section>
+						<h2 class="r-fit-text">Relativistic Plasticity</h2>
+						<p>
+							<ul style="list-style: none;">
+								<li> Ian Hawke
+							</ul>
+						</p>
+
+						<aside class="notes">
+							Following on from previous reading group sessions on elasticity, we take a look at how plasticity could be formulated in relativity.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Phenomenology">
+
+					<section>
+						<h2>Plastic behaviour</h2>
+
+						<div class="container">
+							<div class="col">
+								<p>
+									In some materials, behaviour is
+								</p>
+								<ul>
+									<li>
+										elastic when stress below <em>yield</em> $\sigma_{\text{yo}}$;
+									</li>
+									<li>
+										<em>plastic</em> at higher stress.
+									</li>
+									<li>
+										If loaded from unstrained to $A$ (above yield), then unloaded to $B$ (no strain), left with residual <em>plastic stress</em> $\epsilon^{p}$.
+									</li>
+									<li>
+										Looking for meso-scale phenomenological description.
+									</li>
+								</ul>
+							</div>
+							<div class="col">
+								<img style="width:700px" src="./plasticity_ottosen1.png">
+							</div>
+						</div>
+						<aside class="notes">
+							Plasticity as described in Ottosen and Ristinmaa.
+						</aside>
+
+					</section>
+
+				</section>
+
+				<section id="Elasticity">
+
+					<section>
+						<h2>Elasticity</h2>
+
+						<div class="container">
+							<div class="col">
+								<p>
+									Recap:
+								</p>
+								<ul>
+									<li>
+										Introduce $\mathcal{X}$, coordinates $X^A$, metric $k_{AB}$, reference space;
+									</li>
+									<li>
+										map $\mathcal{M} \leftrightarrow \mathcal{X}$ using $\psi^A_a = \nabla_a X^A$;
+									</li>
+									<li>
+										$\det(k) = n^2$; write $\Lambda = n e(k_{AB})$ through invariants of $k_{AB}$;
+									</li>
+									<li>
+										strain $\sigma_{AB} = (g_{AB} - \eta_{AB})/2$;
+									</li>
+									<li>
+										vary action for dynamics.
+									</li>
+								</ul>
+							</div>
+							<div class="col">
+								<img style="width:900px" src="./plasticity_ottosen1.png">
+							</div>
+						</div>
+
+						<aside class="notes">
+							This quickly recaps Nils' discussion from last time. Note that I have explicitly introduced the strain tensor for later. Note also that isotropy constrains the way elasticity enters the internal energy.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Equations of motion</h2>
+
+						<p>
+							Dynamics:
+						</p>
+						$$
+						\nabla_a T^{ab} = 0, \quad T^{ab} = e u^a u^b + p^{ab}, \quad p_{ab} = 2 \frac{\partial e}{\partial g^{ab}} - e \perp_{ab}.
+						$$
+						<p>
+							Kinematics:
+						</p>
+						$$
+						\begin{aligned}
+							\nabla_{[a, b]} X^A & = 0 & \implies && \partial_t \psi^A_j + \partial_j \left( \hat{v}^k \psi^{A}_k \right) + \hat{v}^k \left( \partial_k \psi^A_j - \partial_j \psi^A_k \right) & = 0, \\
+							&&&& \partial_t k_{AB} + \hat{v}^k \partial_k k_{AB} & = 0.
+						\end{aligned}
+						$$
+						<p>
+							Here the $3+1$ split gives $u^a = \alpha^{-1} W (1, \hat{v}^i)$.
+						</p>
+
+						<aside class="notes">
+							This follows GHE.
+						</aside>
+
+					</section>
+
+				</section>
+
+				<section id="Plasticity">
+
+					<section>
+						<h2>Ideal Plasticity</h2>
+
+						<p>
+							Assumptions:
+						</p>
+						<ul>
+							<li>
+								Introduce <em>yield function</em> $f(p_{AB}) \le 0$:
+								<ul>
+									<li>
+										$f < 0$ gives elastic behaviour;
+									</li>
+									<li>
+										<em>Yield surface</em> $f = 0$ gives "<em>instant</em>" plastic behaviour.
+									</li>
+								</ul>
+							</li>
+							<li>
+								Plastic behaviour conserves energy and number density $n$, hence $\det(k)$.
+							</li>
+							<li>
+								No heat transport, single fluid velocity sufficient.
+							</li>
+						</ul>
+						<p class="fragment" data-fragment-index=1>
+							Consequences:
+						</p>
+						<ul class="fragment" data-fragment-index=1>
+							<li>
+								Dynamics unchanged;
+							</li>
+							<li>
+								reference space changes "instantly";
+							</li>
+							<li>
+								new reference space diffeomorphic to original;
+							</li>
+							<li>
+								<em>some</em> map, metric, describe the matter.
+							</li>
+						</ul>
+
+						<aside class="notes">
+							The key idea here is that the matter is "the same", so it makes sense that the reference spaces are diffeomorphic. The point is that the objects describing the reference space - the metric and the map - must change in some non-elastic way.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Maximum dissipation</h2>
+
+						<p>
+							Energy is constant, but dissipation can (must) change.
+						</p>
+						<p class="fragment" data-fragment-index=1>
+							Use Helmholtz free energy $\Psi = e - sT$ to define dissipation rate $\gamma \sim \text{d} \Psi$.
+						</p>
+						<p class="fragment" data-fragment-index=2>
+							<em>Assume</em> plasticity maximises dissipation whilst staying on yield surface $f=0$. Requires Lagrangian
+						</p>
+						<div class="fragment" data-fragment-index=2>
+							$$
+							\mathcal{L} = -\gamma + \text{d} \lambda f.
+							$$
+						</div>
+						<p class="fragment" data-fragment-index=3>
+							Given any variable $q$, conjugate $Q = \partial_q e$, have
+						</p>
+						<div class="fragment" data-fragment-index=3>
+							$$
+							\text{d} q = \text{d} \lambda \frac{\partial f}{\partial Q} = \text{d} \lambda \frac{\partial f}{\partial \left( \partial_q e \right)}.
+							$$
+						</div>
+
+						<aside class="notes">
+							Energy being constant is key here. We are assuming that the plasticity is driven by the microphysics and the changes happen extremely fast on scales we cannot resolve. The energy we are considering is on the meso-scale, so stays constant. This means that the action principle gives us no useful information.
+							<br>
+							However, we can use the energy functional to give us the dissipation rate. Using the laws of thermodynamics the dissipation rate is given by the change in the free energy, not the total energy, which will be linked to the change in the entropy.
+							<br>
+							For ideal plasticity we then assume that the change on the micro-scale maximises the change in the dissipation, all done whilst staying within the yield surface. We therefore write down a Lagrangian that maximises the dissipation rate whilst enforcing (through a Lagrange multiplier d lambda) that f=0.
+							<br>
+							As the dissipation rate is maximal this tells us how any state variable has to change in order to move within the yield surface. If we can identify a suitable state variable to change, this gives a <em>return map</em> that tells us how to modify the variables in the equations of motion.
+						</aside>
+					</section>
+
+					<section>
+						<h2>State variables</h2>
+
+						<p>
+							Let $\kappa_{AB} \leftrightarrow k_{AB}$, $A^{\bar{A}, \text{el}}_j \leftrightarrow \psi^A_j$ obey the <em>elastic</em> equations of motion.
+						</p>
+						<p class="fragment" data-fragment-index=1>
+							$\kappa, A$ define the <em>elastic</em> reference space $\bar{\mathcal{X}}$, diffeomorphic to $\mathcal{X}$.
+						</p>
+						<p class="fragment" data-fragment-index=2>
+							So there exists a <em>plastic map</em> $P^A_{\bar{B}} \colon \bar{\mathcal{X}} \to \mathcal{X}$, so that
+						</p>
+						<div class="fragment" data-fragment-index=2>
+							$$
+							\psi^A_j = P^A_{\bar{B}} A^{\bar{B}, \text{el}}_j.
+							$$
+						</div>
+						<p class="fragment" data-fragment-index=3>
+							The plastic map changes the reference state; the return map is
+						</p>
+						<div class="fragment" data-fragment-index=3>
+							$$
+							\text{d} P^A_{\bar{B}} = \text{d} \lambda \frac{\partial f}{\partial \left(\partial_{P^A_{\bar{B}}} e \right)}.
+							$$
+						</div>
+
+						<aside class="notes">
+							We know that the state of the matter is defined through some metric and some map. We can think of evolving the original metric and map using the equations of motion for elasticity. This defines a reference space. By the assumptions of perfect plasticity, this "elastic" reference space must be diffeomorphic to the true reference space. Therefore there is some map that takes us from the elastic reference space (notation uses bars) to the true one.
+							<br>
+							We start with the plastic map being the identity. We then identify the plastic map as being the state variable that we modify in the return map that keeps us on the yield surface. This leads us to the convex optimisation problem given in the final equation.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Equations of motion</h2>
+
+						<p>
+							Dynamics:
+						</p>
+						$$
+						\nabla_a T^{ab} = 0, \quad T^{ab} = e u^a u^b + p^{ab}, \quad p_{ab} = 2 \frac{\partial e}{\partial g^{ab}} - e \perp_{ab}.
+						$$
+						<p>
+							Kinematics, map, return map:
+						</p>
+						$$
+						\begin{aligned}
+							\partial_t A^{\bar{A},\text{el}}_j + \partial_j \left( \hat{v}^k A^{\bar{A},\text{el}}_k \right) + \hat{v}^k \left( \partial_k A^{\bar{A},\text{el}}_j - \partial_j A^{\bar{A},\text{el}}_k \right) & = 0, \\
+							\partial_t \kappa_{AB} + \hat{v}^k \partial_k \kappa_{AB} & = 0. \\
+							\psi^A_j & = P^A_{\bar{B}} A^{\bar{B},\text{el}}_j. \\
+							\text{d} P^A_{\bar{B}} & = \text{d} \lambda \frac{\partial f}{\partial \left(\partial_{P^A_{\bar{B}}} e \right)}.
+						\end{aligned}
+						$$
+
+						<aside class="notes">
+							We pull everything together. We evolve stress-energy conservation, which is four equations, plus nine equations for the elastic map and nine equations for the elastic reference metric. At each stage we evaluate the yield function. If the yield function is negative we are in the elastic regime and the full map is formed using the product of the plastic and elastic maps, and the strain invariants are then computed exactly as in the elastic case.
+							<br>
+							If, however, at any point the yield function is positive then we have evolved to an unphysical state. We have to return to the yield surface. We do this using the return map, which finds the Lagrange multiplier such that changing the plastic map gets us back to the physical state on the yield surface. We can then form the full map from the plastic map and the elastic map and proceed.
+							<br>
+							It is important to note that the plastic map does not have an evolution equation. Instead, it relaxes "instantly" to enforce a physical state, assuming that this is needed.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Von Mises' yield</h2>
+
+						<p>
+							To complete, need EOS $e = e(k_{AB})$ and yield $f = f(p_{AB})$.
+						</p>
+						<p>
+							"Simplest" yield function is Von Mises' strain
+						</p>
+						$$
+						f = \sqrt{\tfrac{3}{2} \pi^A_B \pi^B_A} - \sigma_{\text{yield}}.
+						$$
+						<p>
+							Can add <em>work hardening</em> by evolving $\sigma_{\text{yield}}$.
+						</p>
+						<p>
+							As $\sigma_{\text{yield}} \to \infty$ material always yields - "fluid limit".
+						</p>
+
+						<aside class="notes">
+							For certain classes of metals, Von Mises' criteria has substantial experimental backing. It depends only on the anisotropic part of the pressure. This can be computed from the equation of state and the invariants of the metric. As computing the invariants involves raising indices on the reference space, this is where the spacetime metric and the full map (combining the elastic and plastic maps) comes in to the yield function.
+							<br>
+							For more complex materials there are more complex yield functions. However, we can already make life more complex by making the yield strain vary. Typically this is done by introducing a parameter (the work parameter), linking its evolution to the entropy change in the return map (that is, to the amount the material has yielded), and hence changing the point at which the body will yield in the future.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Summary">
+					<section>
+
+						<h2>Summary</h2>
+						<ul>
+							<li>
+								Ideal plasticity should extend to relativity.
+							</li>
+							<li>
+								There's minimal work on this.
+							</li>
+							<li>
+								References:
+								<ul>
+									<li>
+										<a href="https://doi.org/10.1088/0264-9381/29/1/015005">Gundlach, Hawke, Erickson (2011)</a>.
+									</li>
+									<li>
+										<a href="http://eprints.soton.ac.uk/375532/">Erickson's thesis (2015)</a>.
+									</li>
+									<li>
+										<a href="https://www.elsevier.com/books/the-mechanics-of-constitutive-modeling/ottosen/978-0-08-044606-6">Ottosen and Ristinmaa (2005)</a>.
+									</li>
+									<li>
+										<a href="http://link.springer.com/10.1007/b98904">Simo and Hughes (1998)</a>.
+									</li>
+									<li>
+										<b>Key, but different</b>: Peshkov's work in <a href="https://link.springer.com/chapter/10.1007/978-3-319-91548-7_34">Newtonian</a> and <a href="https://arxiv.org/abs/1910.02687">relativity</a>.
+									</li>
+								</ul>
+							</li>
+						</ul>
+
+						<aside class="notes">
+							Link to references.
+						</aside>
+
+					</section>
+
+				</section>
+
+			</div>
+
+		</div>
+
+
+		<script src="../math1058/reveal.js/dist/reveal.js"></script>
+		<script src="../math1058/reveal.js/plugin/zoom/zoom.js"></script>
+		<script src="../math1058/reveal.js/plugin/notes/notes.js"></script>
+		<script src="../math1058/reveal.js/plugin/search/search.js"></script>
+		<script src="../math1058/reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../math1058/reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../math1058/reveal.js/plugin/math/math.js"></script>
+		<script src="../math1058/reveal.js/plugin/spotlight/spotlight.js"></script>
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				width: 1536,
+			  height: 960,
+			  margin: 0.04,
+				controls: false,
+				progress: true,
+				center: true,
+				hash: true,
+				transition: 'none',
+				pdfSeparateFragments: true,
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath.KaTeX, RevealSpotlight ],
+				spotlight: {
+					presentingCursor: 'default',
+					useAsPointer: true,
+					size: 10,
+				}
+			});
+
+		</script>
+
+
+	</body>
+</html>
