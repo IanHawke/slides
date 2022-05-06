@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+	<html class="sl-root decks export offline loaded">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Dijkstra Algorithm - Faster version</title>
+
+
+		<link rel="stylesheet" type="text/css" href="lib/offline-v2.css">
+
+
+
+	</head>
+	<body class="reveal-viewport theme-font-montserrat theme-color-white-blue">
+		<div class="reveal">
+			<div class="slides">
+				<section data-id="9650d7cfd792c941d11d8a34f5778c5b"><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 0px; height: auto;" data-block-id="35567e8b045c567eda6ab7a05a56f3da"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 10;">
+<h1>Dijkstra Algorithm - \( \mathcal{O}(n^2)\) version</h1>
+
+<p> </p>
+</div></div>
+<div class="sl-block" data-block-type="text" data-name="text-9492d1" data-block-id="277fb526739419af4370d49fd28931ae" style="height: auto; width: 313px; left: 14px; top: 404px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<p style="text-align: left;">Michael Kenna-Allison</p>
+
+<p style="text-align: left;">Ian Hawke</p>
+</div></div></section><section data-id="c854253e59b44460cfa2681e0879b51c"><div class="sl-block" data-block-type="text" style="width: 806px; left: 65.5px; top: 0px; height: auto;" data-block-id="195a1b742c90581486e22680ae00a5f1"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 10;">
+<h1><span style="font-size:0.7em">Faster version</span></h1>
+</div></div>
+<div class="sl-block" data-block-type="text" data-name="text-63788e" data-block-id="7d0dfffd9d384499f8f199165bfa96fc" style="height: auto; width: 933px; left: 10px; top: 107.5px;"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;" data-fragment-index="0">
+<p style="text-align:left"><strong>Observation: </strong>The <span style="color:#FF0000">subproblem</span> of finding the arc \( (v,w) \) which minimises:</p>
+
+<p style="text-align:left"> </p>
+</div></div>
+<div class="sl-block" data-block-type="math" data-name="math-05c36d" data-block-id="91ab23eac73f22e5ac23ccafc59cbdc7" style="width: auto; height: auto; left: 92.5px; top: 210px;"><div class="sl-block-content notranslate fragment" style="z-index: 12;" data-fragment-index="1"><div class="math-input">(v,w) \in \argmin_{(i,j) \in \delta^+(S)}\left[Y(i) +l_{ij}   \right]</div></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-4c2df9" data-block-id="4f60297f10455e83d59358d52ca78f4c" style="height: auto; width: 600px; left: 0px; top: 311px;"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;" data-fragment-index="2">
+<p style="text-align:left">Can be recast as:</p>
+</div></div>
+<div class="sl-block" data-block-type="math" style="width: auto; height: auto; left: 11.5px; top: 377px;" data-block-id="f15fba06f59e1943bc312af8ef6c14bc" data-name="math-aca510"><div class="sl-block-content notranslate fragment" style="z-index: 14; font-size: 80%;" data-fragment-index="3"><div class="math-input">(v,w) \in \argmin_{j \in V \backslash S}\left( { \argmin_{(i,j) \in \delta^{-}(j): i \in S} \left[Y(i) +l_{ij}   \right]}\right)</div></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 937px; left: 0px; top: 479px;" data-block-id="bf75379eb28bd4bbd0bc1bf8e9932456" data-name="text-1927b4"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 15;" data-fragment-index="4">
+<p style="text-align:left">The previous result corresponds to:</p>
+
+<p style="text-align:left">1. (outer argmin) - Choosing the node \(j \in V \backslash S\) we want to reach.</p>
+
+<p style="text-align:left">2. (inner argmin) - Choosing the arc \( (i,j) \) we want to reach node \(j\). </p>
+</div></div></section><section data-id="aa3490216ca18104cfe27b9baa440472"><div class="sl-block" data-block-type="text" style="width: 806px; left: 65.5px; top: 0px; height: auto;" data-block-id="2ed6c859f1656fc6414835d2343daf24" data-name="text-9270fe"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 10;">
+<h1><span style="font-size:0.7em">Key difference</span></h1>
+</div></div>
+<div class="sl-block" data-block-type="text" data-name="text-57771a" data-block-id="6f674ab1c5fbec3ca1e12b6f17726fef" style="height: auto; width: 909px; left: 14px; top: 112.5px;"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;" data-fragment-index="0">
+<p style="text-align:left">Instead of repeatedly scanning \( \delta^+(S)\) for each node at each iteration, we no longer compute particular path lengths multiple times.</p>
+
+<p style="text-align:left"> </p>
+
+<p style="text-align:left">This new algorithm is of \( \mathcal{O}(n^2)\), compared to <span style="color:rgb(0, 0, 0); text-align:left">\( \mathcal{O}(n^3)\) of the previous version.</span></p>
+
+<p style="text-align:left"> </p>
+
+<p style="text-align:left"><span style="color:rgb(0, 0, 0); text-align:left">The key point is that if, for each \( j \in V \backslash S\) ,we already KNEW the arc \( (i,j) \) which minimises \( Y(i) + l_{ij}\), we can scan the vertices \( j \in V \backslash S\) rather than in \(\delta^+(S) \).</span></p>
+</div></div></section><section data-id="ceee7b65a347c11141fb5b3479dc45d6"><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 0px; height: auto;" data-block-id="cdb9c2a58a21b64fff0d9f8844c43ba5"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 10;">
+<h1><span style="font-size:0.7em">Key idea</span></h1>
+</div></div>
+<div class="sl-block" data-block-type="image" data-name="image-f9173a" data-block-id="6689997458b584edb7d5da7c448658f4" style="width: 705.223px; height: 348.506px; left: 127.389px; top: 98px;"><div class="sl-block-content fragment" style="z-index: 11;" data-fragment-index="0"><img style="" data-natural-width="773" data-natural-height="382" data-src="images/19_dijkstra_n2/bc8d477f0d96cc966384eefa1ac4d414.png"></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-05d7c8" data-block-id="bf7e94abeb5da2607561aac71c483d1d" style="height: auto; width: 918px; left: 9px; top: 477.5px;"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;" data-fragment-index="1">
+<p style="text-align:left">When trying to ADD to the blue set \(S\), we compute the path lengths and predecessors to the nodes NOT in \(S\), given by the red edges. We store these values and then update as we continue through each iteration.</p>
+</div></div></section><section data-id="20a7eb87b0a84ad1e51156da61393115"><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 0px; height: auto;" data-block-id="1d7dfe49bb9cd58d8e4fc11fa2ba7ea4" data-name="text-949d21"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 10;">
+<h1><span style="font-size:0.7em">Key idea</span></h1>
+</div></div>
+<div class="sl-block" data-block-type="text" data-name="text-0b96b1" data-block-id="33fa56fc4f6a11219b00ffbbbab80fca" style="height: auto; width: 945px; left: 9px; top: 120.5px;"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;" data-fragment-index="0">
+<p style="text-align:left"><strong>Difference:</strong></p>
+
+<p style="text-align:left"> </p>
+
+<p style="text-align:left">If \( j \in S\):  The labels \( Y(i) \) and \( P(i) \) are the length and predecessors of the <span style="color:#FF0000">shortest</span> \( s \to i \) path.</p>
+
+<p style="text-align:left"> </p>
+
+<p style="text-align:left">If \( j \in V \backslash S\): \( Y(j) \) and \( P(j)\) are the length and predecessors of the <span style="color:#FF0000">current </span>shortest \( s \to j \) path.</p>
+
+<p style="text-align:left"> </p>
+
+<p style="text-align:left">If a shorter path is found, the labels get updated until all nodes are in the set \(S\). </p>
+
+<p style="text-align:left"> </p>
+
+<p style="text-align:left"> </p>
+</div></div></section><section data-id="224983259de15ae6679d6ded6af28583"><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 0px; height: auto;" data-name="text-949d21" data-block-id="472e8abf6f095540c954b987d7e4585f"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 10;">
+<h1><span style="font-size:0.7em">Example</span></h1>
+</div></div>
+<div class="sl-block" data-block-type="image" data-name="image-d313c5" data-block-id="00b28c7ca760e0164437c0d199beee3a" style="width: 780.217px; height: 518px; left: 89.8915px; top: 182px;"><div class="sl-block-content fragment" style="z-index: 11; border-style: solid; border-width: 2px;" data-fragment-index="1"><img style="" data-natural-width="970" data-natural-height="644" data-src="images/19_dijkstra_n2/da7221a83bbaf87b9f7b95e010d96c14.png"></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-b18b04" data-block-id="3323e86853cd2f2ed73272677619c2ed" style="height: auto; width: 740px; left: 110px; top: 106px;"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;" data-fragment-index="0">
+<p>Using \( \mathcal{O}(n^2)\) algorithm find all shortest paths.</p>
+</div></div></section><section data-id="d85ff47c7e4f9e2db728e470c760ff94"><div class="sl-block" data-block-type="image" style="width: 800px; height: 415.884px; left: 80px; top: 169px; min-width: 1px; min-height: 1px;" data-block-id="82372e0cfd5d6646045f0b0e811b8f78"><div class="sl-block-content fragment" style="z-index: 10; border-style: solid; border-width: 2px;" data-fragment-index="1"><img style="" data-natural-width="831" data-natural-height="432" data-src="images/19_dijkstra_n2/c63f19f295bc5e82bd635f121290455e.png"></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-e21e51" data-block-id="401a3a4d1ef976c88013b7a7aa31dc17" style="height: auto; width: 600px; left: 170px; top: 5.5px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<p><span style="font-size:1.2em">First Iteration</span></p>
+</div></div>
+<div class="sl-block" data-block-type="text" data-name="text-048a3b" data-block-id="2743207452dd9a73a6a1029eb89ed13b" style="height: auto; width: 600px; left: 40px; top: 52.5px;"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;" data-fragment-index="0">
+<p style="text-align: left;">Initialisation: </p>
+
+<p style="text-align: left;">1. Set \( Y(j) = l_{1,j}\) and \( P(j) = 1\) or \( -\).</p>
+</div></div>
+<div class="sl-block" data-block-type="text" data-name="text-887d88" data-block-id="27b9ba1293b1ef617993cb3d7461ba34" style="height: auto; width: 879px; left: 40px; top: 604.5px;"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;" data-fragment-index="2">
+<p style="text-align:left">Node 3 has minimum \( Y\) so we add it to \(S\) and scan all \( j \in V \backslash S\).</p>
+</div></div></section><section data-id="c01417d0e68bdc13756713974ce3c9ff"><div class="sl-block" data-block-type="image" style="width: 720px; height: 389.774px; left: 110px; top: 210px; min-width: 1px; min-height: 1px;" data-block-id="5e5940ef01f89508691a946888a1d658"><div class="sl-block-content fragment" style="z-index: 10; border-style: solid; border-width: 2px;" data-fragment-index="1"><img style="" data-natural-width="798" data-natural-height="432" data-src="images/19_dijkstra_n2/1f46e306fda897beb0564c60241a907c.png"></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-e21e51" style="height: auto; width: 600px; left: 170px; top: 20.5px;" data-block-id="2d4e319f00b2954704ee341a7588b10b"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<p><span style="font-size:1.2em">Second Iteration</span></p>
+</div></div>
+<div class="sl-block" data-block-type="text" data-name="text-16b69a" data-block-id="7965a60cd2e72f572223ab110b2f1eba" style="height: auto; width: 872px; left: 0px; top: 70px;"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;" data-fragment-index="0">
+<p style="text-align:left">We have:</p>
+
+<ul>
+	<li style="text-align:left">\(Y(3)+ l_{32} =3 \implies \) label on node 2 is updated.</li>
+	<li style="text-align:left">\(Y(3) + l_{35} = 3 \implies \) label on node 5 is updated.</li>
+</ul>
+
+<p style="text-align:left"> </p>
+
+<p> </p>
+</div></div>
+<div class="sl-block" data-block-type="text" data-name="text-887d88" style="height: auto; width: 879px; left: 30.5px; top: 599.774px;" data-block-id="419c24e6fce7a3d253053d004607295e"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;" data-fragment-index="2">
+<p style="text-align:left">Node 2 (or 5) has minimum \( Y\) so we add it to \(S\) and scan all \( j \in V \backslash S\).</p>
+</div></div></section><section data-id="f40d428a9288c6e86f20d43c3739d218"><div class="sl-block" data-block-type="image" style="width: 758.652px; height: 410.699px; left: 100.674px; top: 166.5px; min-width: 1px; min-height: 1px;" data-block-id="23684396f6b0bb47a4c90e1960ea4048"><div class="sl-block-content fragment" style="z-index: 10; border-style: solid; border-width: 2px;" data-fragment-index="1"><img style="" data-natural-width="798" data-natural-height="432" data-src="images/19_dijkstra_n2/8cfbfc2dc506ca72197ac50827b6d501.png"></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-e21e51" style="height: auto; width: 600px; left: 170px; top: 20.5px;" data-block-id="96ada05b77268c3f92fa255c7d290adb"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<p><span style="font-size:1.2em">Third Iteration</span></p>
+</div></div>
+<div class="sl-block" data-block-type="text" data-name="text-16b69a" style="height: auto; width: 872px; left: 0px; top: 67.5px;" data-block-id="bca1c08371e84f42b4503f0a53b82d84"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;" data-fragment-index="0">
+<p style="text-align:left">We have:</p>
+
+<ul>
+	<li style="text-align:left">\(Y(2)+ l_{24} =4 \implies \) label on node 4 is updated.</li>
+</ul>
+
+<p style="text-align:left"> </p>
+
+<p> </p>
+</div></div>
+<div class="sl-block" data-block-type="text" data-name="text-887d88" style="height: auto; width: 879px; left: 30.5px; top: 604.5px;" data-block-id="0f896ad733d0e256d386a694da4c71fd"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;" data-fragment-index="2">
+<p style="text-align:left">Node 5 has minimum \( Y\) so we add it to \(S\) and scan all \( j \in V \backslash S\).</p>
+</div></div></section><section data-id="d5ae25d9954b1227c04fd8350aa63e4c"><div class="sl-block" data-block-type="image" style="width: 778.746px; height: 421.049px; left: 90.627px; top: 210px; min-width: 1px; min-height: 1px;" data-block-id="8ec8187d89f7e67d2fe904c64e712361"><div class="sl-block-content fragment" style="z-index: 10; border-style: solid; border-width: 2px;" data-fragment-index="1"><img style="" data-natural-width="799" data-natural-height="432" data-src="images/19_dijkstra_n2/6fa3c7f02eb07585ea35d793e81c034d.png"></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-e21e51" style="height: auto; width: 600px; left: 170px; top: 20.5px;" data-block-id="3c880511583dbe02afe6db2ac522f28d"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<p><span style="font-size:1.2em">Fourth Iteration</span></p>
+</div></div>
+<div class="sl-block" data-block-type="text" data-name="text-16b69a" style="height: auto; width: 872px; left: 0px; top: 67.5px;" data-block-id="4321e19789ae5e13297829fd5cb2fbd0"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;" data-fragment-index="0">
+<p style="text-align:left">We have:</p>
+
+<ul>
+	<li style="text-align:left">\(Y(5)+ l_{54} =5 \implies \) label on node 4 is not updated.</li>
+	<li style="text-align:left">\(Y(5) + l_{56} = 7 \implies \) label on node 6 is updated</li>
+</ul>
+
+<p style="text-align:left"> </p>
+
+<p> </p>
+</div></div>
+<div class="sl-block" data-block-type="text" data-name="text-887d88" style="height: auto; width: 879px; left: 30.5px; top: 641.5px;" data-block-id="520bfc99d5f10761e7f8b2278d0274e7"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;" data-fragment-index="2">
+<p style="text-align:left">Node 4 has minimum \( Y\) so we add it to \(S\) and scan all \( j \in V \backslash S\).</p>
+</div></div></section><section data-id="fa2a95d8c53cfba59dff3fec96323dc5"><div class="sl-block" data-block-type="image" style="width: 800px; height: 415.385px; left: 80px; top: 210px; min-width: 1px; min-height: 1px;" data-block-id="2fca19dfc15ee0052e08e86c7cee181a"><div class="sl-block-content fragment" style="border-style: solid; border-width: 2px; z-index: 10;" data-fragment-index="1"><img style="" data-natural-width="832" data-natural-height="432" data-src="images/19_dijkstra_n2/270a817726b579eef544110366b8612c.png"></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-e21e51" style="height: auto; width: 600px; left: 170px; top: 20.5px;" data-block-id="917f6a739f181d55a6c4593b8c05bef0"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<p><span style="font-size:1.2em">Fifth Iteration</span></p>
+</div></div>
+<div class="sl-block" data-block-type="text" data-name="text-16b69a" style="height: auto; width: 872px; left: 0px; top: 67.5px;" data-block-id="f075236016f575821583749e5ef51951"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;" data-fragment-index="0">
+<p style="text-align:left">We have:</p>
+
+<ul>
+	<li style="text-align:left">\(Y(4)+ l_{46} =7 \implies \) label on node 4 is not updated (same length).</li>
+</ul>
+
+<p style="text-align:left"> </p>
+
+<p> </p>
+</div></div>
+<div class="sl-block" data-block-type="text" data-name="text-887d88" style="height: auto; width: 879px; left: 30.5px; top: 641.5px;" data-block-id="274528501d4e5c97aa18b84d0f048dc0"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;" data-fragment-index="2">
+<p style="text-align:left">Node 6 has minimum \( Y\) so we add it to \(S\) and scan all \( j \in V \backslash S\).</p>
+</div></div></section><section data-id="84a7ded3c34f0ec6438ae68e868b9c5c"><div class="sl-block" data-block-type="image" style="width: 813.887px; height: 440.049px; left: 73.0565px; top: 153px; min-width: 1px; min-height: 1px;" data-block-id="597b055e923e2c7971d7335c5423c40c"><div class="sl-block-content fragment" style="border-style: solid; border-width: 2px; z-index: 10;" data-fragment-index="1"><img style="" data-natural-width="799" data-natural-height="432" data-src="images/19_dijkstra_n2/a27366e60bed10d967b50eca14b82037.png"></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-e21e51" style="height: auto; width: 600px; left: 170px; top: 20.5px;" data-block-id="e880bc636c8ebe8aa695f6eb391c3974"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<p><span style="font-size:1.2em">Sixth Iteration</span></p>
+</div></div>
+<div class="sl-block" data-block-type="text" data-name="text-887d88" style="height: auto; width: 879px; left: 18.5px; top: 98.5px;" data-block-id="3a81700ffa1f7630e0f29c4b74d47bad"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;" data-fragment-index="0">
+<p style="text-align:left">No more nodes left, algorithm ends.</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 879px; left: 18.5px; top: 610px;" data-block-id="7b75122ddeead2577cc2d5b5cfc061ca" data-name="text-9c80aa"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;" data-fragment-index="2">
+<p style="text-align:left">This is the same result as the \(\mathcal{O}(n^3)\) version. (note there were two possible shortest paths to reach node 6)</p>
+</div></div></section><section data-id="295bd075ea7bbdb5bea67d3ef4ab7249"><div class="sl-block" data-block-type="text" data-name="text-3c33fc" data-block-id="d16e326baa50cda5b1edc0536312c4c5" style="height: auto; width: 600px; left: 160px; top: 19.5px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;">
+<p><span style="font-size:1.2em">Final Comment</span></p>
+</div></div>
+<div class="sl-block" data-block-type="text" data-name="text-53a0d5" data-block-id="7942ddc41128c05135e494d8b2b2383a" style="height: auto; width: 825px; left: 13px; top: 105.5px;"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;" data-fragment-index="0">
+<p style="text-align:left">You have to know BOTH versions of the algorithm for the exam.</p>
+
+<p style="text-align:left"> </p>
+
+<p style="text-align:left">When answering questions in an exam, we do not mind how you present the algorithm, however you MUST be consistent and specify the notation you are using.</p>
+
+<p style="text-align:left"> </p>
+
+<p style="text-align:left">Good luck! Now it is time for revision.</p>
+</div></div></section>
+			</div>
+		</div>
+
+		<script>
+			var SLConfig = {"deck": {"id":2391923,"slug":"images/19_dijkstra_n2","title":"Dijkstra Algorithm - Faster version","description":"","width":960,"height":700,"margin":0.05,"visibility":"self","published_at":null,"sanitize_messages":null,"thumbnail_url":"https://s3.amazonaws.com/media-p.slid.es/thumbnails/c60d79a03711a1cd07aac4e9e17b9161/thumb.jpg?1651839951","view_count":0,"user":{"id":2110728,"username":"michaelka","name":null,"description":null,"thumbnail_url":"https://www.gravatar.com/avatar/25d438e84ebccc0e5d6764d1de6c6af7?s=140\u0026d=https%3A%2F%2Fstatic.slid.es%2Fimages%2Fdefault-profile-picture.png","account_type":"lite","team_id":null,"settings":{"id":40584093,"present_controls":true,"present_upsizing":true,"present_pointer":false,"present_notes":true,"default_deck_tag_id":null}},"background_transition":"slide","transition":"none","theme_id":null,"theme_font":"montserrat","theme_color":"white-blue","auto_slide_interval":0,"comments_enabled":true,"forking_enabled":false,"rolling_links":false,"center":false,"shuffle":null,"should_loop":false,"share_notes":null,"slide_number":null,"slide_count":13,"rtl":false,"version":2,"collaborative":null,"deck_user_editor_limit":1,"data_updated_at":1651848627027,"font_typekit":null,"font_google":null,"time_limit":null,"navigation_mode":"default","upsizing_enabled":null,"notes":{}}};
+
+
+			// Use local fonts
+			SLConfig.fonts_url = 'lib/fonts/';
+		</script>
+
+		<script src="lib/reveal.js"></script>
+		<script src="lib/reveal-plugins.js"></script>
+		<script src="lib/offline.js"></script>
+
+		<!-- Initialize the presentation -->
+		<script>
+			Reveal.initialize({
+				width: 960,
+				height: 700,
+				margin: 0.05,
+
+
+				hash: true,
+				controls: true,
+				progress: true,
+				mouseWheel: false,
+				showNotes: false,
+				slideNumber: false,
+				fragmentInURL: true,
+
+				autoSlide: 0,
+				autoSlideStoppable: true,
+
+				autoAnimateMatcher: SL.deck.AutoAnimate.matcher,
+
+				center: false,
+				shuffle: false,
+				loop: false,
+				rtl: false,
+				navigationMode: "default",
+
+				transition: "none",
+				backgroundTransition: "slide",
+
+				highlight: {
+					escapeHTML: false
+				},
+
+				plugins: [ RevealZoom, RevealNotes, RevealMarkdown, RevealHighlight ]
+			});
+		</script>
+
+
+
+	</body>
+</html>
