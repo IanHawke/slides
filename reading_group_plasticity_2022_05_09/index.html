@@ -162,7 +162,7 @@
 						</p>
 						$$
 						\begin{aligned}
-							\nabla_{[a, b]} X^A & = 0 & \implies && \partial_t \psi^A_j + \partial_j \left( \hat{v}^k \psi^{A}_k \right) + \hat{v}^k \left( \partial_k \psi^A_j - \partial_j \psi^A_k \right) & = 0, \\
+							\partial_{[a, b]} X^A & = 0 & \implies && \partial_t \psi^A_j + \partial_j \left( \hat{v}^k \psi^{A}_k \right) + \hat{v}^k \left( \partial_k \psi^A_j - \partial_j \psi^A_k \right) & = 0, \\
 							&&&& \partial_t k_{AB} + \hat{v}^k \partial_k k_{AB} & = 0.
 						\end{aligned}
 						$$
@@ -188,6 +188,12 @@
 						</p>
 						<ul>
 							<li>
+								Plastic behaviour conserves energy and number density $n$, hence $\det(k)$.
+							</li>
+							<li>
+								No heat transport, single fluid velocity sufficient.
+							</li>
+							<li>
 								Introduce <em>yield function</em> $f(p_{AB}) \le 0$:
 								<ul>
 									<li>
@@ -197,12 +203,6 @@
 										<em>Yield surface</em> $f = 0$ gives "<em>instant</em>" plastic behaviour.
 									</li>
 								</ul>
-							</li>
-							<li>
-								Plastic behaviour conserves energy and number density $n$, hence $\det(k)$.
-							</li>
-							<li>
-								No heat transport, single fluid velocity sufficient.
 							</li>
 						</ul>
 						<p class="fragment" data-fragment-index=1>
@@ -225,6 +225,36 @@
 
 						<aside class="notes">
 							The key idea here is that the matter is "the same", so it makes sense that the reference spaces are diffeomorphic. The point is that the objects describing the reference space - the metric and the map - must change in some non-elastic way.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Elastic map</h2>
+
+						<div class="container">
+							<div class="col">
+								<p>
+									Let $\kappa_{AB}, A^{\bar{A}, \text{el}}_j$ obey the <em>elastic</em> equations of motion.
+								</p>
+								<p class="fragment" data-fragment-index=1>
+									$\kappa, A$ define <em>elastic</em> reference space $\bar{\mathcal{X}}$, diffeomorphic to $\mathcal{X}$.
+								</p>
+								<p class="fragment" data-fragment-index=2>
+									Exists <em>plastic map</em> $P^A_{\bar{B}} \colon \bar{\mathcal{X}} \to \mathcal{X}$,
+								</p>
+								<div class="fragment" data-fragment-index=2>
+									$$
+									\psi^A_j = P^A_{\bar{B}} A^{\bar{B}, \text{el}}_j.
+									$$
+								</div>
+							</div>
+							<div class="col">
+								<img style="width:800px" src="./plastic_map.png">
+							</div>
+						</div>
+
+						<aside class="notes">
+							We know that the state of the matter is defined through some metric and some map. We can think of evolving the original metric and map using the equations of motion for elasticity. This defines a reference space. By the assumptions of perfect plasticity, this "elastic" reference space must be diffeomorphic to the true reference space. Therefore there is some map that takes us from the elastic reference space (notation uses bars) to the true one.
 						</aside>
 					</section>
 
@@ -273,21 +303,21 @@
 								<p>
 									Let $\kappa_{AB}, A^{\bar{A}, \text{el}}_j$ obey the <em>elastic</em> equations of motion.
 								</p>
-								<p class="fragment" data-fragment-index=1>
+								<p>
 									$\kappa, A$ define <em>elastic</em> reference space $\bar{\mathcal{X}}$, diffeomorphic to $\mathcal{X}$.
 								</p>
-								<p class="fragment" data-fragment-index=2>
+								<p>
 									Exists <em>plastic map</em> $P^A_{\bar{B}} \colon \bar{\mathcal{X}} \to \mathcal{X}$,
 								</p>
-								<div class="fragment" data-fragment-index=2>
+								<div>
 									$$
 									\psi^A_j = P^A_{\bar{B}} A^{\bar{B}, \text{el}}_j.
 									$$
 								</div>
-								<p class="fragment" data-fragment-index=3>
+								<p class="fragment" data-fragment-index=1>
 									Plastic map changes reference state:
 								</p>
-								<div class="fragment" data-fragment-index=3>
+								<div class="fragment" data-fragment-index=1>
 									$$
 									\text{d} P^A_{\bar{B}} = \text{d} \lambda \frac{\partial f}{\partial \left(\partial_{P^A_{\bar{B}}} e \right)}.
 									$$
