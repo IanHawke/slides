@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        
+            <meta charset="utf-8">
+            <meta name="robots" content="noindex">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="author" content="Ian Hawke" />
+            <meta name="date" content="2022-07-01" />
+        
+
+        <title>Linear programming | Operational Research and Mathematical Computing</title>
+
+        
+    
+    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../../../static/styles.css">
+            <link rel="stylesheet" id="customiseCSS" href="../../../static/light.css">
+            
+            
+        
+    <link rel="stylesheet" id="customiseCodeCSS" href="../../../static/pygmentize.light.css">
+    <link rel="stylesheet" href="../../../static/codemirror-5.26.0/lib/codemirror.css">
+    <link rel="stylesheet" href="../../../static/boole.css">
+    <link rel="stylesheet" href="../../../static/numbasEmbed.css">
+
+    <link rel="stylesheet" href="../../../static/bootstrap-toc.css?v=3">
+    <link rel="stylesheet" href="../../../static/print.css">
+
+
+        
+    
+    
+            <script defer src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <script defer src="../../../static/mathjax_config.js"></script>
+            <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+            <script defer src="../../../static/customisation.js"></script>
+            <script defer src="../../../static/mp4.js"></script>
+            
+            
+        
+    <script defer src="../../../static/jquery.flexibleArea.js"></script>
+    <script defer src="../../../static/spin.min.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/lib/codemirror.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/octave/octave.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/python/python.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/r/r.js"></script>
+    <script defer src="../../../static/boole.js"></script>
+    <script defer src="../../../static/numbasEmbed.js"></script>
+
+    <script defer src="../../../static/bootstrap-toc.js"></script>
+
+    </head>
+    <body data-spy="scroll" data-target="#chapterTOC" data-offset="50">
+        
+<div class="collapse" id="navbarToggleCustomise">
+	<div class="bg-secondary text-white p-3">
+		<form onsubmit="return false;" id="navbarCustomise">
+			<div class="form-row">
+				<label>Theme Customisation</label>
+				<div id="themeSelector" class="form-group col-md-12">
+					<button class="btn btn-dark mr-2" value="dark">Dark</button>
+					<button class="btn btn-pastel mr-2" value="pastel">Pastel</button>
+					<button class="btn btn-light mr-4" value="light">Light</button>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label style="display: block" for="font-scale">Font size (<span id="font-size-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="font-scale" min="50" max="600" value="100">
+					<button id="font-scale-reset" class="btn btn-sm">Reset</button>
+				</div>
+				<div class="form-group col-md-4">
+					<label style="display: block" for="p-space">Spacing (<span id="p-space-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="p-space" min="0" max="600" value="100">
+					<button id="p-space-reset" class="btn btn-sm">Reset</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<nav aria-label="breadcrumb">
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="../../../index.html">Operational Research and Mathematical Computing</a>
+		</li>
+		
+		<li class="breadcrumb-item">
+			<a href="../../../notes/notes_by_chapter/index.html">Notes by chapter</a>
+		</li>
+		
+		<li class="breadcrumb-item active">
+			Linear programming
+		</li>
+		<li class="ml-auto">
+			<button class="navbar-toggler p0" type="button" data-toggle="collapse" data-target="#navbarToggleCustomise" aria-controls="navbarToggleCustomise" aria-expanded="false" aria-label="Toggle customisations panel">
+				<i class="fa fa-cog" aria-hidden="true" title="Toggle customisations panel"></i> <span class="sr-only">Toggle customisations panel</span>
+			</button>
+		</li>
+	</ul>
+</nav>
+
+
+        <header>
+            
+            
+        </header>
+        <main>
+            
+    <div class="container mt-3">
+        <div class="row">
+            
+            <div id="sidebar" class="col-md-3">
+                <nav class="mb-3" id="chapterTOC" data-toggle="toc">
+                    <ul class="nav navbar-nav">
+                        
+                        
+                        
+                        <li><a id="pdf-link" class="nav-link" href="../../../notes/notes_by_chapter/linear_programming/linear_programming.pdf" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" title="Download as PDF"></i>&nbsp;Download as PDF</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+            <div id="content" class="col-md-9"> 
+            
+            
+<section class="section">
+<h2 id="a0000000005">1.1 Notation and Terminology</h2>
+<p>
+The following is a summary of commonly used symbols and terminology. <br/>
+</p>
+<p>
+<span class="scshape">Quantifiers</span>
+</p>
+<p>
+<script type="math/tex">\forall </script> – for all 
+</p>
+<p>
+<script type="math/tex">\exists </script> – there exists 
+</p>
+<p>
+<span class="scshape">Terminology</span>
+</p>
+<p>
+Theorem (or Proposition) – a proven mathematical statement 
+</p>
+<p>
+  this is usually of the form <i class="itshape">if such and such then so and so</i>
+</p>
+<p>
+  the Hypothesis is <i class="itshape">such and such</i>
+</p>
+<p>
+  the Conclusion is <i class="itshape">so and so</i>
+</p>
+<p>
+Lemma – a little theorem. 
+</p>
+<p>
+Corollary – a mathematical statement which follows from a previous theorem. 
+</p>
+<p>
+<span class="scshape">Sets</span>
+</p>
+<p>
+<script type="math/tex">\mathbb N</script> – natural numbers <script type="math/tex">\{ 1,2,3,\dots \} </script>
+</p>
+<p>
+<script type="math/tex">\mathbb Z</script> – integers <script type="math/tex">\{ \dots ,-3,-2,-1,0,1,2,3,\dots \} </script>
+</p>
+<p>
+<script type="math/tex">\mathbb Q</script> – rational numbers e.g. <script type="math/tex">1,\frac12, -\frac13</script> etc. 
+</p>
+<p>
+<script type="math/tex">\mathbb R</script> – real numbers <br/>(rational numbers and irrational numbers e.g. <script type="math/tex">\pi =3.14159\dots , \sqrt2=1.41421\dots </script>) 
+</p>
+<p>
+<script type="math/tex">\mathbb C</script> – complex numbers <script type="math/tex">a+ib</script> where <script type="math/tex">a,b</script> are real and <script type="math/tex">i=\sqrt{-1}</script>
+</p>
+<p>
+<script type="math/tex">\emptyset </script> – the empty set <script type="math/tex">\{ \} </script>
+</p>
+<p>
+<script type="math/tex">\in </script> – is a member of (is in e.g. <script type="math/tex">-1\in \mathbb Z</script>, <script type="math/tex">\sqrt{2}\in \mathbb R</script>) 
+</p>
+<p>
+<script type="math/tex">\notin </script> – is not a member of (is in e.g. <script type="math/tex">-1\notin \mathbb N</script>, <script type="math/tex">\sqrt{2}\notin \mathbb Q</script>) 
+</p>
+<p>
+<script type="math/tex">\cup </script> – union (things that are in either or both of the sets) 
+</p>
+<p>
+<script type="math/tex">\cap </script> – intersection (things that are in both sets) 
+</p>
+<p>
+<script type="math/tex">\subseteq </script> – is a subset of subset (is contained in, meaning one set is inside another) 
+</p>
+<p>
+<script type="math/tex">\varsubsetneq </script> – is a subset of proper subset (is strictly contained in, meaning the sets are not equal) 
+</p>
+</section><section class="section">
+<h2 id="a0000000006">1.2 Greek letters</h2>
+<p>
+In this module and throughout mathematics you will encounter numerous Greek letters. Here is a table so that you know what they all are and how they are called. 
+</p>
+<p>
+<table class="tabular">
+<tr><td colspan="" rowspan="" style="text-align:center"><p>
+ A
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+B
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\Gamma </script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\Delta </script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+E
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+Z
+</p>
+</td>
+</tr>
+<tr><td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\alpha </script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\beta </script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\gamma </script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\delta </script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\epsilon </script> or <script type="math/tex">\varepsilon </script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\zeta </script>
+</p>
+</td>
+</tr>
+<tr><td colspan="" rowspan="" style="text-align:center; border-bottom-style:solid; border-bottom-color:black; border-bottom-width:1px"><p>
+Alpha
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center; border-bottom-style:solid; border-bottom-color:black; border-bottom-width:1px"><p>
+Beta
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center; border-bottom-style:solid; border-bottom-color:black; border-bottom-width:1px"><p>
+Gamma
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center; border-bottom-style:solid; border-bottom-color:black; border-bottom-width:1px"><p>
+Delta
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center; border-bottom-style:solid; border-bottom-color:black; border-bottom-width:1px"><p>
+Epsilon
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center; border-bottom-style:solid; border-bottom-color:black; border-bottom-width:1px"><p>
+Zeta
+</p>
+</td>
+</tr>
+<tr><td colspan="" rowspan="" style="text-align:center"><p>
+H
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\Theta </script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+I
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+K
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\Lambda </script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+M
+</p>
+</td>
+</tr>
+<tr><td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\eta </script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\theta </script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\iota </script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\kappa </script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\lambda </script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\mu </script>
+</p>
+</td>
+</tr>
+<tr><td colspan="" rowspan="" style="text-align:center; border-bottom-style:solid; border-bottom-color:black; border-bottom-width:1px"><p>
+Eta
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center; border-bottom-style:solid; border-bottom-color:black; border-bottom-width:1px"><p>
+Theta
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center; border-bottom-style:solid; border-bottom-color:black; border-bottom-width:1px"><p>
+Iota
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center; border-bottom-style:solid; border-bottom-color:black; border-bottom-width:1px"><p>
+Kappa
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center; border-bottom-style:solid; border-bottom-color:black; border-bottom-width:1px"><p>
+Lambda
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center; border-bottom-style:solid; border-bottom-color:black; border-bottom-width:1px"><p>
+Mu
+</p>
+</td>
+</tr>
+<tr><td colspan="" rowspan="" style="text-align:center"><p>
+N
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\Xi </script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+O
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\Pi </script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+P
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\Sigma </script>
+</p>
+</td>
+</tr>
+<tr><td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\nu </script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\xi </script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+o
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\pi </script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\rho </script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\sigma </script>
+</p>
+</td>
+</tr>
+<tr><td colspan="" rowspan="" style="text-align:center; border-bottom-style:solid; border-bottom-color:black; border-bottom-width:1px"><p>
+Nu
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center; border-bottom-style:solid; border-bottom-color:black; border-bottom-width:1px"><p>
+Xi
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center; border-bottom-style:solid; border-bottom-color:black; border-bottom-width:1px"><p>
+Omicron
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center; border-bottom-style:solid; border-bottom-color:black; border-bottom-width:1px"><p>
+Pi
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center; border-bottom-style:solid; border-bottom-color:black; border-bottom-width:1px"><p>
+Rho
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center; border-bottom-style:solid; border-bottom-color:black; border-bottom-width:1px"><p>
+Sigma
+</p>
+</td>
+</tr>
+<tr><td colspan="" rowspan="" style="text-align:center"><p>
+T
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+Y
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\Phi </script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+X
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\Psi </script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\Omega </script>
+</p>
+</td>
+</tr>
+<tr><td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\tau </script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\upsilon </script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\phi </script> or <script type="math/tex">\varphi </script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\chi </script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\psi </script>
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+<script type="math/tex">\omega </script>
+</p>
+</td>
+</tr>
+<tr><td colspan="" rowspan="" style="text-align:center"><p>
+Tau
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+Upsilon
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+Phi
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+Chi
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+Psi
+</p>
+</td>
+<td colspan="" rowspan="" style="text-align:center"><p>
+Omega 
+</p>
+</td>
+</tr>
+</table>
+</p>
+</section>
+
+            </div>
+        </div>
+    </div>
+
+        </main>
+		
+		<footer class="text-muted">
+	<hr>
+	<div class="container">
+		<div class="float-right">
+			<ul style="list-style: none">
+			<li><a href="#">Back to top</a></li>
+			
+			
+			<li><a href="../../../notes/notes_by_chapter/linear_programming/linear_programming.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;Download as PDF</a></li>
+			
+			</ul>
+		</div>
+		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
+		<p>This page last generated: 2022-07-01</p>
+	</div>
+</footer>
+		
+    </body>
+</html>

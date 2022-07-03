@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        
+            <meta charset="utf-8">
+            <meta name="robots" content="noindex">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="author" content="Nils Andersson" />
+            <meta name="date" content="2022-07-03" />
+        
+
+        <title>Kinematics | Dynamics and Relativity</title>
+
+        
+    
+    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../../../static/styles.css">
+            <link rel="stylesheet" id="customiseCSS" href="../../../static/light.css">
+            
+            
+        
+    <link rel="stylesheet" id="customiseCodeCSS" href="../../../static/pygmentize.light.css">
+    <link rel="stylesheet" href="../../../static/codemirror-5.26.0/lib/codemirror.css">
+    <link rel="stylesheet" href="../../../static/boole.css">
+    <link rel="stylesheet" href="../../../static/numbasEmbed.css">
+
+    <link rel="stylesheet" href="../../../static/bootstrap-toc.css?v=3">
+    <link rel="stylesheet" href="../../../static/print.css">
+
+
+        
+    
+    
+            <script defer src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <script defer src="../../../static/mathjax_config.js"></script>
+            <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+            <script defer src="../../../static/customisation.js"></script>
+            <script defer src="../../../static/mp4.js"></script>
+            
+            
+        
+    <script defer src="../../../static/jquery.flexibleArea.js"></script>
+    <script defer src="../../../static/spin.min.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/lib/codemirror.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/octave/octave.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/python/python.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/r/r.js"></script>
+    <script defer src="../../../static/boole.js"></script>
+    <script defer src="../../../static/numbasEmbed.js"></script>
+
+    <script defer src="../../../static/bootstrap-toc.js"></script>
+
+    </head>
+    <body data-spy="scroll" data-target="#chapterTOC" data-offset="50">
+        
+<div class="collapse" id="navbarToggleCustomise">
+	<div class="bg-secondary text-white p-3">
+		<form onsubmit="return false;" id="navbarCustomise">
+			<div class="form-row">
+				<label>Theme Customisation</label>
+				<div id="themeSelector" class="form-group col-md-12">
+					<button class="btn btn-dark mr-2" value="dark">Dark</button>
+					<button class="btn btn-pastel mr-2" value="pastel">Pastel</button>
+					<button class="btn btn-light mr-4" value="light">Light</button>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label style="display: block" for="font-scale">Font size (<span id="font-size-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="font-scale" min="50" max="600" value="100">
+					<button id="font-scale-reset" class="btn btn-sm">Reset</button>
+				</div>
+				<div class="form-group col-md-4">
+					<label style="display: block" for="p-space">Spacing (<span id="p-space-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="p-space" min="0" max="600" value="100">
+					<button id="p-space-reset" class="btn btn-sm">Reset</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<nav aria-label="breadcrumb">
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="../../../index.html">Dynamics and Relativity</a>
+		</li>
+		
+		<li class="breadcrumb-item">
+			<a href="../../../notes/notes_by_chapter/index.html">Notes by chapter</a>
+		</li>
+		
+		<li class="breadcrumb-item active">
+			Kinematics
+		</li>
+		<li class="ml-auto">
+			<button class="navbar-toggler p0" type="button" data-toggle="collapse" data-target="#navbarToggleCustomise" aria-controls="navbarToggleCustomise" aria-expanded="false" aria-label="Toggle customisations panel">
+				<i class="fa fa-cog" aria-hidden="true" title="Toggle customisations panel"></i> <span class="sr-only">Toggle customisations panel</span>
+			</button>
+		</li>
+	</ul>
+</nav>
+
+
+        <header>
+            
+            
+        </header>
+        <main>
+            
+    <div class="container mt-3">
+        <div class="row">
+            
+            <div id="sidebar" class="col-md-3">
+                <nav class="mb-3" id="chapterTOC" data-toggle="toc">
+                    <ul class="nav navbar-nav">
+                        
+                        
+                        
+                        <li><a id="pdf-link" class="nav-link" href="../../../notes/notes_by_chapter/kinematics/kinematics.pdf" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" title="Download as PDF"></i>&nbsp;Download as PDF</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+            <div id="content" class="col-md-9"> 
+            
+            
+<!-- Latex Chapter/Part -->
+<h1 id="a0000000285">Kinematics and relative motion</h1>
+<p>
+In general, kinematics is concerned with the description of moving bodies, without considering how the motion is produced. This typically involves the motion in terms of 
+</p>
+<ul class="itemize" id="a0000000286">
+<li id="a0000000287"> <p>
+the position <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec r}(t),</script></span></span>
+</p>
+</li>
+<li id="a0000000288"> <p>
+the velocity <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\dot{{\vec r}}(t)\equiv \frac{d{\vec r}(t)}{dt}={\vec v}(t),</script></span></span>
+</p>
+</li>
+<li id="a0000000289"> <p>
+the acceleration <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\ddot{{\vec r}}(t)\equiv \frac{d^2{\vec r}(t)}{dt^2} =\frac{d{\vec v}(t)}{dt}={\vec a}(t).</script></span></span>
+</p>
+</li>
+</ul>
+<p>
+ For any given force, the motion is then determines from Newton’s second law (<b class="bf">N2</b>). We have seen aspects of this already. Now we are going to take a closer look at the role of the observer. In particular, we are going to touch upon aspects relating to Newton’s first law, which brings in the concept of an <em>inertial frame</em>. We know that, in a coordinate system in which there is no force acting on a body, it does not accelerate (relative to these coordinates). Let us now add the desire that different observers should infer the same physics. In order for that to be the case, the velocity of the observer (or the experimental device) must not impact on the dynamics. This gives us a hint of what we are after. In order to make the idea precise, it helps if we understand how measurements are affected by relative motion. 
+</p>
+<section class="section">
+<h2 id="a0000000290">4.1 Frames of Reference</h2>
+<p>
+An event takes place at a point in space at a give time. For example, Man landed on the Moon on July 16th 1969 at the Sea of Tranquility; JFK was assassinated on 26th November 1963 in Dallas, Texas. 
+</p>
+<p>
+We can all agree that these specific events happened<a class="footnote" href="#a0000000291">
+<sup class="footnotemark">1</sup>
+</a>, but we may disagree on the exact coordinate location or time. We may not have synchronised our clocks and we may be using different rulers. 
+</p>
+<p>
+Events can be characterised both in time and space and for this we need a <b class="bf">reference frame</b>, which is a set of spatial coordinates plus a time coordinate. In general the motion of a body is also described by reference to a set of axes, for example the Cartesian coordinate system with a specific origin. Sometimes a set of axes, called a <b class="bf">frame</b> may itself be moving<a class="footnote" href="#a0000000292">
+<sup class="footnotemark">2</sup>
+</a> and different observers may choose different points for their origin. 
+</p>
+<p>
+For example, someone sitting in a train may naturally choose to centre his (Cartesian) coordinate description of the world on his seat. Someone waiting on the platform as the train passes through the station would more likely centre her (Cartesian) coordinate description of the world on her position on the platform. If the passenger on the train throws an apple into the air as the train passes through the station, he will describe its motion according to his set of coordinates which travel with the train. The trajectory of the apple will look quite different to the person waiting on the platform as will her description of the trajectory in terms of the platform coordinates. How can we reconcile the two descriptions? 
+</p>
+<p>
+To begin to do this we need to define the concept of an inertial frame of reference. 
+</p>
+<p>
+An <b class="bf">inertial frame of reference</b> is <span style="color:#000000">a set of coordinate axes in which an isolated body under no forces (i.e., external influence) travels with constant velocity.</span>
+</p>
+<p>
+Experiment demonstrates that a frame fixed relative to the sun is inertial for all macroscopic practical purposes. However, a frame which rotates relative to another frame is <b class="bf">not</b> inertial because any motion in a curve must produce an acceleration and hence involves a non-constant velocity. Thus technically speaking a frame fixed in a laboratory on the surface of the rotating earth is <b class="bf">not</b> inertial, since the laboratory itself is rotating. However for most practical purposes the earth is spinning so slowly that the rotational complications are unimportant (the anticlockwise spinning of the water down the plug-hole in the northern hemisphere is a myth!). However for situations involving large distances or timescales, such as meteorology or intercontinental ballistic missiles, the effects of rotation do introduce additional external influences that must be taken into account. 
+</p>
+<p>
+Basically, in what follows we are always working with approximations. 
+</p>
+</section><section class="section">
+<h2 id="a0000000293">4.2 Galilean Transformations</h2>
+<p>
+Let <script type="math/tex">\cal {O}</script> be the origin of a coordinate frame <script type="math/tex">\cal {S}</script> and <script type="math/tex">\cal {O’}</script> be the origin of a coordinate frame <script type="math/tex">\cal {S’}</script>. Suppose <script type="math/tex">\cal {S}</script> and <script type="math/tex">\cal {S’}</script> have the same orientation<a class="footnote" href="#a0000000294">
+<sup class="footnotemark">3</sup>
+</a>, but that the position vector of <script type="math/tex">\cal {O’}</script> relative to <script type="math/tex">\cal {O}</script> be <script type="math/tex">{\vec R}(t)</script>. 
+</p>
+<figure id="figure228a">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/kinematics/images/img-0002.png" style="width:289.08pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">4.1</span>
+<span class="caption_text">Frame <script type="math/tex">\cal {S’}</script> moves with velocity <script type="math/tex">{ \dot{\vec R}}(t)</script> relative to <script type="math/tex">\cal {S}</script>. Note that, since <script type="math/tex">\mathcal S'</script> moves with constant velocity we can always align the <script type="math/tex">x</script>-axis with that of the fixed coordinate system.</span>
+</figcaption> </div>
+</figure>
+<p>
+We shall also assume that there is a universal time. In other words, in the example above say, both the commuter <script type="math/tex">\cal {O}</script> and the passenger on the train <script type="math/tex">\cal {O’}</script> agree on the precise time at which the apple was thrown into the air and its time of flight. <a class="footnote" href="#a0000000295">
+<sup class="footnotemark">4</sup>
+</a>
+</p>
+<ul class="itemize" id="a0000000296">
+<li id="a0000000297"> <p>
+Define <script type="math/tex">{\vec r}(t)</script> to be <span style="color:#000000">the position vector of a point <script type="math/tex">P</script> in <script type="math/tex">\cal {S}</script> relative to <script type="math/tex">\cal {O}</script>.</span>
+</p>
+</li>
+<li id="a0000000298"> <p>
+Define <script type="math/tex">{\vec r}'(t)</script> to be <span style="color:#000000">the position vector of a point <script type="math/tex">P</script> in <script type="math/tex">\cal {S’}</script> relative to <script type="math/tex">\cal {O’}</script>.</span>
+</p>
+</li>
+</ul>
+<figure id="figure32">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/kinematics/images/img-0004.png" style="width:252.945pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">4.2</span>
+<span class="caption_text">Frame <script type="math/tex">\cal {S’}</script> moves with velocity <script type="math/tex">{ \dot{\vec R}}(t)</script> relative to <script type="math/tex">\cal {S}</script>.</span>
+</figcaption> </div>
+</figure>
+<p>
+Then it follows at time <script type="math/tex">t</script> from the law of the addition of vectors the relative positions of the point as seen by the differing observers at <script type="math/tex">\cal {O}</script> and <script type="math/tex">\cal {O’}</script> is instantaneously <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec r}(t)={\vec R}(t)+{\vec r}’(t).</script></span> </span> If we differentiate this with respect to time we have <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\frac{d{\vec r}(t)}{dt}=\frac{d{\vec R}(t)}{dt}+\frac{d{\vec r}'(t)}{dt},</script></span> </span> or replacing derivatives by <script type="math/tex">{\vec v}</script> for velocities <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec v}_{P \  {\rm relative \  to} \  {\cal S}}= {\vec v}_{P \  {\rm relative \  to}  {\cal S}'} + {\vec v}_{{\cal S}'  {\rm relative \  to} \  {\cal S}} .</script></span> </span> The last equation can be abbreviated to <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec v}_{P{\cal S}} ={\vec v}_{P{\cal S}'}+{\vec v}_{{\cal S}'{\cal S}}.</script></span> </span> or (in slightly more natural notation) 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\vec v = \vec V + \vec v’</script></span>
+<p>
+ This is the equation that links the relative velocities of the point as observed in each frame, when the two frames are moving with respect to each other. We see that velocities add, just as we expect from our everyday intuition. 
+</p>
+<p>
+Relative velocities are confusing. However the confusion can often be minimised by drawing a diagram<a class="footnote" href="#a0000000299">
+<sup class="footnotemark">5</sup>
+</a>. Also, the following alternative notation might make things clearer. The crucial equation we use is of the simple form 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec v}_{AC} = \textcolor{black}{ {\vec v}_{AB} + {\vec v}_{BC} }</script></span>
+<p>
+ In words, the velocity of <script type="math/tex">A</script> relative to <script type="math/tex">C</script> is equal to the sum of the velocity of <script type="math/tex">A</script> relative to <script type="math/tex">B</script>, plus the velocity of <script type="math/tex">B</script> relative to <script type="math/tex">C</script>. This follows from the equation relating displacement vectors: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\vec{AC} = \textcolor{black}{ \vec{AB} + \vec{BC} }</script></span>
+<p>
+ or, in other notation, 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec r}_{AC} = \textcolor{black}{ {\vec r_{AB}} + {\vec r_{BC}} }</script></span>
+<p>
+ The equation for relative velocities is simply the time derivative of these equations. 
+</p>
+<p>
+If <script type="math/tex">{\vec v}_{S'S}</script> is a constant=<script type="math/tex">{\vec V}</script>, say then <script type="math/tex">S'</script> is also an inertial frame. The coordinates in each frame are them related by the following set of transformations, known as <b class="bf">Galilean transformations</b>: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec R}(t) = {\vec V} t \, \,  \textcolor{black}{ \Rightarrow \, \,  {\vec r}(t)={\vec V}t+{\vec r}'(t). }</script></span>
+<p>
+ where we have assumed <script type="math/tex">{\vec r}(t) = {\vec r}'(t)</script> at <script type="math/tex">t=0</script> (the two coordinate systems have a common origin at the initial time). 
+</p>
+<figure id="figure33">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/kinematics/images/img-0006.png" style="width:289.08pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">4.3</span>
+<span class="caption_text">Frame <script type="math/tex">\cal {S’}</script> moves with velocity <script type="math/tex">V{\hat i}</script> relative to <script type="math/tex">\cal {S}</script>.</span>
+</figcaption> </div>
+</figure>
+<p>
+ [width=%+10mm]Galilean transformation Suppose <script type="math/tex">{\cal S}</script> and <script type="math/tex">{\cal S’}</script> have a uniform speed <script type="math/tex">{\vec V}=V{\hat i}</script> relative to one another, with the respective axes aligned (see figure <a class="ref" href="../../../notes/notes_by_chapter/kinematics/index.html#figure33">4.3</a>). The Galilean transformation between coordinates <script type="math/tex">(x,y,z)</script> relative to <script type="math/tex">{\cal O}</script> in <script type="math/tex">{\cal S}</script> and the coordinates <script type="math/tex">(x',y',z')</script> relative to <script type="math/tex">{\cal O’}</script> in <script type="math/tex">{\cal S’}</script> is then given by the set of vector equation <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">x{\hat i}+y{\hat j}+z{\hat k}=Vt{\hat i}+x’{\hat i}+y’{\hat j}+z’{\vec k}</script></span> </span> or in component form <span style="color:#000000"> <span><script type="math/tex; mode=display">\begin{eqnarray*}  x& =& Vt+x’\\ y& =& y’ \\ z& =& z’ \end{eqnarray*}</script></span> </span> Note that because the axes were aligned an identical set of basis vectors <script type="math/tex">{\hat i}</script>, <script type="math/tex">{\hat j}</script> and <script type="math/tex">{\hat k}</script> could be used in both frames. 
+</p>
+<p>
+ [width=%+10mm]Relative motion in a straight line 
+</p>
+<p>
+A train moves at 30 ms<script type="math/tex">^{-1}</script> (about 70 mph). A boy runs to the front of the train at <script type="math/tex">2.5</script> ms<script type="math/tex">^{-1}</script> (about 5 mph). What is the velocity of the boy relative to the track? Let 
+</p>
+<ul class="itemize" id="a0000000300">
+<li id="a0000000301"> <p>
+<script type="math/tex">{\cal S}</script> be a coordinate frame that is stationary with respect to the track, 
+</p>
+</li>
+<li id="a0000000302"> <p>
+<script type="math/tex">{\cal S}'</script> be a coordinate frame that is stationary with respect to the train. 
+</p>
+</li>
+</ul>
+<p>
+ with the corresponding <script type="math/tex">x</script> and <script type="math/tex">x'</script> axes aligned in the same direction along the track/train and pointing towards the front of the train. Then let 
+</p>
+<ul class="itemize" id="a0000000303">
+<li id="a0000000304"> <p>
+<script type="math/tex">{\vec v}_{P{\cal S}}=</script> velocity of the boy <script type="math/tex">P</script> relative to a stationary observer on the track. 
+</p>
+</li>
+<li id="a0000000305"> <p>
+<script type="math/tex">{\vec v}_{P{\cal S}'}=</script> velocity of the boy <script type="math/tex">P</script> relative to a stationary observer on the train <script type="math/tex">=2.5\  {\hat i}</script> ms<script type="math/tex">^{-1}</script>. 
+</p>
+</li>
+<li id="a0000000306"> <p>
+<script type="math/tex">{\vec v}_{{\cal S}'{\cal S}}=</script> velocity of the stationary observer on the train relative to the stationary observer on the track <script type="math/tex">=30\  {\hat i}</script> ms<script type="math/tex">^{-1}</script>. 
+</p>
+</li>
+</ul>
+<p>
+ From the relative velocity formula <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec v}_{P{\cal S}} ={\vec v}_{P{\cal S}'}+{\vec v}_{{\cal S}'{\cal S}},</script></span> </span> we deduce that <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec v}_{P{\cal S}}=30\  {\hat i}+2.5\  {\hat i}=32.5\  {\hat i}\  {\rm ms}^{-1}.</script></span> </span> If the boy turns round and runs at the same speed towards the back of the train, his new velocity relative to the train is <script type="math/tex">{\vec v}_{P{\cal S}'}=-2.5\  {\hat i}</script> ms<script type="math/tex">^{-1}</script>. Consequently his velocity relative to the stationary track observer is then <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec v}_{P{\cal S}}=30\  {\hat i}-2.5\  {\hat i}=27.5\  {\hat i}\  {\rm ms}^{-1}.</script></span> </span>
+</p>
+<p>
+[width=%+10mm]Relative motion of particles 
+</p>
+<p>
+Two particles have position vectors given by <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec r_1}(t)=4t{\hat i}+5t^2{\hat j}-2\sin \pi t{\hat k}</script></span> </span> and <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec r_2}(t)=2t{\hat i}-5t{\hat j}+\cos \pi t{\hat k}.</script></span> </span> Find the relative velocity and the relative acceleration of the second particle with respect to the first at <script type="math/tex">t=1</script>. 
+</p>
+<p>
+First define the relevant reference frames: 
+</p>
+<ul class="itemize" id="a0000000307">
+<li id="a0000000308"> <p>
+Frame <script type="math/tex">S</script>: the stationary observer. 
+</p>
+</li>
+<li id="a0000000309"> <p>
+Frame <script type="math/tex">P_1</script>: the frame of particle 1. 
+</p>
+</li>
+<li id="a0000000310"> <p>
+Frame <script type="math/tex">P_2</script>: the frame of particle 2. 
+</p>
+</li>
+</ul>
+<p>
+ We require <script type="math/tex">{\vec v}_{P_2 P_1}</script>, which is given by <span style="color:#000000"><span class="dmath"><script type="math/tex; mode=display">{\vec v}_{P_2 P_1} = {\vec v}_{P_2 S} + {\vec v}_{S P_1} = {\vec v}_{P_2 S} - {\vec v}_{P_1 S}</script></span></span>
+</p>
+<p>
+The velocities of the particles are: <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec v}_{P_1 S} = \frac{d}{dt} ({\vec r_{P_1 S}}) = \frac{d}{dt} ({\vec r_1}) = \dot{\vec r}_1(t)=4{\hat i}+10t{\hat j}-2\pi \cos \pi t{\hat k}</script></span> </span> <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec v}_{P_2 S} = \frac{d}{dt} ({\vec r_{P_2 S}}) = \frac{d}{dt} ({\vec r_2}) = \dot{\vec r}_2(t)=2{\hat i}-5{\hat j}-\pi \sin \pi t{\hat k}</script></span> </span> The velocity of <script type="math/tex">2</script> relative to <script type="math/tex">1</script> is: <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec v}_{P_2 P_1} = \dot{\vec r}_2(t)- \dot{\vec r}_1(t)=-2{\hat i}-(5+10t){\vec j}+\left(2\pi \cos \pi t-\pi \sin \pi t\right){\hat k}.</script></span></span> So at <script type="math/tex">t=1</script> we have <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec v}_{P_2 P_1} (t=1) = \dot{\vec r}_2(1)- \dot{\vec r}_1(1)=-2{\hat i}-15{\vec j}-2\pi {\hat k}.</script></span> </span>
+</p>
+<p>
+By a similar logic the acceleration of <script type="math/tex">2</script> relative to <script type="math/tex">1</script> is <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec a}_{P_2 P_1} = \ddot{\vec r}_2(t)- \ddot{\vec r}_1(t)=0{\hat i}-10{\vec j}+\left(-2\pi ^2\sin \pi t-\pi ^2\cos \pi t\right){\hat k}.</script></span> </span> so at <script type="math/tex">t=1</script> we have <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec a}_{P_2 P_1}(t=1) = \ddot{\vec r}_2(1)-\ddot{\vec r}_1(1)=-10{\hat j}+\pi ^2{\hat k}.</script></span> </span>
+</p>
+<figure id="figure35">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/kinematics/images/img-0008.png" style="width:144.54pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">4.4</span>
+<span class="caption_text">Wind velocities</span>
+</figcaption> </div>
+</figure>
+<p>
+<br/>
+</p>
+<p>
+[width=%+10mm]Airspeed versus ground speed 
+</p>
+<p>
+An aeroplane <script type="math/tex">P</script> is to fly from a point <script type="math/tex">A</script> to an airfield <script type="math/tex">B</script> which is 300 km due north of A. The plane can fly at a speed of 150 km h<script type="math/tex">^{-1}</script> relative to the air. A wind of speed 30 km h<script type="math/tex">^{-1}</script> blows from the north-west. Find the direction the plane should be pointing in if it is to reach <script type="math/tex">B</script> and its flight time. 
+</p>
+<p>
+Let 
+</p>
+<ul class="itemize" id="a0000000311">
+<li id="a0000000312"> <p>
+<script type="math/tex">{\cal S}</script> be a coordinate frame that is stationary with respect to the ground (A and B), 
+</p>
+</li>
+<li id="a0000000313"> <p>
+<script type="math/tex">{\cal S}'</script> be a coordinate frame that is stationary with respect to the wind. 
+</p>
+</li>
+<li id="a0000000314"> <p>
+us take basis vectors <script type="math/tex">{\hat i}</script> pointing east and <script type="math/tex">{\hat j}</script> pointing north. 
+</p>
+</li>
+</ul>
+<p>
+ Then we have 
+</p>
+<ul class="itemize" id="a0000000315">
+<li id="a0000000316"> <p>
+<script type="math/tex">{\vec v}_{P{\cal S}}=</script> velocity of the plane <script type="math/tex">P</script> relative to a stationary observer on the ground. 
+</p>
+</li>
+<li id="a0000000317"> <p>
+<script type="math/tex">{\vec v}_{P{\cal S}'}=</script> velocity of the plane <script type="math/tex">P</script> relative to the wind. 
+</p>
+</li>
+<li id="a0000000318"> <p>
+<script type="math/tex">{\vec v}_{{\cal S}'{\cal S}}=</script> velocity of the wind relative to the stationary observer on the ground.
+</p>
+</li>
+</ul>
+<p>
+ Hence we know that: 
+</p>
+<ul class="itemize" id="a0000000319">
+<li id="a0000000320"> <p>
+<span style="color:#000000"> <script type="math/tex">{\vec v}_{{\cal S}'{\cal S}}=30\times \frac{1}{\sqrt{2}}({\hat i}-{\hat j})</script> km h<script type="math/tex">^{-1};</script></span>
+</p>
+</li>
+<li id="a0000000321"> <p>
+<span style="color:#000000"> <script type="math/tex">|{\vec v}_{P{\cal S}'}|=150</script> km h<script type="math/tex">^{-1}</script>;</span>
+</p>
+</li>
+<li id="a0000000322"> <p>
+<span style="color:#000000"> if the plane is to fly from <script type="math/tex">A</script> to <script type="math/tex">B</script>, <script type="math/tex">{\vec v}_{P{\cal S}}=V{\hat j}</script> for some <script type="math/tex">V</script> we must find.</span>
+</p>
+</li>
+</ul>
+<p>
+The best way to solve this is to draw a vector diagram corresponding to the relative velocity equation (see figure <a class="ref" href="../../../notes/notes_by_chapter/kinematics/index.html#figure35">4.4</a>) <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec v}_{P{\cal S}}={\vec v}_{P{\cal S}'} + {\vec v}_{{\cal S}'{\cal S}}.</script></span> </span> There are two unknowns in the problem, the bearing the plane must take and the speed of the plane relative to the ground. A short study of the vector triangle in the diagram shows the following. 
+</p>
+<ul class="itemize" id="a0000000323">
+<li id="a0000000324"> <p>
+The unknown angle <script type="math/tex">\theta </script> is the bearing (west of north) that the plane must fly, so that its velocity relative to the ground is due north. It is given by the sine rule: <span style="color:#000000"> <span><script type="math/tex; mode=display">\begin{eqnarray*}  \frac{150}{\sin 135}=\frac{30}{\sin \theta } \qquad \Rightarrow \qquad \sin \theta =\frac{1}{5 \sqrt{2}} \qquad \Rightarrow \qquad \theta =\arcsin \left(\frac{1}{5 \sqrt{2}}\right) \end{eqnarray*}</script></span> or about <script type="math/tex">8^ o \  8'</script> west of north. (<script type="math/tex">1' = 1</script> minute <script type="math/tex">= 1/60</script>-th of a degree). </span>
+</p>
+</li>
+<li id="a0000000325"> <p>
+The speed of the aircraft relative to the ground is also given by the sine rule <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\frac{|{\vec v}_{PS}|}{\sin (180-135-\theta )} = \frac{150}{\sin 135}</script></span></span> Hence <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">|{\vec v}_{PS}| = 127.3 {\rm km\: h}^{-1}</script></span></span> and the flight time from <script type="math/tex">A</script> to <script type="math/tex">B</script> is <span style="color:#000000"> <script type="math/tex">300/127.28 = 2 \  {\rm hrs} \  21 \  {\rm min}.</script> </span>
+</p>
+</li>
+</ul>
+<figure id="figure36">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/kinematics/images/img-0010.png" style="width:361.34999999999997pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">4.5</span>
+<span class="caption_text">Geometry of flight paths of plane <script type="math/tex">P</script> and helicopter <script type="math/tex">H</script>.</span>
+</figcaption> </div>
+</figure>
+<p>
+ [width=%+10mm]Closest approach 
+</p>
+<p>
+An aircraft <script type="math/tex">P</script> takes off from a runway that is aligned from west to east parallel to <script type="math/tex">{\hat i}</script>. The speed of the aircraft (relative to the stationary air) is <script type="math/tex">u</script> and after takeoff it flies due east, climbing at angle <script type="math/tex">\theta </script> to the horizontal. Meanwhile a helicopter <script type="math/tex">H</script> is flying due north at speed <script type="math/tex">v {\hat j}</script> at a constant height <script type="math/tex">h {\hat k}</script> (with <script type="math/tex">h> 0</script> and <script type="math/tex">{\hat k}</script> pointing upwards!). 
+</p>
+<p>
+At the moment the aircraft takes off at <script type="math/tex">t=0</script>, the helicopter is at the point <script type="math/tex">a {\hat i}-b{\hat j}+h{\hat k} \  (a, b >0)</script>. Find the time at which the two machines are closest and distance between them at that point. 
+</p>
+<p>
+Clearly it makes sense to draw a diagram (figure <a class="ref" href="../../../notes/notes_by_chapter/kinematics/index.html#figure36">4.5</a>). 
+</p>
+<p>
+Start by defining frames. Let: 
+</p>
+<ul class="itemize" id="a0000000326">
+<li id="a0000000327"> <p>
+<script type="math/tex">{\cal S}</script> be a coordinate frame that is stationary with respect to the end of the runway, 
+</p>
+</li>
+<li id="a0000000328"> <p>
+<script type="math/tex">{\cal S}'</script> be a coordinate frame that is stationary with respect to the helicopter. 
+</p>
+</li>
+</ul>
+<p>
+ Recall the relationship between position vectors 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec r}(t)={\vec R}(t)+{\vec r}’(t).</script></span>
+<p>
+ It would be useful to calculate <script type="math/tex">{\vec r}'(t)</script>. Note that 
+</p>
+<ul class="itemize" id="a0000000329">
+<li id="a0000000330"> <p>
+the position of the plane relative to the end of the runway at <script type="math/tex">t=0</script> is <script type="math/tex">{\vec r}(0)={\vec0}</script>. 
+</p>
+</li>
+<li id="a0000000331"> <p>
+the position of the helicopter relative to the end of the runway at <script type="math/tex">t=0</script> is 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec R}(0)=a{\hat i}-b{\hat j}+h{\hat k}.</script></span>
+</li>
+<li id="a0000000332"> <p>
+the position of the plane at <script type="math/tex">t=0</script> relative to the helicopter at <script type="math/tex">t=0</script> is 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec r}’(0)={\vec r}(0)-{\vec R}(0)=-a{\hat i}+b{\hat j}-h{\hat k}.</script></span>
+</li>
+</ul>
+<p>
+ The corresponding relative velocities are then given by 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec v}_{P{\cal S}}= {\vec v}_{P{\cal S}'} + {\vec v}_{{\cal S}'{\cal S}}.</script></span>
+<p>
+ and 
+</p>
+<ul class="itemize" id="a0000000333">
+<li id="a0000000334"> <p>
+the velocity of the plane relative to the end of the runway is <script type="math/tex">{\vec v}_{P{\cal S}}=u\cos \theta {\hat i}+u\sin \theta {\hat k}</script>. 
+</p>
+</li>
+<li id="a0000000335"> <p>
+the velocity of the helicopter relative to the end of the runway is <script type="math/tex">{\vec v}_{{\cal S}'{\cal S}}=v{\hat j}</script>. 
+</p>
+</li>
+<li id="a0000000336"> <p>
+the velocity of the plane relative to the helicopter is 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec v}_{P{\cal S}'}={\vec v}_{P{\cal S}}-{\vec v}_{{\cal S}'{\cal S}}=u\cos \theta {\hat i}-v{\hat j}+u\sin \theta {\hat k}.</script></span>
+</li>
+</ul>
+<p>
+ Hence we can write down a vector equation for the position of the plane relative to the helicopter. It is 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec r}’(t)={\vec r}’(0)+{\vec v}_{P{\cal S}'}t=-a{\hat i}+b{\vec j}-h{\hat k}+t\left(u\cos \theta {\hat i}-v{\hat j}+u\sin \theta {\hat k} \right)</script></span>
+<p>
+ which is nothing more than the equation of a line in 3D. 
+</p>
+<p>
+Now the distance of closest approach will occur when <script type="math/tex">|{\vec r}'(t)|</script> or analogously <script type="math/tex">|{\vec r}'(t)|^2 </script> is a minimum. 
+</p>
+<p>
+This occurs when 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\frac{d}{dt}|{\vec r}’(t)|^2 = \frac{d}{dt}\left({\vec r}’(t) \cdot {\vec r}’(t)\right) = \frac{d{\vec r}'(t)}{dt} \cdot {\vec r}’(t) + {\vec r}’(t) \cdot \frac{d{\vec r}'(t)}{dt} = 2{\vec r}’(t)\cdot {\vec v}_{P{\cal S}'} =0</script></span>
+<p>
+Geometrically this is when <script type="math/tex">{\vec v}_{P{\cal S}'}</script> and <script type="math/tex">{\vec r}'(t)</script> are perpendicular. 
+</p>
+<p>
+Hence we have 
+</p>
+<span><script type="math/tex; mode=display">\begin{eqnarray*}  0 & =&  \left(u\cos \theta {\hat i}-v{\hat j}+u\sin \theta {\hat k} \right) \cdot \left(-a{\hat i}+b{\hat j}-h{\hat k} +t \left(u\cos \theta {\hat i}-v{\hat j}+u\sin \theta {\hat k} \right)\right) \\ \Rightarrow \qquad t_{{\rm min}} & =&  -\frac{\left(u\cos \theta {\hat i}-v{\hat j}+u\sin \theta {\hat k} \right) \cdot \left(-a{\hat i}+b{\hat j}-h{\hat k}\right)}{|u\cos \theta {\hat i}-v{\hat j}+u\sin \theta {\hat k}|^2} \\ & =&  \frac{au\cos {\theta }+bv+hu\sin {\theta }}{u^2+v^2}. \end{eqnarray*}</script></span>
+<p>
+The closest distance between the two machines is then 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">|{\vec r}’(t_{{\rm min}})|=\sqrt{{\vec r}'(t_{{\rm min}})\cdot {\vec r}'(t_{{\rm min}})}={\rm exercise \  for \  student!}</script></span>
+<p>
+ Can this ever be zero? In practice the relative speeds of aircraft are so fast (up to over 1000 mph <script type="math/tex">\approx </script> 450 ms<script type="math/tex">^{-1}</script> for civil aircraft) that air traffic controllers try to allow aircraft never to come within a certain non-zero distance of each other. Usually over the Atlantic routes into the UK this is 1000 ft for vertical separation and a few miles for horizontal separation—yes, the Imperial-measures dominate air traffic control! 
+</p>
+</section>
+<hr/>
+<ol>
+<li id="a0000000291">Assuming we are not conspiracy theorists.</li>
+<li id="a0000000292">This will be important later!</li>
+<li id="a0000000294">As we are dealing with non-accelerated motion, we can always do this.</li>
+<li id="a0000000295">That a universal time exists irrespective of motion seems perfectly natural to us. However, it is also wrong. In the theory of relativity there is no universal measurement of time that is the same between inertial frames. If the speed of the train were near to the speed of light, the commuter and passenger would disagree as to the exact time the apple was thrown. </li>
+<li id="a0000000299">In fact, you should always do this!</li>
+</ol>
+
+            </div>
+        </div>
+    </div>
+
+        </main>
+		
+		<footer class="text-muted">
+	<hr>
+	<div class="container">
+		<div class="float-right">
+			<ul style="list-style: none">
+			<li><a href="#">Back to top</a></li>
+			
+			
+			<li><a href="../../../notes/notes_by_chapter/kinematics/kinematics.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;Download as PDF</a></li>
+			
+			</ul>
+		</div>
+		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
+		<p>This page last generated: 2022-07-03</p>
+	</div>
+</footer>
+		
+    </body>
+</html>

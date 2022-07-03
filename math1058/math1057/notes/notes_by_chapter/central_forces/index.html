@@ -1,0 +1,885 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        
+            <meta charset="utf-8">
+            <meta name="robots" content="noindex">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="author" content="Nils Andersson" />
+            <meta name="date" content="2022-07-03" />
+        
+
+        <title>Central Forces | Dynamics and Relativity</title>
+
+        
+    
+    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../../../static/styles.css">
+            <link rel="stylesheet" id="customiseCSS" href="../../../static/light.css">
+            
+            
+        
+    <link rel="stylesheet" id="customiseCodeCSS" href="../../../static/pygmentize.light.css">
+    <link rel="stylesheet" href="../../../static/codemirror-5.26.0/lib/codemirror.css">
+    <link rel="stylesheet" href="../../../static/boole.css">
+    <link rel="stylesheet" href="../../../static/numbasEmbed.css">
+
+    <link rel="stylesheet" href="../../../static/bootstrap-toc.css?v=3">
+    <link rel="stylesheet" href="../../../static/print.css">
+
+
+        
+    
+    
+            <script defer src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <script defer src="../../../static/mathjax_config.js"></script>
+            <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+            <script defer src="../../../static/customisation.js"></script>
+            <script defer src="../../../static/mp4.js"></script>
+            
+            
+        
+    <script defer src="../../../static/jquery.flexibleArea.js"></script>
+    <script defer src="../../../static/spin.min.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/lib/codemirror.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/octave/octave.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/python/python.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/r/r.js"></script>
+    <script defer src="../../../static/boole.js"></script>
+    <script defer src="../../../static/numbasEmbed.js"></script>
+
+    <script defer src="../../../static/bootstrap-toc.js"></script>
+
+    </head>
+    <body data-spy="scroll" data-target="#chapterTOC" data-offset="50">
+        
+<div class="collapse" id="navbarToggleCustomise">
+	<div class="bg-secondary text-white p-3">
+		<form onsubmit="return false;" id="navbarCustomise">
+			<div class="form-row">
+				<label>Theme Customisation</label>
+				<div id="themeSelector" class="form-group col-md-12">
+					<button class="btn btn-dark mr-2" value="dark">Dark</button>
+					<button class="btn btn-pastel mr-2" value="pastel">Pastel</button>
+					<button class="btn btn-light mr-4" value="light">Light</button>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label style="display: block" for="font-scale">Font size (<span id="font-size-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="font-scale" min="50" max="600" value="100">
+					<button id="font-scale-reset" class="btn btn-sm">Reset</button>
+				</div>
+				<div class="form-group col-md-4">
+					<label style="display: block" for="p-space">Spacing (<span id="p-space-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="p-space" min="0" max="600" value="100">
+					<button id="p-space-reset" class="btn btn-sm">Reset</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<nav aria-label="breadcrumb">
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="../../../index.html">Dynamics and Relativity</a>
+		</li>
+		
+		<li class="breadcrumb-item">
+			<a href="../../../notes/notes_by_chapter/index.html">Notes by chapter</a>
+		</li>
+		
+		<li class="breadcrumb-item active">
+			Central Forces
+		</li>
+		<li class="ml-auto">
+			<button class="navbar-toggler p0" type="button" data-toggle="collapse" data-target="#navbarToggleCustomise" aria-controls="navbarToggleCustomise" aria-expanded="false" aria-label="Toggle customisations panel">
+				<i class="fa fa-cog" aria-hidden="true" title="Toggle customisations panel"></i> <span class="sr-only">Toggle customisations panel</span>
+			</button>
+		</li>
+	</ul>
+</nav>
+
+
+        <header>
+            
+            
+        </header>
+        <main>
+            
+    <div class="container mt-3">
+        <div class="row">
+            
+            <div id="sidebar" class="col-md-3">
+                <nav class="mb-3" id="chapterTOC" data-toggle="toc">
+                    <ul class="nav navbar-nav">
+                        
+                        
+                        
+                        <li><a id="pdf-link" class="nav-link" href="../../../notes/notes_by_chapter/central_forces/central_forces.pdf" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" title="Download as PDF"></i>&nbsp;Download as PDF</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+            <div id="content" class="col-md-9"> 
+            
+            
+<!-- Latex Chapter/Part -->
+<h1 id="a0000000154">Central Forces</h1>
+<p>
+So far our main focus has been on motion that can be described in terms of a fixed Cartesian coordinate system. This takes us quite far, but it is by no means the only way we can describe a problem. Many problems have particular symmetries and dynamical problems simplify if we make use of this. To do this, we need to introduce other sets of coordinates – and these may not be fixed. For example, we can decide to use a coordinate system that is fixed in a rotating body. Then the coordinate basis vectors will vary in time. As an example of this – and an excuse to develop the required mathematics - we will discuss the motion of particles under central forces. These are forces that act towards a central point, for example the sun or an atom. 
+</p>
+<section class="section">
+<h2 id="a0000000155">10.1 Cylindrical Polar Coordinates</h2>
+<p>
+When a 3D problem has a cylindrical symmetry (a rotational symmetry about a single axis), such as the magnetic field around a wire, or the flow of fluid through a circular pipe, it makes sense to use <b class="bf">cylindrical polar coordinates</b> <script type="math/tex">(r, \theta , z)</script>, to specify the position of an object. In such situations the equations governing the system often simplify. 
+</p>
+<figure id="figure81">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/central_forces/images/img-0002.png" style="width:325.215pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">10.1</span>
+<span class="caption_text">Cylindrical polar coordinate system and basis vectors</span>
+</figcaption> </div>
+</figure>
+<p>
+Effectively these are 2D polar coordinates <script type="math/tex">(r,\theta )</script> in the <script type="math/tex">(x,y)</script> plane perpendicular to the symmetry axis, together with the usual Cartesian <script type="math/tex">z</script>-coordinate along the symmetry axis. 
+</p>
+<p>
+The transformation from cylindrical polar coordinates to Cartesian <script type="math/tex">(r,\theta ,z)\rightarrow (x,y,z)</script> is: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x=r\cos \theta , \qquad y=r\sin \theta , \qquad z=z.</script></span>
+<p>
+ while the inverse transformation follows from plane polar coordinates 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">r=\sqrt{x^2+y^2},</script></span>
+<p>
+ with <script type="math/tex">\theta </script> being the <script type="math/tex">\arctan </script> of <script type="math/tex">\pm y/x</script>, depending on the quadrant of <script type="math/tex">\theta </script>. 
+</p>
+<p>
+For motion confined to a 2D plane <script type="math/tex">z=</script>constant, it suffices to think of these coordinates as the plane 2D polar coordinates. 
+</p>
+<p>
+Instead of the unit Cartesian basis vectors <script type="math/tex">{\hat i}, {\hat j}, {\hat k}</script> the unit basis vectors in cylindrical polars are: 
+</p>
+<ul class="itemize" id="a0000000156">
+<li id="a0000000157"> <p>
+<script type="math/tex">{\hat e}_ r</script> is in the outwards radial direction from the origin in the plane <script type="math/tex">z=0</script>. 
+</p>
+</li>
+<li id="a0000000158"> <p>
+<script type="math/tex">{\hat e}_\theta </script> is in the azimuthal (increasing positive <script type="math/tex">\theta </script>) direction <script type="math/tex">{\hat e}_ r\times {\hat e}_ z</script>, where 
+</p>
+</li>
+<li id="a0000000159"> <p>
+<script type="math/tex">{\hat e}_ z</script> is in the Cartesian direction <script type="math/tex">{\hat k}</script> (i.e., <script type="math/tex">{\hat e}_ z\equiv {\hat k}).</script>
+</p>
+</li>
+</ul>
+<p>
+ The relationship between cylindrical polar basis vectors at the point <script type="math/tex">(r,\theta ,z)</script> and Cartesian basis vectors is given by geometry as 
+</p>
+<span><script type="math/tex; mode=display">\begin{eqnarray*}  {\hat e}_ r& =& \cos \theta {\hat i}+\sin \theta {\hat j} \\ {\hat e}_\theta & =& -\sin \theta {\hat i}+\cos \theta {\hat j} \\ {\hat e}_ z& =& {\hat k} \end{eqnarray*}</script></span>
+<p>
+ In general, the position vector of a point <script type="math/tex">(r,\theta ,z)</script> in cylindrical polar coordinates is given by 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec r}=r{\hat e}_ r+z{\hat e}_ z.</script></span>
+<p>
+ This looks crazy! We have point in 3D but only two apparent coordinates specifying it with <b class="bf">no</b> explicit behaviour on <script type="math/tex">\theta </script>. This is because, as we have seen in the last point above, <script type="math/tex">{\hat e}_ r</script> actually depends <b class="bf">itself</b> on <script type="math/tex">\theta </script>. Thus if you use a radial basis vector <script type="math/tex">{\hat e}_ r</script>, you are implicitly specifying a <script type="math/tex">\theta </script>. Hence the third coordinate <script type="math/tex">\theta </script> is actually there in the definition. 
+</p>
+</section><section class="section">
+<h2 id="a0000000160">10.2 Velocity and Acceleration</h2>
+<p>
+The last point above shows that two of the unit vectors in cylindrical polars, <script type="math/tex">{\hat e}_ r</script> and <script type="math/tex">{\hat e}_\theta </script>, depend on their location <script type="math/tex">\theta </script>. Hence as one moves around space in <script type="math/tex">\theta </script> the orientation of these two unit vectors changes locally, depending on the point. This does not happen for the Cartesian basis vectors <script type="math/tex">{\hat i}</script>, <script type="math/tex">{\hat j}</script> and <script type="math/tex">{\hat k}</script>, which are independent of the position. (Note that since <script type="math/tex">{\hat e}_ z={\hat k}</script> it does not change locally either.) 
+</p>
+<p>
+Suppose we wish to represent a derived quantity, such as velocity or acceleration in cylindrical polars. When we take the derivative(s) we must be sure to take into account the fact that the basis vectors are also changing from point to point, starting with the position representation. 
+</p>
+<p>
+Assume that the position of a particle at time <script type="math/tex">t</script> relative to an inertial frame can be represented by the cylindrical coordinates <script type="math/tex">(r(t), \theta (t), z(t)</script>). Then the vector position of the particle is 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec r}=r(t){\hat e}_ r+z(t){\hat e}_ z.</script></span>
+<p>
+ Since <script type="math/tex">\theta </script> is a function of time, from the equation above relating polar and Cartesian bases, so will <script type="math/tex">{\hat e}_ r</script> and <script type="math/tex">{\hat e}_\theta </script>. The velocity of the particle is then given by <span style="color:#000000"><span><script type="math/tex; mode=display">\begin{eqnarray*}  \frac{d{\vec r}}{dt}& =&  \frac{d}{dt}\left(r{\hat e}_ r\right)+\frac{d}{dt}\left(z{\hat e}_ z\right), \\ & =& \dot{r}{\hat e}_ r+r\dot{\hat e}_ r+\dot{z}{\hat e}_ z+z\dot{\hat e}_ z. \end{eqnarray*}</script></span></span> But <script type="math/tex">\dot{\hat e}_ z=\dot{\hat k}={\vec0}</script> and <span style="color:#000000"><span><script type="math/tex; mode=display">\begin{eqnarray*}  \dot{\hat e}_ r& =& \frac{d}{dt}\left(\cos \theta {\hat i}+\sin \theta {\hat j}\right)=\dot{\theta }\left(-\sin \theta {\hat i}+\cos {\theta }{\hat j}\right)=\dot{\theta }{\hat e}_\theta , \\ \dot{\hat e}_\theta & =& \frac{d}{dt}\left(-\sin \theta {\hat i}+\cos \theta {\hat j}\right) =-\dot{\theta }\left(\cos \theta {\hat i}+\sin {\theta }{\hat j}\right)=-\dot{\theta }{\hat e}_ r, \end{eqnarray*}</script></span></span> where the last two derivatives also use the fact that <script type="math/tex">\dot{\hat i}=\dot{\hat j}={\vec0}</script>. Hence substitution of these results into the expression for <script type="math/tex">\dot{\vec r}</script> gives <span style="color:#000000"><span><script type="math/tex; mode=display">\begin{eqnarray*}  \frac{d{\vec r}}{dt}& =& \dot{r}{\hat e}_ r+r\dot{\theta }{\hat e}_\theta +\dot{z}{\hat e}_ z. \end{eqnarray*}</script></span></span> Note that unlike the position vector in cylindrical polars, the velocity vector <b class="bf">does</b> involve a <script type="math/tex">{\hat e}_\theta </script> component. That this is sensible follows from a qualitative description of each term in the velocity of the particle: 
+</p>
+<ul class="itemize" id="a0000000161">
+<li id="a0000000162" style="list-style: none;">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+<script type="math/tex">\rightarrow </script>
+</span>
+<p>
+<script type="math/tex">\dot{r}{\hat e}_ r</script> is the velocity in the outward radial direction; 
+</p>
+</li>
+<li id="a0000000163" style="list-style: none;">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+<script type="math/tex">\rightarrow </script>
+</span>
+<p>
+<script type="math/tex">r\dot{\theta }{\hat e}_\theta </script> is the velocity in the azimuthal direction, i.e., around the <script type="math/tex">z</script>-axis and also perpendicular to <script type="math/tex">{\hat e}_ r</script>; 
+</p>
+</li>
+<li id="a0000000164" style="list-style: none;">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+<script type="math/tex">\rightarrow </script>
+</span>
+<p>
+<script type="math/tex">\dot{z}{\hat e}_ z</script> is the velocity in the <script type="math/tex">z</script> direction. 
+</p>
+</li>
+</ul>
+<p>
+In order to work out the acceleration, we use the results from the velocity. Thus we have <span style="color:#000000"><span><script type="math/tex; mode=display">\begin{eqnarray*}  \frac{d^2{\vec r}}{dt^2}& =& \frac{d}{dt}\left(\dot{r}{\hat e}_ r\right)+\frac{d}{dt}\left(r\dot{\theta }{\hat e}_\theta \right)+\frac{d}{dt}\left(\dot{z}{\hat e}_ z\right) \\ & =& \ddot{r}{\hat e}_ r+\dot{r} \dot{\hat e}_ r+\dot{r}\dot{\theta }{\hat e}_\theta +r\ddot{\theta }{\hat e}_\theta +r\dot{\theta }\dot{\hat e}_\theta +\ddot{z}{\hat e}_ z+z \dot{\hat e}_ z \\ & =& \ddot{r}{\hat e}_ r+\dot{r}\dot{\theta }{\hat e}_\theta +\dot{r}\dot{\theta }{\hat e}_\theta +r\ddot{\theta }{\hat e}_\theta -r\dot{\theta }^2{\hat e}_ r+\ddot{z}{\hat e}_ z \\ & =&  \left(\ddot{r}-r\dot{\theta }^2\right){\hat e}_ r+\left(2\dot{r}\dot{\theta }+r\ddot{\theta }\right){\hat e}_\theta +\ddot{z}{\hat e}_ z \end{eqnarray*}</script></span></span> That is, 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\frac{d^2{\vec r}}{dt^2} = \left(\ddot{r}-r\dot{\theta }^2\right){\hat e}_ r+\frac{1}{r}\frac{d}{dt}\left(r^2\dot{\theta }\right){\hat e}_\theta +\ddot{z}{\hat e}_ z.</script></span>
+<p>
+ so the three cylindrical components of acceleration are 
+</p>
+<ul class="itemize" id="a0000000165">
+<li id="a0000000166" style="list-style: none;">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+<script type="math/tex">\rightarrow </script>
+</span>
+<p>
+<script type="math/tex">\left(\ddot{r}-r\dot{\theta }^2\right)</script> is the radial component of acceleration; 
+</p>
+</li>
+<li id="a0000000167" style="list-style: none;">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+<script type="math/tex">\rightarrow </script>
+</span>
+<p>
+<script type="math/tex">\frac{1}{r}\frac{d}{dt}\left(r^2\dot{\theta }\right)</script> is the azimuthal component of acceleration; 
+</p>
+</li>
+<li id="a0000000168" style="list-style: none;">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+<script type="math/tex">\rightarrow </script>
+</span>
+<p>
+<script type="math/tex">\ddot{z}</script> is the component of acceleration parallel to the <script type="math/tex">z</script>-axis. 
+</p>
+</li>
+</ul>
+<figure id="figure82">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/central_forces/images/img-0004.png" style="width:325.215pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">10.2</span>
+<span class="caption_text">Position (left), velocity (centre) and acceleration (right) vectors for motion in a circle of radius <script type="math/tex">R</script></span>
+</figcaption> </div>
+</figure>
+<p>
+[width=%+10mm]Motion in a circle 
+</p>
+<p>
+A particle moves in a circle of radius <script type="math/tex">R</script> in the <script type="math/tex">z=0</script> plane with position <script type="math/tex">{\vec r}</script> at time <script type="math/tex">t</script>. We study the problem using cylindrical coordinates with origin at the centre of the circle, with <script type="math/tex">{\hat e}_ z</script> oriented perpendicular to the plane of the circle. 
+</p>
+<p>
+By definition we have the radial component of the position as 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">r(t)=R \Rightarrow \dot{r}=0 \Rightarrow \ddot{r}=0.</script></span>
+<p>
+ Likewise we have 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">z(t)=0 \Rightarrow \dot{z}=0 \Rightarrow \ddot{z}=0.</script></span>
+<p>
+ Hence the velocity of the particle in radial coordinates is 
+</p>
+<span><script type="math/tex; mode=display">\begin{eqnarray*}  \frac{d{\vec r}}{dt}& =& \dot{r}{\hat e}_ r+r\dot{\theta }{\hat e}_\theta +\dot{z}{\hat e}_ z = 0{\hat e}_ r+R\dot{\theta }{\hat e}_\theta +0{\hat e}_ z \\ \frac{d{\vec r}}{dt}& =& R\dot{\theta }{\hat e}_\theta \end{eqnarray*}</script></span>
+<p>
+ It is purely tangential to the circle (as it has to be if the circular motion is to be maintained!). The acceleration of the particle in radial components is 
+</p>
+<span><script type="math/tex; mode=display">\begin{eqnarray*}  \frac{d^2{\vec r}}{dt^2}& =&  \left(\ddot{r}-r\dot{\theta }^2\right){\hat e}_ r+\frac{1}{r}\frac{d}{dt}\left(r^2\dot{\theta }\right){\hat e}_\theta +\ddot{z}{\hat e}_ z = \left(0-R\dot{\theta }^2\right){\hat e}_ r+r\ddot{\theta }{\hat e}_\theta +0{\hat e}_ z, \\ \frac{d^2{\vec r}}{dt^2}& =& -R\dot{\theta }^2{\hat e}_ r+r\ddot{\theta }{\hat e}_\theta . \end{eqnarray*}</script></span>
+<p>
+ Note that the radial component of acceleration is directed towards the centre of the circle. This is called the <b class="bf">centripetal</b> (literally meaning “seeking the centre”) component of acceleration. If the particle has mass <script type="math/tex">m</script> and executes the motion with a constant angular speed, i.e., 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\dot{\theta }={\rm constant}=\omega , \Rightarrow \theta =\omega t + {\rm constant},</script></span>
+<p>
+ then the velocity of the particle is 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\frac{d{\vec r}}{dt}=R\omega {\hat e}_\theta .</script></span>
+<p>
+ The acceleration simplifies to only a radial component and <b class="bf">N2</b> gives the force as 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\frac{d^2{\vec r}}{dt^2}=-R\dot{\theta }^2{\hat e}_ r \Rightarrow {\vec F}=-mR\omega ^2{\hat e}_ r.</script></span>
+<p>
+ Note that the particle is only accelerating towards the centre of the circle. The interpretation of <script type="math/tex">{\vec F}</script> is that it is the force that is required to keep the particle in the circular orbit of the origin. Without the presence of <script type="math/tex">{\vec F}</script>, the particle would just continue in a straight line (<b class="bf">N1</b>). If the particle is attached to hoop or a string, by <b class="bf">N3</b> there is a balancing reactive force called the <b class="bf">centrifugal</b> force.  
+</p>
+<figure id="figure83">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/central_forces/images/img-0006.png" style="width:199.16929133858264pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">10.3</span>
+<span class="caption_text">Forces acting on a pendulum represented in cylindrical polar coordinates.</span>
+</figcaption> </div>
+</figure>
+<p>
+[width=%+10mm]Motion of a plane pendulum revisited 
+</p>
+<p>
+Suppose a pendulum of mass <script type="math/tex">m</script> and fixed inextensible length <script type="math/tex">l</script> moves in a plane under the influence of gravity only, see figure <a class="ref" href="../../../notes/notes_by_chapter/central_forces/index.html#figure83">10.3</a>. It is released from rest at <script type="math/tex">t=0</script> from an angle <script type="math/tex">\alpha </script> radians, where <script type="math/tex">\alpha \ll 1</script>. Analyse the motion using cylindrical polar coordinates. 
+</p>
+<p>
+We fix coordinates with <script type="math/tex">{\hat e}_ r</script> pointing along the length of the string, from the suspension point to the bob. <script type="math/tex">{\hat e}_ z</script> passes horizontally through the suspension point, and points into the page. The motion of the bob will take place in the <script type="math/tex">z=0</script> plane. <script type="math/tex">{\hat e}_\theta </script> is then determined by <script type="math/tex">{\hat e}_ r\times {\hat e}_\theta </script>. The angle <script type="math/tex">\theta </script> is fixed to be the angle of the string to the downwards vertical. The forces acting are the weight of the bob <script type="math/tex">m{\vec g}</script> and the tension <script type="math/tex">{\vec T}</script> acting along the string. <b class="bf">N2</b> gives: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">m{ \ddot{\vec r}}={\vec T}+m{\vec g}.</script></span>
+<p>
+ In terms of cylindrical polar coordinates, resolving the force components we have 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec T}=-T{\hat e}_ r, \qquad {\vec g}=g\left(\cos \theta {\hat e}_ r-\sin \theta {\hat e}_\theta \right)</script></span>
+<p>
+ Thus <b class="bf">N2</b> becomes 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">m\left[\left(\ddot{r}-r\dot{\theta }^2\right){\hat e}_ r+\frac{1}{r}\frac{d}{dt}\left(r^2\dot{\theta }^2\right){\hat e}_\theta \right]=-T{\hat e}_ r+mg\left(\cos \theta {\hat e}_ r-\sin \theta {\hat e}_\theta \right)</script></span>
+<p>
+ Now as the string is inextensible, <script type="math/tex">r(t)=l</script>, so in component form we have 
+</p>
+<span><script type="math/tex; mode=display">\begin{eqnarray*}  -ml\dot{\theta }^2& =& -T+mg\cos \theta \\ ml\ddot{\theta }& =& -mg\sin \theta \end{eqnarray*}</script></span>
+<p>
+ For small oscillations <script type="math/tex">|\theta |\ll 1</script>, <script type="math/tex">\sin \theta \approx \theta </script> and <script type="math/tex">\cos \theta \approx 1</script> (remember <script type="math/tex">\theta </script> will be measured in radians and 1 radian <script type="math/tex">=(180/\pi )^ o</script>). Hence the last equation becomes 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\ddot{\theta }+\frac{g}{l}\theta =0.</script></span>
+<p>
+ This is simple harmonic motion, just as in the case of the vertical spring. It has solution 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\theta (t)=C\cos \omega t + D\sin \omega t=A\cos (\omega t+B), \qquad \omega =\frac{g}{l}.</script></span>
+<p>
+ The initial data is <script type="math/tex">\theta (0)=\alpha </script>, <script type="math/tex">\dot{\theta }(0)=0</script> which gives <script type="math/tex">A=\alpha </script>, <script type="math/tex">B=0</script>. Thus the motion takes the form 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\theta (t)=\alpha \cos \omega t.</script></span>
+<p>
+ Note that the frequency of such small oscillations is independent of <script type="math/tex">m</script>. The tension in the string is given by the first equation above as 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">T=mg\cos \theta +ml\dot{\theta }^2\approx m\left(g+\alpha ^2\omega ^2l\sin ^2\omega t\right).</script></span>
+<p>
+ If the string is elastic, or the amplitude of the oscillations is large, the problem is much more difficult! 
+</p>
+</section><section class="section">
+<h2 id="a0000000169">10.3 Spherical Polar Coordinates</h2>
+<p>
+When a problem has a spherical symmetry, such as the gravitational force felt by a satellite, or the precession of a spinning top, it makes sense to use <b class="bf">spherical polar coordinates</b>, <script type="math/tex">(\rho , \theta , \phi )</script> to simplify the governing equations. 
+</p>
+<figure id="figure81">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/central_forces/images/img-0008.png" style="width:325.215pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">10.4</span>
+<span class="caption_text">Spherical polar coordinate system and basis vectors. Note that the <script type="math/tex">\phi </script> angle here is the same as the <script type="math/tex">\theta </script> angle in the case of cylindrical coordinates.</span>
+</figcaption> </div>
+</figure>
+<p>
+Note that the <script type="math/tex">\theta </script> angle does <b class="bf">not</b> have the same definition as in cylindrical coordinates. 
+</p>
+<p>
+The definitions of the coordinates are: 
+</p>
+<ul class="itemize" id="a0000000170">
+<li id="a0000000171" style="list-style: none;">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+<script type="math/tex">\rightarrow </script>
+</span>
+<p>
+<script type="math/tex">\rho </script> is the radial (shortest) distance from the origin of coordinates <script type="math/tex">{\cal O}</script>, <script type="math/tex">0<\rho <\infty </script>
+</p>
+</li>
+<li id="a0000000172" style="list-style: none;">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+<script type="math/tex">\rightarrow </script>
+</span>
+<p>
+<script type="math/tex">\theta </script> is the angle of latitude as measured from the <script type="math/tex">z</script> axis or <script type="math/tex">{\hat k}</script> direction. 
+</p>
+</li>
+<li id="a0000000173" style="list-style: none;">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+<script type="math/tex">\rightarrow </script>
+</span>
+<p>
+<script type="math/tex">\phi </script> is the longitude as measured from the Cartesian <script type="math/tex">x</script>-axis. 
+</p>
+</li>
+</ul>
+<p>
+ Note that the latitude <script type="math/tex">\theta </script> is measured from the north pole and so the geographical latitude = <script type="math/tex">\theta -\pi /2</script>, <script type="math/tex">0<\theta <\pi </script>. With these defintions we have the transformation <script type="math/tex">(r,\theta ,\phi )\rightarrow (x,y,z)</script>
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x=\rho \sin \theta \cos \phi \qquad y=\rho \sin \theta \sin \phi \qquad z=\rho \cos \theta .</script></span>
+<span class="dmath"><script type="math/tex; mode=display">\rho =\sqrt{x^2+y^2+z^2}</script></span>
+<p>
+The unit basis vectors at any point <script type="math/tex">P</script> are given by: 
+</p>
+<ul class="itemize" id="a0000000174">
+<li id="a0000000175" style="list-style: none;">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+<script type="math/tex">\rightarrow </script>
+</span>
+<p>
+<script type="math/tex">{\hat e}_\rho </script> which is the outwards radial unit vector in the direction <script type="math/tex">{\cal O}P</script>. 
+</p>
+</li>
+<li id="a0000000176" style="list-style: none;">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+<script type="math/tex">\rightarrow </script>
+</span>
+<p>
+<script type="math/tex">{\hat e}_\phi ={\hat k}\times {\hat e}_\rho </script>. 
+</p>
+</li>
+<li id="a0000000177" style="list-style: none;">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+<script type="math/tex">\rightarrow </script>
+</span>
+<p>
+<script type="math/tex">{\hat e}_\theta ={\hat e}_\phi \times {\hat e}_\rho </script>
+</p>
+</li>
+</ul>
+<p>
+ In general, the position vector of a point <script type="math/tex">(\rho , \theta , \phi )</script> in spherical polar coordinates is given by 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec r}=\rho {\hat e}_ r</script></span>
+<p>
+ Now the locally defined unit vector <script type="math/tex">{\hat e}_ r</script> masks a dependence on both latitude <script type="math/tex">\theta </script> and longitude <script type="math/tex">\phi </script>. 
+</p>
+<p>
+Velocities and accelerations can be derived for the motion of a particle at <script type="math/tex">(\rho (t),\theta (t),\phi (t))</script> in spherical polar coordinates at time <script type="math/tex">t</script> by techniques similar to those used for cylindrical polar coordinates. In summary, the results are: Velocity: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{ \dot{\vec r}}(t)=\dot{\rho }{\hat e}_\rho +\rho \dot{\theta }{\hat e}_\theta +\rho \dot{\phi }\sin \theta {\hat e}_\phi</script></span>
+<p>
+ Acceleration: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{ \ddot{\vec r}}(t)=\left(\ddot{\rho }-\rho \dot{\theta }^2-\rho \dot{\phi }^2\sin ^2\theta \right){\hat e}_\rho +\left(2\dot{\rho }\dot{\theta }+\rho \ddot{\theta }-\rho \dot{\phi }^2\sin \theta \cos \theta \right){\hat e}_\theta +\left(2\rho \dot{\theta }\dot{\phi } \cos \theta +2\dot{\rho }\dot{\phi }\sin \theta +\rho \ddot{\phi }\sin \theta \right){\hat e}_\phi .</script></span>
+</section><section class="section">
+<h2 id="a0000000178">10.4 Non-inertial frames</h2>
+<p>
+We know that inertial frames provide the setting for Newtonian dynamics, but what happens if you find yourself in a frame that is not inertial? We have already seen examples of this, expressed in terms of the changing basis vectors of cylindrical and spherical coordinates. Let us now consider what Newton’s equations of motion look like in non-inertial frames. In order to be explicit, we will only consider rotating frames. 
+</p>
+<p>
+Let us start with an inertial frame <script type="math/tex">S</script> with coordinate axes <script type="math/tex">x</script>, <script type="math/tex">y</script> and <script type="math/tex">z</script> (as usual). Our goal is to understand the motion of particles as seen in a non-inertial frame <script type="math/tex">S'</script>, with axes <script type="math/tex">x'</script>, <script type="math/tex">y'</script> and <script type="math/tex">z'</script>, which is rotating with respect to <script type="math/tex">S</script>. We denote the angle between the <script type="math/tex">x</script>-axis of <script type="math/tex">S</script> and the <script type="math/tex">x'</script>- axis of <script type="math/tex">S'</script> as <script type="math/tex">\theta </script>. Since <script type="math/tex">S'</script> is rotating, we clearly have <script type="math/tex">\theta =\theta (t)</script> and <script type="math/tex">\dot\theta \neq 0</script>. 
+</p>
+<p>
+Our first task is to describe the rotation of the axes. For this, we can use the angular velocity vector <script type="math/tex">\vec\omega </script> that we introduced earlier. Consider a particle that is sitting stationary in the <script type="math/tex">S'</script> frame. Then, from the perspective of frame <script type="math/tex">S</script> it will appear to be moving with velocity 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\dot{\vec r} = \vec\omega \times \vec r</script></span>
+<p>
+ where, in the present case <script type="math/tex">\vec\omega = \dot\theta {\hat e}_ z</script>. 
+</p>
+<p>
+We can extend the description of the rotation to the axes of <script type="math/tex">S'</script> themselves. Let <script type="math/tex">\hat e_ i^\prime ,\  i = 1, 2, 3</script> be the unit vectors that point along the <script type="math/tex">x'</script>, <script type="math/tex">y'</script> and <script type="math/tex">z'</script> directions. Then these also rotate with velocity 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\dot{\hat e}_ i^\prime = \vec\omega \times {\hat e}_ i^\prime</script></span>
+<p>
+ This is the key result that will allow us to understand motion in rotating frames. 
+</p>
+<p>
+Consider now a particle which is not fixed in the <script type="math/tex">S'</script> frame, but moves along trajectory. We can measure the position of the particle in the inertial frame <script type="math/tex">S</script>, where 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\vec r = \sum _ i r_ i \hat e_ i</script></span>
+<p>
+ where <script type="math/tex">\hat e_ i</script> are the basis vectors of <script type="math/tex">S</script>. Alternatively, we can measure the position of the particle in frame <script type="math/tex">S'</script>, where the position is 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\vec r = \sum _ i r_ i^\prime \hat e_ i^\prime</script></span>
+<p>
+ Of course, the actual position is the same in these two expressions. The coordinates differ because they are measured with respect to different axes. Let us now consider the velocity of the particle. In the fixed frame <script type="math/tex">S</script> we simply have 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\dot{\vec r} = \sum _ i \dot r_ i \hat e_ i</script></span>
+<p>
+ but in the rotating <script type="math/tex">S'</script> frame we have 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\dot{\vec r} = \sum _ i \left( \dot r_ i^\prime \hat e_ i + r_ i^\prime \dot{\hat e}_ i^\prime \right) = \sum _ i \left( \dot r_ i^\prime \hat e_ i^\prime + r_ i^\prime \vec\omega \times {\hat e}_ i^\prime \right) = \sum _ i \dot r_ i^\prime \hat e_ i^\prime + \vec\omega \times \vec r</script></span>
+<p>
+ Let us introduce notation to help the intuition. We write the velocity of the particle as seen by an observer in frame <script type="math/tex">S</script> as 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\left( {d \vec r \over dt} \right)_ S = \sum _ i \dot r_ i \hat e_ i</script></span>
+<p>
+ Similarly, the velocity seen in <script type="math/tex">S'</script> is just 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\left( {d \vec r \over dt} \right)_{S'} = \sum _ i \dot r_ i^\prime \hat e_ i^\prime</script></span>
+<p>
+ From our previous results, we then see that 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\left( {d \vec r \over dt} \right)_ S = \left( {d \vec r \over dt} \right)_{S'} + \vec\omega \times \vec r</script></span>
+<p>
+ The difference is (obviously) the relative velocity between the two frames. 
+</p>
+<p>
+We can play the same game with the acceleration. This is a bit more complicated, but after a bit of algebra<a class="footnote" href="#a0000000179">
+<sup class="footnotemark">1</sup>
+</a>, we find that 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\left( {d^2 \vec r \over dt^2} \right)_ S = \left( {d^2 \vec r \over dt^2} \right)_{S'} + 2 \vec\omega \times \left( {d \vec r \over dt} \right)_{S'} + \dot{ \vec\omega } \times \vec r + \vec\omega \times (\vec\omega \times \vec r)</script></span>
+<p>
+ This relation holds the key to understanding the motion of particles in a rotating frame. 
+</p>
+<p>
+Let us see what happens to <b class="bf">N2</b>. In the inertial frame <script type="math/tex">S</script>, we have 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">m \left( {d^2 \vec r \over dt^2} \right)_ S = \vec F</script></span>
+<p>
+ This means that, in <script type="math/tex">S'</script> we have 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\left( {d^2 \vec r \over dt^2} \right)_{S'} = \vec F - 2 m\vec\omega \times \left( {d \vec r \over dt} \right)_{S'} - m\dot{ \vec\omega } \times \vec r - m\vec\omega \times (\vec\omega \times \vec r)</script></span>
+<p>
+ We learn that, in order to explain the motion of a particle an observer in <script type="math/tex">S'</script> must invoke the existence of three further terms on the right-hand side of <b class="bf">N2</b>. These are called <em>fictitious forces</em>. Viewed from <script type="math/tex">S'</script>, a free particle doe not travel in a straight line and these fictitious forces are necessary to explain this departure from uniform motion. The three extra terms are called the Coriolis force, the centrifugal force and the Euler force, respectively. It is worth noting that all the fictitious forces are proportional to the inertial mass <script type="math/tex">m</script>. This is because they all originated from the “ma” side of <b class="bf">N2</b>. But, the gravitational force also appears to be proportional to the inertial mass. Is this evidence that gravity is also a fictitious force? In fact it is. Einstein’s theory of general relativity recasts gravity as the fictitious force that we experience due to the curvature of space and time. 
+</p>
+<p>
+ [width=%+10mm]Centrifugal force 
+</p>
+<p>
+The centrifugal force is given by 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\vec F_\mathrm {cent} = - m \vec\omega \times ( \vec\omega \times \vec r) = - m ( \vec\omega \cdot \vec r) \vec\omega + m \omega ^2 \vec r</script></span>
+<p>
+ It is easy to see that this points away from the axis of rotation. Rotating bodies want to fly out from the axis of rotation to lower their energy. 
+</p>
+<p>
+On Earth, the centrifugal force impacts on the (local) strength of gravity. As as example of this, consider a piece of string suspended from the ceiling. You might expect the string to point down to the centre of the Earth. But the centrifugal force due to the Earth’s rotation means that this is not the case. The angle that the string makes with the line pointing to the Earth’s centre depends on the latitude, <script type="math/tex">\theta </script>, at which we are sitting. 
+</p>
+<p>
+The effective acceleration, due to the combination of gravity and the centrifugal force, is 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\vec g_\mathrm {eff} = \vec g - \vec\omega \times ( \vec\omega \times \vec r)</script></span>
+<p>
+ We can resolve this is radial and angular (Southernly) directions using unit vectors <script type="math/tex">\hat{\vec r}</script> and <script type="math/tex">\hat{\vec\theta }</script>. The centrifugal force then becomes 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\vec F_\mathrm {cent} = |\vec F| \cos \theta \hat{ r}+ |\vec F| \sin \theta \hat{ \theta } =m \omega ^2 r \cos ^2 \theta \hat{ r} - m \omega ^2 r \cos \theta \sin \theta \hat{ \theta }</script></span>
+<p>
+ At the surface of the Earth, with <script type="math/tex">r=R</script>, this leads to 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\vec g_\mathrm {eff} = \left( - g + \omega ^2 R \cos ^2 \theta \right) \hat{ r} - \omega ^2 R\cos \theta \sin \theta \hat{ \theta }</script></span>
+<p>
+ We see that, at the equation, when <script type="math/tex">\theta = 0</script>, the string hangs directly towards the centre of the Earth, but we would measure gravity to be somewhat weaker than expected: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">g_\mathrm {eff} = g - \omega ^2 R</script></span>
+<p>
+[width=%+10mm]Coriolis force The Coriolis force is given by 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\vec F_\mathrm {cor} = - 2 m \vec\omega \times \vec v</script></span>
+<p>
+ where <script type="math/tex">\vec v</script> is the velocity measured in the rotating frame 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\vec v = \left( {d \vec r \over dt} \right)_{S'}</script></span>
+<p>
+ The force is velocity dependent: it is only felt by moving particles, but it is independent of the position. 
+</p>
+<p>
+We can compare the Coriolis force to one of our earlier examples, that of a charged particle moving in a magnetic field. This means that we already know what the effect of the force will be – it makes moving particles turn in circles. 
+</p>
+<p>
+On Earth, the Coriolis force is responsible for the formation of hurricanes. These rotate in an anti-clockwise direction in the Northern hemisphere and a clockwise direction in the Southern hemisphere. 
+</p>
+</section><section class="section">
+<h2 id="a0000000180">10.5 Central Forces</h2>
+<p>
+A central force acting between two particles is a force that always acts along a line joining two the particles. Often, for convenience, one of the particles will be chosen to represent the origin of the coordinate system. This is the convention we adopt from here on. 
+</p>
+<figure id="figure85">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/central_forces/images/img-0010.png" style="width:144.54pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">10.5</span>
+<span class="caption_text">A central force <script type="math/tex">f({\vec r}){\hat e}_ r</script> acting on particle <script type="math/tex">P</script>.</span>
+</figcaption> </div>
+</figure>
+<p>
+Examples of important central forces include: 
+</p>
+<ul class="itemize" id="a0000000181">
+<li id="a0000000182"> <p>
+<b class="bf">Gravity:</b> Consider two masses <script type="math/tex">m_1</script> and <script type="math/tex">m_2</script> in free space. We fix the coordinate origin on mass <script type="math/tex">m_1</script>, say, and then the position vector of <script type="math/tex">m_2</script> with respect to <script type="math/tex">m_1</script> is <script type="math/tex">{\vec r}</script>. The gravitational force acting on <script type="math/tex">m_2</script> is 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec F}({\vec r})=-\frac{Gm_1m_2}{|{\vec r}|^2}{\hat e}_ r</script></span>
+<p>
+ where <script type="math/tex">{\hat e}_ r={\vec r}/|{\vec r}|</script> and <script type="math/tex">G=6.6742\times 10^{-11}</script> Nm<script type="math/tex">^2</script>kg<script type="math/tex">^{-2}</script> is the universal gravitational constant. <script type="math/tex">G</script> is a fundamental physical constant and is the same for gravitational interactions between bodies with mass.<a class="footnote" href="#a0000000183">
+<sup class="footnotemark">2</sup>
+</a> Note that the force is always attractive. 
+</p>
+</li>
+<li id="a0000000184"> <p>
+<b class="bf">Coulomb interactions between electrical charge:</b> Consider two point particles in free space with electric charge <script type="math/tex">q_1</script> and <script type="math/tex">q_2</script>. We fix the coordinate origin on charge <script type="math/tex">q_1</script>, say, and then the position vector of <script type="math/tex">q_2</script> with respect to <script type="math/tex">q_1</script> is <script type="math/tex">{\vec r}</script>. The electrical force acting on <script type="math/tex">q_2</script> is 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec F}({\vec r})=\frac{q_1q_2}{4\pi \varepsilon _0|{\vec r}|^2}{\hat e}_ r</script></span>
+<p>
+ where <script type="math/tex">{\hat e}_ r={\vec r}/|{\vec r}|</script> and <script type="math/tex">\varepsilon _0=8.854\cdots \times 10^{-12}</script> Fm<script type="math/tex">^{-1}</script>. <script type="math/tex">\varepsilon _0</script> is the electrical permittivity of free space and is another fundamental constant of nature. Note that if <script type="math/tex">q_1q_2>0</script> (like charges) the force is repulsive. If <script type="math/tex">q_1q_2<0</script> (unlike charges) the force is attractive. 
+</p>
+</li>
+</ul>
+<p>
+Moving on, let us represent the force acting per unit mass as <script type="math/tex">f({\vec r}){\hat e}_ r</script>. <b class="bf">N2</b> can then be written as <span style="color:#000000"><span class="dmath"><script type="math/tex; mode=display">m \ddot{\vec{r}}=mf({\vec r}){\hat e}_ r.</script></span></span> If we take moments about the origin, using <b class="bf">N2</b> we have <span style="color:#000000"><span><script type="math/tex; mode=display">\begin{eqnarray*}  {\vec r}\times { \ddot{\vec r}}& =&  {\vec r}\times \left(f({\vec r}){\hat e}_ r\right), \\ & =&  f({\vec r})\left({\vec r}\times {\hat e}_ r\right), \\ & =& |{\vec r}|f({\vec r})\left({\hat e}_ r\times {\hat e}_ r\right), \\ \Rightarrow {\vec r}\times { \ddot{\vec r}}& =& {\vec0} \\ \end{eqnarray*}</script></span></span> Now, since <span style="color:#000000"><span><script type="math/tex; mode=display">\begin{eqnarray*}  \frac{d}{dt}\left({\vec r}\times { \dot{\vec r}}\right)& =& \left({ \dot{\vec r}}\times { \dot{\vec r}}\right)+\left({\vec r}\times { \ddot{\vec r}}\right)={\vec0}+\left({\vec r}\times { \ddot{ \vec r}}\right) \\ \Rightarrow \qquad {\vec r}\times { \ddot{\vec r}}& =& \frac{d}{dt}\left({\vec r}\times { \dot{\vec r}}\right), \end{eqnarray*}</script></span></span> we have <span style="color:#000000"><span><script type="math/tex; mode=display">\begin{eqnarray*}  \frac{d}{dt}\left({\vec r}\times { \dot{\vec r}}\right)& =& {\vec0} \\ \Rightarrow {\vec r}\times { \dot{\vec r}}& =& {\vec l} \end{eqnarray*}</script></span></span> where <script type="math/tex">{\vec l}</script> is a constant vector. 
+</p>
+<p>
+We learn that both the velocity and the position of a particle moving under a central force always lie in a plane. The normal to this plane is the constant vector <script type="math/tex">{\vec l}</script>. 
+</p>
+<figure id="figure86">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/central_forces/images/img-0012.png" style="width:252.945pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">10.6</span>
+<span class="caption_text">Motion under a central force is confined to a plane.</span>
+</figcaption> </div>
+</figure>
+<p>
+As we have seen, gravitational attraction is a central force acting between the centres of mass of two objects. This is why the Earth travels around the sun in a plane, or why a satellite moves in a planar orbit. 
+</p>
+</section><section class="section">
+<h2 id="a0000000185">10.6 Conservation of Angular Momentum</h2>
+<p>
+Recall that the angular momentum <script type="math/tex">{\vec L}</script> of a body at position <script type="math/tex">{\vec r}</script> with linear momentum <script type="math/tex">{\vec p}</script> about a the origin <script type="math/tex">{\cal O}</script> is <span style="color:#000000"><span class="dmath"><script type="math/tex; mode=display">{\vec L}\equiv {\vec r}\times {\vec p}=m\left({\vec r}\times { \dot{\vec r}}\right) = m \vec l .</script></span></span> The angular momentum of a particle acted on by a central force is clearly conserved. 
+</p>
+<p>
+Since the motion of the particle is confined to a plane and is around a central point to which the force is directed to or from, it is natural to represent the dynamics of the particle using cylindrical polar coordinates with <script type="math/tex">z=0</script>, i.e., polar coordinates in the plane (the problem is effectively two dimensional). If we write <b class="bf">N2</b> in component form in these coordinates (ignoring the constant <script type="math/tex">z</script>-component), we have <span style="color:#000000"><span><script type="math/tex; mode=display">\begin{eqnarray*}  m{ \ddot{\vec r}}& =& mf({\vec r}){\hat e}_ r \\ \left(\ddot{r}-r\dot{\theta }^2\right){\hat e}_ r+\frac{1}{r}\frac{d}{dt}\left(r^2\dot{\theta }\right){\hat e}_\theta & =& f({\vec r}){\hat e}_ r \end{eqnarray*}</script></span></span>
+</p>
+<p>
+<span style="color:#000000"><span class="dmath"><script type="math/tex; mode=display">\Rightarrow \left\{ \begin{array}{c}\left(\ddot{r}-r\dot{\theta }^2\right)=f({\vec r}) \\ \frac{1}{r}\frac{d}{dt}\left(r^2\dot{\theta }\right) = 0 \end{array}\right.</script></span></span> This equation may be integrated immediately to obtain <span style="color:#000000"><span class="dmath"><script type="math/tex; mode=display">r^2\dot{\theta }=l</script></span></span> where <script type="math/tex">l</script> is a (scalar) constant. 
+</p>
+<p>
+This is the explicit coordinate form for the conservation of angular momentum for a unit mass. To see this we write <script type="math/tex">{\vec r}\times { \dot{\vec r}}</script> in coordinate form: <span style="color:#000000"><span><script type="math/tex; mode=display">\begin{eqnarray*}  {\vec r}\times { \dot{\vec r}}& =& r{\hat e}_ r\times \left(\dot{r}{\hat e}_ r + r\dot{\theta }{\hat e}_\theta \right) \\ & =& r\dot{r} \underbrace{\left({\hat e}_ r\times {\hat e}_ r\right)}_{\vec0} + r^2\dot{\theta } \  \underbrace{\left({\hat e}_ r\times {\hat e}_\theta \right)}_{{\hat e}_ z} \\ & =& l{\hat e}_ z={\vec l}. \end{eqnarray*}</script></span></span> To determine <script type="math/tex">l</script> it therefore suffices to know the position and velocity of a particle at a single point in its motion. This information will usually be given in the form of initial data, e.g., <script type="math/tex">{\vec r}(0)</script> and <script type="math/tex">\dot{\vec r}(0)</script>. 
+</p>
+</section><section class="section">
+<h2 id="a0000000186">10.7 Conservative Central Forces</h2>
+<p>
+Let us now consider the implication of the conservation of energy for systems with central forces. We assume that the central force only depends on <script type="math/tex">r(t)</script>, the (scalar) distance of the body from the origin at time <script type="math/tex">t</script>. Then <b class="bf">N2</b> becomes 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">m{ \ddot{\vec r}}=mf(r){\hat e}_ r.</script></span>
+<p>
+ Moreover, such central forces are conservative<a class="footnote" href="#a0000000187">
+<sup class="footnotemark">3</sup>
+</a> The upshot of this is that we expect <script type="math/tex">f(r)</script> to possess a potential and to generate an energy conservation law. 
+</p>
+<p>
+In order to demonstrate this observation law we need a couple of few preliminary calculations. 
+</p>
+<p>
+We have already seen that the motion under a central force is confined to a plane. Use this result to express the square of the speed of a body by introducing cylindrical polar coordinates. 
+</p>
+<p>
+The velocity of a body in cylindrical polars is given by 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{ \dot{\vec r}}=\dot{r}{\hat e}_ r+r\dot{\theta }{\hat e}_\theta .</script></span>
+<p>
+ The local basis vectors <script type="math/tex">{\hat e}_ r</script> and <script type="math/tex">{\hat e}_\theta </script> are orthogonal unit vectors. Hence, the square of the speed <script type="math/tex">v</script> of the body is given by <span style="color:#000000"><span class="dmath"><script type="math/tex; mode=display">v^2={ \dot{\vec r}}\cdot { \dot{\vec r}}=\left(\dot{r}{\hat e}_ r+r\dot{\theta }{\hat e}_\theta \right)\cdot \left(\dot{r}{\hat e}_ r+r\dot{\theta }{\hat e}_\theta \right)=\dot{r}^2+r^2\dot{\theta }^2</script></span></span>
+</p>
+<p>
+Next, we use the conservation of angular momentum, which means that <span style="color:#000000"><span class="dmath"><script type="math/tex; mode=display">\frac{1}{r}\frac{d}{dt}\left(r^2\dot{\theta }\right)=r\ddot{\theta }+2\dot{r}\dot{\theta }=0 \Rightarrow r\ddot{\theta }=-2\dot{r}\dot{\theta }</script></span></span> Hence, we have <span style="color:#000000"><span class="dmath"><script type="math/tex; mode=display">\frac{d}{dt}\left(\frac{1}{2}r^2\dot{\theta }^2\right)=r\dot{r}\dot{\theta }^2+r^2\dot{\theta }\ddot{\theta }=r\dot{r}\dot{\theta }^2+r\dot{\theta }\left(-2\dot{r}\dot{\theta }\right)=-r\dot{r}\dot{\theta }^2.</script></span></span> We shall use this result shortly.<br/>
+</p>
+<p>
+Now since <script type="math/tex">f</script> is no longer a function of <script type="math/tex">{\vec r}</script> but of <script type="math/tex">r</script> only, the <script type="math/tex">{\hat e}_ r</script> component of <b class="bf">N2</b> above becomes <span style="color:#000000"><span class="dmath"><script type="math/tex; mode=display">\left(\ddot{r}-r\dot{\theta }^2\right)=f(r).</script></span></span> If we multiply this equation through by <script type="math/tex">\dot{r}</script> we have <span style="color:#000000"><span><script type="math/tex; mode=display">\begin{eqnarray*}  \left(\dot{r}\ddot{r}-\dot{r}r\dot{\theta }^2\right)& =& f(r)\dot{r} \\ \frac{d}{dt}\left\{ \frac{1}{2}\left(\dot{r}^2\right)\right\} +\overbrace{\frac{d}{dt}\left\{ \frac{1}{2}\left(r^2\dot{\theta }^2\right)\right\} }^{\rm using \  above \  result}& =& f(r)\frac{dr}{dt} \\ \frac{1}{2}\left\{ \dot{r}^2+r^2\dot{\theta }^2\right\} & =& \int f(r)\frac{dr}{dt}dt+{\rm constant} \\ \Rightarrow \frac{1}{2}m\left\{ \dot{r}^2+r^2\dot{\theta }^2\right\} -\int mf(r)dr& =& E \end{eqnarray*}</script></span></span> We now identify 
+</p>
+<span><script type="math/tex; mode=display">\begin{eqnarray*}  {\rm Kinetic \  Energy} \  T& =& \textcolor{black}{\frac{1}{2}m\left\{ \dot{r}^2+r^2\dot{\theta }^2\right\} }, \\ {\rm Potential \  Energy} \  V(r)& =& \textcolor{black}{-\int mf(r)dr}, \\ {\rm Total \  Energy}& =& \textcolor{black}{E} \end{eqnarray*}</script></span>
+<p>
+ and deduce that a conservation of energy equation <span style="color:#000000"><span class="dmath"><script type="math/tex; mode=display">T+V=E</script></span></span> holds for central forces. 
+</p>
+<p>
+We can also use conservation of angular momentum <script type="math/tex">r^2\dot{\theta }</script> to simplify the above expression for energy further. In particular, we can remove the explicit dependence<a class="footnote" href="#a0000000188">
+<sup class="footnotemark">4</sup>
+</a> on <script type="math/tex">\dot{\theta }</script>. <span style="color:#000000"><span><script type="math/tex; mode=display">\begin{eqnarray*}  \frac{1}{2}m\left\{ \dot{r}^2+r^2\dot{\theta }^2\right\} +V(r)& =& E \\ \frac{1}{2}m\left\{ \dot{r}^2+\frac{l^2}{r^2}\right\} & =& E-V(r) \\ \Rightarrow \qquad \dot{r}^2& =& \frac{2}{m}\left[E-V(r)\right]-\frac{l^2}{r^2} \end{eqnarray*}</script></span></span> This equation is a separable ordinary differential equation, which (at least in principle) can be integrated to give the position of the particle <script type="math/tex">r(t)</script> explicitly. Once this is known then <script type="math/tex">r^2\dot{\theta }=l</script> can be used to find <script type="math/tex">\theta (t)</script>. Of course, whether this is easily achievable depends on the exact form of <script type="math/tex">f(r)</script>. 
+</p>
+</section><section class="section">
+<h2 id="a0000000189">10.8 Circular orbits and stability</h2>
+<p>
+We can use the above results to discuss the boundedness of the motion. For example, the existence of a potential (<script type="math/tex">V</script>) means that it is possible to establish the existence of a stable circular orbit, by analogy with the treatment for equilibrium states in statics. 
+</p>
+<p>
+Consider the central orbit energy equation 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\frac{1}{2}m\left\{ \dot{r}^2+\frac{l^2}{r^2}\right\} +V(r)=E</script></span>
+<p>
+ This can be written in a form analogous to that of the the 1D equilibrium problem 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\frac{1}{2}m\dot{r}^2+U(r)=E</script></span>
+<p>
+ where 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">U(r)=\frac{1}{2}m\frac{l^2}{r^2}+V(r)</script></span>
+<p>
+ is an “effective potential”, since it combines the real potential <script type="math/tex">V(r)</script> with an extra term. The extra <script type="math/tex">l^2/r^2</script> piece is often referred to as the <em>centrifugal barrier</em>. It stops the particle from getting too close to the origin – there would be a heavy price to pay in “energy”. 
+</p>
+<p>
+Now, the term <script type="math/tex">\tfrac {1}{2}m\dot{r}^2</script> looks like the usual 1D kinetic energy term. So we can pretend that this is a 1D system and treat the “effective potential” <script type="math/tex">U(r)</script> as the potential in which the particle moves. This is not strictly correct, since <script type="math/tex">U(r)</script> contains a term containing <script type="math/tex">l</script>, a constant that depends on the motion. However, since this term does not depend explicitly on the speed <script type="math/tex">\dot{r}</script> we can use this analogy to work out where the particle comes to rest, where the equilibrium points are, and assess their stability. 
+</p>
+<p>
+Continuing with the analogy, we know from 1D equilibrium theory that for a stable equilibrium to exist, <script type="math/tex">U(r)</script> must have a minimum. In the context of <script type="math/tex">U(r)</script>, if such a minimum exists, it will be at a value of <script type="math/tex">r=r_0</script> say. This corresponds to a circular orbit about the central point of radius <script type="math/tex">r_0</script>. 
+</p>
+<figure id="figure810">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/central_forces/images/img-0014.png" style="width:216.81pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">10.7</span>
+<span class="caption_text">The effective potential <script type="math/tex">U(r)=\frac{ml}{2r^2}-\frac{m\mu }{r}</script></span>
+</figcaption> </div>
+</figure>
+<p>
+Suppose we consider – as an example – an attractive inverse square law <script type="math/tex">f(r)=-\mu /r^2</script>. Relative to a point at infinity, this has a “proper” potential 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">V(r)=+m\int _{\infty }^ r\frac{\mu }{\rho ^2}d\rho =-\frac{m\mu }{r}.</script></span>
+<p>
+ This gives rise to the “effective” potential: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">U(r)=\frac{ml^2}{2r^2}-\frac{m\mu }{r}</script></span>
+<p>
+ This has a minimum for <script type="math/tex">\mu >0</script> at 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">U’(r)=0 \Rightarrow r=r_0=\frac{l^2}{\mu }</script></span>
+<p>
+ Now suppose that the total energy of the system is <script type="math/tex">E</script>. Then rearranging the conservation equation we have 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">E-U(r)=\frac{1}{2}m\dot{r}^2.</script></span>
+<p>
+ Due to the positive quantity on the right-hand side, classically allowed motion can only take place when <script type="math/tex">E-U(r)>0</script>, or <script type="math/tex">E>U(r)</script>. With this in mind we now examine the possibilities using figure <a class="ref" href="../../../notes/notes_by_chapter/central_forces/index.html#figure810">10.7</a>. 
+</p>
+<ul class="itemize" id="a0000000190">
+<li id="a0000000191"> <p>
+If the total energy of the system is <script type="math/tex">E=E_0=U(r_0)=-m\mu /2l^2</script>, then the orbit will be a stable circle with radius <script type="math/tex">r_0</script>. 
+</p>
+</li>
+<li id="a0000000192"> <p>
+If the system has a higher energy <script type="math/tex">E_1</script> (see diagram) the system will oscillate between <script type="math/tex">r_-</script> and <script type="math/tex">r_+</script>. 
+</p>
+</li>
+<li id="a0000000193"> <p>
+If the system has energy <script type="math/tex">E_2</script> (see diagram) the system will possess no bounded orbit, and will lie in the range <script type="math/tex">r_2<r<\infty </script>. 
+</p>
+</li>
+<li id="a0000000194"> <p>
+If <script type="math/tex">\mu <0</script> there is no real minimum. All orbits are unbounded, e.g., if <script type="math/tex">E=E_2</script>, the orbit will lie in the range <script type="math/tex">r_{2'}<r<\infty </script>
+</p>
+</li>
+</ul>
+<p>
+It is also useful to ask if the orbits we determine are stable. As we are effectively dealing with a 1D problem, this is not a very tricky problem. Let us take as an example the case of circular orbits from above. We already know that we have a circular orbit if there is a solution, with <script type="math/tex">l\neq 0</script>, such that <script type="math/tex">\dot r=0</script> for all time. This means that we must have <script type="math/tex">\ddot r=0</script>, which in turn leads to 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">U’(r)=0</script></span>
+<p>
+ Not surprisingly, a circular orbit corresponds to a critical point <script type="math/tex">r_0</script> of the effective potential. This orbit will be stable if a small perturbation brings us back to the original point. Basically, we have to sit at a minimum of the potential. That is, for stability we must have 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">U”(r_0)> 0</script></span>
+</section><section class="section">
+<h2 id="a0000000195">10.9 The orbit equation</h2>
+<p>
+So far we have not chosen to work out the actual orbital motion. Instead, we arrived at the energy conservation law by integrating <b class="bf">N2</b> once. Sometimes it is also possible to integrate <b class="bf">N2</b> directly to find the locus of the body as it moves under a central force. <span style="color:#000000"><span class="dmath"><script type="math/tex; mode=display">\ddot{r}-r\dot{\theta }^2=f(r), \qquad r^2\dot{\theta }=l \Rightarrow \ddot{r}-\frac{l^2}{r^3}=f(r).</script></span></span> The solution of this equation is often facilitated by using the change of variables <span style="color:#000000"><span class="dmath"><script type="math/tex; mode=display">r=\frac{1}{u}, \qquad r^2\dot{\theta }=l \Rightarrow \dot{\theta }=l u^2</script></span></span> This way we obtain an ordinary differential equation for <script type="math/tex">u(\theta )</script> as opposed to <script type="math/tex">r(t)</script>. Note that here we are solving for <script type="math/tex">r</script> as a function of <script type="math/tex">\theta </script>. We are not deriving the time dependence (which in principle can be obtained from the energy equation). The procedure is as follows: <span style="color:#000000"><span><script type="math/tex; mode=display">\begin{eqnarray*}  \dot{r}=\frac{d}{dt}\left(\frac{1}{u}\right)=-\frac{1}{u^2}\frac{du}{dt}=-\frac{1}{u^2}\frac{du}{d\theta }\frac{d\theta }{dt}=-r^2\dot{\theta }\frac{du}{d\theta }=-l\frac{du}{d\theta } \end{eqnarray*}</script></span></span> <span style="color:#000000"><span class="dmath"><script type="math/tex; mode=display">\begin{multline}  \ddot{r}=\frac{d}{dt}\left(\dot{r}\right)=\frac{d}{dt}\left(-l\frac{du}{d\theta }\right)=\frac{d\theta }{dt}\frac{d}{d\theta }\left(-l\frac{du}{d\theta }\right) \\ =\dot{\theta }\frac{d}{d\theta }\left(-l\frac{du}{d\theta }\right)=-l\dot{\theta }\frac{d^2u}{d\theta ^2}=-l^2u^2\frac{d^2u}{d\theta ^2} \nonumber \end{multline}</script></span></span> where we have used 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{d l \over d\theta } = {dl \over dt} {dt \over d\theta }= 0</script></span>
+<p>
+ Making these two substitutions into <b class="bf">N2</b> we have <span style="color:#000000"><span class="dmath"><script type="math/tex; mode=display">\ddot{r}-\frac{l^2}{r^3}=f(r) \Rightarrow -l^2u^2\frac{d^2u}{d\theta ^2}-l^2u^3=f\left(\frac{1}{u}\right)</script></span></span> or <span style="color:#000000"><span class="dmath"><script type="math/tex; mode=display">\frac{d^2u}{d\theta ^2}+u=-\frac{1}{l^2u^2}f\left(\frac{1}{u}\right)</script></span></span> This is a second order differential equation for <script type="math/tex">u</script> in terms of <script type="math/tex">\theta </script> and so requires two pieces of initial/boundary data. The solution then generates <script type="math/tex">r(\theta )=1/u(\theta )</script>. Alternatively, if the orbit of the particle is known experimentally as <script type="math/tex">u=u(\theta )</script>, this equation can be used to determine the central force <script type="math/tex">f(1/u)</script> underlying the motion. 
+</p>
+</section><section class="section">
+<h2 id="a0000000196">10.10 Inverse square law</h2>
+<p>
+Perhaps the most physically important central force is the inverse square law, which governs the gravitational attraction between masses and the Coulomb interaction of charged particles. 
+</p>
+<p>
+Let us focus on the simplest case; an attractive law 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">f(r)=-\frac{\mu }{r^2}=-\mu u^2,</script></span>
+<p>
+ which generates an orbit equation of the form 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\frac{d^2u}{d\theta ^2}+u=-\frac{1}{l^2u^2}f\left(\frac{1}{u}\right) \Rightarrow \frac{d^2u}{d\theta ^2}+u=\frac{\mu }{l^2}.</script></span>
+<figure id="conics">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/central_forces/images/img-0016.png" style="width:289.08pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">10.8</span>
+<span class="caption_text">The conic sections.</span>
+</figcaption> </div>
+</figure>
+<p>
+This is a problem we know how to solve – it is just the constant-forcing harmonic oscillator equation. It can be solved with constant particular integral to give: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">u(\theta )=\frac{\mu }{h^2}+A\sin \theta +B\cos \theta ,</script></span>
+<p>
+ or in an equivalent form 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">u(\theta )=\frac{\mu }{h^2}+C\cos (\theta +D).</script></span>
+<p>
+ Now let us assume (actually without loss of generality for what follows) that we fix the <script type="math/tex">\theta =0</script> direction such that <script type="math/tex">D=0</script>. Furthermore, we can write <script type="math/tex">l=h^2/\mu </script> and rename the arbitrary constant <script type="math/tex">C</script> as <script type="math/tex">e/l</script>. Then the locus becomes: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">u=\frac{1}{l}+\frac{e}{l}\cos \theta \Rightarrow \frac{l}{r}=1+e\cos \theta ,</script></span>
+<span class="dmath"><script type="math/tex; mode=display">\Rightarrow r=\frac{l}{1+e\cos \theta }.</script></span>
+<p>
+This is the general equation of a <b class="bf">conic section</b><a class="footnote" href="#a0000000197">
+<sup class="footnotemark">5</sup>
+</a>. 
+</p>
+<ul class="itemize" id="a0000000198">
+<li id="a0000000199"> <p>
+<script type="math/tex">l</script> is called the ‘<b class="bf">semi latus rectum</b>’<a class="footnote" href="#a0000000200">
+<sup class="footnotemark">6</sup>
+</a> and effectively determines the scale of the orbit. 
+</p>
+</li>
+<li id="a0000000201"> <p>
+<script type="math/tex">e</script> is called the <b class="bf">eccentricity</b> of the orbit and determines whether it is circular, elliptic, parabolic, or hyperbolic. It is related to the energy of the orbiting particle. 
+</p>
+</li>
+</ul>
+<p>
+Once we understand the motion, we can derive Kepler’s three laws of planetary motion (from 1605!): 
+</p>
+<ol class="enumerate" id="a0000000202" style="list-style: none">
+<li id="a0000000203" value="1">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		1.
+	</span>
+<p>
+Each planet moves in an ellipse with the Sun at one focus. 
+</p>
+</li>
+<li id="a0000000204" value="2">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		2.
+	</span>
+<p>
+The line between the planet and the Sun sweeps out equal areas in equal times. 
+</p>
+</li>
+<li id="a0000000205" value="3">
+<span style="transform: translateX(-100%);padding-right: 10px;position: absolute;">
+		3.
+	</span>
+<p>
+The period of the orbit is proportional to <script type="math/tex">r^{3/2}</script>. 
+</p>
+</li>
+</ol>
+</section>
+<hr/>
+<ol>
+<li id="a0000000179">Kindly left as an exercise!</li>
+<li id="a0000000183">Due to the extremely weak nature of gravity <script type="math/tex">G</script> is still one of the least accurately known fundamental constants.</li>
+<li id="a0000000187">This can be checked by writing <script type="math/tex">\nabla </script> in polar coordinates and showing that the curl of <script type="math/tex">f(r){\hat e}_ r</script> vanishes.</li>
+<li id="a0000000188">Recall that <script type="math/tex">l = r^2 \dot\theta </script>.</li>
+<li id="a0000000197">So we are making contact with a classic bit of geometry.</li>
+<li id="a0000000200">Yes, this is worth sniggering at.</li>
+</ol>
+
+            </div>
+        </div>
+    </div>
+
+        </main>
+		
+		<footer class="text-muted">
+	<hr>
+	<div class="container">
+		<div class="float-right">
+			<ul style="list-style: none">
+			<li><a href="#">Back to top</a></li>
+			
+			
+			<li><a href="../../../notes/notes_by_chapter/central_forces/central_forces.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;Download as PDF</a></li>
+			
+			</ul>
+		</div>
+		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
+		<p>This page last generated: 2022-07-03</p>
+	</div>
+</footer>
+		
+    </body>
+</html>

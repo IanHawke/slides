@@ -1,0 +1,110 @@
+author: Nils Andersson
+base_dir: math1057
+build_pdf: true
+code: MATH1057
+format_version: 2
+mathjax_url: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+num_pdf_runs: 1
+root_url: /{base}/{code}/
+structure:
+- build_pdf: false
+  content: []
+  pdf_url: index.pdf
+  slug: index
+  source: intro.tex
+  title: index
+  type: introduction
+- build_pdf: false
+  content:
+  - build_pdf: false
+    content: []
+    pdf_url: notes/course_notes/course_notes.pdf
+    slug: course_notes
+    source: latex/course_notes.tex
+    splitlevel: -2
+    title: Course Notes
+    type: document
+  - build_pdf: false
+    content:
+    - build_pdf: true
+      pdf_url: notes/notes_by_chapter/newtons_laws/newtons_laws.pdf
+      slug: newtons_laws
+      source: latex/01-newton.tex
+      title: Newton's laws
+      type: chapter
+    - build_pdf: true
+      pdf_url: notes/notes_by_chapter/friction/friction.pdf
+      slug: friction
+      source: latex/02-friction.tex
+      title: Friction
+      type: chapter
+    - build_pdf: true
+      pdf_url: notes/notes_by_chapter/resonances/resonances.pdf
+      slug: resonances
+      source: latex/03-sorting.tex
+      title: Resonances
+      type: chapter
+    - build_pdf: true
+      pdf_url: notes/notes_by_chapter/kinematics/kinematics.pdf
+      slug: kinematics
+      source: latex/04-simplex.tex
+      title: Kinematics
+      type: chapter
+    - build_pdf: true
+      pdf_url: notes/notes_by_chapter/special_relativity/special_relativity.pdf
+      slug: special_relativity
+      source: latex/05-integer-lp.tex
+      title: Special Relativity
+      type: chapter
+    - build_pdf: true
+      pdf_url: notes/notes_by_chapter/conservation/conservation.pdf
+      slug: conservation
+      source: latex/06-graphs.tex
+      title: Conservation
+      type: chapter
+    - build_pdf: true
+      pdf_url: notes/notes_by_chapter/collisions/collisions.pdf
+      slug: collisions
+      source: latex/07-collisions.tex
+      title: Collisions
+      type: chapter
+    - build_pdf: true
+      pdf_url: notes/notes_by_chapter/rockets/rockets.pdf
+      slug: rockets
+      source: latex/08-rockets.tex
+      title: Rockets
+      type: chapter
+    - build_pdf: true
+      pdf_url: notes/notes_by_chapter/solids/solids.pdf
+      slug: solids
+      source: latex/09-solids.tex
+      title: Solids
+      type: chapter
+    - build_pdf: true
+      pdf_url: notes/notes_by_chapter/central_forces/central_forces.pdf
+      slug: central_forces
+      source: latex/10-central-forces.tex
+      title: Central Forces
+      type: chapter
+    - build_pdf: true
+      pdf_url: notes/notes_by_chapter/analytical_dynamics/analytical_dynamics.pdf
+      slug: analytical_dynamics
+      source: latex/11-analytical-dynamics.tex
+      title: Analytical Dynamics
+      type: chapter
+    pdf_url: notes/notes_by_chapter/notes_by_chapter.pdf
+    slug: notes_by_chapter
+    source: .
+    title: Notes by chapter
+    type: part
+  pdf_url: notes/notes.pdf
+  slug: notes
+  source: .
+  title: Notes
+  type: part
+themes:
+- path: default
+  source: default
+  title: Default
+title: Dynamics and Relativity
+year: 2022

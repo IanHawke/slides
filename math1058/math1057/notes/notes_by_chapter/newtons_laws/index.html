@@ -1,0 +1,872 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        
+            <meta charset="utf-8">
+            <meta name="robots" content="noindex">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="author" content="Nils Andersson" />
+            <meta name="date" content="2022-07-03" />
+        
+
+        <title>Newton&#39;s laws | Dynamics and Relativity</title>
+
+        
+    
+    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../../../static/styles.css">
+            <link rel="stylesheet" id="customiseCSS" href="../../../static/light.css">
+            
+            
+        
+    <link rel="stylesheet" id="customiseCodeCSS" href="../../../static/pygmentize.light.css">
+    <link rel="stylesheet" href="../../../static/codemirror-5.26.0/lib/codemirror.css">
+    <link rel="stylesheet" href="../../../static/boole.css">
+    <link rel="stylesheet" href="../../../static/numbasEmbed.css">
+
+    <link rel="stylesheet" href="../../../static/bootstrap-toc.css?v=3">
+    <link rel="stylesheet" href="../../../static/print.css">
+
+
+        
+    
+    
+            <script defer src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <script defer src="../../../static/mathjax_config.js"></script>
+            <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+            <script defer src="../../../static/customisation.js"></script>
+            <script defer src="../../../static/mp4.js"></script>
+            
+            
+        
+    <script defer src="../../../static/jquery.flexibleArea.js"></script>
+    <script defer src="../../../static/spin.min.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/lib/codemirror.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/octave/octave.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/python/python.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/r/r.js"></script>
+    <script defer src="../../../static/boole.js"></script>
+    <script defer src="../../../static/numbasEmbed.js"></script>
+
+    <script defer src="../../../static/bootstrap-toc.js"></script>
+
+    </head>
+    <body data-spy="scroll" data-target="#chapterTOC" data-offset="50">
+        
+<div class="collapse" id="navbarToggleCustomise">
+	<div class="bg-secondary text-white p-3">
+		<form onsubmit="return false;" id="navbarCustomise">
+			<div class="form-row">
+				<label>Theme Customisation</label>
+				<div id="themeSelector" class="form-group col-md-12">
+					<button class="btn btn-dark mr-2" value="dark">Dark</button>
+					<button class="btn btn-pastel mr-2" value="pastel">Pastel</button>
+					<button class="btn btn-light mr-4" value="light">Light</button>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label style="display: block" for="font-scale">Font size (<span id="font-size-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="font-scale" min="50" max="600" value="100">
+					<button id="font-scale-reset" class="btn btn-sm">Reset</button>
+				</div>
+				<div class="form-group col-md-4">
+					<label style="display: block" for="p-space">Spacing (<span id="p-space-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="p-space" min="0" max="600" value="100">
+					<button id="p-space-reset" class="btn btn-sm">Reset</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<nav aria-label="breadcrumb">
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="../../../index.html">Dynamics and Relativity</a>
+		</li>
+		
+		<li class="breadcrumb-item">
+			<a href="../../../notes/notes_by_chapter/index.html">Notes by chapter</a>
+		</li>
+		
+		<li class="breadcrumb-item active">
+			Newton&#39;s laws
+		</li>
+		<li class="ml-auto">
+			<button class="navbar-toggler p0" type="button" data-toggle="collapse" data-target="#navbarToggleCustomise" aria-controls="navbarToggleCustomise" aria-expanded="false" aria-label="Toggle customisations panel">
+				<i class="fa fa-cog" aria-hidden="true" title="Toggle customisations panel"></i> <span class="sr-only">Toggle customisations panel</span>
+			</button>
+		</li>
+	</ul>
+</nav>
+
+
+        <header>
+            
+            
+        </header>
+        <main>
+            
+    <div class="container mt-3">
+        <div class="row">
+            
+            <div id="sidebar" class="col-md-3">
+                <nav class="mb-3" id="chapterTOC" data-toggle="toc">
+                    <ul class="nav navbar-nav">
+                        
+                        
+                        
+                        <li><a id="pdf-link" class="nav-link" href="../../../notes/notes_by_chapter/newtons_laws/newtons_laws.pdf" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" title="Download as PDF"></i>&nbsp;Download as PDF</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+            <div id="content" class="col-md-9"> 
+            
+            
+<!-- Latex Chapter/Part -->
+<h1 id="a0000000081">Newton’s Laws of Motion</h1>
+<section class="section">
+<h2 id="a0000000082">1.1 Translating words into equations</h2>
+<p>
+Before we get started, it it important to understand what we are trying to achieve. This is generally good advice, and when it comes to mathematical modelling it is essential. Our understanding of reality is inevitably somewhat limited and we need to keep this in mind as we try to model what is going on. However, it may also be that our understanding is too precise and that we do not need all the details in order to describe a particular phenomenon. In essence, we have to make choices. 
+</p>
+<p>
+The main purpose of applied mathematics is to make quantitative statements and predictions about the world that surrounds us. We achieve this by writing down and solving equations expressing relationships between quantities, such as distance, time, volume, money, density, value etc. This typically involves using <b class="bf">vectors</b> to describe the position of object in space and time (relative to some suitable frame of reference) and differential equations, expressing relationships between the <b class="bf">rates of change</b> of quantities with respect to others<a class="footnote" href="#a0000000083">
+<sup class="footnotemark">1</sup>
+</a>. 
+</p>
+<p>
+The ultimate aim of the process is to provide quantitative (or descriptive) predictions concerning “real world” situations. This is not a purely academic exercise. Without the study of these kinds of problems, life as we know it would not exist, your mobile phone would not work, you could not drive a car, planes would not fly, stock markets would be a lot poorer and people could not make predictions about climate and global warming. Non-mathematical models tend to be unable to make quantitative predictions that can be verified against experiments. Good mathematical models should be able to do this. 
+</p>
+<p>
+In order to model something, it is important to be able to write down your assumptions and translate them into mathematical statements. Once you have a well-formed mathematical system you can begin to try solve the problem and make predictions. At this point it is fairly obvious that you need the mathematical problem to be simple enough that you can solve it<a class="footnote" href="#a0000000084">
+<sup class="footnotemark">2</sup>
+</a>, but at the same time the model must retain the key elements of the process we are trying to describe. At the end of the day, the result must be matched against observations and experiments. If our model provides a satisfactory description of reality, then we are done. If we need a more accurate model, then we need to go back and re-think our assumptions. You can think of this as an iterative process, outlined by the flow-chart in figure <a class="ref" href="../../../notes/notes_by_chapter/newtons_laws/index.html#figureMathModel">1.1</a>. 
+</p>
+<figure id="figureMathModel">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/newtons_laws/images/img-0002.png" style="width:361.34999999999997pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">1.1</span>
+<span class="caption_text">The process of mathematical modelling.</span>
+</figcaption> </div>
+</figure>
+<p>
+This may seem somewhat abstract, but it is easy to find examples of how our understanding has developed in just this way. Consider for example our understanding of moving objects. We can immediately think of two major paradigm shifts. First we have Aristotle’s notion that there can be no effect without a cause (essentially, there is no motion without a force), which gave way to Newton’s laws (where the role of the force is to alter the motion, or cause it in the first place). Secondly, as it became apparent that there was a contradiction between Newtonian mechanics and electromagnetism in the late 1800s, developments were set in motion<a class="footnote" href="#a0000000085">
+<sup class="footnotemark">3</sup>
+</a> that led to the development of Einstein’s special theory of relativity. Along the way, our understanding space and time changed. We moved from the fixed clockwork universe of Newton to the flexible space-time of Einstein. 
+</p>
+<p>
+As we go on, we will consider these world views in some detail. We will start with Newton’s laws, mainly as a reminder but also in order to take the opportunity to revise (some of) the mathematical tools we need in order to solve relevant problems. 
+</p>
+</section><section class="section">
+<h2 id="a0000000086">1.2 Case study: Newton’s Laws of Motion</h2>
+<p>
+One of the first, and fundamental, applications of differential equations was to the laws of motion of objects, as written down by Newton in his <i class="it">Philosophiae naturalis principia mathematica</i>, or <i class="it">Principia</i> for short, from 1687. The fundamentals of classical mechanics (as it is now called) were presented in precise and complete detail for the first time. They were based on experimental observations and written down in verbal form. 
+</p>
+<p>
+Suppose we want to describe the motion of a single body. In order to do this, we need two definitions. First of all: 
+</p>
+<ul class="itemize" id="a0000000087">
+<li id="a0000000088"> <p>
+the <b class="bf">mass</b> of a body <script type="math/tex">m</script> (measured in kilogrammes, kg) is a physical quantity associate with the body that acts to resist any change in motion of it<a class="footnote" href="#a0000000089">
+<sup class="footnotemark">4</sup>
+</a>. Secondly, 
+</p>
+</li>
+<li id="a0000000090"> <p>
+the <b class="bf">momentum</b> of the body (measured in kilogrammes per metre per second, kgms<script type="math/tex">^{-1}</script>) is defined to be the mass times the rate of change of position of the body (relative to some point). A speeding bullet of low mass can have similar momentum to a slow moving but heavy truck. 
+</p>
+</li>
+</ul>
+<p>
+With these two definitions, we can state the experimentally deduced laws of classical motion. These are Newton’s three laws: 
+</p>
+<ul class="itemize" id="a0000000091">
+<li id="a0000000092"> <p>
+<b class="bf">N1</b>: A body remains at rest or in uniform motion with respect to an inertial frame unless acted upon by a net force. <br/>
+</p>
+</li>
+<li id="a0000000093"> <p>
+<b class="bf">N2</b>: In an inertial frame a body acted upon by a net force moves in such a way that the rate of change with time of momentum equals the net force applied.<br/>
+</p>
+</li>
+<li id="a0000000094"> <p>
+<b class="bf">N3</b>: If two bodies exert net forces upon each other, these net forces are equal in magnitude and opposite in direction. <br/>
+</p>
+</li>
+</ul>
+<p>
+Clearly, these statements introduce several additional concepts. First of all, we have the concept of a <b class="bf">force</b>. This is a derived quantity, in that its definition depends on that of momentum. The force is the amount of push or pull it takes to alter the motion of the body (measured in Newton, or kgms<script type="math/tex">^{-2}</script>). In essence, the first law (<b class="bf">N1</b>) defines what is meant by a zero net force, which in turn can be used to define an <em>inertial frame</em> as one on which no net force acts. The three laws are only valid in such inertial (non-accelerating) frames. Finally, the third law (<b class="bf">N3</b>), is not general. It holds only for particles in contact, or acted upon by forces parallel to the straight line connecting them. 
+</p>
+<p>
+Newton originally used classical geometry to try to make predictions concerning the motion of bodies. However, the differential calculus of Newton/Leibnitz (developed at the same time) was quickly applied to the subject and this allowed a systematic approach to be developed, kick-starting a scientific revolution. 
+</p>
+</section><section class="section">
+<h2 id="a0000000095">1.3 Reminder: Scalars and vectors</h2>
+<p>
+Some quantities, like temperature (and pressure) are identified by their magnitude. These are called <b class="bf">scalar</b> quantities, and they are simply described by numbers: 
+</p>
+<div class="centered"> <b class="bf">scalar</b> = number (real or complex). </div>
+<p>
+ Other quantities, like wind velocity, are identified by both <b class="bf">magnitude</b> (size or length) <i class="it">and</i> <b class="bf">direction</b>. Such quantities are represented geometrically by arrows. 
+</p>
+<div class="centered"> <b class="bf">vector</b> = number (its size) <i class="it">and</i> direction. </div>
+<p>
+It is easy to think of examples of either kind of quantity: 
+</p>
+<ul class="itemize" id="a0000000096">
+<li id="a0000000097"> <p>
+The position of one point relative to another in space is a vector. 
+</p>
+</li>
+<li id="a0000000098"> <p>
+The distance between the two points is a scalar. 
+</p>
+</li>
+<li id="a0000000099"> <p>
+The velocity of a particle in space is a vector. 
+</p>
+</li>
+<li id="a0000000100"> <p>
+The speed of a particle is a scalar. 
+</p>
+</li>
+<li id="a0000000101"> <p>
+The temperature of a body is a scalar. 
+</p>
+</li>
+</ul>
+<p>
+As we will need to make a distinction<a class="footnote" href="#a0000000102">
+<sup class="footnotemark">5</sup>
+</a> we need to introduce suitable notation. There are a variety of ways to represent vectors. For example, the vector that joins point A with point B can be equivalently represented by indicated by <script type="math/tex">{\vec r}_{AB}</script>, <u class="underline">AB</u>, <script type="math/tex">\vec{AB}</script> or by a bold letter, <script type="math/tex">{\boldsymbol a}</script>, say. Throughout these notes we represent vectors by arrows, e.g. <script type="math/tex">\vec a</script>, as it is not practical to use bold symbols in calculations done by hand or on the blackboard. In most of the illustrations vectors are indicated by bold symbols. 
+</p>
+<p>
+The magnitude (modulus) of a vector <script type="math/tex">\vec v</script> is is the length of the arrow and is denoted by the symbol <script type="math/tex">|{\vec v}|</script>. Vectors with unit length are called <b class="bf">unit vectors</b> and are often denoted by a hat. So for example, <script type="math/tex">\hat{{a}}\equiv {\vec a}/|{\vec a}|</script>. Two vectors are equal if they have the same length and the same direction. <br/>
+</p>
+<p>
+A point in three dimensions can in general be reached by three non-coplanar vectors. One particularly important set of coordinates is the Cartesian. These coordinates can be represented by an orthonormal (the unit vectors are orthogonal) set of vectors called the <b class="bf">standard basis vectors</b> relative to an origin <script type="math/tex">\cal {O}</script> of coordinates. These basis vectors are: 
+</p>
+<ul class="itemize" id="a0000000103">
+<li id="a0000000104"> <p>
+The unit vector from <script type="math/tex">\cal {O}</script> parallel to the <script type="math/tex">x</script> axis, denoted by <script type="math/tex">{\hat e}_ x</script> or <script type="math/tex">{\hat i}</script>; 
+</p>
+</li>
+<li id="a0000000105"> <p>
+The unit vector from <script type="math/tex">\cal {O}</script> parallel to the <script type="math/tex">y</script> axis, denoted by <script type="math/tex">{\hat e}_ y</script> or <script type="math/tex">{\hat j}</script>; 
+</p>
+</li>
+<li id="a0000000106"> <p>
+The unit vector from <script type="math/tex">\cal {O}</script> parallel to the <script type="math/tex">z</script> axis, denoted by <script type="math/tex">{\hat e}_ z</script> or <script type="math/tex">{\hat k}</script>. 
+</p>
+</li>
+</ul>
+<p>
+ These vectors form a <b class="bf">right</b>-handed set. The Cartesian system is but one possible set of coordinates. Later it will be convenient to introduce different orthogonal sets of basis vectors to deal with (for example) rotating systems. 
+</p>
+<figure id="figure28">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/newtons_laws/images/img-0004.png" style="width:216.81pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">1.2</span>
+<span class="caption_text">Triad of unit basis vectors in Cartesian coordinates.</span>
+</figcaption> </div>
+</figure>
+<p>
+Any point or vector in Cartesian 3D can be represented in component form by a linear combination of the standard basis vectors. For example 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec a}=a_1{\hat i}+ a_2{\hat j}+a_3{\hat k}</script></span>
+<p>
+ where <script type="math/tex">(a_1,a_2,a_3)</script> are the Cartesian <script type="math/tex">(x,y,z)</script> coordinates of the point <script type="math/tex">{\vec a}</script> with respect to the origin or the vector. These three numbers are called the <b class="bf">components</b> of the vector with respect to the <script type="math/tex">{\hat i}, {\hat j},{\hat k}</script> basis. 
+</p>
+</section><section class="section">
+<h2 id="a0000000107">1.4 A few comments on derivatives</h2>
+<p>
+It is important to understand that there are different ways to define vector derivatives. In general, we have to use the tools from vector calculus involving grad, div and curl, but here we will focus on the simplest case where we take derivatives with respect to a single variable (typically time). 
+</p>
+<p>
+As we have already see, vectors can be used to indicate the position, velocity and acceleration of a moving particle. Consider such a particle at a point <script type="math/tex">{\vec r}</script> with coordinates <script type="math/tex">(x,y,z)</script> at time <script type="math/tex">t</script>. Its position is indicated by a vector <script type="math/tex">{\vec r}</script>, called the position vector, whose tail is at the origin and whose head lies at the point <script type="math/tex">(x,y,z)</script>. 
+</p>
+<figure id="figure228">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/newtons_laws/images/img-0006.png" style="width:216.81pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">1.3</span>
+<span class="caption_text">The instantaneous position and velocity vectors of a particle at a typical time as it moves along a trajectory between points <script type="math/tex">A</script> and <script type="math/tex">B</script>.</span>
+</figcaption> </div>
+</figure>
+<p>
+Its Cartesian components are <script type="math/tex">x</script>, <script type="math/tex">y</script> and <script type="math/tex">z</script>, which themselves are functions of <script type="math/tex">t</script>, say 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x=x(t), \  y=y(t), \  z=z(t).</script></span>
+<p>
+ The position vector can thus be written as 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec r}={\vec r}(t)=x(t){\hat i}+y(t){\hat j}+z(t){\hat k}.</script></span>
+<p>
+ This is an example of a <b class="bf">vector function</b>, a vector that depends one (or more) parameters (here time). As <script type="math/tex">t</script> varies <script type="math/tex">{\vec r}(t)</script> describes a curve in 3D space. The position along that curve is parameterised by <script type="math/tex">t</script>. 
+</p>
+<p>
+Let us now consider the positions of the particle at time <script type="math/tex">t</script> and <script type="math/tex">t+\delta t</script> where <script type="math/tex">\delta t\rightarrow 0</script>. The distance between these points is given by 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec r}(t+\delta t)-{\vec r}(t).</script></span>
+<p>
+The rate of change of the position as time <script type="math/tex">\delta t \rightarrow 0</script> is nothing other than instantaneous velocity <script type="math/tex">{\vec v}</script> of the particle: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec v}(t)=\lim _{\delta t\rightarrow 0}\frac{{\vec r}(t+\delta t)-{\vec r}(t)}{\delta t}.</script></span>
+<p>
+ We recognise this as the limit definition of a derivative. 
+</p>
+<p>
+If we consider Cartesian coordinates, the basis vectors <script type="math/tex">{\hat i}</script>, <script type="math/tex">{\hat j}</script> and <script type="math/tex">{\hat k}</script> are unit vectors that remain constant relative to the world. Hence any derivative of them with respect to time must be zero<a class="footnote" href="#a0000000108">
+<sup class="footnotemark">6</sup>
+</a>: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\frac{d{\hat i}}{dt}=\frac{d{\hat j}}{dt}=\frac{d{\hat k}}{dt}=0.</script></span>
+<p>
+ Consequently in Cartesian coordinates the velocity of the particle is given by 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec v}(t)\equiv \frac{d{\vec r}}{dt}={\dot{\vec r}}(t)=\frac{dx(t)}{dt}{\hat i}+\frac{dy(t)}{dt}{\hat j}+\frac{dz(t)}{dt}{\hat k}</script></span>
+<p>
+ In the limit as <script type="math/tex">\delta t \rightarrow 0</script> the rate of change of position vector with time becomes tangential to the trajectory (see figure <a class="ref" href="../../../notes/notes_by_chapter/newtons_laws/index.html#figure228">1.3</a>). Hence the velocity vector is tangent to the trajectory of the particle at each time <script type="math/tex">t</script>. 
+</p>
+<figure id="figure229">
+<p>
+<img src="../../../notes/notes_by_chapter/newtons_laws/images/img-0008.png" style="width:216.81pt"/>
+</p>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">1.4</span>
+<span class="caption_text">The change in position vector <script type="math/tex">{\vec r}(t+\delta t)-{\vec r}(t)</script> for <script type="math/tex">\delta t\ll t.</script></span>
+</figcaption>
+</figure>
+<p>
+From now on we shall often refer to the velocity <script type="math/tex">{\vec v}</script> as <script type="math/tex">{ \dot{\vec r}}(t)</script> where the dot “ <script type="math/tex">{\vec\dot {}}</script> ” refers to differentiation with respect to time, <script type="math/tex">d/dt</script>. 
+</p>
+<p>
+The definition of the acceleration is similar – it is the rate of change of velocity with time. Mathematically we have: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\frac{d{\vec v}}{dt}\equiv \frac{d^2{\vec r}}{dt^2}={ \ddot{ \vec r}}(t)=\frac{d^2x(t)}{dt^2}{\hat i}+\frac{d^2y(t)}{dt^2}{\hat j}+\frac{d^2z(t)}{dt^2}{\hat k}</script></span>
+<p>
+ If <script type="math/tex">{ \ddot{ \vec r}}(t)\ne \vec{0}</script> then the velocity <script type="math/tex">{ \dot{ \vec r}}(t)\ne \vec{0}</script> changes with time. If the <script type="math/tex">{ \dot{ \vec r}}(t)\ne \vec{0}</script> changes with time, then so does the tangent vector to the curve. Hence if a particle travels along a trajectory that is <b class="bf">not</b> straight, then it must be experiencing an acceleration. 
+</p>
+<figure id="figure230">
+<p>
+<img src="../../../notes/notes_by_chapter/newtons_laws/images/img-0010.png" style="width:216.81pt"/>
+</p>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">1.5</span>
+<span class="caption_text">The change in velocity vector <script type="math/tex">\dot{\vec r}(t+\delta t)-\dot{\vec r}(t)</script> for <script type="math/tex">\delta t\ll t</script>.</span>
+</figcaption>
+</figure>
+<p>
+Finally, we may also consider the acceleration as the limit 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{ \ddot{\vec r}}(t)=\lim _{\delta t\rightarrow 0}\frac{{ \dot{ \vec r}}(t+\delta t)-{ \dot{ \vec r}}(t)}{\delta t}.</script></span>
+<p>
+The acceleration is therefore (the limit of) the scaled difference between the velocities at time <script type="math/tex">t</script> and <script type="math/tex">t+\delta t</script> as the particle moves along a trajectory. Since the velocities are tangent to the trajectory, it is not too difficult to see that the acceleration vector points in the direction that the curve is bending. 
+</p>
+</section><section class="section">
+<h2 id="a0000000109">1.5 Mathematical expression of Newton’s Laws</h2>
+<figure id="figure100">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/newtons_laws/images/img-0012.png" style="width:216.81pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">1.6</span>
+<span class="caption_text">A Cartesian coordinate system <script type="math/tex">(x,y,z)</script> for a body moving under a force <script type="math/tex">{\vec F}(t)</script> under Newton’s laws along a trajectory from <script type="math/tex">A</script> to <script type="math/tex">B</script>. The position of the particle at time <script type="math/tex">t</script> is given by the vector <script type="math/tex">{\vec r}(t)=x(t){\hat i}+y(t){\hat j}+z(t){\hat k}</script>. The velocity of the particle is the rate of change of position vector with respect to time, <script type="math/tex">\dot{{\vec r}}(t)={\vec v}(t)</script> and is, by definition, tangential everywhere to the trajectory. Note that the force is not necessarily in the same direction as the velocity. From N2, the force is parallel to the acceleration <script type="math/tex">\ddot{{\vec r}}(t)</script>.</span>
+</figcaption> </div>
+</figure>
+<p>
+As we are typically trying to work out how an object moves through space as time progresses, we need two write down Newton’s laws in three space dimensions. We need to work with vectors<a class="footnote" href="#a0000000110">
+<sup class="footnotemark">7</sup>
+</a>, as in figure <a class="ref" href="../../../notes/notes_by_chapter/newtons_laws/index.html#figure100">1.6</a>. In general, this means that we need some understanding of vector calculus. However, we are going to assume that we have not yet added the relevant tools to our arsenal, and mostly consider problems in one space dimension. Then we have 
+</p>
+<span><script type="math/tex; mode=display">\begin{eqnarray*}  x(t)&  \hbox{ the position of a particle }\\ v(t)=\frac{dx}{dt}&  \hbox{ its velocity }\\ \left|\frac{dx}{dt}\right|&  \hbox{ the speed, and }\\ p(t)=m v= m \frac{dx}{dt}&  \hbox{ the momentum } \end{eqnarray*}</script></span>
+<p>
+In three dimensions we have to use vectors to represent these quantities. If the position of a body relative to some origin is 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec r}(t)=x(t){\hat i}+y(t){\hat j}+z(t){\hat k}</script></span>
+<p>
+ at time <script type="math/tex">t</script>, then its velocity <script type="math/tex">{\vec v}(t)</script> is its rate of change of position with respect to time<a class="footnote" href="#a0000000111">
+<sup class="footnotemark">8</sup>
+</a>, i.e., 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec v}(t)=\frac{d{\vec r}(t)}{dt}=\frac{dx}{dt}{\hat i}+\frac{dy}{dt}{\hat j}+\frac{dz}{dt}{\hat k}</script></span>
+<p>
+ Qualitatively Newton’s laws state that force is the amount of push or pull that it takes to change the motion of a body. Quantitatively, <b class="bf">N2</b> states that the <i class="it">sum of all forces</i> <script type="math/tex">{\vec F}</script> acting on a body is given by 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec F}\equiv \frac{d{\vec p}}{dt}</script></span>
+<p>
+ where <script type="math/tex">\vec p = m\vec v</script> is the momentum. 
+</p>
+<p>
+If we insert the definition of momentum into the expression for force we obtain 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec F}=\frac{d\left(m{\vec v}\right)}{dt}=\frac{dm}{dt}{\vec v}+m\frac{d{\vec v}}{dt}=\frac{dm}{dt}\dot{{\vec r}}+m\ddot{{\vec r}}</script></span>
+<p>
+<b class="bf">N2</b> is often referred to as “force <script type="math/tex">=</script> mass <script type="math/tex">\times </script> acceleration”, or “<script type="math/tex">F=ma</script>”. However we can see that this is in general incorrect. Only if the mass of the body is constant do we have the simplification that <br/>
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec F}=m\ddot{{\vec r}}.</script></span>
+<p>
+<br/>If a force only acts in a single direction, say <script type="math/tex">x</script>, then we have <br/>
+</p>
+<span class="dmath"><script type="math/tex; mode=display">F=m\frac{d^2x}{dt^2}.</script></span>
+<p>
+<br/>This is a second order differential equation. Given the force, the solution of the differential equation<a class="footnote" href="#a0000000112">
+<sup class="footnotemark">9</sup>
+</a> will give the position of the particle <script type="math/tex">x</script> at any future time <script type="math/tex">t</script>. 
+</p>
+<p>
+<b class="bf">N2</b> can be written in terms of a first order differential equation involving just the speed of the particle, <script type="math/tex">v(t)</script> as <br/>
+</p>
+<span class="dmath"><script type="math/tex; mode=display">F=m\frac{du}{dt}.</script></span>
+<p>
+ Here the solution will give the speed of the particle at any future time, <script type="math/tex">u(t)=u_ s(t)</script>, say. We will see below that we will need to provide an initial speed of the particle to specify unambiguously the future speed <script type="math/tex">u_ s(t)</script>. Once this has been done we can predict the future position of the particle by remembering that the speed is just the rate of change of distance with time, i.e., 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\frac{dx}{dt}=u_ s(t).</script></span>
+<p>
+ This is again a differential equation that, in principle, could be integrated to obtain <script type="math/tex">x(t)</script>, after specifying an initial position <script type="math/tex">x(0)</script>, say. 
+</p>
+</section><section class="section">
+<h2 id="a0000000113">1.6 Reminder: Multiplying vectors</h2>
+<p>
+A vector <script type="math/tex">\vec a</script> can be multiplied by a scalar <script type="math/tex">t</script>. The resulting vector <script type="math/tex">t{\vec a}</script> has magnitude <script type="math/tex">|t||{\vec a}|</script> which may be greater or less than <script type="math/tex">|{\vec a}|</script> depending on whether <script type="math/tex">|t|>1</script> or <script type="math/tex"><1</script>, respectively. If <script type="math/tex">t>0</script>, the direction of the vector remains unchanged. If <script type="math/tex">t<0</script>, the direction reverses. If <script type="math/tex">t=0</script>, then the result is the zero vector, denoted by <script type="math/tex">{\vec0}</script>. 
+</p>
+<p>
+It is also easy to add vectors. In order to obtain the sum of two vectors <script type="math/tex">{\vec u}</script> and <script type="math/tex">{\vec v}</script> draw a parallelogram that has sides <script type="math/tex">{\vec u}</script> and <script type="math/tex">{\vec v}</script>. The sum <script type="math/tex">{\vec u}+{\vec v} </script> is the vector that joins the tail of <script type="math/tex">{\vec u}</script> with the vertex of <script type="math/tex">{\vec v}</script>. This is equivalent to the triangle rule shown in figure <a class="ref" href="../../../notes/notes_by_chapter/newtons_laws/index.html#figure24">1.7</a> <br/>
+</p>
+<figure id="figure24">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/newtons_laws/images/img-0014.png" style="width:216.81pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">1.7</span>
+<span class="caption_text">Triangle law of vector addition.</span>
+</figcaption> </div>
+</figure>
+<p>
+The addition of vectors is <i class="it">commutative</i> and <i class="it">associative</i>. 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec a}+{\vec b}={\vec b}+{\vec a}\qquad {\vec a}+({\vec b}+{\vec c})=({\vec a}+{\vec b})+{\vec c}</script></span>
+<p>
+ In component form vector addition is easy. If <script type="math/tex">{\vec a}=a_1{\hat i}+ a_2{\hat j}+a_3{\hat k}</script> and <script type="math/tex">{\vec b}=b_1{\hat i}+ b_2{\hat j}+b_3{\hat k}</script> then 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec a}+{\vec b}=(a_1+b_1){\hat i}+ (a_2+b_2){\hat j}+(a_3+b_3){\hat k}</script></span>
+<section class="subsection">
+<h3 id="a0000000114">1.6.1 Scalar Product (Dot Product)</h3>
+<p>
+There are two different ways multiplying vectors with vectors. First of all, the <b class="bf">scalar product</b> combines the two vectors into a single number. The scalar product of the vectors <script type="math/tex">{\vec a}</script> and <script type="math/tex">{\vec b}</script> is defined as 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec a}\cdot {\vec b}=\vert {\vec a}\vert \vert {\vec b}\vert \cos \theta</script></span>
+<p>
+ where <script type="math/tex">\theta </script> is the angle between the directions of <script type="math/tex">{\vec a}</script> and <script type="math/tex">{\vec b}</script>. 
+</p>
+<p>
+Hence, if <script type="math/tex">{\vec a} = a_1{\hat i} + a_2{\hat j} + a_3{\hat k}</script>, and <script type="math/tex">{\vec b} = b_1{\hat i} + b_2{\hat j}+b_3{\hat k}</script>, then the scalar product is the scalar quantity 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec a}\cdot {\vec b}= a_1b_1 + a_2b_2 + a_3b_3\;  .</script></span>
+<p>
+In the special case where <script type="math/tex">{\vec a}\cdot {\vec b}=0</script> then either <script type="math/tex">{\vec a}={\vec0}</script> or <script type="math/tex">{\vec b}={\vec0}</script> or <script type="math/tex">{\vec a}</script> and <script type="math/tex">{\vec b}</script> are orthogonal. 
+</p>
+<p>
+We can use the scalar product to work out the length of a vector. Simply note that 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec a}\cdot {\vec a}= \vert {\vec a}\vert ^2</script></span>
+<p>
+ or, in component form, 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\vert {\vec a}\vert =\sqrt{{\vec a}\cdot {\vec a}}=\sqrt{ a_1^2+ a_2^2 + a_3^2}</script></span>
+<p>
+Alternatively, we can work out the angle between two vectors. The cosine of the angle <script type="math/tex">\theta </script> between the directions of <script type="math/tex">{\vec a}</script> and <script type="math/tex">{\vec b}</script> can be determined from the definition of the scalar product. 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\cos \theta =\frac{{\vec a}\cdot {\vec b}}{\vert {\vec a}\vert \vert {\vec b}\vert }</script></span>
+<p>
+ which if written in <script type="math/tex">(x,y,z)</script> components is 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\cos \theta =\frac{a_1b_1 + a_2b_2 + a_3b_3}{\sqrt{(a_1^2+ a_2^2 + a_3^2)(b_1^2+ b_2^2 + b_3^2)}}</script></span>
+<p>
+We can also use the scalar product to work out the component of one vector in the direction of another. This is often called a “projection”. For example, the component of <script type="math/tex">{\vec b}</script> in the direction of the vector <script type="math/tex">{\vec a}</script> is 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\frac{{\vec b}\cdot {\vec a}}{|{\vec a}|} = \vec b \cdot \hat{ a}</script></span>
+<figure id="figure215">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/newtons_laws/images/img-0016.png" style="width:144.54pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">1.8</span>
+<span class="caption_text">Resolved component of a vector</span>
+</figcaption> </div>
+</figure>
+<p>
+Finally, it is important to note that the order of the scalar product is irrelevant (the procedure is commutative): <script type="math/tex">{\vec a}\cdot {\vec b}={\vec b}\cdot {\vec a}</script>. 
+</p>
+</section><section class="subsection">
+<h3 id="a0000000115">1.6.2 Vector Product (Cross Product)</h3>
+<p>
+We can also multiply two vectors in such a way that we obtain a new vector. This is the so-called <b class="bf">vector product</b> (or <b class="bf">cross product</b>), which is defined in such a way that the vector product of the vectors <script type="math/tex">{\vec a}</script> and <script type="math/tex">{\vec b}</script> is defined as 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec a}\times {\vec b}= \vert {\vec a}\vert \vert {\vec b}\vert \sin \theta \; {\hat n}</script></span>
+<p>
+ where <script type="math/tex">\theta </script> is the angle between the directions of <script type="math/tex">{\vec a}</script> and <script type="math/tex">{\vec b}</script> and <script type="math/tex">{\hat n}</script> is the <i class="it">unit</i> vector perpendicular to both them using the right-hand rule, travelling from <script type="math/tex">{\vec a}</script> to <script type="math/tex">{\vec b}</script>. 
+</p>
+<figure id="figure219">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/newtons_laws/images/img-0018.png" style="width:180.67499999999998pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">1.9</span>
+<span class="caption_text">Definition of vector product</span>
+</figcaption> </div>
+</figure>
+<p>
+Geometrically <script type="math/tex">|{\vec a}\times {\vec b}|</script> is the area of the parallelogram with sides <script type="math/tex">{\vec a}</script> and <script type="math/tex">{\vec b}.</script>
+</p>
+<p>
+Note that the vector product is non-commutative, i.e., 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec b}\times {\vec a}=-\left({\vec a}\times {\vec b}\right)</script></span>
+<p>
+Written in components the vector product can be calculated using the <script type="math/tex">3\times 3</script> determinant 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec a}\times {\vec b}= \left|\begin{array}{ccc} {\hat i} &  {\hat j} &  {\hat k}\\ a_1 &  a_2 &  a_3 \\ b_1 &  b_2 &  b_3 \end{array}\right| = (a_2b_3 - a_3b_2){\hat i} + (a_3b_1 - a_1b_3){\hat j} + (a_1b_2 - a_2b_1){\hat k}.</script></span>
+<p>
+When we are dealing with basis vectors, it is worth noting the following special cases: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\hat i} \times {\hat i}={\hat j}\times {\hat j}={\hat k}\times {\hat k}={\vec0}</script></span>
+<p>
+ and 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\hat i} \times {\hat j}={ - \hat j}\times {\hat i}={\hat k}\qquad {\hat j} \times {\hat k}={ -\hat k}\times {\hat j}={\hat i}\qquad {\hat k} \times {\hat i}={ -\hat i}\times {\hat k}={\hat j}</script></span>
+</section>
+</section><section class="section">
+<h2 id="a0000000116">1.7 Simple examples</h2>
+<p>
+We start with a couple of examples where the path followed by the particle is known and we want to find the force acting on the particle. 
+</p>
+<section class="subsection">
+<h3 id="a0000000117">1.7.1 Motion in a circle</h3>
+<p>
+A particle of unit mass (in suitable units) moves on the circular path given by 
+</p>
+<p>
+<span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec r}(t)=\cos t\;  {\hat i}+\sin t\;  {\hat j} + 0\;  {\hat k}.</script></span> </span>
+</p>
+<p>
+Calculate the total force (again in suitable units) on the particle and show that it is always orthogonal to the trajectory. 
+</p>
+<p>
+The particle is of constant mass and so <b class="bf">N2</b> becomes 
+</p>
+<p>
+<span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec F}=m\; \ddot{{\vec r}}(t)=\frac{d^2{\vec r}(t)}{dt^2}</script></span> </span>
+</p>
+<p>
+The velocity of the particle is given by 
+</p>
+<p>
+<span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\dot{{\vec r}}(t)=\frac{d}{dt}\left(\cos t\;  {\hat i}+\sin t\;  {\hat j} + 0\;  {\hat k}\right)=-\sin t\;  {\hat i}+\cos t \; {\hat j} + 0 \; {\hat k}.</script></span> </span> while the acceleration is 
+</p>
+<p>
+<span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\ddot{{\vec r}}(t)=\frac{d}{dt}\left(-\sin t\;  {\hat i}+\cos t\;  {\hat j} + 0 \; {\hat k}\right)=-\cos t \; {\hat i}-\sin t \; {\hat j} + 0 \; {\hat k}.</script></span> </span>
+</p>
+<p>
+Hence we have: 
+</p>
+<p>
+<span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec F}(t)=-\cos t\;  {\hat i}-\sin t\;  {\hat j} + 0 \; {\hat k} = - \vec r.</script></span> </span>
+</p>
+<p>
+The particle is moving in a circle of radius 1, centred on the origin of coordinates and in the <script type="math/tex">(x,y)</script>-plane. This follows from elimination of <script type="math/tex">t</script> from the Cartesian components of <script type="math/tex">{\vec r}(t)</script>: 
+</p>
+<p>
+<span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">x(t)=\cos t, \  y(t)=\sin t, \  z(t)=0 \qquad \Rightarrow \qquad x^2+y^2=1.</script></span> </span>
+</p>
+<p>
+The velocity of this particle is always tangential to this circle (you can show <script type="math/tex">\dot{\vec r}(t)\cdot {\vec r}(t)= 0</script>). The speed of the particle is constant since 
+</p>
+<p>
+<span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\vert \dot{\vec r}(t) \vert =\sqrt{\dot{x}(t)^2+\dot{y}(t)^2} =\sqrt{\sin ^2(t)+\cos ^2(t)}=1</script></span> </span>
+</p>
+<p>
+The force acting on the particle is of constant magnitude and in this case it is always orthogonal to the velocity since 
+</p>
+<p>
+<span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec F}(t) \cdot \dot{{\vec r}}(t) =\cos t\sin t-\cos t\sin t=0</script></span> </span>
+</p>
+<figure id="figure41">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/newtons_laws/images/img-0020.png" style="width:144.54pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">1.10</span>
+<span class="caption_text">Velocity and forces experienced during motion in a circle.</span>
+</figcaption> </div>
+</figure>
+<p>
+This force is a “radial” force as it always points radially inwards to the origin. Such forces are also sometimes called “central” or “centripetal” forces, since they “seek” the centre. Note that if the circular path of this particle is caused by it being constrained to move on a smooth wire, then the particle experiences a reactionary force <b class="bf">N3</b> from the wire to keep it in place: this is the “centrifugal” force. We will return to the problem of circular motion later. 
+</p>
+</section><section class="subsection">
+<h3 id="a0000000118">1.7.2 Motion under gravity</h3>
+<p>
+Let us now turn to a situation where the forces are known and the motion of a particle must be calculated. Consider a body of constant mass moving under the influence of gravity near the surface of the earth. Later we will see that gravity varies from place to place, but near the surface of the earth it can be taken as approximately constant. Under these conditions, experiment shows that, if gravity is the only force acting then all bodies accelerate in the same way. If we take a Cartesian coordinate frame with <script type="math/tex">{\hat k}</script> pointing away from the earth, then<a class="footnote" href="#a0000000119">
+<sup class="footnotemark">10</sup>
+</a> <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\ddot{{\vec r}}=-g\;  {\hat k}\approx -9.81 {\rm ms}^{-2}{\hat k.}</script></span> </span> where <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\ddot{{\vec r}}= \ddot{x}\; {\hat i} + \ddot{y}\; {\hat j} + \ddot{z}\; {\hat k}</script></span> </span> The force acting on a particle of constant mass moving under the influence of gravity is thus <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec F}=-mg\; {\hat k}.</script></span> </span> The magnitude of this force that is said to be the “weight” of the particle<a class="footnote" href="#a0000000120">
+<sup class="footnotemark">11</sup>
+</a>
+</p>
+<p>
+Suppose a projectile, the particle, of constant mass is launched from the surface of the earth with initial velocity <script type="math/tex">{\vec u}=U\hat{ u}</script> (with <script type="math/tex">U</script> the initial speed of the particle) at an angle <script type="math/tex">\theta </script> to the horizontal. In order to find the path that the particle takes as it is acted on by this force, we choose a Cartesian frame with <script type="math/tex">{\hat i}</script> along the horizontal projection of the direction of launch and <script type="math/tex">{\hat k}</script> pointing vertically. <b class="bf">N2</b> then gives the equation of motion as<a class="footnote" href="#a0000000121">
+<sup class="footnotemark">12</sup>
+</a> <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">m\ddot{{\vec r}}(t)=-m g\; {\hat k}.</script></span> </span>
+</p>
+<figure id="figure43">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/newtons_laws/images/img-0022.png" style="width:216.81pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">1.11</span>
+<span class="caption_text">Trajectory of a projectile.</span>
+</figcaption> </div>
+</figure>
+<p>
+We need to solve a second order linear (vector) differential equation so require two pieces of boundary or initial data to determine the solution uniquely. We have these. They are: <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec r}(0)=0, \qquad \dot{{\vec r}}(0)={\vec u}</script></span> </span> We solve this problem to find the path given by the vector <script type="math/tex">{\vec r}(t)</script>. The most elegant strategy is to solve the vector equation directly. In the present case this is easy, since the force we consider is constant. We have 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\ddot{{\vec r}}(t)= - g\; {\hat k} \  ,</script></span>
+<span class="dmath"><script type="math/tex; mode=display">\dot{{\vec r}}(t)= A \hat i + C \hat j + (E-gt) \; {\hat k} \  ,</script></span>
+<p>
+ and 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{{\vec r}}(t)= (At +B) \hat i + (Ct+D) \hat j - \left( {1\over 2} gt^2 - Et - F \right) \; {\hat k} \  ,</script></span>
+<p>
+ The initial conditions then tell us that 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec r}(0)=0 \quad \Longrightarrow \quad B=D=F=0</script></span>
+<p>
+ and 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\dot{{\vec r}}(0)={\vec u} \quad \Longrightarrow \quad A=U\cos \theta , \  C=0, \  E=U\sin \theta ,</script></span>
+<p>
+ leading to the final result 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec r}(t)=Ut\cos \theta \; {\hat i}+\left(Ut\sin \theta -\tfrac {1}{2}gt^2\right)\; {\hat k}.</script></span>
+<p>
+Note that we would have arrived at the same answer by writing out the problem in terms of the vector components, starting with 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\vec r = x \hat i + y \hat j + z \hat k</script></span>
+<p>
+ and integrating them separately. It is a matter of choice–each strategy has its merits. Either way, we have equations for the displacements in terms of time<a class="footnote" href="#a0000000122">
+<sup class="footnotemark">13</sup>
+</a> <script type="math/tex">t</script>: <span style="color:#000000"> <span><script type="math/tex; mode=display">\begin{eqnarray*}  x(t)& =& Ut\cos \theta \\ y(t)& =& 0 \\ z(t)& =& Ut\sin \theta -\tfrac {1}{2}gt^2 \end{eqnarray*}</script></span> </span> In this case we can simplify these and get an algebraic expression for the path of the particle. We can eliminate <script type="math/tex">t</script> between the components by using the first equation to write <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">t=\frac{x}{U\cos \theta },</script></span> </span> and substituting for <script type="math/tex">t</script> in the third equation. We then arrive at the Cartesian form of the trajectory <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">z=x\tan \theta -\frac{gx^2\sec ^2\theta }{2U^2},</script></span> </span> This is an equation of the form <script type="math/tex">z=\alpha x -\beta x^2</script>, which is a parabola. 
+</p>
+<p>
+ [width=%+10mm]A projectile Assuming that the projectile is launched over flat ground determine the range of the projectile and hence show that the maximum range for a given launch speed <script type="math/tex">u</script> is achieved when <script type="math/tex">\theta =\pi /4</script>. 
+</p>
+<p>
+The particle hits the horizontal plane when <script type="math/tex">z=0</script>, i.e., when <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">x\tan \theta -\frac{gx^2\sec ^2\theta }{2U^2}=0</script></span> </span> This is a quadratic equation for <script type="math/tex">x</script>. The first solution <span style="color:#000000"><script type="math/tex"> x=0 </script></span> corresponds to the launch position while the second solution is <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">x=\frac{2 U^2\tan \theta }{g\sec ^2\theta } =\frac{2 U^2}{g}\sin \theta \cos \theta =\frac{U^2}{g}\sin 2\theta .</script></span> </span> This is the range of the projectile. 
+</p>
+<p>
+For fixed launch speed <script type="math/tex">u</script> and gravitational acceleration <script type="math/tex">g</script>, this can be maximised by maximising <script type="math/tex">\sin 2\theta </script>. This leads to <span style="color:#000000">  <script type="math/tex">\sin 2\theta =1 \Rightarrow \theta =\pi /4</script>.</span>
+</p>
+<p>
+In a similar way you can calculate the maximum height achieved in the trajectory as a function of <script type="math/tex">\theta </script> for fixed launch speed. This is known as the safety parabola, since the projectile can never pass outside this curve. 
+</p>
+<p>
+You may also repeat the above example, to find the trajectory of a projectile being launched on a surface that has constant slope and is is inclined at an angle <script type="math/tex">\alpha </script> to the horizontal (<script type="math/tex">\alpha </script> could be positive or negative).  
+</p>
+</section><section class="subsection">
+<h3 id="a0000000123">1.7.3 Springs</h3>
+<p>
+A spring is a piece of material that extends its length when a force is applied to it. It has a natural length <script type="math/tex">l</script>, say when it is unstressed. If a force is applied along the spring and is not too large (a strong force might break the spring) then the change in length of the spring is proportional to the magnitude of the force. That is, we have 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\hbox{magnitude of force along spring}=k [(\hbox{actual length of spring}) - (\hbox{natural length of spring})].</script></span>
+<p>
+ The constant of proportionality <script type="math/tex">k</script> is called the spring constant and varies between springs. It has units of N m<script type="math/tex">^{-1}</script>. In addition the spring always tries to return to its natural length (this gives the direction of the force). Such a spring, where the force depends linearly on the displacement, is commonly called a <b class="bf">Hookean spring</b>. 
+</p>
+<figure id="figure44">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/newtons_laws/images/img-0024.png" style="width:252.945pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">1.12</span>
+<span class="caption_text">Oscillating spring system.</span>
+</figcaption> </div>
+</figure>
+<p>
+Here we consider the motion of a light (=negligible mass) spring with spring constant <script type="math/tex">k</script> that is attached at one end to a wall and at the other end to a mass <script type="math/tex">m</script> moving on a smooth table (i.e., we will neglect friction). The mass is displaced along the length of the spring to a distance of <script type="math/tex">L</script> metres, held stationary and then released. We want to calculate the subsequent motion of the mass. 
+</p>
+<p>
+For simplicity, we take the coordinate system to be such that the origin is at the location of the end of the unstretched string with <script type="math/tex">{\hat i}</script> pointing along the string. Hence, the position of the mass will be given by 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec r}(t)=x(t)\;  {\hat i}+0\;  {\hat j} + 0\;  {\hat k}.</script></span>
+<p>
+ where the actual length of the spring at any time is <script type="math/tex">x(t)+l</script>. The force acting on the mass has three parts, one due to the spring, one due to gravity, and the other due to the smooth table it is sitting on. 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec F} = -k[(x(t)+l)-l]\; {\hat i} -mg\; {\hat k} + {\vec R}</script></span>
+<p>
+ Note that we need to find <script type="math/tex">x(t)</script> and that we also do not currently know <script type="math/tex">\vec R</script>. (The minus sign in front of <script type="math/tex">k</script> is because an extended spring creates a force that will seek to draw it back to its natural unextended length). 
+</p>
+<p>
+From <b class="bf">N2</b> we obtain: <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec F}=m\; \ddot{{\vec r}}(t)</script></span> </span> and if we equate the components of this equation then in the <script type="math/tex">{\hat k}</script> direction we find that we must have <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec R} = mg\; {\hat k}\; .</script></span> in order for the mass to stay on the smooth surface. This is the reaction force applied by the table to the mass. </span> In addition, we find that in the <script type="math/tex">{\hat i}</script> direction we get the equation <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">m\; \ddot{x}(t)=-k\; x(t)</script></span></span>
+</p>
+<p>
+We expect that both <script type="math/tex">m</script> and <script type="math/tex">k</script> are positive by definition. The equation is then a second order linear ordinary differential equation with constant coefficients and we may use standard methods (we will return to this later) to find the solution. This leads to <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">x(t)=A\cos \omega t+B\sin \omega t, \qquad \hbox{where }\quad \omega =\sqrt\frac {k}{m},</script></span> </span> with constants <script type="math/tex">A</script> and <script type="math/tex">B</script>. So we require two pieces of information to solve the problem uniquely. From the problem description we know that the initial displacement is <script type="math/tex">L</script> and that the mass is initially stationary. Hence we can write <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">x(0)=L, \qquad \dot{x}(0)=0.</script></span> </span> Using these to find <script type="math/tex">A</script> and <script type="math/tex">B</script> we arrive at <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec r}(t)=L\cos \sqrt{\frac{k}{m}}t \  {\hat i}</script></span> </span>
+</p>
+<figure id="figure45">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/newtons_laws/images/img-0026.png" style="width:252.945pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">1.13</span>
+<span class="caption_text">Simple harmonic motion for <script type="math/tex">L=1</script> .</span>
+</figcaption> </div>
+</figure>
+<p>
+The motion is oscillatory, with amplitude <script type="math/tex">L</script>, and repeats after a time period of <script type="math/tex">2\pi \sqrt{m/k}</script>. Motion like this – that involves linear combinations of the harmonic functions cosines and sines – is called <b class="bf">simple harmonic motion</b> and is often referred to as a <b class="bf">harmonic oscillator</b>. If you actually did this experiment with a mass and a spring on a table then you would find that friction between the mass and the table would damp the oscillation away (we will work this out later). 
+</p>
+</section><section class="subsection">
+<h3 id="a0000000124">1.7.4 Motion in a magnetic field</h3>
+<p>
+As a final example, let us consider a problem from a different part of physics. Newton’s laws of motion don’t just apply to situations that arise out of simple mechanical situations. As an illustration of this (and an example of a more general use of vectors), we turn to the motion of an electrically charged particle in a magnetic field, for example an electron or proton. A magnetic field can be represented by a vector field denoted by <script type="math/tex">{\vec B}</script>. We shall assume that the strength of the magnetic field can be increased to the point where the effect of gravity on the charged particle can be neglected. 
+</p>
+<p>
+The magnetic force <script type="math/tex">{\vec F}</script> acting on a particle, which has an electrical charge <script type="math/tex">q</script> and is moving at velocity <script type="math/tex">\dot{{\vec r}}(t)={\vec v}(t)</script> in a field <script type="math/tex">{\vec B}</script>, is given (experimentally) by the vector product<a class="footnote" href="#a0000000125">
+<sup class="footnotemark">14</sup>
+</a>
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec F}=q\left({\vec v}\times {\vec B}\right).</script></span>
+<p>
+We are interested in determining the path the particle takes in a particular magnetic field. We shall suppose the particle is of constant mass <script type="math/tex">m</script> and that the magnetic field (constant throughout the region of interest) is of the form <script type="math/tex">{\vec B}=B{\vec k}</script> relative to the reference frame. Let us assume that initially the particle is located at <script type="math/tex">{\vec r}(0)={\vec0}</script> with velocity <script type="math/tex">\dot{{\vec r}}(0)={\hat i}+{\hat k}</script>. We now use <b class="bf">N2</b> and the given form of the force to find the trajectory of the particle. 
+</p>
+<figure id="figure46">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/newtons_laws/images/img-0028.png" style="width:180.67499999999998pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">1.14</span>
+<span class="caption_text">Forces acting on a negatively charged particle in a magnetic field.</span>
+</figcaption> </div>
+</figure>
+<p>
+<b class="bf">N2</b> gives the equation of motion of the particle as 
+</p>
+<span><script type="math/tex; mode=display">\begin{eqnarray*}  {\vec F}=m\ddot{\vec r}(t)&  =&  q\left({\vec v}\times {\vec B}\right) \\ &  = &  q\left(\dot{\vec r}\times {\vec B}\right) \\ &  = &  q\left(\dot{\vec r}\times B{\hat k}\right) \\ m\ddot{\vec r}(t) &  = &  qB\left(\dot{\vec r}\times {\hat k}\right). \end{eqnarray*}</script></span>
+<p>
+ This looks awful! Our approach to solving this problem will be to write everything out in component form and then try to solve the resulting equations. However, to show that it is possible to find some properties of the solution using vector manipulations we note that: If we take the scalar product of both sides of the <b class="bf">N2</b> equation with the velocity vector <script type="math/tex">\dot{\vec r}</script> we get 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\dot{\vec r}\cdot \ddot{\vec r} = \frac{qB}{m}\dot{\vec r}\cdot \left(\dot{\vec r}\times {\hat k}\right) = 0.</script></span>
+<p>
+The right hand side of the equation vanishes because a vector product of any two vectors is, by definition, orthogonal to both the vectors and the dot product of any vector with a vector that is orthogonal to it is zero. Thus, we have 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\dot{\vec r} \cdot \ddot{\vec r} = \frac{1}{2}\frac{d\left( \dot{\vec r}\cdot \dot{\vec r}\right)}{dt} =\frac{1}{2}\frac{d|\dot{\vec r}|^2}{dt}=0 \qquad \Rightarrow \qquad |\dot{\vec r}|^2={\rm constant}.</script></span>
+<p>
+ We have found that, for this problem, the speed of the particle will be constant. However, this does not mean that there is no force acting on the particle – the direction of the velocity could still be changing. 
+</p>
+<p>
+To find the path of the particle we now write everything in the <b class="bf">N2</b> equation in component form—in this case it is a bit trickier to “integrate” the vector equation—using 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec r}(t)= x(t)\; {\hat i} + y(t)\; {\hat j} + z(t)\; {\hat k}\; .</script></span>
+<p>
+ Hence <b class="bf">N2</b> becomes 
+</p>
+<span><script type="math/tex; mode=display">\begin{eqnarray*}  \ddot{x}(t)\; {\hat i} + \ddot{y}(t)\; {\hat j} + \ddot{z}(t)\; {\hat k}&  = &  \frac{qB}{m}\left|\begin{array}{ccc}{\hat i} &  {\hat j} &  {\hat k} \\ \dot{x} &  \dot{y} &  \dot{z} \\ 0 &  0 &  1\end{array}\right| \\ & =&  \frac{qB}{m} \left(\dot{y}\; {\hat i}-\dot{x}\; {\hat j}\right). \end{eqnarray*}</script></span>
+<p>
+ Rewriting the initial data in component form we have 
+</p>
+<span><script type="math/tex; mode=display">\begin{eqnarray*}  \ddot{x}(t)=\frac{qB}{m}\dot{y},&  \qquad x(0)=0, & \qquad \dot{x}(0)=1\\ \ddot{y}(t)=-\frac{qB}{m}\dot{x},&  \qquad y(0)=0, & \qquad \dot{y}(0)=0 \\ \ddot{z}(t)=0, & \qquad z(0)=0, & \qquad \dot{z}(0)=1. \end{eqnarray*}</script></span>
+<p>
+ We must now solve these three ordinary differential equations. The <script type="math/tex">z</script> equation is easy, and using the initial conditions gives <script type="math/tex">z=t</script>. In other words, in the <script type="math/tex">z</script> direction, the particle moves at constant speed 1 ms<script type="math/tex">^{-1}</script> in the direction parallel to the magnetic field, passing through <script type="math/tex">z=0</script> when <script type="math/tex">t=0</script>. 
+</p>
+<p>
+The other two equations are coupled: the <script type="math/tex">x</script> depends on <script type="math/tex">y</script> and vice-versa and we cannot solve one without the other. However, we can solve this system by eliminating variables to make a single higher-order differential equation. To eliminate <script type="math/tex">y(t)</script> we differentiate the <script type="math/tex">\ddot{x}</script> equation once and then observe that the right-hand side only involves <script type="math/tex">\ddot{y}(t)</script>. Using the second component equation we can then write  
+</p>
+<span class="dmath"><script type="math/tex; mode=display"><script type="math/tex">{x}=\frac{qB}{m}\ddot{y}= \frac{qB}{m}\left(-\frac{qB}{m}\dot{x}\right) =-\left(\frac{qB}{m}\right)^2\dot{x}. </script></span>
+<p>
+ This is a third order linear differential equation with constant coefficients. To solve this, let us introduce a new variable <script type="math/tex">u(t)</script> which is the velocity in the <script type="math/tex">x</script>-direction and hence take <script type="math/tex">\dot{x}=u(t)</script>. Using this in the equation we have 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\ddot{u}+\left(\frac{qB}{m}\right)^2u=0.</script></span>
+<p>
+ This is a second order linear harmonic oscillator-type equation, and we know how to deal with this. The standard approach leads to 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">u(t)=C\cos \lambda t+D\sin \lambda t, \qquad \lambda =\frac{q B}{m},</script></span>
+<p>
+ for constants <script type="math/tex">C</script> and <script type="math/tex">D</script>. Since <script type="math/tex">u=\dot{x}</script>, we now just have to integrate this expression one more time with respect to <script type="math/tex">t</script> to obtain <script type="math/tex">x</script>. 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x(t)=\frac{C}{\lambda }\sin \lambda t-\frac{D}{\lambda }\cos \lambda t + E, \qquad \lambda =\frac{q B}{m}.</script></span>
+<p>
+ We can then immediately deduce <script type="math/tex">y(t)</script> from the coupled equation above which gives 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\dot{y}=\frac{1}{\lambda } \ddot{x} \qquad \Rightarrow \qquad y(t)=\frac{1}{\lambda } \dot{x(t)}+F</script></span>
+<span class="dmath"><script type="math/tex; mode=display">y(t)=\frac{C}{\lambda }\cos \lambda t+\frac{D}{\lambda }\sin \lambda t+F, \qquad \lambda =\frac{q B}{m}.</script></span>
+<p>
+ We now apply the initial data. Recall that we had: 
+</p>
+<span><script type="math/tex; mode=display">\begin{eqnarray*}  x(0)& =& 0 \qquad \Rightarrow E=\frac{D}{\lambda }, \\ \dot{x}(0)& =& 1 \qquad \Rightarrow C=1,\\ y(0)& =& 0 \qquad \Rightarrow F=-\frac{C}{\lambda }, \\ \dot{y}(0)& =& 0 \qquad \Rightarrow D=0. \end{eqnarray*}</script></span>
+<span class="dmath"><script type="math/tex; mode=display">\Rightarrow C=1, D=0, E=0, F=-\frac{1}{\lambda }</script></span>
+<p>
+ from which we deduce that 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec r}(t)=\frac{1}{\lambda }\sin \lambda t \  {\vec i}+\frac{1}{\lambda }(\cos \lambda t - 1) \  {\hat j} + t \  {\hat k},</script></span>
+<p>
+Clearly the <script type="math/tex">(x,y)</script> components are related by the formula 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x^2+\left(y+\frac{1}{\lambda }\right)^2=\frac{1}{\lambda ^2}, \qquad z=t</script></span>
+<figure id="figure47">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/newtons_laws/images/img-0030.png" style="width:180.67499999999998pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">1.15</span>
+<span class="caption_text">Motion of a charged particle in a magnetic field. As an exercise you may want to use the trajectory to deduce the direction of the velocity of the the particle and draw in the force acting on the particle at a chosen time.</span>
+</figcaption> </div>
+</figure>
+<p>
+and we see that the path is a circular helix of radius <script type="math/tex">1/\lambda </script>, centred on the point <script type="math/tex">-\lambda ^{-1} \  {\hat j} </script> with vertical pitch (repeat) every <script type="math/tex">2\pi /\lambda </script> seconds, see figure <a class="ref" href="../../../notes/notes_by_chapter/newtons_laws/index.html#figure47">1.15</a>. We also observe that the total speed of the particle is given by 
+</p>
+<span><script type="math/tex; mode=display">\begin{eqnarray*}  |\dot{{\vec r}}(t)|& =& \sqrt{\dot{{\vec r}}(t)\cdot \dot{{\vec r}}(t)} \\ & =&  \sqrt{\left\{ \dot{x}(t)\; {\hat i}+\dot{y}(t)\; {\hat j}+\dot{z}(t)\; {\vec k}\right\}  \cdot \left\{ \dot{x}(t)\; {\hat i}+\dot{y}(t)\; {\hat j}+\dot{z}(t)\; {\vec z k}\right\} } \\ & =&  \sqrt{\cos ^2 \lambda t + \sin ^2 \lambda t +1} \\ & =&  \sqrt{2}. \end{eqnarray*}</script></span>
+<p>
+ As expected, this is constant.  
+</p>
+</section>
+</section>
+<hr/>
+<ol>
+<li id="a0000000083">Ultimately we will need derivatives of vectors, meaning that we need to master vector calculus and partial differential equations.</li>
+<li id="a0000000084">As you gain experience, you will be equipped to deal with more complex problems, but there will always be a limit to what you are able to do. That’s life.</li>
+<li id="a0000000085">If that’s not a terrible pun, then I don’t know what it is...</li>
+<li id="a0000000089">Strictly speaking, this is the <b class="bf">inertial</b> mass of the body.</li>
+<li id="a0000000102">This is <b class="bf">very</b> important. We always need to indicate if a quantity is a scalar or a vector. Sloppy notation is the first step towards confusion!</li>
+<li id="a0000000108">Note that this is not true for other coordinate systems, like spherical polar coordinates, for example. So we have to be careful.</li>
+<li id="a0000000110">Some revision of basic vector operations may be required as we need to be comfortable applying them.</li>
+<li id="a0000000111">Note that this is easy to work out since the Cartesian basis vectors are fixed. Later, we will discuss coordinate systems for which this is not true.</li>
+<li id="a0000000112">We clearly need to be on top of the solution of second order differential equations. Such problems can be complicated, but at the same time there are many useful situations that are easy to deal with.</li>
+<li id="a0000000119">To get an idea of the magnitude of the answer, it is often sufficient to approximate <script type="math/tex">g</script> as 10 ms<script type="math/tex">^{-2}</script>.</li>
+<li id="a0000000120">Strictly speaking, this is the body’s <b class="bf">gravitational</b> mass. Actually, if we want be precise it is the <b class="bf">passive gravitational mass</b>. There is also an <b class="bf">active gravitational mass</b>, which is the one that leads to the gravitational force in the first place.</li>
+<li id="a0000000121">Technically, we are making an assumption by taking the inertial mass (on the left) as equal to the gravitational mass (the right).</li>
+<li id="a0000000122">As a bit of a caution... you may have memorised this result during your previous life (and perhaps know the “suvat” equations). Now it is time to forget all about that! It is good practice to derive things from scratch, especially as the simple formulas may not apply under the more general circumstances we are going to consider.</li>
+<li id="a0000000125">You do not have to remember this!</li>
+</ol>
+
+            </div>
+        </div>
+    </div>
+
+        </main>
+		
+		<footer class="text-muted">
+	<hr>
+	<div class="container">
+		<div class="float-right">
+			<ul style="list-style: none">
+			<li><a href="#">Back to top</a></li>
+			
+			
+			<li><a href="../../../notes/notes_by_chapter/newtons_laws/newtons_laws.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;Download as PDF</a></li>
+			
+			</ul>
+		</div>
+		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
+		<p>This page last generated: 2022-07-03</p>
+	</div>
+</footer>
+		
+    </body>
+</html>

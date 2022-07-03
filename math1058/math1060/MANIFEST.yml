@@ -1,0 +1,74 @@
+author: D Ian Jones
+base_dir: math1060
+build_pdf: true
+code: MATH1060
+format_version: 2
+mathjax_url: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+num_pdf_runs: 1
+root_url: /{base}/{code}/
+structure:
+- build_pdf: false
+  content: []
+  pdf_url: index.pdf
+  slug: index
+  source: intro.tex
+  title: index
+  type: introduction
+- build_pdf: false
+  content:
+  - build_pdf: true
+    content: []
+    pdf_url: notes/course_notes/pdf/course_notes.pdf
+    slug: course_notes
+    source: latex/course_notes.tex
+    splitlevel: -2
+    title: Course Notes
+    type: document
+  - build_pdf: false
+    content:
+    - build_pdf: true
+      pdf_url: notes/notes_by_chapter/introduction/introduction.pdf
+      slug: introduction
+      source: latex/01-intro.tex
+      title: Introduction
+      type: chapter
+    - build_pdf: true
+      pdf_url: notes/notes_by_chapter/notation/notation.pdf
+      slug: notation
+      source: latex/02-lp.tex
+      title: Notation
+      type: chapter
+    - build_pdf: true
+      pdf_url: notes/notes_by_chapter/multivariable_functi/multivariable_functi.pdf
+      slug: multivariable_functi
+      source: latex/03-sorting.tex
+      title: Multivariable Functions
+      type: chapter
+    - build_pdf: true
+      pdf_url: notes/notes_by_chapter/multivariable_integr/multivariable_integr.pdf
+      slug: multivariable_integr
+      source: latex/04-simplex.tex
+      title: Multivariable Integration
+      type: chapter
+    - build_pdf: true
+      pdf_url: notes/notes_by_chapter/line_integrals/line_integrals.pdf
+      slug: line_integrals
+      source: latex/05-integer-lp.tex
+      title: Line Integrals
+      type: chapter
+    pdf_url: notes/notes_by_chapter/notes_by_chapter.pdf
+    slug: notes_by_chapter
+    source: .
+    title: Notes by chapter
+    type: part
+  pdf_url: notes/notes.pdf
+  slug: notes
+  source: .
+  title: Notes
+  type: part
+themes:
+- path: default
+  source: default
+  title: Default
+title: Multivariable Calculus
+year: 2022

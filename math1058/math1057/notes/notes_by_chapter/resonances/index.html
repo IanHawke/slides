@@ -1,0 +1,1030 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        
+            <meta charset="utf-8">
+            <meta name="robots" content="noindex">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="author" content="Nils Andersson" />
+            <meta name="date" content="2022-07-03" />
+        
+
+        <title>Resonances | Dynamics and Relativity</title>
+
+        
+    
+    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../../../static/styles.css">
+            <link rel="stylesheet" id="customiseCSS" href="../../../static/light.css">
+            
+            
+        
+    <link rel="stylesheet" id="customiseCodeCSS" href="../../../static/pygmentize.light.css">
+    <link rel="stylesheet" href="../../../static/codemirror-5.26.0/lib/codemirror.css">
+    <link rel="stylesheet" href="../../../static/boole.css">
+    <link rel="stylesheet" href="../../../static/numbasEmbed.css">
+
+    <link rel="stylesheet" href="../../../static/bootstrap-toc.css?v=3">
+    <link rel="stylesheet" href="../../../static/print.css">
+
+
+        
+    
+    
+            <script defer src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <script defer src="../../../static/mathjax_config.js"></script>
+            <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+            <script defer src="../../../static/customisation.js"></script>
+            <script defer src="../../../static/mp4.js"></script>
+            
+            
+        
+    <script defer src="../../../static/jquery.flexibleArea.js"></script>
+    <script defer src="../../../static/spin.min.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/lib/codemirror.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/octave/octave.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/python/python.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/r/r.js"></script>
+    <script defer src="../../../static/boole.js"></script>
+    <script defer src="../../../static/numbasEmbed.js"></script>
+
+    <script defer src="../../../static/bootstrap-toc.js"></script>
+
+    </head>
+    <body data-spy="scroll" data-target="#chapterTOC" data-offset="50">
+        
+<div class="collapse" id="navbarToggleCustomise">
+	<div class="bg-secondary text-white p-3">
+		<form onsubmit="return false;" id="navbarCustomise">
+			<div class="form-row">
+				<label>Theme Customisation</label>
+				<div id="themeSelector" class="form-group col-md-12">
+					<button class="btn btn-dark mr-2" value="dark">Dark</button>
+					<button class="btn btn-pastel mr-2" value="pastel">Pastel</button>
+					<button class="btn btn-light mr-4" value="light">Light</button>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label style="display: block" for="font-scale">Font size (<span id="font-size-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="font-scale" min="50" max="600" value="100">
+					<button id="font-scale-reset" class="btn btn-sm">Reset</button>
+				</div>
+				<div class="form-group col-md-4">
+					<label style="display: block" for="p-space">Spacing (<span id="p-space-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="p-space" min="0" max="600" value="100">
+					<button id="p-space-reset" class="btn btn-sm">Reset</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<nav aria-label="breadcrumb">
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="../../../index.html">Dynamics and Relativity</a>
+		</li>
+		
+		<li class="breadcrumb-item">
+			<a href="../../../notes/notes_by_chapter/index.html">Notes by chapter</a>
+		</li>
+		
+		<li class="breadcrumb-item active">
+			Resonances
+		</li>
+		<li class="ml-auto">
+			<button class="navbar-toggler p0" type="button" data-toggle="collapse" data-target="#navbarToggleCustomise" aria-controls="navbarToggleCustomise" aria-expanded="false" aria-label="Toggle customisations panel">
+				<i class="fa fa-cog" aria-hidden="true" title="Toggle customisations panel"></i> <span class="sr-only">Toggle customisations panel</span>
+			</button>
+		</li>
+	</ul>
+</nav>
+
+
+        <header>
+            
+            
+        </header>
+        <main>
+            
+    <div class="container mt-3">
+        <div class="row">
+            
+            <div id="sidebar" class="col-md-3">
+                <nav class="mb-3" id="chapterTOC" data-toggle="toc">
+                    <ul class="nav navbar-nav">
+                        
+                        
+                        
+                        <li><a id="pdf-link" class="nav-link" href="../../../notes/notes_by_chapter/resonances/resonances.pdf" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" title="Download as PDF"></i>&nbsp;Download as PDF</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+            <div id="content" class="col-md-9"> 
+            
+            
+<!-- Latex Chapter/Part -->
+<h1 id="a0000000238">Oscillations and resonances</h1>
+<p>
+We have already seen the simple example of a harmonic oscillator. With a better understanding of simple differential equations, we can turn to more concrete applications and consider more complicated oscillating systems. 
+</p>
+<section class="section">
+<h2 id="a0000000239">3.1 Reminder: Homogeneous second order constant coefficient equations</h2>
+<p>
+Second order differential equations are more complicated—we can no longer get away with “integrating”—but we can readily deal with a particular class of equations: linear equations with constant coefficients. 
+</p>
+<p>
+In general we have 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">a\frac{d^2x}{dt^2}+b\frac{dx}{dt}+cx=0</script></span>
+<p>
+ First we take a homogeneous equation (no driving force) and divide through by <script type="math/tex">a</script> (this is allowed as <script type="math/tex">a</script> – the coefficient multiplying the second derivative – is non-zero which must be true, otherwise the equation would not be second order!) 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\frac{d^2x}{dt^2}+\frac{b}{a}\frac{dx}{dt}+\frac{c}{a}x=0\quad \Rightarrow \quad \frac{d^2x}{dt^2}+m\frac{dx}{dt}+nx=0</script></span>
+<p>
+ where <script type="math/tex">m</script> and <script type="math/tex">n</script> are constants. 
+</p>
+<p>
+To find the general solution we make the <b class="bf">ansatz</b> that there is a solution of the form: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x=Ae^{kt}</script></span>
+<p>
+ where <script type="math/tex">A</script> and <script type="math/tex">k</script> are constants that we will try to find. Now 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\frac{dx}{dt}=Ake^{kt},\quad \frac{d^2x}{dt^2}=Ak^2e^{kt}</script></span>
+<p>
+ Thus if <script type="math/tex">x=A\exp \left( {kt} \right)</script> is a solution of the homogeneous equation by substituting it into the equation we see that we must have 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">Ak^2e^{kt}+mAke^{kt}+nAe^{kt}=0</script></span>
+<p>
+ The <script type="math/tex">\exp \left( {kt} \right)</script> can be divided through as it is always non-zero for finite <script type="math/tex">t</script>. We can also divide through by <script type="math/tex">A</script>, since this must be non-zero for a <b class="bf">non-trivial</b> solution (a solution that is not <script type="math/tex">x(t)\equiv 0</script>). This leaves what is called the <b class="bfseries">auxiliary</b> equation of the differential equation (occasionally called the characteristic equation): 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">k^2+mk+n=0</script></span>
+<p>
+ This is a quadratic in <script type="math/tex">k</script> which has two roots <script type="math/tex">k_1 ,k_2 </script>. 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">k_1 =\frac{-m+\sqrt{m^2-4n} }{2},\quad k_2 =\frac{-m-\sqrt{m^2-4n} }{2}</script></span>
+<p>
+ Thus we typically have two possible solutions to the original equation <script type="math/tex">x_1=A\exp \left( {k_1 t} \right)</script> and <script type="math/tex">x_2=A\exp \left( {k_2 t} \right). </script>
+</p>
+<p>
+We can check that the solutions are linearly independent<a class="footnote" href="#a0000000240">
+<sup class="footnotemark">1</sup>
+</a> by computing the Wronskian<a class="footnote" href="#a0000000241">
+<sup class="footnotemark">2</sup>
+</a>: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">W[e^{k_1t},e^{k_2t}]=\left|\begin{array}{cc}e^{k_1t} &  e^{k_2t} \\ k_1e^{k_1t} &  k_2e^{k_2t}\end{array}\right|=(k_2-k_1)e^{(k_1+k_2)t}\ne 0 \  \   {\rm provided} \  \   k_1\ne k2.</script></span>
+<p>
+Hence as long as the roots of the auxilliary equation are not identical, we have a set of linearly independent solutions. 
+</p>
+<p>
+It is a simple exercise of substitution to deduce that a linear combination of these two solutions is also a solution. Hence we have found that 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x=Ae^{k_1 t}+Be^{k_2 t}</script></span>
+<p>
+ is a solution of the differential equation where <script type="math/tex">A</script> and <script type="math/tex">B</script> are <b class="bfseries"><i class="itshape">any</i></b> two (very loosely: integration) constants. This is the <b class="bfseries">general</b> solution for most equations of this type. 
+</p>
+<p>
+The two arbitrary constants <script type="math/tex">A</script> and <script type="math/tex">B</script> can only be determined by the <b class="bfseries">boundary</b> or <b class="bfseries">initial conditions</b>, as we shall see below. 
+</p>
+<p>
+From the formula for the solution of the auxiliary equation we can see that the nature of the solution of the equation will depend on the whether <script type="math/tex">m^2>4n, \   m^2=4n,</script> or <script type="math/tex">m^2<4n</script> (in exactly the same way as the roots of a quadratic equation depend on this quantity). We now consider each of these cases in turn. 
+</p>
+<section class="subsection">
+<h3 id="a0000000242">3.1.1  <script type="math/tex">m^2>4n</script>: real and distinct roots</h3>
+<p>
+When <script type="math/tex">m^2>4n</script> the auxiliary equation gives two unequal real solutions for <script type="math/tex">k</script> and hence the general solution can be written as above: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x=Ae^{k_1 t}+Be^{k_2 t}.</script></span>
+</section><section class="subsection">
+<h3 id="a0000000243">3.1.2 <script type="math/tex">m^2=4n</script>: real and equal roots</h3>
+<p>
+When <script type="math/tex">m^2=4n</script>, the roots <script type="math/tex">k</script> of the auxiliary equation are real and equal. Let these roots be called <script type="math/tex">k_1</script>. In this particular case, it is not possible to form a general solution with two arbitrary constants, since we could rewrite it in the following form: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x=Ae^{k_1 t}+Be^{k_1 t}=\left( {A+B} \right)e^{k_1 t}=Ce^{k_1 t}</script></span>
+<p>
+ So that effectively there would be only one arbitrary constant. Put another way, in this case the Wronskian vanishes everywhere, since <script type="math/tex">k_1=k_2</script>. Thus we do not have the most general form (which needs two  linearly independent, solutions). 
+</p>
+<p>
+We thus modify the guessed form of the solution to a new form<a class="footnote" href="#a0000000244">
+<sup class="footnotemark">3</sup>
+</a>: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x=\left( {A+Bt} \right)e^{k_1 t}</script></span>
+<p>
+ Substitution into the differential equation shows that this is in fact a general solution provided that 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">k_1^2 +mk_1 +n=0 \qquad {\rm with} \qquad m^2=4n,</script></span>
+<p>
+ i.e., the auxiliary equation is satisfied. 
+</p>
+<p>
+The Wronskian of the two parts of the general solution is given by 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">W[e^{k_1t},te^{k_1t}]=\left|\begin{array}{cc}e^{k_1t} &  te^{k_1t} \\ k_1e^{k_1t} &  (1+k_1t)e^{k_1t}\end{array}\right|=e^{2k_1t} \ne 0</script></span>
+<p>
+ for finite <script type="math/tex">t</script>, and so <script type="math/tex">e^{k_1t}</script> and <script type="math/tex">te^{k_1t}</script> are linearly independent. Hence this is a general solution of the case with equal roots. 
+</p>
+</section><section class="subsection">
+<h3 id="a0000000245">3.1.3 <script type="math/tex">m^2<4n</script>, complex roots</h3>
+<p>
+When <script type="math/tex">m^2<4n</script> the auxiliary equation has no real roots. However for <script type="math/tex">m</script> and <script type="math/tex">n</script> real the complex roots <script type="math/tex">k_1</script> and <script type="math/tex">k_2</script> appear as a complex conjugate pair. The roots are of the form 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">k_1 =\frac{-m+i\sqrt{4n-m^2} }{2},\quad k_2 =\frac{-m-i\sqrt{4n-m^2} }{2}</script></span>
+<p>
+ where <script type="math/tex">i=\sqrt{-1} </script>. Hence the general solution is 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\begin{array}{c} x=Ae^{t{\left( {-m+i\sqrt{4n-m^2} } \right)} \mathord {\left/ {\vphantom {{\left( {-m+i\sqrt{4n-m^2} } \right)} 2}} \right. \kern -\nulldelimiterspace } 2}+Be^{{t\left( {-m-i\sqrt{4n-m^2} } \right)} \mathord {\left/ {\vphantom {{t\left( {-m-i\sqrt{4n-m^2} } \right)} 2}} \right. \kern -\nulldelimiterspace } 2} \\ =e^{{-mt} \mathord {\left/ {\vphantom {{-mx} 2}} \right. \kern -\nulldelimiterspace } 2}\left( {Ae^{{it\sqrt{4n-m^2} } \mathord {\left/ {\vphantom {{ix\sqrt{4n-m^2} } 2}} \right. \kern -\nulldelimiterspace } 2}+Be^{{-it\sqrt{4n-m^2} } \mathord {\left/ {\vphantom {{-it\sqrt{4n-m^2} } 2}} \right. \kern -\nulldelimiterspace } 2}} \right) \\ \end{array}</script></span>
+<p>
+ Note that this looks like a complex (and complicated!) solution, even though we started off from a real equation, that only involved real numbers, but this is not necessarily the case. Now recall the following facts: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\sin z=\frac{e^{iz}-e^{-iz}}{2i},\quad \cos z=\frac{e^{iz}+e^{-iz}}{2}</script></span>
+<p>
+ Thus we can write the above solution as 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\begin{array}{c} x=e^{{-mt} \mathord {\left/ {\vphantom {{-mt} 2}} \right. \kern -\nulldelimiterspace } 2}\left( {\left( {A+B} \right)\cos \left( {\displaystyle \frac{\sqrt{4n-m^2} }{2}t} \right)+i\left( {A-B} \right)\sin \left( {\displaystyle \frac{\sqrt{4n-m^2} }{2}t} \right)} \right) \\ =e^{{-mt} \mathord {\left/ {\vphantom {{-mt} 2}} \right. \kern -\nulldelimiterspace } 2}\left( {C\cos \left( {\displaystyle \frac{\sqrt{4n-m^2} }{2}t} \right)+D\sin \left( {\displaystyle \frac{\sqrt{4n-m^2} }{2}t} \right)} \right). \\ \end{array}</script></span>
+<p>
+ where <script type="math/tex">C</script> and <script type="math/tex">D</script> are arbitrary constants, formed from <script type="math/tex">A</script> and <script type="math/tex">B</script>, <script type="math/tex">C = A +B</script>, <script type="math/tex">D =i(A -B)</script>. This equation “looks" real. In fact real boundary data will generate real values of <script type="math/tex">C</script> and <script type="math/tex">D</script>. 
+</p>
+</section>
+</section><section class="section">
+<h2 id="a0000000246">3.2 Damped Oscillations</h2>
+<p>
+Damped oscillations play an important role in mechanical systems. A prime example is the shock absorber in a car. This can be modelled fairly accurately by combination of a spring and a “dashpot”. 
+</p>
+<p>
+A dashpot is a plunger in a pot of viscous liquid. A linear dashpot provides a resistive force proportional to the velocity of plunger, the constant of proportionality being <script type="math/tex">\lambda </script>. A Hookean spring with spring constant <script type="math/tex">k</script> and natural length <script type="math/tex">l</script> provides a restoring force proportional to a displacement. 
+</p>
+<p>
+As the car of mass <script type="math/tex">m</script> moves along, it encounters a bump, or variation in <script type="math/tex">z</script> in the road, the spring component compresses, and the plunger pushes into the dashpot. We want to know how the car responds to the bump so we can try to design the car to give the passengers a smooth ride. 
+</p>
+<p>
+We will take each of the car’s four wheels to support a mass <script type="math/tex">m/4</script>. This mass will have three forces acting on it namely: gravity, the spring and the damper. We will only consider movement and forces in the vertical direction. Our coordinate system will take <script type="math/tex">{\hat k}</script> to be in the vertical direction with the point <script type="math/tex">z=l</script> representing the position of the car when the spring is extended to its natural length. 
+</p>
+<figure id="figure413a">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/resonances/images/img-0002.png" style="width:180.67499999999998pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">3.1</span>
+<span class="caption_text">A schematic representation of one of the shock absorbers on a 4-wheeled car.</span>
+</figcaption> </div>
+</figure>
+<p>
+In the upwards vertical direction, <b class="bf">N2</b> then gives  <span class="dmath"><script type="math/tex; mode=display">\frac{m}{4} \ddot{z}(t)=-k(z-l)-\lambda \dot{z}-\frac{mg}{4}</script></span>  Rearranging this we get  <span class="dmath"><script type="math/tex; mode=display">\ddot{z}(t)+\frac{4\lambda }{m}\dot{z}+\frac{4k}{m}z=\frac{4kl}{m}-g = \mathrm{constant}</script></span>  This is a second order linear constant coefficient ordinary differential equation. If can be represented schematically in terms of a linear operator <script type="math/tex">{\cal L}</script> and a forcing function <script type="math/tex">f</script>.  <span class="dmath"><script type="math/tex; mode=display">{\cal L}z=f</script></span>  where  <span class="dmath"><script type="math/tex; mode=display">{\cal L} = \left(\frac{d^2}{dt^2}+\frac{4\lambda }{m}\frac{d}{dt}+\frac{4k}{m}\right)</script></span> <span class="dmath"><script type="math/tex; mode=display">f = \frac{4kl}{m}-g</script></span>  We know how to solve this type of equation. We can break the solution down into two parts.  <span class="dmath"><script type="math/tex; mode=display">z=z_{\rm CF}+z_{\rm PI}</script></span>  where 
+</p>
+<ul class="itemize" id="a0000000247">
+<li id="a0000000248"> <p>
+“CF” stands for “complementary function” and satisfies  <span class="dmath"><script type="math/tex; mode=display">{\cal L}z_{\rm CF}=0</script></span>
+</p>
+</li>
+<li id="a0000000249"> <p>
+“PI” stands for “particular integral” and satisfies  <span class="dmath"><script type="math/tex; mode=display">{\cal L}z_{\rm PI}=f</script></span>
+</p>
+</li>
+</ul>
+<p>
+Clearly we still have  <span class="dmath"><script type="math/tex; mode=display">{\cal L}z={\cal L}\left(z_{\rm CF}+z_{\rm PI}\right)=0+f=f.</script></span>
+</p>
+<p>
+We solve for <script type="math/tex">z_{\rm PI}</script> by an “educated guess”. Any derivative of a constant vanishes so we can guess that a possible solution to the equation is a constant. Putting this guess into the ODE we see:  <span class="dmath"><script type="math/tex; mode=display">\frac{4k z_{\rm PI}}{m} = \frac{4kl}{m} - g \hspace{3mm} \Rightarrow \hspace{3mm} z_{\rm PI}=l-\frac{mg}{4k}</script></span>  This part of the solution corresponds to the position of the car if everything is stationary and the spring is compressed from its natural length due to the weight of the car. 
+</p>
+<p>
+Next we solve for <script type="math/tex">z_{\rm CF}</script> by assuming there is a solution of the form <script type="math/tex">z=e^{\alpha t}</script> where <script type="math/tex">\alpha </script> is a constant. Substitution into the homogeneous equation  <span class="dmath"><script type="math/tex; mode=display">\ddot{z}(t)+\frac{4\lambda }{m}\dot{z}+\frac{4k}{m}z=0</script></span>  generates the auxiliary equation  <span class="dmath"><script type="math/tex; mode=display">\alpha ^2+\frac{4\lambda }{m}\alpha +\frac{4k}{m}=0,</script></span>  and hence <script type="math/tex">\alpha </script> must be given by the solution to this quadratic  <span class="dmath"><script type="math/tex; mode=display">\alpha =-\frac{2\lambda }{m}\pm \frac{2\lambda }{m} \sqrt{1-\frac{mk}{\lambda ^2}}.</script></span>
+</p>
+<p>
+The complementary function is therefore of the form  <span class="dmath"><script type="math/tex; mode=display">z_{CF}=e^{-\frac{2\lambda }{m}t}\left(Ae^{\frac{2\lambda }{m} \sqrt{1-\frac{mk}{\lambda ^2}}t} +Be^{-\frac{2\lambda }{m}\sqrt{1-\frac{mk}{\lambda ^2}}t}\right).</script></span>  where <script type="math/tex">A</script> and <script type="math/tex">B</script> depend on initial data <script type="math/tex">z(0), \dot{z}(0)</script>. 
+</p>
+<p>
+Note that the precise form of this solution will depend on whether <script type="math/tex">1-(mk)/\lambda ^2</script> is positive or negative. Hence the size of the positive quantity <script type="math/tex">mk/\lambda ^2</script> is crucial and we now discuss the different possible cases. 
+</p>
+<p>
+If <script type="math/tex">mk/\lambda ^2>1</script> the values of <script type="math/tex">\alpha </script> are complex and so the solution can be rewritten as a decaying oscillatory one.  <span class="dmath"><script type="math/tex; mode=display">z_{CF}=e^{-\frac{2\lambda }{m}t}\left(C\cos \omega t+D\sin \omega t\right), \qquad \omega =\frac{2\lambda }{m}\sqrt{\frac{mk}{\lambda ^2}-1} > 0</script></span>  This situation is said to be <b class="bf">underdamped</b>: the spring is dominating the response of the shock system. Any bump in the road initiates a long tail of oscillations in the shock system. It would be best not to attempt to try to drink anything while travelling in a car with this type of shock absorbing system. Indeed such a car would fail its annual MOT test of roadworthyness. 
+</p>
+<figure id="figure414">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/resonances/images/img-0004.png" style="width:216.81pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">3.2</span>
+<span class="caption_text">Schematic plot of response of underdamped shock system.</span>
+</figcaption> </div>
+</figure>
+<p>
+If <script type="math/tex">mk/\lambda ^2<1</script> then both values of <script type="math/tex">\alpha </script> are real and negative. Hence the the solution is the sum of two exponential decaying functions. 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">z_{CF}=e^{-\frac{2\lambda }{m}t} \left(Ae^{\frac{2\lambda }{m}\sqrt{1-\frac{mk}{\lambda ^2}}t} +Be^{-\frac{2\lambda }{m}\sqrt{1-\frac{mk}{\lambda ^2}}t}\right),</script></span>
+<p>
+ where <script type="math/tex">A</script> and <script type="math/tex">B</script> are constants that depend on the initial data <script type="math/tex">z(0), \dot{z}(0)</script>. This situation is said to be <b class="bf">overdamped</b>: the dashpot is dominating the response of the shock system. The cushioning effect of the spring is effectively absent and the effect of bumps in the road will be felt over a long timescale. 
+</p>
+<figure id="figure415">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/resonances/images/img-0006.png" style="width:216.81pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">3.3</span>
+<span class="caption_text">Schematic plot of response of overdamped shock system.</span>
+</figcaption> </div>
+</figure>
+<p>
+If <script type="math/tex">mk/\lambda ^2=1</script> mechanically the effect of the spring and dashpot are matched. Mathematically, the solution of the auxiliary equation is degenerate and only one exponential effectively exists. From our discussion of the methods used to solve the equation we know that the form of the solution will then be slightly different and takes the form  <span class="dmath"><script type="math/tex; mode=display">z_{CF}=e^{-\frac{2\lambda }{m}t}\left(At+B\right),</script></span>  where <script type="math/tex">A</script> and <script type="math/tex">B</script> depend on initial data <script type="math/tex">z(0), \dot{z}(0)</script>. This situation is said to be <b class="bf">critical damping</b>: the linear term ensures that there is some cushioning, with effectively one and only one oscillation in response to a bump, but no long-term oscillatory behaviour<a class="footnote" href="#a0000000250">
+<sup class="footnotemark">4</sup>
+</a>. This one-oscillation behaviour is what MOT inspectors looks for when they test the car. 
+</p>
+<figure id="figure416">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/resonances/images/img-0008.png" style="width:216.81pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">3.4</span>
+<span class="caption_text">Schematic plot of response of critically damped shock system.</span>
+</figcaption> </div>
+</figure>
+<p>
+The ideas of underdamped, overdamped and critically damped oscillating systems governed by the second order linear constant coefficient differential equation arise in a large number of practical situations including motion of pendulums, radio waves, and water waves. 
+</p>
+</section><section class="section">
+<h2 id="a0000000251">3.3 Reminder: Particular integrals and complementary functions</h2>
+<p>
+Let us suppose that we have found a <b class="bf">particular integral</b>, <script type="math/tex">x_ P(t)</script>, i.e., a solution that satisfies 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\mathcal L}\left[x_ P(t)\right]=f(t).</script></span>
+<p>
+ Due to the second order nature of the equation, we expect to have two arbitrary constants in the solution. Hence we might look for a second solution <script type="math/tex">x_ Q(t)</script> that also satisfies 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\mathcal L}\left[x_ Q(t)\right]=f(t).</script></span>
+<p>
+ Then, following the ideas of the solutions of the homogeneous equation, we could construct a general solution of the form 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x(t)=\alpha x_ P(t)+\beta x_ Q(t).</script></span>
+<p>
+ The only problem is, this is <b class="bf">wrong!</b>
+</p>
+<p>
+To see why, we substitute to the proposed solution into the left-hand side of the equation: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\mathcal L}\left[\alpha x_ P(t)+\beta x_ Q(t)\right]={\mathcal L}\left[\alpha x_ P(t)\right]+{\mathcal L}\left[\beta x_ Q(t)\right]=\alpha {\mathcal L}\left[ x_ P(t)\right]+\beta {\mathcal L}\left[ x_ Q(t)\right]=(\alpha +\beta )f(t).</script></span>
+<p>
+ This clearly does not balance the right-hand side of the equation unless the (assumed) arbitrary <script type="math/tex">\alpha +\beta </script> is always set to be unity (which they can’t be because they are arbitrary). 
+</p>
+<p>
+Hence there is <b class="bf">one</b> and <b class="bf">only one</b> particular integral of the inhomogeneous equation, called, say <script type="math/tex">x_ P(t)</script> which satisfies the full equation 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\mathcal L}\left[x_ P(t)\right]=f(t).</script></span>
+<p>
+ We were expecting two arbitrary constants and now we have none! Where do we get them from? 
+</p>
+<p>
+The solution comes from considering the homogeneous equation 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\mathcal L}\left[x(t)\right]=0,</script></span>
+<p>
+ i.e., the same left-hand side as the full inhomogeneous equation, but with <script type="math/tex">f(t)</script> replace by <script type="math/tex">0</script> on the right-hand side. We know that this “reduced” equation will have a general solution involving two arbitrary constants <script type="math/tex">A</script>, <script type="math/tex">B</script> of the form 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x_{CF}(t)=Ax_1(t)+Bx_2(t),</script></span>
+<p>
+ where the <script type="math/tex">x_ j(t)</script> each independent satisfy the linear homogeneous equation 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\mathcal L}\left[x_ j(t)\right]=0, \qquad j=1,2.</script></span>
+<p>
+ We call the general solution to the homogeneous equation <script type="math/tex">x_{CF}(t)</script> the <b class="bf">complementary function</b> (hence the subscript “CF” attached to it). 
+</p>
+<p>
+Now consider what happens when we add the particular integral <script type="math/tex">x_ P(t)</script> and the complementary function <script type="math/tex">x_{CF}(t)</script> and substitute them into the left-hand side of the <b class="bf">full inhomogeneous</b> equation and use the linearity property of the operator: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\mathcal L}\left[x_ P(t)+x_{CF}(t)\right]={\mathcal L}\left[x_ P(t)\right]+{\mathcal L}\left[x_{CF}(t)\right]=f(t)+0=f(t).</script></span>
+<p>
+ In other words the sum of the particular integral plus the complementary function <b class="bf">also</b> satisfies the full inhomogenous equation. Since the complementary function includes two arbitrary constants, we have found the general solution of the full inhomogeneous equation: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x(t)=x_ P(t)+x_{CF}(t)=x_ P(t)+Ax_1(t)+Bx_2(t),</script></span>
+<p>
+ where 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\mathcal L}\left[x_ P(t)\right]=f(t), \qquad {\mathcal L}\left[x_ j(t)\right]=0, \  j=1,2.</script></span>
+<p>
+In general the complementary function is easy to find: you just use the same techniques as we did for solving the homogeneous equations. The difficulty arises in finding the particular integral, which must satisfy the full inhomogeneous equation. 
+</p>
+<p>
+There are several ways of doing this. It is natural to first consider the <b class="bf">method of undetermined coefficients</b> (aka “educated guesswork”!). 
+</p>
+<p>
+This method considers the form of <script type="math/tex">f(t)</script> and then looks for a particular integral according to the following rule of thumb: 
+</p>
+<ul class="itemize" id="a0000000252">
+<li id="a0000000253"> <p>
+If <script type="math/tex">f(t)</script> is an <script type="math/tex">n^{\rm th}</script> order polynomial in <script type="math/tex">t</script>, assume a particular integral of the form 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x_ P(t)=A_ nt^ n+A_{n-1}t^{n-1}+\cdots A_1t+A_0,</script></span>
+<p>
+ i.e., an <script type="math/tex">n^{\rm th}</script> order polynomial with coefficients <script type="math/tex">A_ i</script> that must be found by direct substitution into the inhomogeneous equation and balancing powers of <script type="math/tex">t</script>. 
+</p>
+</li>
+<li id="a0000000254"> <p>
+If <script type="math/tex">f(t)=ke^{\alpha t}</script>, with <script type="math/tex">k</script> and <script type="math/tex">\alpha </script> given constants, assume a particular integral of the form 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x_ P(t)=Ae^{\alpha t}</script></span>
+<p>
+ where the exponent <script type="math/tex">\alpha </script> is the same as in <script type="math/tex">f(t)</script> and <script type="math/tex">A</script> is a constant to be found by direct substitution into the inhomogeneous equation and balancing powers of <script type="math/tex">e^{\alpha t}</script>. 
+</p>
+</li>
+<li id="a0000000255"> <p>
+If <script type="math/tex">f(t)=p\sin \beta t+q \cos \beta t</script>, with <script type="math/tex">p, q</script> and <script type="math/tex">\beta </script> given constants, assume a particular integral of the form 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x_ P(t)=A\sin \beta t +B\cos \beta t</script></span>
+<p>
+ where the frequency <script type="math/tex">\beta </script> is the same as in <script type="math/tex">f(t)</script> and <script type="math/tex">A, B</script> are constants to be found by direct substitution into the inhomogeneous equation and balancing powers of <script type="math/tex">\sin \beta t</script> and <script type="math/tex">\cos \beta t</script>. 
+</p>
+</li>
+<li id="a0000000256"> <p>
+If <script type="math/tex">f(t)</script> is a combination of the above three cases, e.g., an <script type="math/tex">n^{\rm th}</script> order polynomial in <script type="math/tex">t</script> multiplied by an exponential <script type="math/tex">e^{\alpha t}</script>, with <script type="math/tex">\alpha </script> a given constant, then assume a particular integral of the form 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x_ P(t)=e^{\alpha t}\left(A_ nt^ n+A_{n-1}t^{n-1}+\cdots A_1t+A_0\right),</script></span>
+<p>
+ and determine the unknown <script type="math/tex">A_ i</script> by direct substitution into the full inhomogeneous equation and balancing of terms as above. 
+</p>
+</li>
+<li id="a0000000257"> <p>
+If any component of the proposed particular integrals also satisfies the homogeneous equation, then this will not be a suitable particular integral, as it will only duplicate the complementary function. Hence multiply the proposed particular integral by <script type="math/tex">t</script>, to obtain a new proposed particular integral, repeating this until the guess no longer contains any terms that satisfy the homogeneous equation. 
+</p>
+</li>
+</ul>
+</section><section class="section">
+<h2 id="a0000000258">3.4 Resonance</h2>
+<p>
+Many oscillatory systems exhibit a phenomenon called <b class="bf">resonance</b>. This is an large (sometimes infinite) increase in the amplitude of an oscillation when the system undergoes forcing at (or near) its natural frequency. 
+</p>
+<p>
+Suppose we have a system<a class="footnote" href="#a0000000259">
+<sup class="footnotemark">5</sup>
+</a>: <span class="dmath"><script type="math/tex; mode=display">\ddot{x}+\omega ^2x=\cos \omega _0t, \qquad x(0)=0, \qquad \dot{x}(0)=0.</script></span> This represents an oscillatory system with a natural frequency <script type="math/tex">\omega </script> being forced at a frequency <script type="math/tex">\omega _0</script>, chosen by us, where for the time being, we assume that <script type="math/tex">\omega \ne \omega _0</script>. The equation could model an undamped pendulum with periodic forcing. 
+</p>
+<p>
+We have: 
+</p>
+<ul class="itemize" id="a0000000260">
+<li id="a0000000261"> <p>
+a complementary function <span class="dmath"><script type="math/tex; mode=display">x_{CF}=A\sin \omega t +B\cos \omega t</script></span>
+</p>
+</li>
+<li id="a0000000262"> <p>
+a particular integral <span class="dmath"><script type="math/tex; mode=display">x_{P}=C\sin \omega _0 t +D\cos \omega _0 t</script></span> so for <script type="math/tex">\omega \ne \omega _0</script> there is no duplication between the complementary function or particular integral. 
+</p>
+</li>
+</ul>
+<p>
+ We have <span><script type="math/tex; mode=display">\begin{eqnarray*}  x_ P(t)& =& C\sin \omega _0 t +D\cos \omega _0 t, \\ \dot{x}_ P(t)& =& C\omega _0\cos \omega _0 t -D\omega _0\sin \omega _0 t \\ \ddot{x}_ P(t)& =& -C\omega _0^2\sin \omega _0 t -D\omega _0^2\cos \omega _0 t \end{eqnarray*}</script></span>
+</p>
+<p>
+Hence substitution into the full inhomogeneous equation gives <span><script type="math/tex; mode=display">\begin{eqnarray*}  -C\omega _0^2\sin \omega _0 t -D\omega _0^2\cos \omega _0 t+\omega ^2\left(C\sin \omega _0 t +D\cos \omega _0 t\right)& =& \cos \omega _0 t \\ C\left(\omega ^2-\omega _0^2\right)\sin \omega _0t +D\left(\omega ^2-\omega _0^2\right)\cos \omega _0t& =& \cos \omega _0 t \end{eqnarray*}</script></span> and we have <span class="dmath"><script type="math/tex; mode=display">C=0, \qquad D=\frac{1}{\omega ^2-\omega _0^2}</script></span> Thus the particular integral is <span class="dmath"><script type="math/tex; mode=display">x_{P}=\left(\frac{1}{\omega ^2-\omega _0^2}\right)\cos \omega _0 t.</script></span>
+</p>
+<p>
+It should be immediately obvious that if we tune the forcing frequency <script type="math/tex">\omega _0</script> to the natural frequency <script type="math/tex">\omega </script> then the coefficient of the particular integral, and so the amplitude of the motion, diverges. Although catastrophic for the solution, this makes sense on both physical and mathematical grounds. 
+</p>
+<p>
+On <b class="bfseries">physical</b> grounds the system is receiving a forcing input at precisely the frequency it would like to oscillate. All the energy of the forcing can be transmitted into increasing the amplitude of the natural oscillation. This is very similar to pushing a child on a swing. Push the child at the wrong frequency and the amplitude will not increase (and you’ll get hit in the face!). Push the child at the right frequency (just as the seat reaches its highest point in the swing) and the the amplitude of the swing will increase. 
+</p>
+<p>
+On <b class="bfseries">mathematical</b> grounds when <script type="math/tex">\omega _0=\omega </script> the particular integral becomes <script type="math/tex">\cos \omega t</script>, which identical to one of the components of the complementary function. Hence if we had started with <script type="math/tex">\omega _0=\omega </script>, mathematically a particular integral of the form <span class="dmath"><script type="math/tex; mode=display">x_ P(t)=t\left(C\sin \omega t+D \cos \omega t\right),</script></span> should have been used. A short exercise shows that taking this approach we obtain <span class="dmath"><script type="math/tex; mode=display">x_ P(t)=\frac{t}{2\omega _0}\sin \omega t \  .</script></span> However, you can see that this particular integral will also grow in time due to the presence of the multiplicative factor of <script type="math/tex">t</script>. Hence, the amplitude of the oscillation will still grow. So regardless of whether we examine the limit of <script type="math/tex">\omega _0\rightarrow \omega </script>, or first take <script type="math/tex">\omega _0=\omega </script> and then consider <script type="math/tex">t\rightarrow \infty </script>, the amplitude will diverge. The divergence of an amplitude is often indicative of a breakdown in the assumptions underlying the actual mathematical model. 
+</p>
+<figure id="ResGrowth">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/resonances/images/img-0010.png" style="width:252.945pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">3.5</span>
+<span class="caption_text">The growth of the amplitude of the oscillation when an undamped system is forced at its natural frequency <script type="math/tex">\omega _0</script> (here <script type="math/tex">=1</script>), resulting in the behaviour <script type="math/tex">x(t)=t\sin (\omega t)/2\omega _0</script>.</span>
+</figcaption> </div>
+</figure>
+<p>
+For example, if <script type="math/tex">x</script> in this equation were modelling the angle of swing of a pendulum, the differential equation would only be valid for small values of <script type="math/tex">|x| \ll 1</script>. Hence if the amplitude of the particular integral is increasing unboundedly as <script type="math/tex">\omega _0\rightarrow \omega </script>, then the assumptions that allowed us to linearise the equation from a <script type="math/tex">\sin x(t)</script> gravitational component to a simple <script type="math/tex">x(t)</script> term is false and hence at that frequency it would be more appropriate to consider the full nonlinear equation <span class="dmath"><script type="math/tex; mode=display">\ddot{x}-\omega ^2\sin x(t)=\cos \omega t.</script></span> Another reason for a physical failure of the model might be because we have neglected the effect of damping (see below). Hence a good <b class="bf">mathematical</b> rule of thumb is: 
+</p>
+<p>
+“Divergence in a linear model for a set of parameters means you should consider a more complete nonlinear model near those parameter values”. 
+</p>
+<section class="subsection">
+<h3 id="a0000000263">3.4.1 Beating</h3>
+<p>
+We continue to analyse the same situation as above, but we use it to discuss the phenomenon of <b class="bf">frequency beating</b>. 
+</p>
+<p>
+If we now keep <script type="math/tex">\omega \ne \omega _0</script>, the full solution is 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x = A \sin \omega t + B\cos \omega t + {1\over \omega ^2 - \omega _0^2} \cos \omega _0 t \  ,</script></span>
+<p>
+ which leads to 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x(0) = B + {1\over \omega ^2 - \omega _0^2} = 0 \  ,</script></span>
+<p>
+ and 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\dot x (0) = A \omega = 0 \Rightarrow A = 0 \  .</script></span>
+<p>
+ That is, we have <span class="dmath"><script type="math/tex; mode=display">x(t)=x_{CF}(t)+x_ P(t)=\left(\frac{1}{\omega ^2-\omega _0^2}\right)\left(\cos \omega _0 t-\cos \omega t\right).</script></span>
+</p>
+<p>
+Subtracting the angle addition formulae <span class="dmath"><script type="math/tex; mode=display">\cos (A \pm B)=\cos A\cos B \mp \sin A\sin B,</script></span> from one another, we have <span class="dmath"><script type="math/tex; mode=display">2\sin A \sin B= \cos (A-B) -\cos (A+B).</script></span>
+</p>
+<p>
+Hence, seting <script type="math/tex">A-B=\omega _0</script> and <script type="math/tex">A+B=\omega </script>, the full solution can be written as <span class="dmath"><script type="math/tex; mode=display">x(t)=\left(\frac{2}{\omega ^2-\omega _0^2}\right)\sin \left[\left(\frac{\omega +\omega _0}{2}\right)t\right]\sin \left[\left(\frac{\omega -\omega _0}{2}\right)t\right].</script></span>
+</p>
+<p>
+The structure of this extremely informative. It is an amplitude, multiplied by two sines. If <script type="math/tex">\omega </script> is approximately (but not exactly) equal to <script type="math/tex">\omega _0</script>, the first sine oscillates with a high frequency, being the mean of <script type="math/tex">\omega </script> and <script type="math/tex">\omega _0</script>. The second sine oscillates at a lower frequency being the half the difference of <script type="math/tex">\omega </script> and <script type="math/tex">\omega _0</script>. The effect can be seen graphically: 
+</p>
+<figure id="Beating">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/resonances/images/img-0012.png" style="width:252.945pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">3.6</span>
+<span class="caption_text">The effect of beating. Here the natural frequency is <script type="math/tex">\omega =1</script> and we have the forcing frequency set at <script type="math/tex">\omega _0=9/10</script>. The full line is the exact solution in the text. It is clear that high frequency waves, <script type="math/tex">(\omega +\omega _0)/2=19/20</script>, are modulated in amplitude by low frequency ones, <script type="math/tex">(\omega +\omega _0)/2=1/20</script>. The dashed lines denote the modulation of the amplitude given from the formula above by <script type="math/tex">\pm \sin \left\{ (\omega -\omega _0)t/2\right\} </script>.</span>
+</figcaption> </div>
+</figure>
+<p>
+The amplitude higher frequency component is modulated by the lower frequency component. This is a phenomenon known as <b class="bf">beating</b>. It occurs, for example, when two musical instruments, violins say, that are almost, but not quite in tune. The audience hears a note that is at the mean of the two violins, but the sound varies in loudness at half the difference of the notes (a wowing sound). 
+</p>
+</section><section class="subsection">
+<h3 id="a0000000264">3.4.2 Near resonance and damping.</h3>
+<p>
+The system we studied above had no damping <script type="math/tex">\dot{x}(t)</script> term. Damping terms have the effect of “smearing out” the resonance. To see this we study the equation <span class="dmath"><script type="math/tex; mode=display">\ddot{x}+\lambda \dot{x} +\omega ^2 x = \cos \omega _0 t</script></span> where <script type="math/tex">\lambda </script> is a positive damping constant such that <script type="math/tex">\lambda ^2<4\omega ^2</script> and the forcing frequency <script type="math/tex">\omega _0</script> is a parameter that can be changes to cycle through the value of the natural frequency of the undamped system <script type="math/tex">\omega </script>. 
+</p>
+<p>
+We now have: a complementary function <span class="dmath"><script type="math/tex; mode=display">x_{CF}=e^{-\lambda t/2}\left(A\cos \sigma t +B\sin \sigma t\right)</script></span> where <span class="dmath"><script type="math/tex; mode=display">\sigma =\sqrt{4\omega ^2-\lambda ^2}/2>0.</script></span> Clearly, this is a damped (actually underdamped) oscillatory motion, and so decreases in magnitude with time, whatever the forcing frequency <script type="math/tex">\omega _0</script> or (finite) initial conditions (i.e., the (finite) values of <script type="math/tex">A</script> and <script type="math/tex">B</script>). This type of motion is thus said to be <b class="bf">transient</b>: eventually the system will increasingly be increasingly less dominated by any component that corresponds to its <b class="bf">natural</b> frequency and will become increasingly dominated by motion at the <b class="bf">forced</b> frequency. Thus we won’t bother finding <script type="math/tex">A</script> and <script type="math/tex">B</script> and pass on to the particular integral. 
+</p>
+<p>
+Due to the presence of <script type="math/tex">e^{-\lambda t/2}</script> prefactor in the complementary function, the particular integral which takes the form <span class="dmath"><script type="math/tex; mode=display">x_{P}=C\sin \omega _0 t +D\cos \omega _0 t</script></span> now has no duplication with the complementary function whether <script type="math/tex">\omega _0=\omega </script> or not. The linear growth is no longer apparent. 
+</p>
+<p>
+We have (yet again) <span><script type="math/tex; mode=display">\begin{eqnarray*}  x_ P(t)& =& C\sin \omega _0 t +D\cos \omega _0 t, \\ \dot{x}_ P(t)& =& C\omega _0\cos \omega _0 t -D\omega _0\sin \omega _0 t \\ \ddot{x}_ P(t)& =& -C\omega _0^2\sin \omega _0 t -D\omega _0^2\cos \omega _0 t \end{eqnarray*}</script></span>
+</p>
+<p>
+Hence substitution into the full inhomogeneous equation gives 
+</p>
+<span><script type="math/tex; mode=display">\begin{eqnarray*}  -C\omega _0^2\sin \omega _0 t -D\omega _0^2\cos \omega _0 t+\lambda \left(C\omega _0\cos \omega _0 t -D\omega _0\sin \omega _0 t \right)+\\ +\omega ^2\left(C\sin \omega _0 t +D\cos \omega _0 t\right)& =& \cos \omega _0 t \\ \left\{ C\left(\omega ^2-\omega _0^2\right)-\lambda D \omega _0\right\} \sin \omega _0t +\left\{ D\left(\omega ^2-\omega _0^2\right)+\lambda C \omega _0\right\} \cos \omega _0t& =& \cos \omega _0 t \end{eqnarray*}</script></span>
+<p>
+ and we have <span class="dmath"><script type="math/tex; mode=display">C\left(\omega ^2-\omega _0^2\right)-\lambda D \omega _0=0, \qquad D\left(\omega ^2-\omega _0^2\right)+\lambda C \omega _0=1</script></span> which can be solved simultaneously to give <span class="dmath"><script type="math/tex; mode=display">C=\frac{\lambda \omega _0}{\left(\omega ^2-\omega _0^2\right)^2+\left(\lambda \omega _0\right)^2} \qquad D=\frac{\left(\omega ^2-\omega _0^2\right)}{\left(\omega ^2-\omega _0^2\right)^2+\left(\lambda \omega _0\right)^2}</script></span>
+</p>
+<p>
+Thus the particular integral is <span class="dmath"><script type="math/tex; mode=display">x_{P}=\frac{\lambda \omega _0}{\left(\omega ^2-\omega _0^2\right)^2+\left(\lambda \omega _0\right)^2}\sin \omega _0 t+\frac{\left(\omega ^2-\omega _0^2\right)}{\left(\omega ^2-\omega _0^2\right)^2+\left(\lambda \omega _0\right)^2}\cos \omega _0t</script></span> This can be put into the form of just a single, phase lagged, oscillatory term using the standard addition formulae for sine and cosine: <span><script type="math/tex; mode=display">\begin{eqnarray*} C\sin \omega _0t+D\cos \omega _0t& =& \sqrt{C^2+D^2}\left(\underbrace{\frac{C}{\sqrt{C^2+D^2}}}_{=\cos \phi }\sin \omega _0t+\underbrace{\frac{D}{\sqrt{C^2+D^2}}}_{=\sin \phi }\cos \omega _0t\right). \\ \Rightarrow x_ P(t)& =&  \sqrt{C^2+D^2}\sin (\omega _0 t +\phi ), \\ \tan \phi & =& \frac{D}{C}. \end{eqnarray*}</script></span>
+</p>
+<p>
+Using this approach we see that the amplitude of the oscillation is <script type="math/tex">R(\omega _0)=\sqrt{C^2+D^2}</script>. For our <script type="math/tex">C</script> and <script type="math/tex">D</script> above this is <span class="dmath"><script type="math/tex; mode=display">R(\omega _0)=\frac{1}{\sqrt{\left(\omega ^2-\omega _0^2\right)^2+\left(\lambda \omega _0\right)^2}}, \qquad \tan \phi = \frac{\left(\omega ^2-\omega _0^2\right)}{\lambda \omega }.</script></span>
+</p>
+<p>
+If we take the driving amplitude to be 1, the ratio of the response to the forcing is <script type="math/tex">R(\omega _0)</script>. A graph of this as a function of <script type="math/tex">\omega _0</script> is plotted below for different values of <script type="math/tex">\lambda </script>. Note that at resonance <script type="math/tex">\omega _0=\omega </script>, the response climbs rapidly in amplitude, but is not infinite. The size of the response at resonance increases as the damping <script type="math/tex">\lambda </script> decreases. 
+</p>
+<figure id="ResonanceAmplitude">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/resonances/images/img-0014.png" style="width:252.945pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">3.7</span>
+<span class="caption_text">The growth of the ratio of the amplitude of response to the amplitude of forcing, <script type="math/tex">R(\omega _0)</script> as the damping <script type="math/tex">\lambda </script> decreases, plotted as a function of the forcing frequency <script type="math/tex">\omega _0</script> near to the resonance frequency <script type="math/tex">\omega =1</script>. As <script type="math/tex">\lambda \rightarrow 0</script>, the width of the resonance peak narrows and the amplitude at resonance <script type="math/tex">R(\omega _0=\omega =1)\rightarrow \infty </script> </span>
+</figcaption> </div>
+</figure>
+<p>
+Clearly the damping in the system means avoids a divergence in the response. This is a more physically realistic model of forced oscillatory systems. 
+</p>
+<p>
+This is a simple model of the mechanism that is responsible for the serious problems that arose with the Millennium footbridge in London. Soon after it was opened to foot passengers in June 2000, it became apparent that the bridge was undergoing a resonance swaying due to the frequency of footfalls. Extra masses and dampers had to be added to change the position and amplitude of the resonance. A more catastrophic example of resonance is the Tacoma bridge collapse of 1940. There a resonance of the bridge was excited by abnormal wind conditions. This resonance built up and ultimately led to the collapse of the bridge. Resonance is still an extremely important consideration in engineering construction (be it civil or electrical). 
+</p>
+</section>
+</section><section class="section">
+<h2 id="a0000000265">3.5 Going further: The Wronskian</h2>
+<p>
+So far we have focussed on second order constant equations. The are nice—because we can solve them–but they do not (necessarily) represent reality. In order to go further, we need to develop a bit more computational technology. As this machinery can be applied to more general problems, we take as our starting point an equation of form <span class="dmath"><script type="math/tex; mode=display">\frac{d^2x}{dt^2}+p(t)\frac{dx}{dt}+q(t)x(t)=r(t),</script></span> where <script type="math/tex">p, q</script> and <script type="math/tex">r</script> are known functions of <script type="math/tex">t</script>. We also need initial data: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x(0) = x_0 \qquad \dot x(0) = u_0\  .</script></span>
+<p>
+We first consider the <b class="bf">homogeneous</b> case where <script type="math/tex">r(t)=0</script>: <span class="dmath"><script type="math/tex; mode=display">\frac{d^2x}{dt^2}+p(t)\frac{dx}{dt}+q(t)x(t)=0.</script></span> and pose two questions we have so far (conveniently) avoided. How many solutions does this equation have? How do we know that these solutions are “independent”? 
+</p>
+<p>
+The first step towards answering these questions involves noting that, since the equation is linear, we can add solutions to get solutions. In essence, a linear combination of solutions is also a solution. This is easy to prove, bit it does not take us very far. We may also note that, since we have a second order equation, we need to “integrate” twice which means that we would expect to have two integration constants floating around. This suggests that (perhaps) we should expect that there are two solutions. This turns out to be correct, but how do we prove this? 
+</p>
+<p>
+Suppose we start by assuming that there is a single solution, <script type="math/tex">x_1(t)</script>, corresponding to given initial data at (say) <script type="math/tex">t=t_0</script>. Setting <script type="math/tex">x(t)=\alpha x_1(t)</script> with <script type="math/tex">\alpha </script> we then require <span><script type="math/tex; mode=display">\begin{eqnarray*}  \alpha x_1(t_0)& =& x_0 \qquad \Rightarrow \qquad \alpha =x_0/x_1(t_0)\\ \alpha \dot{x}_1(t_0)& =& u_0 \qquad \Rightarrow \qquad \alpha =u_0/\dot{x}_1(t_0) \end{eqnarray*}</script></span> and it is easy to see that we cannot (in general) satisfy both equations with a single value of <script type="math/tex">\alpha </script>. Hence, a single solution is not sufficient to provide a unique solution to the second order system of the equation plus two initial conditions. 
+</p>
+<p>
+What happens if we consider two solutions, <script type="math/tex">x_1(t)</script> and <script type="math/tex">x_2(t)</script>? Now set <script type="math/tex">x(t)=\alpha x_1(t)+\beta x_2(t)</script> with <script type="math/tex">\alpha </script> and <script type="math/tex">\beta </script> constants. Then the initial conditions require <span><script type="math/tex; mode=display">\begin{eqnarray*}  \alpha x_1(t_0)+\beta x_2(t_0)& =& x_0 \\ \alpha \dot{x}_1(t_0)+\beta \dot{x}_2(t_0)& =& u_0 \end{eqnarray*}</script></span> This can be written as a matrix equation <span class="dmath"><script type="math/tex; mode=display">\left(\begin{array}{cc}x_1(t_0) &  x_2(t_0) \\ \dot{x}_1(t_0) &  \dot{x}_2(t_0)\end{array}\right)\left(\begin{array}{c}\alpha \\ \beta \end{array}\right)=\left(\begin{array}{c}x_0 \\ u_0\end{array}\right)</script></span> We see that, in order that solutions <script type="math/tex">\alpha </script> and <script type="math/tex">\beta </script> exist, we require the existence of the inverse of the <script type="math/tex">2\times 2</script> matrix containing the initial data, <script type="math/tex">x_ i(t_0)</script>. 
+</p>
+<p>
+From standard matrix theory (=linear algebra!), we know that the inverse exists if the determinant of the square matrix is non-zero, i.e., 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\left|\begin{array}{cc}x_1(t_0) &  x_2(t_0) \\ \dot{x}_1(t_0) &  \dot{x}_2(t_0)\end{array}\right|\ne 0.</script></span>
+<p>
+ We learn that two solutions will be sufficient, as long as this condition is satisfied. 
+</p>
+<p>
+Suppose that this determinant were actually zero. What would that mean? If we evaluate it explicitly we obtain<a class="footnote" href="#a0000000266">
+<sup class="footnotemark">6</sup>
+</a>
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x_1(t_0)\dot{x}_2(t_0)-\dot{x}_1(t_0)x_2(t_0)=0 \qquad \Rightarrow \qquad \frac{x_1(t_0)}{x_2(t_0)}=\frac{\dot{x}_1(t_0)}{\dot{x}_2(t_0)}=c, \  {\rm say}.</script></span>
+<p>
+ Hence if the determinant were to vanish, we would have 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x_1(t_0)=cx_2(t_0), \qquad \dot{x}_1(t_0)=c\dot{x}_2(t_0)</script></span>
+<p>
+ which implies that the two solutions <script type="math/tex">x_1(t)</script> and <script type="math/tex">x_2(t)</script> are proportional: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x_1(t)=cx_2(t).</script></span>
+<p>
+Suppose instead that there are three fundamental solutions. Set <script type="math/tex">x(t)=\alpha x_1(t)+\beta x_2(t)+\gamma x_3(t)</script> where <script type="math/tex">x_3(t)\not \equiv 0</script> and <script type="math/tex">\alpha </script>, <script type="math/tex">\beta </script>, <script type="math/tex">\gamma </script> constants to be found by satisfaction of the initial conditions. Then the initial conditions require the following equations to be satisfied: 
+</p>
+<span><script type="math/tex; mode=display">\begin{eqnarray*}  \alpha x_1(t_0)+\beta x_2(t_0)+\gamma x_3(t_0)& =& x_0 \\ \alpha \dot{x}_1(t_0)+\beta \dot{x}_2(t_0)+\gamma \dot{x}_3(t_0)& =& u_0 \end{eqnarray*}</script></span>
+<p>
+ This is an <b class="bf">underdetermined</b> system with 3 unknowns, but only 2 equations. Hence it is impossible to determine unique values of <script type="math/tex">\alpha </script>, <script type="math/tex">\beta </script> and <script type="math/tex">\gamma </script>—we cannot have a unique solution. A similar argument applies when we have more than three candidate fundamental solutions. 
+</p>
+<p>
+We have learned something very important. A necessary and sufficient condition to find the complete solution of a second order homogenous linear ordinary differential equation with initial conditions is that we find two solutions <script type="math/tex">x_1(t)</script>, <script type="math/tex">x_2(t)</script> such that 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\left|\begin{array}{cc}x_1(t_0) &  x_2(t_0) \\ \dot{x}_1(t_0) &  \dot{x}_2(t_0)\end{array}\right|\ne 0.</script></span>
+<p>
+ Then the general solution of the differential equation is 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x(t)=\alpha x_1(t)+\beta x_2(t)</script></span>
+<p>
+ with <script type="math/tex">\alpha </script> and <script type="math/tex">\beta </script> determined by the initial conditions. 
+</p>
+<p>
+The arguments leads us to define the <b class="bf">Wronskian</b> <span class="dmath"><script type="math/tex; mode=display">W\left[x_1(t),x_2(t)\right]=\left|\begin{array}{cc}x_1(t) &  x_2(t) \\ \dot{x}_1(t) &  \dot{x}_2(t)\end{array}\right|</script></span> Its non-vanishing is intimately related to the concept of <b class="bf">linear independence</b>. 
+</p>
+<p>
+ [width=%+10mm]Linearly independents solutions 
+</p>
+<p>
+Consider the equation for a simple harmonic oscillator 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x” + x = 0</script></span>
+<p>
+ for which we know the solutions 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x_1(t)=\cos t, \qquad x_2(t)=\sin t.</script></span>
+<p>
+ Then we have 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x’_1(t)=-\sin t, \qquad x’_2(t)=\cos t,</script></span>
+<p>
+ so that 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">W[x_1(t),x_2(t)]=\left|\begin{array}{cc}x_1(t) &  x_2(t) \\ x’_1(t) &  x’_2(t)\end{array}\right|=\left|\begin{array}{cc}\cos t &  \sin t \\ -\sin t &  x’_2(t)\end{array}\right|=\cos ^2 t + \sin ^2 t =1, \forall t.</script></span>
+<p>
+ Hence we deduce that <script type="math/tex">\cos t</script> and <script type="math/tex">\sin t</script> are linearly independent, i.e., it is not possible to find non-zero constants <script type="math/tex">c_1</script> and <script type="math/tex">c_2</script> such that <script type="math/tex">c_1 \cos t + c_2 \sin t =0</script> on an interval of <script type="math/tex">t</script>. (Of course we can find these constants so that <script type="math/tex">c_1 \cos t + c_2 \sin t =0</script> at a point, but linear dependence would require this expression to vanish over a range of values of <script type="math/tex">t</script>.)  
+</p>
+</section><section class="section">
+<h2 id="a0000000267">3.6 General force terms: Variation of parameters</h2>
+<p>
+Finally, let us go a step further in the direction of more realistic situations, e.g. where the involved forces do not lend themselves to “guessing” suitable particular integrals. This illustrates an important method, which “happens” to include our recent friend, the Wronskian. The key point is that it provides a systematic way to obtain a particular integral without any form of guesswork. The method of <b class="bf">variation of parameters</b> provides just such a method. It can be applied whether the coefficients in the linear equation are constant or functions of the independent variable. 
+</p>
+<p>
+Let us start from a linear second order equation of form: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x”(t)+p(t)x’(t)+q(t)x(t)=r(t),</script></span>
+<p>
+ and assume that we have found a complementary function 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x_{CF}(t)=\alpha x_1(t)+\beta x_2(t)</script></span>
+<p>
+ which satisfies the homogeneous equation 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x”(t)+p(t)x’(t)+q(t)x(t)=0.</script></span>
+<p>
+ Suppose we now look for a particular integral of the form 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x_{P}(t)=v_1(t)x_1(t)+v_2(t)x_2(t),</script></span>
+<p>
+ where the <script type="math/tex">x_ i(t)</script> are the complementary functions above and <script type="math/tex">v_ i(t)</script> are functions to be determined. 
+</p>
+<p>
+Note that, if <script type="math/tex">v_ i(t)</script> were constants then this would have an identical form to the complementary function, which would not be allowed. We therefore assume that <script type="math/tex">v_ i(t)</script> are <b class="bf">not</b> constants and that they will turn out to be such that the complementary function is linearly independent of the particular integral. 
+</p>
+<p>
+Let us further suppose that the following two conditions hold (we will soon see why these are useful): 
+</p>
+<span><script type="math/tex; mode=display">\begin{eqnarray*}  v’_1(t)x_1(t)+v’_2(t)x_2(t)& =& 0 \\ v’_1(t)x’_1(t)+v’_2(t)x’_2(t)& =& r(t) \end{eqnarray*}</script></span>
+<p>
+ We can make these two assumptions, since the two <script type="math/tex">v_ i(t)</script> are, as yet, undetermined. 
+</p>
+<p>
+To find the <script type="math/tex">v_ i(t)</script> we must differentiate <script type="math/tex">x_{P}(t)</script> and substitute it into the inhomogeneous equation. We then have 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x’_{P}(t)=\underbrace{v'_1(t)x_1(t)+v'_2(t)x_2(t)}_{=0 \   {\rm by \  assumption}}+v_1(t)x’_1(t)+v_2(t)x’_2(t)=v_1(t)x’_1(t)+v_2(t)x’_2(t)</script></span>
+<span class="dmath"><script type="math/tex; mode=display">x”_{P}(t)=v_1(t)x”_1(t)+v_2(t)x”_2(t)+\underbrace{v'_1(t)x'_1(t)+v'_2(t)x'_2(t)}_{=r(t) \   {\rm by \  assumption}}=v_1(t)x”_1(t)+v_2(t)x”_2(t)+r(t)</script></span>
+<p>
+Substitution thus gives 
+</p>
+<span><script type="math/tex; mode=display">\begin{eqnarray*}  {\rm LHS}& =& x”_ P+p(t)x’_ P+q(t)x_ P(t) \\ & =& \left\{ v_1(t)x”_1(t)+v_2(t)x”_2(t)+r(t)\right\} +p(t)\left\{ v_1(t)x’_1(t)+v_2(t)x’_2(t)\right\} +q(t)x_ P(t) \\ & =& v_1(t)\underbrace{\left\{ x''_1(t)+p(t)x'_1(t)+q(t)x_1(t)\right\} }_{=0}+v_2(t)\underbrace{\left\{ x''_2(t)+p(t)x'_2(t)+q(t)x_2(t)\right\} }_{=0}+r(t) \\ & =&  r(t) = {\rm RHS} \end{eqnarray*}</script></span>
+<p>
+So what? Well... we have just shown that 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x_{P}(t)=v_1(t)x_1(t)+v_2(t)x_2(t)</script></span>
+<p>
+ is the particular integral of 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x”(t)+p(t)x’(t)+q(t)x(t)=r(t)</script></span>
+<p>
+ provided that 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x”_ i(t)+p(t)x’_ i(t)+q(t)x_ i(t)=0, \qquad i=1,2</script></span>
+<p>
+ and 
+</p>
+<span><script type="math/tex; mode=display">\begin{eqnarray*}  v’_1(t)x_1(t)+v’_2(t)x_2(t)& =& 0 \\ v’_1(t)x’_1(t)+v’_2(t)x’_2(t)& =& r(t). \end{eqnarray*}</script></span>
+<p>
+ How does this help to find the <script type="math/tex">v_ i(t)</script>? We have two simultaneous equations for <script type="math/tex">v'_ i(t)</script>. These can be rewritten as a matrix equation: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\left(\begin{array}{cc}x_1(t) &  x_2(t) \\ x’_1(t) &  x’_2(t)\end{array}\right)\left(\begin{array}{c}v’_1(t) \\ v’_2(t)\end{array}\right)=\left(\begin{array}{c}0 \\ r(t)\end{array}\right)</script></span>
+<p>
+ which can be solved by inverting the coefficient matrix to give 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\left(\begin{array}{c}v’_1(t) \\ v’_2(t)\end{array}\right)=\frac{\left(\begin{array}{cc}x’_2(t) &  -x_2(t) \\ -x’_1(t) &  x_1(t)\end{array}\right)}{\left|\begin{array}{cc}x_1(t) &  x_2(t) \\ x’_1(t) &  x’_2(t)\end{array}\right|}\left(\begin{array}{c}0 \\ r(t)\end{array}\right)=\frac{r(t)}{W[x_1(t),x_2(t)]}\left(\begin{array}{c}-x_2(t) \\ x_1(t)\end{array}\right)</script></span>
+<p>
+ where we have recognised <script type="math/tex">W[x_1(t),x_2(t)]</script> as the Wronskian of <script type="math/tex">x_1(t)</script> and <script type="math/tex">x_2(t)</script>. Thus we have two equations to solve 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">v’_1(t)=-\frac{x_2(t)r(t)}{W[x_1(t),x_2(t)]}, \qquad v’_2(t)=\frac{x_1(t)r(t)}{W[x_1(t),x_2(t)]}</script></span>
+<p>
+ These can be integrated immediately with respect to <script type="math/tex">t</script> to give the solutions 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">v_1(t)=-\int ^ t\frac{x_2(\zeta )r(\zeta )}{W[x_1(\zeta ),x_2(\zeta )]}d \zeta \qquad v_2(t)=\int ^ t\frac{x_1(\zeta )r(\zeta )}{W[x_1(\zeta ),x_2(\zeta )]}d\zeta</script></span>
+<p>
+At the end of the day, we find that the particular integral is given by 
+</p>
+<span><script type="math/tex; mode=display">\begin{eqnarray*}  x_{P}(t)& =& v_1(t)x_1(t)+v_2(t)x_2(t) \\ & =& -x_1(t)\int ^ t\frac{x_2(\zeta )r(\zeta )}{W[x_1(\zeta ),x_2(\zeta )]}d \zeta +x_2(t)\int ^ t\frac{x_1(\zeta )r(\zeta )}{W[x_1(\zeta ),x_2(\zeta )]}d\zeta \\ \Rightarrow x_{P}(t)& =& \int ^ t\frac{\left\{ x_2(t)x_1(\zeta )-x_1(t)x_2(\zeta )\right\} r(\zeta )}{W[x_1(\zeta ),x_2(\zeta )]}d\zeta \end{eqnarray*}</script></span>
+<p>
+ The final formula can be conveniently remembered as 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x_{P}(t)=\int ^ t\frac{\left|\begin{array}{cc}x_1(\zeta ) &  x_2(\zeta ) \\ x_1(t) &  x_2(t)\end{array}\right|}{W[x_1(\zeta ),x_2(\zeta )]}r(\zeta )d\zeta</script></span>
+<ul class="itemize" id="a0000000268">
+<li id="a0000000269"> <p>
+Note that the lower limit is not specified. This is because any arbitrary change in the lower limit just generates the complementary function, which adds nothing to the particular integral. Hence it is possible to ignore the arbitrary constant of integration. 
+</p>
+</li>
+<li id="a0000000270"> <p>
+Note that the coefficients in the inhomogeneous equation <script type="math/tex">p(t)</script> and <script type="math/tex">q(t)</script> were not assumed to be constants. Hence this formula is valid for particular integrals of more than just inhomogeneous equations of differential equations with constant coefficients. 
+</p>
+</li>
+<li id="a0000000271"> <p>
+An analogous formula can be derived for <script type="math/tex">n^{\rm th}</script> order equations, but we will not consider this here. 
+</p>
+</li>
+</ul>
+<p>
+ [width=%+10mm]A simple case 
+</p>
+<p>
+Consider the following linear, inhomogeneous, second order, constant-coefficient equation: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\ddot{x}-\dot{x}-2x=e^{3t}</script></span>
+<p>
+ for which it is easy to see that the particular integral has the form <script type="math/tex">Ae^{3t}</script> and we can substitute in to find <script type="math/tex">A</script>. Now let us instead use variation of parameters to systematically find the particular integral <b class="bf">without guessing</b>. 
+</p>
+<p>
+The complementary function is 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x(t)=Ae^{-t}+Be^{2t} \qquad \Rightarrow \qquad x_1(t)=e^{-t}, x_2(t)=e^{2t}</script></span>
+<p>
+The inhomogeneous term on the right-hand side is 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">r(t)=e^{3t}.</script></span>
+<p>
+The Wronskian is 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">W[x_1(\zeta ),x_2(\zeta )]= \left|\begin{array}{cc}x_1(\zeta ) &  x_2(\zeta ) \\ \dot{x}_1(\zeta ) &  \dot{x}_2(\zeta )\end{array}\right|=\left|\begin{array}{cc}e^{-\zeta } &  e^{2\zeta } \\ -e^{-\zeta } &  2e^{2\zeta }\end{array}\right|=3e^{\zeta }</script></span>
+<p>
+Thus the particular integral is given by: 
+</p>
+<span><script type="math/tex; mode=display">\begin{eqnarray*}  x_{P}(t)& =& \int ^ t\frac{\left|\begin{array}{cc}e^{-\zeta } &  e^{2\zeta } \\ e^{-t} &  e^{2t}\end{array}\right|}{3e^{\zeta }}e^{3\zeta }d\zeta \\ & =& \frac{1}{3}\int ^ t\left(e^{2t-\zeta }-e^{2\zeta -t}\right) e^{2\zeta }d\zeta \\ & =&  \frac{1}{3}\int ^ t\left(e^{2t+\zeta }-e^{4\zeta -t}\right) d\zeta \\ & =& \frac{1}{3}e^{2t}\int ^ t e^{\zeta } d\zeta -\frac{1}{3}e^{-t}\int ^ te^{4\zeta } d\zeta \\ & =& \frac{1}{3}e^{2t+t} -\frac{1}{12}e^{-t+4t} \\ & =& \frac{1}{4}e^{3t}, \end{eqnarray*}</script></span>
+<p>
+ where it is worth noting that we ignored the constants of integration in the integral. 
+</p>
+<p>
+ [width=%+10mm]A more complicated situation 
+</p>
+<p>
+The variation of parameters is a powerful tool for finding the particular integral of inhomogeneous equations where it is not easy to guess its form from the inhomogeneity on the right-hand side. As an example of this, we seek the particular integral of the inhomogeneous equation: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\ddot{x}-2\dot{x}+x=\frac{e^ t}{t^2+1}.</script></span>
+<p>
+The complementary function is given in straightforward manner by 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x(t)=(A+Bt)e^ t \qquad \Rightarrow \qquad x_1(t)=e^{t}, x_2(t)=te^{t}</script></span>
+<p>
+The inhomogeneous term on the RHS is 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">r(t)=\frac{e^ t}{t^2+1},</script></span>
+<p>
+ which is clearly like nothing we have studied before. Don’t panic! Just use the formula from variation of parameters. 
+</p>
+<p>
+The Wronskian is 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">W[x_1(\zeta ),x_2(\zeta )]= \left|\begin{array}{cc}x_1(\zeta ) &  x_2(\zeta ) \\ \dot{x}_1(\zeta ) &  \dot{x}_2(\zeta )\end{array}\right|=\left|\begin{array}{cc}e^{\zeta } &  \zeta e^{\zeta } \\ e^{\zeta } &  (1+\zeta )e^{\zeta }\end{array}\right|=e^{2\zeta }</script></span>
+<p>
+Thus the particular integral is given by: 
+</p>
+<span><script type="math/tex; mode=display">\begin{eqnarray*}  x_{P}(t)& =& \int ^ t\frac{\left|\begin{array}{cc}e^{\zeta } &  \zeta e^{\zeta } \\ e^{t} &  te^{t}\end{array}\right|}{e^{2\zeta }}\left(\frac{e^\zeta }{\zeta ^2+1}\right)d\zeta \\ & =& \int ^ t\left(te^{t+\zeta }-\zeta e^{\zeta +t}\right) \left(\frac{e^{-\zeta }}{\zeta ^2+1}\right)d\zeta \\ & =& \int ^ t \frac{\left(te^{t}-\zeta e^{t}\right)}{\zeta ^2+1}d\zeta \\ & =& te^{t}\int ^ t \frac{d\zeta }{\zeta ^2+1}d\zeta - e^{t}\int ^ t \frac{\zeta }{\zeta ^2+1}d\zeta \\ & =& te^{t}\arctan t - \frac{1}{2}e^ t \log | t^2+1| \end{eqnarray*}</script></span>
+<p>
+ Which clearly looks nothing like the original right-hand side: without the formula from the variation of parameters we would not not have realistically been able to guess the form of the PI! 
+</p>
+<p>
+Finally, the general solution of the above equation is 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x(t)=x_{CF}+x_{P}=(A+Bt)e^ t+te^{t}\arctan t - \frac{1}{2}e^ t \log | t^2+1|.</script></span>
+</section><section class="section">
+<h2 id="a0000000272">3.7 Eigenvalues and boundary value problems (vibrating strings)</h2>
+<p>
+So far we have assumed that the problem we consider involves only initial conditions, which serve to fix the integration constants in the problem and/or the relation between linearly independent solutions at the initial time. There is, however, an important alternative to this, where the solution is instead constrained by set boundary conditions. This changes the nature of the problem—instead of considering the evolution of the system we would typically end up discussing eigenvalues and characteristic solutions which help us understand the behaviour. We will not go very far in this direction, but it is very important that we understand the ideas involved as the lay the foundation for the standard method of solving linear <b class="bfseries">partial differential equations</b>. 
+</p>
+<p>
+As a step in this direction—aimed at illustrating the principle and the fact that the specification of boundary data may lead to either no solutions or an infinite number of them—let us consider <span class="dmath"><script type="math/tex; mode=display">x”(t)+p(t)x’(t)+\lambda q(t)x(t)=0, \qquad x(a)=0,\qquad x(b)=0.</script></span> The key point is that we will treat <script type="math/tex">\lambda </script> as a parameter, which turns out to determine the existence and type of solutions. Intuitively, thinking of this as an initially unspecified parameter, we can “tune” <script type="math/tex">\lambda </script> (exactly as in tuning the frequency of a violin string, say) to select the type of solution we want. 
+</p>
+<p>
+Typically a solution satisfying the boundary conditions will exist for only certain values of <script type="math/tex">\lambda </script>. Such problems are called <b class="bf">eigenvalue problems</b> and <script type="math/tex">\lambda </script> is the <b class="bf">eigenvalue</b><a class="footnote" href="#a0000000273">
+<sup class="footnotemark">7</sup>
+</a>. The solution of the equation+boundary value problem corresponding to a particular value of <script type="math/tex">\lambda </script> is called the <b class="bf">eigenfunction</b>. 
+</p>
+<p>
+The relationship between eigenvalues of differential equations and matrices through linear algebra is intimate, but beyond the scope of the present discussion. 
+</p>
+<section class="subsection">
+<h3 id="a0000000274">3.7.1 Determination of Eigenvalues.</h3>
+<p>
+Starting from the equation<a class="footnote" href="#a0000000275">
+<sup class="footnotemark">8</sup>
+</a>
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x”(t)+\lambda x(t)=0, \qquad x(0)=0, \qquad x(L)=0, \qquad L>0.</script></span>
+<p>
+ let us figure out which values of <script type="math/tex">\lambda </script> lead to non-trivial solutions? We have to consider all (real) possibilities. 
+</p>
+<ul class="itemize" id="a0000000276">
+<li id="a0000000277"> <p>
+Suppose we have <script type="math/tex">\lambda =0</script>: 
+</p>
+<p>
+If <script type="math/tex">\lambda =0</script>, the equation becomes <script type="math/tex">x''(t)=0</script>, with a general solution 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x=At+B,</script></span>
+<p>
+ Substitution into the endpoint conditions gives <script type="math/tex">A=B=0</script>. Hence the only solution when <script type="math/tex">\lambda =0</script> is the trivial one <script type="math/tex">x(t)=0</script>. Such static solutions are often rejected in modelling situations as being too boring, or irrelevant. Hence <script type="math/tex">\lambda =0</script> is rejected as an eigenvalue. 
+</p>
+</li>
+<li id="a0000000278"> <p>
+If, instead, the parameter is negative, <script type="math/tex">\lambda <0=-\alpha ^2</script>: 
+</p>
+<p>
+Now the equation 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x”(t)-\alpha ^2 x(t)=0</script></span>
+<p>
+ has a general solution 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x(t)=A\cosh \alpha t+B\sinh \alpha t.</script></span>
+<p>
+ Substitution into the left endpoint conditions gives: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x(0)=A\cosh 0+B\sinh 0 =A =0.</script></span>
+<p>
+ Substitution into the right endpoint conditions gives: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x(L)=A\cosh \alpha L+B\sinh \alpha L =B\sinh \alpha L =0.</script></span>
+<p>
+ Now <script type="math/tex">\sinh \alpha L</script> can only vanish when <script type="math/tex">\alpha L=0</script>. Hence we deduce that <script type="math/tex">B=0</script>. Again the only solution when <script type="math/tex">\lambda <0</script> is the trivial one <script type="math/tex">x(t)=0</script>. Hence there are no eigenvalues when <script type="math/tex">\lambda <0</script>. 
+</p>
+</li>
+<li id="a0000000279"> <p>
+Finally, the parameter may be positive, <script type="math/tex">\lambda >0=+\alpha ^2</script>: 
+</p>
+<p>
+The equation is now 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x”(t)+\alpha ^2 x(t)=0</script></span>
+<p>
+ with a general solution 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x(t)=A\cos \alpha t+B\sin \alpha t.</script></span>
+<p>
+ Substitution into the left endpoint conditions gives: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x(0)=A\cos 0+B\sin 0 =A =0.</script></span>
+<p>
+ Substitution into the right endpoint conditions gives: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x(L)=A\cos \alpha L+B\sin \alpha L =B\sin \alpha L =0.</script></span>
+<p>
+ Clearly <script type="math/tex">B\sin \alpha L</script> can vanish when <script type="math/tex">B=0</script>. This would again lead to a trivial solution. However <script type="math/tex">B\sin \alpha L</script> can also vanish if we tune <script type="math/tex">\lambda </script> so that 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\alpha L=n\pi , \qquad n\in {\mathbb N} \qquad \Rightarrow \qquad \alpha =\frac{n\pi }{L} \qquad \Rightarrow \qquad \lambda \equiv \lambda _ n=\left(\frac{n\pi }{L}\right)^2.</script></span>
+<p>
+ Hence for a set of discrete eigenvalues <script type="math/tex">\lambda _ n</script>, we can find eigenfunctions 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x(t)=B\sin \lambda _ n t=B_ n\sin \frac{n\pi t}{L}</script></span>
+<p>
+ that satisfy the equation and the boundary conditions. Note that <script type="math/tex">B</script> is still undetermined. Any possible finite value of <script type="math/tex">B</script> will do, and it could vary between the <script type="math/tex">\lambda _ n</script>. As we shall see in the example below, additional information is often used to determine which values of <script type="math/tex">B_ n</script> are appropriate. 
+</p>
+</li>
+</ul>
+<figure id="EigenSine">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/resonances/images/img-0016.png" style="width:252.945pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">3.8</span>
+<span class="caption_text">The eigenfunctions <script type="math/tex">\sin n\pi t/L</script> for <script type="math/tex">L=1</script>, <script type="math/tex">n=1,2,3,4</script>.</span>
+</figcaption> </div>
+</figure>
+<p>
+We have effectively just solved the problem of an oscillating violin/guitar string. The eigenvalues we have found are the frequencies you hear when the string instrument is played. The eigenfunctions describe ways in which the strings can vibrate. 
+</p>
+</section>
+</section><section class="section">
+<h2 id="a0000000280">3.8 Euler-type equations</h2>
+<p>
+An Euler-type equation<a class="footnote" href="#a0000000281">
+<sup class="footnotemark">9</sup>
+</a> is the simplest type of second order differential equations that does <b class="bf">not</b> have constant coefficients. The class of equations is easy extended to higher orders, but we will only consider the second-order example: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">a_2t^2\frac{d^2x}{dt^2}+a_1t\frac{dx}{dt}+a_0x=0.</script></span>
+<p>
+ (one factor of <script type="math/tex">t</script> per derivative). The problem is easily solved because it can be turned into a second-order linear constant-coefficient equation by the change of variables: <span style="color:#000000"><span class="dmath"><script type="math/tex; mode=display">z=\ln t \qquad \Rightarrow \qquad t=e^ z.</script></span></span> Using the chain rule, we have <span><script type="math/tex; mode=display">\begin{eqnarray*}  \frac{dx}{dt}& =& \frac{dx}{dz}\frac{dz}{dt}=\frac{1}{t}\frac{dx}{dz}=e^{-z}\frac{dx}{dz} \\ \frac{d^2x}{dt^2}& =& \frac{d}{dt}\left(\frac{dx}{dt}\right)=\frac{d}{dt}\left(e^{-z}\frac{dx}{dz}\right) = e^{-z}\frac{d}{dz}\left(e^{-z}\frac{dx}{dz}\right)=e^{-2z}\frac{d^2x}{dz^2}-e^{-2z}\frac{dx}{dz}. \end{eqnarray*}</script></span> Substitution of these results into the Euler equation gives <span><script type="math/tex; mode=display">\begin{eqnarray*}  a_2e^{2z}\left(e^{-2z}\frac{d^2x}{dz^2}-e^{-2z}\frac{dx}{dz}\right)+a_1e^{z}\left(e^{-z}\frac{dx}{dz}\right)+a_0x& =& 0, \\ a_2\frac{d^2x}{dz^2}+(a_1-a_2)\frac{dx}{dz}+a_0x& =& 0 \end{eqnarray*}</script></span> This is (obviously) a homogeneous second-order constant-coefficient equation and so can be solved by the usual method, for <script type="math/tex">x</script> as a function of <script type="math/tex">z</script>. Then <script type="math/tex">x</script> can be written in terms of <script type="math/tex">t</script> by using the substitution <script type="math/tex">z=\ln t</script>. 
+</p>
+<p>
+In practice, note that (at least for distinct roots) the solutions of the transformed equation will take the form <script type="math/tex">e^{k_ i z}</script>. Hence after transforming back to the original variables <script type="math/tex">x</script>, then the solutions take the form <script type="math/tex">t^{k_ i}</script>. Hence it is possible to attack Euler equations by a direct substitution of solutions of the form <script type="math/tex">t^ k</script> and solving the indicial equation (=auxiliary equations) for <script type="math/tex">k</script>. 
+</p>
+<p>
+ [width=%+10mm]Stellar oscillations 
+</p>
+<p>
+A typical situation where Euler equations arise is in <em>astero-seismology</em> (the oscillations of stars)—perhaps ironically, involving the Euler equations from fluid dynamics. The relevant equation relates to the dependence on the radial coordinate, which we will call <script type="math/tex">t</script> in order to stay close to the previous description. One arrives at an ordinary differential equation by the method of separation of variables (which you will find out a lot more about next year). This equation can be written 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">t^2 x” + 2t x’ - l(l+1) x = 0</script></span>
+<p>
+ with <script type="math/tex">l\ge 0</script> and integer. We want the solution to be i) regular at the centre, <script type="math/tex">t=0</script>, and ii) match smoothly to a solution in the star’s exterior. We will ignore the second of these conditions for now. 
+</p>
+<p>
+Trying a power-law solution, <script type="math/tex">x=t^\alpha </script>, we get 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\alpha (\alpha -1) t^2 \times t^{\alpha -2} + 2 \alpha t\times t^{\alpha -1} - l(l+1) t^\alpha = 0</script></span>
+<p>
+ or, dividing through by the common factor <script type="math/tex">t^\alpha </script>; 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\alpha (\alpha -1) + 2\alpha - l(l+1) = 0</script></span>
+<p>
+ or 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\alpha ^2 + \alpha - l(l+1) = 0 \Longrightarrow \alpha = -{1\over 2} \pm \sqrt{{1\over 4} + l(l+1) } = -{1\over 2} \pm \left( l+ {1\over 2} \right)</script></span>
+<p>
+ We have two options. Either <script type="math/tex">\alpha = l</script>, which means that the solution behaves like <script type="math/tex">t^ l</script>. That is, it satisfies the boundary condition at <script type="math/tex">t=0</script>. The other option is <script type="math/tex">\alpha = -l - 1</script> and a solution that behaves as <script type="math/tex">t^{-l-1}</script>, which diverges as <script type="math/tex">t\to 0</script> and therefore must be discarded.  
+</p>
+<section class="subsection">
+<h3 id="a0000000282">3.8.1 Repeated roots of the indical equation</h3>
+<p>
+Suppose we want to solve <span class="dmath"><script type="math/tex; mode=display">t^2\frac{d^2x}{dt^2}+3t\frac{dx}{dt}+x=0.</script></span> Try a solution of the form <script type="math/tex">x(t)=t^ k</script>, as before. Then <span class="dmath"><script type="math/tex; mode=display">x’(t)=kt^{k-1}, \qquad x”(t)=k(k-1)^{k-2}.</script></span> Substitution into the equation gives <span class="dmath"><script type="math/tex; mode=display">t^2\times \underbrace{k(k-1)t^{k-2}}_{x''(t)}+3t\times \underbrace{kt^{k-1}}_{x'(t)} +\underbrace{t^ k}_{x(t)}=0 \qquad \Rightarrow \qquad \left\{ k(k-1)+3k +1\right\} t^ k=0</script></span> This equation must be valid for all <script type="math/tex">t</script>, hence we obtain the <b class="bf">indicial</b> equation as <span class="dmath"><script type="math/tex; mode=display">k(k-1)+3k+1=0 \qquad \Rightarrow \qquad k^2+2k+1=0 \qquad \Rightarrow \qquad k=-1, {\rm twice.}</script></span> We obtain but one solution as <script type="math/tex">x=1/t</script>, but what about the other one? The hint comes from what happens when you have equal roots in a second order linear constant coefficient equations. In that case the solution takes the form <script type="math/tex">(A+Bz)e^{k_1z}</script>. We could have solved the Euler equation by a transformation <script type="math/tex">z=\ln t</script> as a second order linear constant coefficient equation, in which case <script type="math/tex">k_1=-1</script>. Hence the general solution takes the form: <span class="dmath"><script type="math/tex; mode=display">x(t)=\frac{A}{t}+\frac{B}{t}\ln t.</script></span> In general when there are equal roots <script type="math/tex">k_1</script> for the indicial equation of an Euler equation, the general solution is then <span class="dmath"><script type="math/tex; mode=display">x(t)=(A+B\ln t)t^{k_1}</script></span>
+</p>
+</section><section class="subsection">
+<h3 id="a0000000283">3.8.2 Complex roots of the indicial equation</h3>
+<p>
+It is also possible to obtain complex values for the roots of the indicial equation, say <script type="math/tex">k=\alpha \pm \beta i</script>. In that case, using the rules of logarithms, the general solution can be written as 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x(t)=At^{\alpha +\beta i}+Bt^{\alpha -\beta i}=t^\alpha \left(A e^{\beta i\ln t}+Be^{-\beta i\ln t}\right)=t^\alpha \left(C \cos (\beta \ln t)+D \sin (\beta \ln t)\right),</script></span>
+<p>
+ where <script type="math/tex">A, B</script>, or alternatively, <script type="math/tex">C, D</script> are arbitrary constants determined by the two initial/boundary conditions. 
+</p>
+</section>
+</section>
+<hr/>
+<ol>
+<li id="a0000000240">This simply means that they are not proportional to one another.</li>
+<li id="a0000000241">This is a new concept. We will return to it later.</li>
+<li id="a0000000244">You can derive this, but we will not do that here.</li>
+<li id="a0000000250">The exponential always wins over the linear term if you wait a while.</li>
+<li id="a0000000259">Note that the driving force is time dependent.</li>
+<li id="a0000000266">Assuming here that <script type="math/tex">x_2(t_0)\ne 0</script>, <script type="math/tex">\dot{x}_2(t_0)\ne 0</script>, but an analogous satisfactory argument can be found when they are.</li>
+<li id="a0000000273"><i class="it">Eigen</i> is a German word meaning “own” in the sense of “special” or “characteristic” value.</li>
+<li id="a0000000275">This problem is motivated by the one-dimensional wave equation <span class="dmath"><script type="math/tex; mode=display">{\partial ^2 Y \over \partial t^2} - {\partial ^2 Y \over \partial x^2}=0</script></span> which, if we assume that the time dependence is “harmonic” (read: <script type="math/tex">Y\propto e^{i\omega t}</script> for some frequency <script type="math/tex">\omega </script>), reduces to <span class="dmath"><script type="math/tex; mode=display">{\partial ^2 Y \over \partial x^2}+ \omega ^2 Y = 0</script></span></li>
+<li id="a0000000281">Note that Euler was so prolific that there are many different equations that bear the name “Euler equation", e.g., the main equation in fluid dyanmics.</li>
+</ol>
+
+            </div>
+        </div>
+    </div>
+
+        </main>
+		
+		<footer class="text-muted">
+	<hr>
+	<div class="container">
+		<div class="float-right">
+			<ul style="list-style: none">
+			<li><a href="#">Back to top</a></li>
+			
+			
+			<li><a href="../../../notes/notes_by_chapter/resonances/resonances.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;Download as PDF</a></li>
+			
+			</ul>
+		</div>
+		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
+		<p>This page last generated: 2022-07-03</p>
+	</div>
+</footer>
+		
+    </body>
+</html>

@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        
+            <meta charset="utf-8">
+            <meta name="robots" content="noindex">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="author" content="Nils Andersson" />
+            <meta name="date" content="2022-07-03" />
+        
+
+        <title>Collisions | Dynamics and Relativity</title>
+
+        
+    
+    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../../../static/styles.css">
+            <link rel="stylesheet" id="customiseCSS" href="../../../static/light.css">
+            
+            
+        
+    <link rel="stylesheet" id="customiseCodeCSS" href="../../../static/pygmentize.light.css">
+    <link rel="stylesheet" href="../../../static/codemirror-5.26.0/lib/codemirror.css">
+    <link rel="stylesheet" href="../../../static/boole.css">
+    <link rel="stylesheet" href="../../../static/numbasEmbed.css">
+
+    <link rel="stylesheet" href="../../../static/bootstrap-toc.css?v=3">
+    <link rel="stylesheet" href="../../../static/print.css">
+
+
+        
+    
+    
+            <script defer src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <script defer src="../../../static/mathjax_config.js"></script>
+            <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+            <script defer src="../../../static/customisation.js"></script>
+            <script defer src="../../../static/mp4.js"></script>
+            
+            
+        
+    <script defer src="../../../static/jquery.flexibleArea.js"></script>
+    <script defer src="../../../static/spin.min.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/lib/codemirror.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/octave/octave.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/python/python.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/r/r.js"></script>
+    <script defer src="../../../static/boole.js"></script>
+    <script defer src="../../../static/numbasEmbed.js"></script>
+
+    <script defer src="../../../static/bootstrap-toc.js"></script>
+
+    </head>
+    <body data-spy="scroll" data-target="#chapterTOC" data-offset="50">
+        
+<div class="collapse" id="navbarToggleCustomise">
+	<div class="bg-secondary text-white p-3">
+		<form onsubmit="return false;" id="navbarCustomise">
+			<div class="form-row">
+				<label>Theme Customisation</label>
+				<div id="themeSelector" class="form-group col-md-12">
+					<button class="btn btn-dark mr-2" value="dark">Dark</button>
+					<button class="btn btn-pastel mr-2" value="pastel">Pastel</button>
+					<button class="btn btn-light mr-4" value="light">Light</button>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label style="display: block" for="font-scale">Font size (<span id="font-size-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="font-scale" min="50" max="600" value="100">
+					<button id="font-scale-reset" class="btn btn-sm">Reset</button>
+				</div>
+				<div class="form-group col-md-4">
+					<label style="display: block" for="p-space">Spacing (<span id="p-space-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="p-space" min="0" max="600" value="100">
+					<button id="p-space-reset" class="btn btn-sm">Reset</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<nav aria-label="breadcrumb">
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="../../../index.html">Dynamics and Relativity</a>
+		</li>
+		
+		<li class="breadcrumb-item">
+			<a href="../../../notes/notes_by_chapter/index.html">Notes by chapter</a>
+		</li>
+		
+		<li class="breadcrumb-item active">
+			Collisions
+		</li>
+		<li class="ml-auto">
+			<button class="navbar-toggler p0" type="button" data-toggle="collapse" data-target="#navbarToggleCustomise" aria-controls="navbarToggleCustomise" aria-expanded="false" aria-label="Toggle customisations panel">
+				<i class="fa fa-cog" aria-hidden="true" title="Toggle customisations panel"></i> <span class="sr-only">Toggle customisations panel</span>
+			</button>
+		</li>
+	</ul>
+</nav>
+
+
+        <header>
+            
+            
+        </header>
+        <main>
+            
+    <div class="container mt-3">
+        <div class="row">
+            
+            <div id="sidebar" class="col-md-3">
+                <nav class="mb-3" id="chapterTOC" data-toggle="toc">
+                    <ul class="nav navbar-nav">
+                        
+                        
+                        
+                        <li><a id="pdf-link" class="nav-link" href="../../../notes/notes_by_chapter/collisions/collisions.pdf" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" title="Download as PDF"></i>&nbsp;Download as PDF</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+            <div id="content" class="col-md-9"> 
+            
+            
+<!-- Latex Chapter/Part -->
+<h1 id="a0000000112">Collisions</h1>
+<p>
+As an application of the conservation of momentum, we will consider a set of problems involving the collision of two bodies. This is a common set-up in Nature, ranging from bar-room billiards to particle collisions in the Large Hadron Collider at CERN. We will discuss the classic Newtonian problem, but also take a look at how the results change if we are dealing with velocities near the speed of light. 
+</p>
+<p>
+In essence, we will make use of the concept of conservation of momentum, but before we do, we need to discuss what happens when momentum is <b class="bf">not</b> conserved. For this we need to introduce the idea of an <b class="bf">impulse</b>. 
+</p>
+<section class="section">
+<h2 id="sect:impulses">7.1 Impulses</h2>
+<p>
+In many situations a body is subjected to a rapidly applied force, e.g., the collision of two cars, a ball hitting the wall or even a punch in the face. In such situations, the velocity of the particle changes rapidly in a short time. 
+</p>
+<figure id="figure71">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/collisions/images/img-0002.png" style="width:180.67499999999998pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">7.1</span>
+<span class="caption_text">Short timescale, large amplitude force.</span>
+</figcaption> </div>
+</figure>
+<p>
+Consider an event where the force is applied for a brief period of time <script type="math/tex">t_1<t<t_2</script>. According to <b class="bf">N2</b> the velocity change will involve a momentum change: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec F}(t)=\frac{d{\vec p}}{dt}.</script></span>
+<p>
+ This momentum change is given by integrating both sides of <b class="bf">N2</b> to give <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec I}\equiv \int _{t_1}^{t_2}{\vec F}(t)dt={\vec p}(t_2)-{\vec p}(t_1).</script></span></span> The time integral of <script type="math/tex">{\vec F}</script> is called the <b class="bf">impulse</b> of the force and is denoted by <script type="math/tex">{\vec I}</script>. The impulse is therefore the change in momentum of the body due to the rapidly applied force. 
+</p>
+<p>
+When two particles collide, in general an impulsive force acts on each one. If the collision is rapid, the effect of forces acting over significantly longer timescales may be insignificant. We can then use the concepts of conservation of momentum and impulse to study the effect of the collision on the particles. 
+</p>
+</section><section class="section">
+<h2 id="a0000000113">7.2 Conservation of Total Momentum</h2>
+<p>
+Consider two bodies that collide: 
+</p>
+<ul class="itemize" id="a0000000114">
+<li id="a0000000115"> <p>
+Body <script type="math/tex">A</script> with momentum <script type="math/tex">{\vec p_ A}=m_ A{\vec v_ A}</script>. 
+</p>
+</li>
+<li id="a0000000116"> <p>
+Body <script type="math/tex">B</script> with momentum <script type="math/tex">{\vec p_ B}=m_ B{\vec v_ B}</script>. 
+</p>
+</li>
+</ul>
+<figure id="figure72">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/collisions/images/img-0004.png" style="width:180.67499999999998pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">7.2</span>
+<span class="caption_text">When worlds collide.</span>
+</figcaption> </div>
+</figure>
+<p>
+The collision is rapid and causes an impulse to each body. Assuming no other forces act during this rapid interaction, then by the time-integral of <b class="bf">N2</b> discussed above <br/><span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec p_ A}^{\rm after}-{\vec p_ A}^{\rm before}={\vec I_ A}, \qquad \qquad {\vec p_ B}^{\rm after}-{\vec p_ B}^{\rm before}={\vec I_ B}</script></span> </span> Now by <b class="bf">N3</b> at the moment of contact the bodies exert equal, but opposite forces on each other, so we must have <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec I_ A}=-{\vec I_ B}</script></span> </span> and moreover these act in the direction of <script type="math/tex">\pm {\vec n}</script>, where <script type="math/tex">\vec n</script> is a unit vector along the line from the centre of one body to the centre of the other. Thus adding the two momentum equations we have <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\left({\vec p_ A}^{\rm after}-{\vec p_ A}^{\rm before}\right)+\left({\vec p_ B}^{\rm after}-{\vec p_ B}^{\rm before}\right)={\vec0}</script></span> <br/><span class="dmath"><script type="math/tex; mode=display">\therefore \qquad \underbrace{\left({\vec p_ A}^{\rm after}+{\vec p_ B}^{\rm after}\right)}_{\rm total \  momentum  after}=\underbrace{\left({\vec p_ A}^{\rm before}+{\vec p_ B}^{\rm before}\right)}_{\rm total \  momentum \  before}</script></span> </span> The <b class="bf">total</b> momentum of the system is conserved in the impact. 
+</p>
+</section><section class="section">
+<h2 id="a0000000117">7.3 Newton’s Law of Restitution</h2>
+<p>
+Conservation of total momentum alone does not allow us to determine the momentum of each particle separately after the collision: it gives us but one vector equation for two vector unknowns <script type="math/tex">{\vec p_ A}^{\rm after}</script> and <script type="math/tex">{\vec p_ B}^{\rm after}</script>. We need more information. 
+</p>
+<p>
+The nature of the forces acting between the bodies depends on their material properties. A pair of steel ball bearings will rebound in a different way than say, two cars. To assess the effect of differing material properties on the collision would be (far too) complicated. Fortunately, experiment leads to a simple empirical law. 
+</p>
+<p>
+<b class="bf">Newton’s Law of Restitution</b>: When two bodies collide, their relative parting velocity in the direction of their line of contact <script type="math/tex">{\vec n}</script> (<script type="math/tex">|{\vec n}|=1</script>), is <script type="math/tex">-e</script> times their relative approaching velocity in the same direction. <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\left({\vec v_ A}^{\rm after}-{\vec v_ B}^{\rm after}\right)\cdot {\vec n}=-e\left({\vec v_ A}^{\rm before}-{\vec v_ B}^{\rm before}\right)\cdot {\vec n}</script></span> </span> Note that this law contains the <b class="bf">velocities</b> and <b class="bf">not</b> the momenta of the bodies. 
+</p>
+<p>
+The number <script type="math/tex">e</script> is an empirically determined constant that depends on the nature of the particles and encompasses the effect of their material properties on the collision. It is called the <b class="bf">coefficient of restitution</b>. 
+</p>
+<ul class="itemize" id="a0000000118">
+<li id="a0000000119"> <p>
+If <script type="math/tex">e=1</script> the collision is said to be perfectly elastic (a theoretical ideal). 
+</p>
+</li>
+<li id="a0000000120"> <p>
+If <script type="math/tex">e=0</script>, the collision is perfectly inelastic (like throwing mud at a wall). 
+</p>
+</li>
+</ul>
+<p>
+ In practice the coefficient of restitution takes a value in the range <script type="math/tex">0<e<1</script>. Only in the case of a perfectly elastic collision is the total kinetic energy of the system conserved. In an inelastic collision a proportion of the kinetic energy will be converted into another form of energy, such as heat, light or sound. 
+</p>
+</section><section class="section">
+<h2 id="a0000000121">7.4 Constancy of velocities perpendicular to line of collision</h2>
+<p>
+We still don’t have enough information to calculate the velocities of the bodies after the collision. The final ingredient follows from the definition of an impulse: <em>if there is no friction between the bodies</em>, no impulsive force will act perpendicular to their line of centres. Hence we deduce that, for frictionless collisions: 
+</p>
+<ul class="itemize" id="a0000000122">
+<li id="a0000000123"> <p>
+the momentum component of each particle in a direction orthogonal to the line of centres <script type="math/tex">{\vec n}</script>, is conserved ; 
+</p>
+</li>
+<li id="a0000000124"> <p>
+hence if the masses remain unchanged, the velocity of each particle in the direction orthogonal to <script type="math/tex">{\vec n}</script> is unchanged. 
+</p>
+</li>
+</ul>
+<p>
+ Mathematically, we have <b class="bf">conservation of perpendicular velocities</b>: When the two bodies collide, if the unit vector <script type="math/tex">{\vec t}</script> is perpendicular to the direction of their line of contact <script type="math/tex">{\vec n}</script>, then <br/><span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec v_ A}^{\rm after}\cdot {\vec t}={\vec v_ A}^{\rm before}\cdot {\vec t}, \qquad {\vec v_ B}^{\rm after}\cdot {\vec t}={\vec v_ B}^{\rm before}\cdot {\vec t}.</script></span> </span> This is important: It gives us enough information to close the system of equations and solve for the motion of the bodies after the collision. 
+</p>
+</section><section class="section">
+<h2 id="a0000000125">7.5 Collisions and Non-conservation of Kinetic Energy</h2>
+<p>
+As the ideas we have outlined are best illustrated by actual examples, we will consider a series of (increasingly involved) problem settings. It is natural to start with a one-dimensional situation. 
+</p>
+<p>
+Two particles of mass <script type="math/tex">m_1</script> and <script type="math/tex">m_2</script> are moving in the same direction with speeds <script type="math/tex">u_1</script> and <script type="math/tex">u_2</script>, respectively and collide. Find their subsequent velocities <script type="math/tex">u'_1</script> and <script type="math/tex">u'_2</script> if their coefficient of restitution is <script type="math/tex">e</script>. 
+</p>
+<figure id="figure73">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/collisions/images/img-0006.png" style="width:325.215pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">7.3</span>
+<span class="caption_text">Collision parallel to the line of centres.</span>
+</figcaption> </div>
+</figure>
+<p>
+When the particles collide, their line of contact will be along (say) the <script type="math/tex">{\vec n}={\hat i}</script> direction and they each experience an equal impulse of magnitude <script type="math/tex">I</script>, but in opposite directions. 
+</p>
+<ul class="itemize" id="a0000000126">
+<li id="a0000000127"> <p>
+Conservation of momentum for ball 1: <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\rm (A)} \qquad m_1u’_1{\hat i}=m_1u_1{\hat i}+I{\hat i},</script></span> </span> where the sign of the impulse has been chosen arbitrarily. 
+</p>
+</li>
+<li id="a0000000128"> <p>
+Conservation of momentum for ball 2: <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\rm (B)} \qquad m_2u’_2{\hat i}=m_2u_2{\hat i}-I{\hat i},</script></span> </span> where the sign of the impulse has been determined to be opposite to the choice in (A). 
+</p>
+</li>
+<li id="a0000000129"> <p>
+Newton’s law of restitution acts in the <b class="bf">i</b> direction is: <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\rm (C)} \qquad \left(u’_2{\hat i}-u’_1{\hat i}\right)\cdot {\hat i}=-e\left(u_2{\hat i}-u_1{\hat i}\right)\cdot {\hat i}</script></span> </span>
+</p>
+</li>
+<li id="a0000000130"> <p>
+Since there is no initial motion perpendicular to the line of contact of the bodies, there is no motion perpendicular afterwards. It is enough to consider the components <script type="math/tex">u_1</script>, <script type="math/tex">u_2</script>, <script type="math/tex">u'_1</script>, <script type="math/tex">u'_2</script>. 
+</p>
+</li>
+<li id="a0000000131"> <p>
+Resolving into components we have three equations for the three unknowns, <span style="color:#000000"> <span><script type="math/tex; mode=display">\begin{eqnarray*}  {\rm (A)} \   \  \qquad m_1 u’_1& =& m_1 u_1+I \\ {\rm (B)} \  \  \qquad m_2 u’_2& =& m_2 u_2-I \\ {\rm (C)} \qquad u’_2-u’_1& =& -e(u_2-u_1) \end{eqnarray*}</script></span> </span>
+</p>
+</li>
+<li id="a0000000132"> <p>
+Remove <script type="math/tex">I</script> by considering (A)<script type="math/tex">+</script>(B) <script type="math/tex">\Rightarrow </script> <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">m_1 u’_1+m_2 u’_2=m_1 u_1+m_2 u_2</script></span> </span>
+</p>
+</li>
+</ul>
+<p>
+ With (C), we now have two equations for the two unknowns <script type="math/tex">u'_1</script> and <script type="math/tex">u'_2</script>. These can be solved simultaneously to give: <span style="color:#000000"> <span><script type="math/tex; mode=display">\begin{eqnarray*}  u’_1& =&  \frac{u_1(m_1-em_2)+m_2u_2(1+e)}{(m_1+m_2)}\\ u’_2& =&  \frac{u_2(m_2-em_1)+m_1u_1(1+e)}{(m_2+m_2)}\\ \end{eqnarray*}</script></span> </span> <script type="math/tex">I</script> may be calculated by back-substitution of <script type="math/tex">u'_1</script> or <script type="math/tex">u'_2</script> into (A) or (B). This gives <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">I=\frac{m_1m_2}{m_1+m_2}(1+e)(u_2-u_1).</script></span> </span> Note that often we are not so much interested in <script type="math/tex">I</script> as the velocities after the collision. Hence we do not always bother to determine it. 
+</p>
+<section class="subsection">
+<h3 id="a0000000133">7.5.1 Elastic and inelastic collisions</h3>
+<p>
+Note that if <script type="math/tex">e=1</script> and <script type="math/tex">m_1=m_2</script>, the speeds of the particles interchange at the collision, i.e., <script type="math/tex">u'_1=u_2, \  u'_2=u_1</script>. Calculations of this type underlie the modelling of the executive toy known as “Newton’s Cradle". 
+</p>
+<p>
+Note also that when the collision is perfectly elastic the kinetic energy is conserved. 
+</p>
+<p>
+The total kinetic energy before collision <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">T_{\rm before} =\frac{1}{2}m_1u_1^2+\frac{1}{2}m_2u_2^2</script></span> </span>
+</p>
+<p>
+The total kinetic energy after the collision <span style="color:#000000"> <span><script type="math/tex; mode=display">\begin{eqnarray*}  T_{\rm after} & =& \frac{1}{2}m_1{u’}_1^2+\frac{1}{2}m_2{u’}_2^2 \\ & =& \frac{1}{2}m_1\left\{ \frac{u_1(m_1-m_2)+2m_2u_2}{(m_1+m_2)}\right\} ^2+\frac{1}{2}m_2\left\{ \frac{u_2(m_2-m_1)+2m_1u_1}{(m_2+m_2)}\right\} ^2 \\ & =& \cdots \\ & =&  \frac{1}{2}m_1u_1^2+\frac{1}{2}m_2u_2^2 \end{eqnarray*}</script></span> </span> If <script type="math/tex">e\ne 1</script> then the total kinetic energy is <b class="bf">not</b> conserved. Where does this energy go? The <b class="bf">total</b> energy <b class="bf">has</b> been conserved, but some of the kinetic energy has been converted into other forms of energy. This could be (for example) heat, acoustic, or even light energy. The mechanical problem can predict the amount of the kinetic energy that is transformed, but not the form the energy takes. 
+</p>
+<p>
+<br/>
+</p>
+<figure id="figure74">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/collisions/images/img-0008.png" style="width:216.81pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">7.4</span>
+<span class="caption_text">Ball bouncing off a wall.</span>
+</figcaption> </div>
+</figure>
+<p>
+ [width=%+10mm]Bouncing ball 
+</p>
+<p>
+A ball of mass <script type="math/tex">m</script> hits the ground. The ball is travelling at speed <script type="math/tex">u</script> at an angle <script type="math/tex">\theta </script> to the ground, as in figure <a class="ref" href="../../../notes/notes_by_chapter/collisions/index.html#figure74">7.4</a>. If the coefficient of restitution of impact is <script type="math/tex">e</script>, (and there is no spin on the ball) find the velocity after the impact. 
+</p>
+<p>
+Before impact: <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec p_{\rm ball \  before}}=m(u\cos \theta {\hat i}-u\sin {\theta }{\hat k})</script></span> </span> At impact: line of centres is along <script type="math/tex">{\hat k}</script>, hence the impulse takes the form <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec I}=I{\hat k}</script></span> </span> After impact: assume that ground does not move, <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec p_{\rm ball \  after}}=m(u’\cos \phi {\hat i}+u’\sin {\phi }{\vec k})</script></span> </span> Conservation of Momentum for ball: 
+</p>
+<p>
+<span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">m(u’\cos \phi {\hat i}+u’\sin {\phi }{\hat k})=m(u\cos \theta {\vec i}-u\sin {\theta }{\hat k})+I{\hat k}</script></span> </span> Now apply Newton’s law of restitution: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\textcolor{black}{ {\hat k} \cdot [{\vec v}_{\rm ball, \,  after} - {\vec v}_{\rm ground, \,  after}] = -e {\hat k} \cdot [{\vec v}_{\rm ball, \,  before} - {\vec v}_{\rm ground, \,  before} ] }</script></span>
+<p>
+ Assume that ground does not move, so that <script type="math/tex">\Rightarrow {\vec v}_{\rm ground, \,  before}= {\vec v}_{\rm ground, \,  after}={\vec0}</script>, <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">(u’\cos \phi {\hat i}+u’\sin {\phi }{\hat k}-{\vec0})\cdot {\vec k}=-e(u\cos \theta {\hat i}-u\sin {\theta }{\hat k}-{\vec0})\cdot {\vec k}</script></span> </span> Resolving the conservation of momentum equations into <script type="math/tex">{\hat i}</script> and <script type="math/tex">{\hat k}</script> components these give 3 equations for the three unknowns, <script type="math/tex">u', \phi </script> and <script type="math/tex">I</script>., <span style="color:#000000"> <span><script type="math/tex; mode=display">\begin{eqnarray*}  {\rm (A)} \  \qquad mu’\cos \phi & =& mu\cos \theta \\ {\rm (B)} \  \qquad mu’\sin \phi & =& -mu\sin \theta +I \\ {\rm (C)} \  \  \  \qquad u’\sin \phi & =& eu\sin \theta \end{eqnarray*}</script></span> </span> (C)/(A) <script type="math/tex">\Rightarrow </script> <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\tan \phi =e\tan \theta</script></span> </span> (A)<script type="math/tex">^2+</script>(C)<script type="math/tex">^2</script> <script type="math/tex">\Rightarrow </script> <span style="color:#000000"> <span><script type="math/tex; mode=display">\begin{eqnarray*}  u’^2(\cos ^2\phi +\sin ^2\phi )& =& u^2(\cos ^2\theta +e^2\sin ^2\theta ) \\ \Rightarrow u’& =& u\sqrt{1-(1-e^2)\sin ^2\theta } \end{eqnarray*}</script></span> </span> If we require it, (B) can then be used to determined the impulse as <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">I = m e u \sin \theta + m u \sin \theta = (1+e)m u \sin \theta</script></span> </span>
+</p>
+<figure id="figure75a">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/collisions/images/img-0010.png" style="width:307.1475pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">7.5</span>
+<span class="caption_text">Oblique impact. (Two billiards are said to collide <i class="it">obliquely</i>, if their initial velocities point in directions different to their line of centres at collision.)</span>
+</figcaption> </div>
+</figure>
+<p>
+[width=%+10mm]Oblique collision 
+</p>
+<p>
+Consider two colliding billiard balls <script type="math/tex">A</script> and <script type="math/tex">B</script> of equal mass <script type="math/tex">m</script> whose line of centres lie in the direction <script type="math/tex">{\hat i}</script> at the point of collision, see figure <a class="ref" href="../../../notes/notes_by_chapter/collisions/index.html#figure75a">7.5</a>. Let the velocities before the collision be <script type="math/tex">{\vec v_ A}=\sqrt{2}\left({\hat i}+{\hat j}\right)</script> and <script type="math/tex">{\vec v_ B}={\vec0}</script>. The coefficient of restitution between the balls is <script type="math/tex">e</script>. Find the velocities of the balls after collision. 
+</p>
+<p>
+We shall use the following notation for the post-collision velocities for <script type="math/tex">A</script> and <script type="math/tex">B</script>, respectively: <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec v’_ A}=a{\hat i}+b{\hat j}, \qquad {\vec v’_ B}=\alpha {\hat i}+\beta {\hat j}.</script></span> </span> Conservation of momentum: <span style="color:#000000"> <span><script type="math/tex; mode=display">\begin{eqnarray*}  m_ A{\vec v_ A}+m_ B{\vec v_ B}& =& m_ A{\vec v’_ A}+m_ B{\vec v’_ B} \\ \Rightarrow {\vec v_ A}+{\vec0}& =& {\vec v’_ A}+{\vec v’_ B} \\ \Rightarrow \sqrt{2}\left({\hat i}+{\hat j}\right)& =& a{\hat i}+b{\hat j}+\alpha {\hat i}+\beta {\hat j} \\ \Rightarrow \sqrt{2}& =& a+\alpha \quad {\rm and\,  } \quad \sqrt{2} = b+\beta . \end{eqnarray*}</script></span> </span> Newton’s law of restitution along the line of centres <script type="math/tex">{\vec n}={\hat i}</script>: <span style="color:#000000"> <span><script type="math/tex; mode=display">\begin{eqnarray*}  \left({\vec v’_ A}-{\vec v’_ B}\right)\cdot {\hat i}& =& -e\left({\vec v_ A}-{\vec v_ B}\right)\cdot {\hat i} \\ \left(\left\{ a{\hat i}+b{\hat j}\right\} -\left\{ \alpha {\hat i}+\beta {\hat j}\right\} \right)\cdot \vec{i}& =& -e\left(\sqrt{2}\left\{ {\hat i}+{\hat j}\right\} -{\vec0}\right) \cdot {\hat i} \\ a-\alpha & =& -\sqrt{2}e. \end{eqnarray*}</script></span></span> Conservation of (momentum) perpendicular to line of motion <script type="math/tex">{\vec t}={\hat j}</script>. The mass of either particle does not change (classically) as a result of the collition, so conservation of momentum perpendicular to the line of centres just becomes conservation of velocities: <span style="color:#000000"> <span><script type="math/tex; mode=display">\begin{eqnarray*}  {\vec v’_ A}\cdot {\hat j}={\vec v_ A}\cdot {\hat j} \qquad \Rightarrow \qquad b=\sqrt{2},\\ {\vec v’_ B}\cdot {\hat j}={\vec v_ B}\cdot {\hat j} \qquad \Rightarrow \qquad \beta =0. \end{eqnarray*}</script></span> </span> Combining the momentum and restitution equations and simultaneously solving for <script type="math/tex">a</script> and <script type="math/tex">\alpha </script>, we have: <span style="color:#000000"> <span><script type="math/tex; mode=display">\begin{eqnarray*}  \sqrt{2}& =& a+\alpha \\ -e\sqrt{2}& =& a-\alpha \\ \Rightarrow a& =& \frac{1}{\sqrt{2}}\left(1-e\right) \qquad \alpha =\frac{1}{\sqrt{2}}\left(1+e\right). \end{eqnarray*}</script></span> </span> Hence drawing everything together, we have <span style="color:#000000"> <span><script type="math/tex; mode=display">\begin{eqnarray*}  {\vec v’_ A}& =& \frac{1}{\sqrt{2}}(1-e){\hat i}+ \sqrt{2} {\hat j} , \\ {\vec v’_ B}& =& \frac{1}{\sqrt{2}}(1+e){\hat i}. \end{eqnarray*}</script></span> </span> Note that the originally stationary ball <script type="math/tex">B</script> moves off along the line of centres at impact. If you play snooker you may already know that one aims to hit the coloured ball with the cue ball so that the line of centres points towards the pocket. This is a mathematical explanation of this phenomenon. 
+</p>
+<p>
+This is, of course, an idealised model. In practice, friction between balls and table may affect the results. 
+</p>
+</section>
+</section><section class="section">
+<h2 id="a0000000134">7.6 Centre of mass</h2>
+<p>
+Let us now consider what happens if the impact takes place at high velocities. In order to do this it is useful (as it simplifies the mathematics) to focus on elastic collisions<a class="footnote" href="#a0000000135">
+<sup class="footnotemark">1</sup>
+</a>. In general all velocities are vectors, but in order to keep the discussion simple we will consider motion in one dimension, in which case the velocities can be treated as scalars. 
+</p>
+<p>
+Suppose we know the velocities of two particle before they collide, <script type="math/tex">v_1</script> and <script type="math/tex">v_2</script>. These are measured in the “lab frame”. If the two masses are <script type="math/tex">m_1</script> and <script type="math/tex">m_2</script> then the corresponding total (kinetic) energy is 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">T=T_1 + T_2 = {1\over 2} m_1 v_1^2 + {1\over 2} m_2 v_2^2</script></span>
+<p>
+However, in many situations it is convenient to consider the problem in a different coordinate system, e.g. one that is moving along with the centre of mass. In this system, the two velocities are <script type="math/tex">u_1</script> and <script type="math/tex">u_2</script> (say) and, if the centre of mass moves with velocity <script type="math/tex">V</script>, we have the simple transformations 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">u_1 = v_1 - V</script></span>
+<span class="dmath"><script type="math/tex; mode=display">u_2 = v_2 - V</script></span>
+<p>
+ because (as we know from our everyday experience) velocities add (at least in Newtonian dynamics...). 
+</p>
+<p>
+We determine <script type="math/tex">V</script> by demanding that the total momentum vanishes in the centre of mass frame. With the total mass <script type="math/tex">M=m_1+m_2</script> we then have 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">MV = m_1 v_1 + m_2 v_2 \  \longrightarrow \  V = { m_1 v_1 + m_2 v_2 \over M}</script></span>
+<figure id="kencon">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/collisions/images/img-0012.png" style="width:252.945pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">7.6</span>
+<span class="caption_text">The motion of the centre-of-mass remains the same as if the object had stayed in one piece.</span>
+</figcaption> </div>
+</figure>
+<p>
+We can also assign a kinetic energy associated with the centre of mass: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">T_\mathrm {cm} = {1\over 2} M V^2</script></span>
+<p>
+ For an elastic collision the energy is conserved. In essence, this energy is not available for the collision, but... in general we have 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">T = T_\mathrm {cm} + T_\mathrm {rel}</script></span>
+<p>
+ where the remaining energy 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">T_\mathrm {rel} = {1\over 2} \mu (v_2 - v_1)^2</script></span>
+<p>
+ is available for the collision. The quantity <script type="math/tex">\mu </script> is called the reduced mass, and it is given by 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\mu = {m_1 m_2 \over M}</script></span>
+<p>
+We now have all the quantities we need to consider a collision in the centre of mass frame. Letting primed velocities represent the velocity of the particles after the collision, we have momentum conservation 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">m_1 u_1 + m_2 u_2 = m_1 u_1’ + m_2 u_2’</script></span>
+<p>
+ and energy conservation 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{1\over 2} m_1 u_1^2 + {1\over 2} m_2 u_2^2 = {1\over 2} m_1 (u_1’)^2 + {1\over 2} m_2 (u_2’)^2 \label{kencon}</script></span>
+<p>
+ We have two equations for two unknowns: <script type="math/tex">u_1'</script> and <script type="math/tex">u_2'</script>. We also know that in the centre of mass frame the total momentum is zero. So we actually have 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">m_1 u_1 + m_2 u_2 = 0 \  \longrightarrow \  u_1 = - {m_2 \over m_1} u_2</script></span>
+<p>
+ and as the same is true after the collision; 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">m_1 u_1’ + m_2 u_2’ = 0 \  \longrightarrow \  u_1’ = - {m_2 \over m_1} u_2’</script></span>
+<p>
+ Combining these results with the conservation of energy <a class="ref eqref" href="../../../notes/notes_by_chapter/collisions/index.html#kencon">(7.6)</a> we see that we must have 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">u_2’ = \pm u_2 \quad \mbox{and} \quad u_1 = \pm u_1</script></span>
+<p>
+ For an elastic collision (and in the centre of mass frame), there are only two options. Either the particles emerge with the same velocity as before (actually, a miss!) or the directions are reversed but the speeds stays the same.  
+</p>
+</section>
+<hr/>
+<ol>
+<li id="a0000000135">We are being lazy. It would be straightforward to extend the discussion to the general case by accounting for inelastic change in the energy of the collision products, but we would not gain much additional understanding by doing this.</li>
+</ol>
+
+            </div>
+        </div>
+    </div>
+
+        </main>
+		
+		<footer class="text-muted">
+	<hr>
+	<div class="container">
+		<div class="float-right">
+			<ul style="list-style: none">
+			<li><a href="#">Back to top</a></li>
+			
+			
+			<li><a href="../../../notes/notes_by_chapter/collisions/collisions.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;Download as PDF</a></li>
+			
+			</ul>
+		</div>
+		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
+		<p>This page last generated: 2022-07-03</p>
+	</div>
+</footer>
+		
+    </body>
+</html>

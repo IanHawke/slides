@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        
+            <meta charset="utf-8">
+            <meta name="robots" content="noindex">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="author" content="Nils Andersson" />
+            <meta name="date" content="2022-07-03" />
+        
+
+        <title>Analytical Dynamics | Dynamics and Relativity</title>
+
+        
+    
+    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../../../static/styles.css">
+            <link rel="stylesheet" id="customiseCSS" href="../../../static/light.css">
+            
+            
+        
+    <link rel="stylesheet" id="customiseCodeCSS" href="../../../static/pygmentize.light.css">
+    <link rel="stylesheet" href="../../../static/codemirror-5.26.0/lib/codemirror.css">
+    <link rel="stylesheet" href="../../../static/boole.css">
+    <link rel="stylesheet" href="../../../static/numbasEmbed.css">
+
+    <link rel="stylesheet" href="../../../static/bootstrap-toc.css?v=3">
+    <link rel="stylesheet" href="../../../static/print.css">
+
+
+        
+    
+    
+            <script defer src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <script defer src="../../../static/mathjax_config.js"></script>
+            <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+            <script defer src="../../../static/customisation.js"></script>
+            <script defer src="../../../static/mp4.js"></script>
+            
+            
+        
+    <script defer src="../../../static/jquery.flexibleArea.js"></script>
+    <script defer src="../../../static/spin.min.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/lib/codemirror.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/octave/octave.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/python/python.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/r/r.js"></script>
+    <script defer src="../../../static/boole.js"></script>
+    <script defer src="../../../static/numbasEmbed.js"></script>
+
+    <script defer src="../../../static/bootstrap-toc.js"></script>
+
+    </head>
+    <body data-spy="scroll" data-target="#chapterTOC" data-offset="50">
+        
+<div class="collapse" id="navbarToggleCustomise">
+	<div class="bg-secondary text-white p-3">
+		<form onsubmit="return false;" id="navbarCustomise">
+			<div class="form-row">
+				<label>Theme Customisation</label>
+				<div id="themeSelector" class="form-group col-md-12">
+					<button class="btn btn-dark mr-2" value="dark">Dark</button>
+					<button class="btn btn-pastel mr-2" value="pastel">Pastel</button>
+					<button class="btn btn-light mr-4" value="light">Light</button>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label style="display: block" for="font-scale">Font size (<span id="font-size-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="font-scale" min="50" max="600" value="100">
+					<button id="font-scale-reset" class="btn btn-sm">Reset</button>
+				</div>
+				<div class="form-group col-md-4">
+					<label style="display: block" for="p-space">Spacing (<span id="p-space-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="p-space" min="0" max="600" value="100">
+					<button id="p-space-reset" class="btn btn-sm">Reset</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<nav aria-label="breadcrumb">
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="../../../index.html">Dynamics and Relativity</a>
+		</li>
+		
+		<li class="breadcrumb-item">
+			<a href="../../../notes/notes_by_chapter/index.html">Notes by chapter</a>
+		</li>
+		
+		<li class="breadcrumb-item active">
+			Analytical Dynamics
+		</li>
+		<li class="ml-auto">
+			<button class="navbar-toggler p0" type="button" data-toggle="collapse" data-target="#navbarToggleCustomise" aria-controls="navbarToggleCustomise" aria-expanded="false" aria-label="Toggle customisations panel">
+				<i class="fa fa-cog" aria-hidden="true" title="Toggle customisations panel"></i> <span class="sr-only">Toggle customisations panel</span>
+			</button>
+		</li>
+	</ul>
+</nav>
+
+
+        <header>
+            
+            
+        </header>
+        <main>
+            
+    <div class="container mt-3">
+        <div class="row">
+            
+            <div id="sidebar" class="col-md-3">
+                <nav class="mb-3" id="chapterTOC" data-toggle="toc">
+                    <ul class="nav navbar-nav">
+                        
+                        
+                        
+                        <li><a id="pdf-link" class="nav-link" href="../../../notes/notes_by_chapter/analytical_dynamics/analytical_dynamics.pdf" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" title="Download as PDF"></i>&nbsp;Download as PDF</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+            <div id="content" class="col-md-9"> 
+            
+            
+<!-- Latex Chapter/Part -->
+<h1 id="a0000000207">Analytical Dynamics</h1>
+<p>
+We are now going to take a slightly different approach to dynamical problems. The starting point is a formalism developed by Lagrange to represent the behaviour of mechanical systems, irrespective of the number of constituent parts or chosen coordinate systems. At the heart of the approach is the notion of energy conservation. The advantage is that this new strategy can be applied to quite complicated systems (with extensions to particle physics, general relativity etc), to derive the equations of motion, without the need for physical intuition. The underlying physical laws are not changed by this approach, but are reduced to a set of mathematical relationships between standard functions and equations, abstracted from the physical context. 
+</p>
+<p>
+The ideas introduced here, including functions such as the Lagrangian or Hamiltonian, turn up in many other areas of applied mathematics and physics, from the quantum to the astronomical scale. 
+</p>
+<p>
+Analytical dynamics is also a powerful grounding in the more general (and abstract) theory of the dynamical systems which studies the evolution of arbitrary systems, not necessarily mechanical, as functions of their underlying governing parameters. 
+</p>
+<p>
+The concepts of conserved quantities naturally arise here, which ultimately can lead to studies of integrable and chaotic systems (which we will not discuss). 
+</p>
+<section class="section">
+<h2 id="a0000000208">11.1 The Calculus of Variations</h2>
+<p>
+Lagrange’s approach to mechanics is based on a method of deriving the equations of motion by finding the <em>minimum value</em> of an integral. This involves solving a problem in the calculus of variations. Before we consider the particular problem that arises in Lagrange’s approach to mechanics we will start by considering some more general problems in the calculus of variations. 
+</p>
+<p>
+<br/>[width=%+10mm]The brachistochrone Consider a bead sliding under the force of gravity. The bead starts being stationary at a point <script type="math/tex">P</script> and then slides down a smooth wire to a point <script type="math/tex">Q</script>. The points <script type="math/tex">P</script> and <script type="math/tex">Q</script> are fixed and we want to find the shape of the wire that minimises the time taken for the bead to get to <script type="math/tex">Q</script>. 
+</p>
+<p>
+Let the curve be <script type="math/tex">z=z(x)</script> (where the <script type="math/tex">z</script>-axis points vertically upwards), and take <script type="math/tex">P</script> to have coordinates <script type="math/tex">(x_0, z_0)</script> to <script type="math/tex">Q</script> to have coordinates <script type="math/tex">(x_1, z_1)</script>. Using the intial data at <script type="math/tex">P</script> and conservation of energy we can find the time taken to go from <script type="math/tex">P</script> to <script type="math/tex">Q</script>. We have 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">T = \textcolor{black}{ \int _ P^ Q \frac{dl}{v} }</script></span>
+<p>
+ where <script type="math/tex">dl</script> denotes a small element of length, measured along the wire. By conservation of energy: <span style="color:#000000"><span class="dmath"><script type="math/tex; mode=display">mgz_0 = \frac{1}{2}mv^2 + mgz \Rightarrow v = [2g(z_0-z)]^{1/2}</script></span></span> while 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">dl \textcolor{black}{= [(dx)^2 + (dz)^2]^{1/2} = \left[1+\left(\frac{dz}{dx}\right)^2\right]^{1/2} \,  dx }</script></span>
+<p>
+ We therefore obtain 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">T=\textcolor{black}{\int _{x=x_0}^{x=x_1} \sqrt{\frac{1+\dot z^2}{2g(z_0-z)}}\;  dx}</script></span>
+<p>
+ where <script type="math/tex">\dot z= \frac{dz}{dx}</script>. 
+</p>
+<p>
+Again the time <script type="math/tex">T</script> depends upon the function <script type="math/tex">z(x)</script> and is again a functional 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">T=T[z]</script></span>
+<p>
+The problem is then to find <script type="math/tex">z(x)</script> with <script type="math/tex">z(x_0)=z_0</script> and <script type="math/tex">z(x_1)=z_1</script> so that <script type="math/tex">T</script> is minimised. The general solution to the problem of finding the brachistochrone, or curve of quickest descent, was first found by J Bernoulli in 1696 who showed that it was a cycloid.  
+</p>
+</section><section class="section">
+<h2 id="a0000000209">11.2 The Euler-Lagrange Equations</h2>
+<p>
+In essence, we have to minimise an integral that depends upon some function and its derivatives and has fixed end points. We therefore now consider the general case of a functional<a class="footnote" href="#a0000000210">
+<sup class="footnotemark">1</sup>
+</a> that depends upon <script type="math/tex">x(t)</script> and has the form <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">I[x]=\int _{t=t_0}^{t_1} f(x(t), \dot x(t), t)dt</script></span> </span> where <script type="math/tex">f(\cdot , \cdot , \cdot )</script> is a given function and <script type="math/tex">\dot x=\frac{dx}{dt}</script>. 
+</p>
+<p>
+The function <script type="math/tex">x(t)</script> is taken to be fixed at the end points of the integral <script type="math/tex">x(t_0)=x_0</script> and <script type="math/tex">x(t_1)=x_1</script> and is required to be twice differentiable. We then want to find an expression for <script type="math/tex">x(t)</script> which minimises the functional <script type="math/tex">I[x]</script>. 
+</p>
+<p>
+In order to find <script type="math/tex">x(t)</script> it is useful to suppose we have (somehow) found an <script type="math/tex">x(t)</script> which minimises <script type="math/tex">I[x]</script> and then consider what happens “near” that function. Consider some nearby function <script type="math/tex">\tilde x(t)</script> which is ‘close to’ <script type="math/tex">x(t)</script>. We can construct a general expression for such nearby functions <script type="math/tex">\tilde x(t)</script> as follows. Let <script type="math/tex">\eta (t)</script> be a twice differentiable function (it has a continuous second derivative) defined for <script type="math/tex">t_0 \leq t \leq t_1</script> which also satisfies the conditions 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\eta (t_0)=0, \quad \eta (t_1)=0.</script></span>
+<p>
+ We call such a function <script type="math/tex">\eta </script> a variation. Then we can define a one parameter family of functions <script type="math/tex">\tilde x</script> close to <script type="math/tex">x(t)</script> by using the variation <script type="math/tex">\eta </script> to define <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\tilde x(t)=x(t) + \epsilon \eta (t)</script></span> </span> where <script type="math/tex">\epsilon </script> is a small parameter. 
+</p>
+<p>
+We now consider some fixed variation <script type="math/tex">\eta (t)</script> and see how <script type="math/tex">I[\tilde x(t)]</script> varies with <script type="math/tex">\epsilon </script>. Hence we consider the function <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\phi (\epsilon )=I[x(t)+\epsilon \eta (t)]</script></span> </span> Since <script type="math/tex">x(t)</script> gives a minimum for <script type="math/tex">I[x(t)]</script> it follows that <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">I[x(t)+\epsilon \eta (t)] \geq I[x(t)]</script></span> </span> and hence 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\phi (\epsilon ) \geq \phi (0)</script></span>
+<p>
+ Using results from the calculus of a function of one variable we see that in order that <script type="math/tex">\epsilon =0</script> is a minimum we must have <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\frac{d\phi }{d\epsilon }(0)=0</script></span> </span> More generally if the above equation is true for all possible choices of variation <script type="math/tex">\eta (t)</script> we say that <script type="math/tex">x(t)</script> is a stationary value of <script type="math/tex">I[x(t)]</script>. 
+</p>
+<p>
+We now use the definition of <script type="math/tex">\phi (\epsilon )</script>, and the fact that <script type="math/tex">\epsilon =0</script> is a minimum of <script type="math/tex">\phi (\epsilon )</script> to find equations that <script type="math/tex">x(t)</script> must satisfy. We have <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\phi (\epsilon )= \int _{t=t_0}^{t_1} f(x+\epsilon \eta , \dot x+\epsilon \dot\eta , t)dt</script></span> </span> so that<a class="footnote" href="#a0000000211">
+<sup class="footnotemark">2</sup>
+</a> <span style="color:#000000"> <span><script type="math/tex; mode=display">\begin{eqnarray*}  \frac{d\phi }{d\epsilon }& =& \frac{d}{d\epsilon } \int _{t=t_0}^{t_1} f(x+\epsilon \eta , \dot x+\epsilon \dot\eta , t)dt \\ & =& \int _{t=t_0}^{t_1} \frac{d}{d\epsilon }\left\{ f(x+\epsilon \eta , \dot x+\epsilon \dot\eta , t)\right\} dt \\ & =& \int _{t=t_0}^{t_1}\left( \frac{\partial f}{\partial \tilde x}\frac{d\tilde x}{d\epsilon }+ \frac{\partial f}{\partial \dot{\tilde x}}\frac{d\dot{\tilde x}}{d\epsilon } \right)dt \\ & =& \int _{t=t_0}^{t_1}\left( \eta \frac{\partial f}{\partial \tilde x}+ \dot\eta \frac{\partial f}{\partial \dot{\tilde x}} \right)dt \\ \end{eqnarray*}</script></span> </span> At <script type="math/tex">\epsilon =0</script> we have <script type="math/tex">\tilde x=x</script> so that <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\frac{d\phi }{d\epsilon }(0)= \int _{t=t_0}^{t_1}\left( \eta \frac{\partial f}{\partial x}+ \dot\eta \frac{\partial f}{\partial \dot{x}} \right)dt</script></span> </span> Integrating the <script type="math/tex">\dot\eta </script> term by parts gives 
+</p>
+<p>
+<span style="color:#000000"> <span><script type="math/tex; mode=display">\begin{eqnarray*}  \frac{d\phi }{d\epsilon }(0)& =&  \left[\frac{\partial f}{\partial \dot x}\eta \right]_{t_0}^{t_1} + \int _{t=t_0}^{t_1}\left\{  \eta \frac{\partial f}{\partial x} -\eta \frac{d}{dt}\left(\frac{\partial f}{\partial \dot x}\right) \right\} dt \\ & =& -\int _{t=t_0}^{t_1}\left\{  \frac{d}{dt}\left(\frac{\partial f}{\partial \dot x}\right) -\frac{\partial f}{\partial x}\right\} \eta dt \end{eqnarray*}</script></span> </span> The first term vanishes because <script type="math/tex">\eta (t_0)=\eta (t_1)=0</script>. 
+</p>
+<p>
+We have shown that if <script type="math/tex">x(t)</script> is an stationary value of <script type="math/tex">I[x(t)]</script> then we must have <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\int _{t=t_0}^{t_1}\left\{  \frac{d}{dt}\left(\frac{\partial f}{\partial \dot x}\right) -\frac{\partial f}{\partial x}\right\} \eta dt =0</script></span> </span> for <i class="it">all</i> possible choices of variation <script type="math/tex">\eta (t)</script>. 
+</p>
+<p>
+It follows that<a class="footnote" href="#a0000000212">
+<sup class="footnotemark">3</sup>
+</a> <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\frac{d}{dt}\left(\frac{\partial f}{\partial \dot x}\right) -\frac{\partial f}{\partial x}=0</script></span> </span> This is known as the Euler-Lagrange equation for <script type="math/tex">x(t)</script>. It is straightforward to reverse the argument to show that if <script type="math/tex">x(t)</script> satisfies the Euler-Lagrange equation then <script type="math/tex">x(t)</script> is an extremal for <script type="math/tex">I[x]</script>. We have therefore established the following result <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">x(t) \hbox{ is an extremal of } I[x(t)] \Longleftrightarrow \frac{d}{dt}\left(\frac{\partial f}{\partial \dot x}\right)-\frac{\partial f}{\partial x}=0</script></span> </span>
+</p>
+</section><section class="section">
+<h2 id="a0000000213">11.3 The Lagrangian</h2>
+<p>
+We are now in a position to give our first example of the application of the calculus of variations to mechanics. 
+</p>
+<p>
+<br/>[width=%+10mm]Recovering Newton Consider the motion of a particle of mass <script type="math/tex">m</script> moving in 1D along the <script type="math/tex">x</script>-axis under the influence of a force <script type="math/tex">F(x)</script> due to a potential <script type="math/tex">V(x)</script>. 
+</p>
+<p>
+We define the <i class="it">Lagrangian</i> <script type="math/tex">L</script> of the particle to be given by <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">L=T-V=\frac{1}{2}m\dot x^2-V(x)</script></span> </span> (Note the minus sign that makes this different from the energy!!!)<br/>Note also that <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">L = L(\dot{x},x)\; .</script></span> </span> We also define the <i class="it">action</i> <script type="math/tex">I[x]</script> to be given by <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">I[x]=\int _{t=t_0}^{t_1} L(x(t), \dot x(t),t)dt</script></span> </span> Then an extremal value of <script type="math/tex">I[x]</script> occurs if <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\frac{d}{dt}\left(\frac{\partial L}{\partial \dot x}\right) -\frac{\partial L}{\partial x}=0</script></span> </span> This is <i class="it">Lagrange’s equation of motion</i>. Let us now show that this result is equivalent to Newton’s second law for this problem. Using the definition of <script type="math/tex">L</script> it follows that (hold <script type="math/tex">x</script> fixed) <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\frac{\partial L}{\partial \dot x}=m\dot x</script></span> </span> and that (hold <script type="math/tex">\dot x</script> fixed in the derivative!) <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\frac{\partial L}{\partial x}=-\frac{dV}{dx}=F</script></span> </span> Using these in the Euler-Lagrange equations of motion gives us <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\frac{d}{dt}\left(m \dot{x}\right)-F=0</script></span> </span> and so 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">m\ddot x-F=0</script></span>
+<p>
+ which is just the equation of motion in Newtonian mechanics.  
+</p>
+</section><section class="section">
+<h2 id="a0000000214">11.4 Adding degrees of freedom</h2>
+<p>
+The advantages of the Lagrangian method become more obvious if we consider a problem with several degrees of freedom<a class="footnote" href="#a0000000215">
+<sup class="footnotemark">4</sup>
+</a>. We start by considering the motion of a particle moving in three dimensions under the action of a potential <script type="math/tex">V</script>. Let <script type="math/tex">(x_1, x_2, x_3)</script> be the <script type="math/tex">x</script>, <script type="math/tex">y</script> and <script type="math/tex">z</script> coordinates of the particle. 
+</p>
+<p>
+We use <script type="math/tex">x=x_1</script>, <script type="math/tex">y=x_2</script> and <script type="math/tex">z=x_3</script> so that the theory can be generalised later. 
+</p>
+<p>
+Then the kinetic energy is 
+</p>
+<p>
+<span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">T=\frac{1}{2}m(\dot x_1^2+\dot x_2^2+\dot x_3^2)</script></span> </span> Since the force may derived from a potential <script type="math/tex">V(x_1, x_2, x_3)</script> the components of the force are given by 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">F_1=-\frac{\partial V}{\partial x_1}, \quad F_2=-\frac{\partial V}{\partial x_2}\quad \hbox{and}\quad F_3=-\frac{\partial V}{\partial x_3}</script></span>
+<p>
+ The Lagrangian for this problem is 
+</p>
+<p>
+<span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">L=T-V=\frac{1}{2}m(\dot x_1^2+\dot x_2^2 +\dot x_3^2)-V(x_1,x_2, x_3)</script></span> </span> and the action is 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">I[x_1, x_2, x_3]=\int _{t=t_0}^{t_1} L(x_1, x_2, x_3, \dot x_1, \dot x_2, \dot x_3, t)dt</script></span>
+<p>
+ minimising the action now gives three equations <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\frac{d}{dt}\left(\frac{\partial L}{\partial \dot x_ i}\right) -\frac{\partial L}{\partial x_ i}=0, \quad \hbox{for}\quad i=1,2, 3</script></span> </span> Using the definition of the Lagrangian we have <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\frac{\partial L}{\partial \dot x_ i}=m\dot x_ i</script></span> </span> so that <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\frac{d}{dt}\left(\frac{\partial L}{\partial \dot x_ i}\right)=m\ddot x_ i</script></span> </span> Also <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\frac{\partial L}{\partial x_ i}=-\frac{\partial V}{\partial x_ i}=F_ i</script></span> </span> So that the Lagrange equations of motion give <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">m\ddot x_ i-F_ i=0, \quad \hbox{for}\quad i=1,2, 3</script></span></span> which are simply the components of Newton’s equations in three dimensions. 
+</p>
+<p>
+We have established the following result: 
+</p>
+<ul class="itemize" id="a0000000216">
+<li id="a0000000217"> <p>
+Newton’s equations for a particle acted on by a force due to a potential <script type="math/tex">V</script> are equivalent to the Lagrange equations of motion, which give the motion of the particle which minimises the action <script type="math/tex">I</script>. 
+</p>
+</li>
+</ul>
+<p>
+ In other words, one can derive Newton’s laws of motion from the <i class="it">principle of least action</i> (sometimes called Hamilton’s principle). In fact the principle of least action is more fundamental than Newton’s laws. As well as being used to derive the equations of motion for a particle it can be used to derive the equations of motion for a field. For example Maxwell’s equations for electromagnetism can be derived from the principle of least action as can Einstein’s general relativistic field equations. 
+</p>
+<p>
+The big advantage of the principle of least action as far as mechanics is concerned is that it is true in <i class="it">any</i> coordinate system, since the Lagrangian is a <i class="it">scalar</i> that only depends on the motion of the particle not the coordinates used to describe it. 
+</p>
+<p>
+Let us illustrate this by obtaining the equations of motion for a particle moving in the plane but using polar coordinates <script type="math/tex">(r, \theta )</script> to describe the motion rather than the usual Cartesian coordinates <script type="math/tex">(x,y)</script>. 
+</p>
+<p>
+The first step is to obtain a formula for the kinetic energy in plane polar coordinates. There are a number of ways of obtaining this but the most straightforward is to use the chain rule to differentiate the equations that relate Cartesian and polar coordinates. <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">x=r\cos \theta , \qquad y=r\sin \theta</script></span> </span> Differentiating the first of these<a class="footnote" href="#a0000000218">
+<sup class="footnotemark">5</sup>
+</a> with respect to <script type="math/tex">t</script> we get <span style="color:#000000"> <span><script type="math/tex; mode=display">\begin{eqnarray*}  \frac{dx}{dt}& =& \frac{\partial x}{\partial r}\frac{dr}{dt}+ \frac{\partial x}{\partial \theta }\frac{d\theta }{dt} \\ \dot x& =&  \dot r \cos \theta -r\dot\theta \sin \theta \end{eqnarray*}</script></span> </span> Similarly differentiating the second gives <span style="color:#000000"> <span><script type="math/tex; mode=display">\begin{eqnarray*}  \frac{dy}{dt}& =& \frac{\partial y}{\partial r}\frac{dr}{dt}+ \frac{\partial y}{\partial \theta }\frac{d\theta }{dt} \\ \dot y& =&  \dot r \sin \theta +r\dot\theta \cos \theta \end{eqnarray*}</script></span> </span> Squaring and adding these equations gives <span style="color:#000000"> <span><script type="math/tex; mode=display">\begin{eqnarray*}  \dot x^2+\dot y^2& =& \dot r^2\cos ^2\theta - 2r\dot r\dot\theta \sin \theta \cos \theta +r^2\dot\theta ^2\sin ^2\theta \\ & +& \dot r^2\sin ^2\theta + 2r\dot r\dot\theta \sin \theta \cos \theta +r^2\dot\theta ^2\cos ^2\theta \\ & =&  \dot r^2+r^2\dot\theta ^2 \end{eqnarray*}</script></span> </span> Hence in polar coordinates <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">T=\frac{1}{2}m(\dot r^2+r^2\dot\theta ^2)</script></span> </span> Using the formula for <script type="math/tex">x</script> and <script type="math/tex">y</script> in terms of <script type="math/tex">r</script> and <script type="math/tex">\theta </script> also allows us to write the potential <script type="math/tex">V</script> as a function of <script type="math/tex">r</script> and <script type="math/tex">\theta </script>. We may therefore write the Lagrangian for this problem as <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">L=\frac{1}{2}m(\dot r^2+r^2\dot\theta ^2)-V(r,\theta )</script></span> </span> To find the equations of motion we simply calculate the Euler-Lagrange equations for <script type="math/tex">L</script>. We start with the <script type="math/tex">r</script>-equation <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\frac{\partial L}{\partial \dot r}=m\dot r</script></span> </span> Hence <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\frac{d}{dt}\left(\frac{\partial L}{\partial \dot r}\right)=m\ddot r</script></span> </span> and <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\frac{\partial L}{\partial r}=mr\dot\theta ^2-\frac{\partial V}{\partial r}</script></span> </span> Note that this contains two terms because both <script type="math/tex">T</script> and <script type="math/tex">V</script> depend on <script type="math/tex">r</script>. 
+</p>
+<p>
+Hence the Euler-Lagrange equation for the <script type="math/tex">r</script> variable <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\frac{d}{dt}\left(\frac{\partial L}{\partial \dot r}\right)- \frac{\partial L}{\partial r}=0</script></span> </span> gives <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">m\ddot r-mr\dot\theta ^2+\frac{\partial V}{\partial r}=0</script></span> </span> or 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">m(\ddot r-r\dot\theta ^2)=-\frac{\partial V}{\partial r}</script></span>
+<p>
+ which may be shown to be the component of Newton’s equation in the radial direction (by using vectors and resolving). The <script type="math/tex">r\dot\theta ^2</script> term is the ‘centripetal acceleration’ term from before. 
+</p>
+<p>
+To find the <script type="math/tex">\theta </script>-equation we again just look at the corresponding Euler-Lagrange equation. <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\frac{\partial L}{\partial \dot\theta }=m r^2\dot\theta</script></span> </span> so that <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\frac{d}{dt}\left(\frac{\partial L}{\partial \dot\theta }\right)= mr^2\ddot\theta +2mr\dot r\dot\theta</script></span> </span> Note that this contains two terms because both <script type="math/tex">r</script> and <script type="math/tex">\dot\theta </script> depend upon <script type="math/tex">t</script>. 
+</p>
+<p>
+Differentiating <script type="math/tex">L</script> with respect to <script type="math/tex">\theta </script> gives <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\frac{\partial L}{\partial \theta }=-\frac{\partial V}{\partial \theta }</script></span> </span> Hence the Euler-Lagrange equation for the <script type="math/tex">\theta </script> variable <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\frac{d}{dt}\left(\frac{\partial L}{\partial \dot\theta }\right)- \frac{\partial L}{\partial \theta }=0</script></span> </span> gives <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">mr^2\ddot\theta +2mr\dot r\dot\theta =-\frac{\partial V}{\partial \theta }</script></span> </span> or 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">m(r\ddot\theta +2\dot r\dot\theta )=-\frac{1}{r}\frac{\partial V}{\partial \theta }</script></span>
+<p>
+ which may be shown to be the transverse component of Newton’s equations. The <script type="math/tex">2\dot r\dot\theta </script> term represent the Coriolis force (as before). 
+</p>
+<p>
+<br/>[width=%+10mm]The pendulum 
+</p>
+<p>
+As a first example, consider a simple pendulum. In this case the kinetic energy is given by 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">T=\frac{1}{2}mv^2=\frac{1}{2}m(\dot r^2+r^2\dot\theta ^2)=\frac{1}{2}ml^2\dot\theta ^2</script></span>
+<p>
+ since <script type="math/tex">r=l</script> and <script type="math/tex">\dot r=0</script>, while the potential energy is <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">V=mgh=mgl(1-\cos \theta )</script></span> </span> Hence the Lagrangian is <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">L=\frac{1}{2}ml^2\dot\theta ^2-mgl(1-\cos \theta )</script></span> </span> We now calculate the Lagrange equations of motion <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\frac{\partial L}{\partial \dot\theta }=ml^2\dot\theta , \quad \frac{d}{dt}\left(\frac{\partial L}{\partial \dot\theta }\right)=ml^2\ddot\theta , \quad \frac{\partial L}{\partial \theta }=-mgl\sin \theta</script></span> </span> so that <script type="math/tex">ml^2\ddot\theta +mgl\sin \theta =0</script> or <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\ddot\theta +\frac{g}{l}\sin \theta =0</script></span> </span> One cannot solve this differential equation in closed form (without introducing so-called elliptic functions). However for small <script type="math/tex">\theta </script> we have <script type="math/tex">\sin \theta \approx \theta </script>, so that for small oscillations the equation is approximately given by 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\ddot\theta +\frac{g}{l}\theta =0</script></span>
+<p>
+ writing <script type="math/tex">g/l=\omega ^2</script> we recognise this as simple harmonic motion with angular frequency <script type="math/tex">\omega </script> so that the general solution is 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\theta (t)=A\cos (\omega t)+B\sin (\omega t), \quad \hbox{where}\quad \omega =\sqrt{\frac{g}{l}}</script></span>
+<p>
+ So that the motion of the pendulum is described by oscillations about <script type="math/tex">\theta =0</script> with period <script type="math/tex">\tau =2\pi \sqrt{l/g}</script>.  
+</p>
+<p>
+<br/>[width=%+10mm]Mass on a spring 
+</p>
+<p>
+Another example is a mass on a spring. Let <script type="math/tex">x</script> be the extension of the spring. The the force due to the spring is <script type="math/tex">F=-kx</script>, where <script type="math/tex">k</script> is the spring constant. Hence the potential energy stored in the spring is <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">V_{\hbox{spring}}=\frac{1}{2}k x^2</script></span> </span> The gravitational potential energy is <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">V_{\hbox{grav}}=-mgx</script></span> </span> So that the total potential energy is <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">V=\frac{1}{2}k x^2-mgx</script></span> </span> The kinetic energy of the mass is <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">T=\frac{1}{2}m v^2=\frac{1}{2}m \dot x^2</script></span> </span> Hence the Lagrangian for this problem is <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">L= \frac{1}{2}m \dot x^2 -\frac{1}{2}k x^2+mgx</script></span> </span> We now calculate the Lagrange equation of motion <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\frac{\partial L}{\partial \dot x}=m\dot x, \quad \frac{d}{dt}\left(\frac{\partial L}{\partial \dot x}\right)=m\ddot x, \quad \frac{\partial L}{\partial x}=-kx+mg</script></span> </span> So that <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\frac{d}{dt}\left(\frac{\partial L}{\partial \dot x}\right)- \frac{\partial L}{\partial x}=0</script></span> </span> gives 
+</p>
+<p>
+<span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">m\ddot x+kx-mg=0</script></span> </span> or 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\ddot x+\frac{k}{m}x=g</script></span>
+<p>
+ That is, we have recovered the usual result and we know that the mass oscillates about the equilibrium position <script type="math/tex">x=mg/k</script> with angular frequency <script type="math/tex">\omega =\sqrt{k/m}</script>.  
+</p>
+<p>
+<br/>[width=%+10mm]Planetary motion 
+</p>
+<p>
+Lagrangian methods provide a very easy way of deriving the equations of motion of a small particle in the gravitational field of a much larger one, e.g. the motion of a planet around the Sun. We can assume that the planet’s motion is confined to a plane containing the Sun, and use plane polar coordinates <script type="math/tex">(r,\phi )</script> to label its position. The planet then has velocity 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\boldsymbol v} = \textcolor{black}{ \dot r {\boldsymbol e_ r} + r\dot\phi {\boldsymbol e_\phi } }</script></span>
+<p>
+ where a dot denotes a time derivative and <script type="math/tex">{\boldsymbol e_ r}, {\boldsymbol e_\phi }</script> are unit vectors in the radial and angular directions. The planet’s kinetic energy is then 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">T = \textcolor{black}{ \frac{1}{2} m (\dot r ^2 + r^2\dot\phi ^2) }</script></span>
+<p>
+ The potential energy in this case is gravitational potetial energy, which Newton took to be given by the equation 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">V = \textcolor{black}{ -\frac{GMm}{r} }</script></span>
+<p>
+ where <script type="math/tex">M</script> is the mass of the Sun (assumed fixed in space), <script type="math/tex">m</script> the mass of the planet, and <script type="math/tex">G</script> is Newton’s gravitational constant. Note that this leads to a force <script type="math/tex">{\boldsymbol F}</script> given by 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\boldsymbol F} = -\nabla V = \textcolor{black}{ -\frac{\partial V}{\partial r} {\boldsymbol e_ r} = -\frac{GMm}{r^2} {\boldsymbol e_ r} ,}</script></span>
+<p>
+ This is the famous “inverse square law”. 
+</p>
+<p>
+The Lagrangian is then 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">L = T - V = \textcolor{black}{ \frac{1}{2} m (\dot r ^2 + r^2\dot\phi ^2) + \frac{GMm}{r} }</script></span>
+<p>
+ The radial Euler-Lagrange equation 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\frac{d}{dt} \frac{\partial L}{\partial \dot r} = \frac{\partial L}{\partial r} \quad \longrightarrow \quad \textcolor{black}{ \frac{d}{dt} (m\dot r) = mr\dot\phi ^2 - \frac{GMm}{r^2} \Rightarrow \ddot r = r\dot\phi ^2 - \frac{GM}{r^2} }</script></span>
+<p>
+ while the angular Euler-Lagrange equation 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\frac{d}{dt} \frac{\partial L}{\partial \dot\phi } = \frac{\partial L}{\partial \phi } \quad \longrightarrow \quad \textcolor{black}{ \frac{d}{dt}(mr^2\dot\phi ) = 0 }</script></span>
+<p>
+These are two coupled ordinary differential equations which can then be solved to give <script type="math/tex">r(t)</script> and <script type="math/tex">\phi (t)</script>, although the solution cannot be written in simple form. Note that the angular equation particularly simple: the particle’s angular momentum is given by (we will use <script type="math/tex">J</script> for the angular momentum to avoid confusion with the Lagrangian) 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\boldsymbol J} = \textcolor{black}{ {\boldsymbol r} \times {\boldsymbol p} = r{\boldsymbol e_ r} \times m (\dot r{\boldsymbol e_ r} + r\dot\phi {\boldsymbol e_\phi }) = mr^2 \dot\phi {\boldsymbol e_ r} \times {\boldsymbol e_\phi } }</script></span>
+<p>
+ A little thought shows that for points in the <script type="math/tex">z=0</script> plane where our planet resides, <script type="math/tex">{\boldsymbol e_ r} \times {\boldsymbol e_\phi } = {\boldsymbol e_ z}</script>, so that 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\boldsymbol J} = \textcolor{black}{ mr^2\dot\phi {\boldsymbol e_ z} \hspace{3mm} \Rightarrow \hspace{3mm} J = mr^2\dot\phi }</script></span>
+<p>
+ i.e. the angular Euler-Lagrange equation is simply <script type="math/tex">J =</script>constant (as expected from the discussion of central forces). The particle’s energy is: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">E = T + V = \textcolor{black}{ \frac{1}{2} m (\dot r ^2 + r^2\dot\phi ^2) - \frac{GMm}{r} }</script></span>
+<p>
+ Eliminating <script type="math/tex">\dot\phi </script> in favour of <script type="math/tex">J</script> leads to 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\hat E = \textcolor{black}{ \frac{1}{2} \left(\dot r^2 + \frac{\hat J^2}{r^2}\right) - \frac{GM}{r} }</script></span>
+<p>
+ where <script type="math/tex">\hat E = E/m</script> and <script type="math/tex">\hat J = J/m</script>, the energy and angular momentum of the particle per unit mass. 
+</p>
+</section>
+<hr/>
+<ol>
+<li id="a0000000210">A functional is simply a function of a function.</li>
+<li id="a0000000211">There is no longer a way to avoid partial derivatives...</li>
+<li id="a0000000212">Technically we should appeal to the so-called Euler-Lagrange Lemma here...</li>
+<li id="a0000000215">Although we need to be comfortable with partial derivatives!</li>
+<li id="a0000000218">This should be familiar from our discussion of cylindrical coordinates.</li>
+</ol>
+
+            </div>
+        </div>
+    </div>
+
+        </main>
+		
+		<footer class="text-muted">
+	<hr>
+	<div class="container">
+		<div class="float-right">
+			<ul style="list-style: none">
+			<li><a href="#">Back to top</a></li>
+			
+			
+			<li><a href="../../../notes/notes_by_chapter/analytical_dynamics/analytical_dynamics.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;Download as PDF</a></li>
+			
+			</ul>
+		</div>
+		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
+		<p>This page last generated: 2022-07-03</p>
+	</div>
+</footer>
+		
+    </body>
+</html>

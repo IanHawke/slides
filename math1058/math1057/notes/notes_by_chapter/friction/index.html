@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        
+            <meta charset="utf-8">
+            <meta name="robots" content="noindex">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="author" content="Nils Andersson" />
+            <meta name="date" content="2022-07-03" />
+        
+
+        <title>Friction | Dynamics and Relativity</title>
+
+        
+    
+    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../../../static/styles.css">
+            <link rel="stylesheet" id="customiseCSS" href="../../../static/light.css">
+            
+            
+        
+    <link rel="stylesheet" id="customiseCodeCSS" href="../../../static/pygmentize.light.css">
+    <link rel="stylesheet" href="../../../static/codemirror-5.26.0/lib/codemirror.css">
+    <link rel="stylesheet" href="../../../static/boole.css">
+    <link rel="stylesheet" href="../../../static/numbasEmbed.css">
+
+    <link rel="stylesheet" href="../../../static/bootstrap-toc.css?v=3">
+    <link rel="stylesheet" href="../../../static/print.css">
+
+
+        
+    
+    
+            <script defer src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <script defer src="../../../static/mathjax_config.js"></script>
+            <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+            <script defer src="../../../static/customisation.js"></script>
+            <script defer src="../../../static/mp4.js"></script>
+            
+            
+        
+    <script defer src="../../../static/jquery.flexibleArea.js"></script>
+    <script defer src="../../../static/spin.min.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/lib/codemirror.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/octave/octave.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/python/python.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/r/r.js"></script>
+    <script defer src="../../../static/boole.js"></script>
+    <script defer src="../../../static/numbasEmbed.js"></script>
+
+    <script defer src="../../../static/bootstrap-toc.js"></script>
+
+    </head>
+    <body data-spy="scroll" data-target="#chapterTOC" data-offset="50">
+        
+<div class="collapse" id="navbarToggleCustomise">
+	<div class="bg-secondary text-white p-3">
+		<form onsubmit="return false;" id="navbarCustomise">
+			<div class="form-row">
+				<label>Theme Customisation</label>
+				<div id="themeSelector" class="form-group col-md-12">
+					<button class="btn btn-dark mr-2" value="dark">Dark</button>
+					<button class="btn btn-pastel mr-2" value="pastel">Pastel</button>
+					<button class="btn btn-light mr-4" value="light">Light</button>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label style="display: block" for="font-scale">Font size (<span id="font-size-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="font-scale" min="50" max="600" value="100">
+					<button id="font-scale-reset" class="btn btn-sm">Reset</button>
+				</div>
+				<div class="form-group col-md-4">
+					<label style="display: block" for="p-space">Spacing (<span id="p-space-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="p-space" min="0" max="600" value="100">
+					<button id="p-space-reset" class="btn btn-sm">Reset</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<nav aria-label="breadcrumb">
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="../../../index.html">Dynamics and Relativity</a>
+		</li>
+		
+		<li class="breadcrumb-item">
+			<a href="../../../notes/notes_by_chapter/index.html">Notes by chapter</a>
+		</li>
+		
+		<li class="breadcrumb-item active">
+			Friction
+		</li>
+		<li class="ml-auto">
+			<button class="navbar-toggler p0" type="button" data-toggle="collapse" data-target="#navbarToggleCustomise" aria-controls="navbarToggleCustomise" aria-expanded="false" aria-label="Toggle customisations panel">
+				<i class="fa fa-cog" aria-hidden="true" title="Toggle customisations panel"></i> <span class="sr-only">Toggle customisations panel</span>
+			</button>
+		</li>
+	</ul>
+</nav>
+
+
+        <header>
+            
+            
+        </header>
+        <main>
+            
+    <div class="container mt-3">
+        <div class="row">
+            
+            <div id="sidebar" class="col-md-3">
+                <nav class="mb-3" id="chapterTOC" data-toggle="toc">
+                    <ul class="nav navbar-nav">
+                        
+                        
+                        
+                        <li><a id="pdf-link" class="nav-link" href="../../../notes/notes_by_chapter/friction/friction.pdf" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" title="Download as PDF"></i>&nbsp;Download as PDF</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+            <div id="content" class="col-md-9"> 
+            
+            
+<!-- Latex Chapter/Part -->
+<h1 id="a0000000207">Air resistance and friction</h1>
+<p>
+So far we have explored forces that do not <i class="it">per se</i> resist the motion—we have assumed that there is no friction or air resistance. This is not our everyday reality. While energy is conserved at a fundamental level, it does not appear to be conserved in many things we do. At a microscopic level, kinetic energy is transferred to the atoms in the floor you may be trying to slide across, manifesting itself as heat. But if we only want to know how far our socks will slide, the details of the atomic processes are of little interest. Instead, we often summarise everything in a single, macroscopic force that we call friction. This is a messy business, but the effective description is quite simple. 
+</p>
+<p>
+In this chapter we consider the effect of such forces. Newton’s laws formally remain unchanged, but the presence of resistive forces complicates the problem we have to solve. 
+</p>
+<section class="section">
+<h2 id="a0000000208">2.1 Air Resistance</h2>
+<p>
+A particle moving through a fluid (or a gas, such as air!) is subject to a drag force. This arises because in moving through the liquid, the particle has to push the fluid molecules out of the way. 
+</p>
+<figure id="figure48">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/friction/images/img-0002.png" style="width:108.405pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">2.1</span>
+<span class="caption_text">Resistive force <script type="math/tex">{\vec D}({\vec v}_{PL})</script> due to motion of body relative to liquid <script type="math/tex">{\vec v}_{PL}</script>.</span>
+</figcaption> </div>
+</figure>
+<p>
+Experimentally it has been found that a good model for the drag force <script type="math/tex">{\vec D}</script> is one that depends on the velocity of the particle <script type="math/tex">P</script> relative<a class="footnote" href="#a0000000209">
+<sup class="footnotemark">1</sup>
+</a> to the fluid <script type="math/tex">L</script>, <script type="math/tex">{\vec v}_{PL}</script>. Such a model takes the form <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec D}=-K {\vec v}_{PL}</script></span></span> where <script type="math/tex">K</script> is a positive quantity that depends on the speed and shape of the particle as well as the density and viscosity of the fluid. Note that the drag force <script type="math/tex">{\vec D}</script> is, at all times, in the opposite direction to the velocity. A common form for this law is <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec D} =-k|{\vec v}_{PL}|^{(\alpha -1)}{\vec v}_{PL} =-k|{\vec v}_{PL}|^{\alpha }\hat{{ v}}_{PL}</script></span> </span> where the exponent <script type="math/tex">\alpha </script> depends on the physical situation. For “high” speed flows, such as cars or planes moving through air, <script type="math/tex">\alpha \approx 2</script>. This is natural when the friction is proportional to the surface area of the moving object. For “low” speed flows, such as a pebble falling though thick oil, <script type="math/tex">\alpha \approx 1</script>. For “intermediate” speeds <script type="math/tex">\alpha </script> may itself be a function of the speed.  A special case, valid when the particle is moving very slowly, is <script type="math/tex">\alpha =1</script> in which case 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec D}=-k{{\vec v}}_{PL}</script></span>
+</section><section class="section">
+<h2 id="a0000000210">2.2 Reminder: Separable first order equations</h2>
+<p>
+The simplest differential equations are those that can be solved by direct integration. As an example, consider 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">y’(x)=f\left( y \right)</script></span>
+<p>
+ which can be solved in the following way: First we divide both sides by <script type="math/tex">f(y)</script> (assuming initially that <script type="math/tex">f(y)\ne 0</script> on the range of interest) 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\frac{1}{f\left( y \right)}\; \frac{dy}{dx}=1\quad \Rightarrow \quad \int {\frac{1}{f\left( y \right)}} \; \frac{dy}{dx}\; dx=\int 1\; dx</script></span>
+<p>
+ Now suppose that <script type="math/tex">H(y)</script> is the integral of <script type="math/tex">1/f(y)</script>, i.e., 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">H’(y)=\frac{1}{f(y)}</script></span>
+<p>
+ Then, using the chain rule we have 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\frac{d}{dx}H(y(x))=H’(y(x))\frac{dy}{dx}=\frac{1}{f(y)}\frac{dy}{dx}.</script></span>
+<p>
+Hence, by the fundamental theorem of calculus, the integral on the left-hand side above becomes 
+</p>
+<div class="eqn" id="sepint">
+<script type="math/tex; mode=display">\begin{equation}\int {\frac{1}{f\left( y \right)}} \; \frac{dy}{dx}\; dx=\int \left(\frac{d}{dx}H(y(x))\right)dx=H(y)+c \label{sepint}\tag{2.1}\end{equation}</script>
+</div>
+<p>
+ If you look carefully at <a class="ref eqref" href="../../../notes/notes_by_chapter/friction/index.html#sepint">(2.1)</a>, effectively all we did was evaluate the integral of <script type="math/tex">1/f(y)</script> with respect to <script type="math/tex">y</script>: the answer being the integral <script type="math/tex">H(y)</script>. 
+</p>
+<p>
+Note that you could have obtained the same result just by “cancelling” the <script type="math/tex">dx</script> top and bottom in the integral on the left-hand side and integrating with respect to <script type="math/tex">dy</script>. Hence, a short cut for the integration is as follows: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\frac{1}{f\left( y \right)}\; \frac{dy}{dx}=1\quad \Rightarrow \quad \int {\frac{1}{f\left( y \right)}} \;  {dy \over dx}\; {dx}=\int 1\; dx \qquad \Rightarrow \int {\frac{1}{f\left( y \right)}} \; dy=x+C</script></span>
+<p>
+ The last integral with respect to <script type="math/tex">y</script> just has to be evaluated depending on what <script type="math/tex">f(y)</script> is and <script type="math/tex">C</script> is an arbitrary constant. 
+</p>
+<p>
+However, this cancellation trick is (formally) quite naughty, since the derivative <script type="math/tex">dy/dx</script> is not a fraction that can be cancelled! Still, this notational short cut is justified due to the argument outlined above. Hence everybody does it. Just remember why it is allowed! 
+</p>
+<p>
+A related kind of first order equation contains functions of <script type="math/tex">x</script> and <script type="math/tex">y</script> such that it is possible to separate them into two terms, one on each side of the equal sign, one a function of <script type="math/tex">x</script> only and the other only a function of <script type="math/tex">y</script>. In general these equations take the form. <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\frac{dy}{dx}=g(x)f(y).</script></span> </span> Separating the terms we may integrate with respect to <script type="math/tex">x</script> only: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\int {\frac{1}{f(y)}\; \frac{dy}{dx}\; dx} = \int g\left( x \right)\; dx \quad \Rightarrow \quad \int \frac{1}{f(y)}\; dy =\int g\left( x \right)\; dx</script></span>
+<p>
+Note that we are using the naughty cancellation trick between derivatives again. This is justified by the same procedure as outlined above. 
+</p>
+</section><section class="section">
+<h2 id="a0000000211">2.3 Projectile under gravity with air resistance</h2>
+<p>
+Suppose a particle of constant mass <script type="math/tex">m</script> is launched from the surface of the earth at <script type="math/tex">t=0</script> with initial speed <script type="math/tex">U</script> at an angle <script type="math/tex">\theta </script> up from the horizontal. We shall assume that the air is stationary. Suppose the position of the particle at time <script type="math/tex">t</script> is <script type="math/tex">{\vec r}(t)</script> and that the motion is very slow (this makes the mathematics easier!) so that the resistive force due to the air is <script type="math/tex">{\vec D}=-\gamma \dot{{\vec r}}(t)</script>. Calculate the subsequent motion of the particle as it moves under the influence of gravity <script type="math/tex">-g {\hat k}</script> and air resistance. 
+</p>
+<p>
+As before we use a coordinate system with <script type="math/tex">{\hat i}</script> horizontal and <script type="math/tex">{\hat k}</script> vertical with the origin at the point of release of the particle. 
+</p>
+<figure id="figure49">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/friction/images/img-0004.png" style="width:180.67499999999998pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">2.2</span>
+<span class="caption_text">Projectile subject to drag force.</span>
+</figcaption> </div>
+</figure>
+<p>
+<b class="bf">N2</b> then gives the equation of motion as <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">m\; \ddot{{\vec r}}(t)=-mg\; {\hat k}-\gamma \;  \dot{{\vec r}}(t),</script></span> </span> with <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec r}(t)= x(t)\; {\hat i}+y(t)\; {\hat j}+z(t)\; {\hat k}.</script></span> </span> As in many cases, this problem can be solved using the second order equation above written in component form. However it is easier to introduce variables to indicate the velocity of the particle so we write <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\dot{{\vec r}}(t)= u(t)\; {\hat i}+v(t)\; {\hat j}+w(t)\; {\hat k}</script></span> </span> so that <b class="bf">N2</b> is now the system of equations <span style="color:#000000"> <span><script type="math/tex; mode=display">\begin{eqnarray*}  m\dot{u}(t)=-\gamma u, & &  \qquad u(0)=U\cos \theta \\ m\dot{v}(t)=-\gamma v, & &  \qquad v(0)=0 \\ m\dot{w}(t)=-\gamma w-mg,& &  \qquad w(0)=U\sin \theta \\ \dot{x}(t)=u(t) & &  \qquad x(0)=0\\ \dot{y}(t)=v(t) & &  \qquad y(0)=0\\ \dot{z}(t)=w(t) & &  \qquad z(0)=0 \end{eqnarray*}</script></span> </span> Now we solve this system of differential equations. 
+</p>
+<p>
+The first equation is separable and can be integrated: <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\int _{U\cos \theta }^ u \frac{du}{u}=-\frac{\gamma }{m}\int _0^ t dt \hspace{3mm} \Rightarrow \hspace{3mm} \large [ \ln u \large ]^ u_{U\cos \theta } = -\frac{\gamma t}{m} \hspace{3mm} \Rightarrow \hspace{3mm} u(t)=U\cos \theta \exp {\left(-\frac{\gamma }{m}t\right)}.</script></span> </span> Using the equation <script type="math/tex">u(t)=\dot{x}(t)</script> we can integrate this expression once more and use the fact that <script type="math/tex">x(0)=0</script> to obtain <script type="math/tex">x(t)</script> <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\dot{x}(t)=U\cos \theta \exp \left(-\frac{\gamma }{m}t\right), \  x(0)=0 \qquad \Rightarrow \qquad x(t)=\frac{mU\cos \theta }{\gamma }\left\{ 1-\exp \left(-\frac{\gamma }{m}t\right)\right\}</script></span> </span>
+</p>
+<p>
+The second equation can be solved in a similar manner <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">m\frac{dv}{dt} = -\gamma v \hspace{3mm} \Rightarrow \hspace{3mm} \int \frac{dv}{v} = -\frac{\gamma }{m} \int dt</script></span> </span> <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\hspace{3mm} \Rightarrow \hspace{3mm} \ln v = -\frac{\gamma t}{m} + \ln A \hspace{3mm} \Rightarrow \hspace{3mm} v(t) = A \exp \left(-\frac{\gamma }{m} t\right)</script></span> </span> <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">v(0)=0, \qquad \Rightarrow \qquad A=0 \qquad \Rightarrow \qquad v(t)=0.</script></span> </span> Hence we have <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\dot{y}(t)=0, \qquad \Rightarrow \qquad y(t)=B, \qquad {\rm but} \  y(0)=0 \qquad \Rightarrow \qquad B=0 \qquad \therefore  y(t)=0.</script></span> </span> So the projectile always stays in the <script type="math/tex">y=0</script> plane and never has a non-zero <script type="math/tex">{\hat j}</script> component (this should have been obvious from the start!). 
+</p>
+<p>
+The third equation is also separable and can be solved as <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\int _{U\sin \theta }^ w\frac{dw}{(mg/\gamma +w)}=-\frac{\gamma }{m} \int _{0}^ tdt \qquad \Rightarrow \qquad w(t)=-\frac{mg}{\gamma }+\left(U\sin \theta +\frac{mg}{\gamma }\right)\exp \left({-\frac{\gamma }{m}t}\right)</script></span> </span> This can be integrated to give the <script type="math/tex">z</script>-component as <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\dot{z}(t)=-\frac{mg}{\gamma }+\left(U\sin \theta +\frac{mg}{\gamma }\right) \exp \left({-\frac{\gamma }{m}t}\right)</script></span> </span> <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\Rightarrow z(t)=-\frac{mgt}{\gamma }+\frac{m}{\gamma }\left(U\sin \theta +\frac{mg}{\gamma }\right) \left\{ 1-\exp \left({-\frac{\gamma }{m}t}\right)\right\}</script></span> </span>
+</p>
+<p>
+The vector equation of the trajectory is thus <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec r}(t)=\frac{mU\cos \theta }{\gamma } \left\{ 1-\exp \left(-\frac{\gamma }{m}t\right)\right\}  \  {\hat i} +\left[-\frac{mgt}{\gamma }+\frac{m}{\gamma }\left(U\sin \theta +\frac{mg}{\gamma }\right)\left\{ 1-\exp \left({-\frac{\gamma }{m}t}\right)\right\}  \right] {\hat k}.</script></span> </span> which is much more complicated than the parabolic motion with no air resistance. 
+</p>
+<p>
+By considering the components <script type="math/tex">x(t)</script> and <script type="math/tex">z(t)</script> and eliminating <script type="math/tex">t</script> between them the Cartesian equation of the trajectory can be found to be <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">z=\left(\tan \theta +\frac{mg}{\gamma U\cos \theta }\right)x +\frac{m^2g}{\gamma ^2}\log \left(1-\frac{\gamma x}{mU\cos \theta }\right).</script></span> </span>
+</p>
+<p>
+Exercise: Take the solution above and put <script type="math/tex">\epsilon =\gamma U/mg</script> and then expand the resulting expression in a Taylor series (see later) as <script type="math/tex">\epsilon \rightarrow 0</script>. For the first term in the series you should recover the resistance-free parabola and the next terms give you the correction to the path due to air resistance. 
+</p>
+</section><section class="section">
+<h2 id="a0000000212">2.4 Reminder: Linear Equations and integrating factors</h2>
+<p>
+Many first order ordinary differential equations can be solved by multiplying both sides by a suitable factor, called an <i class="it">integrating factor</i> <script type="math/tex">R(x,y)</script>. Finding such an integrating factor can be difficult but there is a simple rule for the case of a linear first-order ordinary differential equations. 
+</p>
+<p>
+An equation 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\frac{dy}{dx}+p\left( x \right)y=q\left( x \right)</script></span>
+<p>
+ is called a <i class="it">linear first order differential equation</i> and can be solved by use of an integrating factor. The integrating factor is given by 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">R\left( x \right)=\exp \left[ {\int ^ x p\left( s \right)ds } \right].</script></span>
+<p>
+ Note that the integrating factor is usually taken not to contain an arbitrary constant (since this will be a multiplicative factor that can be cancelled on both sides of the equation). 
+</p>
+<p>
+We solve the equation by multiplying through by <script type="math/tex">R\left( x \right)</script>, 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\exp \left( {\int ^ x p\left( s \right)ds } \right)\frac{dy}{dx}+\exp \left( {\int ^ x p\left( s \right)ds } \right)p\left( x \right)y=\exp \left( {\int ^ x p\left( s \right)ds } \right)q\left( x \right).</script></span>
+<p>
+The left-hand side can then be recognised as an exact derivative: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\exp \left( {\int ^ x p\left( s\right)ds } \right)\frac{dy}{dx}+\exp \left( {\int ^ x p\left( s \right)ds } \right)p\left( x \right)y=\frac{d}{dx}\left[ {y\exp \left( {\int ^ x p\left( s \right)ds } \right)} \right]</script></span>
+<p>
+ where we have used the fundamental theorem of calculus: 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">p(x)=\frac{d}{dx}\left(\int ^ x p(s) ds\right).</script></span>
+<p>
+ Hence, we can write the linear equation above as 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\frac{d}{dx}\left( {y\; \exp \left( {\int ^ x p\left( s \right)ds } \right)} \right)=q\left( x \right)\exp \left( {\int ^ x p\left( s \right)ds } \right)</script></span>
+<p>
+ or more simply as 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\frac{d}{dx}\Big( y\;  R(x)\Big)=q(x) R(x).</script></span>
+<p>
+ Both sides can now be integrated directly with respect to <script type="math/tex">x</script> to obtain a solution for <script type="math/tex">y(x)</script>: 
+</p>
+<span><script type="math/tex; mode=display">\begin{eqnarray*}  y(x)R(x)& =& \int ^ x q(s)R(s) ds +C \\ \Rightarrow y(x)& =& \frac{1}{R(x)}\int ^ x q(s)R(s)ds +\frac{C}{R(x)}. \end{eqnarray*}</script></span>
+<p>
+ Note that if you chose not to use the initial conditions in the integration limits here, so that the arbitrary constant <script type="math/tex">C</script> is automatically found as part of the definite integration progress, it is vital that you don’t forget to put <script type="math/tex">C</script> on the right hand side <b class="bf">before</b> you ultimately divide through by <script type="math/tex">R(x)</script> to obtain <script type="math/tex">y(x)</script>. Otherwise you miss out a whole term in the solution. 
+</p>
+<p>
+Note: When seeking the integrating factor be careful. For example for the equation 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x\frac{dy}{dx}-x^2\; y=e^{3x},</script></span>
+<p>
+ first put the equation in the <b class="bf">standard</b> form with the coefficient of <script type="math/tex">dy/dx</script> being unity and a function of <script type="math/tex">x</script> multiplying a single linear term in <script type="math/tex">y</script>. 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\frac{dy}{dx}-x\; y=\frac{e^{3x}}{x},</script></span>
+<p>
+ and then find the integrating factor (taking care to include the correct sign of <script type="math/tex">p(x)</script>
+</p>
+<span class="dmath"><script type="math/tex; mode=display">R(x)=\exp \left(\int p\left( x \right)dx\right) =\exp \left( \int -x\; dx \right)=\exp \left( {-x^2/2} \right).</script></span>
+<p>
+Also, you will have noticed that for a first order equation, there is one arbitrary constant in the general solution. Thus to find a specific solution you need to provide one additional bit of information, or boundary condition, to determine the specific value of the arbitrary constant. 
+</p>
+</section><section class="section">
+<h2 id="a0000000213">2.5 Alternative solution to the projectile problem</h2>
+<p>
+While it is often natural to solve the problem in component form (as we did above), we have already seen that simple ballistic motion can also be solve directly as a vector equation. As before, we have 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">m {d \vec v \over dt} = m \vec g - \gamma \vec v</script></span>
+<p>
+ This is a linear equation, so we can solve it using an integrating factor. We have 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{d \over dt} \left( e^{\gamma t \over m} \vec v \right) = e^{\gamma t \over m} \vec g</script></span>
+<p>
+ which leads to 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\vec v = {m \over \gamma } \vec g + {\vec c} e^{-\gamma t/m}</script></span>
+<p>
+ where the integration constant, <script type="math/tex">\vec c</script>, is fixed by the initial speed. Suppose that we have <script type="math/tex">\vec v = \vec u</script> at <script type="math/tex">t=0</script>. Then it follows that 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\vec v = {m \over \gamma } \vec g +\left( \vec u - {m \over \gamma } \vec g \right) e^{-\gamma t/m}</script></span>
+<p>
+ If we want the position, we can integrate again. This leads to 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\vec r = { m\over \gamma } \vec g t - {m \over \gamma }\left( \vec u - {m \over \gamma } \vec g \right) e^{-\gamma t/m} + \vec b</script></span>
+<p>
+ If we let <script type="math/tex">\vec r=0</script> at <script type="math/tex">t=0</script>, then 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\vec r= { m\over \gamma } \vec g t + {m \over \gamma }\left( \vec u - {m \over \gamma } \vec g \right) \left( 1- e^{-\gamma t/m} \right)</script></span>
+<p>
+We can make contact with the previous calculation by expanding our result in components. Let <script type="math/tex">\vec r = (x,y,z)</script> and send the projectile off with initial velocity <script type="math/tex">\vec u = (u \cos \theta , 0, u \sin \theta )</script>. With gravity acting downwards, so <script type="math/tex">\vec g = (0, 0,-g)</script>, our vector equation becomes three equations. One is trivial: <script type="math/tex">y=0</script>. The other two are 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x = {m\over \gamma } u \cos \theta \left( 1- e^{-\gamma t/m} \right)</script></span>
+<p>
+ and 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">z = - {mgt \over \gamma } + {m \over \gamma } \left( u \sin \theta + {mg \over \gamma } \right) \left( 1- e^{-\gamma t/m} \right)</script></span>
+<p>
+ The time scale<a class="footnote" href="#a0000000214">
+<sup class="footnotemark">2</sup>
+</a> <script type="math/tex">m/\gamma </script> is important. For <script type="math/tex">t\gg m/\gamma </script>, the horizontal position is essentially constant. By this time, the particle is dropping more or less vertically. The trajectory is not symmetric. 
+</p>
+<p>
+We may also consider what happens when friction is small. A couple of terms look as if they are going to become singular (as we would appear to divide by zero) in this limit, but that seems unphysical. To resolve this, we should ask what <script type="math/tex">\gamma </script> is small relative to. In the present case, the answer lies in the exponential terms. To say that <script type="math/tex">\gamma </script> is small, really means <script type="math/tex">\gamma \ll m/t</script> or, in other words, it means that we are looking at short times, <script type="math/tex">t\ll m/\gamma </script>. Then we can expand the exponential in a Taylor series. Reverting to the vector form of the equation, we have 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">e^{-\gamma t/m} \approx 1 - {\gamma t \over m} + \ldots</script></span>
+<p>
+ so we find 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\begin{multline}  \vec r = { m\over \gamma } \vec g t + {m \over \gamma }\left( \vec u - {m \over \gamma } \vec g \right) \left[ 1 - 1 + \gamma {t \over m} - {1\over 2} \left( {\gamma t \over m} \right)^2 + \ldots \right] \\ = \vec u t + {1\over 2} \vec g t^2 + \mathcal O \left( {\gamma t \over m} \right) \nonumber \end{multline}</script></span>
+<p>
+ This is the usual projectile result. 
+</p>
+</section><section class="section">
+<h2 id="a0000000215">2.6 Terminal velocity</h2>
+<p>
+Let us now consider a particle of mass <script type="math/tex">m</script> moving in a constant gravitational field, subject to quadratic friction. We measure the height <script type="math/tex">z</script> to be in the upwards direction, meaning that if <script type="math/tex">v = dz/dt > 0</script>, the particle is going up. We will look at the cases where the particle goes up and goes down separately. 
+</p>
+<p>
+First suppose that we drop the particle from some height. The equation of motion is given by 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">m {dv \over dt} = - mg + \gamma v^2</script></span>
+<p>
+ It is worth commenting on the minus signs on the right-hand side. Gravity acts downwards, so comes with a minus sign. Since the particle is falling down, friction is acting upwards so comes with a plus sign. Dividing through by <script type="math/tex">m</script>, we have 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{dv \over dt} = - g + {\gamma \over m} v^2</script></span>
+<p>
+ Integrating this, we get 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">t = - \int _0^ v {dv’ \over g - \gamma v^{\prime 2}/m}</script></span>
+<p>
+This can be worked out—either through the substitution <script type="math/tex">v=\sqrt{mg/\gamma } \tanh x</script> or partial fractions (which may be the easiest route)—leading to 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">t = - \sqrt{ m \over \gamma g} \tanh ^{-1} \left( \sqrt{\gamma \over mg} v \right)</script></span>
+<p>
+ which we can invert to get the speed as a function of time 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">v = - \sqrt{ mg \over \gamma } \tanh \left( \sqrt{ \gamma g \over m} t\right)</script></span>
+<p>
+ This illustrates the effect of the air resistance. As time increases, the velocity does not increase without bound. Instead, the particle reaches a maximum speed (the terminal velocity) 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">v \longrightarrow - \sqrt{mg \over \gamma } \  , \qquad \mbox{as} \  t \to \infty</script></span>
+<p>
+The sign is negative because the particle is falling downwards. Note that if all we want is the terminal velocity, then we do not need to go through the whole calculation. We can simply look for solutions with constant speed, so <script type="math/tex">dv/dt = 0</script>. This gives us the same answer. The advantage of going through the full calculation is that we learn how the velocity approaches its terminal value. 
+</p>
+<p>
+This example teaches us an important lesson. A small animal (like a mouse) may survive a fall where a large animal (say, an elephant) will not<a class="footnote" href="#a0000000216">
+<sup class="footnotemark">3</sup>
+</a>. The point is that, if we compare objects of equal density the masses scale as the volume, meaning <script type="math/tex"> m\sim L^3</script> where <script type="math/tex">L</script> is the linear size of the object. In contrast, the coefficient of friction usually scales as surface area, <script type="math/tex">\gamma \sim L^2</script>. This means that the terminal velocity depends on size. For objects of equal density, we expect the terminal velocity to scale as <script type="math/tex">v \sim \sqrt{L}</script>. 
+</p>
+<p>
+Let us now throw the object upwards. Since both gravity and friction are then acting downwards, we get a flip of a minus sign in the equation of motion. It is now 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{dv \over dt} = - g - {\gamma \over m} v^2</script></span>
+<p>
+ Suppose that we throw the object up with initial speed <script type="math/tex">u</script> and we want to figure out the maximum height, <script type="math/tex">h</script>, that it reaches. We could follow our earlier calculation and integrate the equation to determine <script type="math/tex">v = v(t</script>). But since we are not asking about time, it is much better to instead consider velocity as a function of distance: <script type="math/tex">v = v(z)</script>. We write<a class="footnote" href="#a0000000217">
+<sup class="footnotemark">4</sup>
+</a>
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{dv \over dt} = {dv \over dz} {dz \over dt} = v {dv \over dz} = - g - {\gamma v^2 \over m}</script></span>
+<p>
+ or 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{1 \over 2} {dv^2 \over dz} = - g - {\gamma v^2 \over m}</script></span>
+<p>
+ Using <script type="math/tex">y=v^2</script> we can integrate this to get 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\int _{u^2}^0 {dy \over g+\gamma y/m} = - 2\int _0^ h dz \quad \longrightarrow \quad {m\over \gamma } \left[ \log \left( g + {\gamma y\over m} \right) \right]_{y=u^2}^{y=0} = - 2h</script></span>
+<p>
+ That is, 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">h = {m \over 2\gamma } \log \left( 1 + {\gamma u^2 \over mg} \right)</script></span>
+<p>
+Here, it is worth looking at what happens when the effect of friction is small. Naively, it looks like we are in trouble because as <script type="math/tex">\gamma \to 0</script>, the term in front gets large. But surely the height should not go to infinity just because the friction is small. The resolution to this is that the log is also getting small in this limit. Expanding as a Taylor series, we have 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">h = {u^2 \over 2g} \left( 1 - {\gamma u^2 \over 2mg} + \ldots \right)</script></span>
+<p>
+ The leading term is the answer we would get in the absence of friction; the subleading terms tell us how much the friction, <script type="math/tex">\gamma </script>, affects the attained height. 
+</p>
+</section><section class="section">
+<h2 id="a0000000218">2.7 Friction</h2>
+<p>
+Friction is the resistive force that occurs when two solid surfaces pressed together attempt to slide over each other. Even the apparently macroscopically smoothest of surfaces will, in practice, give rise to frictional forces, since on the macroscopic scale the surfaces are imperfect and so are rough. The surfaces then snag on and scrap against each other’s microscopic mountain ranges as they move past each other. <a class="footnote" href="#a0000000219">
+<sup class="footnotemark">5</sup>
+</a>
+</p>
+<p>
+Consider two solid, reasonably flat surfaces in contact. Assume they are both stationary and are being pushed together by a normal force <script type="math/tex">{\vec N}</script>. This normal force is the component orthogonal to the surfaces of any force holding the surfaces together. For example you might consider the upper surface to be a book and the lower surface to be a horizontal table in which case the normal force would be due to the weight of the book. 
+</p>
+<figure id="figure411">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/friction/images/img-0006.png" style="width:289.08pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">2.3</span>
+<span class="caption_text">Cartoon close-up of the interface between two apparently flat surfaces.</span>
+</figcaption> </div>
+</figure>
+<p>
+As there is no acceleration we can apply <script type="math/tex">{\bf N2}</script> to infer that there will be a reactive force <script type="math/tex">{\vec R}</script> due to the lower surface acting on the upper surface (the table pushing on the book) of equal magnitude to <script type="math/tex">{\vec N}</script>, but in the opposite direction. 
+</p>
+<figure id="figure412">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/friction/images/img-0008.png" style="width:180.67499999999998pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">2.4</span>
+<span class="caption_text">Effect of applying forces to the frictional interface between two surface forced together.</span>
+</figcaption> </div>
+</figure>
+<p>
+The rough surface creates a frictional force <script type="math/tex">{\vec F}_ F</script> that acts tangentially to each surface to oppose any translational force applied in an orthogonal direction to <script type="math/tex">{\vec R}</script> (see diagram). If a translational force, <script type="math/tex">{\vec F}_{{\rm app}}</script>, is applied to the upper surface (the book) then the surfaces will not slide over each other and hence will remain stationary only as long as <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">|{\vec F}_{{\rm app}}|\le \mu _ s|{\vec R}|,</script></span> </span> where <script type="math/tex"> \mu _ s</script> is an experimentally determined positive number called the <b class="bf">coefficient of static friction</b>. If <script type="math/tex">{\vec F}_{\rm appl}</script> is greater in magnitude than the static frictional force then the surfaces will slide over each other. Once the surfaces start to slide there will still be a frictional force tangential to the surfaces but it will have a magnitude <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">|{\vec F}_ F| =\mu _ k|{\vec R}|,</script></span> </span> and act in a direction to oppose the sliding motion. The experimentally determined positive number <script type="math/tex">\mu _ k</script> is called the <b class="bf">coefficient of kinetic friction</b> (also sometimes known as the coefficient of dynamic friction). Suppose the instantaneous motion of one surface relative to another in contact with it is in the direction <script type="math/tex">{ {\hat v}}\ne {\vec0}</script>. In vector notation the friction force resisting the motion can then be written as <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec F}_ F=-\mu _ k|{\vec R}|{{\hat v}}.</script></span> </span> This force continues to act until the surfaces become stationary at which time the static friction returns. 
+</p>
+<p>
+Several points are worth making: 
+</p>
+<ul class="itemize" id="a0000000220">
+<li id="a0000000221"> <p>
+the coefficients of friction are properties of the surfaces in contact. Hence the coefficient of friction between two wooden surfaces can be expected to be different from that between a steel and wood surface. 
+</p>
+</li>
+<li id="a0000000222"> <p>
+Frictional forces are independent of the area of the surface in contact, they depend only on the magnitude of the normal force with which the surfaces are pushed together. 
+</p>
+</li>
+<li id="a0000000223"> <p>
+Usually <script type="math/tex">\mu _ k\le \mu _ s</script>, however to simplify algebra they are often taken as being equal and take a value less than 1, i.e., 
+</p>
+<p>
+<span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\mu _ k=\mu _ s<1.</script></span> </span>
+</p>
+<p>
+We shall follow this procedure here. Note that coefficients of friction greater than unity only occur if the surfaces interlock and that a book sliding on a table might have values around <script type="math/tex">0.2</script>. 
+</p>
+</li>
+<li id="a0000000224"> <p>
+Note that there is also similarly defined <b class="bf">coefficient of rolling friction</b> <script type="math/tex">\mu _ s</script> which is applicable to situations where two surfaces are only in minimal contact, for example a cart wheel in contact with the road. However we shall not deal so much with this situation. 
+</p>
+</li>
+<li id="a0000000225"> <p>
+We can attack problems involving friction using Newton’s laws of motion. 
+</p>
+</li>
+</ul>
+<figure id="figure413">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/friction/images/img-0010.png" style="width:180.67499999999998pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">2.5</span>
+<span class="caption_text">A, somewhat square, child sliding down a slide.</span>
+</figcaption> </div>
+</figure>
+<p>
+ [width=%+10mm]A child on a slide 
+</p>
+<p>
+Consider a straight slide inclined at an angle <script type="math/tex">\theta </script> to the horizontal. Suppose a child of mass <script type="math/tex">m</script> attempts to slide down the slide under gravity of magnitude <script type="math/tex">g</script>. The forces acting on the child are 
+</p>
+<ul class="itemize" id="a0000000226">
+<li id="a0000000227"> <p>
+their weight <script type="math/tex">{\vec W}</script> which has magnitude <script type="math/tex">mg</script> and acts vertically downwards; 
+</p>
+</li>
+<li id="a0000000228"> <p>
+a force of reaction <script type="math/tex">{\vec R}</script> that acts normal to the slide (that this exists is due to <b class="bf">N3</b> as without it the child would fall through the slide); 
+</p>
+</li>
+<li id="a0000000229"> <p>
+the frictional force <script type="math/tex">{\vec F}_ F</script> acting tangentially to the slide and in a direction (up or down the slide) to oppose any motion. The coefficient of friction is supposed to be <script type="math/tex">\mu </script>. 
+</p>
+</li>
+</ul>
+<p>
+ These forces are summarised in the diagram below. 
+</p>
+<p>
+We can use <b class="bf">N2</b> to analyse the situation. We fix a Cartesian coordinate frame at the base of the slide and orient the axes such that <script type="math/tex">{\hat i}</script> points down the tangent to the slide, <script type="math/tex">{\hat j}</script> points into the page and <script type="math/tex">{\hat k}</script> points away from the ground but normal to the slide. 
+</p>
+<p>
+Note that there is no fixed rule that says that a Cartesian coordinate system has to be oriented so that <script type="math/tex">{\hat k}</script> has to point directly upwards! In fact for this problem this orientation saves a lot of algebraic effort. If you don’t believe this, try orienting the coordinates with <script type="math/tex">{\hat i}</script> horizontal and <script type="math/tex">{\hat k}</script> pointing upwards and repeating the analysis. 
+</p>
+<p>
+Then we can write the normal and frictional forces as <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec F}_ F=-F_ F \  {\hat i}, \qquad {\vec R}=R \  {\hat k}.</script></span> </span> If the position of the child on the slide is given by <script type="math/tex">{\vec r}(t)=x(t){\hat i}+y(t){\hat j}+z(t){\hat k}</script> with respect to this coordinate frame then <b class="bf">N2</b> says that <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">m\;  \ddot{\vec{r}}(t)={\vec F}_ F+{\vec R}+{\vec W}.</script></span> </span> where 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec W} = mg\sin \theta \; {\hat i} + 0{\hat j} - mg\cos \theta \; {\hat k}</script></span>
+<p>
+ To solve this problem we do exactly as before and rewrite the problem in component form. By symmetry, <script type="math/tex">y(t)=0</script> for all time, so we will not need to solve for <script type="math/tex">y(t)</script>. We find: 
+</p>
+<p>
+<script type="math/tex">\hat i</script> component: <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">m\ddot{x}(t)=mg\sin \theta -F_ F.</script></span> </span>
+</p>
+<p>
+<script type="math/tex">{\hat k}</script> component: <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">m\ddot{z}(t)=R-mg\cos \theta .</script></span> </span> Assuming that the child does not spontaneously fly off the slide (i.e., we assume no motion in the <script type="math/tex">{\hat k}</script> direction) we must have no acceleration in this direction <script type="math/tex">\Rightarrow \ddot{z}(t)</script>=0. Hence this last equation reduces to <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">R=mg\cos \theta ,</script></span> </span> and gives us an expression relating the normal reaction <script type="math/tex">R</script> to the weight <script type="math/tex">mg</script>. 
+</p>
+<p>
+Two possible situations can arise. 
+</p>
+<p>
+<b class="bf">1. The child is just stationary, on the point of sliding.</b> In this case we must have <script type="math/tex">\ddot x(t)=0</script>: <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">m\ddot{x}(t)=0 \qquad \Rightarrow \qquad F_ F=mg\sin \theta .</script></span></span> Using the fact that, in this case, <script type="math/tex">F_ F=\mu R</script> we combine this result with the <script type="math/tex">z</script>-component to arrive at: <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">R=mg\cos \theta , \  \  F_ F=mg\sin \theta , \  \  F_ F=\mu R \qquad \Rightarrow \qquad \tan \theta =\mu ,</script></span></span> <span style="color:#000000"><span class="dmath"><script type="math/tex; mode=display">\theta =\arctan \mu .</script></span> </span> This is a (rather scary for the child) way to determine <script type="math/tex">\mu _ s</script>. The angle of the slide <script type="math/tex">\theta </script> is altered until the child first just starts to move. <script type="math/tex">\mu _ s</script> is then just the tangent of the angle of inclination at which slipping first occurs. 
+</p>
+<p>
+<b class="bf">2. The child slides downwards.</b> The equations of motion must be solved subject to some initial data, say <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec r}(0)=-L{\hat i}, \qquad \dot{\vec{r}}(0)=\vec{0}.</script></span> </span> Once again it is best to rewrite the problem using  <script type="math/tex"> \dot{ \vec{r}}(t)=u(t){\hat i}+v(t){\hat j}+w(t){\hat k} \quad </script> as it makes the algebra easier and leads to the following, where we have again used <script type="math/tex">F_ F = \mu R = \mu m g \cos \theta </script>: 
+</p>
+<ul class="itemize" id="a0000000230">
+<li id="a0000000231"> <p>
+<script type="math/tex">{\hat i}</script> component: <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">m\dot{u}(t)=mg\sin \theta -\mu mg\cos \theta , \  u(0)=0 \qquad \Rightarrow \qquad u(t)=g(\sin \theta -\mu \cos \theta )t .</script></span> </span>
+</p>
+</li>
+<li id="a0000000232"> <p>
+<script type="math/tex">{\hat k}</script> component: <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">m\dot{w}(t)=R-mg\cos \theta =0, \  w(0)=0 \Rightarrow w(t)=0.</script></span> </span>
+</p>
+</li>
+</ul>
+<p>
+ Integrating once more with respect to <script type="math/tex">t</script> we obtain: 
+</p>
+<ul class="itemize" id="a0000000233">
+<li id="a0000000234"> <p>
+<script type="math/tex">{\hat i}</script> component: <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\dot{x}(t)=g(\sin \theta -\mu \cos \theta )t, \  x(0)=-L \rightarrow x(t)=-L+g(\sin \theta -\mu \cos \theta )\frac{t^2}{2}</script></span> </span>
+</p>
+</li>
+<li id="a0000000235"> <p>
+<script type="math/tex">{\hat k}</script> component: <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">m\dot{z}(t)=0, \  z(0)=0 \rightarrow z(t)=0.</script></span> </span>
+</p>
+</li>
+</ul>
+<p>
+ Hence the position as a function of time is <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec r}(t)=\left[-L+g(\sin \theta -\mu \cos \theta )\frac{t^2}{2}\right]{\hat i}.</script></span> </span>  Note: If the angle of the slope were increased to <script type="math/tex">\theta =\pi /2</script> the slide would be vertical and the child would no longer held in contact with the slide by component of its weight. In the equation above, the terms involving <script type="math/tex">\mu </script> vanish and the equation of motion becomes <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec r}(t)=\left(-L+g\frac{t^2}{2}\right){\hat i}</script></span> </span> which is just the usual equation of a body falling under gravity (with the height measured downwards!) If the slide is horizontal with <script type="math/tex">\theta =0</script>, then the above dynamic analysis does not hold. 
+</p>
+</section><section class="section">
+<h2 id="a0000000236">2.8 Addendum: Taylor expansions</h2>
+<p>
+The Taylor series is one of the most useful mathematical tools applied to real life problems. As in the example of potential motion near equilibrium, we can often use a Taylor series to approximate a complicated function by a (simpler) polynomial function. 
+</p>
+<p>
+The starting point is Taylor’s theorem (which we state without proof, as we are mainly interested in the applications): 
+</p>
+<p>
+Let <script type="math/tex">f(x)</script> be continuous and differentiable an infinite number of times at point <script type="math/tex">x=a</script> (i.e., <script type="math/tex">f</script> and all of its derivatives <script type="math/tex">f', f'',\ldots </script> exist at <script type="math/tex">x=a</script>). Then <script type="math/tex">f(x)</script> can be expanded about the point <script type="math/tex">x=a</script> in terms of powers of <script type="math/tex">(x-a)</script>, and this expansion is given by the formula <span class="dmath"><script type="math/tex; mode=display">\begin{multline*}  f(x) = \textcolor{black}{ f(a) + (x-a) f'(a) + {{(x-a)^2} \over 2!} f''(a) + \dots } \\ \textcolor{black}{ + \frac{(x-a)^ n}{n!} f^{(n)}(a) +O(x-a)^{n+1} } \end{multline*}</script></span>
+<p>
+ This is a <b class="bf">Taylor expansion</b>. It has the form 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">f(x) = P_ n(x) + O(x-a)^{n+1}</script></span>
+<p>
+ where <script type="math/tex">P_ n(x)</script> is a polynomial of degree <script type="math/tex">n</script> and <script type="math/tex">O(x-a)^{n+1}</script> is a remainder term. The remainder term reminds us that in writing the Taylor expansion explicitly up to the term <script type="math/tex">\propto (x-a)^ n</script> (“up to order n”) we are omitting terms “of order <script type="math/tex">(x-a)^{n+1}</script> and higher”. 
+</p>
+<p>
+For <script type="math/tex">x</script> close to <script type="math/tex">a</script>, we can expect the remainder term to be small (since <script type="math/tex">x-a</script> is small), so that <script type="math/tex">f(x) \simeq P_{n} (x)</script>. Thus Taylor’s theorem enables us to approximate functions by polynomials. 
+</p>
+<p>
+In many cases the remainder term goes to zero as <script type="math/tex">n \rightarrow \infty </script> and the Taylor series expansion of <script type="math/tex">f(x)</script> takes the form of a possibly infinite, but convergent, series. 
+</p>
+<p>
+ [width=%+10mm]The exponential 
+</p>
+<p>
+As an example, let us determine the Taylor series expansion of the function <script type="math/tex">f(x)=e^ x</script> about <script type="math/tex">x=0</script>. 
+</p>
+<p>
+We first establish the necessary data. We know that we need the derivatives: 
+</p>
+<span><script type="math/tex; mode=display">\begin{eqnarray*} & & f(x)= e^ x \qquad f’(x)=\textcolor{black}{e^ x} \qquad f”(x)=\textcolor{black}{e^ x} \quad \textcolor{black}{\dots }\\ & & f(0)= \textcolor{black}{e^0 = 1 } \quad f’(0)=\textcolor{black}{e^0=1} \quad f”(0)=\textcolor{black}{e^0=1} \quad \textcolor{black}{\dots } \end{eqnarray*}</script></span>
+<p>
+ Then we use this in the Taylor series expansion with <script type="math/tex">a=0</script>
+</p>
+<span class="dmath"><script type="math/tex; mode=display">f(x) = \textcolor{black}{1 + x + {x^2 \over 2!} + {x^3 \over 3!} + {x^4 \over 4!} + \dots = \sum _{n=0}^\infty \frac{1}{n!} x^ n}</script></span>
+<p>
+Similarly, we can work out the Taylor series expansion of the function <script type="math/tex">f(x)=\cos x</script> about <script type="math/tex">x=0</script>. 
+</p>
+<p>
+In this case, we need: 
+</p>
+<span><script type="math/tex; mode=display">\begin{eqnarray*}  f(x) & =&  \textcolor{black}{\cos x } \  , \qquad f(0) = \textcolor{black}{1} \\ f’(x) & =&  \textcolor{black}{-\sin x} \  , \qquad f’(0) = \textcolor{black}{0} \\ f”(x) & =&  \textcolor{black}{ -\cos x} \  , \qquad f”(0) = \textcolor{black}{-1} \\ f”’(x) & =&  \textcolor{black}{\sin x} \  , \qquad f”’(0) = \textcolor{black}{0} \\ f^{(4)} (x) & =&  \textcolor{black}{\cos x } \  , \qquad f^{(4)}(0) = \textcolor{black}{1} \\ \end{eqnarray*}</script></span>
+<p>
+ and we arrive at 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">f(x) = \textcolor{black}{1 - {x^2 \over 2!} + {x^4 \over 4!} - {x^6 \over 6!} + \dots =\sum _{k=0}^\infty \frac{(-1)^ k}{(2k)!} x^{2k} }</script></span>
+</p>
+</section>
+<hr/>
+<ol>
+<li id="a0000000209">We will return to the issue of relative velocities later.</li>
+<li id="a0000000214">Note that <script type="math/tex">\gamma t/m</script> must be dimensionless.</li>
+<li id="a0000000216">While it would be interesting to demonstrate this experimentally, health and safety regulations prevent us from doing so at this time.</li>
+<li id="a0000000217">Strictly speaking, we are using <script type="math/tex">v(z(t))</script> here.</li>
+<li id="a0000000219">The effect of lubricating the surfaces reduces the friction by separating the rough surfaces with a thin layer of fluid (for example, oil). With the solid surfaces are no longer in microscopic contact the problem is effectively reduced to one of sliding a fluid under pressure over a surface, which requires less effort.</li>
+</ol>
+
+            </div>
+        </div>
+    </div>
+
+        </main>
+		
+		<footer class="text-muted">
+	<hr>
+	<div class="container">
+		<div class="float-right">
+			<ul style="list-style: none">
+			<li><a href="#">Back to top</a></li>
+			
+			
+			<li><a href="../../../notes/notes_by_chapter/friction/friction.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;Download as PDF</a></li>
+			
+			</ul>
+		</div>
+		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
+		<p>This page last generated: 2022-07-03</p>
+	</div>
+</footer>
+		
+    </body>
+</html>

@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        
+            <meta charset="utf-8">
+            <meta name="robots" content="noindex">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="author" content="Nils Andersson" />
+            <meta name="date" content="2022-07-03" />
+        
+
+        <title>Conservation | Dynamics and Relativity</title>
+
+        
+    
+    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../../../static/styles.css">
+            <link rel="stylesheet" id="customiseCSS" href="../../../static/light.css">
+            
+            
+        
+    <link rel="stylesheet" id="customiseCodeCSS" href="../../../static/pygmentize.light.css">
+    <link rel="stylesheet" href="../../../static/codemirror-5.26.0/lib/codemirror.css">
+    <link rel="stylesheet" href="../../../static/boole.css">
+    <link rel="stylesheet" href="../../../static/numbasEmbed.css">
+
+    <link rel="stylesheet" href="../../../static/bootstrap-toc.css?v=3">
+    <link rel="stylesheet" href="../../../static/print.css">
+
+
+        
+    
+    
+            <script defer src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <script defer src="../../../static/mathjax_config.js"></script>
+            <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+            <script defer src="../../../static/customisation.js"></script>
+            <script defer src="../../../static/mp4.js"></script>
+            
+            
+        
+    <script defer src="../../../static/jquery.flexibleArea.js"></script>
+    <script defer src="../../../static/spin.min.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/lib/codemirror.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/octave/octave.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/python/python.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/r/r.js"></script>
+    <script defer src="../../../static/boole.js"></script>
+    <script defer src="../../../static/numbasEmbed.js"></script>
+
+    <script defer src="../../../static/bootstrap-toc.js"></script>
+
+    </head>
+    <body data-spy="scroll" data-target="#chapterTOC" data-offset="50">
+        
+<div class="collapse" id="navbarToggleCustomise">
+	<div class="bg-secondary text-white p-3">
+		<form onsubmit="return false;" id="navbarCustomise">
+			<div class="form-row">
+				<label>Theme Customisation</label>
+				<div id="themeSelector" class="form-group col-md-12">
+					<button class="btn btn-dark mr-2" value="dark">Dark</button>
+					<button class="btn btn-pastel mr-2" value="pastel">Pastel</button>
+					<button class="btn btn-light mr-4" value="light">Light</button>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label style="display: block" for="font-scale">Font size (<span id="font-size-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="font-scale" min="50" max="600" value="100">
+					<button id="font-scale-reset" class="btn btn-sm">Reset</button>
+				</div>
+				<div class="form-group col-md-4">
+					<label style="display: block" for="p-space">Spacing (<span id="p-space-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="p-space" min="0" max="600" value="100">
+					<button id="p-space-reset" class="btn btn-sm">Reset</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<nav aria-label="breadcrumb">
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="../../../index.html">Dynamics and Relativity</a>
+		</li>
+		
+		<li class="breadcrumb-item">
+			<a href="../../../notes/notes_by_chapter/index.html">Notes by chapter</a>
+		</li>
+		
+		<li class="breadcrumb-item active">
+			Conservation
+		</li>
+		<li class="ml-auto">
+			<button class="navbar-toggler p0" type="button" data-toggle="collapse" data-target="#navbarToggleCustomise" aria-controls="navbarToggleCustomise" aria-expanded="false" aria-label="Toggle customisations panel">
+				<i class="fa fa-cog" aria-hidden="true" title="Toggle customisations panel"></i> <span class="sr-only">Toggle customisations panel</span>
+			</button>
+		</li>
+	</ul>
+</nav>
+
+
+        <header>
+            
+            
+        </header>
+        <main>
+            
+    <div class="container mt-3">
+        <div class="row">
+            
+            <div id="sidebar" class="col-md-3">
+                <nav class="mb-3" id="chapterTOC" data-toggle="toc">
+                    <ul class="nav navbar-nav">
+                        
+                        
+                        
+                        <li><a id="pdf-link" class="nav-link" href="../../../notes/notes_by_chapter/conservation/conservation.pdf" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" title="Download as PDF"></i>&nbsp;Download as PDF</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+            <div id="content" class="col-md-9"> 
+            
+            
+<!-- Latex Chapter/Part -->
+<h1 id="a0000000355">Conservation Laws</h1>
+<p>
+Let us now introduce the (hugely important) idea of conservation laws. As the name suggests, a conserved quantity is one that does not change throughout the motion of a system. Conservation laws can often be used as an alternative formulation of dynamical problems—they allow us to introduce suitable variables that remain fixed as the system evolves<a class="footnote" href="#a0000000356">
+<sup class="footnotemark">1</sup>
+</a>. We will deal with two major conservation properties, relating to <b class="bfseries">energy</b> and <b class="bfseries">momentum</b>. These conservation laws extend the range of mechanical problems we can attack. We shall also use the concept of energy to discuss the <i class="it">stability</i> of an static situation: if a static system is displaced slightly, will it return to the same static state, or will there be a dramatic (or even catastrophic) change in its structure. We have already alluded to these properties in the context of potential motion. 
+</p>
+<section class="section">
+<h2 id="a0000000357">6.1 Energy</h2>
+<p>
+The history of the concept of energy is long and varied. We might easily be able to mathematically define an quantity that we could call the energy, and have an intuitive idea of what it means. However historically there were great issues with the concept of physical mechanisms that could convert, say, thermal energy into energy of motion. Were they the same “thing”? How was this achieved? Did they have the same origin? What was the mechanical equivalent of heat? This was not some arcane academic debate: it underlay the whole of the industrial revolution in the UK , which was largely powered by the conversion of the thermal energy of steam into the kinetic energy of pumps/wheels/looms etc. and so the industrial revolution of the whole world. 
+</p>
+<p>
+Originally heat energy was assumed to be a fluid (the caloric theory) that was transferred between bodies and could neither be created nor destroyed. This theory was demolished by the major experimental advances of James Joule who showed that heat can be produced by motion. For this reason the unit of energy is named the “joule”. A joule can be defined in many equivalent ways, for example: 
+</p>
+<ul class="itemize" id="a0000000358">
+<li id="a0000000359"> <p>
+The energy expended by a force of 1N moving an object a distance of 1 m in the direction of the force. 
+</p>
+</li>
+<li id="a0000000360"> <p>
+The energy expended when a current of 1 amp to pass through an (ohmic) electrical resistance of 1 ohm. 
+</p>
+</li>
+</ul>
+<p>
+We will not be concerned with the philosophical issues of energy. Rather, we will use it as a mathematical tool. 
+</p>
+</section><section class="section">
+<h2 id="a0000000361">6.2 Work and Energy</h2>
+<p>
+It is natural to start by introducing the idea of energy from Newton’s laws of motion. We know that Newton’s second law of motion states that the rate of change of momentum <script type="math/tex">{\vec p}</script> with time is equal to the force applied <script type="math/tex">\vec F</script>: <br/><span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec F}=\frac{d{\vec p}}{dt}.</script></span> </span> <br/>Here we shall consider this body to be of <i class="it">constant</i> mass <script type="math/tex">m</script> and at time <script type="math/tex">t</script> at position <script type="math/tex">{\vec r}(t)</script> relative to a certain intertial frame. Using the definition <script type="math/tex">{\vec p}=m{\dot{\vec r}}(t)</script>, we can then write <b class="bf">N2</b> as: <br/><span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\vec{ F}=m{ \ddot{\vec r}}(t).</script></span> </span> <br/>We can dot-product both sides with the velocity <script type="math/tex">{ \dot{ \vec r}}(t)</script>. <br/><span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\begin{multline}  \vec{ F}\cdot { \dot{ \vec r}}(t) = m\left({ \ddot{\vec r}}(t)\cdot { \dot{\vec r}}(t)\right) \\ = \frac{1}{2}m\frac{d}{dt}\left({ \dot{\vec r}}(t)\cdot { \dot{\vec r}}(t)\right) \\ = \frac{d}{dt}\left(\frac{1}{2}m|{ \dot{\vec r}}(t)|^2\right). \label{echange} \end{multline}</script></span> </span>
+</p>
+<p>
+The kinetic energy <script type="math/tex">T</script> of a particle of constant mass <script type="math/tex">m</script> and velocity <script type="math/tex">{ \dot{\vec r}}(t)</script> relative to an inertial frame is then  defined to be: <br/><span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">T\equiv \frac{1}{2}m|{ \dot{\vec r}}(t)|^2.</script></span> </span> <br/>
+</p>
+<p>
+Obviously the kinetic energy of a stationary particle is zero relative to its own rest frame. Thus the quantity on the left-hand side of <a class="ref eqref" href="../../../notes/notes_by_chapter/conservation/index.html#echange">(6.3)</a> is the rate of change of kinetic energy with time <br/><span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\vec{ F}\cdot { \dot{ \vec r}}(t)=\frac{dT}{dt}.</script></span> </span> <br/>Suppose that between <script type="math/tex">t=a</script> and <script type="math/tex">t=b</script>, the particle moves from <script type="math/tex">{ r}(a)</script> to <script type="math/tex">{ r}(b)</script>. We can then integrate both sides with respect to <script type="math/tex">t</script> to give: <br/><span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\int _{a}^{b}{ \vec F}\cdot \frac{d{ \vec r}}{dt}dt=\int _{a}^{b}\frac{dT}{dt}dt = T(b)-T(a).</script></span></span> <br/>The right-hand side is the difference in kinetic energy of the body at times <script type="math/tex">a</script> and <script type="math/tex">b</script>. The left-hand side is the amount of energy that must have been expended by the force to make this change. It is defined to be the work done by the force on the particle. Hence we have: 
+</p>
+<p>
+The work <script type="math/tex">W</script> done by a force <script type="math/tex">F</script> on a particle moving along a trajectory <script type="math/tex">{ r}(t)</script> in time <script type="math/tex">a\le t \le b</script> is the amount of energy given by the integral <br/><span style="color:#000000"> <div class="eqn" id="workint">
+<script type="math/tex; mode=display">\begin{equation}W({\vec r}(a),{\vec r}(b)) \equiv \int _{a}^{b}{ \vec F}\cdot \frac{d{\vec r}}{dt}dt = \int _ a^ b \vec F \cdot d\vec r \label{workint}\tag{6.4}\end{equation}</script>
+</div> </span> and we have derived the law of conservation of energy: <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">W(a,b)=T(b)-T(a)</script></span> </span> <br/>In words the law of conservation of energy states that the work done equals the change in kinetic energy of a system. If <script type="math/tex">W>0</script>, the force has increased the speed of the particle. If <script type="math/tex">W<0</script>, the force has resisted the motion of the particle, it has reduced in speed and dissipated energy. 
+</p>
+<p>
+Overall energy is conserved. The work done decelerating (say) a body will be dissipated as frictional heat and/or acoustic energy. The work done accelerating a body to increase its kinetic energy must come from a source, such as chemical combustion of a fuel. However for now, we will not be concerned with the form of the energy that the work done takes. 
+</p>
+<p>
+Before we can use <a class="ref eqref" href="../../../notes/notes_by_chapter/conservation/index.html#workint">(6.4)</a> we need to define how we evaluate the weird looking work integral. Such integrals are called <b class="bf">line integrals</b> because they are integrals that depend on the path over which the integration is carried out. <br/>
+</p>
+</section><section class="section">
+<h2 id="a0000000362">6.3 A slight aside: Vector Fields and Line Integrals</h2>
+<p>
+As a useful reminder, let us outline some jargon that you will come across in reading texts about how to evaluate line integrals. 
+</p>
+<p>
+First of all, a <em>scalar field</em> is just a fancy description for an ordinary function defined at each point in space. The input is a vector <script type="math/tex">{\vec r}=x{\vec i}+y{\hat j}+z{\hat k}</script>, (where <script type="math/tex">x,y,</script> and <script type="math/tex">z</script> may themselves depend on another parameter, e.g., time <script type="math/tex">t</script>) the output is a number <script type="math/tex">f({\vec r})=f(x,y,z)</script>. Example of scalar fields are: 
+</p>
+<ul class="itemize" id="a0000000363">
+<li id="a0000000364"> <p>
+the altitude of a landscape above (or below) sea level; 
+</p>
+</li>
+<li id="a0000000365"> <p>
+temperature of the atmosphere; 
+</p>
+</li>
+<li id="a0000000366"> <p>
+the pressure of the atmosphere; 
+</p>
+</li>
+<li id="a0000000367"> <p>
+the wind <i class="it">speed</i> at a point. 
+</p>
+</li>
+</ul>
+<p>
+ Scalar fields are often represented by drawing contour plots of curves/surfaces where <script type="math/tex">f({\vec r})=</script>constant. 
+</p>
+<p>
+Similarly, a <span class="rm">vector field</span> is a function whose input is a vector <script type="math/tex">{\vec r}=x{\vec i}+y{\hat j}+z{\hat k}</script> while theoutput is a vector quantity. In a Cartesian frame it takes the form <br/><span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec F}({\vec r})=F_1({\vec r}){\hat i}+F_2({\vec r}){\hat j}+F_3({\vec r}){\hat k} .</script></span> </span> <br/>Examples of vector fields are: 
+</p>
+<ul class="itemize" id="a0000000368">
+<li id="a0000000369"> <p>
+the wind <i class="it">velocity</i> on a weather map; 
+</p>
+</li>
+<li id="a0000000370"> <p>
+the Earth’s magnetic field at any point on its surface; 
+</p>
+</li>
+<li id="a0000000371"> <p>
+the electric field near a pylon; 
+</p>
+</li>
+<li id="a0000000372"> <p>
+the vorticity of a fluid flow. 
+</p>
+</li>
+</ul>
+<p>
+ Vector fields are usually represented with arrow plots, where the length of the arrow is proportional to the strength of the field. The forces in <b class="bf">N2</b> can be regarded as vector fields. 
+</p>
+<p>
+If we want to quantify the work done by a certain process, we need to evaluate a line integral. An ordinary 1D integral is the integration of a scalar function <script type="math/tex">f\left( x \right)</script> over a straight line segment <script type="math/tex">a \le x \le b</script> <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\int _ a^ b f(x)\; dx</script></span> </span> It represents the area between <script type="math/tex">f(x)</script> and the <script type="math/tex">x</script>-axis between <script type="math/tex">x=a</script> and <script type="math/tex">x=b</script>. If <script type="math/tex">f(x)</script> represents the height of a straight fence, then the integral is the area of the fence panels. 
+</p>
+<p>
+The work integral we need to evaluate <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\int _{a}^{b}{\vec F}\cdot \frac{d{\vec r}}{dt}dt</script></span> </span> is a generalisation of this definition.<a class="footnote" href="#a0000000373">
+<sup class="footnotemark">2</sup>
+</a>
+</p>
+<ul class="itemize" id="a0000000374">
+<li id="a0000000375"> <p>
+First the integration is now over a given curve <script type="math/tex">C</script>, or <script type="math/tex">{\vec r}(t)</script> with <script type="math/tex">a \le t\le b</script>. This is equivalent to working out the area of a fence that is placed along a curved base. 
+</p>
+</li>
+<li id="a0000000376"> <p>
+Second, the integrand involves vector functions <script type="math/tex">\vec F</script> and <script type="math/tex">{ \dot{\vec r}}</script>. However these combine as a dot product to form a scalar function <script type="math/tex">\vec F\cdot { \dot{\vec r}}</script>. 
+</p>
+</li>
+</ul>
+<p>
+We represent the trajectory by the curve <script type="math/tex">C</script>: <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec r}(t)=x(t){\hat i}+y(t){\hat j}+z(t){\hat k}, \quad a \leq t \leq b</script></span> </span> which has a tangent vector <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\frac{d\vec r}{dt} = \frac{dx}{dt} \hat i + \frac{dy}{dt}\hat j + \frac{dz}{dt}\hat k,\quad a \leq t \leq b.</script></span> </span> With these definitions, the force experienced by the particle will (in general) differ at each point of the trajectory. <a class="footnote" href="#a0000000377">
+<sup class="footnotemark">3</sup>
+</a>
+</p>
+<p>
+To evaluate the integral, we evaluate <script type="math/tex">\vec F</script> at each point on the trajectory as a function of the curve parameter <script type="math/tex">t</script>, take the dot product <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec F}\cdot \frac{d{\vec r}}{dt},</script></span> </span> and then integrate the resulting scalar function of <script type="math/tex">t</script> between <script type="math/tex">a</script> and <script type="math/tex">b</script>. Sometimes the work done depends on the path taken by the body. Sometimes it does not. 
+</p>
+</section><section class="section">
+<h2 id="cons">6.4 Conservation of Linear Momentum</h2>
+<p>
+Energy is not the only quantity that is conserved in Newtonian mechanics. We may also consider the linear momentum. 
+</p>
+<p>
+<b class="bf">N2</b> tells us that 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec F}=\frac{d{\vec p}}{dt},</script></span>
+<p>
+ where <script type="math/tex">{\vec p}=m{ \dot{\vec r}}</script> is the linear momentum of the body. If there are no external forces acting, then <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec F}=0 \Rightarrow \frac{d{\vec p}}{dt}=0 \Rightarrow {\vec p}={\rm constant}.</script></span> </span> Hence we see that the linear momentum of a body is conserved if the total force on it is zero. 
+</p>
+<p>
+Components of momentum can also be conserved. Suppose <script type="math/tex">{\vec s}</script> is a constant vector such that <script type="math/tex">{\vec F}\cdot {\vec s}={\vec0}</script>. Thus the force <script type="math/tex">{\vec F}</script> has no component in the <script type="math/tex">{\vec s}</script> direction. If we take the scalar product of both sides of <script type="math/tex">{\vec N2}</script> with <script type="math/tex">{\vec s}</script> we obtain: <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec F}=\frac{d{\vec p}}{dt} \Rightarrow {\vec F}\cdot {\vec s}=\frac{d{\vec p}}{dt}\cdot {\vec s} \Rightarrow {\vec0}=\frac{d({\vec p}\cdot {\vec s})}{dt}</script></span> </span> (since <script type="math/tex">{\vec s}</script> is constant). Hence we deduce that <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec p}\cdot {\vec s}={\rm constant}.</script></span> </span> In words, the <em>component</em> of linear momentum in a direction in which the component of force vanishes is constant in time. 
+</p>
+<p>
+ [width=%+10mm]Golf on the moon 
+</p>
+<p>
+An astronaut plays golf on the surface of the moon, where there is little atmosphere (i.e., negligible air resistance). The golf ball of mass <script type="math/tex">m</script> is launched and moves with velocity <script type="math/tex">{\vec v}(t)</script>, subject only to the moon’s gravity <script type="math/tex">-g{\hat k}</script>. 
+</p>
+<p>
+<script type="math/tex">{\bf N2}</script> gives: <span style="color:#000000"> <span><script type="math/tex; mode=display">\begin{eqnarray*}  {\vec F}=\frac{d{\vec p}}{dt} \Rightarrow -mg{\hat k}& =& m\frac{d{\vec v}}{dt} \Rightarrow -mg{\hat k}\cdot {\hat i}=m\frac{d{\vec v}}{dt}\cdot {\hat i} \\ \Rightarrow 0& =& m\frac{d}{dt}\left({\vec v}\cdot {\hat i}\right). \end{eqnarray*}</script></span> </span> In other words, the <script type="math/tex">{\hat i}</script> component of <script type="math/tex">{\vec v}(t)</script> is constant throughout the motion. This is simply a reflection of the fact that the force has no component in this direction. 
+</p>
+</section><section class="section">
+<h2 id="a0000000378">6.5 Conservative Forces and potentials</h2>
+<p>
+In the context of mechanics, conservative forces represent a special class of force fields for which the work done on a body by the field is independent of the motion<a class="footnote" href="#a0000000379">
+<sup class="footnotemark">4</sup>
+</a>. 
+</p>
+<p>
+The idea is simple. If a force field <script type="math/tex">{\vec F}({\vec r})</script> at any point <script type="math/tex">{\vec r}(t)=x(t){\vec i}+y(t){\hat j}+z(t){\hat k}</script> can be represented by the gradient of a scalar function <script type="math/tex">V({\vec r})</script> of the form<a class="footnote" href="#a0000000380">
+<sup class="footnotemark">5</sup>
+</a> <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec F}({\vec r}) \equiv -\nabla V({\vec r})</script></span> </span> then it is a <b class="bf">conservative force field.</b>
+</p>
+<p>
+The work done by such a field is independent of the path taken, it depends only on the initial and final states. 
+</p>
+<p>
+If a force is conservative such that <script type="math/tex">{\vec F}=-\nabla V</script>, then the function <script type="math/tex">V</script> is called the <b class="bf">potential energy</b> of the field (or <b class="bf">potential</b> for short). 
+</p>
+<p>
+Let us consider a simple example. 
+</p>
+<p>
+ [width=%+10mm]Gravity 
+</p>
+<p>
+Gravity is a conservative force field. If we take the <script type="math/tex">z</script>-axis to point upwards, then <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec F} = - mg{\hat k} \Rightarrow {\vec F} = -\frac{d}{d z} (mgz) {\hat k}</script></span> <span class="dmath"><script type="math/tex; mode=display">\Rightarrow {\vec F} = - {d \over dz}(mgz)</script></span></span> The gravitational potential is thus 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">V(z)=+mgz.</script></span>
+<p>
+If the <script type="math/tex">z</script>-axis had instead pointed downwards, we would have obtained <script type="math/tex">V = -mgz</script>. In both cases, an arbitrary constant can be added. 
+</p>
+<figure id="figure63">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/conservation/images/img-0002.png" style="width:126.4725pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">6.1</span>
+<span class="caption_text">A body falling in a gravitational potential</span>
+</figcaption> </div>
+</figure>
+<p>
+ [width=%+10mm]Motion Under Gravity 
+</p>
+<p>
+Conservation of energy can often be used as an alternative to the solution of a dynamical system using <b class="bf">N2</b>. This example provides a demonstration. 
+</p>
+<p>
+A body of mass <script type="math/tex">m</script> is thrown vertically upward under the action of a gravitational field <script type="math/tex">{-mg}{\hat k}</script>. Suppose that the particle has initial speed <script type="math/tex">v_ a</script> at height <script type="math/tex">z_ a{\hat k}</script>. Find its speed <script type="math/tex">v=|{ \dot{\vec r}}|</script> as a function of position 
+</p>
+<p>
+Gravity is a conservative force with potential (see above) <script type="math/tex">V(z)=mgz</script>. In the absence of non-conservative fields we have <br/><span style="color:#000000"> <span><script type="math/tex; mode=display">\begin{eqnarray*}  T(z)+V(z)& =& {\rm constant}= E, {\rm \  \  say}\\ \frac{1}{2}m|{\vec\dot {r}}|^2+mgz & =&  {\rm constant} =\frac{1}{2}mv_ a^2+mgz_ a \\ \frac{1}{2}mv^2+mgz & =&  \frac{1}{2}mv_ a^2+mgz_ a \\ \Rightarrow v(z)& =&  \pm \sqrt{v_ a^2+2g(z_ a-z)} \  \  {\rm or} \\ v(z)& =&  \pm \sqrt{\frac{2}{m}}\sqrt{E-mgz} \end{eqnarray*}</script></span> </span> <br/>The maximum height of the body is reached when <script type="math/tex">v(z)=0</script>, i.e., <script type="math/tex">z-z_ a = v_ a^2/ (2g)</script>. 
+</p>
+</section><section class="section">
+<h2 id="a0000000381">6.6 One-dimensional motion</h2>
+<p>
+Let us now focus on a body moving along a line, so that its position is determined by a single function <script type="math/tex">x(t)</script> (say). For now, suppose that the force on the particle depends only on the position, not the velocity. That is, we have <script type="math/tex">F = F (x)</script>. We then define the potential <script type="math/tex">V (x)</script> in such a way that 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">F(x) = - {dV \over dx}</script></span>
+<p>
+ (note the sign!). Obviously, the potential is only defined up to a constant. We can always invert the equation by integrating both sides. The integration constant is now determined by the choice of lower limit of the integral, 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">V(x) = - \int _{x_0}^ x F(x’) dx’</script></span>
+<p>
+ where <script type="math/tex">x'</script> is a dummy variable. Given the definition of the potential, we can write the equation of motion as 
+</p>
+<div class="eqn" id="coneom">
+<script type="math/tex; mode=display">\begin{equation}m\ddot x = - {dV \over dx} \label{coneom}\tag{6.5}\end{equation}</script>
+</div>
+<p>
+For any force in one dimension which depends only on the position, there exists a conserved <b class="bf">energy</b>, 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">E= {1\over 2} m\dot x^2 + V(x)</script></span>
+<p>
+ As before, the fact that this is conserved means that <script type="math/tex">\dot E =0</script> for any trajectory that obeys the equation of motion. Introducing the kinetic energy, 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">T = {1\over 2} m \dot x^2</script></span>
+<p>
+ it is easy to show that the energy is conserved. We only need to differentiate to get 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\dot E = m \dot x \ddot x + {dV \over dx} \dot x = \dot x \left(m\ddot x +{dV \over dx} \right) = 0</script></span>
+<p>
+ where the last equality holds courtesy of the equation of motion <a class="ref eqref" href="../../../notes/notes_by_chapter/conservation/index.html#coneom">(6.5)</a>. We also see why the sign of the potential in Newton’s second law makes sense. 
+</p>
+<p>
+In any physical system, conserved quantities of this kind are precious—because they help us simplifying the solution. Hence, we will spend some time finding them and showing how they help us simplify various problems. 
+</p>
+</section><section class="section">
+<h2 id="a0000000382">6.7 Stability of Equilibrium</h2>
+<p>
+If a body is stationary it is said to be in equilibrium. From <b class="bf">N2</b> we have seen that a necessary condition for this is that the sum of the forces acting on the body <script type="math/tex">{\vec F}</script> must vanish. Now if all the forces acting on the system are conservative so that <script type="math/tex">{\vec F}=- V'</script> we then have a necessary condition for equilibrium as <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec F}={\vec0} \longrightarrow V’=0.</script></span> </span> Thus a system will be in equilibrium at a stationary point (or critical point) of the potential. This definition is valid in all dimensions. 
+</p>
+<p>
+To explore whether a position of equilibrium is stable, unstable (or otherwise), we will consider a 1-D potential <script type="math/tex">V(x)</script>. 
+</p>
+<figure id="figure67">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/conservation/images/img-0004.png" style="width:216.81pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">6.2</span>
+<span class="caption_text">Stable equilibrium.</span>
+</figcaption> </div>
+</figure>
+<p>
+ [width=%+10mm]Stable equilibrium 
+</p>
+<p>
+Consider a potential function <script type="math/tex">V(x)</script> that behaves qualitatively like that in the diagram with a minimum of potential energy at a point <script type="math/tex">x_0</script>. Suppose a particle is released from rest a point <script type="math/tex">x_1</script> relative to the minimum. By conservation of total energy, <script type="math/tex">E=E(x_1)</script>=constant, throughout the motion the kinetic, <script type="math/tex">T</script>, and potential, <script type="math/tex">V</script>, energies are related by <br/><span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">E=T+V \Rightarrow T=E-V.</script></span> </span> <br/>Now since <script type="math/tex">T=m|{ \dot{\vec r}}|^2/2</script> we must have <script type="math/tex">T\ge 0</script>. Hence we can write 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\textcolor{black}{T \ge 0 \Rightarrow E-V \ge 0 \Rightarrow V \le E }</script></span>
+<p>
+ i.e. the motion is confined to regions where <script type="math/tex">V\le E</script>. Thus the particle will oscillate in a finite region around the minimum of V and so the motion is bounded. Hence the equilibrium point is said to be stable. 
+</p>
+<figure id="figure68">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/conservation/images/img-0006.png" style="width:216.81pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">6.3</span>
+<span class="caption_text">Unstable equilibrium.</span>
+</figcaption> </div>
+</figure>
+<p>
+[width=%+10mm]Unstable equilibrium 
+</p>
+<p>
+Consider now a potential that has a maximum at <script type="math/tex">x_0</script>. If a particle released from a small distance away, <script type="math/tex">x_1</script>, again energy is conserved <script type="math/tex">E=E(x_1)</script>=constant throughout the motion. Now since the kinetic energy must be non-negative, we can again write 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\textcolor{black}{T \ge 0 \Rightarrow E-V \ge 0 \Rightarrow V \le E }</script></span>
+<p>
+ so again, the the only classically allowed motion must have <script type="math/tex">V \le E</script>. Hence the particle cannot approach the maximum and must move away from it. As it does so the kinetic energy <script type="math/tex">T</script> and hence speed will increase. Hence the equilibrium point is said to be unstable. 
+</p>
+<p>
+In general, an equilibrium point in a conservative system where <script type="math/tex">{\vec F}=-\nabla V</script> occurs when 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\nabla V =0.</script></span>
+<ul class="itemize" id="a0000000383">
+<li id="a0000000384"> <p>
+It is <b class="bf">stable</b> if <span style="color:#000000">it is a <b class="bf">minimum</b> (in 1-D <script type="math/tex">\Rightarrow V''(x)>0</script>).</span>
+</p>
+</li>
+<li id="a0000000385"> <p>
+It is <b class="bf">unstable</b> if <span style="color:#000000">it is a <b class="bf">maximum</b> (in 1-D <script type="math/tex">\Rightarrow V''(x)<0</script>).</span>
+</p>
+</li>
+<li id="a0000000386"> <p>
+Otherwise <span style="color:#000000">it may be stable or unstable and needs further investigation (in 1-D <script type="math/tex">\Rightarrow V''(x)=0</script>).</span>
+</p>
+</li>
+</ul>
+<p>
+In 1-D, max/min points where <script type="math/tex">T=0</script>, i.e., <script type="math/tex">E=V</script> are called <b class="bf">turning points</b>. On one side of such points the classical motion is allowed, and on the other it is not. Hence a moving particle is said to “turn around” there<a class="footnote" href="#a0000000387">
+<sup class="footnotemark">6</sup>
+</a>. 
+</p>
+<figure id="figure69">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/conservation/images/img-0008.png" style="width:108.405pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">6.4</span>
+<span class="caption_text">Elastic energy is stored in two springs</span>
+</figcaption> </div>
+</figure>
+<p>
+ [width=%+10mm]Coupled springs 
+</p>
+<p>
+A mass <script type="math/tex">m</script> is attached to two Hookean springs with spring constants <script type="math/tex">k_1, k_2</script> and natural lengths <script type="math/tex">l_1, l_2</script>, as in figure <a class="ref" href="../../../notes/notes_by_chapter/conservation/index.html#figure69">6.4</a>. Determine the equilibrium point and whether it is stable or unstable. 
+</p>
+<p>
+Potential energy: 
+</p>
+<ul class="itemize" id="a0000000388">
+<li id="a0000000389"> <p>
+Gravitational: <span style="color:#000000"><script type="math/tex"> \qquad mgz</script></span> <br/>
+</p>
+</li>
+<li id="a0000000390"> <p>
+Spring 2: <span style="color:#000000"><script type="math/tex">\qquad \frac{1}{2}k_2(z-l_2)^2</script></span> <br/>
+</p>
+</li>
+<li id="a0000000391"> <p>
+Spring 1: <span style="color:#000000"><script type="math/tex">\qquad \frac{1}{2}k_1(H-z-l_1)^2</script></span> <br/>
+</p>
+</li>
+</ul>
+<p>
+<span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">V(z)=mgz+\frac{1}{2}k_2(z-l_2)^2+ \frac{1}{2}k_1(H-z-l_1)^2</script></span> </span> Equilibrium position: <span style="color:#000000"> <span><script type="math/tex; mode=display">\begin{eqnarray*}  V’(z)& =& mg+k_2(z-l_2)- k_1(H-z-l_1)=0 \\ z_{\rm eqm}& =& \frac{k_1(H-l_1)+k_2l_2-mg}{k_1+k_2} \end{eqnarray*}</script></span> </span> Stability: <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">V”(z)=k_1+k_2>0</script></span> </span> The equilibrium point is a minimum and hence it is stable. 
+</p>
+</section><section class="section">
+<h2 id="a0000000392">6.8 Moving in a potential</h2>
+<p>
+Let us consider the general case of a potential <script type="math/tex">V(x)</script>. It turns out that we can learn quite a lot about the motion without actually solving the problem. For example, the existence of a conserved energy magically allows us to turn the problem into a first order differential equation 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">E = {1\over 2} m\dot x^2 + V(x) \quad \longrightarrow \quad {dx \over dt} = \pm \sqrt{{2\over m} \left[ E-V(x)\right]}</script></span>
+<p>
+ Noting that the right-hand side does not depend on <script type="math/tex">t</script>, we have our first hint of the hint of the importance of conserved quantities in solving a problem. Of course, to go from a second order equation (like <b class="bf">N2</b>) to a first order equation, we must have chosen an integration constant. In this case, this is the energy <script type="math/tex">E</script> itself. Given a first order equation, we can always write down a formal solution for the dynamics by integrating. We have 
+</p>
+<div class="eqn" id="intform">
+<script type="math/tex; mode=display">\begin{equation}t-t_0 = \pm \int _{x_0}^ x {dx’ \over \sqrt{{2\over m} \left[ E-V(x')\right]} } \label{intform}\tag{6.6}\end{equation}</script>
+</div>
+<p>
+ If we can work out the integral, we are done. If we can’t do the integral, you sometimes hear that the problem has been “reduced to quadrature”. This really means “I can’t do the integral”, but it is often the case that having a solution in this form still sheds light on some of the properties. And, if nothing else, one can always evaluate the integral numerically – computers are really good at integration. 
+</p>
+</section><section class="section">
+<h2 id="a0000000393">6.9 Getting a feel for the solution</h2>
+<p>
+Given the potential <script type="math/tex">V (x)</script>, it is often easy to figure out the qualitative nature of any trajectory simply by looking at the form of <script type="math/tex">V(x)</script>. This allows us to answer some questions with very little work<a class="footnote" href="#a0000000394">
+<sup class="footnotemark">7</sup>
+</a>. For example, we may want to know whether the particle is trapped within some region of space or can escape to infinity. 
+</p>
+<figure id="potplot1">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/conservation/images/img-0010.png" style="width:216.81pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">6.5</span>
+<span class="caption_text">A cubic potential.</span>
+</figcaption> </div>
+</figure>
+<p>
+Let us illustrate this with an example. Consider the cubic potential 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">V(x) = m(x^3-3x)</script></span>
+<p>
+ If we were to substitute this into the general form <a class="ref eqref" href="../../../notes/notes_by_chapter/conservation/index.html#intform">(6.6)</a>, we have a fearsome looking integral which we struggle to solve<a class="footnote" href="#a0000000395">
+<sup class="footnotemark">8</sup>
+</a>. Luckily, we can make progress even without solving the integral. The potential is plotted in figure <a class="ref" href="../../../notes/notes_by_chapter/conservation/index.html#potplot1">6.5</a>. Let us start with the particle sitting stationary at some position <script type="math/tex">x_0</script>. This means that the energy is 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">E=V(x_0)</script></span>
+<p>
+ and we know that this must remain constant during the subsequent motion. What happens next depends only on <script type="math/tex">x_0</script>. We can identify the following possibilities: 
+</p>
+<ul class="itemize" id="a0000000396">
+<li id="a0000000397"> <p>
+<script type="math/tex">x_0=\pm 1</script>. These are the local maximum and minimum. If we drop the particle at these points, it stays there for all time. 
+</p>
+</li>
+<li id="a0000000398"> <p>
+<script type="math/tex">x_0 \in (-1,+2)</script>. Here the particle is “trapped” in the dip. It oscillates backwards and forwards between the two points with potential energy <script type="math/tex">V(x_0)</script>. The particle cannot climb to the right because it does not have the energy. In principle, it could live off to the left where the potential energy is negative, but to get there it would have to first climb the small bump at <script type="math/tex">x=1</script> and it does not have the energy to this either<a class="footnote" href="#a0000000399">
+<sup class="footnotemark">9</sup>
+</a>. 
+</p>
+</li>
+<li id="a0000000400"> <p>
+<script type="math/tex">x_0>2</script>. When released, the particle falls into the dip, climbs out the other side, before falling into the void <script type="math/tex">x\to -\infty </script>. 
+</p>
+</li>
+<li id="a0000000401"> <p>
+<script type="math/tex">x_0 <-1</script>. The particle just falls off to the left. 
+</p>
+</li>
+<li id="a0000000402"> <p>
+<script type="math/tex">x_0 = +2</script>. This is a special value, since <script type="math/tex">E = 2m</script> which is the same as the potential energy at the local maximum <script type="math/tex">x=1</script>. The particle falls into the dip and starts to climb up towards <script type="math/tex">x=1</script>. It can never stop before it reaches <script type="math/tex">x=1</script> for at its stopping point it would have only potential energy <script type="math/tex">V<2m</script>. But, similarly, it cannot arrive at <script type="math/tex">x=1</script> with any excess kinetic energy. The only option is that the particle moves towards <script type="math/tex">x=1</script> at an ever decreasing speed, only reaching the maximum at time <script type="math/tex">t\to \infty </script>. 
+</p>
+</li>
+</ul>
+<p>
+One can easily play a similar game to that above if the starting speed is not zero. In general, one finds that the particle is trapped in the dip <script type="math/tex">x\in [-1,+1]</script> if its energy lies in the interval <script type="math/tex">E\in [-2m,2m]</script>. 
+</p>
+<p>
+ [width=%+10mm]The harmonic oscillator 
+</p>
+<p>
+The harmonic oscillator is, by far, the most important dynamical system in all of mathematical physics. The good news is that it is very easy to deal with. (In fact, the reason that it is so important is precisely because it is easy!). The potential energy of the harmonic oscillator is defined to be 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">V(x) = {1\over 2} k x^2</script></span>
+<p>
+ The harmonic oscillator is a good model for, among other things, a particle attached to the end of a spring. The force resulting from the energy <script type="math/tex">V</script> is given by <script type="math/tex">F=-kx</script> which, in the context of the spring, is Hooke’s law. The equation of motion is (again, as before) 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">m\ddot x = - kx</script></span>
+<p>
+ with general solution 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">x(t) = A \cos \omega t + B \sin \omega t \qquad \mbox{with} \qquad \omega = \sqrt{k\over m}</script></span>
+<p>
+<script type="math/tex">A</script> and <script type="math/tex">B</script> are integration constants and <script type="math/tex">\omega </script> is called the angular frequency (also... as before). 
+</p>
+</section><section class="section">
+<h2 id="a0000000403">6.10 Why (almost) everything is a harmonic oscillator</h2>
+<p>
+A particle placed at an <b class="bf">equilibrium</b> point will stay there for all time. In the example with a cubic potential, we had two such equilibrium points: <script type="math/tex">x=\pm 1</script>. In general, if we want <script type="math/tex">\dot x=0</script> for all time, then clearly we must have <script type="math/tex">\ddot x=0</script>, which, from the form of the equation of motion, tells us that we can identify the equilibrium points with the critical points of the potential, 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{dV \over dx} = 0</script></span>
+<p>
+ What happens to a particle that is close to an equilibrium point, <script type="math/tex">x_0</script> (say)? In this case, we can Taylor expand the potential energy about <script type="math/tex">x = x_0</script>. Because, by definition, the first derivative vanishes, we have 
+</p>
+<div class="eqn" id="potexp">
+<script type="math/tex; mode=display">\begin{equation}V(x) \approx V(x_0) + {1\over 2} V''(x_0) (x-x_0)^2 + \ldots \label{potexp}\tag{6.7}\end{equation}</script>
+</div>
+<p>
+ In order to proceed, we need to know the sign of <script type="math/tex">V''(x_0)</script>. 
+</p>
+<ul class="itemize" id="a0000000404">
+<li id="a0000000405"> <p>
+<script type="math/tex">V''(x_0)>0</script>. In this case, the equilibrium is a minimum of the potential and the potential energy is that of a harmonic oscillator. The particle oscillates backwards and forwards around <script type="math/tex">x_0</script> with frequency 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\omega = \sqrt{V''(x_0)\over m}</script></span>
+<p>
+ Such equilibria are stable. As long as the amplitude of the oscillations is small enough (so that we can ignore the <script type="math/tex">(x-x_0)^3</script> and higher order terms in the Taylor expansion), all systems oscillating around a stable fixed point behave like a harmonic oscillator. 
+</p>
+</li>
+<li id="a0000000406"> <p>
+<script type="math/tex">V''(x_0)<0</script>. In this case, the equilibrium point is a maximum of the potential. The equation of motion again reads 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">m\ddot x = - V”(x_0) (x-x_0)</script></span>
+<p>
+ but if the second derivative of the potential is negative, then we have <script type="math/tex">\ddot x >0</script> when <script type="math/tex">x-x_0>0</script>. This means that if we displace the system a little bit away from the equilibrium point, the acceleration pushes it further away. The equilibrium is unstable. 
+</p>
+</li>
+<li id="a0000000407"> <p>
+Finally, we could have <script type="math/tex">V''(x_0)=0</script>. In this case, there is nothing we can say about the dynamics of the system without Taylor expanding the potential further. 
+</p>
+</li>
+</ul>
+</section><section class="section">
+<h2 id="a0000000408">6.11 Addendum: Taylor expansions</h2>
+<p>
+The Taylor series is one of the most useful mathematical tools applied to real life problems. As in the example of potential motion near equilibrium, we can often use a Taylor series to approximate a complicated function by a (simpler) polynomial function. 
+</p>
+<p>
+The starting point is Taylor’s theorem (which we state without proof, as we are mainly interested in the applications): 
+</p>
+<p>
+Let <script type="math/tex">f(x)</script> be continuous and differentiable an infinite number of times at point <script type="math/tex">x=a</script> (i.e., <script type="math/tex">f</script> and all of its derivatives <script type="math/tex">f', f'',\ldots </script> exist at <script type="math/tex">x=a</script>). Then <script type="math/tex">f(x)</script> can be expanded about the point <script type="math/tex">x=a</script> in terms of powers of <script type="math/tex">(x-a)</script>, and this expansion is given by the formula <span class="dmath"><script type="math/tex; mode=display">\begin{multline*}  f(x) = \textcolor{black}{ f(a) + (x-a) f'(a) + {{(x-a)^2} \over 2!} f''(a) + \dots } \\ \textcolor{black}{ + \frac{(x-a)^ n}{n!} f^{(n)}(a) +O(x-a)^{n+1} } \end{multline*}</script></span>
+<p>
+ This is a <b class="bf">Taylor expansion</b>. It has the form 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">f(x) = P_ n(x) + O(x-a)^{n+1}</script></span>
+<p>
+ where <script type="math/tex">P_ n(x)</script> is a polynomial of degree <script type="math/tex">n</script> and <script type="math/tex">O(x-a)^{n+1}</script> is a remainder term. The remainder term reminds us that in writing the Taylor expansion explicitly up to the term <script type="math/tex">\propto (x-a)^ n</script> (“up to order n”) we are omitting terms “of order <script type="math/tex">(x-a)^{n+1}</script> and higher”. 
+</p>
+<p>
+For <script type="math/tex">x</script> close to <script type="math/tex">a</script>, we can expect the remainder term to be small (since <script type="math/tex">x-a</script> is small), so that <script type="math/tex">f(x) \simeq P_{n} (x)</script>. Thus Taylor’s theorem enables us to approximate functions by polynomials. 
+</p>
+<p>
+In many cases the remainder term goes to zero as <script type="math/tex">n \rightarrow \infty </script> and the Taylor series expansion of <script type="math/tex">f(x)</script> takes the form of a possibly infinite, but convergent, series. 
+</p>
+<p>
+ [width=%+10mm]The exponential 
+</p>
+<p>
+As an example, let us determine the Taylor series expansion of the function <script type="math/tex">f(x)=e^ x</script> about <script type="math/tex">x=0</script>. 
+</p>
+<p>
+We first establish the necessary data. We know that we need the derivatives: 
+</p>
+<span><script type="math/tex; mode=display">\begin{eqnarray*} & & f(x)= e^ x \qquad f’(x)=\textcolor{black}{e^ x} \qquad f”(x)=\textcolor{black}{e^ x} \quad \textcolor{black}{\dots }\\ & & f(0)= \textcolor{black}{e^0 = 1 } \quad f’(0)=\textcolor{black}{e^0=1} \quad f”(0)=\textcolor{black}{e^0=1} \quad \textcolor{black}{\dots } \end{eqnarray*}</script></span>
+<p>
+ Then we use this in the Taylor series expansion with <script type="math/tex">a=0</script>
+</p>
+<span class="dmath"><script type="math/tex; mode=display">f(x) = \textcolor{black}{1 + x + {x^2 \over 2!} + {x^3 \over 3!} + {x^4 \over 4!} + \dots = \sum _{n=0}^\infty \frac{1}{n!} x^ n}</script></span>
+<p>
+Similarly, we can work out the Taylor series expansion of the function <script type="math/tex">f(x)=\cos x</script> about <script type="math/tex">x=0</script>. 
+</p>
+<p>
+In this case, we need: 
+</p>
+<span><script type="math/tex; mode=display">\begin{eqnarray*}  f(x) & =&  \textcolor{black}{\cos x } \  , \qquad f(0) = \textcolor{black}{1} \\ f’(x) & =&  \textcolor{black}{-\sin x} \  , \qquad f’(0) = \textcolor{black}{0} \\ f”(x) & =&  \textcolor{black}{ -\cos x} \  , \qquad f”(0) = \textcolor{black}{-1} \\ f”’(x) & =&  \textcolor{black}{\sin x} \  , \qquad f”’(0) = \textcolor{black}{0} \\ f^{(4)} (x) & =&  \textcolor{black}{\cos x } \  , \qquad f^{(4)}(0) = \textcolor{black}{1} \\ \end{eqnarray*}</script></span>
+<p>
+ and we arrive at 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">f(x) = \textcolor{black}{1 - {x^2 \over 2!} + {x^4 \over 4!} - {x^6 \over 6!} + \dots =\sum _{k=0}^\infty \frac{(-1)^ k}{(2k)!} x^{2k} }</script></span>
+<p>
+Finally, let us make contact with our discussion of potentials and equilibrium points. We see that the statement <a class="ref eqref" href="../../../notes/notes_by_chapter/conservation/index.html#potexp">(6.7)</a> follows immediately from Taylor’s theorem if we take <script type="math/tex">f=V</script>, <script type="math/tex">a=x_0</script> and note that <script type="math/tex">V'(x_0)=0</script> (and we neglect terms beyond quadratic order).  
+</p>
+</p>
+</section>
+<hr/>
+<ol>
+<li id="a0000000356">It always helps to be able to with constant quantities.</li>
+<li id="a0000000373">We have introduced this type of integral using the concept of work, but it is generally defined for any vector field, independently of its physical meaning. In fact <script type="math/tex">t</script> need not be time: it is just a parameter describing positions on <script type="math/tex">C</script>. Furthermore, <script type="math/tex">{\vec F}({\vec r})</script> really only depends on the position <script type="math/tex">{\vec r}</script> on the curve <script type="math/tex">C</script>, not on the parameter describing it. How you represent <script type="math/tex">C</script> or <script type="math/tex">{\vec r}</script> in terms of parameters should does not affect the answer.</li>
+<li id="a0000000377">Thus the force is not constant and so we can’t apply the usual formula of <br/>“Work done = Component of force in direction of motion <script type="math/tex">\times </script> distance moved”<br/>However we can split the trajectory into very small sections of length <script type="math/tex">d \vec r</script> over which the force is approximately constant, apply the old formula and then sum (= integrate) over them. </li>
+<li id="a0000000379">This is useful as it significantly simplifies the evaluation of the work integral.</li>
+<li id="a0000000380">Note that this requires us to use partial derivatives, which we are (for the moment) trying to avoid.</li>
+<li id="a0000000387">An analogous argument can be applied in more than one dimension. In higher dimensions isolated maxima of the potential are unstable equilibrium points, isolated minima are stable points. (Just think of rolling a ball down a hill.) However, saddle points also satisfy the equilibrium condition <script type="math/tex">\nabla V={\vec0}</script> and so are also equilibrium points. Their stability or otherwise, depends on the motion perturbing the equilibrium. </li>
+<li id="a0000000394">... and we like this.</li>
+<li id="a0000000395">It can be solved – it is called an elliptic integral – but we do not yet have the tools to work this out.</li>
+<li id="a0000000399">There is an assumption here which is implicit throughout all of classical mechanics: the trajectory of the particle <script type="math/tex">x(t)</script> is a continuous function.</li>
+</ol>
+
+            </div>
+        </div>
+    </div>
+
+        </main>
+		
+		<footer class="text-muted">
+	<hr>
+	<div class="container">
+		<div class="float-right">
+			<ul style="list-style: none">
+			<li><a href="#">Back to top</a></li>
+			
+			
+			<li><a href="../../../notes/notes_by_chapter/conservation/conservation.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;Download as PDF</a></li>
+			
+			</ul>
+		</div>
+		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
+		<p>This page last generated: 2022-07-03</p>
+	</div>
+</footer>
+		
+    </body>
+</html>

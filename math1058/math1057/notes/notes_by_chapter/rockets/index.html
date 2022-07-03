@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        
+            <meta charset="utf-8">
+            <meta name="robots" content="noindex">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="author" content="Nils Andersson" />
+            <meta name="date" content="2022-07-03" />
+        
+
+        <title>Rockets | Dynamics and Relativity</title>
+
+        
+    
+    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../../../static/styles.css">
+            <link rel="stylesheet" id="customiseCSS" href="../../../static/light.css">
+            
+            
+        
+    <link rel="stylesheet" id="customiseCodeCSS" href="../../../static/pygmentize.light.css">
+    <link rel="stylesheet" href="../../../static/codemirror-5.26.0/lib/codemirror.css">
+    <link rel="stylesheet" href="../../../static/boole.css">
+    <link rel="stylesheet" href="../../../static/numbasEmbed.css">
+
+    <link rel="stylesheet" href="../../../static/bootstrap-toc.css?v=3">
+    <link rel="stylesheet" href="../../../static/print.css">
+
+
+        
+    
+    
+            <script defer src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <script defer src="../../../static/mathjax_config.js"></script>
+            <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+            <script defer src="../../../static/customisation.js"></script>
+            <script defer src="../../../static/mp4.js"></script>
+            
+            
+        
+    <script defer src="../../../static/jquery.flexibleArea.js"></script>
+    <script defer src="../../../static/spin.min.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/lib/codemirror.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/octave/octave.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/python/python.js"></script>
+    <script defer src="../../../static/codemirror-5.26.0/mode/r/r.js"></script>
+    <script defer src="../../../static/boole.js"></script>
+    <script defer src="../../../static/numbasEmbed.js"></script>
+
+    <script defer src="../../../static/bootstrap-toc.js"></script>
+
+    </head>
+    <body data-spy="scroll" data-target="#chapterTOC" data-offset="50">
+        
+<div class="collapse" id="navbarToggleCustomise">
+	<div class="bg-secondary text-white p-3">
+		<form onsubmit="return false;" id="navbarCustomise">
+			<div class="form-row">
+				<label>Theme Customisation</label>
+				<div id="themeSelector" class="form-group col-md-12">
+					<button class="btn btn-dark mr-2" value="dark">Dark</button>
+					<button class="btn btn-pastel mr-2" value="pastel">Pastel</button>
+					<button class="btn btn-light mr-4" value="light">Light</button>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label style="display: block" for="font-scale">Font size (<span id="font-size-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="font-scale" min="50" max="600" value="100">
+					<button id="font-scale-reset" class="btn btn-sm">Reset</button>
+				</div>
+				<div class="form-group col-md-4">
+					<label style="display: block" for="p-space">Spacing (<span id="p-space-display">100%</span>)</label>
+					<input type="range" class="form-control-range col-9 mr-2" id="p-space" min="0" max="600" value="100">
+					<button id="p-space-reset" class="btn btn-sm">Reset</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<nav aria-label="breadcrumb">
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="../../../index.html">Dynamics and Relativity</a>
+		</li>
+		
+		<li class="breadcrumb-item">
+			<a href="../../../notes/notes_by_chapter/index.html">Notes by chapter</a>
+		</li>
+		
+		<li class="breadcrumb-item active">
+			Rockets
+		</li>
+		<li class="ml-auto">
+			<button class="navbar-toggler p0" type="button" data-toggle="collapse" data-target="#navbarToggleCustomise" aria-controls="navbarToggleCustomise" aria-expanded="false" aria-label="Toggle customisations panel">
+				<i class="fa fa-cog" aria-hidden="true" title="Toggle customisations panel"></i> <span class="sr-only">Toggle customisations panel</span>
+			</button>
+		</li>
+	</ul>
+</nav>
+
+
+        <header>
+            
+            
+        </header>
+        <main>
+            
+    <div class="container mt-3">
+        <div class="row">
+            
+            <div id="sidebar" class="col-md-3">
+                <nav class="mb-3" id="chapterTOC" data-toggle="toc">
+                    <ul class="nav navbar-nav">
+                        
+                        
+                        
+                        <li><a id="pdf-link" class="nav-link" href="../../../notes/notes_by_chapter/rockets/rockets.pdf" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" title="Download as PDF"></i>&nbsp;Download as PDF</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+            <div id="content" class="col-md-9"> 
+            
+            
+<!-- Latex Chapter/Part -->
+<h1 id="a0000000137">Rockets: Motion with variable mass</h1>
+<p>
+So far we have confined ourselves to studying the mechanics of bodies with constant mass. Let us now turn to an important variable mass problem, that of rocket motion (for which we no longer have <script type="math/tex">\vec F = m\vec a</script>). Although the mechanics is discussed in the context of a rocket, it could equally be applied to the acceleration of a jet fighter, the ascent of a balloon or even falling raindrops on a misty day. 
+</p>
+<p>
+We consider a rocket of mass <script type="math/tex">m(t)</script> travelling at velocity <script type="math/tex">{\vec v(t)}</script> in space (i.e., free from gravity and air resistance) by emitting a jet of gas at a speed <script type="math/tex">u>0</script> relative to the rocket. At an infinitesimally later time <script type="math/tex">t+dt</script> suppose that the mass of the rocket is <script type="math/tex">m+dm</script> due to the expulsion of a mass <script type="math/tex">-dm</script> of gas through the back of the rocket.<a class="footnote" href="#a0000000138">
+<sup class="footnotemark">1</sup>
+</a>. 
+</p>
+<p>
+We want to use conservation of momentum to study this situation. If we denote the fixed inertial frame by <script type="math/tex">S</script>, the rocket frame by <script type="math/tex">R</script>, and the exhaust frame by <script type="math/tex">E</script>, then 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec v_{ES}} = {\vec v_{ER}} + {\vec v_{RS}}</script></span>
+<p>
+ We therefore have 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">{\vec v_{ES}} = -u {\vec n} + {\vec v}</script></span>
+<p>
+ where <script type="math/tex">{\vec n}</script> is a unit vector pointing in whatever direction the rocket points. 
+</p>
+<figure id="figure76">
+<div class="centered"> <img src="../../../notes/notes_by_chapter/rockets/images/img-0002.png" style="width:289.08pt"/>
+<figcaption>
+<span class="caption_title">Figure</span>
+<span class="caption_ref">8.1</span>
+<span class="caption_text">Rocket motion by ejection of gases.</span>
+</figcaption> </div>
+</figure>
+<p>
+At time <script type="math/tex">t</script>: <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\rm Momentum \  of \  gas:} \  \  {\vec0} \qquad {\rm Momentum  of \  rocket:} \  \  m {\vec v}</script></span></span> At time <script type="math/tex">t+dt</script>: <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\  \  \  \  \  {\rm Momentum \  of \  gas:} -dm( - u{\vec n} + {\vec v} ) \qquad {\rm Momentum \  of \  rocket:} \  \  (m+dm)({\vec v}+ {\vec dv})</script></span> </span> Conservation of total momentum gives: <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">m {\vec v}=(m+dm)({\vec v}+{\vec dv}) + (-dm)(-u{\vec n} + {\vec v})</script></span> Expanding: <span class="dmath"><script type="math/tex; mode=display">m{\vec v} = m{\vec v} + {\vec v} dm + m d{\vec v} + u{\vec n}dm - {\vec v} dm</script></span> where terms beyond linear have been neglected. This can be rearranged (and turned into a differential equation by recalling that the change was associated with a time interval <script type="math/tex">dt</script>) <span class="dmath"><script type="math/tex; mode=display">m\frac{d{\vec v}}{dt} = -u {\vec n} \frac{dm}{dt}</script></span> <span class="dmath"><script type="math/tex; mode=display">\Rightarrow m\frac{d{\vec v}}{dt} + {\vec v} \frac{dm}{dt} = -u{\vec n} \frac{dm}{dt} + {\vec v} \frac{dm}{dt}</script></span> which has the interpretation: <span class="dmath"><script type="math/tex; mode=display">\underbrace{\frac{d}{dt}(m{\vec v})}_{\rm rate \  of \  change \  of  rocket \  momentum}=\underbrace{({\vec v}-u{\vec n})\frac{dm}{dt}}_{\rm force \  due \  to \  rocket \  motion} = - \vec v_{ES} {dm \over dt}</script></span> </span> By <script type="math/tex">{\bf N2}</script> we can generalise this to the full vector form of the equation: <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\frac{d}{dt}(m{\vec v})=({\vec v}-u{\vec n})\frac{dm}{dt}+{\vec F}</script></span></span> where <script type="math/tex">{\vec F}</script> is the sum of the other forces acting on the rocket, e.g., air resistance, gravity etc. Note that in the above derivation the magnitude <script type="math/tex">u</script> may also be a function of time. 
+</p>
+<p>
+ [width=%+10mm]Rocket speed 
+</p>
+<p>
+Consider a rocket under gaseous propulsion in deep space, free from all external forces, travelling along the <script type="math/tex">x</script>-axis. If the initial speed of the rocket is <script type="math/tex">{\vec v_0} = v_0 {\hat i}</script>, its mass is <script type="math/tex">m_0</script> and the propulsive gases are emitted at a constant speed relative to the rocket, calculate its speed as a function of mass. 
+</p>
+<p>
+Using the above calculation (with <script type="math/tex">{\vec n} = {\hat i}</script>) we obtain the differential equation <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">m\frac{dv}{dt}=-u\frac{dm}{dt}</script></span> </span> This can be converted to a separable equation by dividing through by one of the derivatives <span style="color:#000000"> <span><script type="math/tex; mode=display">\begin{eqnarray*}  m\frac{dv}{dt}\left/ \frac{dm}{dt}\right.& =& -u \quad \longrightarrow \quad m\frac{dv}{dm}=-u \\ \int dv& =& -u\int \frac{dm}{m}\quad \longrightarrow \quad v-v_0=u\ln \left(\frac{m_0}{m}\right). \end{eqnarray*}</script></span></span> Thus the speed depends only on the ratio of initial to current masses <script type="math/tex">(>1)</script>. Hence to get the rocket to travel quickly we need <script type="math/tex">m_0/m \gg 1</script>, i.e, to reduce the mass of the rocket by as much as possible. That’s (partly) why you have multistage rockets. Once a particular fuel tank is empty, it is jettisoned to reduce the mass as much as possible. If we want to know the speed at a particular time, we need to specify the rate of burn of rocket fuel, <script type="math/tex">dm/dt</script>, which is often a constant for most of the burn time. Suppose the rate of fuel burn for the above rocket is constant rate <script type="math/tex">-\alpha </script>. (Remember <script type="math/tex">dm</script> was negative!) 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\frac{dm}{dt}=-\alpha \Rightarrow m(t)=m_0-\alpha t</script></span>
+<p>
+ Hence we have <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">v=v_0+u\ln \left(\frac{m_0}{m_0-\alpha t}\right).</script></span></span> Note that we must have <script type="math/tex">m_0-\alpha t>0</script>, or else it will most certainly be out of fuel! 
+</p>
+<p>
+ [width=%+10mm]Rocket burn under gravity 
+</p>
+<p>
+Suppose the above rocket is ejecting gas at a constant rate (<script type="math/tex">\alpha </script>) and at a constant velocity relative to it but is moving vertically upward in a constant gravitational field <script type="math/tex">{\vec g} = -g{\hat k}</script> (assuming that it won’t go very high...). Calculate its speed as a function of time. 
+</p>
+<p>
+We use the full expression for <b class="bf">N2</b> <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">\frac{d}{dt}(m{\vec v})=({\vec v}-u{\vec n})\frac{dm}{dt}+{\vec F}</script></span> </span> where <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">{\vec F}=-m(t)g{\hat k}, \qquad {\vec v}=v(t){\hat k}, \qquad {\vec n} = {\hat k} , \qquad u={\rm constant}, \qquad \frac{dm}{dt}=-\alpha .</script></span> </span> The mass of the rocket is 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">\frac{dm}{dt}=-\alpha \Rightarrow m(t)=m_0-\alpha t.</script></span>
+<p>
+ Inserting this into the full equation and noting that only the <script type="math/tex">{\hat k}</script> component is relevant we have 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">m {d\vec v \over dt} = - u \vec n {dm \over dt} + \vec F</script></span>
+<p>
+ If the rocket starts at <script type="math/tex">t=0</script> with speed <script type="math/tex">v(0)=0</script>, then 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">0=- u \ln (m_0) + {\rm constant} \Rightarrow {\rm constant}= u \ln (m_0)</script></span>
+<p>
+ and we then have <span style="color:#000000"> <span class="dmath"><script type="math/tex; mode=display">v= u \ln \left(\frac{m_0}{m_0-\alpha t}\right)-gt.</script></span> </span> The effect of gravity is to retard the speed of the rocket by an amount <script type="math/tex">gt</script>. Integrating once more with respect to time will give the position of the rocket.  
+</p>
+<p>
+<br/>[width=%+10mm]A rocket with linear drag 
+</p>
+<p>
+Here’s a slightly more involved example. The initial mass of the rocket is <script type="math/tex">m_0</script> and we still burn fuel at a constant rate, so <script type="math/tex">\dot m = - \alpha </script>. But now the rocket is subject to linear drag, <script type="math/tex">F=-\gamma v</script>, presumably because it has encountered some sticky intergalactic sludge or something. If the rocket starts from rest, how fast is it going after it has burned one half of its mass as fuel? 
+</p>
+<p>
+With linear drag, the rocket equation becomes 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">m\dot v + u \dot m = - \gamma v</script></span>
+<p>
+ We can get a feel for what’s going on by looking at this equation. Since <script type="math/tex">\dot m = - \alpha </script>, rearranging we get 
+</p>
+<span class="dmath"><script type="math/tex; mode=display">m\dot v = \alpha u - \gamma v</script></span>
+<p>
+ This means that we will continue to accelerate through the sticky stuff if we are travelling slowly and burning fuel fast enough so that <script type="math/tex">\alpha u > \gamma v</script>, but as our speed approaches <script type="math/tex">v=\alpha u /\gamma </script> the acceleration slows down and we expect this to be the limiting velocity. However, if we were travelling too fast to begin with, so <script type="math/tex">\gamma v > \alpha u</script>, then we will slow down until we again hit the (same) limiting speed. These expectations are brought out by the detailed solution (which follows from solving a separable equation). 
+</p>
+<hr/>
+<ol>
+<li id="a0000000138">How can you have a negative mass of gas you ask? Well, you don’t really. Note that <script type="math/tex">-dm</script> is a positive quantity if <script type="math/tex">dm</script> is assumed negative. This is the convention that the most people have adopted!</li>
+</ol>
+
+            </div>
+        </div>
+    </div>
+
+        </main>
+		
+		<footer class="text-muted">
+	<hr>
+	<div class="container">
+		<div class="float-right">
+			<ul style="list-style: none">
+			<li><a href="#">Back to top</a></li>
+			
+			
+			<li><a href="../../../notes/notes_by_chapter/rockets/rockets.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;Download as PDF</a></li>
+			
+			</ul>
+		</div>
+		<p>Generated using <a target="_blank" href="https://github.com/chirun-ncl/chirun">Chirun</a>, written by the E-Learning Unit, School of Mathematics &amp; Statistics, Newcastle University</p>
+		<p>This page last generated: 2022-07-03</p>
+	</div>
+</footer>
+		
+    </body>
+</html>
