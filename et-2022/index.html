@@ -88,58 +88,10 @@
 
 				<section id="Focus">
 
-					<section data-background="figures/pch/strain.svg" data-background-position='right' data-background-size="50%">
-						<div style="width: 50%">
+					<section> <!-- data-background="figures/pch/strain.svg" data-background-position='right' data-background-size="50%"> -->
+						<div style="position:absolute; width:768px; top:50px; left:0px">
 
 							<h2>The aim</h2>
-
-							<p>
-								Numerics:
-							</p>
-							<ol>
-								<li>
-									given model,
-								</li>
-								<li>
-									find observable
-								</li>
-								<li>
-									 to given accuracy
-								 </li>
-								 <li>
-									 using minimum resources.
-								 </li>
-							 </ol>
-							<p class="fragment" data-fragment-index=1>
-								ETK:
-							</p>
-							<ol class="fragment" data-fragment-index=1>
-								<li>
-									within GR,
-								</li>
-								<li>
-									find GW signal from binary merger
-								</li>
-								<li>
-									to 1 radian phase accuracy
-								</li>
-								<li>
-									using minimum compute time.
-								</li>
-							</ol>
-
-						</div>
-
-						<aside class="notes">
-							As candidate you can ask for one of your supervisory team to be present in the room. They are not allowed to talk or contribute in any way. Hands up anyone who believes their supervisor is capable of this over a two hour discussion of research.
-						</aside>
-
-					</section>
-
-					<section>
-						<div style="position:absolute; width:768px; top:150px; left:0px">
-
-							<h2>The models</h2>
 
 							<p>
 								Numerics:
@@ -175,156 +127,392 @@
 									using minimum CPU time.
 								</li>
 							</ol>
+						</div>
+						<div style="position:absolute; width:768px; top:0px; left:768px">
+							<img src="figures/pch/sqrtPSD_OoE_NSE.svg" style="width:680px; margin:0px">
+							<img src="figures/pch/sqrtPSD_OoE_OEL.svg" style="width:680px; margin:0px">
+						</div>
+
+						<aside class="notes">
+							No best method etc.
+						</aside>
+
+					</section>
+
+					<section>
+						<div style="position:absolute; width:768px; top:50px; left:0px">
+
+							<h2>The models</h2>
+
+							<ol>
+								<li>
+									EFEs $\implies$ wave equation
+									$$
+									\partial_{tt} \phi = c^2 \nabla^2 \phi;
+									$$
+								</li>
+								<li>
+									Charge conservation $\implies$ advection
+									$$
+									\partial_t \phi + \nabla_k \left( \phi v^k \right) = 0;
+									$$
+								</li>
+								<li>
+									$\nabla_a T^{ab} \; \implies$ balance laws
+									$$
+									\partial_t q + \nabla_k f^{(k)}(q) = s(q);
+									$$
+								 </li>
+								 <li>
+									 Exchange $\implies$ relaxation
+									 $$
+									 \dot{q} = \tau^{-1} s(q).
+									 $$
+								 </li>
+							 </ol>
 
 						</div>
 						<div style="position:absolute; width:768px; top:0px; left:768px">
-							<video controls data-autoplay loop="true" src="figures/toy_models.mp4" width="768px">
+							<video controls data-autoplay loop="true" src="figures/toy_models.mp4" style="width:768px; margin:0px">
 						</div>
 
 						<aside class="notes">
-							As candidate you can ask for one of your supervisory team to be present in the room. They are not allowed to talk or contribute in any way. Hands up anyone who believes their supervisor is capable of this over a two hour discussion of research.
+							No generic best numerical method - problem dependent. ETK was designed for a particular task.
 						</aside>
 
 					</section>
 
 					<section>
+						<div style="position:absolute; width:768px; top:50px; left:0px">
 
-						<h2 class="r-fit-text">Recommendation</h2>
+							<h2>Split out time</h2>
 
-						<p>
-							The examiners will recommend one of
-						</p>
-						<ol style="list-style-type:lower-alpha;">
-							<li>
-								Award PhD;
-							</li>
-							<li>
-								Award after minor changes (3 months, no new research);
-							</li>
-							<li>
-								Award after modest changes (9 months, limited further research);
-							</li>
-							<li>
-								Resubmit, lower degree, or fail.
-							</li>
-						</ol>
-						<p class="fragment">
-							Typically the recommendation is <em>based on the thesis</em>. Viva may shift recommendation up or down one.
-						</p>
+							<p>
+								Method of Lines (thorn <code>MoL</code>):
+							</p>
+							<ol>
+								<li>
+									start from spacetime;
+								</li>
+								<li>
+									discretize space, giving ODEs;
+								</li>
+								<li>
+									 solve ODEs.
+							 </li>
+							</ol>
+							<p class="fragment" data-fragment-index=1>
+								(Dis)advantages:
+							</p>
+							<ul class="fragment" data-fragment-index=1>
+								<li>
+									causality restricts $\Delta t$;
+								</li>
+								<li>
+									width of stencil affects cost;
+								</li>
+								<li>
+									MoL simplifies coupling;
+								</li>
+								<li>
+									accuracy, efficiency issues.
+								</li>
+							</ul>
 
-						<aside class="notes">
-						</aside>
-
-					</section>
-
-				</section>
-
-				<section id="Questions">
-
-					<section>
-						<h2 class="r-fit-text">Question</h2>
-
-						<p class="r-fit-text">
-							What have you done in your PhD?
-						</p>
-
-						<aside class="notes">
-							We're after a brief summary here, less than one minute.
-						</aside>
-
-					</section>
-
-					<section>
-
-						<h2 class="r-fit-text">First tickbox criteria</h2>
-
-						<blockquote style="font-size:1.4em">
-							The creation and interpretation of <b>new knowledge</b> through original research or other advanced scholarship, of a quality to <b>satisfy peer review</b>, extend the forefront of the discipline and merit publication.
-						</blockquote>
+						</div>
+						<div style="position:absolute; width:768px; top:0px; left:768px" class="r-stack">
+							<img src="figures/mol1.svg" style="width:100%">
+							<img src="figures/mol2.svg" style="width:100%" class="fragment fade-in" data-fragment-index=1>
+						</div>
 
 						<aside class="notes">
-							Get your contribution in early.
+							No generic best numerical method - problem dependent. ETK was designed for a particular task.
 						</aside>
 
 					</section>
 
 					<section>
-						<h2 class="r-fit-text">Question</h2>
+						<div style="position:absolute; width:800px; top:50px; left:0px">
 
-						<p class="r-fit-text">
-							What's your field?
-						</p>
+							<h2>Finite differencing</h2>
+
+							<p>
+								Approximate:
+							</p>
+							<ol>
+								<li>
+									fields $\phi$ as point values $\phi_i = \phi(x_i)$;
+								</li>
+								<li>
+									polynomial interpolation gives $\hat{\phi}(x)$ from $\{\phi_i\}$;
+								</li>
+								<li>
+									 derivative from $\partial_x \phi \simeq \partial_x \hat{\phi}$.
+							 </li>
+							</ol>
+							<p>
+								See <code>Kranc</code>, <code>NRPy</code>.
+							</p>
+							<div class="fragment" data-fragment-index=1>
+								<p>
+									Example:
+								</p>
+								$$
+								\begin{aligned}
+									&& \partial_t \phi + \partial_x (v \phi) & = 0 \\
+									\rightarrow && \partial_t \phi_i & = \frac{-v \left( \phi_{i+1} - \phi_{i-1} \right)}{2 \, \Delta x}.
+								\end{aligned}
+								$$
+							</div>
+						</div>
+						<div style="position:absolute; width:736px; top:0px; left:800px" class="r-stack">
+							<img src="figures/fd_example.svg" style="width:100%">
+							<video controls data-autoplay loop="true" src="figures/fd_compare.mp4" style="width:100%" class="fragment fade-in" data-fragment-index=1>
+						</div>
 
 						<aside class="notes">
-							We're after the context: where does your research sit, who is interested in your contribution.
+							No generic best numerical method - problem dependent. ETK was designed for a particular task.
 						</aside>
 
 					</section>
 
 					<section>
+						<div style="position:absolute; width:800px; top:50px; left:0px">
 
-						<h2 class="r-fit-text">Second tickbox criteria</h2>
+							<h2>Order of accuracy</h2>
 
-						<blockquote style="font-size:1.4em">
-							A systematic acquisition and understanding of a <b>substantial body of knowledge</b> which is at the <b>forefront of an academic discipline</b> or an area of professional practice.
-						</blockquote>
+							<p>
+								Finite differencing errors $\propto \Delta x^p = N^{-p}$:
+							</p>
+							$$
+							\partial_t \phi_i + \frac{v \left( \phi_{i+1} - \phi_{i-1} \right)}{2 \, \Delta x} = \mathcal{O} \left( \Delta x^3 \right).
+							$$
+							<p>
+								$\Delta x$ "small": higher order usually better. However, costs increase:
+							</p>
+							$$
+							\partial_x \phi \simeq \frac{-\phi_{i+2} + \phi_{i-2} + 8 (\phi_{i+1} - \phi_{i-1})}{12 \, \Delta x}.
+							$$
+							<p class="fragment" data-fragment-index=1>
+								Usual to plot convergence with $N$ or $\Delta x$. Really resource (eg CPU time) that matters.
+							</p>
+						</div>
+						<div style="position:absolute; width:736px; top:0px; left:800px">
+							<img src="figures/fd_costs.svg" style="width:100%">
+						</div>
 
 						<aside class="notes">
-							Get your contribution in early.
+							No generic best numerical method - problem dependent. ETK was designed for a particular task.
 						</aside>
 
 					</section>
 
 					<section>
-						<h2 class="r-fit-text">Question</h2>
+						<div style="position:absolute; width:768px; top:50px; left:0px">
 
-						<p class="r-fit-text">
-							How did you do it?
-						</p>
+							<h2>Phase errors</h2>
+
+							<p>
+								Finite differencing errors:
+							</p>
+							<ol>
+								<li>
+									dissipation, reducing amplitude;
+								</li>
+								<li>
+									dispersion, changing phase.
+							 </li>
+							</ol>
+							<div class="r-stack">
+								<div class="fragment fade-in-then-out" data-fragment-index=1>
+									<p>
+										Phase error dependence on $\Delta x$ can be estimated.
+									</p>
+									<p>
+										For 1kHz wave for 1s, 1% phase error:
+									</p>
+									<table>
+										<tr>
+											<th>$2^{\textrm{nd}}$ order</th>
+											<th>$4^{\textrm{th}}$ order</th>
+											<th>$6^{\textrm{th}}$ order</th>
+										</tr>
+										<tr>
+											<td>$10$m</td>
+											<td>$265$m</td>
+											<td>$784$m</td>
+										</tr>
+									</table>
+								</div>
+								<div class="fragment" data-fragment-index=2>
+									<p>
+										Phase errors dependence on $\Delta x$ can be estimated.
+									</p>
+									<p>
+										For 10kHz wave for 1s, 0.01% phase error:
+									</p>
+									<table>
+										<tr>
+											<th>$2^{\textrm{nd}}$ order</th>
+											<th>$4^{\textrm{th}}$ order</th>
+											<th>$6^{\textrm{th}}$ order</th>
+										</tr>
+										<tr>
+											<td>$0.3$m</td>
+											<td>$47$m</td>
+											<td>$247$m</td>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div style="position:absolute; width:768px; top:0px; left:768px" class="r-stack">
+							<video controls data-autoplay loop="true" src="figures/damping_dx0_05.mp4" style="width:100%">
+						</div>
 
 						<aside class="notes">
-							Are you on top of the techniques that you used? Do you understand the implications, uses, problems and advantages of the methods? This typically won't be a line-by-line questioning of the text, instead it will (start) about the generalities, but applied to your specific case.
+							No generic best numerical method - problem dependent. ETK was designed for a particular task.
 						</aside>
 
 					</section>
 
 					<section>
+						<div style="position:absolute; width:768px; top:50px; left:0px">
 
-						<h2 class="r-fit-text">Third tickbox criteria</h2>
+							<h2>Spectral</h2>
 
-						<blockquote style="font-size:1.4em">
-							A detailed <b>understanding of applicable techniques</b> for research and advanced academic enquiry.
-						</blockquote>
+							<p>
+								Higher order is better: use all information. Mode expand:
+							</p>
+							$$
+							\phi = \sum_i \hat{\phi}_i \sin \left(\frac{2 \pi i x}{L} \right).
+							$$
+							<p>
+								Then $\partial_x \phi \simeq D \hat{\phi}$.
+							</p>
+							<p>
+								Spectral error $\sim \exp(-p N)$.
+							</p>
+							<p class="fragment" data-fragment-index=1>
+								Accuracy of full evolution often constrained.
+							</p>
+							<p class="fragment" data-fragment-index=1>
+								ETK has spectral initial data (<code>TwoPunctures</code>, <code>LORENE</code>), no evolution.
+							</p>
+						<div style="position:absolute; width:768px; top:0px; left:768px" class="r-stack">
+							<img src="figures/spectral_deriv.svg" style="width:100%">
+							<img src="figures/spectral_costs.svg" style="width:100%" class="fragment" data-fragment-index=1>
+						</div>
 
 						<aside class="notes">
-							This is the closest to digging in to the details of the project. Be prepared to argue that your methods are not the best in all cases, but are the most suitable to your problem.
+							No generic best numerical method - problem dependent. ETK was designed for a particular task.
 						</aside>
 
 					</section>
 
 					<section>
-						<h2 class="r-fit-text">Question</h2>
+						<div style="position:absolute; width:768px; top:50px; left:0px">
 
-						<p class="r-fit-text">
-							What would you change?
-						</p>
+							<h2>Discontinuities</h2>
+
+							<p>
+								Any high order method shows Gibbs' oscillations at jumps.
+							</p>
+							<p>
+								No convergence with resolution.
+							</p>
+							<p class="fragment" data-fragment-index=1>
+								Use <em>piecewise</em> polynomial reconstruction (eg WENO) to avoid oscillations.
+							</p>
+							<ul class="fragment" data-fragment-index=2>
+								<li>
+									Converges with resolution.
+								</li>
+								<li>
+									Formally first order at jumps.
+								</li>
+								<li>
+									Extension to higher dimensions an issue.
+								</li>
+							</ul>
+							<p class="fragment" data-fragment-index=3>
+								See <code>GRHydro</code>, <code>IllinoisMHD</code>, <code>Spritz</code>, <code>WhiskyTHC</code>.
+							</p>
+						</div>
+						<div style="position:absolute; width:768px; top:0px; left:768px" class="r-stack">
+							<img src="figures/gibbs1.svg" style="width:100%">
+							<img src="figures/recon21.svg" style="width:100%" class="fragment" data-fragment-index=1>
+							<img src="figures/recon81.svg" style="width:100%" class="fragment" data-fragment-index=2>
+							<img src="figures/gibbs2.svg" style="width:100%" class="fragment" data-fragment-index=3>
+						</div>
 
 						<aside class="notes">
-							Four years later, the field is four years smarter, and so are you. So, if you had a time machine then what would you change?
+							No generic best numerical method - problem dependent. ETK was designed for a particular task.
 						</aside>
 
 					</section>
 
 					<section>
+						<div style="position:absolute; width:768px; top:50px; left:0px">
 
-						<h2 class="r-fit-text">Fourth tickbox criteria</h2>
+							<h2>Nonlinearity</h2>
 
-						<blockquote style="font-size:1.4em">
-							The general ability to <b>conceptualise, design and implement a project</b> for the generation of new knowledge, applications or understanding at the forefront of the discipline, and to <b>adjust the project design</b> in the light of unforeseen problems.
-						</blockquote>
+							<p>
+								Formally need to work with <em>weak form</em>
+							</p>
+							$$
+							\begin{aligned}
+								&& \partial_t \phi + \nabla_k f^{(k)}(\phi) & = 0 \\
+								\implies && \frac{\text{d}}{\text{d}t} \int_V \phi + \oint_{\partial V} \hat{n}_k  f^{(k)}(\phi) & = 0.
+							\end{aligned}
+							$$
+							<p>
+								Discrete version, 1d:
+							</p>
+							$$
+							\frac{\text{d}}{\text{d}t} \hat{\phi}_i + \frac{1}{\Delta x} \left[ f_{i+1/2} - f_{i-1/2} \right] = 0.
+							$$
+							<p>
+								Finding the flux $f_{k \pm 1/2}$ depends on the model (for fluids see <code>GRHydro</code> etc).
+							</p>
+						</div>
+						<div style="position:absolute; width:768px; top:0px; left:768px" class="r-stack">
+							<img src="figures/weak_solutions1.svg" style="width:100%">
+						</div>
 
 						<aside class="notes">
-							This is all about planning and your ability to see the big picture.
+							No generic best numerical method - problem dependent. ETK was designed for a particular task.
+						</aside>
+
+					</section>
+
+					<section>
+						<div style="position:absolute; width:768px; top:50px; left:0px">
+
+							<h2>Consistency</h2>
+
+							<p>
+								Using the right weak form is essential.
+							</p>
+							$$
+							\begin{aligned}
+								&& \partial_t q^n + \frac{n}{n+1} \partial_x q^{n+1} & = 0 \\
+								\implies && \partial_t q + q \partial_x q & = 0.
+							\end{aligned}
+							$$
+							<p>
+								Strong solutions agree when continuous; inconsistent at shocks.
+							</p>
+							<p class="fragment">
+								Can use entropy pairs, path-consistent methods for complex cases. Links to <code>SummationByParts</code>.
+							</p>
+						</div>
+						<div style="position:absolute; width:768px; top:0px; left:768px" class="r-stack">
+								<video controls data-autoplay loop="true" src="figures/burgers_n_shock.mp4" style="width:768px;">
+						</div>
+
+						<aside class="notes">
+							No generic best numerical method - problem dependent. ETK was designed for a particular task.
 						</aside>
 
 					</section>
@@ -337,33 +525,27 @@
 						<h2>Summary</h2>
 
 						<p>
-							The examiners have to comment on
+							The ETK is optimized for
 						</p>
 						<ul>
 							<li>
-								organisation
+								finite difference/volume methods
 							</li>
 							<li>
-								structure
+								using block-structured mesh refinement
 							</li>
 							<li>
-								presentation
+								on CPUs
 							</li>
 							<li>
-								authenticity
-							</li>
-							<li>
-								content
-							</li>
-							<li>
-								publishable quality
-							</li>
-							<li>
-								critical awareness of the subject.
+								for computing gravitational waves.
 							</li>
 						</ul>
 						<p>
-							Make it easy for the examiners to say yes.
+							CarpetX should add GPU support.
+						</p>
+						<p>
+							Adaptive and hybrid methods becoming common, but complex.
 						</p>
 
 						<aside class="notes">
