@@ -88,8 +88,11 @@
 
 				<section id="Focus">
 
-					<section> <!-- data-background="figures/pch/strain.svg" data-background-position='right' data-background-size="50%"> -->
-						<div style="position:absolute; width:768px; top:50px; left:0px">
+					<section>
+
+						<div class="container">
+							<div class="col">
+<!--						<div style="position:absolute; width:768px; top:50px; left:0px">-->
 
 							<h2>The aim</h2>
 
@@ -128,9 +131,12 @@
 								</li>
 							</ol>
 						</div>
-						<div style="position:absolute; width:768px; top:0px; left:768px">
+
+							<div class="col">
+<!--						<div style="position:absolute; width:768px; top:0px; left:768px"> -->
 							<img src="figures/pch/sqrtPSD_OoE_NSE.svg" style="width:680px; margin:0px">
 							<img src="figures/pch/sqrtPSD_OoE_OEL.svg" style="width:680px; margin:0px">
+							</div>
 						</div>
 
 						<aside class="notes">
@@ -140,7 +146,9 @@
 					</section>
 
 					<section>
-						<div style="position:absolute; width:768px; top:50px; left:0px">
+						<div class="container">
+								<div class="col">
+							<!--												<div style="position:absolute; width:768px; top:50px; left:0px; margin:0px"> -->
 
 							<h2>The models</h2>
 
@@ -172,10 +180,12 @@
 							 </ol>
 
 						</div>
-						<div style="position:absolute; width:768px; top:0px; left:768px">
+							<div class="col">
+<!--
+						<div style="position:absolute; width:768px; top:0px; left:768px; margin:0px"> -->
 							<video controls data-autoplay loop="true" src="figures/toy_models.mp4" style="width:768px; margin:0px">
+							</div>
 						</div>
-
 						<aside class="notes">
 							No generic best numerical method - problem dependent. ETK was designed for a particular task.
 						</aside>
@@ -183,7 +193,10 @@
 					</section>
 
 					<section>
-						<div style="position:absolute; width:768px; top:50px; left:0px">
+						<div class="container">
+							<div class="col">
+<!--
+						<div style="position:absolute; width:768px; top:50px; left:0px">-->
 
 							<h2>Split out time</h2>
 
@@ -220,9 +233,12 @@
 							</ul>
 
 						</div>
-						<div style="position:absolute; width:768px; top:0px; left:768px" class="r-stack">
+							<div class="col r-stack">
+<!--
+						<div style="position:absolute; width:768px; top:0px; left:768px" class="r-stack"> -->
 							<img src="figures/mol1.svg" style="width:100%">
 							<img src="figures/mol2.svg" style="width:100%" class="fragment fade-in" data-fragment-index=1>
+							</div>
 						</div>
 
 						<aside class="notes">
@@ -232,7 +248,10 @@
 					</section>
 
 					<section>
-						<div style="position:absolute; width:800px; top:50px; left:0px">
+						<div class="container">
+							<div class="col">
+<!--
+						<div style="position:absolute; width:800px; top:50px; left:0px"> -->
 
 							<h2>Finite differencing</h2>
 
@@ -265,9 +284,12 @@
 								$$
 							</div>
 						</div>
-						<div style="position:absolute; width:736px; top:0px; left:800px" class="r-stack">
+							<div class="col r-stack">
+<!--
+						<div style="position:absolute; width:736px; top:0px; left:800px" class="r-stack"> -->
 							<img src="figures/fd_example.svg" style="width:100%">
 							<video controls data-autoplay loop="true" src="figures/fd_compare.mp4" style="width:100%" class="fragment fade-in" data-fragment-index=1>
+							</div>
 						</div>
 
 						<aside class="notes">
@@ -277,7 +299,10 @@
 					</section>
 
 					<section>
-						<div style="position:absolute; width:800px; top:50px; left:0px">
+						<div class="container">
+							<div class="col">
+<!--
+						<div style="position:absolute; width:800px; top:50px; left:0px"> -->
 
 							<h2>Order of accuracy</h2>
 
@@ -297,8 +322,11 @@
 								Usual to plot convergence with $N$ or $\Delta x$. Really resource (eg CPU time) that matters.
 							</p>
 						</div>
-						<div style="position:absolute; width:736px; top:0px; left:800px">
+							<div class="col">
+<!--
+						<div style="position:absolute; width:736px; top:0px; left:800px">-->
 							<img src="figures/fd_costs.svg" style="width:100%">
+							</div>
 						</div>
 
 						<aside class="notes">
@@ -308,7 +336,10 @@
 					</section>
 
 					<section>
-						<div style="position:absolute; width:768px; top:50px; left:0px">
+						<div class="container">
+							<div class="col">
+<!--
+						<div style="position:absolute; width:768px; top:50px; left:0px">-->
 
 							<h2>Phase errors</h2>
 
@@ -366,8 +397,11 @@
 								</div>
 							</div>
 						</div>
-						<div style="position:absolute; width:768px; top:0px; left:768px" class="r-stack">
+							<div class="col">
+<!--
+						<div style="position:absolute; width:768px; top:0px; left:768px" class="r-stack"> -->
 							<video controls data-autoplay loop="true" src="figures/damping_dx0_05.mp4" style="width:100%">
+							</div>
 						</div>
 
 						<aside class="notes">
@@ -377,7 +411,10 @@
 					</section>
 
 					<section>
-						<div style="position:absolute; width:768px; top:50px; left:0px">
+						<div class="container">
+							<div class="col">
+<!--
+						<div style="position:absolute; width:768px; top:50px; left:0px">-->
 
 							<h2>Spectral</h2>
 
@@ -399,9 +436,13 @@
 							<p class="fragment" data-fragment-index=1>
 								ETK has spectral initial data (<code>TwoPunctures</code>, <code>LORENE</code>), no evolution.
 							</p>
-						<div style="position:absolute; width:768px; top:0px; left:768px" class="r-stack">
+						</div>
+							<div class="col r-stack">
+<!--
+						<div style="position:absolute; width:768px; top:0px; left:768px" class="r-stack"> -->
 							<img src="figures/spectral_deriv.svg" style="width:100%">
 							<img src="figures/spectral_costs.svg" style="width:100%" class="fragment" data-fragment-index=1>
+							</div>
 						</div>
 
 						<aside class="notes">
@@ -411,7 +452,10 @@
 					</section>
 
 					<section>
-						<div style="position:absolute; width:768px; top:50px; left:0px">
+						<div class="container">
+							<div class="col">
+<!--
+						<div style="position:absolute; width:768px; top:50px; left:0px">-->
 
 							<h2>Discontinuities</h2>
 
@@ -432,6 +476,12 @@
 									Formally first order at jumps.
 								</li>
 								<li>
+									<em>Much</em> more expensive.
+								</li>
+								<li>
+									Data dependent - hard to analyse.
+								</li>
+								<li>
 									Extension to higher dimensions an issue.
 								</li>
 							</ul>
@@ -439,11 +489,14 @@
 								See <code>GRHydro</code>, <code>IllinoisMHD</code>, <code>Spritz</code>, <code>WhiskyTHC</code>.
 							</p>
 						</div>
-						<div style="position:absolute; width:768px; top:0px; left:768px" class="r-stack">
+							<div class="col r-stack">
+<!--
+						<div style="position:absolute; width:768px; top:0px; left:768px" class="r-stack">-->
 							<img src="figures/gibbs1.svg" style="width:100%">
 							<img src="figures/recon21.svg" style="width:100%" class="fragment" data-fragment-index=1>
 							<img src="figures/recon81.svg" style="width:100%" class="fragment" data-fragment-index=2>
 							<img src="figures/gibbs2.svg" style="width:100%" class="fragment" data-fragment-index=3>
+							</div>
 						</div>
 
 						<aside class="notes">
@@ -453,7 +506,10 @@
 					</section>
 
 					<section>
-						<div style="position:absolute; width:768px; top:50px; left:0px">
+						<div class="container">
+							<div class="col">
+<!--
+						<div style="position:absolute; width:768px; top:50px; left:0px">-->
 
 							<h2>Nonlinearity</h2>
 
@@ -476,8 +532,11 @@
 								Finding the flux $f_{k \pm 1/2}$ depends on the model (for fluids see <code>GRHydro</code> etc).
 							</p>
 						</div>
-						<div style="position:absolute; width:768px; top:0px; left:768px" class="r-stack">
+							<div class="col">
+<!--
+						<div style="position:absolute; width:768px; top:0px; left:768px" class="r-stack">-->
 							<img src="figures/weak_solutions1.svg" style="width:100%">
+							</div>
 						</div>
 
 						<aside class="notes">
@@ -487,7 +546,10 @@
 					</section>
 
 					<section>
-						<div style="position:absolute; width:768px; top:50px; left:0px">
+						<div class="container">
+							<div class="col">
+<!--
+						<div style="position:absolute; width:768px; top:50px; left:0px">-->
 
 							<h2>Consistency</h2>
 
@@ -507,9 +569,12 @@
 								Can use entropy pairs, path-consistent methods for complex cases. Links to <code>SummationByParts</code>.
 							</p>
 						</div>
-						<div style="position:absolute; width:768px; top:0px; left:768px" class="r-stack">
+							<div class="col">
+<!--
+						<div style="position:absolute; width:768px; top:0px; left:768px" class="r-stack"> -->
 								<video controls data-autoplay loop="true" src="figures/burgers_n_shock.mp4" style="width:768px;">
-						</div>
+								</div>
+							</div>
 
 						<aside class="notes">
 							No generic best numerical method - problem dependent. ETK was designed for a particular task.
@@ -518,7 +583,10 @@
 					</section>
 
 					<section>
-						<div style="position:absolute; width:768px; top:50px; left:0px">
+						<div class="container">
+							<div class="col">
+<!--
+						<div style="position:absolute; width:768px; top:50px; left:0px">-->
 
 							<h2>Parallel compute</h2>
 
@@ -535,9 +603,12 @@
 								Physics not Cartesian: overlapping patches complex, but help (<code>Llama</code>, <code>BH@Home</code>).
 							</p>
 						</div>
-						<div style="position:absolute; width:768px; top:0px; left:768px" class="r-stack">
+							<div class="col r-stack">
+<!--
+						<div style="position:absolute; width:768px; top:0px; left:768px" class="r-stack">-->
 							<img src="figures/amr.svg" style="width:768px" class="fragment fade-out" data-fragment-index=1>
 							<img src="figures/grids.png" style="height:960px" class="fragment" data-fragment-index=1>
+							</div>
 						</div>
 
 						<aside class="notes">
@@ -547,7 +618,54 @@
 					</section>
 
 					<section>
-						<div style="position:absolute; width:768px; top:50px; left:0px">
+						<div class="container">
+							<div class="col">
+
+								<h2>Adaptive Model</h2>
+
+								<p>
+									Changing model can reduce costs by
+								</p>
+								<ol>
+									<li>
+										reducing size of state vector;
+									</li>
+									<li>
+										increasing allowed timestep.
+									</li>
+								</ol>
+								<p>
+									Examples:
+								</p>
+								<ul>
+									<li>
+										Low Mach approximation (Harpole);
+									</li>
+									<li>
+										Fast reactions as bulk viscosity (Hammond, Celora, Most);
+									</li>
+									<li>
+										Resistive MHD as ideal plus corrections (Wright).
+									</li>
+								</ul>
+							</div>
+							<div class="col">
+								<img src="figures/pch/LowMach2.png" style="height:500px">
+								<img src="figures/pch/Gamma_ratio.svg" style="height:400px">
+							</div>
+						</div>
+
+						<aside class="notes">
+							No generic best numerical method - problem dependent. ETK was designed for a particular task.
+						</aside>
+
+					</section>
+
+					<section>
+						<div class="container">
+							<div class="col">
+<!--
+						<div style="position:absolute; width:768px; top:50px; left:0px">-->
 
 							<h2>Mesh refinement</h2>
 
@@ -564,9 +682,12 @@
 								Physics not Cartesian: overlapping patches complex, but help (<code>Llama</code>, <code>BH@Home</code>).
 							</p>
 						</div>
-						<div style="position:absolute; width:768px; top:0px; left:768px" class="r-stack">
+							<div class="col r-stack">
+<!--
+						<div style="position:absolute; width:768px; top:0px; left:768px" class="r-stack">-->
 							<img src="figures/amr.svg" style="width:768px" class="fragment fade-out" data-fragment-index=1>
 							<img src="figures/grids.png" style="height:960px" class="fragment" data-fragment-index=1>
+							</div>
 						</div>
 
 						<aside class="notes">
