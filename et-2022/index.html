@@ -585,10 +585,105 @@
 					<section>
 						<div class="container">
 							<div class="col">
+
+								<h2>Parallel compute</h2>
+
+								<p>
+									Classic CPU (<code>Carpet</code> etc): split domain.
+								</p>
+								<ul>
+									<li>
+										Each CPU fast, high memory.
+									</li>
+									<li>
+										Need <em>ghostzones</em>, linked to stencil size.
+									</li>
+									<li>
+										Communication is bottleneck.
+									</li>
+									<li>
+										Problem for higher order schemes.
+									</li>
+								</ul>
+								<p>
+									GPUs (<code>CarpetX</code> etc): create tasks.
+								</p>
+								<ul>
+									<li>
+										Each GPU slow, low memory.
+									</li>
+									<li>
+										$N_{\textrm{GPU}} \gg N_{\textrm{CPU}}$.
+									</li>
+									<li>
+										Overload GPUs via pipeline.
+									</li>
+									<li>
+										Task based approach hides communication.
+									</li>
+								</ul>
+							</div>
+							<div class="col">
+								<img src="figures/parallel.svg" style="width:768px">
+							</div>
+						</div>
+
+						<aside class="notes">
+							No generic best numerical method - problem dependent. ETK was designed for a particular task.
+						</aside>
+
+					</section>
+
+					<section>
+						<div class="container">
+							<div class="col">
 <!--
 						<div style="position:absolute; width:768px; top:50px; left:0px">-->
 
-							<h2>Parallel compute</h2>
+							<h2>Spectral element</h2>
+
+							<p>
+								Want high order, low communication. Apply weak form to basis expansion $q(x, t) \sim \hat{q}_m(t) P_m(x)$, getting
+							</p>
+							$$
+							M \partial_t \hat{q} + S^T f(\hat{q}) = - \left[ F \right]_{i-1/2}^{i+1/2}.
+							$$
+							<ul class="fragment" data-fragment-index=1>
+								<li>
+									Spectral accuracy with modes.
+								</li>
+								<li>
+									Only communication through RHS.
+								</li>
+								<li>
+									Expensive, complex.
+								</li>
+								<li>
+									(Solvable?) issues with shocks.
+							</ul>
+							<p class="fragment" data-fragment-index=1>
+								No code in ETK (?) - see <code>Spectre</code>.
+							</p>
+						</div>
+							<div class="col r-stack">
+							<img src="figures/fd_fv_fe_grids.svg" style="width:768px" class="fragment fade-out" data-fragment-index=1>
+							<img src="figures/dg_all.png" style="height:960px" class="fragment" data-fragment-index=1>
+							</div>
+						</div>
+
+						<aside class="notes">
+							No generic best numerical method - problem dependent. ETK was designed for a particular task.
+						</aside>
+
+					</section>
+
+					<section>
+						<div class="container">
+							<div class="col">
+<!--
+						<div style="position:absolute; width:768px; top:50px; left:0px">-->
+
+							<h2>Mesh refinement</h2>
 
 							<p>
 								Errors $\sim \Delta x^p$, but also local.
@@ -599,7 +694,7 @@
 							<p>
 								Boundaries need interpolation - source of error.
 							</p>
-							<p class="fragment">
+							<p class="fragment" data-fragment-index=1>
 								Physics not Cartesian: overlapping patches complex, but help (<code>Llama</code>, <code>BH@Home</code>).
 							</p>
 						</div>
@@ -654,41 +749,6 @@
 							</div>
 							<div class="col">
 								<img src="figures/pch/adaptive_model.png" style="height:960px">
-							</div>
-						</div>
-
-						<aside class="notes">
-							No generic best numerical method - problem dependent. ETK was designed for a particular task.
-						</aside>
-
-					</section>
-
-					<section>
-						<div class="container">
-							<div class="col">
-<!--
-						<div style="position:absolute; width:768px; top:50px; left:0px">-->
-
-							<h2>Mesh refinement</h2>
-
-							<p>
-								Errors $\sim \Delta x^p$, but also local.
-							</p>
-							<p>
-								Refine mesh where errors large (<code>Carpet(X)</code>).
-							</p>
-							<p>
-								Boundaries need interpolation - source of error.
-							</p>
-							<p class="fragment" data-fragment-index=1>
-								Physics not Cartesian: overlapping patches complex, but help (<code>Llama</code>, <code>BH@Home</code>).
-							</p>
-						</div>
-							<div class="col r-stack">
-<!--
-						<div style="position:absolute; width:768px; top:0px; left:768px" class="r-stack">-->
-							<img src="figures/amr.svg" style="width:768px" class="fragment fade-out" data-fragment-index=1>
-							<img src="figures/grids.png" style="height:960px" class="fragment" data-fragment-index=1>
 							</div>
 						</div>
 
