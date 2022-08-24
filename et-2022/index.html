@@ -517,6 +517,64 @@
 
 					</section>
 
+					<section>
+						<div style="position:absolute; width:768px; top:50px; left:0px">
+
+							<h2>Parallel compute</h2>
+
+							<p>
+								Errors $\sim \Delta x^p$, but also local.
+							</p>
+							<p>
+								Refine mesh where errors large (<code>Carpet(X)</code>).
+							</p>
+							<p>
+								Boundaries need interpolation - source of error.
+							</p>
+							<p class="fragment">
+								Physics not Cartesian: overlapping patches complex, but help (<code>Llama</code>, <code>BH@Home</code>).
+							</p>
+						</div>
+						<div style="position:absolute; width:768px; top:0px; left:768px" class="r-stack">
+							<img src="figures/amr.svg" style="width:768px" class="fragment fade-out" data-fragment-index=1>
+							<img src="figures/grids.png" style="height:960px" class="fragment" data-fragment-index=1>
+						</div>
+
+						<aside class="notes">
+							No generic best numerical method - problem dependent. ETK was designed for a particular task.
+						</aside>
+
+					</section>
+
+					<section>
+						<div style="position:absolute; width:768px; top:50px; left:0px">
+
+							<h2>Mesh refinement</h2>
+
+							<p>
+								Errors $\sim \Delta x^p$, but also local.
+							</p>
+							<p>
+								Refine mesh where errors large (<code>Carpet(X)</code>).
+							</p>
+							<p>
+								Boundaries need interpolation - source of error.
+							</p>
+							<p class="fragment" data-fragment-index=1>
+								Physics not Cartesian: overlapping patches complex, but help (<code>Llama</code>, <code>BH@Home</code>).
+							</p>
+						</div>
+						<div style="position:absolute; width:768px; top:0px; left:768px" class="r-stack">
+							<img src="figures/amr.svg" style="width:768px" class="fragment fade-out" data-fragment-index=1>
+							<img src="figures/grids.png" style="height:960px" class="fragment" data-fragment-index=1>
+						</div>
+
+						<aside class="notes">
+							No generic best numerical method - problem dependent. ETK was designed for a particular task.
+						</aside>
+
+					</section>
+
 				</section>
 
 				<section id="Summary">
