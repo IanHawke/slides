@@ -312,35 +312,36 @@
 						<div class="container">
 							<div class="col">
 
-							<h2>Finite differencing</h2>
+								<h2>Finite differencing</h2>
 
-							<p>
-								Approximate:
-							</p>
-							<ol>
-								<li>
-									fields $\phi$ as point values $\phi_i = \phi(x_i)$;
-								</li>
-								<li>
-									polynomial interpolation gives $\hat{\phi}(x)$ from $\{\phi_i\}$;
-								</li>
-								<li>
-									 derivative from $\partial_x \phi \simeq \partial_x \hat{\phi}$.
-							 </li>
-							</ol>
-							<p>
-								See <code>Kranc</code>, <code>NRPy</code>.
-							</p>
-							<div class="fragment" data-fragment-index=1>
 								<p>
-									Example:
+									Approximate:
 								</p>
-								$$
-								\begin{aligned}
-									&& \partial_t \phi + \partial_x (v \phi) & = 0 \\
-									\rightarrow && \partial_t \phi_i & = \frac{-v \left( \phi_{i+1} - \phi_{i-1} \right)}{2 \, \Delta x}.
-								\end{aligned}
-								$$
+								<ol>
+									<li>
+										fields $\phi$ as point values $\phi_i = \phi(x_i)$;
+									</li>
+									<li>
+										polynomial interpolation gives $\hat{\phi}(x)$ from $\{\phi_i\}$;
+									</li>
+									<li>
+										 derivative from $\partial_x \phi \simeq \partial_x \hat{\phi}$.
+								 </li>
+								</ol>
+								<p>
+									See <code>Kranc</code>, <code>NRPy</code>.
+								</p>
+								<div class="fragment" data-fragment-index=1>
+									<p>
+										Example:
+									</p>
+									$$
+									\begin{aligned}
+										&& \partial_t \phi + \partial_x (v \phi) & = 0 \\
+										\rightarrow && \partial_t \phi_i & = \frac{-v \left( \phi_{i+1} - \phi_{i-1} \right)}{2 \, \Delta x}.
+									\end{aligned}
+									$$
+								</div>
 							</div>
 							<div class="col r-stack">
 								<img src="figures/fd_example.svg" style="width:100%">
@@ -784,7 +785,13 @@
 						</div>
 
 						<aside class="notes">
-							
+							So far I've emphasized how the errors scale with the grid size, but haven't specified how the grid itself is set up. The finer the grid the higher the computational cost. Due to the timestep restriction, halving the spatial grid step means increasing the computational cost by a factor of 16.
+							<br>
+							By concentrating the computational grid where the error is largest we can minimise the cost. This typically focuses on the compact objects, near the neutron stars or black holes. This is done via mesh refinement, where multiple grids are used with different grid spacings. In the ETK, this is implemented by <code>Carpet</code>. The data from the finer grids is the most accurate, so used by overwriting the data on coarser grids. The boundary data on the finer grids needs to be interpolated from the coarser grids.
+							<br>
+							The boundaries can be a significant source of error. In addition to the interpolation issues, consider the phase errors discussed earlier. Waves propagate at slightly different speeds depending on the numerical resolution. This leads to reflections and diffractions from the boundaries. Whilst this can be mitigated by high order methods, its impact on lower order schemes, particularly when matter is involved, can be severe.
+							<br>
+							Some of these issues can be significantly reduced by changing the coordinate system the grid is in - the wave will be roughly spherical, so a spherical grid is better. However, getting a useful grid set up can be technically painful. Look carefully at the <code>Llama</code> project within the ETK, but also BlackHoles@Home.
 						</aside>
 
 					</section>
@@ -822,9 +829,15 @@
 						</div>
 
 						<aside class="notes">
-							When there is a big difference in the fastest and slowest timescales in the problem it is said to be stiff. This is a problem, particularly when the physics on the slowest timescale is interesting or essential, as the simplest and fastest numerical methods need to resolve the fast timescale for stability.
+							When there is a big difference in the fastest and slowest timescales in the problem it is said to be stiff. This is a problem, particularly when the physics on the slowest timescale is interesting or essential, as the simplest and fastest numerical methods need to resolve the fast timescale for stability. This can make the source terms, which we have so far ignored, crucially important for the stability and accuracy of the problem. Here we're thinking of matter problems in particular, where reactions or radiation can add a relaxation term to the problem, and the field is expected to relax exponentially quickly on a particular timescale to equilibrium.
 							<br>
-							An example would be the Euler methods.
+							An example would be the Euler methods. The explicit Euler method solves the ODE simply and cheaply. However, it is only stable if the timestep is comparable to or smaller than the relaxation timescale. If the relaxation scale is faster then the numerical method will overshoot and the oscillations will explode with time.
+							<br>
+							The alternative is to use an implicit method. As the unknown data appears nonlinearly within the algorithm we need to use a nonlinear root-finder to solve each point at each step, which is expensive - usually an order of magnitude worse than an implicit scheme. However, implicit methods can be stable for arbitrary timesteps. For really stiff problems they can be much more efficient.
+							<br>
+							However, an implicit method being stable does not mean it is accurate. It's usual for the relative error of the implicit scheme being large even when the result is stable. If the impact of the fast behaviour on the observable of interest is small then implicit schemes are a good choice. However, this can be hard to judge or predict - see the current disagreements about the impact of bulk viscosity.
+							<br>
+							There are methods that split the system of equations into slow parts that can be solved explicitly and fast parts that need an implicit solver. The implicit-explicit (IMEX) methods can then be used to get the best efficiency for the whole system.							Within the ETK and particularly <code>MoL</code> the focus is on explicit methods. It is possible to include IMEX methods within this framework - it has been done - but they're not included by default.
 						</aside>
 					</section>
 
@@ -856,7 +869,11 @@
 						</div>
 
 						<aside class="notes">
-							Tricks exist to adapt the model to the numerics.
+							Tricks exist to adapt the model to the numerics. I mentioned bulk viscosity. Resistivity in non-ideal MHD models is another stiff source that can be approached this way. Here I'll use the example of heat conduction in non-ideal hydro, for which there's a simple toy model.
+							<br>
+							The Cattaneo equation is a causal model of heat propagation. Temperature evolves through the gradient of the flux; the flux evolves in relaxation form so that Fourier's law is approached on a relaxation timescale. When the timescale is small we can write the flux in the Fourier law form plus a small correction. Plugging this back in gives us the standard heat equation plus a correction term proportional to the relaxation scale.
+							<br>
+							The point is that standard explicit numerical methods work well for the heat equation when the grid spacing is large. So when the relaxation scale is much smaller than the timestep, the corrected heat equation is physically acceptable and numerically preferrable. However, the timestep restriction for the heat equation, due to its parabolic nature, is much more restrictive. Therefore, when the relaxation timescale is resolvable it will be more efficient to solve the original Cattaneo equation.
 						</aside>
 					</section>
 
@@ -878,7 +895,7 @@
 									</li>
 								</ol>
 								<p>
-									Choose model <em>adaptively</em> to improve numerics (remove stiffness, increase accuracy) while capturing (enough) physics (for chosen observable).
+									Choose model <em>adaptively</em> to improve numerics while capturing physics.
 								</p>
 								<p>
 									Examples:
@@ -894,6 +911,9 @@
 										Resistive MHD as ideal plus corrections (Wright).
 									</li>
 								</ul>
+								<p>
+									Asymptotic preserving models and schemes are needed.
+								</p>
 							</div>
 							<div class="col">
 								<img src="figures/pch/adaptive_model.png" style="height:960px">
@@ -901,7 +921,11 @@
 						</div>
 
 						<aside class="notes">
-							No generic best numerical method - problem dependent. ETK was designed for a particular task.
+							This leads into the idea of Adaptive <em>Model</em> Refinement. In different regions of spacetime it may be possible to use simpler, less accurate, models to capture the physics to sufficient accuracy, purely for numerical advantage.
+							<br>
+							To some extent adaptivity is a core part of every large scale simulation we do. It's also standard to use the results of a simulation with a complex model as initial data for a simpler, cheaper model for long term simulations. This is known as <em>co-simulation</em>. Dynamics adaptation of the models and numerical methods used within the simulation is a known, but technically difficult, approach, that has been discussed in the past but never fully implemented within the ETK.
+							<br>
+							There's a range of examples in the literature where it's worked - the use of adaptivity for resistive relativistic MHD is the case that I think is the most successful. However, I want to highlight the Low Mach approach, which is a well-known application of the AMReX code. Here, acoustic waves are eliminated by solving elliptic equations. This only works when the Mach number is low. However, this holds true for neutron stars all the way up until merger, if the coordinate system is chosen appropriately. We would also expect it to be true throughout much of the disk. Adaptive model could give us order of magnitude increases in the timestep, and hence the associated accuracy, but the technical difficulty will be high.
 						</aside>
 
 					</section>
@@ -938,6 +962,7 @@
 						</p>
 
 						<aside class="notes">
+							Thank you for your attention.
 						</aside>
 
 					</section>
