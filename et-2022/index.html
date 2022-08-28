@@ -93,47 +93,50 @@
 						<div class="container">
 							<div class="col">
 
-							<h2>The aim</h2>
+								<h2>The aim</h2>
 
-							<p>
-								Numerics:
-							</p>
-							<ol>
-								<li>
-									given model,
-								</li>
-								<li>
-									find observable
-								</li>
-								<li>
-									 to given accuracy
-								 </li>
-								 <li>
-									 using minimum resources.
-								 </li>
-							 </ol>
-							<p class="fragment" data-fragment-index=1>
-								ETK:
-							</p>
-							<ol class="fragment" data-fragment-index=1>
-								<li>
-									within GR,
-								</li>
-								<li>
-									find GW signal from binary merger
-								</li>
-								<li>
-									to 1 radian phase accuracy
-								</li>
-								<li>
-									using minimum CPU time.
-								</li>
-							</ol>
-						</div>
+								<p>
+									Numerics:
+								</p>
+								<ol>
+									<li>
+										given model,
+									</li>
+									<li>
+										find observable
+									</li>
+									<li>
+										 to given accuracy
+									 </li>
+									 <li>
+										 using minimum resources.
+									 </li>
+								 </ol>
+								<p class="fragment" data-fragment-index=1>
+									ETK:
+								</p>
+								<ol class="fragment" data-fragment-index=1>
+									<li>
+										within GR,
+									</li>
+									<li>
+										find GW signal from binary merger
+									</li>
+									<li>
+										to 1 radian phase accuracy
+									</li>
+									<li>
+										using minimum CPU time.
+									</li>
+								</ol>
+								<p style="position:absolute; bottom:0;">
+									<a href="https://arxiv.org/abs/2205.11377">Hammond+, 2205.11377.</a>
+								</p>
+							</div>
 
-						<div class="col">
-							<img src="figures/pch/sqrtPSD_OoE_NSE.svg" style="width:680px; margin:0px">
-							<img src="figures/pch/sqrtPSD_OoE_OEL.svg" style="width:680px; margin:0px">
+							<div class="col">
+								<img src="figures/pch/sqrtPSD_OoE_NSE.svg" style="width:680px; margin:0px">
+								<img src="figures/pch/sqrtPSD_OoE_OEL.svg" style="width:680px; margin:0px">
 							</div>
 						</div>
 
@@ -203,7 +206,7 @@
 							<h2>Split out time</h2>
 
 							<p>
-								Method of Lines (thorn <code>MoL</code>):
+								Method of Lines (thorn <a href="https://einsteintoolkit.org/thornguide/CactusNumerical/MoL/documentation.html"><code>MoL</code></a>):
 							</p>
 							<ol>
 								<li>
@@ -329,7 +332,7 @@
 								 </li>
 								</ol>
 								<p>
-									See <code>Kranc</code>, <code>NRPy</code>.
+									See <a href="http://kranccode.org/index.html"><code>Kranc</code></a>, <a href="https://nrpyplus.net/"><code>NRPy</code></a>.
 								</p>
 								<div class="fragment" data-fragment-index=1>
 									<p>
@@ -491,7 +494,7 @@
 									Accuracy of full evolution often constrained.
 								</p>
 								<p class="fragment" data-fragment-index=1>
-									ETK has spectral initial data (<code>TwoPunctures</code>, <code>LORENE</code>), no evolution.
+									ETK has spectral initial data (<a href="https://einsteintoolkit.org/thornguide/EinsteinInitialData/TwoPunctures/documentation.html"><code>TwoPunctures</code></a>, <a href="https://lorene.obspm.fr/"><code>LORENE</code></a>), no evolution.
 								</p>
 							</div>
 							<div class="col r-stack">
@@ -546,7 +549,7 @@
 									</li>
 								</ul>
 								<p class="fragment" data-fragment-index=3>
-									See <code>GRHydro</code>, <code>IllinoisMHD</code>, <code>Spritz</code>, <code>WhiskyTHC</code>.
+									See <a href="https://einsteintoolkit.org/thornguide/EinsteinEvolve/GRHydro/documentation.html"><code>GRHydro</code></a>, <a href="https://einsteintoolkit.org/thornguide/WVUThorns/IllinoisGRMHD/documentation.html"><code>IllinoisGRMHD</code></a>, <a href="https://www.brunogiacomazzo.org/?page_id=623"><code>Spritz</code></a>, <a href="http://personal.psu.edu/dur566/whiskythc.html"><code>WhiskyTHC</code></a>.
 								</p>
 							</div>
 							<div class="col r-stack">
@@ -578,7 +581,7 @@
 								<h2>Parallel compute</h2>
 
 								<p>
-									Classic CPU (<code>Carpet</code> etc): split domain.
+									Classic CPU (<a href="https://einsteintoolkit.org/arrangementguide/Carpet/documentation.html"><code>Carpet</code></a> etc): split domain.
 								</p>
 								<ul>
 									<li>
@@ -595,7 +598,7 @@
 									</li>
 								</ul>
 								<p>
-									GPUs (<code>CarpetX</code> etc): create tasks.
+									GPUs (<a href="https://bitbucket.org/eschnett/cactusamrex/src/master/"><code>CarpetX</code></a> etc): create tasks.
 								</p>
 								<ul>
 									<li>
@@ -656,7 +659,7 @@
 								\frac{\text{d}}{\text{d}t} \hat{\phi}_i + \frac{1}{\Delta x} \left[ f_{i+1/2} - f_{i-1/2} \right] = 0.
 								$$
 								<p>
-									Finding the flux $f_{k \pm 1/2}$ depends on the model (for fluids see <code>GRHydro</code> etc).
+									Finding the flux $f_{k \pm 1/2}$ depends on the model (for fluids see <a href="https://einsteintoolkit.org/thornguide/EinsteinEvolve/GRHydro/documentation.html"><code>GRHydro</code></a> etc).
 								</p>
 							</div>
 							<div class="col">
@@ -690,7 +693,7 @@
 									Strong solutions agree when continuous; inconsistent at shocks.
 								</p>
 								<p class="fragment">
-									Can use entropy pairs, path-consistent methods for complex cases. Links to <code>SummationByParts</code>.
+									Can use entropy pairs, path-consistent methods for complex cases. Links to <a href="https://einsteintoolkit.org/thornguide/CactusNumerical/SummationByParts/documentation.html"><code>SummationByParts</code></a>.
 								</p>
 							</div>
 							<div class="col">
@@ -733,7 +736,7 @@
 										(Solvable?) issues with shocks.
 								</ul>
 								<p class="fragment" data-fragment-index=1>
-									No code in ETK (?) - see <code>Spectre</code>.
+									No code in ETK (?) - see <a href="https://spectre-code.org/index.html"><code>Spectre</code></a>.
 								</p>
 							</div>
 							<div class="col r-stack">
@@ -775,7 +778,7 @@
 									Boundaries need interpolation - source of error.
 								</p>
 								<p class="fragment" data-fragment-index=1>
-									Physics not Cartesian: overlapping patches complex, but help (<code>Llama</code>, <code>BH@Home</code>).
+									Physics not Cartesian: overlapping patches complex, but help (<a href="https://llamacode.bitbucket.io/"><code>Llama</code></a>, <a href="https://nrpyplus.net/blackholesathome_homepage-en_US.html"><code>BH@Home</code></a>).
 								</p>
 							</div>
 							<div class="col r-stack">
@@ -821,7 +824,7 @@
 									Stable does not mean accurate!
 								</p>
 								<p class="fragment" data-fragment-index=2>
-									IMEX methods <em>can</em> be added to <code>MoL</code>.
+									IMEX methods <em>can</em> be added to <a href="https://einsteintoolkit.org/thornguide/CactusNumerical/MoL/documentation.html"><code>MoL</code></a>.
 								</p>
 							</div>
 							<div class="r-stack col">
@@ -867,7 +870,7 @@
 								</p>
 							</div>
 							<div class="col">
-								<img src="figures/toy_heat.svg" style="width:100%">
+								<video autoplay controls src="figures/toy_heat_compare.mp4" style="width:100%">
 							</div>
 						</div>
 
@@ -905,17 +908,17 @@
 								</p>
 								<ul>
 									<li>
-										Low Mach approximation (Harpole);
+										Low Mach approximation (<a href="https://eprints.soton.ac.uk/id/eprint/422175">Harpole</a>);
 									</li>
 									<li>
-										Fast reactions as bulk viscosity (Hammond, Celora, Most);
+										Fast reactions as bulk viscosity (<a href="https://arxiv.org/abs/2202.01576">Hammond, Celora</a>, <a href="http://arxiv.org/abs/2207.00442">Most+</a>);
 									</li>
 									<li>
-										Resistive MHD as ideal plus corrections (Wright).
+										Resistive MHD as ideal plus corrections (<a href="https://eprints.soton.ac.uk/448034/">Wright</a>).
 									</li>
 								</ul>
 								<p>
-									Asymptotic preserving models and schemes are needed.
+									<a href="http://arxiv.org/abs/2112.05920">Asymptotic preserving</a> models and schemes are needed.
 								</p>
 							</div>
 							<div class="col">
@@ -938,31 +941,41 @@
 				<section id="Summary">
 					<section>
 
-						<h2>Summary</h2>
+						<div class="container">
+							<div class="col">
+								<h2>Summary</h2>
 
-						<p>
-							The ETK is optimized for
-						</p>
-						<ul>
-							<li>
-								finite difference/volume methods
-							</li>
-							<li>
-								using block-structured mesh refinement
-							</li>
-							<li>
-								on CPUs
-							</li>
-							<li>
-								for computing gravitational waves.
-							</li>
-						</ul>
-						<p>
-							CarpetX should add GPU support.
-						</p>
-						<p>
-							Adaptive and hybrid methods becoming common, but complex.
-						</p>
+								<p>
+									The ETK is optimized for
+								</p>
+								<ul>
+									<li>
+										finite difference/volume methods
+									</li>
+									<li>
+										using block-structured mesh refinement
+									</li>
+									<li>
+										on CPUs
+									</li>
+									<li>
+										for computing gravitational waves.
+									</li>
+								</ul>
+								<p>
+									CarpetX should add GPU support.
+								</p>
+								<p>
+									Adaptive and hybrid methods becoming common, but complex.
+								</p>
+								<p style="position:absolute; bottom:50px; left:500px">
+									<a href="https://arxiv.org/abs/2108.08649">Hammond+</a>; <a href="http://arxiv.org/abs/2207.00442">Most+</a>.
+								</p>
+							</div>
+							<div class="col">
+								<img src="figures/pch/adaptive_model.png" style="height:960px">
+							</div>
+						</div>
 
 						<aside class="notes">
 							Thank you for your attention.
