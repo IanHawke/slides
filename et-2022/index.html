@@ -1020,6 +1020,7 @@
 		<script src="../math1058/reveal.js/plugin/markdown/markdown.js"></script>
 		<script src="../math1058/reveal.js/plugin/highlight/highlight.js"></script>
 		<script src="../math1058/reveal.js/plugin/math/math.js"></script>
+		<script src="../math1058/reveal.js/plugin/spotlight/spotlight.js"></script>
 		<script>
 
 			// Also available as an ES module, see:
@@ -1035,7 +1036,19 @@
 				transition: 'none',
 				pdfSeparateFragments: true,
 				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath.KaTeX ],
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath.KaTeX, RevealSpotlight  ],
+				spotlight: {
+					presentingCursor: 'default',
+					useAsPointer: true,
+					size: 10,
+					toggleSpotlightOnMouseDown: false,
+					spotlightOnKeyPressAndHold: true,
+				},
+				keyboard: {
+					// alternative to toggleSpotlightOnMouseDown:
+					// toggle spotlight by pressing key 'c'
+					67: function() { RevealSpotlight.toggleSpotlight() },
+				},
 			});
 
 		</script>
