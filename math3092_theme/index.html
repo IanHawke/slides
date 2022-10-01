@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>MATH3092 - Numerical PDEs</title>
+
+		<meta name="description" content="MATH3092 - Numerical PDEs">
+		<meta name="author" content="Ian Hawke">
+
+				<meta name="apple-mobile-web-app-capable" content="yes" />
+				<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+				<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+				<link rel="stylesheet" href="../math1058/reveal.js/dist/reset.css">
+				<link rel="stylesheet" href="../math1058/reveal.js/dist/reveal.css">
+				<link rel="stylesheet" href="../math1058/reveal.js/dist/theme/white.css" id="theme">
+
+				<!-- Code syntax highlighting -->
+				<link rel="stylesheet" href="../math1058/reveal.js/plugin/highlight/monokai.css">
+
+			<style type="text/css">
+			  .reveal p {
+			    text-align: left;
+			  }
+			  .reveal ul {
+			    display: block;
+			  }
+			  .reveal ol {
+			    display: block;
+			  }
+
+				.reveal pre code {
+					font-size: 1.4em !important;
+					line-height: 1.4 !important;
+				}
+				.container{
+				    display: flex;
+				}
+				.col{
+				    flex: 1;
+				}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="summary">
+
+					<section data-background="../et-2022/figures/pch/adaptive_model.png" data-background-position='right' data-background-size="35%">
+						<div style="float: center; width: 60%">
+							<h2>Numerical PDEs</h2>
+							<p>
+								Nonlinear PDEs are essential:
+							</p>
+							<ul>
+								<li>
+									Fluids, gases, Navier-Stokes;
+								</li>
+								<li>
+									Solids, structures, Navier-Cauchy;
+								</li>
+								<li>
+									Gravity (Einstein), Finance (Black-Scholes), etc.
+								</li>
+							</ul>
+							<p>
+								Numerical methods often most practical.
+							</p>
+							<ul>
+								<li>
+									Approximate is "good enough";
+								</li>
+								<li>
+									Flexible to small change in model;
+								</li>
+								<li>
+									Many interesting mathematical issues.
+								</li>
+							</ul>
+							<p>
+								Linked modules and themes:
+							</p>
+							<ul>
+								<li>
+									PDEs (2038) essential. Python (1058 or equivalent) important. Numerical Methods (3018) useful.
+								</li>
+								<li>
+									Overlap with Modelling Problems, Fluid Dynamics, Mathematical Methods, Stochastic Modelling.
+								</li>
+							</ul>
+						</div>
+						<aside class="notes">
+						</aside>
+					</section>
+
+
+					<section>
+						<div class="container">
+							<div class="col">
+								<h2>Toy models</h2>
+
+								<ol>
+									<li>
+										Wave equation
+										$$
+										\partial_{tt} \phi = c^2 \nabla^2 \phi;
+										$$
+									</li>
+									<li>
+										Advection
+										$$
+										\partial_t \phi + \nabla_k \left( \phi v^k \right) = 0;
+										$$
+									</li>
+									<li>
+										Balance laws
+										$$
+										\partial_t q + \nabla_k f^{(k)}(q) = s(q);
+										$$
+									 </li>
+									 <li>
+										 Relaxation
+										 $$
+										 \dot{q} = \tau^{-1} s(q).
+										 $$
+									 </li>
+								 </ol>
+								 <!--
+								 <p>
+									 Statistics can come in through uncertain initial/boundary data or additional terms.
+								 </p>
+							 -->
+
+							</div>
+							<div class="col">
+								<video controls data-autoplay loop="true" src="../et-2022/figures/toy_models.mp4" style="width:768px; margin:0px">
+							</div>
+						</div>
+						<aside class="notes">
+						</aside>
+					</section>
+
+
+					<section>
+						<div class="container">
+							<div class="col">
+								<h2>Project</h2>
+
+								<p>
+									Explore and implement a method.
+								</p>
+								<ul>
+									<li>
+										Various approaches:
+										<ul>
+											<li>
+												More complex $=$ more accurate/efficient?
+											</li>
+											<li>
+												Suitability for problem (low regularity)?
+											</li>
+											<li>
+												Mathematical assumptions needed?
+											</li>
+										</ul>
+									</li>
+									<li>
+										An implementation essential.
+										<ul>
+											<li>
+												Guided by comfort level.
+											</li>
+											<li>
+												Template codes available.
+											</li>
+										</ul>
+									</li>
+									<li>
+										Connect key texts with own codes.
+										<ul>
+											<li>
+												Explore related literature.
+											</li>
+											<li>
+												Identify impact of changing resources.
+											</li>
+										</ul>
+									 </li>
+								 </ul>
+
+							</div>
+							<div class="col">
+								<img src="../et-2022/figures/fd_fv_fe_grids.svg" style="width:768px">
+							</div>
+						</div>
+						<aside class="notes">
+						</aside>
+					</section>
+
+				</section>
+
+			</div>
+
+		</div>
+
+				<script src="../math1058/reveal.js/dist/reveal.js"></script>
+				<script src="../math1058/reveal.js/plugin/zoom/zoom.js"></script>
+				<script src="../math1058/reveal.js/plugin/notes/notes.js"></script>
+				<script src="../math1058/reveal.js/plugin/search/search.js"></script>
+				<script src="../math1058/reveal.js/plugin/markdown/markdown.js"></script>
+				<script src="../math1058/reveal.js/plugin/highlight/highlight.js"></script>
+				<script src="../math1058/reveal.js/plugin/math/math.js"></script>
+				<script src="../math1058/reveal.js/plugin/spotlight/spotlight.js"></script>
+				<script>
+
+					// Also available as an ES module, see:
+					// https://revealjs.com/initialization/
+					Reveal.initialize({
+						width: 1536,
+					  height: 960,
+					  margin: 0.04,
+						controls: false,
+						progress: true,
+						center: true,
+						hash: true,
+						transition: 'none',
+						pdfSeparateFragments: true,
+						// Learn about plugins: https://revealjs.com/plugins/
+						plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath.KaTeX, RevealSpotlight  ],
+						spotlight: {
+							presentingCursor: 'default',
+							useAsPointer: true,
+							size: 10,
+							toggleSpotlightOnMouseDown: false,
+							spotlightOnKeyPressAndHold: true,
+						},
+						keyboard: {
+							// alternative to toggleSpotlightOnMouseDown:
+							// toggle spotlight by pressing key 'c'
+							67: function() { RevealSpotlight.toggleSpotlight() },
+						},
+					});
+
+				</script>
+
+
+	</body>
+</html>
