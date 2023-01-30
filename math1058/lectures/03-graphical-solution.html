@@ -80,100 +80,101 @@
 					<section>
 						<h2>Feasible region</h2>
 
-
-						<div style="position:absolute; width:768px; top:150px; left:0px" class="r-stack">
-							<div class="fragment fade-out" data-fragment-index="1">
-								<p>
-									<em>Feasible region</em>: set of points $x$ obeying all constraints.
-								</p>
-								\[
-								\begin{array}{rcrcl}
-									&& \color{blue}{x_B} & \color{blue}{\ge} & \color{blue}{0} \\
-									x_A &&& \ge & 0 \\
-									x_A &&& \le & 7 \\
-									&&x_B & \le & 5 \\
-									x_A & + & x_B & \le & 10
-								\end{array}
-								\]
+						<div class="container">
+							<div class="col r-stack">
+								<div class="fragment fade-out" data-fragment-index="1">
+									<p>
+										<em>Feasible region</em>: set of points $x$ obeying all constraints.
+									</p>
+									\[
+									\begin{array}{rcrcl}
+										&& \color{blue}{x_B} & \color{blue}{\ge} & \color{blue}{0} \\
+										x_A &&& \ge & 0 \\
+										x_A &&& \le & 7 \\
+										&&x_B & \le & 5 \\
+										x_A & + & x_B & \le & 10
+									\end{array}
+									\]
+								</div>
+								<div class="fragment fade-in-out" data-fragment-index="1">
+									<p>
+										<em>Feasible region</em>: set of points $x$ obeying all constraints.
+									</p>
+									\[
+									\begin{array}{rcrcl}
+										&& x_B & \ge & 0 \\
+										\color{blue}{x_A} &&& \color{blue}{\ge} & \color{blue}{0} \\
+										x_A &&& \le & 7 \\
+										&&x_B & \le & 5 \\
+										x_A & + & x_B & \le & 10
+									\end{array}
+									\]
+								</div>
+								<div class="fragment fade-in-out" data-fragment-index="2">
+									<p>
+										<em>Feasible region</em>: set of points $x$ obeying all constraints.
+									</p>
+									\[
+									\begin{array}{rcrcl}
+										&& x_B & \ge & 0 \\
+										x_A &&& \ge & 0 \\
+										\color{blue}{x_A} &&& \color{blue}{\le} & \color{blue}{7} \\
+										&&x_B & \le & 5 \\
+										x_A & + & x_B & \le & 10
+									\end{array}
+									\]
+								</div>
+								<div class="fragment fade-in-out" data-fragment-index="3">
+									<p>
+										<em>Feasible region</em>: set of points $x$ obeying all constraints.
+									</p>
+									\[
+									\begin{array}{rcrcl}
+										&& x_B & \ge & 0 \\
+										x_A &&& \ge & 0 \\
+										x_A &&& \le & 7 \\
+										&& \color{blue}{x_B} & \color{blue}{\le} & \color{blue}{5} \\
+										x_A & + & x_B & \le & 10
+									\end{array}
+									\]
+								</div>
+								<div class="fragment fade-in-out" data-fragment-index="4">
+									<p>
+										<em>Feasible region</em>: set of points $x$ obeying all constraints.
+									</p>
+									\[
+									\begin{array}{rcrcl}
+										&& x_B & \ge & 0 \\
+										x_A &&& \ge & 0 \\
+										x_A &&& \le & 7 \\
+										&&x_B & \le & 5 \\
+										\color{blue}{x_A} & \color{blue}{+} & \color{blue}{x_B} & \color{blue}{\le} & \color{blue}{10}
+									\end{array}
+									\]
+								</div>
+								<div class="fragment fade-in" data-fragment-index="5">
+									<p>
+										<em>Feasible region</em>: set of points $x$ obeying all constraints.
+									</p>
+									\[
+									\begin{array}{rcrcl}
+										&& x_B & \ge & 0 \\
+										x_A &&& \ge & 0 \\
+										x_A &&& \le & 7 \\
+										&&x_B & \le & 5 \\
+										x_A & + & x_B & \le & 10
+									\end{array}
+									\]
+								</div>
 							</div>
-							<div class="fragment fade-in-out" data-fragment-index="1">
-								<p>
-									<em>Feasible region</em>: set of points $x$ obeying all constraints.
-								</p>
-								\[
-								\begin{array}{rcrcl}
-									&& x_B & \ge & 0 \\
-									\color{blue}{x_A} &&& \color{blue}{\ge} & \color{blue}{0} \\
-									x_A &&& \le & 7 \\
-									&&x_B & \le & 5 \\
-									x_A & + & x_B & \le & 10
-								\end{array}
-								\]
+							<div class="col r-stack">
+								<img style="width:768px" src="images/03_graphical_solution/lp_graphical_step_1.svg" class="fragment fade-out" data-fragment-index=1>
+								<img style="width:768px" src="images/03_graphical_solution/lp_graphical_step_2.svg" class="fragment fade-in-out" data-fragment-index=1>
+								<img style="width:768px" src="images/03_graphical_solution/lp_graphical_step_3.svg" class="fragment fade-in-out" data-fragment-index=2>
+								<img style="width:768px" src="images/03_graphical_solution/lp_graphical_step_4.svg" class="fragment fade-in-out" data-fragment-index=3>
+								<img style="width:768px" src="images/03_graphical_solution/lp_graphical_step_5.svg" class="fragment fade-in-out" data-fragment-index=4>
+								<img style="width:768px" src="images/03_graphical_solution/lp_graphical_all.svg" class="fragment fade-in-out" data-fragment-index=5>
 							</div>
-							<div class="fragment fade-in-out" data-fragment-index="2">
-								<p>
-									<em>Feasible region</em>: set of points $x$ obeying all constraints.
-								</p>
-								\[
-								\begin{array}{rcrcl}
-									&& x_B & \ge & 0 \\
-									x_A &&& \ge & 0 \\
-									\color{blue}{x_A} &&& \color{blue}{\le} & \color{blue}{7} \\
-									&&x_B & \le & 5 \\
-									x_A & + & x_B & \le & 10
-								\end{array}
-								\]
-							</div>
-							<div class="fragment fade-in-out" data-fragment-index="3">
-								<p>
-									<em>Feasible region</em>: set of points $x$ obeying all constraints.
-								</p>
-								\[
-								\begin{array}{rcrcl}
-									&& x_B & \ge & 0 \\
-									x_A &&& \ge & 0 \\
-									x_A &&& \le & 7 \\
-									&& \color{blue}{x_B} & \color{blue}{\le} & \color{blue}{5} \\
-									x_A & + & x_B & \le & 10
-								\end{array}
-								\]
-							</div>
-							<div class="fragment fade-in-out" data-fragment-index="4">
-								<p>
-									<em>Feasible region</em>: set of points $x$ obeying all constraints.
-								</p>
-								\[
-								\begin{array}{rcrcl}
-									&& x_B & \ge & 0 \\
-									x_A &&& \ge & 0 \\
-									x_A &&& \le & 7 \\
-									&&x_B & \le & 5 \\
-									\color{blue}{x_A} & \color{blue}{+} & \color{blue}{x_B} & \color{blue}{\le} & \color{blue}{10}
-								\end{array}
-								\]
-							</div>
-							<div class="fragment fade-in" data-fragment-index="5">
-								<p>
-									<em>Feasible region</em>: set of points $x$ obeying all constraints.
-								</p>
-								\[
-								\begin{array}{rcrcl}
-									&& x_B & \ge & 0 \\
-									x_A &&& \ge & 0 \\
-									x_A &&& \le & 7 \\
-									&&x_B & \le & 5 \\
-									x_A & + & x_B & \le & 10
-								\end{array}
-								\]
-							</div>
-						</div>
-						<div style="position:absolute; width:768px; top:100px; left:768px" class="r-stack">
-							<img style="width:768px" src="images/03_graphical_solution/lp_graphical_step_1.svg" class="fragment fade-out" data-fragment-index=1>
-							<img style="width:768px" src="images/03_graphical_solution/lp_graphical_step_2.svg" class="fragment fade-in-out" data-fragment-index=1>
-							<img style="width:768px" src="images/03_graphical_solution/lp_graphical_step_3.svg" class="fragment fade-in-out" data-fragment-index=2>
-							<img style="width:768px" src="images/03_graphical_solution/lp_graphical_step_4.svg" class="fragment fade-in-out" data-fragment-index=3>
-							<img style="width:768px" src="images/03_graphical_solution/lp_graphical_step_5.svg" class="fragment fade-in-out" data-fragment-index=4>
-							<img style="width:768px" src="images/03_graphical_solution/lp_graphical_all.svg" class="fragment fade-in-out" data-fragment-index=5>
 						</div>
 
 						<aside class="notes">
@@ -191,7 +192,8 @@
 					<section>
 						<h2>Level curves</h2>
 
-						<div style="position:absolute; width:768px; top:150px; left:0px">
+						<div class="container">
+							<div class="col">
 								<ul>
 									<li>
 										<em>Objective</em>:
@@ -209,13 +211,14 @@
 										Last feasible point crossing level curve is optimal.
 									</li>
 								</ul>
-						</div>
-						<div style="position:absolute; width:768px; top:100px; left:768px" class="r-stack">
-							<img style="width:768px" src="images/03_graphical_solution/lp_level_curves_1.svg" class="fragment fade-in-out" data-fragment-index=1>
-							<img style="width:768px" src="images/03_graphical_solution/lp_level_curves_2.svg" class="fragment fade-in-out" data-fragment-index=2>
-							<img style="width:768px" src="images/03_graphical_solution/lp_level_curves_3.svg" class="fragment fade-in-out" data-fragment-index=3>
-							<img style="width:768px" src="images/03_graphical_solution/lp_level_curves_4.svg" class="fragment fade-in-out" data-fragment-index=4>
-							<img style="width:768px" src="images/03_graphical_solution/lp_level_curves.svg" class="fragment fade-in-out" data-fragment-index=5>
+							</div>
+							<div class="col r-stack">
+								<img style="width:768px" src="images/03_graphical_solution/lp_level_curves_1.svg" class="fragment fade-in-out" data-fragment-index=1>
+								<img style="width:768px" src="images/03_graphical_solution/lp_level_curves_2.svg" class="fragment fade-in-out" data-fragment-index=2>
+								<img style="width:768px" src="images/03_graphical_solution/lp_level_curves_3.svg" class="fragment fade-in-out" data-fragment-index=3>
+								<img style="width:768px" src="images/03_graphical_solution/lp_level_curves_4.svg" class="fragment fade-in-out" data-fragment-index=4>
+								<img style="width:768px" src="images/03_graphical_solution/lp_level_curves.svg" class="fragment fade-in-out" data-fragment-index=5>
+							</div>
 						</div>
 
 						<aside class="notes">
@@ -262,85 +265,86 @@
 					<section>
 						<h2>Feasible region</h2>
 
-
-						<div style="position:absolute; width:768px; top:150px; left:0px" class="r-stack">
-							<div class="fragment fade-out" data-fragment-index="1">
-								<p>
-									<em>Feasible region</em>: set of points $x$ obeying all constraints.
-								</p>
-								\[
-								\begin{array}{rcrcl}
-									&& \color{blue}{x_H} & \color{blue}{\ge} & \color{blue}{0} \\
-									x_E &&& \ge & 0 \\
-									90  x_E & + & 200 x_H & \ge & 600 \\
-									20  x_E & + & 10 x_H & \ge & 300 \\
-									0.02 x_E & + & 0.5 x_H & \ge & 1
-								\end{array}
-								\]
+						<div class="container">
+							<div class="col r-stack">
+								<div class="fragment fade-out" data-fragment-index="1">
+									<p>
+										<em>Feasible region</em>: set of points $x$ obeying all constraints.
+									</p>
+									\[
+									\begin{array}{rcrcl}
+										&& \color{blue}{x_H} & \color{blue}{\ge} & \color{blue}{0} \\
+										x_E &&& \ge & 0 \\
+										90  x_E & + & 200 x_H & \ge & 600 \\
+										20  x_E & + & 10 x_H & \ge & 300 \\
+										0.02 x_E & + & 0.5 x_H & \ge & 1
+									\end{array}
+									\]
+								</div>
+								<div class="fragment fade-in-out" data-fragment-index="1">
+									<p>
+										<em>Feasible region</em>: set of points $x$ obeying all constraints.
+									</p>
+									\[
+									\begin{array}{rcrcl}
+										&& x_H & \ge & 0 \\
+										\color{blue}{x_E} &&& \color{blue}{\ge} & \color{blue}{0} \\
+										90  x_E & + & 200 x_H & \ge & 600 \\
+										20  x_E & + & 10 x_H & \ge & 300 \\
+										0.02 x_E & + & 0.5 x_H & \ge & 1
+									\end{array}
+									\]
+								</div>
+								<div class="fragment fade-in-out" data-fragment-index="2">
+									<p>
+										<em>Feasible region</em>: set of points $x$ obeying all constraints.
+									</p>
+									\[
+									\begin{array}{rcrcl}
+										&& x_H & \ge & 0 \\
+										x_E &&& \ge & 0 \\
+										\color{blue}{90  x_E} & \color{blue}{+} & \color{blue}{200 x_H} & \color{blue}{\ge} & \color{blue}{600} \\
+										20  x_E & + & 10 x_H & \ge & 300 \\
+										0.02 x_E & + & 0.5 x_H & \ge & 1
+									\end{array}
+									\]
+								</div>
+								<div class="fragment fade-in-out" data-fragment-index="3">
+									<p>
+										<em>Feasible region</em>: set of points $x$ obeying all constraints.
+									</p>
+									\[
+									\begin{array}{rcrcl}
+										&& x_H & \ge & 0 \\
+										x_E &&& \ge & 0 \\
+										90  x_E & + & 200 x_H & \ge & 600 \\
+										\color{blue}{20  x_E} & \color{blue}{+} & \color{blue}{10 x_H} & \color{blue}{\ge} & \color{blue}{300} \\
+										0.02 x_E & + & 0.5 x_H & \ge & 1
+									\end{array}
+									\]
+								</div>
+								<div class="fragment fade-in" data-fragment-index="4">
+									<p>
+										<em>Feasible region</em>: set of points $x$ obeying all constraints.
+									</p>
+									\[
+									\begin{array}{rcrcl}
+										&& x_H & \ge & 0 \\
+										x_E &&& \ge & 0 \\
+										90  x_E & + & 200 x_H & \ge & 600 \\
+										20  x_E & + & 10 x_H & \ge & 300 \\
+										\color{blue}{0.02 x_E} & \color{blue}{+} & \color{blue}{0.5 x_H} & \color{blue}{\ge} & \color{blue}{1}
+									\end{array}
+									\]
+								</div>
 							</div>
-							<div class="fragment fade-in-out" data-fragment-index="1">
-								<p>
-									<em>Feasible region</em>: set of points $x$ obeying all constraints.
-								</p>
-								\[
-								\begin{array}{rcrcl}
-									&& x_H & \ge & 0 \\
-									\color{blue}{x_E} &&& \color{blue}{\ge} & \color{blue}{0} \\
-									90  x_E & + & 200 x_H & \ge & 600 \\
-									20  x_E & + & 10 x_H & \ge & 300 \\
-									0.02 x_E & + & 0.5 x_H & \ge & 1
-								\end{array}
-								\]
+							<div class="col r-stack">
+								<img style="width:768px" src="images/03_graphical_solution/lp_graphical_diet_step_1.svg" class="fragment fade-out" data-fragment-index=1>
+								<img style="width:768px" src="images/03_graphical_solution/lp_graphical_diet_step_2.svg" class="fragment fade-in-out" data-fragment-index=1>
+								<img style="width:768px" src="images/03_graphical_solution/lp_graphical_diet_step_3.svg" class="fragment fade-in-out" data-fragment-index=2>
+								<img style="width:768px" src="images/03_graphical_solution/lp_graphical_diet_step_4.svg" class="fragment fade-in-out" data-fragment-index=3>
+								<img style="width:768px" src="images/03_graphical_solution/lp_graphical_diet_step_5.svg" class="fragment fade-in-out" data-fragment-index=4>
 							</div>
-							<div class="fragment fade-in-out" data-fragment-index="2">
-								<p>
-									<em>Feasible region</em>: set of points $x$ obeying all constraints.
-								</p>
-								\[
-								\begin{array}{rcrcl}
-									&& x_H & \ge & 0 \\
-									x_E &&& \ge & 0 \\
-									\color{blue}{90  x_E} & \color{blue}{+} & \color{blue}{200 x_H} & \color{blue}{\ge} & \color{blue}{600} \\
-									20  x_E & + & 10 x_H & \ge & 300 \\
-									0.02 x_E & + & 0.5 x_H & \ge & 1
-								\end{array}
-								\]
-							</div>
-							<div class="fragment fade-in-out" data-fragment-index="3">
-								<p>
-									<em>Feasible region</em>: set of points $x$ obeying all constraints.
-								</p>
-								\[
-								\begin{array}{rcrcl}
-									&& x_H & \ge & 0 \\
-									x_E &&& \ge & 0 \\
-									90  x_E & + & 200 x_H & \ge & 600 \\
-									\color{blue}{20  x_E} & \color{blue}{+} & \color{blue}{10 x_H} & \color{blue}{\ge} & \color{blue}{300} \\
-									0.02 x_E & + & 0.5 x_H & \ge & 1
-								\end{array}
-								\]
-							</div>
-							<div class="fragment fade-in" data-fragment-index="4">
-								<p>
-									<em>Feasible region</em>: set of points $x$ obeying all constraints.
-								</p>
-								\[
-								\begin{array}{rcrcl}
-									&& x_H & \ge & 0 \\
-									x_E &&& \ge & 0 \\
-									90  x_E & + & 200 x_H & \ge & 600 \\
-									20  x_E & + & 10 x_H & \ge & 300 \\
-									\color{blue}{0.02 x_E} & \color{blue}{+} & \color{blue}{0.5 x_H} & \color{blue}{\ge} & \color{blue}{1}
-								\end{array}
-								\]
-							</div>
-						</div>
-						<div style="position:absolute; width:768px; top:100px; left:768px" class="r-stack">
-							<img style="width:768px" src="images/03_graphical_solution/lp_graphical_diet_step_1.svg" class="fragment fade-out" data-fragment-index=1>
-							<img style="width:768px" src="images/03_graphical_solution/lp_graphical_diet_step_2.svg" class="fragment fade-in-out" data-fragment-index=1>
-							<img style="width:768px" src="images/03_graphical_solution/lp_graphical_diet_step_3.svg" class="fragment fade-in-out" data-fragment-index=2>
-							<img style="width:768px" src="images/03_graphical_solution/lp_graphical_diet_step_4.svg" class="fragment fade-in-out" data-fragment-index=3>
-							<img style="width:768px" src="images/03_graphical_solution/lp_graphical_diet_step_5.svg" class="fragment fade-in-out" data-fragment-index=4>
 						</div>
 
 						<aside class="notes">
@@ -354,7 +358,8 @@
 					<section>
 						<h2>Level curves</h2>
 
-						<div style="position:absolute; width:768px; top:150px; left:0px">
+						<div class="container">
+							<div class="col">
 								<ul>
 									<li>
 										<em>Objective</em>:
@@ -372,9 +377,10 @@
 										Last feasible point crossing level curve is optimal.
 									</li>
 								</ul>
-						</div>
-						<div style="position:absolute; width:768px; top:100px; left:768px">
-							<img style="width:768px" src="images/03_graphical_solution/lp_diet_level_curves.svg">
+							</div>
+							<div class="col">
+								<img style="width:768px" src="images/03_graphical_solution/lp_diet_level_curves.svg">
+							</div>
 						</div>
 
 						<aside class="notes">
