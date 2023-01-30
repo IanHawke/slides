@@ -1,0 +1,20 @@
+.reveal p {
+  text-align: left;
+}
+.reveal ul {
+  display: block;
+}
+.reveal ol {
+  display: block;
+}
+
+.reveal pre code {
+  font-size: 1.4em !important;
+  line-height: 1.4 !important;
+}
+.container{
+    display: flex;
+}
+.col{
+    flex: 1;
+}
