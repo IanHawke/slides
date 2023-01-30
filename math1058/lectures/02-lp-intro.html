@@ -56,52 +56,54 @@
 
 						<h2>Diet Problem</h2>
 
-						<div style="position:absolute; width:900px; top:150px; left:0px">
-							<p>
-								Sam can only buy eggs (£1 each) and ham (£10 each).
-							</p>
-							<p>
-								Every day Sam needs carbs (300g), protein (600g), and vitamins (1g) to live.
-							</p>
-							<table>
-							<thead>
-							  <tr>
-							    <th>Food</th>
-							    <th>Carbs</th>
-							    <th>Protein</th>
-							    <th>Vitamins</th>
-							  </tr>
-							</thead>
-							<tbody>
-							  <tr>
-							    <td>Eggs</td>
-							    <td>20</td>
-							    <td>90</td>
-							    <td>0.02</td>
-							  </tr>
-							  <tr>
-							    <td>Ham</td>
-							    <td>10</td>
-							    <td>200</td>
-							    <td>0.5</td>
-							  </tr>
-							</tbody>
-							</table>
+						<div class="container">
+							<div class="col">
+								<p>
+									Sam can only buy eggs (£1 each) and ham (£10 each).
+								</p>
+								<p>
+									Every day Sam needs carbs (300g), protein (600g), and vitamins (1g) to live.
+								</p>
+								<table>
+								<thead>
+								  <tr>
+								    <th>Food</th>
+								    <th>Carbs</th>
+								    <th>Protein</th>
+								    <th>Vitamins</th>
+								  </tr>
+								</thead>
+								<tbody>
+								  <tr>
+								    <td>Eggs</td>
+								    <td>20</td>
+								    <td>90</td>
+								    <td>0.02</td>
+								  </tr>
+								  <tr>
+								    <td>Ham</td>
+								    <td>10</td>
+								    <td>200</td>
+								    <td>0.5</td>
+								  </tr>
+								</tbody>
+								</table>
 
-							<ul class="fragment fade-in">
-								<li>
-									<em>Decision</em>: How much of each to buy.
-								</li>
-								<li>
-									<em>Objective</em>: Minimise cost.
-								</li>
-								<li>
-									<em>Constraints</em>: Get enough nutrition.
-								</li>
-							</ul>
-						</div>
-						<div style="position:absolute; width:636px; top:150px; left:900px">
-							<img style="width:'636px'" src="images/02_lp_intro/diet.jpeg">
+								<ul class="fragment fade-in">
+									<li>
+										<em>Decision</em>: How much of each to buy.
+									</li>
+									<li>
+										<em>Objective</em>: Minimise cost.
+									</li>
+									<li>
+										<em>Constraints</em>: Get enough nutrition.
+									</li>
+								</ul>
+							</div>
+							<div class="col">
+								<img style="width:'636px'" src="images/02_lp_intro/diet.jpeg">
+							</div>
 						</div>
 
 						<aside class="notes">
@@ -323,43 +325,45 @@
 					<section>
 
 						<h2>Optimal transport</h2>
-						<div style="position:absolute; width:968px; top:100px; left:0px">
-							<ul>
-								<li>
-									Two boxes contain dirt, amounts
-									\[
-										\mu_1=0.3, \mu_2=0.7.
-									\]
-								</li>
-								<li>
-									Need to move dirt to boxes on the right, so that
-									<ul>
-										<li>
-											$\nu_1=0.6, \nu_2=0.4$;
-										</li>
-										<li>
-											minimise distance travelled, $\min |i-j|^2$.
-										</li>
-									</ul>
-								</li>
-							</ul>
-							<div class="fragment fade-in" data-fragment-index="1">
-								\[
-								\small
-								\begin{alignat*}{5}
-								& \min & 0 & x_{11}  + & |1-2|^2 & x_{12}  + & |2-1|^2 & x_{21}  + & 0 & x_{22}  \\
-								& \text{subject to} &  & x_{11}  + &  & x_{12} & & & & \phantom{x_{22}} =  0.3 \quad (= \mu_1) \\
-							  & & & &&&& x_{21} & + & x_{22}  =  0.7 \quad (= \mu_2) \\
-								& & & x_{11} &  &  &  + & x_{21} &  & \phantom{x_{22}} =  0.6 \quad (= \nu_1) \\
-								& & &  &  & x_{12} & & & + & x_{22}  =  0.4 \quad (= \nu_2) \\
-								&& & x_{11} , & & x_{12} , & &  x_{21} , & &  x_{22}  \ge  0.
-								\end{alignat*}
-								\]
+
+						<div class="container">
+							<div class="col">
+								<ul>
+									<li>
+										Two boxes contain dirt, amounts
+										\[
+											\mu_1=0.3, \mu_2=0.7.
+										\]
+									</li>
+									<li>
+										Move dirt to boxes on the right, s.t.
+										<ul>
+											<li>
+												$\nu_1=0.6, \nu_2=0.4$;
+											</li>
+											<li>
+												minimise travel, $\min |i-j|^2$.
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+							<div class="col">
+								<img style="width:560px" src="images/02_lp_intro/optimal_transport.svg">
 							</div>
 						</div>
-						<div style="position:absolute; width:668px; top:50px; left:868px">
-							<img style="width:'668px'" src="images/02_lp_intro/optimal_transport.svg">
-							<img style="width:'668px'" src="images/02_lp_intro/digger.jpeg" class="fragment fade-out" data-fragment-index="1">
+						<div class="fragment fade-in" data-fragment-index="1">
+							\[
+							\small
+							\begin{alignat*}{5}
+							& \min & 0 & x_{11}  + & |1-2|^2 & x_{12}  + & |2-1|^2 & x_{21}  + & 0 & x_{22}  \\
+							& \text{subject to} &  & x_{11}  + &  & x_{12} & & & & \phantom{x_{22}} =  0.3 \quad (= \mu_1) \\
+							& & & &&&& x_{21} & + & x_{22}  =  0.7 \quad (= \mu_2) \\
+							& & & x_{11} &  &  &  + & x_{21} &  & \phantom{x_{22}} =  0.6 \quad (= \nu_1) \\
+							& & &  &  & x_{12} & & & + & x_{22}  =  0.4 \quad (= \nu_2) \\
+							&& & x_{11} , & & x_{12} , & &  x_{21} , & &  x_{22}  \ge  0.
+							\end{alignat*}
+							\]
 						</div>
 
 						<aside class="notes">
