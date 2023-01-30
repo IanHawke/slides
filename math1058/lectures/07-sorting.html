@@ -107,37 +107,40 @@
 
 					<section>
 						<h2>Brute force sorting</h2>
-						<div style="position:absolute; width:868px; top:150px; left:0px">
-							<ol>
-								<li>
-									Enumerate all possible $\pi$;
-								</li>
-								<li>
-									Return once $a_{\pi(i)} \le a_{\pi(i+1)} \quad \forall i$.
-							</ol>
-							<p class="fragment" data-fragment-index=1>
-								How many permutations exist?
-							</p>
-							<ul>
-								<li class="fragment" data-fragment-index=2>
-									Item $1$ can take $n$ positions;
-								</li>
-								<li class="fragment" data-fragment-index=3>
-									item $2$ can take $n-1$ positions;
-								</li>
-								<li class="fragment" data-fragment-index=4>
-									item $j$ can take $n-j+1$ positions;
-								</li>
-								<li class="fragment" data-fragment-index=5>
-									item $n$ can take $1$ position.
-								</li>
-								<li class="fragment" data-fragment-index=6>
-									Total of $n!$ combinations.
-								</li>
-							</ul>
-						</div>
-						<div style="position:absolute; width:668px; top:150px; left:868px" class="r-stack">
-							<img style="width:668px" src="images/06_costs/complexity_growth4.svg" class="fragment fade-in" data-fragment-index=6>
+
+						<div class="container">
+							<div class="col">
+								<ol>
+									<li>
+										Enumerate all possible $\pi$;
+									</li>
+									<li>
+										Return once $a_{\pi(i)} \le a_{\pi(i+1)} \quad \forall i$.
+								</ol>
+								<p class="fragment" data-fragment-index=1>
+									How many permutations exist?
+								</p>
+								<ul>
+									<li class="fragment" data-fragment-index=2>
+										Item $1$ can take $n$ positions;
+									</li>
+									<li class="fragment" data-fragment-index=3>
+										item $2$ can take $n-1$ positions;
+									</li>
+									<li class="fragment" data-fragment-index=4>
+										item $j$ can take $n-j+1$ positions;
+									</li>
+									<li class="fragment" data-fragment-index=5>
+										item $n$ can take $1$ position.
+									</li>
+									<li class="fragment" data-fragment-index=6>
+										Total of $n!$ combinations.
+									</li>
+								</ul>
+							</div>
+							<div class="col r-stack">
+								<img style="width:668px" src="images/06_costs/complexity_growth4.svg" class="fragment fade-in" data-fragment-index=6>
+							</div>
 						</div>
 
 						<aside class="notes">
@@ -264,91 +267,97 @@
 
 					<section>
 						<h2>Selection sort: code and costs</h2>
-						<div style="position:absolute; width:868px; top:150px; left:0px">
-							<ul>
-								<li class="fragment" data-fragment-index="1">
-									Setup instance; $n$ operations.
-								</li>
-								<li class="fragment" data-fragment-index="2">
-									Iterate over all $n-1$ positions;
-									<ul>
-										<li class="fragment" data-fragment-index="3">
-											Find index of smallest element <code>j</code>; $1 + 2(n-i-1)$ operations.
-										</li>
-										<li class="fragment" data-fragment-index="4">
-											Swap entries if needed; 2 operations.
-										</li>
-									</ul>
-								</li>
-								<li class="fragment" data-fragment-index="5">
-									Total operation count:
-									\[
-									\sum_{i=0}^{n-2} (1 + 2(n-i-1) + 2) = (n-1)(n+3).
-									\]
-								</li>
-							</ul>
-						</div>
-						<div style="position:absolute; width:668px; top:150px; left:868px" class="r-stack">
-							<pre><code class="language-python" data-trim data-noescape data-line-numbers style="font-size:140%; line-height:140%">
-							a = [7, 2, 2, 6, 4]
-							for i in range(n-1):
-									j = i
-									for k in range(i+1, n):
-											if a[k] < a[j]:
-													j = k
-									if a[j] < a[i]:
-											a = swap(a, i, j)
-							</code></pre>
-							<pre class="fragment" data-fragment-index="1"><code class="language-python" data-trim data-noescape data-line-numbers="1" style="font-size:140%; line-height:140%">
-							a = [7, 2, 2, 6, 4]
-							for i in range(n-1):
-									j = i
-									for k in range(i+1, n):
-											if a[k] < a[j]:
-													j = k
-									if a[j] < a[i]:
-											a = swap(a, i, j)
-							</code></pre>
-							<pre class="fragment" data-fragment-index="2"><code class="language-python" data-trim data-noescape data-line-numbers="2" style="font-size:140%; line-height:140%">
-							a = [7, 2, 2, 6, 4]
-							for i in range(n-1):
-									j = i
-									for k in range(i+1, n):
-											if a[k] < a[j]:
-													j = k
-									if a[j] < a[i]:
-											a = swap(a, i, j)
-							</code></pre>
-							<pre class="fragment" data-fragment-index="3"><code class="language-python" data-trim data-noescape data-line-numbers="3-6" style="font-size:140%; line-height:140%">
-							a = [7, 2, 2, 6, 4]
-							for i in range(n-1):
-									j = i
-									for k in range(i+1, n):
-											if a[k] < a[j]:
-													j = k
-									if a[j] < a[i]:
-											a = swap(a, i, j)
-							</code></pre>
-							<pre class="fragment" data-fragment-index="4"><code class="language-python" data-trim data-noescape data-line-numbers="7-8" style="font-size:140%; line-height:140%">
-							a = [7, 2, 2, 6, 4]
-							for i in range(n-1):
-									j = i
-									for k in range(i+1, n):
-											if a[k] < a[j]:
-													j = k
-									if a[j] < a[i]:
-											a = swap(a, i, j)
-							</code></pre>
-							<pre class="fragment" data-fragment-index="5"><code class="language-python" data-trim data-noescape data-line-numbers style="font-size:140%; line-height:140%">
-							a = [7, 2, 2, 6, 4]
-							for i in range(n-1):
-									j = i
-									for k in range(i+1, n):
-											if a[k] < a[j]:
-													j = k
-									if a[j] < a[i]:
-											a = swap(a, i, j)
-							</code></pre>
+
+						<div class="container">
+							<div class="col">
+								<ul>
+									<li class="fragment" data-fragment-index="1">
+										Setup instance; $n$ operations.
+									</li>
+									<li class="fragment" data-fragment-index="2">
+										Iterate over all $n-1$ positions;
+										<ul>
+											<li class="fragment" data-fragment-index="3">
+												Find index of smallest element <code>j</code>; $1 + 2(n-i-1)$ operations.
+											</li>
+											<li class="fragment" data-fragment-index="4">
+												Swap entries if needed; 2 operations.
+											</li>
+										</ul>
+									</li>
+									<li class="fragment" data-fragment-index="5">
+										Total operation count:
+										\[
+										\begin{aligned}
+											\text{TOC} & = \sum_{i=0}^{n-2} (1 + 2(n-i-1) + 2) \\
+											& = (n-1)(n+3).
+										\end{aligned}
+										\]
+									</li>
+								</ul>
+							</div>
+							<div class="col r-stack">
+								<pre class="stretch"><code class="language-python" data-trim data-noescape data-line-numbers style="font-size:140%; line-height:140%">
+								a = [7, 2, 2, 6, 4]
+								for i in range(n-1):
+										j = i
+										for k in range(i+1, n):
+												if a[k] < a[j]:
+														j = k
+										if a[j] < a[i]:
+												a = swap(a, i, j)
+								</code></pre>
+								<pre class="stretch fragment" data-fragment-index="1"><code class="language-python" data-trim data-noescape data-line-numbers="1" style="font-size:140%; line-height:140%">
+								a = [7, 2, 2, 6, 4]
+								for i in range(n-1):
+										j = i
+										for k in range(i+1, n):
+												if a[k] < a[j]:
+														j = k
+										if a[j] < a[i]:
+												a = swap(a, i, j)
+								</code></pre>
+								<pre class="stretch fragment" data-fragment-index="2"><code class="language-python" data-trim data-noescape data-line-numbers="2" style="font-size:140%; line-height:140%">
+								a = [7, 2, 2, 6, 4]
+								for i in range(n-1):
+										j = i
+										for k in range(i+1, n):
+												if a[k] < a[j]:
+														j = k
+										if a[j] < a[i]:
+												a = swap(a, i, j)
+								</code></pre>
+								<pre class="stretch fragment" data-fragment-index="3"><code class="language-python" data-trim data-noescape data-line-numbers="3-6" style="font-size:140%; line-height:140%">
+								a = [7, 2, 2, 6, 4]
+								for i in range(n-1):
+										j = i
+										for k in range(i+1, n):
+												if a[k] < a[j]:
+														j = k
+										if a[j] < a[i]:
+												a = swap(a, i, j)
+								</code></pre>
+								<pre class="stretch fragment" data-fragment-index="4"><code class="language-python" data-trim data-noescape data-line-numbers="7-8" style="font-size:140%; line-height:140%">
+								a = [7, 2, 2, 6, 4]
+								for i in range(n-1):
+										j = i
+										for k in range(i+1, n):
+												if a[k] < a[j]:
+														j = k
+										if a[j] < a[i]:
+												a = swap(a, i, j)
+								</code></pre>
+								<pre class="stretch fragment" data-fragment-index="5"><code class="language-python" data-trim data-noescape data-line-numbers style="font-size:140%; line-height:140%">
+								a = [7, 2, 2, 6, 4]
+								for i in range(n-1):
+										j = i
+										for k in range(i+1, n):
+												if a[k] < a[j]:
+														j = k
+										if a[j] < a[i]:
+												a = swap(a, i, j)
+								</code></pre>
+							</div>
 						</div>
 
 						<aside class="notes">
@@ -453,73 +462,76 @@
 
 					<section>
 						<h2>Insertion sort: code and costs</h2>
-						<div style="position:absolute; width:768px; top:150px; left:0px">
-							<ul>
-								<li class="fragment" data-fragment-index="1">
-									Setup instance; $n$ operations.
-								</li>
-								<li class="fragment" data-fragment-index="2">
-									Iterate over all $n-1$ unsorted positions;
-									<ul>
-										<li class="fragment" data-fragment-index="3">
-											Swap first element through $i$ positions in sorted list.
-										</li>
-									</ul>
-								</li>
-								<li class="fragment" data-fragment-index="4">
-									Total operation count:
-									\[
-									\sum_{i=1}^{n-1} 2 i = n (n-1).
-									\]
-								</li>
-							</ul>
-						</div>
-						<div style="position:absolute; width:768px; top:150px; left:768px" class="r-stack">
-							<pre><code class="language-python" data-trim data-noescape data-line-numbers style="font-size:140%; line-height:140%">
-							a = [7, 2, 2, 6, 4]
-							for i in range(1, n):
-									for j in range(i, 0, -1):
-											if a[j-1] > a[j]:
-													a = swap(a, j-1, j)
-											else:
-													break
-							</code></pre>
-							<pre class="fragment" data-fragment-index="1"><code class="language-python" data-trim data-noescape data-line-numbers="1" style="font-size:140%; line-height:140%">
-							a = [7, 2, 2, 6, 4]
-							for i in range(1, n):
-									for j in range(i, 0, -1):
-											if a[j-1] > a[j]:
-													a = swap(a, j-1, j)
-											else:
-													break
-							</code></pre>
-							<pre class="fragment" data-fragment-index="2"><code class="language-python" data-trim data-noescape data-line-numbers="2" style="font-size:140%; line-height:140%">
-							a = [7, 2, 2, 6, 4]
-							for i in range(1, n):
-									for j in range(i, 0, -1):
-											if a[j-1] > a[j]:
-													a = swap(a, j-1, j)
-											else:
-													break
-							</code></pre>
-							<pre class="fragment" data-fragment-index="3"><code class="language-python" data-trim data-noescape data-line-numbers="3-7" style="font-size:140%; line-height:140%">
-							a = [7, 2, 2, 6, 4]
-							for i in range(1, n):
-									for j in range(i, 0, -1):
-											if a[j-1] > a[j]:
-													a = swap(a, j-1, j)
-											else:
-													break
-							</code></pre>
-							<pre class="fragment" data-fragment-index="4"><code class="language-python" data-trim data-noescape data-line-numbers style="font-size:140%; line-height:140%">
-							a = [7, 2, 2, 6, 4]
-							for i in range(1, n):
-									for j in range(i, 0, -1):
-											if a[j-1] > a[j]:
-													a = swap(a, j-1, j)
-											else:
-													break
-							</code></pre>
+
+						<div class="container">
+							<div class="col">
+								<ul>
+									<li class="fragment" data-fragment-index="1">
+										Setup instance; $n$ operations.
+									</li>
+									<li class="fragment" data-fragment-index="2">
+										Iterate over all $n-1$ unsorted positions;
+										<ul>
+											<li class="fragment" data-fragment-index="3">
+												Swap first element through $i$ positions in sorted list.
+											</li>
+										</ul>
+									</li>
+									<li class="fragment" data-fragment-index="4">
+										Total operation count:
+										\[
+										\sum_{i=1}^{n-1} 2 i = n (n-1).
+										\]
+									</li>
+								</ul>
+							</div>
+							<div class="col r-stack">
+								<pre><code class="language-python" data-trim data-noescape data-line-numbers style="font-size:140%; line-height:140%">
+								a = [7, 2, 2, 6, 4]
+								for i in range(1, n):
+										for j in range(i, 0, -1):
+												if a[j-1] > a[j]:
+														a = swap(a, j-1, j)
+												else:
+														break
+								</code></pre>
+								<pre class="fragment" data-fragment-index="1"><code class="language-python" data-trim data-noescape data-line-numbers="1" style="font-size:140%; line-height:140%">
+								a = [7, 2, 2, 6, 4]
+								for i in range(1, n):
+										for j in range(i, 0, -1):
+												if a[j-1] > a[j]:
+														a = swap(a, j-1, j)
+												else:
+														break
+								</code></pre>
+								<pre class="fragment" data-fragment-index="2"><code class="language-python" data-trim data-noescape data-line-numbers="2" style="font-size:140%; line-height:140%">
+								a = [7, 2, 2, 6, 4]
+								for i in range(1, n):
+										for j in range(i, 0, -1):
+												if a[j-1] > a[j]:
+														a = swap(a, j-1, j)
+												else:
+														break
+								</code></pre>
+								<pre class="fragment" data-fragment-index="3"><code class="language-python" data-trim data-noescape data-line-numbers="3-7" style="font-size:140%; line-height:140%">
+								a = [7, 2, 2, 6, 4]
+								for i in range(1, n):
+										for j in range(i, 0, -1):
+												if a[j-1] > a[j]:
+														a = swap(a, j-1, j)
+												else:
+														break
+								</code></pre>
+								<pre class="fragment" data-fragment-index="4"><code class="language-python" data-trim data-noescape data-line-numbers style="font-size:140%; line-height:140%">
+								a = [7, 2, 2, 6, 4]
+								for i in range(1, n):
+										for j in range(i, 0, -1):
+												if a[j-1] > a[j]:
+														a = swap(a, j-1, j)
+												else:
+														break
+								</code></pre>
+							</div>
 						</div>
 
 						<aside class="notes">
@@ -546,25 +558,28 @@
 					<section>
 
 						<h2>Cost comparison</h2>
-						<div style="position:absolute; width:768px; top:250px; left:0px">
-							<ul>
-								<li>
-									Brute force only competitive for tiny problems.
-								</li>
-								<li>
-									Factorial growth impractical.
-								</li>
-								<li class="fragment" data-fragment-index=1>
-									Insertion sort always fastest.
-								</li>
-								<li class="fragment" data-fragment-index=1>
-									Difference irrelevant for large lists.
-								</li>
-							</ul>
-						</div>
-						<div style="position:absolute; width:768px; top:150px; left:768px" class="r-stack">
-							<img style="width:768px" src="images/07_sorting/sorting_comparison_1.svg" class="fragment fade-out" data-fragment-index=1>
-							<img style="width:768px" src="images/07_sorting/sorting_comparison_2.svg" class="fragment" data-fragment-index=1>
+
+						<div class="container">
+							<div class="col">
+								<ul>
+									<li>
+										Brute force only competitive for tiny problems.
+									</li>
+									<li>
+										Factorial growth impractical.
+									</li>
+									<li class="fragment" data-fragment-index=1>
+										Insertion sort always fastest.
+									</li>
+									<li class="fragment" data-fragment-index=1>
+										Difference irrelevant for large lists.
+									</li>
+								</ul>
+							</div>
+							<div class="col r-stack">
+								<img style="width:768px" src="images/07_sorting/sorting_comparison_1.svg" class="fragment fade-out" data-fragment-index=1>
+								<img style="width:768px" src="images/07_sorting/sorting_comparison_2.svg" class="fragment" data-fragment-index=1>
+							</div>
 						</div>
 
 						<aside class="notes">

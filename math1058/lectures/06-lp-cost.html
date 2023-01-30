@@ -85,22 +85,25 @@
 
 					<section>
 						<h2>Sanity checks: interior points</h2>
-						<div style="position:absolute; width:868px; top:150px; left:0px">
-							<p>
-								<b>Proposition:</b> Interior points are not optimal.
-							</p>
-							<p class="fragment" data-fragment-index=1>
-								Prove by contradiction: assume interior $x$ is optimal.
-							</p>
-							<p class="fragment" data-fragment-index=1>
-								Take ball $B = \{ y \colon \| y - x \| < \delta \}$. $x$ interior implies $\exists \delta > 0$ such that $B \subset P$.
-							</p>
-							<p class="fragment" data-fragment-index=2>
-								Can move within $B$ in direction $c = \nabla f$ improving objective function. Therefore $x$ is not optimal.
-							</p>
-						</div>
-						<div style="position:absolute; width:668px; top:150px; left:868px">
-							<img style="width:668px" src="images/06_costs/lp_geom_interior_feasible.svg">
+
+						<div class="container">
+							<div class="col">
+								<p>
+									<b>Proposition:</b> Interior points are not optimal.
+								</p>
+								<p class="fragment" data-fragment-index=1>
+									Prove by contradiction: assume interior $x$ is optimal.
+								</p>
+								<p class="fragment" data-fragment-index=1>
+									Take ball $B = \{ y \colon \| y - x \| < \delta \}$. $x$ interior implies $\exists \delta > 0$ such that $B \subset P$.
+								</p>
+								<p class="fragment" data-fragment-index=2>
+									Can move within $B$ in direction $c = \nabla f$ improving objective function. Therefore $x$ is not optimal.
+								</p>
+							</div>
+							<div class="col">
+								<img style="width:668px" src="images/06_costs/lp_geom_interior_feasible.svg">
+							</div>
 						</div>
 
 						<aside class="notes">
@@ -116,26 +119,29 @@
 
 					<section>
 						<h2>Sanity checks: relative facet interior</h2>
-						<div style="position:absolute; width:868px; top:150px; left:0px">
-							<p>
-								<b>Observation:</b> Points in the <em>relative interior</em> of a facet can be optimal.
-							</p>
-							<ul>
-								<li>
-									This requires the facet be normal to $c = \nabla f$.
-								</li>
-								<li>
-									All vertices of the facet will be optimal.
-								</li>
-								<li>
-									All convex combinations of the vertices will be optimal.
-								</li>
-								<li>
-									Hence all points in the facet will be optimal.
-								</li>
-						</div>
-						<div style="position:absolute; width:668px; top:150px; left:868px">
-							<img style="width:668px" src="images/06_costs/lp_geom_interior_facet.svg">
+
+						<div class="container">
+							<div class="col">
+								<p>
+									<b>Observation:</b> Points in the <em>relative interior</em> of a facet can be optimal.
+								</p>
+								<ul>
+									<li>
+										This requires the facet be normal to $c = \nabla f$.
+									</li>
+									<li>
+										All vertices of the facet will be optimal.
+									</li>
+									<li>
+										All convex combinations of the vertices will be optimal.
+									</li>
+									<li>
+										Hence all points in the facet will be optimal.
+									</li>
+							</div>
+							<div class="col">
+								<img style="width:668px" src="images/06_costs/lp_geom_interior_facet.svg">
+							</div>
 						</div>
 
 						<aside class="notes">
@@ -154,30 +160,33 @@
 					<section>
 
 						<h2>Brute force</h2>
-						<div style="position:absolute; width:868px; top:50px; left:0px">
-							\[
-							\begin{array}{lcrlcl}
-							x_A & + &  & x_B & \le & 10 \\
-							x_A &  &  &  & \le & 7 \\
-							    &  &  & x_B & \le & 5 \\
-							x_A, &&& x_B & \ge & 0.
-							\end{array}
-							\]
-							<p>
-								Vertices:
-							</p>
-							\[
-							\begin{alignat*}{4}
-							v_1 & \colon & x_B & =  5 & \quad \text{and} & \quad & x_A & =  0, \\
-							v_2 & \colon & x_B & =  5 & \quad \text{and} & \quad & x_A + x_B & =  10, \\
-							v_3 & \colon & x_A & =  7 & \quad \text{and} & \quad & x_A + x_B & =  10, \\
-							v_4 & \colon & x_A & =  7 & \quad \text{and} & \quad & x_B & =  0, \\
-							v_5 & \colon & x_A & =  0 & \quad \text{and} & \quad & x_B & =  0.
-							\end{alignat*}
-							\]
-						</div>
-						<div style="position:absolute; width:668px; top:150px; left:868px">
-							<img style="width:668px" src="images/06_costs/lp_graphical_vertices.svg">
+
+						<div class="container">
+							<div class="col">
+								\[
+								\begin{array}{lcrlcl}
+								x_A & + &  & x_B & \le & 10 \\
+								x_A &  &  &  & \le & 7 \\
+								    &  &  & x_B & \le & 5 \\
+								x_A, &&& x_B & \ge & 0.
+								\end{array}
+								\]
+								<p>
+									Vertices:
+								</p>
+								\[
+								\begin{alignat*}{4}
+								v_1 & \colon & x_B & =  5 & \quad \text{and} & \quad & x_A & =  0, \\
+								v_2 & \colon & x_B & =  5 & \quad \text{and} & \quad & x_A + x_B & =  10, \\
+								v_3 & \colon & x_A & =  7 & \quad \text{and} & \quad & x_A + x_B & =  10, \\
+								v_4 & \colon & x_A & =  7 & \quad \text{and} & \quad & x_B & =  0, \\
+								v_5 & \colon & x_A & =  0 & \quad \text{and} & \quad & x_B & =  0.
+								\end{alignat*}
+								\]
+							</div>
+							<div class="col">
+								<img style="width:668px" src="images/06_costs/lp_graphical_vertices.svg">
+							</div>
 						</div>
 
 						<aside class="notes">
@@ -191,28 +200,31 @@
 
 					<section>
 						<h2>Combinations</h2>
-						<div style="position:absolute; width:868px; top:150px; left:0px">
-							<ul>
-								<li>
-									In $\mathbb{R}^n$, $n$ equations define a point.
-								</li>
-								<li class="fragment">
-									Any $n$ of the total $m$ constraints defines a vertex.
-								</li>
-								<li class="fragment">
-									There are
-									\[
-									\binom{m}{n} = \frac{m!}{n! (m - n)!} \simeq \frac{m^m}{n^n (m - n)^{m-n}}
-									\]
-									possible vertices.
-								</li>
-								<li class="fragment">
-									This escalates quickly.
-								</li>
-							</ul>
-						</div>
-						<div style="position:absolute; width:668px; top:150px; left:868px">
-							<img style="width:668px" src="images/06_costs/lp_graphical_vertices.svg">
+
+						<div class="container">
+							<div class="col">
+								<ul>
+									<li>
+										In $\mathbb{R}^n$, $n$ equations define a point.
+									</li>
+									<li class="fragment">
+										Any $n$ of the total $m$ constraints defines a vertex.
+									</li>
+									<li class="fragment">
+										There are
+										\[
+										\binom{m}{n} = \frac{m!}{n! (m - n)!} \simeq \frac{m^m}{n^n (m - n)^{m-n}}
+										\]
+										possible vertices.
+									</li>
+									<li class="fragment">
+										This escalates quickly.
+									</li>
+								</ul>
+							</div>
+							<div class="col">
+								<img style="width:668px" src="images/06_costs/lp_graphical_vertices.svg">
+							</div>
 						</div>
 
 						<aside class="notes">
@@ -229,43 +241,46 @@
 
 					<section>
 						<h2>Growth rates</h2>
-						<div style="position:absolute; width:868px; top:150px; left:0px">
-							<table>
-							<thead>
-							  <tr>
-							    <th>$n$</th>
-							    <th>1</th>
-							    <th>10</th>
-							    <th>100</th>
-							  </tr>
-							</thead>
-							<tbody>
-							  <tr class="fragment" data-fragment-index=1>
-							    <th>$n^2$</th>
-							    <td>$1\mu$s</td>
-							    <td>$100\mu$s</td>
-							    <td>$10^{-2}$s</td>
-							  </tr>
-							  <tr class="fragment" data-fragment-index=2>
-							    <th>$2^n$</th>
-							    <td>$2\mu$s</td>
-							    <td>$\sim 10^3 \mu$s</td>
-							    <td>$\sim 10^{16}$ years</td>
-							  </tr>
-							  <tr class="fragment" data-fragment-index=3>
-							    <th>$n^n$</th>
-							    <td>$1\mu$s</td>
-							    <td>$\sim 3$ hours</td>
-							    <td>$\sim 10^{186}$ years</td>
-							  </tr>
-							</tbody>
-							</table>
-						</div>
-						<div style="position:absolute; width:668px; top:150px; left:868px" class="r-stack">
-							<img style="width:668px" src="images/06_costs/complexity_growth1.svg" class="fragment fade-out" data-fragment-index=1>
-							<img style="width:668px" src="images/06_costs/complexity_growth2.svg" class="fragment fade-in-then-out" data-fragment-index=1>
-							<img style="width:668px" src="images/06_costs/complexity_growth3.svg" class="fragment fade-in-then-out" data-fragment-index=2>
-							<img style="width:668px" src="images/06_costs/complexity_growth4.svg" class="fragment fade-in" data-fragment-index=3>
+
+						<div class="container">
+							<div class="col">
+								<table>
+								<thead>
+								  <tr>
+								    <th>$n$</th>
+								    <th>1</th>
+								    <th>10</th>
+								    <th>100</th>
+								  </tr>
+								</thead>
+								<tbody>
+								  <tr class="fragment" data-fragment-index=1>
+								    <th>$n^2$</th>
+								    <td>$1\mu$s</td>
+								    <td>$100\mu$s</td>
+								    <td>$10^{-2}$s</td>
+								  </tr>
+								  <tr class="fragment" data-fragment-index=2>
+								    <th>$2^n$</th>
+								    <td>$2\mu$s</td>
+								    <td>$\sim 10^3 \mu$s</td>
+								    <td>$\sim 10^{16}$ years</td>
+								  </tr>
+								  <tr class="fragment" data-fragment-index=3>
+								    <th>$n^n$</th>
+								    <td>$1\mu$s</td>
+								    <td>$\sim 3$ hours</td>
+								    <td>$\sim 10^{186}$ years</td>
+								  </tr>
+								</tbody>
+								</table>
+							</div>
+							<div class="col r-stack">
+								<img style="width:668px" src="images/06_costs/complexity_growth1.svg" class="fragment fade-out" data-fragment-index=1>
+								<img style="width:668px" src="images/06_costs/complexity_growth2.svg" class="fragment fade-in-then-out" data-fragment-index=1>
+								<img style="width:668px" src="images/06_costs/complexity_growth3.svg" class="fragment fade-in-then-out" data-fragment-index=2>
+								<img style="width:668px" src="images/06_costs/complexity_growth4.svg" class="fragment fade-in" data-fragment-index=3>
+							</div>
 						</div>
 
 						<aside class="notes">

@@ -133,32 +133,34 @@
 
 					<section>
 						<h2>Convex combinations</h2>
-						<div style="position:absolute; width:868px; top:150px; left:0px">
-							<p>
-								Take $x_1, \dots x_k \in \mathbb{R}^n$. <em>Convex combinations</em>:
-								\[
-								\begin{aligned}
-								  && y & = \sum_{i=1}^k \lambda_i x_i \\
-									\text{with} && \lambda_i & \ge 0 \\
-									\text{and} && \sum_{i=1}^k \lambda_i & = 1.
-								\end{aligned}
-								\]
-							</p>
-							<ul>
-								<li class="fragment" data-fragment-index=1>
-									Convex combinations "fill in" between the $x_i$.
-								</li>
-								<li class="fragment" data-fragment-index=1>
-									In 1d get a line <em>segment</em>.
-								</li>
-								<li class="fragment" data-fragment-index=2>
-									In higher dimensions get a "triangle".
-								</li>
-							</ul>
-						</div>
-						<div style="position:absolute; width:668px; top:150px; left:868px" class="r-stack">
-							<img style="width:668px" src="images/05_theorem/lp_geom_convex1.svg" class="fragment fade-in-then-out" data-fragment-index=1>
-							<img style="width:668px" src="images/05_theorem/lp_geom_convex2.svg" class="fragment fade-in" data-fragment-index=2>
+						<div class="container">
+							<div class="col">
+								<p>
+									Take $x_1, \dots x_k \in \mathbb{R}^n$. <em>Convex combinations</em>:
+									\[
+									\begin{aligned}
+									  && y & = \sum_{i=1}^k \lambda_i x_i \\
+										\text{with} && \lambda_i & \ge 0 \\
+										\text{and} && \sum_{i=1}^k \lambda_i & = 1.
+									\end{aligned}
+									\]
+								</p>
+								<ul>
+									<li class="fragment" data-fragment-index=1>
+										Convex combinations "fill in" between the $x_i$.
+									</li>
+									<li class="fragment" data-fragment-index=1>
+										In 1d get a line <em>segment</em>.
+									</li>
+									<li class="fragment" data-fragment-index=2>
+										In higher dimensions get a "triangle".
+									</li>
+								</ul>
+							</div>
+							<div class="col r-stack">
+								<img style="width:668px" src="images/05_theorem/lp_geom_convex1.svg" class="fragment fade-in-then-out" data-fragment-index=1>
+								<img style="width:668px" src="images/05_theorem/lp_geom_convex2.svg" class="fragment fade-in" data-fragment-index=2>
+							</div>
 						</div>
 
 						<aside class="notes">
@@ -177,22 +179,23 @@
 					<section>
 						<h2>Vertices, faces, facets</h2>
 
-
-						<div style="position:absolute; width:668px; top:150px; left:0px">
-							<ul>
-								<li>
-									<em>Vertex:</em> a $v \in P$ that cannot be expressed as a convex combination of $x, y \in P$, with $x, y, v$ distinct.
-								</li>
-								<li>
-									<em>Face:</em> any planar surface in the boundary of $P$.
-								</li>
-								<li>
-									<em>Facet:</em> any $n-1$ dimensional face.
-								</li>
-							</ul>
-						</div>
-						<div style="position:absolute; width:868px; top:150px; left:668px">
-							<img style="width:868px" src="images/05_theorem/lp_geom_vertices_facets.svg">
+						<div class="container">
+							<div class="col">
+								<ul>
+									<li>
+										<em>Vertex:</em> a $v \in P$ that cannot be expressed as a convex combination of $x, y \in P$, with $x, y, v$ distinct.
+									</li>
+									<li>
+										<em>Face:</em> any planar surface in the boundary of $P$.
+									</li>
+									<li>
+										<em>Facet:</em> any $n-1$ dimensional face.
+									</li>
+								</ul>
+							</div>
+							<div class="col">
+								<img style="width:868px" src="images/05_theorem/lp_geom_vertices_facets.svg">
+							</div>
 						</div>
 
 						<aside class="notes">
@@ -206,30 +209,33 @@
 
 					<section>
 						<h2>Conic combinations</h2>
-						<div style="position:absolute; width:868px; top:150px; left:0px">
-							<p>
-								Take $x_1, \dots x_h \in \mathbb{R}^n$. <em>Conic combinations</em>:
-								\[
-								\begin{aligned}
-								  && y & = \sum_{j=1}^h \mu_j x_j \\
-									\text{with} && \mu_j & \ge 0.
-								\end{aligned}
-								\]
-							</p>
-							<ul class="fragment" data-fragment-index=1>
-								<li>
-									Conic combinations "sweep out" between the $x_i$ and the origin.
-								</li>
-								<li>
-									In 1d get a <em>line</em>.
-								</li>
-								<li>
-									In higher dimensions get a "cone".
-								</li>
-							</ul>
-						</div>
-						<div style="position:absolute; width:668px; top:150px; left:868px" class="r-stack">
-							<img style="width:668px" src="images/05_theorem/lp_geom_conic.svg" class="fragment" data-fragment-index=1>
+
+						<div class="container">
+							<div class="col">
+								<p>
+									Take $x_1, \dots x_h \in \mathbb{R}^n$. <em>Conic combinations</em>:
+									\[
+									\begin{aligned}
+									  && y & = \sum_{j=1}^h \mu_j x_j \\
+										\text{with} && \mu_j & \ge 0.
+									\end{aligned}
+									\]
+								</p>
+								<ul class="fragment" data-fragment-index=1>
+									<li>
+										Conic combinations "sweep out" between the $x_i$ and the origin.
+									</li>
+									<li>
+										In 1d get a <em>line</em>.
+									</li>
+									<li>
+										In higher dimensions get a "cone".
+									</li>
+								</ul>
+							</div>
+							<div class="col">
+								<img style="width:668px" src="images/05_theorem/lp_geom_conic.svg" class="fragment" data-fragment-index=1>
+							</div>
 						</div>
 
 						<aside class="notes">
@@ -241,32 +247,35 @@
 
 					<section>
 						<h2>Rays</h2>
-						<div style="position:absolute; width:768px; top:150px; left:0px">
-							<p>
-								For $S \subseteq \mathbb{R}^n$, vector $r \in \mathbb{R}^n$ is a <em>ray</em> if
-								\[
-								\begin{aligned}
-									&& x_0 + \mu r & \in S \\
-									&& \forall x_0 & \in S \\
-									\text{and} &&  \forall \mu & \ge 0.
-								\end{aligned}
-								\]
-							</p>
-							<ul>
-								<li class="fragment" data-fragment-index=1>
-									Start from any point in $S$. Move in the direction of $r$, and you remain in $S$.
-								</li>
-								<li class="fragment" data-fragment-index=2>
-									<em>Extreme</em> rays cannot be written as conic combinations of other rays.
-								</li>
-								<li class="fragment" data-fragment-index=2>
-									Extreme rays are roughly edges.
-								</li>
-							</ul>
-						</div>
-						<div style="position:absolute; width:768px; top:150px; left:768px" class="r-stack">
-							<img style="width:768px" src="images/05_theorem/lp_geom_rays.svg" class="fragment fade-in-then-out" data-fragment-index=1>
-							<img style="width:768px" src="images/05_theorem/lp_geom_extreme_rays.svg" class="fragment fade-in" data-fragment-index=2>
+
+						<div class="container">
+							<div class="col">
+								<p>
+									For $S \subseteq \mathbb{R}^n$, vector $r \in \mathbb{R}^n$ is a <em>ray</em> if
+									\[
+									\begin{aligned}
+										&& x_0 + \mu r & \in S \\
+										&& \forall x_0 & \in S \\
+										\text{and} &&  \forall \mu & \ge 0.
+									\end{aligned}
+									\]
+								</p>
+								<ul>
+									<li class="fragment" data-fragment-index=1>
+										Start from any point in $S$. Move in the direction of $r$, and you remain in $S$.
+									</li>
+									<li class="fragment" data-fragment-index=2>
+										<em>Extreme</em> rays cannot be written as conic combinations of other rays.
+									</li>
+									<li class="fragment" data-fragment-index=2>
+										Extreme rays are roughly edges.
+									</li>
+								</ul>
+							</div>
+							<div class="col r-stack">
+								<img style="width:768px" src="images/05_theorem/lp_geom_rays.svg" class="fragment fade-in-then-out" data-fragment-index=1>
+								<img style="width:768px" src="images/05_theorem/lp_geom_extreme_rays.svg" class="fragment fade-in" data-fragment-index=2>
+							</div>
 						</div>
 
 						<aside class="notes">
@@ -286,27 +295,30 @@
 					<section>
 
 						<h3>Weyl-Minkowski</h3>
-						<div style="position:absolute; width:868px; top:50px; left:0px">
-							\[
-							x \in P \implies \; x = \sum_{i=1}^k \lambda_i v_i + \sum_{j=1}^h \mu_j r_j.
-							\]
-							<p class="fragment">
-								Change LP variables to $(\lambda, \mu)$:
+
+						<div class="container">
+							<div class="col">
 								\[
-									\max c x \longleftrightarrow \max \sum_{i=1}^k \lambda_i \left( c v_i \right) + \sum_{j=1}^h \mu_j \left( c r_j \right).
+								x \in P \implies \; x = \sum_{i=1}^k \lambda_i v_i + \sum_{j=1}^h \mu_j r_j.
 								\]
-							</p>
-							<p class="fragment">
-								Constraints:
-								\[
-								\begin{aligned}
-									\lambda_1, \dots, \lambda_k, \mu_1, \dots, \mu_h & \ge 0, \\
-									\sum_{i=1}^k \lambda_i & = 1.
-								\end{aligned}
-								\]
-						</div>
-						<div style="position:absolute; width:668px; top:150px; left:868px">
-							<img style="width:668px" src="images/05_theorem/lp_geom_weyl_minkowski.svg">
+								<p class="fragment">
+									Change LP variables to $(\lambda, \mu)$:
+									\[
+										\max c x \longleftrightarrow \max \sum_{i=1}^k \lambda_i \left( c v_i \right) + \sum_{j=1}^h \mu_j \left( c r_j \right).
+									\]
+								</p>
+								<p class="fragment">
+									Constraints:
+									\[
+									\begin{aligned}
+										\lambda_1, \dots, \lambda_k, \mu_1, \dots, \mu_h & \ge 0, \\
+										\sum_{i=1}^k \lambda_i & = 1.
+									\end{aligned}
+									\]
+							</div>
+							<div class="col">
+								<img style="width:668px" src="images/05_theorem/lp_geom_weyl_minkowski.svg">
+							</div>
 						</div>
 
 						<aside class="notes">

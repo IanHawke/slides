@@ -55,35 +55,38 @@
 					<section>
 
 						<h2>Simplex Method</h2>
-						<div style="position:absolute; width:768px; top:150px; left:0px">
-							<ul>
-								<li>
-									Solutions to linear programs at vertices.
-								</li>
-								<li>
-									Simplex method: move from one vertex to adjacent until optimal found.
-								</li>
-								<li>
-									Ingredients:
-									<ol>
-										<li>
-											How to characterize vertex algebraically?
-										</li>
-										<li>
-											How to check vertex is optimal?
-										</li>
-										<li>
-											How to move from vertex to better vertex?
-										</li>
-									</ol>
-								</li>
-							</ul>
-							<p>
-								How to start? How much does it cost?
-							</p>
-						</div>
-						<div style="position:absolute; width:768px; top:150px; left:768px">
-							<img style="width:768px" src="images/09_simplex_basics/lp_simplex_vertex.svg">
+
+						<div class="container">
+							<div class="col">
+								<ul>
+									<li>
+										Solutions to linear programs at vertices.
+									</li>
+									<li>
+										Simplex method: move from one vertex to adjacent until optimal found.
+									</li>
+									<li>
+										Ingredients:
+										<ol>
+											<li>
+												How to characterize vertex algebraically?
+											</li>
+											<li>
+												How to check vertex is optimal?
+											</li>
+											<li>
+												How to move from vertex to better vertex?
+											</li>
+										</ol>
+									</li>
+								</ul>
+								<p>
+									How to start? How much does it cost?
+								</p>
+							</div>
+							<div class="col">
+								<img style="width:768px" src="images/09_simplex_basics/lp_simplex_vertex.svg">
+							</div>
 						</div>
 
 						<aside class="notes">
@@ -335,86 +338,115 @@
 				<section id="Example">
 					<section>
 						<h2>Optimal portfolio again</h2>
-						<div style="position:absolute; width:968px; left:0px; top:100px">
-						\[
-						\begin{pmatrix}
-						1 & 1 & 1 & 0 & 0 \\
-						1 & 0 & 0 & 1 & 0 \\
-						0 & 1 & 0 & 0 & 1
-						\end{pmatrix}
-						x =
-						\begin{pmatrix}
-						10 \\ 7 \\ 5
-						\end{pmatrix}
-						\]
-						<div class="fragment fade-in-then-out" style="position:absolute; width:968px; left:0px; top:230px" data-fragment-index=1>
-							<p>
-								$B = \{3, 4, 5\}, N = \{1, 2\}$:
-							</p>
-							\[
-							\begin{aligned}
-								A_B & = \begin{pmatrix}
-								1 & 0 & 0 \\
-								0 & 1 & 0 \\
-								0 & 0 & 1
-								\end{pmatrix}, & A_N & =
-								\begin{pmatrix}
-								1 & 1 \\
-								1 & 0 \\
-								0 & 1
-								\end{pmatrix}, \\
-								x_B & = \begin{pmatrix} 10 & 7 & 5 \end{pmatrix}, & x_N & = \begin{pmatrix} 0 & 0 \end{pmatrix}.
-								\end{aligned}
-							\]
-							<p>
-								Hence $(x_1, x_2) = (0, 0) \to v_5$.
-						</div>
-						<div class="fragment fade-in-then-out" style="position:absolute; width:968px; left:0px; top:230px" data-fragment-index=2>
-							<p>
-								$B = \{1, 2, 4\}, N = \{3, 5\}$:
-							</p>
-							\[
-							\begin{aligned}
-								A_B & = \begin{pmatrix}
-								1 & 1 & 0 \\
-								1 & 0 & 1 \\
-								0 & 1 & 0
-								\end{pmatrix}, & A_N & =
-								\begin{pmatrix}
-								1 & 0 \\
-								0 & 0 \\
-								0 & 1
-								\end{pmatrix}, \\
-								x_B & = \begin{pmatrix} 5 & 5 & 2 \end{pmatrix}, & x_N & = \begin{pmatrix} 0 & 0 \end{pmatrix}.
-								\end{aligned}
-							\]
-							<p>
-								Hence $(x_1, x_2) = (5, 5) \to v_2$.
-						</div>
-						<div class="fragment fade-in" style="position:absolute; width:968px; left:0px; top:230px" data-fragment-index=3>
-							<p>
-								$B = \{2, 4, 5\}, N = \{1, 3\}$:
-							</p>
-							\[
-							\begin{aligned}
-								A_B & = \begin{pmatrix}
-								1 & 0 & 0 \\
-								0 & 1 & 0 \\
-								1 & 0 & 1
-								\end{pmatrix}, & A_N & =
-								\begin{pmatrix}
-								1 & 1 \\
-								1 & 0 \\
-								0 & 0
-								\end{pmatrix}, \\
-								x_B & = \begin{pmatrix} 10 & 7 & -5 \end{pmatrix}, & x_N & = \begin{pmatrix} 0 & 0 \end{pmatrix}.
-								\end{aligned}
-							\]
-							<p>
-								Hence <em>not feasible</em> as $x_5 < 0$.
-						</div>
-						<div style="position:absolute; width:568px; top:150px; left:968px">
-							<img style="width:568px" src="images/06_costs/lp_graphical_vertices.svg">
+
+						<div class="container">
+							<div class="col r-stack">
+								<div class="fragment fade-in-then-out" data-fragment-index=1>
+									\[
+									\begin{pmatrix}
+									1 & 1 & 1 & 0 & 0 \\
+									1 & 0 & 0 & 1 & 0 \\
+									0 & 1 & 0 & 0 & 1
+									\end{pmatrix}
+									x =
+									\begin{pmatrix}
+									10 \\ 7 \\ 5
+									\end{pmatrix}
+									\]
+									<p>
+										$B = \{3, 4, 5\}, N = \{1, 2\}$:
+									</p>
+									\[
+									\begin{aligned}
+										A_B & = \begin{pmatrix}
+										1 & 0 & 0 \\
+										0 & 1 & 0 \\
+										0 & 0 & 1
+										\end{pmatrix}, & A_N & =
+										\begin{pmatrix}
+										1 & 1 \\
+										1 & 0 \\
+										0 & 1
+										\end{pmatrix}, \\
+										x_B & = \begin{pmatrix} 10 & 7 & 5 \end{pmatrix}, & x_N & = \begin{pmatrix} 0 & 0 \end{pmatrix}.
+										\end{aligned}
+									\]
+									<p>
+										Hence $(x_1, x_2) = (0, 0) \to v_5$.
+									</p>
+								</div>
+								<div class="fragment fade-in-then-out" data-fragment-index=2>
+									\[
+									\begin{pmatrix}
+									1 & 1 & 1 & 0 & 0 \\
+									1 & 0 & 0 & 1 & 0 \\
+									0 & 1 & 0 & 0 & 1
+									\end{pmatrix}
+									x =
+									\begin{pmatrix}
+									10 \\ 7 \\ 5
+									\end{pmatrix}
+									\]
+									<p>
+										$B = \{1, 2, 4\}, N = \{3, 5\}$:
+									</p>
+									\[
+									\begin{aligned}
+										A_B & = \begin{pmatrix}
+										1 & 1 & 0 \\
+										1 & 0 & 1 \\
+										0 & 1 & 0
+										\end{pmatrix}, & A_N & =
+										\begin{pmatrix}
+										1 & 0 \\
+										0 & 0 \\
+										0 & 1
+										\end{pmatrix}, \\
+										x_B & = \begin{pmatrix} 5 & 5 & 2 \end{pmatrix}, & x_N & = \begin{pmatrix} 0 & 0 \end{pmatrix}.
+										\end{aligned}
+									\]
+									<p>
+										Hence $(x_1, x_2) = (5, 5) \to v_2$.
+									</p>
+								</div>
+								<div class="fragment fade-in" data-fragment-index=3>
+									\[
+									\begin{pmatrix}
+									1 & 1 & 1 & 0 & 0 \\
+									1 & 0 & 0 & 1 & 0 \\
+									0 & 1 & 0 & 0 & 1
+									\end{pmatrix}
+									x =
+									\begin{pmatrix}
+									10 \\ 7 \\ 5
+									\end{pmatrix}
+									\]
+									<p>
+										$B = \{2, 4, 5\}, N = \{1, 3\}$:
+									</p>
+									\[
+									\begin{aligned}
+										A_B & = \begin{pmatrix}
+										1 & 0 & 0 \\
+										0 & 1 & 0 \\
+										1 & 0 & 1
+										\end{pmatrix}, & A_N & =
+										\begin{pmatrix}
+										1 & 1 \\
+										1 & 0 \\
+										0 & 0
+										\end{pmatrix}, \\
+										x_B & = \begin{pmatrix} 10 & 7 & -5 \end{pmatrix}, & x_N & = \begin{pmatrix} 0 & 0 \end{pmatrix}.
+										\end{aligned}
+									\]
+									<p>
+										Hence <em>not feasible</em> as $x_5 < 0$.
+									</p>
+								</div>
+							</div>
+							<div class="col">
+								<img style="width:568px" src="images/06_costs/lp_graphical_vertices.svg">
+							</div>
 						</div>
 
 						<aside class="notes">
