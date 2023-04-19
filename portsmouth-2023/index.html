@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Bulk viscosity</title>
+
+		<meta name="description" content="Portsmouth, 2023">
+		<meta name="author" content="Ian Hawke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="../math1058/reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../math1058/reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../math1058/reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../math1058/reveal.js/plugin/highlight/monokai.css">
+
+		<!-- Personal defaults -->
+		<link rel="stylesheet" href="../math1058/lectures/reveal_css.css">
+	</style>
+
+
+
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="Title">
+
+					<section data-background="figures/pch/strain.svg" data-background-position='right' data-background-size="50%">
+						<div style="float: center; width: 50%">
+							<h2>Nuclear reactions, Bulk viscosity, Neutron Star mergers, and Gravitational Waves</h2>
+							<p style="margin: 50px">
+								<ul style="list-style: none;">
+									<li> 
+										Ian Hawke
+									</li>
+									<li>
+										P Hammond, T Celora, M Hatton
+									</li>
+									<li>
+										N Andersson, G Comer
+									</li>
+								</ul>
+							</p>
+							<p>
+								<ul style="list-style: none;">
+									<li>
+										See <a href="https://arxiv.org/abs/2205.11377">2205.11377</a>, <a href="https://arxiv.org/abs/2108.08649">2108.08649</a>, <a href="https://arxiv.org/abs/2107.01083">2107.01083</a>
+									</li>
+									<li> <a href="https://https://github.com/IanHawke">github.com/IanHawke</a></li>
+									<li> STAG, University of Southampton</li>
+								</ul>
+							</p>
+						</div>
+						<p style="margin: 50px">
+							<ul style="list-style: none;">
+								<li> <a href="https://ianhawke.github.io/slides/portsmouth-2023">ianhawke.github.io/slides/portsmouth-2023</a> </li>
+							</ul>
+						</p>
+						<aside class="notes">
+							This talk will cover why very small, fast, things can have an observable impact on large, slow things.
+							<!--
+							<br>
+							The observable universe is roughly $10^{11}$ light years across. Our galaxy is roughly $10^5$ light years across. That's a scale ratio of $10^6$. The supermassive black hole at the galatic centre is probably $10^{-6}$ light years across or smaller; that's a scale ratio of $10^{11}$ to the galaxy and $10^{17}$ to the observable universe. Galaxies are small in cosmological terms; even the biggest black hole is tiny. But can they be ignored?
+							<br>
+							Similarly, the wavelength of gravitational waves from neutron star mergers, as detected by LVK in GW170817, is of the order of $10^{11}$ metres, whilst the neutron star radius itself is of the order of $10^4$ metres. 
+							<br>
+							However, one key thing that I've done here is to a particular choice of units and hence scales. When comparing a black hole to a galaxy to the universe, the masses are more likely to be relevant than the extents. Similarly, when comparing reactions, the lengths are not of interest: depending on the application, we're more likely to care about the energies or the timescales.
+							<br>
+							Here I'm going to care most about the timescale ratio. The gravitational wave frequencies that LVK is sensitive to are in the $100-1000$ Hz range, so timescales of the order of $10^{-2}-10^{-3}$ seconds. Neutron stars have a whole host of oscillation frequencies, but the ones emitting the most gravitational waves tend to be at the fast end of that limit. The Urca reactions also have an associated timescale: they return a fluid element to equilibrium on times of the order of $10^{-10}$ seconds, although this can vary by a couple of orders of magnitude depending on densities and temperatures. So we see that the scale ratio we're looking at here is roughly $10^6 - 10^8$: again, similar to the scale ratio between a single galaxy and the observable universe.
+							<br>
+							Scales discussion goes here.
+							<br>
+							Now, there is a numerical problem in addition to a physics problem here. When we evolve a neutron star merger, or do any nonlinear time domain simulation, we take our domain and split it into discrete cells. The more cells we use, the smaller they are, the smaller the numerical error is. As we need to compute gravitational wave templates to high phase accuracy, this error needs to be very small. However, the smaller the cell, the smaller the timestep we can use: causality means we can only use information from neighbouring cells, and so the speed of light limits us. Most current simulations use cell sizes between $10-100$ metres, giving timesteps around $10^{-7}-10^{-8}$ seconds. The computational cost of taking smaller timesteps is prohibitive.
+							<br>
+							However, this means the Urca reactions are typically happening faster than our numerical timestep. That means we can't capture their effects accurately and stably. 
+							<br>
+							So, the stage is set. How do we capture these "subgrid" effects? Are they really important (I obviously think so, or I wouldn't be wasting your time with them)? What might they tell us, and how, or are they just confusing?
+							-->
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Mergers">
+
+					<section>
+
+						<div class="container">
+							<div class="col">
+								<h2>Neutron star merger</h2>
+								<ul>
+									<li class="fragment" data-fragment-index="1">
+										GWs drain energy from orbit.
+									</li>
+									<li class="fragment" data-fragment-index="1">
+										"Chirp" visible to LVK (GW170817).
+									</li>
+									<li class="fragment" data-fragment-index="2">
+										Merger is messy:
+										<ul>
+											<li>
+												Shearing instabilities;
+											</li>
+											<li>
+												Magnetic field wind up;
+											</li>
+											<li>
+												Temperature increase through shocks;
+											</li>
+											<li>
+												Nuclear reactions;
+											</li>
+											<li>
+												Emission through EM, neutrinos.
+											</li>
+										</ul>
+									</li>
+									<li class="fragment" data-fragment-index="3">
+										Post-merger:
+										<ul>
+											<li>
+												jets;
+											</li>
+											<li>
+												ejecta;
+											</li>
+											<li>
+												probes high $T$ <em>and</em> high density regime.
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+							<div class="col r-stack">
+								<div class="fragment fade-in-then-out" style="width:90%; margin:0px" data-fragment-index="1">
+									<img src="figures/pch/rho_Gamma_Inspiral.svg" style="width:100%; margin:0px">
+								</div>
+								<div class="fragment fade-in-then-out" data-fragment-index="2" style="width:90%; margin:0px">
+									<img src="figures/pch/rho_Gamma_Merger.svg" style="width:100%; margin:0px">
+								</div>
+								<div class="fragment" data-fragment-index="3">
+									<img src="figures/pch/rhomubTYe.svg" style="width:100%; margin:0px">
+									<img src="figures/pch/mub_T_new.svg" style="width:100%; margin:0px">
+								</div>
+							</div>
+						</div>
+
+						<aside class="notes">
+							Let's briefly discuss the anatomy of a neutron star merger, and why we need numerical simulations. A neutron star binary, formed by some evolutionary track, is a pair of roughly solar-mass amounts of dense matter squeezed into a radius of around 10km. The orbit circularises and loses energy through gravitational wave emission, so the stars inspiral, and the inspiral accelerates, increasing the gravitational wave frequency in a predictable fashion. It's this inspiral that LVK observes.
+							<br>
+							When the stars merge the collision is violent and messy, increasing the core density, winding up the magnetic fields, heating up the matter through shocks and other interactions, shedding matter and possibly launching a jet, and triggering a range of nuclear reactions that lead to electromagnetic and neutrino emission. None of this can be captured approximately as yet: nonlinear simulations of anything past the last dozen orbits of inspiral are essential. LVK cannot yet observe post-merger gravitational waves, but next generation detectors like the Einstein Telescope will. The era of precision gravitational wave observation, mirroring precision cosmology, is hopefully 15-20 years away.
+							<br>
+							One of the fundamental applications of gravitational wave observations of neutron star mergers is understanding the state of matter in extreme situations: strong field gravity and high temperatures. Terrestrial accelerators and other experiments can give high temperatures. The inspiral phase and current LVK measurements can give at least bounds on the behaviour in strong field gravity. But only observations through the merger phase and the post-merger behaviour will give us the full picture of both strong gravity and high temperatures. When next generation detectors come online, they will need the templates derived from numerical simulations in order to extract the information about the microphysics. The key question is then, which physics needs including in the numerical model in order to get sufficiently accurate templates?
+						</aside>
+
+					</section>
+
+				</section>	
+
+				<section id="Nuclear Reactions">
+
+					<section>
+
+						<div class="container">
+							<div class="col">
+
+								<h2>Urca</h2>
+
+								$$
+								\begin{aligned}
+								  \text{n} &\to \text{p} + \text{e}^- + \bar{\nu}_e \\
+								  \text{p} + \text{e}^- &\to \text{n} + \nu_e.
+								\end{aligned}
+								$$
+								<p>
+									Keep track of species $Y_\text{e} \sim n_\text{e} / n_b$ by
+								</p>
+								$$
+								u^a \nabla_a Y_\text{e} = \Gamma_\text{e}(n_b, Y_\text{e}, T, \dots)/n_b.
+								$$
+								<div class="fragment">
+									<p>
+										Timescales:
+									</p>
+									<ul>
+										<li>
+											Full merger event: $\sim$ seconds;
+										</li>
+										<li>
+											Inspiral: $\sim 10^{-2}$ seconds;
+										</li>
+										<li>
+											Post-merger: $\sim 10^{-3}$ seconds
+										</li>
+										<li>
+											Numerics: $\sim 10^{-7}-10^{-8}$ seconds;
+										</li>
+										<li>
+											Urca: $\sim 10^{-8}-10^{-10}$ seconds.
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="col">
+								<img src="figures/pch/sqrtPSD_OoE_NSE.svg" style="width:680px; margin:0px">
+								<img src="figures/pch/sqrtPSD_OoE_OEL.svg" style="width:680px; margin:0px">
+							</div>
+						</div>
+
+						<aside class="notes">
+							I've mentioned that nuclear reactions occur. The one I'll focus on here is the Urca interactions which are where nucleons interact with neutrons, efficiently emitting neutrinos. These reactions tend to reduce the number of electrons in the mix, reducing the pressure and softening the equation of state. The effects may be small, but they might be long lived: the plots on the right are spoiling the later part of the talk by showing that the impact on the gravitational wave signal can be seen.
+							<br>
+							Evolving reactions directly means looking at individual particles, which is totally impractical. Instead we assume that all particles within a numerical cell move together, so the effect of reactions can be encapsulated in a rate term. That is, we evolve the total number density of baryons (neutrons and protons here), and all the electron fraction (or lepton fraction more generally). By assuming all particles within a cell have, on average, the same velocity, this scalar field is advected along, with the reaction rate term adding or subtracting electrons as needed. In general the rates are complex functions of the density, temperature, composition, and many other things: in what follows we'll simplify to it just depending on the thermodynamics and the composition.
+							<br>
+							Now, it's worth comparing scales to see if we believe the reactions can have any effect. The Urca reactions are happening on timescales ten or more orders of magnitude faster than the full event, and 6 or more orders of magnitude faster than the post-merger oscillations that we might expect them to effect. That's comparable to the scale ratio between the size of the observable universe today and the size of our galaxy. So do we really need to consider these effects?
+							<br>
+							Even worse, the reactions are happening faster than the numerical timestep. Making the timestep smaller, which is often linked to using higher resolution, is impractical - simulations are already too expensive. So, even if we wanted to include these nuclear reactions, how can we accurately and stably capture these "subgrid" effects in a numerical simulation?
+						</aside>
+
+					</section>
+
+				</section>
+
+				<section id="Multiscale">
+
+					<section>
+						<h2>Toy model</h2>
+						<p>
+							Approximate fluid equations, using $\theta = \nabla_a u^a$:
+						</p>
+						$$
+						D_t \begin{pmatrix} n_b \\ e \\ Y_\text{e} \end{pmatrix} = - \begin{pmatrix} n_b \theta \\ (e + p) \theta \\ {\color{red}\epsilon^{-1}} \left( A Y_\text{e} - B \right) \end{pmatrix}.
+						$$
+						<p>
+							Short timescale encoded in $\epsilon \ll 1$.
+						</p>
+						<div class="r-stack">
+							<div class="fragment fade-in-then-out" style="width:100%">
+								<p>
+									Assume $Y_\text{e} = Y_0 + \epsilon Y_1 + \dots$ and separate scales:
+								</p>
+								$$
+								\begin{aligned}
+								\mathcal{O}(\epsilon^{-1}) & \colon & 0 &= -A Y_0 + B, \\
+								\mathcal{O}(\epsilon^{0}) & \colon & D_t Y_0 &= -A Y_1 \\
+								& \implies & Y_1 &= -A^{-1} D_t Y_0 \\
+								& & &= F(n_b, e) \theta.
+								\end{aligned}
+								$$
+							</div>
+							<div class="fragment fade-in-then-out" style="width:100%">
+								<p>
+									Expand pressure:
+								</p>
+								$$
+								\begin{aligned}
+								p(n_b, e, Y_\text{e}) &= p(n_b, e, Y_0(n_b, e)) + \epsilon \partial_{Y_\text{e}} p Y_1 \\
+								&= p_0(n_b, e) + \Pi, \\
+								\Pi &= \zeta(n_b, e) \theta.
+								\end{aligned}
+								$$
+								<p>
+									Appearance of <em>bulk viscous pressure</em>.
+								</p>
+							</div>
+							<div class="fragment fade-in" style="width:100%">
+								<p>
+									Reduced model:
+								</p>
+								$$
+								D_t \begin{pmatrix} n_b \\ e \end{pmatrix} = - \begin{pmatrix} n_b \theta \\ (e + {\color{blue} p_0 + \Pi}) \theta \end{pmatrix}.
+								$$
+								<ul>
+									<li>
+										No longer tracking species: always in equilibrium.
+									</li>
+									<li>
+										Scales now tractable: $\Gamma_\text{e} \sim \epsilon^{-1} \to \Pi \sim \epsilon.$
+									</li>
+								</ul>
+							</div>
+						</div>
+						<aside class="notes">
+							We develop the key idea using a toy model.
+							<br>
+							Here we've taken the relativistic fluid equations and made a couple of key approximations. First, we've assumed we're working in coordinates moving along with the fluid flow. Second, we've assumed we're working on a small enough scale that the pressure and the expansion (which is the divergence of the velocity) are both roughly constant. There's plenty of cases where this doesn't work - turbulence wouldn't allow us to do this - but enough cases where it will to fix our ideas.
+							<br>
+							Next, we assume that the reactions are happening on a short timescale. Dimensionally we can pull this out into $\epsilon$, a small number encoding the ratio of scales. We will also linearize the reaction rate to make the steps clearer, although this isn't essential. Our key assumption is now that there is scale separation: behaviour at each power of $\epsilon$ is independent. Again, this wouldn't work in turbulent cases.
+							<br>
+							With these assumptions we can look for a power series solution in the species fraction. Plug this power series into the equation of motion for the species fraction and look at each power of the scale ratio separately. The leading order term in the power series is then fixed: remember $A, B$ are known functions that don't depend on the species fraction, as they come from linearising the reaction rate. We also see that this leading order term is in equilibrium: if it were the total species fraction and we plugged it into the equation of motion then its time derivative vanishes.
+							<br>
+							At zeroth order we have the next term in the expansion given by the time derivative of the equilibrium leading order term. Using the chain rule and the other equations of motion we can expand the time derivative. The precise form of the terms isn't essential here. What matters is that they are all evaluated at equilibrium, where the species fraction is given by the leading order term, which itself depends only on the baryon number and internal energy. We also pull out a factor of the expansion.
+							<br>
+							The reason for pulling out the expansion can be seen by going back to the other equations of motion, those for the baryon number and internal energy. The only place where the species fraction matters is in the pressure. We Taylor expand about equilibrium: the first order term is proportional to the first order term in the species fraction, so proportional to the expansion. That means it behaves exactly as expected for a bulk viscous pressure. The bulk viscous coefficient then depends on the baryon number and internal energy.
+							<br>
+							Putting this all together, what this multiscale calculation does is give us a reduced model. In the reduced model the species fraction is not evolved, but always assumed to be in equilibrium. Its value can be computed by setting the reaction rate to zero. The leading order impact of the out-of-equilibrium behaviour that should be there manifests itself as a bulk viscous pressure. The bulk viscous pressure coefficient can be evaluated using appropriate derivatives of the reaction rate, evaluated at equilibrium. We thus have to evaluate fewer equations of motion. More importantly, the problematic fast timescale has been removed from the problem, as the bulk viscous pressure correction term is linear in the small scale ratio, not inversely proportional to it as the reaction rate was.
+						</aside>
+
+					</section>
+
+					<section>
+
+						<h2>Impact of $\Pi$</h2>
+
+						<div class="container">
+							<div class="col">
+
+							<p>
+								Check with a "real" equation of state:
+							</p>
+							<ul>
+								<li>
+									Bulk viscous pressure can be big for neutron star core in merger;
+								</li>
+								<li>
+									Bulk viscous approximation <em>needed</em> above dashed lines (resolution dependent).
+								</li>
+							</ul>
+							</div>
+
+							<div>
+								<img src="figures/pch/Pip_cont_zoom.svg" style="width:1100px; margin:0px">
+							</div>
+						</div>
+
+						<aside class="notes">
+							Let us now move from the toy model to looking at the impact for a real equation of state. Here we're using the APR4 equation of state, with the reaction rates and derivatives computed using the Fermi surface approximation. That's not ideal: unfortunately very few equations of state also have the reaction rates in a suitable form for this calculation in full.
+							<br>
+							This plot covers the range of densities and temperatures relevant for a neutron star merger. The core of the neutron star is typically at a few times nuclear saturation density (see note below). The outer layers of the neutron star are many orders of magnitude lower, but the Urca reactions are rapidly suppressed at low densities. The temperature of the neutron star during inspiral is low - it is expected to be well below 1MeV - but can reach around 100MeV through merger in extreme cases.
+							<br>
+							There are two key pieces of information in this plot. The first, given by the colour, is how big the bulk viscous pressure is compared to the total pressure. We see this can be substantial - certainly into the percent level - at low temperatures, and particularly through the core. The second piece of information is the timescale of the reactions. Remember, bulk viscous pressure is an approximation, and that approximation is only needed if the numerical timestep is too big. The lines pick a particular timestep. Every region below a line has reactions slow enough that the bulk viscous approximation isn't needed, and the full nonlinear reaction can be directly solved. The solid line is quite a poor numerical resolution by current standards. The top, dotted, line is an order of magnitude better than the best simulation ever run. We see that there's a region in parameter space where we will have no choice but to use a bulk viscous approximation.
+							<br>
+							Note: back of the envelope calculation says that nuclear saturation density, the unit we use for baryon density, is roughly equivalent to the density of the universe when $z \sim 10^{12}$, which is very early in the life of the universe. It's close to the neutrino decoupling time - unsurprising as the nuclear reactions are linked to those invoked for this, as is the temperature at that point of 1MeV. This was around 1 second after the Big Bang.
+						</aside>
+
+					</section>
+
+				</section>
+
+				<section id="Simulation results">
+
+					<section>
+						<div class="container">
+							<div class="col">
+								<h2>Impact on GWs</h2>
+
+								<ul>
+									<li>
+										Do nonlinear merger simulation;
+									</li>
+									<li class="fragment" data-fragment-index=0>
+										Simulate with $\epsilon \to 0, \infty$;
+									</li>
+									<li class="fragment" data-fragment-index=1>
+										Filter out inspiral signal;
+									</li>
+									<li class="fragment" data-fragment-index=1>
+										Reactions "soften" EOS, $$\Delta f \simeq 58\textrm{Hz}$$
+									</li>
+									<li class="fragment" data-fragment-index=1>
+										Compute the mismatch between signals,
+										$$
+										\mathcal{M} \sim 1 - \frac{\max \langle h_1 \vert h_2 (\sim \textrm{phase}) \rangle}{\sqrt{\langle h_1 \vert h_1 \rangle\langle h_2 \vert h_2 \rangle}}
+										$$
+									</li>
+									<li class="fragment" data-fragment-index=1>
+										The limits are distinguishable in GWs by ET.
+									</li>
+								</ul>
+							</div>
+							<div class="col r-stack">
+								<img src="figures/pch/strain.svg" style="width:100%; margin:0px"class="fragment fade-in-then-out" data-fragment-index=0>
+								<div style="width:95%; margin:0px" class="fragment fade-in" data-fragment-index=1>
+									<img src="figures/pch/sqrtPSD_OoE_NSE.svg" style="width:100%; margin:0px">
+									<img src="figures/pch/sqrtPSD_OoE_OEL.svg" style="width:100%; margin:0px">
+								</div>
+							</div>
+						</div>
+						<aside class="notes">
+							Having argued that the nuclear reactions, in the bulk viscous approximation, can be relevant through merger, we actually want to test that. Doing the full nonlinear simulations is a real pain: for proper consistency we would need to keep track of the products of the reactions - that would be the neutrinos - by including radiation hydrodynamics, which increases the computational expense massively. Instead we focus on the extreme limits: the case where the reactions are infinitely slow and infinitely fast. If there's no way of distinguishing between these two cases observationally then we can leave this out of the model.
+							<br>
+							The simulations here again use the APR4 equation of state, and take two 1.4 solar mass neutron stars, initially 40km separated and in equilibrium, and run the simulation through a few orbits before merger. The three gravitational wave signals you see here are the slow and fast reaction limits, and then the slow reaction limit again but with a different numerical resolution to check that any differences are due to changing the model, not numerical error. By eye, it's impossible to tell the difference between the models.
+							<br>
+							However, we don't quantify signals by eye, nor do we do it in the time domain. Instead we look at signals in the frequency domain. So, perform the Fourier transform and look at where the power is in the signal. As the inspiral phase of the simulation will be the same - reactions only do anything at high enough densities and temperatures, so in the post-merger regime - we filter out the lower frequency inspiral signal to concentrate on the post-merger behaviour. This filtering was done in two different ways, and the result are unchanged by the choice.
+							<br>
+							The top panel compares the power spectra of the two models. The horizontal line is the design noise curve for the Einstein Telescope, giving us confidence that this post-merger signal would be detectable in ET. The peak in the power spectra of the post-merger signal has moved, as shown by the vertical dashed lines, by about 60Hz. This isn't a lot in a signal at 3kHz, but is orders of magnitude more than the phase change caused by changing numerical resolution, shown in the bottom panel. 
+							<br>
+							The question is then whether this makes a difference for estimating physical parameters in an observational pipeline. In particular, if we had a signal, and had the two templates for the different reaction limits, would we be able to distinguish which template was the better fit to the signal, given the noise? We can use the mismatch between the template signals to find the required signal-to-noise-ratio for distinguishability. The mismatch roughly finds the minimum difference, in frequency space, of two signals after phase and time shifting. The SNR required is then roughly the inverse square root of the mismatch.
+							<br>
+							For a merger happening at a similar distance to GW170817, and using a next generation GW detector, we see that the signals are distinguishable.
+							<br>
+							I need to emphasise that this does not mean we could measure nuclear reaction parameters through GWs. We should instead think of this as being a potential systematic error in the signals. It's then necessary to include nuclear reactions correctly into numerical simulations to get sufficiently accurate templates for ET.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Summary">
+					<section>
+
+						<div class="container">
+							<div class="col">
+								<h2>Summary</h2>
+
+								<ul>
+									<li>
+										Neutron star mergers need nonlinear numerical simulations.
+									</li>
+									<li>
+										Timescales mean subgrid schemes/models required.
+									</li>
+									<li>
+										Interpret models as bulk viscous corrections.
+									</li>
+									<li>
+										Modelling reactions necessary to avoid systematic errors.
+									</li>
+								</ul>
+								<p>
+									Look out for problems!
+								</p>
+								<ul>
+									<li>
+										Coupling to full radiation hydro might give double counting issues.
+									</li>
+									<li>
+										Potential for boundary layer issues in numerical codes.
+									</li>
+								</ul>
+								<p style="position:absolute; bottom:50px; left:500px">
+									<a href="https://arxiv.org/abs/2108.08649">Hammond+</a>; <a href="http://arxiv.org/abs/2207.00442">Most+</a>.
+								</p>
+							</div>
+							<div class="col">
+								<img src="figures/pch/adaptive_model.png" style="height:960px">
+							</div>
+						</div>
+
+						<aside class="notes">
+							Thank you for your attention.
+						</aside>
+
+					</section>
+				</section>
+
+
+			</div>
+
+		</div>
+
+
+		<script src="../math1058/reveal.js/dist/reveal.js"></script>
+		<script src="../math1058/reveal.js/plugin/zoom/zoom.js"></script>
+		<script src="../math1058/reveal.js/plugin/notes/notes.js"></script>
+		<script src="../math1058/reveal.js/plugin/search/search.js"></script>
+		<script src="../math1058/reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../math1058/reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../math1058/reveal.js/plugin/math/math.js"></script>
+		<script src="../math1058/reveal.js/plugin/spotlight/spotlight.js"></script>
+		<script src="../math1058/lectures/reveal_defaults.js"></script>
+
+
+	</body>
+</html>
