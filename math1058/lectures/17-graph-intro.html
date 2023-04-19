@@ -53,7 +53,7 @@
 
 <ul>
 	<li class="fragment" data-fragment-index="2">\( V \) is a set of <em><span style="color:#FF0000">nodes / vertices</span></em> with \( |V| = n \).</li>
-	<li class="fragment" data-fragment-index="3">\(A \) is a set of ordered pairs \( A \supseteq V \times V \), excluding self-loops, called <em><span style="color:#FF0000">arcs</span></em>, with \( |A|= m \).</li>
+	<li class="fragment" data-fragment-index="3">\(A \) is a set of ordered pairs \( A \subset V \times V \), excluding self-loops, called <em><span style="color:#FF0000">arcs</span></em>, with \( |A|= m \).</li>
 </ul>
 </div></div>
 <div class="sl-block" data-block-type="image" data-name="image-0edd31" data-block-id="7d64f9b2fbf798ecb2013b78aa133549" style="width: 356.021px; height: 348px; left: 36.03px; top: 340px; min-width: 1px; min-height: 1px;"><div class="sl-block-content fragment" style="z-index: 13;" data-fragment-index="4"><img style="" data-natural-width="1154" data-natural-height="1128" data-lazy-loaded="" data-src="images/17_graph_intro/3175ccf5c99e8b7e57f9aa8fc5db865d.png"></div></div>
@@ -275,11 +275,11 @@
 <p><span style="font-size:1.4em">Cuts</span></p>
 </div></div>
 <div class="sl-block" data-block-type="text" data-name="text-5e40e3" data-block-id="a61f2c9927cd50a27292f76404906713" style="height: auto; width: 952px; left: 8px; top: 116px;"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;" data-fragment-index="0">
-<p style="text-align: left;"><strong>Definition: </strong>Let \( S \supseteq V \). We call the <em><span style="color:#FF0000">forward cut induced by \(S\) </span></em>the set of arcs leaving \(S\), with tail in \(S\) and head in \(V \backslash S \).</p>
+<p style="text-align: left;"><strong>Definition: </strong>Let \( S \subset V \). We call the <em><span style="color:#FF0000">forward cut induced by \(S\) </span></em>the set of arcs leaving \(S\), with tail in \(S\) and head in \(V \backslash S \).</p>
 </div></div>
 <div class="sl-block" data-block-type="math" data-name="math-b9fbec" data-block-id="4df152fac9aeda9dabe476f42d1de886" style="width: auto; height: auto; left: 111.5px; top: 264px;"><div class="sl-block-content notranslate fragment" style="z-index: 12; font-size: 80%;" data-fragment-index="1"><div class="math-input">\delta^{+}(S):= \{ (i,j) \in A: i \in S \;\; \text{and}\;\; j \in V \backslash S \}</div></div></div>
 <div class="sl-block" data-block-type="text" style="height: auto; width: 952px; left: 8px; top: 396px;" data-block-id="5ca2e70c073b1882955c1b419043baf2" data-name="text-22e06d"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;" data-fragment-index="2">
-<p style="text-align:left"><strong>Definition: </strong>Let \( S \supseteq V \). We call the <em><span style="color:#FF0000">backward</span></em><em><span style="color:#FF0000"> cut induced by \(S\) </span></em>the set of arcs entering \(S\), with tail in \(V \backslash S\) and head in \(S \).</p>
+<p style="text-align:left"><strong>Definition: </strong>Let \( S \subset V \). We call the <em><span style="color:#FF0000">backward</span></em><em><span style="color:#FF0000"> cut induced by \(S\) </span></em>the set of arcs entering \(S\), with tail in \(V \backslash S\) and head in \(S \).</p>
 </div></div>
 <div class="sl-block" data-block-type="math" data-name="math-f42d29" data-block-id="cca2618e7deb13bf48988ed0cc37d10d" style="width: auto; height: auto; left: 107.5px; top: 522px;"><div class="sl-block-content notranslate fragment" style="z-index: 14; font-size: 80%;" data-fragment-index="3"><div class="math-input">\delta^{-}(S):= \{ (i,j) \in A: i \in  V \backslash S \;\; \text{and}\;\; j \in S \}</div></div></div></section><section data-id="e36b17e5f078bb66c07053467aa40c9c"><div class="sl-block" data-block-type="text" data-name="text-cce7d6" data-block-id="70837fa08f31e1ad8bfc5cfca3682150" style="height: auto; width: 600px; left: 180px; top: 0px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;">
 <p><span style="font-size:1.4em">Example</span></p>
