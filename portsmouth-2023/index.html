@@ -458,6 +458,160 @@
 					</section>
 				</section>
 
+				<section id="Boundary Layers">
+
+					<section>
+						<h2>Solve the toy problem</h2>
+						
+						<img src="figures/boundary_layers/rel_no_bl.svg" style="width:90%">
+					
+						<aside class="notes">
+							When we set up the toy problem we never showed results to actually prove that the approximations made things better. Let's fix that here. None of the numbers mean anything much. The fast timescale here isn't too fast - typically one to four orders of magnitude less than the full run time, to see the effects.
+							<br>
+							In this case, where we're starting with the lepton fraction being at equilibrium, it's impossible by eye to distinguish the different cases. The error obviously improves using the bulk viscous approximation as compared to just enforcing equilibrium, which is what infinitely fast reactions do, but the errors are tiny.
+						</aside>
+	
+					</section>
+
+					<section>
+						<div class="container">
+							<div class="col">
+								<h2>Check accuracy</h2>
+								<ul>
+									<li>
+										Vary the fast timescale.
+									</li>
+									<li>
+										See the expected behaviour:
+										<ul>
+											<li>
+												Leading order error $\propto \epsilon$;
+											</li>
+											<li>
+												Bulk viscous error $\propto \epsilon^2$;
+											</li>
+											<li>
+												More terms including, better overall error.
+											</li>
+										</ul>
+									</li>
+								</ul>
+								<p>
+									Argues for the use of the bulk viscous pressure correction.
+								</p>
+							</div>
+							<div class="col">
+								<img src="figures/boundary_layers/rel_no_bl_conv.svg" style="width:100%">
+							</div>
+						</div>
+
+						<aside class="notes">
+							To check the behaviour of the approximations is correct we solve the same problem varying the timescale, and look at the difference between the full problem and our differing approximation schemes. We see the expected result: the error at times order one is proportional to the scale ratio raised to the power of the first term not included in the approximation. So including the bulk viscous correction term improves our results.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Start out-of-equilibrium</h2>
+						
+						<img src="figures/boundary_layers/rel_bl.svg" style="width:90%">
+					
+						<aside class="notes">
+							If we start out of equilibrium then the results look much worse. We're working with a large timescale ratio here to make the behaviour clear, but it's already obvious that the different approximations have comparable errors. It's also obvious that the early time behaviour is a real issue, as the initial out-of-equilibrium behaviour relaxes.
+						</aside>
+	
+					</section>
+
+					<section>
+						<div class="container">
+							<div class="col">
+								<h2>Check accuracy</h2>
+								<ul>
+									<li>
+										Vary the fast timescale.
+									</li>
+									<li>
+										Do <em>not</em> see the expected behaviour:
+										<ul>
+											<li>
+												Leading order error $\propto \epsilon$;
+											</li>
+											<li>
+												Bulk viscous error $\propto \epsilon$!
+											</li>
+											<li>
+												Errors comparable.
+											</li>
+										</ul>
+									</li>
+								</ul>
+								<p>
+									What has gone wrong?
+								</p>
+							</div>
+							<div class="col">
+								<img src="figures/boundary_layers/rel_bl_conv.svg" style="width:100%">
+							</div>
+						</div>
+
+						<aside class="notes">
+							We apply the same convergence test with the timescale ratio. We now see that the bulk viscous approximation is not behaving as we wanted.
+							<br>
+							In essence, the issue is that both approximations are inconsistent with the initial data for the species fraction. This is because they use reduced models that ignore that equation of motion, instead computing its value by assuming equilibrium. When we start out of equilibrium, an inconsistency is inevitable. If we're a long way from equilibrium, the inconsistency can lead to a systematic error that kills the advantages from the higher order corrections.
+							<br>
+							We can get around this by modifying the initial data used by the approximations.
+						</aside>
+					</section>
+					
+					<section>
+						<h2>Boundary layers</h2>
+						
+						<img src="figures/boundary_layers/rel_bl_correction.svg" style="width:90%">
+					
+						<aside class="notes">
+							The power series expansion assumption isn't correct at early times. At that point the solution wants to relax exponentially quickly to (near) the equilibrium surface. We can see this by the plot. We can also see this by re-scaling the equation to look solely at the early time behaviour.
+							<br>
+							If we solve the re-scaled behaviour near the initial time, we can use matched asymptotic expansions to tell us how to correct the initial data for the reduced models. This is a pain, but re-captures all the advantages.
+						</aside>
+	
+					</section>
+
+					<section>
+						<div class="container">
+							<div class="col">
+								<h2>Check accuracy</h2>
+								<ul>
+									<li>
+										Vary the fast timescale.
+									</li>
+									<li>
+										Again see the expected behaviour:
+										<ul>
+											<li>
+												Leading order error $\propto \epsilon$;
+											</li>
+											<li>
+												Bulk viscous error $\propto \epsilon^2$
+											</li>
+										</ul>
+									</li>
+								</ul>
+								<p>
+									Matched asymptotics and modifying the initial data mean we can successfully use bulk viscous approximations.
+								</p>
+								<p>
+									Within a numerical scheme, discrete steps or multi-physics aspects can act to push things out of equilibrium...
+								</p>
+							</div>
+							<div class="col">
+								<img src="figures/boundary_layers/rel_bl_correction_conv.svg" style="width:100%">
+							</div>
+						</div>
+
+						<aside class="notes">
+							The initial data modification fixes the issues.
+						</aside>
+					</section>
+				</section>
 
 			</div>
 
