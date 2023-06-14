@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Einstein Toolkit Meeting 2023</title>
+
+		<meta name="description" content="ETK, Aveiro, 2023">
+		<meta name="author" content="Ian Hawke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="../math1058/reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../math1058/reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../math1058/reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../math1058/reveal.js/plugin/highlight/monokai.css">
+
+	<style type="text/css">
+	  .reveal p {
+	    text-align: left;
+	  }
+	  .reveal ul {
+	    display: block;
+	  }
+	  .reveal ol {
+	    display: block;
+	  }
+
+		.reveal pre code {
+			font-size: 1.4em !important;
+			line-height: 1.4 !important;
+		}
+		.container{
+		    display: flex;
+		}
+		.col{
+		    flex: 1;
+		}
+	</style>
+
+
+
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="Title">
+
+					<section data-background="../et-2022/figures/pch/strain.svg" data-background-position='right' data-background-size="50%">
+						<div style="float: center; width: 50%">
+							<h2 class="r-fit-text">ETK Aveiro 2023 </h2>
+							<ul>
+								<li>
+									<a href="./matter_numerics.html">Numerical Methods for Matter in GR (Monday 19th June, 10.30)</a>.
+								</li>
+								<li>
+									<a href="./bulk_viscosity.html">Impact of nuclear reactions on GWs from NS mergers (Wednesday 21st June, 11.30)</a>.
+								</li>
+							</ul>
+						</div>
+						<aside class="notes">
+							Follow the links.
+						</aside>
+					</section>
+
+				</section>
+
+			</div>
+
+		</div>
+
+
+		<script src="../math1058/reveal.js/dist/reveal.js"></script>
+		<script src="../math1058/reveal.js/plugin/zoom/zoom.js"></script>
+		<script src="../math1058/reveal.js/plugin/notes/notes.js"></script>
+		<script src="../math1058/reveal.js/plugin/search/search.js"></script>
+		<script src="../math1058/reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../math1058/reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../math1058/reveal.js/plugin/math/math.js"></script>
+		<script src="../math1058/reveal.js/plugin/spotlight/spotlight.js"></script>
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				width: 1536,
+			  height: 960,
+			  margin: 0.04,
+				controls: false,
+				progress: true,
+				center: true,
+				hash: true,
+				transition: 'none',
+				pdfSeparateFragments: true,
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath.KaTeX, RevealSpotlight  ],
+				spotlight: {
+					presentingCursor: 'default',
+					useAsPointer: true,
+					size: 10,
+					toggleSpotlightOnMouseDown: false,
+					spotlightOnKeyPressAndHold: true,
+				},
+				keyboard: {
+					// alternative to toggleSpotlightOnMouseDown:
+					// toggle spotlight by pressing key 'c'
+					67: function() { RevealSpotlight.toggleSpotlight() },
+				},
+			});
+
+		</script>
+
+
+	</body>
+</html>
