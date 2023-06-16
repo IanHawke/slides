@@ -4,9 +4,9 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Numerical Methods in GR</title>
+		<title>Numerical Methods for Matter in GR</title>
 
-		<meta name="description" content="ETK, Dublin, 2022">
+		<meta name="description" content="ETK, Aveiro, 2023">
 		<meta name="author" content="Ian Hawke">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -58,9 +58,9 @@
 
 				<section id="Title">
 
-					<section data-background="figures/pch/strain.svg" data-background-position='right' data-background-size="50%">
+					<section data-background="../et-2022/figures/pch/strain.svg" data-background-position='right' data-background-size="50%">
 						<div style="float: center; width: 50%">
-							<h2 class="r-fit-text">Numerical Methods in GR </h2>
+							<h2 class="r-fit-text">Numerical Methods for Matter in GR </h2>
 							<p style="margin: 50px">
 								<ul style="list-style: none;">
 									<li> Ian Hawke
@@ -75,7 +75,7 @@
 							</p>
 							<p style="margin: 50px">
 								<ul style="list-style: none;">
-									<li> <a href="https://ianhawke.github.io/slides/et-2022">ianhawke.github.io/slides/et-2022</a> </li>
+									<li> <a href="https://ianhawke.github.io/slides/et-2023">ianhawke.github.io/slides/et-2023</a> </li>
 								</ul>
 							</p>
 						</div>
@@ -93,59 +93,55 @@
 						<div class="container">
 							<div class="col">
 
-								<h2>The aim</h2>
+								<h2>What matters</h2>
 
-								<p>
-									Numerics:
-								</p>
+								$$
+								G_{ab} = 8 \pi T_{ab}, \quad \textrm{where } T_{ab} = \dots 
+								$$
 								<ol>
 									<li>
-										given model,
+										scalar fields;
 									</li>
 									<li>
-										find observable
+										simple fluids (dust, barotropes);
 									</li>
 									<li>
-										 to given accuracy
-									 </li>
-									 <li>
-										 using minimum resources.
-									 </li>
+										composition dependent finite temperature fluids;
+									</li>
+									<li>
+										electromagnetism (MHD, resistivity, full Maxwell);
+									</li>
+									<li>
+										neutrinos, ...
+									</li>
 								 </ol>
 								<p class="fragment" data-fragment-index=1>
 									ETK:
 								</p>
 								<ol class="fragment" data-fragment-index=1>
 									<li>
-										within GR,
+										couple $T_{ab}$ to $G_{ab}$;
 									</li>
 									<li>
-										find GW signal from binary merger
+										provides solvers for perfect MHD, constituitive interfaces;
 									</li>
 									<li>
-										to 1 radian phase accuracy
-									</li>
-									<li>
-										using minimum CPU time.
+										builds on spacetime infrastructure.
 									</li>
 								</ol>
 								<p style="position:absolute; bottom:0;">
-									<a href="https://arxiv.org/abs/2205.11377">Hammond+, 2205.11377.</a>
+									<a href="https://arxiv.org/abs/2108.08649">Hammond+, 2205.11377.</a>
 								</p>
 							</div>
 
 							<div class="col">
-								<img src="figures/pch/sqrtPSD_OoE_NSE.svg" style="width:680px; margin:0px">
-								<img src="figures/pch/sqrtPSD_OoE_OEL.svg" style="width:680px; margin:0px">
+								<img src="../portsmouth-2023/figures/pch/rhomubTYe.svg" style="width:100%; margin:0px">
+								<img src="../portsmouth-2023/figures/pch/mub_T_new.svg" style="width:100%; margin:0px">
 							</div>
 						</div>
 
 						<aside class="notes">
-							There is no <em>generic</em> best model. We want to find a specific model prediction as efficiently as possible, often to estimate parameters of the model. It's clear that as we change model, or the observable of interest, or the level of accuracy required by observations, or the resources available, then the best numerical method could change.
-							<br>
-							The ETK is founded on design decisions taken 20-25 years ago, built around assumptions from LIGO. It is designed to work within GR or similar theores, for finding gravitational wave signals, with accuracy assumptions from the early LIGO era, and working with HPC resources built around CPUs.
-							<br>
-							We have to remember that "resource" here includes human time. We have to balance the time needed to improve the methods with "just" throwing more compute time at a problem.
+							The ETK was designed with gravitational wave applications in mind. That means the motivating examples for including matter are astrophysical, in particular neutron star mergers. This should not be taken as representative of all research on relativistic numerical simulations with matter. There's a lot of work done in, for example, alternative theories of gravity with high energy physics applications where scalar fields are crucial, and cosmological applications where "dust" or radiation fluids are essential. However, for our motivating example of neutron star mergers that the ETK has been set up to support, we're looking at relativistic magneto-fluids at finite temperature, coupled to radiation transport.
 						</aside>
 
 					</section>
