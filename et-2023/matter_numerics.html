@@ -184,7 +184,7 @@
 
 					<section>
 
-						<h1>Shock formation</h1>
+						<h2>Shock formation</h2>
 						<div class="container">
 							<div class="col">
 		
@@ -224,15 +224,15 @@
 								</p>
 								$$
 								\begin{aligned}
-									&& \partial_t \phi + \nabla_k f^{(k)}(\phi) & = 0 \\
-									\implies && \frac{\text{d}}{\text{d}t} \int_V \phi + \oint_{\partial V} \hat{n}_k  f^{(k)}(\phi) & = 0.
+									&& \partial_t q + \nabla_k f^{(k)}(q) & = 0 \\
+									\implies && \frac{\text{d}}{\text{d}t} \int_V q + \oint_{\partial V} \hat{n}_k  f^{(k)}(q) & = 0.
 								\end{aligned}
 								$$
 								<p>
 									Discrete version, 1d:
 								</p>
 								$$
-								\frac{\text{d}}{\text{d}t} \hat{\phi}_i + \frac{1}{\Delta x} \left[ f_{i+1/2} - f_{i-1/2} \right] = 0.
+								\frac{\text{d}}{\text{d}t} \hat{q}_i + \frac{1}{\Delta x} \left[ f_{i+1/2} - f_{i-1/2} \right] = 0.
 								$$
 								<p>
 									Finding the flux $f_{k \pm 1/2}$ depends on the model (for fluids see <a href="https://einsteintoolkit.org/thornguide/EinsteinEvolve/GRHydro/documentation.html"><code>GRHydro</code></a> etc).
@@ -289,57 +289,65 @@
 
 				</section>
 
-				<section id="Linear issues">
+				<section id="GRHydro">
 
 					<section>
 						<div class="container">
 							<div class="col">
-
-								<h2>Finite differencing</h2>
+								<h2>Algorithm outline</h2>
 
 								<p>
-									Approximate:
+									Discrete version, 1d:
 								</p>
+								$$
+								\frac{\text{d}}{\text{d}t} \hat{q}_i + \frac{1}{\Delta x} \left[ f_{i+1/2} - f_{i-1/2} \right] = 0.
+								$$
 								<ol>
 									<li>
-										fields $\phi$ as point values $\phi_i = \phi(x_i)$;
+										<em>Reconstruct</em> $\{ \hat{q}_i \} \to q(x)$;
 									</li>
 									<li>
-										polynomial interpolation gives $\hat{\phi}(x)$ from $\{\phi_i\}$;
+										<em>Solve</em> discontinuous problem at cell boundaries;
 									</li>
 									<li>
-										 derivative from $\partial_x \phi \simeq \partial_x \hat{\phi}$.
-								 </li>
+										<em>Average</em> from $\{f_{i+1/2}\}$ get new $\hat{q}_i$.
+									</li>
 								</ol>
-								<p>
-									See <a href="http://kranccode.org/index.html"><code>Kranc</code></a>, <a href="https://nrpyplus.net/"><code>NRPy</code></a>.
-								</p>
-								<div class="fragment" data-fragment-index=1>
-									<p>
-										Example:
-									</p>
-									$$
-									\begin{aligned}
-										&& \partial_t \phi + \partial_x (v \phi) & = 0 \\
-										\rightarrow && \partial_t \phi_i & = \frac{-v \left( \phi_{i+1} - \phi_{i-1} \right)}{2 \, \Delta x}.
-									\end{aligned}
-									$$
-								</div>
+								<br>
+								<ul class="fragment">
+									<li>
+										Sources "just" add (stiffness?);
+									</li>
+									<li>
+										Can reconstruct $f$ directly;
+									</li>
+									<li>
+										Use <code>MoL</code> in time;
+									</li>
+									<li>
+										High accuracy needs good reconstruction and time evolution.
+									</li>
+								</ul>
 							</div>
-							<div class="col r-stack">
-								<img src="figures/fd_example.svg" style="width:100%">
-								<video controls data-autoplay loop="true" src="figures/fd_compare.mp4" style="width:100%" class="fragment fade-in" data-fragment-index=1>
+							<div class="col">
+								<img src="../et-2022/figures/weak_solutions1.svg" style="width:100%">
 							</div>
 						</div>
 
 						<aside class="notes">
-							Start from the "field values at grid points" viewpoint. Finite differencing is the standard method used in many codes, particularly for evolving the spacetime within the ETK. Given the field values at the points, we can fit an interpolating polynomial through the values and then approximate the derivative of the field as the derivative of the interpolating polynomial. For most cases we can explicitly calculate the derivative in terms of the neighbouring points, so this is very cheap.
+							The classic algorithm used by Einstein Toolkit codes works as follows.
 							<br>
-							The more points we use the higher the order of the interpolating polynomial and hence the better the accuracy of the approximation, in general, but the higher the cost.
+							The weak solution is stored as an integral average over the grid cells. Using the weak form we write the update in terms of the flux through the boundary of the cell. In one dimension that's the flux contributions into the cell from the left and out through the right.
 							<br>
-							If developing a new code you can find the finite differencing coefficients on Wikipedia, for example. However, it's simplest - within the ETK - to use one of the code generation frameworks such as Kranc or NRPy to generate efficient finite differencing code.
+							We then take these integral average solutions and reconstruct a pointwise function interpolating the data. This has to ensure conservation of the data, or shocks are inconsistent. It has to allow for discontinuities: all practical methods put discontinuities at the cell boundaries. So generically we assume that the data is always discontinuous at cell boundaries.
+							<br>
+							We then need to solve this discontinuous problem at the boundary to compute the flux. This is usually called the <em>Riemann Problem</em>. Strictly the Riemann Problem finds the solution for all variables, and we then construct the flux from them (using self-similarity). However, we can (and often do) use approximations that give the flux directly from the variables.
+							<br>
+							We can then update the discrete integral averages using the flux contributions. This is often talked about as updating the reconstructed solution which is then integral averaged back onto the discrete cells.
+							<br>
+							Adding sources can be done algebraically. Provided they change slowly in time, which is true for the geometric terms, this is fine. To evolve in time we use the standard method of lines approach. Both absolute and order of accuracy are dominated by the reconstruction method, with some impact from the time evolution. The Riemann solver has an impact near shocks and ensures stability.
 						</aside>
-
+	
 					</section>
 
 					<section>
