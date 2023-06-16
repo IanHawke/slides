@@ -60,7 +60,7 @@
 
 					<section data-background="../et-2022/figures/pch/strain.svg" data-background-position='right' data-background-size="50%">
 						<div style="float: center; width: 50%">
-							<h2 class="r-fit-text">Numerical Methods for Matter in GR </h2>
+							<h2>Numerical Methods for Matter in GR </h2>
 							<p style="margin: 50px">
 								<ul style="list-style: none;">
 									<li> Ian Hawke
@@ -106,10 +106,10 @@
 										simple fluids (dust, barotropes);
 									</li>
 									<li>
-										composition dependent finite temperature fluids;
+										finite $T$, real $Y_\text{x}$ fluids;
 									</li>
 									<li>
-										electromagnetism (MHD, resistivity, full Maxwell);
+										electromagnetism (MHD, resistivity, ...);
 									</li>
 									<li>
 										neutrinos, ...
@@ -120,7 +120,7 @@
 								</p>
 								<ol class="fragment" data-fragment-index=1>
 									<li>
-										couple $T_{ab}$ to $G_{ab}$;
+										couple $T_{ab} \leftrightarrow G_{ab}$;
 									</li>
 									<li>
 										provides solvers for perfect MHD, constituitive interfaces;
@@ -146,161 +146,145 @@
 
 					</section>
 
-					<section>
-						<div class="container">
-							<div class="col">
-								<h2>The models</h2>
-
-								<ol>
-									<li>
-										EFEs $\implies$ wave equation
-										$$
-										\partial_{tt} \phi = c^2 \nabla^2 \phi;
-										$$
-									</li>
-									<li>
-										Charge conservation $\implies$ advection
-										$$
-										\partial_t \phi + \nabla_k \left( \phi v^k \right) = 0;
-										$$
-									</li>
-									<li>
-										$\nabla_a T^{ab} \; \implies$ balance laws
-										$$
-										\partial_t q + \nabla_k f^{(k)}(q) = s(q);
-										$$
-									 </li>
-									 <li>
-										 Exchange $\implies$ relaxation
-										 $$
-										 \dot{q} = \tau^{-1} s(q).
-										 $$
-									 </li>
-								 </ol>
-
-							</div>
-							<div class="col">
-								<video controls data-autoplay loop="true" src="figures/toy_models.mp4" style="width:768px; margin:0px">
-							</div>
-						</div>
-						<aside class="notes">
-							When looking at the numerical methods literature, and developing and testing methods, it's really useful to look at toy models and know why they're relevant. A number are clear: information is pushed around by waves and by matter, so the wave equation is obviously important for gravitational waves, and the advection equation needed for matter models. Most matter models will also give nonlinear balance laws, for which the standard toy model is Burgers' equation where the flux term is quadratic in terms of the conserved quantity.
-							<br>
-							In addition, information is exchanged between spacetime and matter, or between different components of the matter. This often leads to relaxation towards an equilibrium on a specific timescale. This timescale can be really important for the numerics, as we'll talk about later.
-						</aside>
-
-					</section>
-
 				</section>
 
-				<section id="Fundamentals">
+				<section id="Shocks">
 
 					<section>
-						<div class="container">
-							<div class="col">
-
-							<h2>Split out time</h2>
+						<div>
+							<h2>Conservation</h2>
 
 							<p>
-								Method of Lines (thorn <a href="https://einsteintoolkit.org/thornguide/CactusNumerical/MoL/documentation.html"><code>MoL</code></a>):
+								EFEs imply $\nabla_a T^{ab} = 0$.
 							</p>
-							<ol>
-								<li>
-									start from spacetime;
-								</li>
-								<li>
-									discretize space, giving ODEs;
-								</li>
-								<li>
-									 solve ODEs.
-							 </li>
-							</ol>
-							<p class="fragment" data-fragment-index=1>
-								(Dis)advantages:
+							<p>
+								Pick a tetrad, $e_b^{(j)}$ to get
+								$$
+								\begin{aligned}
+									&& \nabla_a \left[ e_b^{(j)} T^{ab} \right] &= \tfrac{1}{\sqrt{-g}} \partial_a \left( \sqrt{-g} e_b^{(j)} T^{ab} \right) = -T^{ab} \nabla_a e_b^{(j)} \\
+									\implies && \partial_t {\bf q} + \partial_i {\bf f}^{(i)}({\bf q}) &= {\bf s}.
+								\end{aligned}
+								$$
+								Balance law form.
 							</p>
-							<ul class="fragment" data-fragment-index=1>
-							<li>
-								MoL simplifies coupling;
-							</li>
-								<li>
-									causality restricts $\Delta t$;
-								</li>
-								<li>
-									width of stencil affects cost;
-								</li>
-								<li>
-									accuracy, efficiency issues.
-								</li>
-							</ul>
-
+							<p>
+								Only four equations: need other constituitive equations for, eg, EM, particle number, etc.
+							</p>
 						</div>
-							<div class="col r-stack">
-							<img src="figures/mol1.svg" style="width:100%">
-							<img src="figures/mol2.svg" style="width:100%" class="fragment fade-in" data-fragment-index=1>
+						<aside class="notes">
+							We now know the outlines of our problem. We want a model of matter, coupled to GR, that we can write as a set of PDEs. This model will encode the detailed physics we're interested in, at the level we can simulate with our given resources. But before we try and be specific, let's look at what we can say in general.
+							<br>
+							We know the field equations require total stress energy conservation: the divergence of $T^{ab}$ is zero. We can use this to get <i>four</i> equations of motion. The most useful form for our purposes is to use the standard identity for the 4-divergence of a vector, which can be written as the <i>partial</i> 4-divergence of that vector, weighted by the metric determinant. To get from the stress-energy, which is a two-tensor, to a vector, we contract the free index with one member of a <i>tetrad</i>, which is a set of orthonormal (in our case) vectors that we can link to the coordinates. This then allows us to write stress energy conservation as four PDEs, one for each member of the tetrad.
+							<br>
+							The key point is that the only derivatives of the matter appear in total divergence form. The term on the right-hand-side which isn't in this form only involves derivatives of the tetrad, which can be written as derivatives of spacetime quantities. We write this abstractly in <i>balance law form</i>: all derivatives of the matter are total derivatives, but these <i>fluxes</i> must balance off against the <i>source terms</i> which come from the geometry.
+							<br>
+							If we simplify to Minkowski space in standard Cartesian coordinates then the source terms vanish and these balance laws reduce to the <i>conservation laws</i> for energy-momentum. However, we need to be careful of this interpretation (locally): if we write Minkowski spacetime in <i>spherical</i> coordinates then there will be source terms, but that certainly does not mean that energy-momentum is being transferred between the matter and the spacetime.
+						</aside>
+					</section>
+
+					<section>
+
+						<h1>Shock formation</h1>
+						<div class="container">
+							<div class="col">
+		
+								<p>
+									Advection equation
+									$$
+										\partial_t q + \partial_x (v q) = 0.
+									$$
+									Information moves right, speed $v$.
+								</p>
+								<p>
+									Burgers equation
+									$$
+										\partial_t q + \tfrac{1}{2} \partial_x q^{2} = 0.
+									$$
+									Information moves right, speed $q$. Shocks form.
+								</p>
+							</div>
+							<div class="col">
+								<img src="figures/characteristics.svg" style="width:100%; margin:0px">
 							</div>
 						</div>
-
 						<aside class="notes">
-							Evolving just the spacetime is complex enough. However, there are many weakly coupled systems and models that we care about, including fluids, magnetic fields, radiation, gauge, and more. Monolithic codes that deal with everything at once are hard to write, hard to maintain, and hard to analyse. Instead it's best to split the code into separate sections - thorns, in the Cactus language - which are easier to work with.
+							We see that <i>generically</i> the matter will obey conservation laws. We expect the fluxes ${\bf f}$ to depend <i>nonlinearly</i> on the conserved variables ${\bf q}$. This immediately tells us something very important.
 							<br>
-							The central idea is to split space and time at the discrete level. This is semi-discretization, or the Method of Lines. First we introduce some finite representation of the spatial dependence of the fields, whilst keeping time continuous. Think about introducing a grid of points on each slice of the manifold. The result of this is to convert the PDEs describing the model to ODEs. This system is large, and couples (for example) all the neighbouring points on the grid, but is a lot easier to solve numerically in a consistent and accurate fashion.
-							<br>
-							Solving the ODEs introduces the discretization in time, and hence the timestep. Causality means that the representative lengthscale introduced by the spatial discretization will be linked to the maximum stable timestep that can be taken: a given point on the future slice needs to be updated using all points from the previous slice that could potentially be causally connected to it. The more timesteps you have to take, the higher the cost and the lower the accuracy.
-							<br>
-							The ETK implements this idea through the <code>MoL</code> thorn. It's central to the ideas I'll present here. When absolute efficiency and accuracy are essential, particular when working with less accurate methods, it can be better to avoid using this approach.
+							The simplest conservation law is the advection equation, where the solution is propagated to the right with constant speed $v$. For a nonlinear conservation law we can <i>locally</i> approximate it as an advection-like equation, where the solution propagates with speed $\partial_q f$. This means the propagation speed depends on the data. Depending on the form of the flux function, some gradients will steadily get steeper, and some will get shallower. In the absence of dissipation (and crucially the generic total energy-momentum equations have no dissipative terms) these steepening effects will lead to discontinuities: a generic <i>shock</i> will form.
 						</aside>
-
 					</section>
 
 					<section>
 						<div class="container">
 							<div class="col">
-								<h2>Fields as data</h2>
+								<h2>Nonlinearity</h2>
+
 								<p>
-									To represent $\phi(x)$ as finite data:
+									Formally need to work with <em>weak form</em>
 								</p>
-								<ol>
-									<li>
-										Finite differences. Points $x_i$,
-										$$
-										\phi_i = \phi(x_i).
-										$$
-									</li>
-									<li>
-										Finite volumes. Cells $[x_{i-1/2}, x_{i+1/2}]$,
-										$$
-										\hat{\phi}_i = \frac{1}{\Delta x} \int_{x_{i-1/2}}^{x_{i+1/2}} \text{d} x \, \phi(x).
-										$$
-									</li>
-									<li>
-										Finite elements. Basis functions $P_m(x)$,
-										$$
-										\phi(x) = \sum_m \hat{\phi}_m P_m(x).
-										$$
-									</li>
-								</ol>
-								<p class="fragment" style="margin-top:-20px">
-									ETK works best with FD and FV.
+								$$
+								\begin{aligned}
+									&& \partial_t \phi + \nabla_k f^{(k)}(\phi) & = 0 \\
+									\implies && \frac{\text{d}}{\text{d}t} \int_V \phi + \oint_{\partial V} \hat{n}_k  f^{(k)}(\phi) & = 0.
+								\end{aligned}
+								$$
+								<p>
+									Discrete version, 1d:
+								</p>
+								$$
+								\frac{\text{d}}{\text{d}t} \hat{\phi}_i + \frac{1}{\Delta x} \left[ f_{i+1/2} - f_{i-1/2} \right] = 0.
+								$$
+								<p>
+									Finding the flux $f_{k \pm 1/2}$ depends on the model (for fluids see <a href="https://einsteintoolkit.org/thornguide/EinsteinEvolve/GRHydro/documentation.html"><code>GRHydro</code></a> etc).
 								</p>
 							</div>
 							<div class="col">
-								<img src="figures/fd_fv_fe_grids.svg" style="width:100%">
+								<img src="../et-2022/figures/weak_solutions1.svg" style="width:100%">
 							</div>
 						</div>
 
 						<aside class="notes">
-							With the time advance dealt with by converting everything to ODEs, specifying the rest of the numerical method depends on how the spatial derivatives are represented discretely. This is directly linked to how the continuous fields describing the model are represented discretely.
+							All the previous discussion has focused on linear models such as the wave and advection equations. However, matter models such as fluids naturally lead to nonlinear balance laws. The nonlinearity means that information is propagated at a speed that depends on the data, meaning that generic initial data will lead to discontinuities forming. At this point the strong form of the PDE does not make sense. Instead we need to use the weak form which follows from the finite volume representation shown earlier, where we integrate the PDE over the cell volume.
 							<br>
-							The first, and usually simplest, option is to represent fields by introducing a set of gridpoints covering the slice and storing discretely the values of the fields at these points. Regularly spaced grids in some coordinate system are simplest and often lead to the fastest expressions to numerically evaluate; however, they may not be the most efficient as we'll touch on later.
-							<br>
-							Another approach that's often used for matter models is to think of the slice as split into sub-volumes called cells, and to store the average value of the fields within each cell. This has specific advantages when the fields lose differentiability, for a slight increase in complexity and cost.
-							<br>
-							The third approach is to express the fields in terms of a function basis. Standard examples are Fourier series, particularly truncated Fourier series, where a function is expressed as a finite sum of trigonometric functions. We then store the mode coefficients. We can do this over the whole domain at once, or apply it again on subdomains. This approach needs much more set-up and can be very costly, but can also give huge gains in efficiency.
-							<br>
-							There are also particle methods. Despite some recent successes of SPH within numerical relativity - see Sphincs-BSSN - from the point of view of this classification SPH is closer to a function basis method than a traditional particle method. In my opinion, particle methods have very limited applicability to our problems.
-							<br>
-							The ETK was designed with finite difference methods in mind, using the grid point representation. Adapting it to finite volume methods is not difficult. Function basis methods are used in places, particularly for initial data, but are not a natural choice within the ETK for evolution.
+							We saw earlier that it's essential to reconstruct the data using a data-dependent method such as a WENO scheme. When applied to the weak form we use this to compute the flux through the cell boundaries. This can be done in multiple ways. The first standard one is to compute a flux at the cell centre, reconstruct to the boundaries, and average appropriately. The other standard approach is to reconstruct the fields to the boundaries and then solve the <em>Riemann Problem</em> to say how the fields evolve when jumping at the boundary, from which the flux is computed. The precise approach does not matter - the key is that the same cell boundary flux is used when updating neighbouring cells. This ensures conservation and is essential for a discontinuity to propagate at the right speed.
 						</aside>
+
+					</section>
+	
+					<section>
+						<div class="container">
+							<div class="col">
+								<h2>Consistency</h2>
+
+								<p>
+									Using the right weak form is essential.
+								</p>
+								$$
+								\begin{aligned}
+									&& \partial_t q^n + \frac{n}{n+1} \partial_x q^{n+1} & = 0 \\
+									\implies && \partial_t q + q \partial_x q & = 0.
+								\end{aligned}
+								$$
+								<p>
+									Strong solutions agree when continuous; inconsistent at shocks.
+								</p>
+								<p class="fragment">
+									Can use entropy pairs, path-consistent methods for complex cases. 
+								</p>
+							</div>
+							<div class="col">
+								<video controls data-autoplay loop="true" src="../et-2022/figures/burgers_n_shock.mp4" style="width:768px;">
+								</div>
+							</div>
+
+						<aside class="notes">
+							Getting shock propagation speeds right is essential and depends both on how the model is written and how the numerical method implements it. A standard example is shown on the slide, where - if we were only dealing with differentiable solutions - the results should be identical for all values of n. However, as soon as a discontinuity forms, its speed depends strongly on the value of n. This means that manipulating a balance law for numerical advantage has to be done with care, as both the model and the numerics need to be consistent.
+							<br>
+							This links to other quantities or concepts that should be constrained or bounded. As we've seen, in MHD the divergence constraints are also crucial in order to get good numerical results. Other examples would be the second law of thermodynamics, or the constraints resulting from the 3+1 split. However, conservation constraints are probably the most extreme, and must be enforced at the discrete level.
+							<br>
+							For more complex matter models it is possible to have shocks even when the model has equations not in conservation law form. In this case we need to look for entropy functions which are non-increasing and change only at shocks, and which encode the underlying dissipation of the model. It is then possible to construct <em>path consistent</em> schemes. This is often linked to methods that ensure that energy functions are conserved discretely, which are implemented within the <code>SummationByParts</code> thorn of the ETK.
+						</aside>
+
 					</section>
 
 				</section>
