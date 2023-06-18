@@ -170,6 +170,9 @@
 							<p>
 								Only four equations: need other constituitive equations for, eg, EM, particle number, etc.
 							</p>
+							<p>
+								Relations may need variables other than ${\bf q}$: <em>conservative to primitive</em> problem.
+							</p>
 						</div>
 						<aside class="notes">
 							We now know the outlines of our problem. We want a model of matter, coupled to GR, that we can write as a set of PDEs. This model will encode the detailed physics we're interested in, at the level we can simulate with our given resources. But before we try and be specific, let's look at what we can say in general.
@@ -200,7 +203,10 @@
 									$$
 										\partial_t q + \tfrac{1}{2} \partial_x q^{2} = 0.
 									$$
-									Information moves right, speed $q$. Shocks form.
+									Information moves right, speed $q$.
+								</p>
+								<p>
+									Shocks form.
 								</p>
 							</div>
 							<div class="col">
@@ -307,10 +313,7 @@
 										<em>Reconstruct</em> $\{ \hat{q}_i \} \to q(x)$;
 									</li>
 									<li>
-										<em>Solve</em> discontinuous problem at cell boundaries;
-									</li>
-									<li>
-										<em>Average</em> from $\{f_{i+1/2}\}$ get new $\hat{q}_i$.
+										<em>Solve</em> discontinuous problem at cell boundaries.
 									</li>
 								</ol>
 								<br>
@@ -353,162 +356,7 @@
 					<section>
 						<div class="container">
 							<div class="col">
-
-								<h2>Order of accuracy</h2>
-
-								<p>
-									Finite differencing errors $\propto \Delta x^p = N^{-p}$:
-								</p>
-								$$
-								\partial_t \phi_i + \frac{v \left( \phi_{i+1} - \phi_{i-1} \right)}{2 \, \Delta x} = \mathcal{O} \left( \Delta x^2 \right).
-								$$
-								<p>
-									$\Delta x$ "small": higher order usually better. However, costs increase:
-								</p>
-								$$
-								\partial_x \phi \simeq \frac{-\phi_{i+2} + \phi_{i-2} + 8 (\phi_{i+1} - \phi_{i-1})}{12 \, \Delta x}.
-								$$
-								<p class="fragment" data-fragment-index=1>
-									Usual to plot convergence with $N$ or $\Delta x$. Really resource (eg CPU time) that matters.
-								</p>
-							</div>
-							<div class="col">
-								<img src="figures/fd_costs.svg" style="width:100%">
-							</div>
-						</div>
-
-						<aside class="notes">
-							The order of the interpolating polynomial is directly linked to how the error of the method scales as we change the grid resolution. It's essential to check the correctness of the method by measuring how the error changes on a known solution. On a log-log plot, the power-law scaling of the error shows up as a straight line. Once we have confidence in the implementation, this allows us to estimate the error in simulations where the exact solution is not know.
-							<br>
-							However, higher accuracy using higher order methods means higher costs. We need to check that the extra cost is worth it. By plotting error against CPU time we see that - for this model and example, and ignoring implementation overhead - for any moderate level of error, the higher cost is worth the effort.
-						</aside>
-
-					</section>
-
-					<section>
-						<div class="container">
-							<div class="col">
-								<h2>Phase errors</h2>
-
-								<p>
-									Finite differencing errors:
-								</p>
-								<ol>
-									<li>
-										dissipation, reducing amplitude;
-									</li>
-									<li>
-										dispersion, changing phase.
-								 </li>
-								</ol>
-								<div class="r-stack">
-									<div class="fragment fade-in-then-out" data-fragment-index=1>
-										<p>
-											Phase error dependence on $\Delta x$ can be estimated.
-										</p>
-										<p>
-											For 1kHz wave for 1s, 1% phase error:
-										</p>
-										<table>
-											<tr>
-												<th>$2^{\textrm{nd}}$ order</th>
-												<th>$4^{\textrm{th}}$ order</th>
-												<th>$6^{\textrm{th}}$ order</th>
-											</tr>
-											<tr>
-												<td>$10$m</td>
-												<td>$265$m</td>
-												<td>$784$m</td>
-											</tr>
-										</table>
-									</div>
-									<div class="fragment" data-fragment-index=2>
-										<p>
-											Phase errors dependence on $\Delta x$ can be estimated.
-										</p>
-										<p>
-											For 10kHz wave for 1s, 0.01% phase error:
-										</p>
-										<table>
-											<tr>
-												<th>$2^{\textrm{nd}}$ order</th>
-												<th>$4^{\textrm{th}}$ order</th>
-												<th>$6^{\textrm{th}}$ order</th>
-											</tr>
-											<tr>
-												<td>$0.3$m</td>
-												<td>$47$m</td>
-												<td>$247$m</td>
-											</tr>
-										</table>
-									</div>
-								</div>
-							</div>
-							<div class="col">
-								<video controls data-autoplay loop="true" src="figures/damping_dx0_05.mp4" style="width:100%">
-							</div>
-						</div>
-
-						<aside class="notes">
-							Looking at how the error scales with the grid resolution is not the only way of approaching matters. If we look at a single Fourier mode - essentially a sine wave - then we can look at how the amplitude and phase of the wave changes with resolution and order of the method. For gravitational waves in particular the phase accuracy is crucial for parameter estimation.
-							<br>
-							We can see from evolutions how the waves are damped by the numerical error, and that this is the most obvious effect. However, as the mode number increases the phase error from dispersive effects also increases, and this can be the most signficant effect.
-							<br>
-							Kreiss and Oliger showed back in the 70s that, for linear finite difference methods, the phase error can be approximated as a function of the grid spacing and the order. Using this we can bound the required grid spacing for a given wave. As a rough estimate for a LIGO wave, we're looking for a 1kHz wave over 1 seconds, which leads to a required grid spacing of around 10 metres for the simple second order method. This needs to hold over all the grid between its generation and extraction, which leads to an absurdly large grid and is totally impractical. We see the bound is much more relaxed with higher order. Unsurprisingly, production codes using finite differences use sixth or eighth order schemes as a matter of course.
-							<br>
-							While this is bad enough, the task for numerical relativity in the next decade will switch to producing waveforms for the Einstein Telescope and Cosmic Explorer. In this case we may need to resolve waves to both higher frequencies and better phase errors, making higher order even more important.
-						</aside>
-
-					</section>
-
-					<section>
-						<div class="container">
-							<div class="col">
-								<h2>Spectral</h2>
-
-								<p>
-									Higher order is better: use all information. Mode expand:
-								</p>
-								$$
-								\phi = \sum_i \hat{\phi}_i \sin \left(\frac{2 \pi i x}{L} \right).
-								$$
-								<p>
-									Then $\partial_x \phi \simeq D \hat{\phi}$.
-								</p>
-								<p>
-									Spectral error $\sim \exp(-p N)$.
-								</p>
-								<p class="fragment" data-fragment-index=1>
-									Accuracy of full evolution often constrained.
-								</p>
-								<p class="fragment" data-fragment-index=1>
-									ETK has spectral initial data (<a href="https://einsteintoolkit.org/thornguide/EinsteinInitialData/TwoPunctures/documentation.html"><code>TwoPunctures</code></a>, <a href="https://lorene.obspm.fr/"><code>LORENE</code></a>), no evolution.
-								</p>
-							</div>
-							<div class="col r-stack">
-								<img src="figures/spectral_deriv.svg" style="width:100%">
-								<img src="figures/spectral_costs.svg" style="width:100%" class="fragment" data-fragment-index=1>
-							</div>
-						</div>
-
-						<aside class="notes">
-							If higher order is better, why not use all the information available to get the highest order possible? This is the essential idea of a spectral method, where the approximate derivative computed anywhere depends on every single data point.
-							<br>
-							In order to practically use spectral methods for nonlinear problems it's usual to use the function basis approach rather than grid points, also known as collocation points for spectral methods. In either case, the result of using all the information means the discrete spectral method can be written in terms of a <em>differentiation matrix</em>, which is typically dense.
-							<br>
-							The key advantage over finite differencing methods is the speed with which the error converges with the amount of computational steps. The comparison is between N grid points for finite differencing compared to N mode coefficients for spectral methods. But the convergence rate is exponential - the second plot is linear in the degrees of freedom rather than logarithmic - which is a huge advantage.
-							<br>
-							However, eventually the error from the spatial derivatives is not the main source of error. Because I'm using a toy model here this comes in earlier than it would with a more complex system, but it's always going to be the case that eventually the nonlinear couplings and error from the time integrator will stop the extremely rapid convergence. From the efficiency plot, however, we should expect spectral methods to be better than finite differencing. However, they are much more complex to set up and get working.
-							<br>
-							As noted earlier, the ETK isn't best set up to do evolutions with spectral methods, although they appear in initial data and analysis codes which are used. The standard spectral code in the field for evolutions is SpEC.
-						</aside>
-
-					</section>
-
-					<section>
-						<div class="container">
-							<div class="col">
-								<h2>Discontinuities</h2>
+								<h2>Reconstruction</h2>
 
 								<p>
 									Any high order method shows Gibbs' oscillations at jumps.
@@ -527,7 +375,7 @@
 										Formally first order at jumps.
 									</li>
 									<li>
-										<em>Much</em> more expensive.
+										<em>Much</em> more expensive than linear FD.
 									</li>
 									<li>
 										Data dependent - hard to analyse.
@@ -541,10 +389,10 @@
 								</p>
 							</div>
 							<div class="col r-stack">
-								<img src="figures/gibbs1.svg" style="width:100%">
-								<img src="figures/recon21.svg" style="width:100%" class="fragment" data-fragment-index=1>
-								<img src="figures/recon81.svg" style="width:100%" class="fragment" data-fragment-index=2>
-								<img src="figures/gibbs2.svg" style="width:100%" class="fragment" data-fragment-index=3>
+								<img src="../et-2022/figures/gibbs1.svg" style="width:100%">
+								<img src="../et-2022/figures/recon21.svg" style="width:100%" class="fragment" data-fragment-index=1>
+								<img src="../et-2022/figures/recon81.svg" style="width:100%" class="fragment" data-fragment-index=2>
+								<img src="../et-2022/figures/gibbs2.svg" style="width:100%" class="fragment" data-fragment-index=3>
 							</div>
 						</div>
 
@@ -558,66 +406,6 @@
 							The alternative that avoids, or at least minimises, the oscillations, is to change the data used in the interpolating polynomial to avoid the jump. This ensures that Gibbs' oscillations are never introduced, so the derivative is fine. However, it means that the reconstruction step now depends on the data itself. There are many ways of doing this, from second order slope limited methods to high order WENO methods. Whilst they are essential for discontinuous data they are much more costly - in some cases an order of magnitude or more - than finite differencing.
 							<br>
 							These sort of reconstruction methods can be found in a number of thorns in the ETK. If developing your own code then for initial tests I would recommend taking the slope limited methods from, for example, <code>GRHydro</code>, but higher order methods will be essential eventually. For those I would recommend starting with the WENO methods which are most generically implemented in <code>WhiskyTHC</code>.
-						</aside>
-
-					</section>
-
-					<section>
-						<div class="container">
-							<div class="col">
-
-								<h2>Parallel compute</h2>
-
-								<p>
-									Classic CPU (<a href="https://einsteintoolkit.org/arrangementguide/Carpet/documentation.html"><code>Carpet</code></a> etc): split domain.
-								</p>
-								<ul>
-									<li>
-										Each CPU fast, high memory.
-									</li>
-									<li>
-										Need <em>ghostzones</em>, linked to stencil size.
-									</li>
-									<li>
-										Communication is bottleneck.
-									</li>
-									<li>
-										Problem for higher order schemes.
-									</li>
-								</ul>
-								<p>
-									GPUs (<a href="https://bitbucket.org/eschnett/cactusamrex/src/master/"><code>CarpetX</code></a> etc): create tasks.
-								</p>
-								<ul>
-									<li>
-										Each GPU slow, low memory.
-									</li>
-									<li>
-										$N_{\textrm{GPU}} \gg N_{\textrm{CPU}}$.
-									</li>
-									<li>
-										Overload GPUs via pipeline.
-									</li>
-									<li>
-										Task based approach hides communication.
-									</li>
-								</ul>
-							</div>
-							<div class="col">
-								<img src="figures/parallel.svg" style="width:768px">
-							</div>
-						</div>
-
-						<aside class="notes">
-							The second problem with spectral methods is an implementation question. The number of fields that need evolving in a modern GR model, and the tight accuracy constraints we need, mean there's too much computation and memory to do a simulation on a single core of any machine. This means we have to use parallel computing.
-							<br>
-							The standard model for parallel computing, which is built into the ETK, is domain decomposition. Take the grid covering the spatial slice. Split the grid into chunks, or patches, and put each patch onto a different core. The question is what happens at the boundaries of the patch. In order to compute the spatial derivative we need the data from the neighbouring points. The standard approach is to introduce ghostzones: points which will live on both cores, used on both, but evolved only on one. After the points have been evolved, the ghostzone data needed to be communicated from one core to the other.
-							<br>
-							Compared to computation, communication is <em>really</em> expensive. It's often the main bottleneck in an evolution, and as more cores are used it becomes worse. The higher the order of the numerical method, the wider the computational stencil, and hence the more the communication costs. This is significant problem for spectral methods in principle, although there are ways around it in real codes.
-							<br>
-							It's important to note that the next generation of HPC machines are likely to be built around GPUs rather than CPUs. GPUs are slower, cheaper, and with much less memory than CPUs. However, there will be orders of magnitude more available. Here, a pure domain decomposition technique will fail because of the communication. Instead it's standard to split the problem both into patches and into tasks on each patch. By ensuring the number of tasks is greater than the number of cores, the communication between patches can be hidden behind the computation taking place in the pipeline of tasks.
-							<br>
-							For now the ETK is a pure CPU framework, although (with a lot of effort) a user could put tasks onto GPUs within their own code. The CarpetX project should build GPU capabilities into the ETK much more systematically. The key takeaway is the importance of communication in the cost of HPC simulations.
 						</aside>
 
 					</section>
