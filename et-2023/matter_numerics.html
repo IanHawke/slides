@@ -410,6 +410,71 @@
 
 					</section>
 
+					<section>
+						<div class="container">
+							<div class="col">
+								<h2>Riemann Solvers</h2>
+								<ul>
+									<li>
+										Reconstruction $\to$ Riemann Problem;
+									</li>
+									<li>
+										Full solution as <em>waves</em>: expensive;
+									</li>
+									<li>
+										Approximations usually enough;
+									</li>
+									<ul class="fragment" data-fragment-index=1>
+										<li>
+											Roe - linearize: 
+										</li>
+										<ul>
+											<li>
+												sharp;
+											</li>
+											<li>
+												entropy violations.
+											</li>
+										</ul>
+										<li>
+											Marquina - fixes Roe:
+										</li>
+										<ul>
+											<li>
+												flux formula only;
+											</li>
+											<li>
+												expensive.
+											</li>
+										</ul> 
+										<li>
+											HLL(E) - impose number of waves: 
+										</li>
+										<ul>
+											<li>
+												cheap;
+											</li>
+											<li>
+												positive;
+											</li>
+											<li>
+												diffusive.
+											</li>
+										</ul>
+									</ul>
+								</ul>
+							</div>
+							<div class="col r-stack">
+								<img src="figures/RP1.svg" style="width:100%">
+								<img src="figures/RP2.svg" style="width:100%" class="fragment" data-fragment-index=1>
+								
+							</div>
+						</div>
+						<aside class="notes">
+
+						</aside>
+					</section>
+
 				</section>
 
 				<section id="Nonlinear issues">
