@@ -475,306 +475,76 @@
 						</aside>
 					</section>
 
-				</section>
-
-				<section id="Nonlinear issues">
-
 					<section>
 						<div class="container">
 							<div class="col">
-								<h2>Nonlinearity</h2>
+								<h2>Entropy functions</h2>
 
 								<p>
-									Formally need to work with <em>weak form</em>
+									Entropy $\eta({\bf q})$ is convex function, flux $\psi$, s.t.
 								</p>
 								$$
-								\begin{aligned}
-									&& \partial_t \phi + \nabla_k f^{(k)}(\phi) & = 0 \\
-									\implies && \frac{\text{d}}{\text{d}t} \int_V \phi + \oint_{\partial V} \hat{n}_k  f^{(k)}(\phi) & = 0.
-								\end{aligned}
+								\partial_t \eta + \partial_x \psi \le 0, \quad \nabla_{\bf q} \psi = \nabla_{\bf q} \eta \nabla_{\bf q} {\bf f}.
 								$$
 								<p>
-									Discrete version, 1d:
+									Entropy picks out <em>unique</em> weak solution.
+								</p>
+								<p>
+									Given two solutions ${\bf q}_{1, 2}$, then
 								</p>
 								$$
-								\frac{\text{d}}{\text{d}t} \hat{\phi}_i + \frac{1}{\Delta x} \left[ f_{i+1/2} - f_{i-1/2} \right] = 0.
+								\frac{d}{dt} \| {\bf q}_{1} - {\bf q}_{2} \| \le 0
 								$$
 								<p>
-									Finding the flux $f_{k \pm 1/2}$ depends on the model (for fluids see <a href="https://einsteintoolkit.org/thornguide/EinsteinEvolve/GRHydro/documentation.html"><code>GRHydro</code></a> etc).
-								</p>
-							</div>
-							<div class="col">
-								<img src="figures/weak_solutions1.svg" style="width:100%">
-							</div>
-						</div>
-
-						<aside class="notes">
-							All the previous discussion has focused on linear models such as the wave and advection equations. However, matter models such as fluids naturally lead to nonlinear balance laws. The nonlinearity means that information is propagated at a speed that depends on the data, meaning that generic initial data will lead to discontinuities forming. At this point the strong form of the PDE does not make sense. Instead we need to use the weak form which follows from the finite volume representation shown earlier, where we integrate the PDE over the cell volume.
-							<br>
-							We saw earlier that it's essential to reconstruct the data using a data-dependent method such as a WENO scheme. When applied to the weak form we use this to compute the flux through the cell boundaries. This can be done in multiple ways. The first standard one is to compute a flux at the cell centre, reconstruct to the boundaries, and average appropriately. The other standard approach is to reconstruct the fields to the boundaries and then solve the <em>Riemann Problem</em> to say how the fields evolve when jumping at the boundary, from which the flux is computed. The precise approach does not matter - the key is that the same cell boundary flux is used when updating neighbouring cells. This ensures conservation and is essential for a discontinuity to propagate at the right speed.
-						</aside>
-
-					</section>
-
-					<section>
-						<div class="container">
-							<div class="col">
-								<h2>Consistency</h2>
-
-								<p>
-									Using the right weak form is essential.
-								</p>
-								$$
-								\begin{aligned}
-									&& \partial_t q^n + \frac{n}{n+1} \partial_x q^{n+1} & = 0 \\
-									\implies && \partial_t q + q \partial_x q & = 0.
-								\end{aligned}
-								$$
-								<p>
-									Strong solutions agree when continuous; inconsistent at shocks.
+									<em>only</em> if both are entropy solutions.
 								</p>
 								<p class="fragment">
-									Can use entropy pairs, path-consistent methods for complex cases. Links to <a href="https://einsteintoolkit.org/thornguide/CactusNumerical/SummationByParts/documentation.html"><code>SummationByParts</code></a>.
+									Conclusion: if numerical scheme violates entropy condition, it can and will diverge from true solution.
 								</p>
 							</div>
 							<div class="col">
-								<video controls data-autoplay loop="true" src="figures/burgers_n_shock.mp4" style="width:768px;">
-								</div>
-							</div>
-
-						<aside class="notes">
-							Getting shock propagation speeds right is essential and depends both on how the model is written and how the numerical method implements it. A standard example is shown on the slide, where - if we were only dealing with differentiable solutions - the results should be identical for all values of n. However, as soon as a discontinuity forms, its speed depends strongly on the value of n. This means that manipulating a balance law for numerical advantage has to be done with care, as both the model and the numerics need to be consistent.
-							<br>
-							This links to other quantities or concepts that should be constrained or bounded. As we've seen, in MHD the divergence constraints are also crucial in order to get good numerical results. Other examples would be the second law of thermodynamics, or the constraints resulting from the 3+1 split. However, conservation constraints are probably the most extreme, and must be enforced at the discrete level.
-							<br>
-							For more complex matter models it is possible to have shocks even when the model has equations not in conservation law form. In this case we need to look for entropy functions which are non-increasing and change only at shocks, and which encode the underlying dissipation of the model. It is then possible to construct <em>path consistent</em> schemes. This is often linked to methods that ensure that energy functions are conserved discretely, which are implemented within the <code>SummationByParts</code> thorn of the ETK.
-						</aside>
-
-					</section>
-
-					<section>
-						<div class="container">
-							<div class="col">
-								<h2>Spectral element</h2>
-
-								<p>
-									Want high order, low communication. Apply weak form to basis expansion $q(x, t) \sim \hat{q}_m(t) P_m(x)$, getting
-								</p>
-								$$
-								M \partial_t \hat{q} + S^T f(\hat{q}) = - \left[ F \right]_{i-1/2}^{i+1/2}.
-								$$
-								<ul class="fragment" data-fragment-index=1>
-									<li>
-										Spectral accuracy with modes.
-									</li>
-									<li>
-										Only communication through RHS.
-									</li>
-									<li>
-										Expensive, complex.
-									</li>
-									<li>
-										(Solvable?) issues with shocks.
-								</ul>
-								<p class="fragment" data-fragment-index=1>
-									No code in ETK (?) - see <a href="https://spectre-code.org/index.html"><code>Spectre</code></a>.
-								</p>
-							</div>
-							<div class="col r-stack">
-								<img src="figures/fd_fv_fe_grids.svg" style="width:768px" class="fragment fade-out" data-fragment-index=1>
-								<img src="figures/dg_all.png" style="height:960px" class="fragment" data-fragment-index=1>
+								<img src="figures/entropy_violation1.svg" style="width:70%">
 							</div>
 						</div>
-
 						<aside class="notes">
-							For linear, smooth, models we saw the huge advantages of the spectral methods. There's been a lot of work tackling their main disadvantages - the communication for parallel computing, and dealing with shocks.
-							<br>
-							This leads to spectral element methods, of which the currently focus is on <em>Discontinuous Galerkin</em>. As in finite volume methods the domain is split into subdomains. The PDEs are multiplied by a test function - a smooth function whose precise form does not matter. The fields and the test function are then expressed in terms of basis functions. Integration by parts is then used over the subdomain to shift spatial derivatives from the fields onto the test functions. The resulting discrete scheme still depends on dense matrices, but all the coefficients are local to the element - the subdomain. The only coupling to neighbouring elements is through the flux term, so communication is minimized.
-							<br>
-							In a sense, DG methods are better than, for example, WENO methods, as the "reconstruction" step is not needed. By keeping all the modal coefficients around the fields are known everywhere all the time. However, this comes with significant extra cost. The number of degrees of freedom is now the number of elements times the number of modes. Care is needed to interpret DG results - never trust comparisons of gridpoints to elements.
-							<br>
-							Dealing with shocks remains an issue, although limiters and hybrid methods have been used with a lot of success to get around the oscillations. The downside of most of these fixes is they break the locality advantages by coupling more elements, or otherwise increase communication. However, these problems should be confined to near shocks. It seems likely that, in the long run, DG methods will be better than the alternatives. However, their complexity and cost currently work against them.
-							<br>
-							As with spectral methods, the ETK isn't best suited to DG or spectral element approaches. The <code>Spectre</code> code is the field-specific framework to look at.
+							
 						</aside>
-
-					</section>
-
-				</section>
-
-				<section id="Adaptivity">
-
-					<section>
-						<div class="container">
-							<div class="col">
-								<h2>Mesh refinement</h2>
-
-								<p>
-									Errors $\sim \Delta x^p$, but also local.
-								</p>
-								<p>
-									Refine mesh where errors large (<code>Carpet(X)</code>).
-								</p>
-								<p>
-									Boundaries need interpolation - source of error.
-								</p>
-								<p class="fragment" data-fragment-index=1>
-									Physics not Cartesian: overlapping patches complex, but help (<a href="https://llamacode.bitbucket.io/"><code>Llama</code></a>, <a href="https://nrpyplus.net/blackholesathome_homepage-en_US.html"><code>BH@Home</code></a>).
-								</p>
-							</div>
-							<div class="col r-stack">
-								<img src="figures/amr.svg" style="width:768px" class="fragment fade-out" data-fragment-index=1>
-								<img src="figures/grids.png" style="height:960px" class="fragment" data-fragment-index=1>
-							</div>
-						</div>
-
-						<aside class="notes">
-							So far I've emphasized how the errors scale with the grid size, but haven't specified how the grid itself is set up. The finer the grid the higher the computational cost. Due to the timestep restriction, halving the spatial grid step means increasing the computational cost by a factor of 16.
-							<br>
-							By concentrating the computational grid where the error is largest we can minimise the cost. This typically focuses on the compact objects, near the neutron stars or black holes. This is done via mesh refinement, where multiple grids are used with different grid spacings. In the ETK, this is implemented by <code>Carpet</code>. The data from the finer grids is the most accurate, so used by overwriting the data on coarser grids. The boundary data on the finer grids needs to be interpolated from the coarser grids.
-							<br>
-							The boundaries can be a significant source of error. In addition to the interpolation issues, consider the phase errors discussed earlier. Waves propagate at slightly different speeds depending on the numerical resolution. This leads to reflections and diffractions from the boundaries. Whilst this can be mitigated by high order methods, its impact on lower order schemes, particularly when matter is involved, can be severe.
-							<br>
-							Some of these issues can be significantly reduced by changing the coordinate system the grid is in - the wave will be roughly spherical, so a spherical grid is better. However, getting a useful grid set up can be technically painful. Look carefully at the <code>Llama</code> project within the ETK, but also BlackHoles@Home.
-						</aside>
-
 					</section>
 
 					<section>
 						<div class="container">
 							<div class="col">
-								<h2>Stiff sources</h2>
-								<p>
-									For $\dot{q} = -\tau^{-1} f(q)$,
-								</p>
+								<h2>MHD</h2>
 								<ul>
 									<li>
-										$$
-										q^{\color{green}{n+1}} = q^{\color{green}{n}} - \frac{\Delta t}{\tau} f(q^{\color{green}{n}}).
-										$$
-										Explicit: fast, unstable for $\tau \lesssim \Delta t$.
+										Still conservation laws (ideal case).
 									</li>
 									<li>
-										$$
-										q^{\color{red}{n+1}} = q^{\color{red}{n}} - \frac{\Delta t}{\tau} f(q^{\color{red}{n+1}}).
-										$$
-										Implicit: slow, stable $ \forall \tau$.
+										Constraint $\mathcal{C} = \nabla \cdot {\bf B} \equiv 0$ essential.
+									</li>
+									<li>
+										Can either
+									</li>
+									<ul>
+										<li>add damping terms $\propto - \mathcal{C}$</li>
+										<li>enforce $\mathcal{C}=0$ discretely.</li>
+									</ul>
+									<li class="fragment" data-fragment-index="1">
+										Using vector potential does the latter - preferred.
+									</li>
+									<li class="fragment" data-fragment-index="2">
+										Entropy function evolution has term $\propto \mathcal{C}$
 									</li>
 								</ul>
-								<p class="fragment" data-fragment-index=1>
-									Stable does not mean accurate!
-								</p>
-								<p class="fragment" data-fragment-index=2>
-									IMEX methods <em>can</em> be added to <a href="https://einsteintoolkit.org/thornguide/CactusNumerical/MoL/documentation.html"><code>MoL</code></a>.
-								</p>
 							</div>
-							<div class="r-stack col">
-								<img src="figures/implicit1.svg" style="width:100%">
-								<img src="figures/vdp_stiff.svg" style="width:100%" class="fragment" data-fragment-index=1>
+							<div class="col r-stack">
+								<img src="../icts-2020/figures/brackbill_barnes.png" style="width:100%" class="fragment fade-out" data-fragment-index="1">
+								<img src="../icts-2020/figures/GRID_CELL.png" style="width:100%"  class="fragment" data-fragment-index="1">
 							</div>
 						</div>
-
 						<aside class="notes">
-							When there is a big difference in the fastest and slowest timescales in the problem it is said to be stiff. This is a problem, particularly when the physics on the slowest timescale is interesting or essential, as the simplest and fastest numerical methods need to resolve the fast timescale for stability. This can make the source terms, which we have so far ignored, crucially important for the stability and accuracy of the problem. Here we're thinking of matter problems in particular, where reactions or radiation can add a relaxation term to the problem, and the field is expected to relax exponentially quickly on a particular timescale to equilibrium.
-							<br>
-							An example would be the Euler methods. The explicit Euler method solves the ODE simply and cheaply. However, it is only stable if the timestep is comparable to or smaller than the relaxation timescale. If the relaxation scale is faster then the numerical method will overshoot and the oscillations will explode with time.
-							<br>
-							The alternative is to use an implicit method. As the unknown data appears nonlinearly within the algorithm we need to use a nonlinear root-finder to solve each point at each step, which is expensive - usually an order of magnitude worse than an implicit scheme. However, implicit methods can be stable for arbitrary timesteps. For really stiff problems they can be much more efficient.
-							<br>
-							However, an implicit method being stable does not mean it is accurate. It's usual for the relative error of the implicit scheme being large even when the result is stable. If the impact of the fast behaviour on the observable of interest is small then implicit schemes are a good choice. However, this can be hard to judge or predict - see the current disagreements about the impact of bulk viscosity.
-							<br>
-							There are methods that split the system of equations into slow parts that can be solved explicitly and fast parts that need an implicit solver. The implicit-explicit (IMEX) methods can then be used to get the best efficiency for the whole system.							Within the ETK and particularly <code>MoL</code> the focus is on explicit methods. It is possible to include IMEX methods within this framework - it has been done - but they're not included by default.
+
 						</aside>
-					</section>
-
-					<section>
-						<div class="container">
-							<div class="col">
-								<h2>Toy heat</h2>
-								<p>
-									The Cattaneo model for heat is stiff:
-								</p>
-								$$
-								\begin{aligned}
-								\partial_t T & = \partial_x q, \\
-								\partial_t q & = - \tau^{-1} \left( q - \kappa \partial_x T \right).
-								\end{aligned}
-								$$
-								<p>
-									For $\tau \ll 1$ write $q = \kappa \partial_x T + \mathcal{O}(\tau)$, finding
-								</p>
-								$$
-								\partial_t T = \kappa \partial_{xx} T + \tau \kappa^3 \partial_x^{(4)} T.
-								$$
-								<p class="fragment">
-									Solve heat equation explicitly whilst $\Delta t \gtrsim \kappa \Delta x^2 / 2$.
-								</p>
-							</div>
-							<div class="col">
-								<video controls data-autoplay loop="true" src="figures/toy_heat_compare.mp4" style="width:768px; margin:0px">
-							</div>
-						</div>
-
-						<aside class="notes">
-							Tricks exist to adapt the model to the numerics. I mentioned bulk viscosity. Resistivity in non-ideal MHD models is another stiff source that can be approached this way. Here I'll use the example of heat conduction in non-ideal hydro, for which there's a simple toy model.
-							<br>
-							The Cattaneo equation is a causal model of heat propagation. Temperature evolves through the gradient of the flux; the flux evolves in relaxation form so that Fourier's law is approached on a relaxation timescale. When the timescale is small we can write the flux in the Fourier law form plus a small correction. Plugging this back in gives us the standard heat equation plus a correction term proportional to the relaxation scale.
-							<br>
-							The point is that standard explicit numerical methods work well for the heat equation when the grid spacing is large. So when the relaxation scale is much smaller than the timestep, the corrected heat equation is physically acceptable and numerically preferrable. However, the timestep restriction for the heat equation, due to its parabolic nature, is much more restrictive. Therefore, when the relaxation timescale is resolvable it will be more efficient to solve the original Cattaneo equation.
-						</aside>
-					</section>
-
-					<section>
-						<div class="container">
-							<div class="col">
-
-								<h2>Adaptive Model</h2>
-
-								<p>
-									Changing model can reduce costs by
-								</p>
-								<ol>
-									<li>
-										reducing size of state vector;
-									</li>
-									<li>
-										increasing allowed timestep.
-									</li>
-								</ol>
-								<p>
-									Choose model <em>adaptively</em> to improve numerics while capturing physics.
-								</p>
-								<p>
-									Examples:
-								</p>
-								<ul>
-									<li>
-										Low Mach approximation (<a href="https://eprints.soton.ac.uk/id/eprint/422175">Harpole</a>);
-									</li>
-									<li>
-										Fast reactions as bulk viscosity (<a href="https://arxiv.org/abs/2202.01576">Hammond, Celora</a>, <a href="http://arxiv.org/abs/2207.00442">Most+</a>);
-									</li>
-									<li>
-										Resistive MHD as ideal plus corrections (<a href="https://eprints.soton.ac.uk/448034/">Wright</a>).
-									</li>
-								</ul>
-								<p>
-									<a href="http://arxiv.org/abs/2112.05920">Asymptotic preserving</a> models and schemes are needed.
-								</p>
-							</div>
-							<div class="col">
-								<img src="figures/pch/adaptive_model.png" style="height:960px">
-							</div>
-						</div>
-
-						<aside class="notes">
-							This leads into the idea of Adaptive <em>Model</em> Refinement. In different regions of spacetime it may be possible to use simpler, less accurate, models to capture the physics to sufficient accuracy, purely for numerical advantage.
-							<br>
-							To some extent adaptivity is a core part of every large scale simulation we do. It's also standard to use the results of a simulation with a complex model as initial data for a simpler, cheaper model for long term simulations. This is known as <em>co-simulation</em>. Dynamics adaptation of the models and numerical methods used within the simulation is a known, but technically difficult, approach, that has been discussed in the past but never fully implemented within the ETK.
-							<br>
-							There's a range of examples in the literature where it's worked - the use of adaptivity for resistive relativistic MHD is the case that I think is the most successful. However, I want to highlight the Low Mach approach, which is a well-known application of the AMReX code. Here, acoustic waves are eliminated by solving elliptic equations. This only works when the Mach number is low. However, this holds true for neutron stars all the way up until merger, if the coordinate system is chosen appropriately. We would also expect it to be true throughout much of the disk. Adaptive model could give us order of magnitude increases in the timestep, and hence the associated accuracy, but the technical difficulty will be high.
-						</aside>
-
 					</section>
 
 				</section>
