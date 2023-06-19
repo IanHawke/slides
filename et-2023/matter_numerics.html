@@ -182,6 +182,8 @@
 							The key point is that the only derivatives of the matter appear in total divergence form. The term on the right-hand-side which isn't in this form only involves derivatives of the tetrad, which can be written as derivatives of spacetime quantities. We write this abstractly in <i>balance law form</i>: all derivatives of the matter are total derivatives, but these <i>fluxes</i> must balance off against the <i>source terms</i> which come from the geometry.
 							<br>
 							If we simplify to Minkowski space in standard Cartesian coordinates then the source terms vanish and these balance laws reduce to the <i>conservation laws</i> for energy-momentum. However, we need to be careful of this interpretation (locally): if we write Minkowski spacetime in <i>spherical</i> coordinates then there will be source terms, but that certainly does not mean that energy-momentum is being transferred between the matter and the spacetime.
+							<br>
+							The final point is that the four conserved quantities q will not necessarilly be useful for the constituitive or closure relations that we need. In particular, the fluxes are often only easily written in terms of other variables. The key example is the equation of state, which is usually written in terms of thermodynamic potentials such as density and temperature which are not transparent from the conserved quantities. This is the conservative to primitive problem which in general is expensive and complex: rely on existing solutions (eg Reprimand).
 						</aside>
 					</section>
 
@@ -252,7 +254,7 @@
 						<aside class="notes">
 							All the previous discussion has focused on linear models such as the wave and advection equations. However, matter models such as fluids naturally lead to nonlinear balance laws. The nonlinearity means that information is propagated at a speed that depends on the data, meaning that generic initial data will lead to discontinuities forming. At this point the strong form of the PDE does not make sense. Instead we need to use the weak form which follows from the finite volume representation shown earlier, where we integrate the PDE over the cell volume.
 							<br>
-							We saw earlier that it's essential to reconstruct the data using a data-dependent method such as a WENO scheme. When applied to the weak form we use this to compute the flux through the cell boundaries. This can be done in multiple ways. The first standard one is to compute a flux at the cell centre, reconstruct to the boundaries, and average appropriately. The other standard approach is to reconstruct the fields to the boundaries and then solve the <em>Riemann Problem</em> to say how the fields evolve when jumping at the boundary, from which the flux is computed. The precise approach does not matter - the key is that the same cell boundary flux is used when updating neighbouring cells. This ensures conservation and is essential for a discontinuity to propagate at the right speed.
+							The telescoping flux approach here is crucial to get the right solution when shocks form. There are additional constraints on the method, but we'll see that this flux conservation step is fundamental.
 						</aside>
 
 					</section>
@@ -286,9 +288,9 @@
 						<aside class="notes">
 							Getting shock propagation speeds right is essential and depends both on how the model is written and how the numerical method implements it. A standard example is shown on the slide, where - if we were only dealing with differentiable solutions - the results should be identical for all values of n. However, as soon as a discontinuity forms, its speed depends strongly on the value of n. This means that manipulating a balance law for numerical advantage has to be done with care, as both the model and the numerics need to be consistent.
 							<br>
-							This links to other quantities or concepts that should be constrained or bounded. As we've seen, in MHD the divergence constraints are also crucial in order to get good numerical results. Other examples would be the second law of thermodynamics, or the constraints resulting from the 3+1 split. However, conservation constraints are probably the most extreme, and must be enforced at the discrete level.
+							The point here is that there can be multiple, even infinite, weak solutions that could in principle evolve from discontinuous data. With standard methods the choice of weak form implicitly picks out which weak solution is chosen by the numerics. We'll come back to this.
 							<br>
-							For more complex matter models it is possible to have shocks even when the model has equations not in conservation law form. In this case we need to look for entropy functions which are non-increasing and change only at shocks, and which encode the underlying dissipation of the model. It is then possible to construct <em>path consistent</em> schemes. This is often linked to methods that ensure that energy functions are conserved discretely, which are implemented within the <code>SummationByParts</code> thorn of the ETK.
+							Finally, there is the concern of what to do when you don't have a natural balance law form, or can't write your equations as a total derivative at all. Superfluids and other multi-fluid problems have this issue. In this case you have to explicitly state what the dissipation operator is and construct a scheme to use that entropy.
 						</aside>
 
 					</section>
@@ -397,15 +399,17 @@
 						</div>
 
 						<aside class="notes">
-							So, why don't we all use spectral methods? Well, they have major disadvantages. Here we'll mention two. The first is when the fields lose differentiability. This occurs naturally with matter models, particularly fluids.
+							If reconstruction dominates the accuracy of the scheme, we want to make it as accurate as possible. We'd usually do this using as much discrete data as possible with a smooth polynomial. Unfortunately that fails.
 							<br>
-							This is why we think about the methods in terms of interpolating functions or polynomials. The standard Gibbs' effect is usually introduced in terms of Fourier series but can be seen in other function basis representations. That is, when a finite amount of data is used to represent a discontinuous jump in a field, the truncated series approximation will oscillate near that jump. When we differentiate the approximation in order to approximate the derivative of the original field, those oscillations are amplified. As Gibbs' oscillations do not converge with amplitude as the order of the truncation is increased, this means the oscillations in the approximate derivative get worse as more computational effort is used.
+							The standard Gibbs' effect is usually introduced in terms of Fourier series but can be seen in other function basis representations. That is, when a finite amount of data is used to represent a discontinuous jump in a field, the truncated series approximation will oscillate near that jump. When we differentiate the approximation in order to approximate the derivative of the original field, those oscillations are amplified. As Gibbs' oscillations do not converge with amplitude as the order of the truncation is increased, this means the oscillations in the approximate derivative get worse as more computational effort is used.
 							<br>
 							For finite difference methods these oscillations exist but are confined to a region near the jumps. As spectral methods rely on a dense differentiation matrix, the oscillations induced contaminate the entire domain.
 							<br>
 							The alternative that avoids, or at least minimises, the oscillations, is to change the data used in the interpolating polynomial to avoid the jump. This ensures that Gibbs' oscillations are never introduced, so the derivative is fine. However, it means that the reconstruction step now depends on the data itself. There are many ways of doing this, from second order slope limited methods to high order WENO methods. Whilst they are essential for discontinuous data they are much more costly - in some cases an order of magnitude or more - than finite differencing.
 							<br>
 							These sort of reconstruction methods can be found in a number of thorns in the ETK. If developing your own code then for initial tests I would recommend taking the slope limited methods from, for example, <code>GRHydro</code>, but higher order methods will be essential eventually. For those I would recommend starting with the WENO methods which are most generically implemented in <code>WhiskyTHC</code>.
+							<br>
+							As a theory matter, the crucial point here is that we need to constrain the total variation of the solution. Intuitively, this is linked to the maximum size of any jump in the discrete data. If this is unbounded the solutions won't converge, so this is a crucial restriction.
 						</aside>
 
 					</section>
@@ -471,7 +475,19 @@
 							</div>
 						</div>
 						<aside class="notes">
-
+							Given the reconstructed data we now need to solve for the flux at cell boundaries. We can approximate the problem at cell boundaries as being piecewise constant - this is accurate enough. This is known as the Riemann Problem, where we need to know how the solution evolves in time.
+							<br>
+							In this sketch picture we see the density evolving with time, splitting into three waves: rarefaction, contact, and shock. We rely on the self-similarity of the problem: from the solution along the axis we have the solution for all future time, from which we compute the flux.
+							<br>
+							Unfortunately, finding the full solution with all waves correct is far too expensive - try using Bruno's solver for MHD to see the cost. Also it's not needed in evolution codes, as approximations are enough.
+							<br>
+							Most approximations to the solution look at the waves in parameter space - here the x axis is still space but the vertical axis is time. The wave structure shows the self-similarity: each line is straight, and the solution between waves is constant. The real cost in finding the exact solution is iteratively finding the correct wave structure, so most approximations start with that wave structure. Here I note three approaches, all seen in GRHydro.
+							<br>
+							For Roe's solver we linearize the nonlinear flux (in particular, its Jacobian) about some state. That makes the problem linear and hence easy to compute. It gives very sharp discontinuous waves but isn't good at continuous waves and can fail horribly when a transsonic rarefaction appears.
+							<br>
+							Marquina fixes Roe by checking for transsonic rarefactions and replacing the flux computed then. This is highly accurate, but is expensive and only gives the flux directly, without going through the solution.
+							<br>
+							Finally, the least accurate but most robust solution comes from the HLL family of solvers. In this case the wave speeds are over-estimated and only a limited number of waves are used. We can then enforce conservation to get the solution. This is the standard solver to start with - it can smear out shocks, but with good reconstruction methods is often enough. HLL also guarantees that certain quantities that you want to remain positive (like density) do so.
 						</aside>
 					</section>
 
@@ -507,7 +523,17 @@
 							</div>
 						</div>
 						<aside class="notes">
-							
+							Finally, an underlying point is entropy. I've noted that Roe has problems for transsonic cases. I've noted that multiple weak solutions can be consistent with given initial data. So the question is how we enforce that we get the right solution.
+							<br>
+							The sketch on the right illustrates the problem. We have a Riemann problem with separating data, as seen from the characteristic speeds. We expect to get the rarefaction solution at the top. This is because if we perturbed the initial data very slightly, smoothing it out, then the characteristic speeds should vary in exactly this way. However, both of the weak solutions below are consistent with the discontinuous data. They do something very odd - information appears out of the shock discontinuously - but mathematically they are fine.
+							<br>
+							To fix this problem we have to find an entropy pair: a scalar function of the conserved quantities that is convex, called the entropy, and its associated flux. This pair satisfies a conservation law, where the entropy strictly decreases only at shocks. Yes, decreases: blame numerical analysts for this choice.
+							<br>
+							Entropy solutions satisfy the conservation laws and the entropy law. If our numerical solution also obeys the entropy law then it will converge to some solution of the real problem. In essence, entropy solutions enforce that characteristics also propagate into shocks, not out of them.
+							<br>
+							Now, Murphy's law says that if we don't enforce that our numerical scheme obeys the entropy condition then it violates it. The corollary to the above is that an entropy violating solution will not converge to any solution of the original problem. So entropy consistency is essential.
+							<br>
+							It turns out that a consitent entropy stable flux (so, not Roe), combined with the telescoping flux form, enforces an entropy solution. Combine that with total variation boundedness and we can be confident that we're getting the right thing. However, the approaches can be overly restrictive.
 						</aside>
 					</section>
 
@@ -549,7 +575,13 @@
 							</div>
 						</div>
 						<aside class="notes">
-
+							Finally, we need to discuss the additional issues that come in when we add physics beyond just perfect fluids. We'll focus on MHD. In this case the Maxwell equations are easily written as balance laws, but there is the no monopole divergence constraint as well.
+							<br>
+							It's been known for a very long time that ensuring the divergence constraint holds is crucial - the figure here is from Brackbill and Barnes from  1980. Since then a number of approaches have been tried. In constraint damping terms are added proportional to the constraint (which should vanish) so that the evolution of the error converges to zero exponentially. Every time numerical error kicks the divergence away from zero, the damping term forces it back.
+							<br>
+							The alternative approach is to enforce the constraint at the discrete level. This should be compared to the way that a telescoping flux enforces conservation at the discrete level. One method, used by IllinoisGRMHD and Spritz, is to evolve a vector potential stored at cell edges. The magnetic field is then the curl of the vector potential, which is divergence free by construction.
+							<br>
+							It's worth noting that entropy pairs have been constructed for MHD (in general, and for relativistic MHD for simple equations of state). With this entropy pair we see that the evolution of the entropy has a term that is proportional to the divergence constraint. The proportionality constant is nonlinear and complex. Again, Murphy's law says that unless we explicitly enforce otherwise, a violation of the divergence constraint will make the entropy grow with the wrong sign, and lead to convergence to the wrong solution.
 						</aside>
 					</section>
 
@@ -598,6 +630,12 @@
 						</div>
 
 						<aside class="notes">
+							The steps I've outline above form the basis of the astrophysical ETK evolution codes involving matter. They've been good enough for now, but the costs are high and the accuracy low compared to spacetime codes. For next generation detectors we need order of magnitude improvements.
+							<br>
+							A lot of the focus in the field has been ensuring correct evolution at shocks. This is essential, but shocks form a tiny region of the spacetime. By indirectly enforcing entropy stability and TVB at every point in spacetime we are restricting accuracy. Methods that focus on different metrics for accuracy such as compact differencing schemes could give significant improvements.
+							<br>
+							Finally, we should note that matter evolution, particularly through merger, can see lots of structure and power built up on short lengthscales and fast timescales, below the scales that we can resolve on the grid. There's a lot of effort right now to capture this physics using LES-type approaches, which are naturally ad hoc. However, ensuring stability with these ad hoc terms need analysis that hasn't yet been done: I believe entropy stability should be the non-negotiable basis on which we build future schemes.
+							<br>
 							Thank you for your attention.
 						</aside>
 
