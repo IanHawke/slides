@@ -6,7 +6,7 @@
 
 		<title>Bulk viscosity</title>
 
-		<meta name="description" content="Portsmouth, 2023">
+		<meta name="description" content="Aveiro, 2023">
 		<meta name="author" content="Ian Hawke">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -39,7 +39,7 @@
 
 				<section id="Title">
 
-					<section data-background="figures/pch/strain.svg" data-background-position='right' data-background-size="50%">
+					<section data-background="../portsmouth-2023/figures/pch/strain.svg" data-background-position='right' data-background-size="50%">
 						<div style="float: center; width: 50%">
 							<h2>Nuclear reactions, Bulk viscosity, Neutron Star mergers, and Gravitational Waves</h2>
 							<p style="margin: 50px">
@@ -67,29 +67,11 @@
 						</div>
 						<p style="margin: 50px">
 							<ul style="list-style: none;">
-								<li> <a href="https://ianhawke.github.io/slides/portsmouth-2023">ianhawke.github.io/slides/portsmouth-2023</a> </li>
+								<li> <a href="https://ianhawke.github.io/slides/et-2023">ianhawke.github.io/slides/et-2023</a> </li>
 							</ul>
 						</p>
 						<aside class="notes">
 							This talk will cover why very small, fast, things can have an observable impact on large, slow things.
-							<!--
-							<br>
-							The observable universe is roughly $10^{11}$ light years across. Our galaxy is roughly $10^5$ light years across. That's a scale ratio of $10^6$. The supermassive black hole at the galatic centre is probably $10^{-6}$ light years across or smaller; that's a scale ratio of $10^{11}$ to the galaxy and $10^{17}$ to the observable universe. Galaxies are small in cosmological terms; even the biggest black hole is tiny. But can they be ignored?
-							<br>
-							Similarly, the wavelength of gravitational waves from neutron star mergers, as detected by LVK in GW170817, is of the order of $10^{11}$ metres, whilst the neutron star radius itself is of the order of $10^4$ metres. 
-							<br>
-							However, one key thing that I've done here is to a particular choice of units and hence scales. When comparing a black hole to a galaxy to the universe, the masses are more likely to be relevant than the extents. Similarly, when comparing reactions, the lengths are not of interest: depending on the application, we're more likely to care about the energies or the timescales.
-							<br>
-							Here I'm going to care most about the timescale ratio. The gravitational wave frequencies that LVK is sensitive to are in the $100-1000$ Hz range, so timescales of the order of $10^{-2}-10^{-3}$ seconds. Neutron stars have a whole host of oscillation frequencies, but the ones emitting the most gravitational waves tend to be at the fast end of that limit. The Urca reactions also have an associated timescale: they return a fluid element to equilibrium on times of the order of $10^{-10}$ seconds, although this can vary by a couple of orders of magnitude depending on densities and temperatures. So we see that the scale ratio we're looking at here is roughly $10^6 - 10^8$: again, similar to the scale ratio between a single galaxy and the observable universe.
-							<br>
-							Scales discussion goes here.
-							<br>
-							Now, there is a numerical problem in addition to a physics problem here. When we evolve a neutron star merger, or do any nonlinear time domain simulation, we take our domain and split it into discrete cells. The more cells we use, the smaller they are, the smaller the numerical error is. As we need to compute gravitational wave templates to high phase accuracy, this error needs to be very small. However, the smaller the cell, the smaller the timestep we can use: causality means we can only use information from neighbouring cells, and so the speed of light limits us. Most current simulations use cell sizes between $10-100$ metres, giving timesteps around $10^{-7}-10^{-8}$ seconds. The computational cost of taking smaller timesteps is prohibitive.
-							<br>
-							However, this means the Urca reactions are typically happening faster than our numerical timestep. That means we can't capture their effects accurately and stably. 
-							<br>
-							So, the stage is set. How do we capture these "subgrid" effects? Are they really important (I obviously think so, or I wouldn't be wasting your time with them)? What might they tell us, and how, or are they just confusing?
-							-->
 						</aside>
 					</section>
 
@@ -212,14 +194,14 @@
 							</div>
 							<div class="col r-stack">
 								<div class="fragment fade-in-then-out" style="width:90%; margin:0px" data-fragment-index="1">
-									<img src="figures/pch/rho_Gamma_Inspiral.svg" style="width:100%; margin:0px">
+									<img src="../portsmouth-2023/figures/pch/rho_Gamma_Inspiral.svg" style="width:100%; margin:0px">
 								</div>
 								<div class="fragment fade-in-then-out" data-fragment-index="2" style="width:90%; margin:0px">
-									<img src="figures/pch/rho_Gamma_Merger.svg" style="width:100%; margin:0px">
+									<img src="../portsmouth-2023/figures/pch/rho_Gamma_Merger.svg" style="width:100%; margin:0px">
 								</div>
 								<div class="fragment" data-fragment-index="3">
-									<img src="figures/pch/rhomubTYe.svg" style="width:100%; margin:0px">
-									<img src="figures/pch/mub_T_new.svg" style="width:100%; margin:0px">
+									<img src="../portsmouth-2023/figures/pch/rhomubTYe.svg" style="width:100%; margin:0px">
+									<img src="../portsmouth-2023/figures/pch/mub_T_new.svg" style="width:100%; margin:0px">
 								</div>
 							</div>
 						</div>
@@ -282,8 +264,8 @@
 							</div>
 
 							<div class="col">
-								<img src="figures/pch/sqrtPSD_OoE_NSE.svg" style="width:680px; margin:0px">
-								<img src="figures/pch/sqrtPSD_OoE_OEL.svg" style="width:680px; margin:0px">
+								<img src="../portsmouth-2023/figures/pch/sqrtPSD_OoE_NSE.svg" style="width:680px; margin:0px">
+								<img src="../portsmouth-2023/figures/pch/sqrtPSD_OoE_OEL.svg" style="width:680px; margin:0px">
 							</div>
 						</div>
 
@@ -399,7 +381,7 @@
 							</div>
 
 							<div>
-								<img src="figures/pch/Pip_cont_zoom.svg" style="width:1100px; margin:0px">
+								<img src="../portsmouth-2023/figures/pch/Pip_cont_zoom.svg" style="width:1100px; margin:0px">
 							</div>
 						</div>
 
@@ -452,10 +434,10 @@
 								</ul>
 							</div>
 							<div class="col r-stack">
-								<img src="figures/pch/strain.svg" style="width:100%; margin:0px"class="fragment fade-in-then-out" data-fragment-index=0>
+								<img src="../portsmouth-2023/figures/pch/strain.svg" style="width:100%; margin:0px"class="fragment fade-in-then-out" data-fragment-index=0>
 								<div style="width:95%; margin:0px" class="fragment fade-in" data-fragment-index=1>
-									<img src="figures/pch/sqrtPSD_OoE_NSE.svg" style="width:100%; margin:0px">
-									<img src="figures/pch/sqrtPSD_OoE_OEL.svg" style="width:100%; margin:0px">
+									<img src="../portsmouth-2023/figures/pch/sqrtPSD_OoE_NSE.svg" style="width:100%; margin:0px">
+									<img src="../portsmouth-2023/figures/pch/sqrtPSD_OoE_OEL.svg" style="width:100%; margin:0px">
 								</div>
 							</div>
 						</div>
@@ -515,7 +497,7 @@
 								</p>
 							</div>
 							<div class="col">
-								<img src="figures/pch/adaptive_model.png" style="height:960px">
+								<img src="../portsmouth-2023/figures/pch/adaptive_model.png" style="height:960px">
 							</div>
 						</div>
 
@@ -531,7 +513,7 @@
 					<section>
 						<h2>Solve the toy problem</h2>
 						
-						<img src="figures/boundary_layers/rel_no_bl.svg" style="width:90%">
+						<img src="../portsmouth-2023/figures/boundary_layers/rel_no_bl.svg" style="width:90%">
 					
 						<aside class="notes">
 							When we set up the toy problem we never showed results to actually prove that the approximations made things better. Let's fix that here. None of the numbers mean anything much. The fast timescale here isn't too fast - typically one to four orders of magnitude less than the full run time, to see the effects.
@@ -569,7 +551,7 @@
 								</p>
 							</div>
 							<div class="col">
-								<img src="figures/boundary_layers/rel_no_bl_conv.svg" style="width:100%">
+								<img src="../portsmouth-2023/figures/boundary_layers/rel_no_bl_conv.svg" style="width:100%">
 							</div>
 						</div>
 
@@ -581,7 +563,7 @@
 					<section>
 						<h2>Start out-of-equilibrium</h2>
 						
-						<img src="figures/boundary_layers/rel_bl.svg" style="width:90%">
+						<img src="../portsmouth-2023/figures/boundary_layers/rel_bl.svg" style="width:90%">
 					
 						<aside class="notes">
 							If we start out of equilibrium then the results look much worse. We're working with a large timescale ratio here to make the behaviour clear, but it's already obvious that the different approximations have comparable errors. It's also obvious that the early time behaviour is a real issue, as the initial out-of-equilibrium behaviour relaxes.
@@ -617,7 +599,7 @@
 								</p>
 							</div>
 							<div class="col">
-								<img src="figures/boundary_layers/rel_bl_conv.svg" style="width:100%">
+								<img src="../portsmouth-2023/figures/boundary_layers/rel_bl_conv.svg" style="width:100%">
 							</div>
 						</div>
 
@@ -633,7 +615,7 @@
 					<section>
 						<h2>Boundary layers</h2>
 						
-						<img src="figures/boundary_layers/rel_bl_correction.svg" style="width:90%">
+						<img src="../portsmouth-2023/figures/boundary_layers/rel_bl_correction.svg" style="width:90%">
 					
 						<aside class="notes">
 							The power series expansion assumption isn't correct at early times. At that point the solution wants to relax exponentially quickly to (near) the equilibrium surface. We can see this by the plot. We can also see this by re-scaling the equation to look solely at the early time behaviour.
@@ -671,7 +653,7 @@
 								</p>
 							</div>
 							<div class="col">
-								<img src="figures/boundary_layers/rel_bl_correction_conv.svg" style="width:100%">
+								<img src="../portsmouth-2023/figures/boundary_layers/rel_bl_correction_conv.svg" style="width:100%">
 							</div>
 						</div>
 
