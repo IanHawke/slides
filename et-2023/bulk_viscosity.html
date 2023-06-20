@@ -132,6 +132,11 @@
 								<img src="../eth/figures/timeline-with-spectrum-amgv7.png" style="width:100%; margin:0px">
 							</div>
 						</div>
+						<aside class="notes">
+							So unless something has happened very recently, we've still only had the one multimessenger signal. Whilst we can hope for more in O4 it's really with the next generation of detectors - Einstein Telescope and Cosmic Explorer - that we expect numbers to really take off. At that point we'll be probing the post-merger regime, where temperatures become significant and nuclear reactions come into play. 
+							<br>
+							Now, adding additional physics to our codes is painful and expensive. Do we really have to do it? We should only do it when it makes a difference: when we can distinguish the additional physical parameters or model additions in observations. So, first we should say roughly how parameter estimation from gravitational waves works.
+						</aside>
 					</section>
 
 					<section>
@@ -141,6 +146,11 @@
 
 					<!-- https://dcc.ligo.org/LIGO-G1700908/public -->
 
+					<aside class="notes">
+						Here's a toy picture for you. Start from a signal and a model. Overlay the wave strains. Change one parameter at a time. In this case the model is a black hole binary, so the parameters are the total mass and the distance to the source. First modify the mass until the phase matches; then modify the distance until the amplitude does. Finally, fold in the detector noise. At that point we have the best match between the model and the signal.
+						<br>
+						We can measure the overlap between the best model result and the signal. If multiple parameter values are within a certain tolerance of the best case, or two different models have similar best matches, then they can't be distinguished, so there's no point adding that physics to the model.					
+					</aside>
 				</section>
 
 				<section id="Mergers and reactions">
@@ -194,11 +204,11 @@
 						</div>
 
 						<aside class="notes">
-							Let's briefly discuss the anatomy of a neutron star merger, and why we need numerical simulations. A neutron star binary, formed by some evolutionary track, is a pair of roughly solar-mass amounts of dense matter squeezed into a radius of around 10km. The orbit circularises and loses energy through gravitational wave emission, so the stars inspiral, and the inspiral accelerates, increasing the gravitational wave frequency in a predictable fashion. It's this inspiral that LVK observes.
+							There is a lot of physics driven by merger. Here the focus is on the small-scale structure driven by merger, with the shocks making the temperature shoot up, shearing instabilities and turbulent effects driving power to small scales, and neutrinos and nuclear reactions becoming much more important. Here I'm going to be motivated by the weak interactions, particularly of Urca type, where the relative amount of baryons and electrons changes due to the reactions, with energy-momentum transferred into neutrinos.
 							<br>
-							When the stars merge the collision is violent and messy, increasing the core density, winding up the magnetic fields, heating up the matter through shocks and other interactions, shedding matter and possibly launching a jet, and triggering a range of nuclear reactions that lead to electromagnetic and neutrino emission. None of this can be captured approximately as yet: nonlinear simulations of anything past the last dozen orbits of inspiral are essential. LVK cannot yet observe post-merger gravitational waves, but next generation detectors like the Einstein Telescope will. The era of precision gravitational wave observation, mirroring precision cosmology, is hopefully 15-20 years away.
+							For now, the focus is on the evolution of the lepton fraction keeping track of the number of electrons at each point. This is an advection equation with a source - the reaction rate. The dimensions of the reaction rate are inverse time, so we need an idea of the reaction timescale.
 							<br>
-							One of the fundamental applications of gravitational wave observations of neutron star mergers is understanding the state of matter in extreme situations: strong field gravity and high temperatures. Terrestrial accelerators and other experiments can give high temperatures. The inspiral phase and current LVK measurements can give at least bounds on the behaviour in strong field gravity. But only observations through the merger phase and the post-merger behaviour will give us the full picture of both strong gravity and high temperatures. When next generation detectors come online, they will need the templates derived from numerical simulations in order to extract the information about the microphysics. The key question is then, which physics needs including in the numerical model in order to get sufficiently accurate templates?
+							Unfortunately for numerical studies, typical Urca reaction rates can be smaller than the numerical timestep. When we solve the evolution equations, we would want to use explicit methods: we can't do this stably. We're left with a problem: we can either switch to a timestep limited by the reactions or an implicit scheme in time, both of which are impractical. Or we can do something else.
 						</aside>
 
 					</section>
@@ -313,8 +323,6 @@
 							This plot covers the range of densities and temperatures relevant for a neutron star merger. The core of the neutron star is typically at a few times nuclear saturation density (see note below). The outer layers of the neutron star are many orders of magnitude lower, but the Urca reactions are rapidly suppressed at low densities. The temperature of the neutron star during inspiral is low - it is expected to be well below 1MeV - but can reach around 100MeV through merger in extreme cases.
 							<br>
 							There are two key pieces of information in this plot. The first, given by the colour, is how big the bulk viscous pressure is compared to the total pressure. We see this can be substantial - certainly into the percent level - at low temperatures, and particularly through the core. The second piece of information is the timescale of the reactions. Remember, bulk viscous pressure is an approximation, and that approximation is only needed if the numerical timestep is too big. The lines pick a particular timestep. Every region below a line has reactions slow enough that the bulk viscous approximation isn't needed, and the full nonlinear reaction can be directly solved. The solid line is quite a poor numerical resolution by current standards. The top, dotted, line is an order of magnitude better than the best simulation ever run. We see that there's a region in parameter space where we will have no choice but to use a bulk viscous approximation.
-							<br>
-							Note: back of the envelope calculation says that nuclear saturation density, the unit we use for baryon density, is roughly equivalent to the density of the universe when $z \sim 10^{12}$, which is very early in the life of the universe. It's close to the neutrino decoupling time - unsurprising as the nuclear reactions are linked to those invoked for this, as is the temperature at that point of 1MeV. This was around 1 second after the Big Bang.
 						</aside>
 
 					</section>
