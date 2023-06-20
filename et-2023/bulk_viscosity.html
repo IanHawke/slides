@@ -143,7 +143,7 @@
 
 				</section>
 
-				<section id="Mergers">
+				<section id="Mergers and reactions">
 
 					<section>
 
@@ -151,56 +151,42 @@
 							<div class="col">
 								<h2>Neutron star merger</h2>
 								<ul>
-									<li class="fragment" data-fragment-index="1">
-										GWs drain energy from orbit.
-									</li>
-									<li class="fragment" data-fragment-index="1">
-										"Chirp" visible to LVK (GW170817).
-									</li>
-									<li class="fragment" data-fragment-index="2">
+									<li>
 										Merger is messy:
 										<ul>
 											<li>
 												Shearing instabilities;
 											</li>
 											<li>
-												Magnetic field wind up;
-											</li>
-											<li>
 												Temperature increase through shocks;
 											</li>
 											<li>
-												Nuclear reactions;
-											</li>
-											<li>
-												Emission through EM, neutrinos.
+												Nuclear reactions.
 											</li>
 										</ul>
 									</li>
-									<li class="fragment" data-fragment-index="3">
-										Post-merger:
-										<ul>
-											<li>
-												jets;
-											</li>
-											<li>
-												ejecta;
-											</li>
-											<li>
-												probes high $T$ <em>and</em> high density regime.
-											</li>
-										</ul>
+									<li>
+										Urca reactions:
+										$$
+										\begin{aligned}
+										  \text{n} &\to \text{p} + \text{e}^- + \bar{\nu}_e \\
+										  \text{p} + \text{e}^- &\to \text{n} + \nu_e.
+										\end{aligned}
+										$$
+									</li>
+									<li>
+										Keep track of species $Y_\text{e} \sim n_\text{e} / n_b$ by
+										$$
+										D_t Y_\text{e} = \Gamma_\text{e}(\rho, T, Y_\text{e}).
+										$$
+									</li>
+									<li class="fragment">
+										Urca timescale $\sim 10^{-8}-10^{-10}$ seconds: $< \Delta t$. <em>Stiff</em>: $\Gamma_\text{e} \gg 1$.
 									</li>
 								</ul>
 							</div>
-							<div class="col r-stack">
-								<div class="fragment fade-in-then-out" style="width:90%; margin:0px" data-fragment-index="1">
-									<img src="../portsmouth-2023/figures/pch/rho_Gamma_Inspiral.svg" style="width:100%; margin:0px">
-								</div>
-								<div class="fragment fade-in-then-out" data-fragment-index="2" style="width:90%; margin:0px">
-									<img src="../portsmouth-2023/figures/pch/rho_Gamma_Merger.svg" style="width:100%; margin:0px">
-								</div>
-								<div class="fragment" data-fragment-index="3">
+							<div class="col">
+								<div>
 									<img src="../portsmouth-2023/figures/pch/rhomubTYe.svg" style="width:100%; margin:0px">
 									<img src="../portsmouth-2023/figures/pch/mub_T_new.svg" style="width:100%; margin:0px">
 								</div>
@@ -218,71 +204,6 @@
 					</section>
 
 				</section>	
-
-				<section id="Nuclear Reactions">
-
-					<section>
-
-						<div class="container">
-							<div class="col">
-
-								<h2>Urca</h2>
-
-								$$
-								\begin{aligned}
-								  \text{n} &\to \text{p} + \text{e}^- + \bar{\nu}_e \\
-								  \text{p} + \text{e}^- &\to \text{n} + \nu_e.
-								\end{aligned}
-								$$
-								<p>
-									Keep track of species $Y_\text{e} \sim n_\text{e} / n_b$ by
-								</p>
-								$$
-								u^a \nabla_a Y_\text{e} = \Gamma_\text{e}(n_b, Y_\text{e}, T, \dots)/n_b.
-								$$
-								<div class="fragment">
-									<p>
-										Timescales:
-									</p>
-									<ul>
-										<li>
-											Full merger event: $\sim$ seconds;
-										</li>
-										<li>
-											Inspiral: $\sim 10^{-2}$ seconds;
-										</li>
-										<li>
-											Post-merger: $\sim 10^{-3}$ seconds
-										</li>
-										<li>
-											Numerics: $\sim 10^{-7}-10^{-8}$ seconds;
-										</li>
-										<li>
-											Urca: $\sim 10^{-8}-10^{-10}$ seconds.
-										</li>
-									</ul>
-								</div>
-							</div>
-
-							<div class="col">
-								<img src="../portsmouth-2023/figures/pch/sqrtPSD_OoE_NSE.svg" style="width:680px; margin:0px">
-								<img src="../portsmouth-2023/figures/pch/sqrtPSD_OoE_OEL.svg" style="width:680px; margin:0px">
-							</div>
-						</div>
-
-						<aside class="notes">
-							I've mentioned that nuclear reactions occur. The one I'll focus on here is the Urca interactions which are where nucleons interact with neutrons, efficiently emitting neutrinos. These reactions tend to reduce the number of electrons in the mix, reducing the pressure and softening the equation of state. The effects may be small, but they might be long lived: the plots on the right are spoiling the later part of the talk by showing that the impact on the gravitational wave signal can be seen.
-							<br>
-							Evolving reactions directly means looking at individual particles, which is totally impractical. Instead we assume that all particles within a numerical cell move together, so the effect of reactions can be encapsulated in a rate term. That is, we evolve the total number density of baryons (neutrons and protons here), and all the electron fraction (or lepton fraction more generally). By assuming all particles within a cell have, on average, the same velocity, this scalar field is advected along, with the reaction rate term adding or subtracting electrons as needed. In general the rates are complex functions of the density, temperature, composition, and many other things: in what follows we'll simplify to it just depending on the thermodynamics and the composition.
-							<br>
-							Now, it's worth comparing scales to see if we believe the reactions can have any effect. The Urca reactions are happening on timescales ten or more orders of magnitude faster than the full event, and 6 or more orders of magnitude faster than the post-merger oscillations that we might expect them to effect. That's comparable to the scale ratio between the size of the observable universe today and the size of our galaxy. So do we really need to consider these effects?
-							<br>
-							Even worse, the reactions are happening faster than the numerical timestep. Making the timestep smaller, which is often linked to using higher resolution, is impractical - simulations are already too expensive. So, even if we wanted to include these nuclear reactions, how can we accurately and stably capture these "subgrid" effects in a numerical simulation?
-						</aside>
-
-					</section>
-
-				</section>
 
 				<section id="Multiscale">
 
