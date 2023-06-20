@@ -187,7 +187,7 @@
 									<li>
 										Keep track of species $Y_\text{e} \sim n_\text{e} / n_b$ by
 										$$
-										D_t Y_\text{e} = \Gamma_\text{e}(\rho, T, Y_\text{e}).
+										D_t Y_\text{e} = \Gamma_\text{e}(n_b, T, Y_\text{e}).
 										$$
 									</li>
 									<li class="fragment">
@@ -223,7 +223,7 @@
 							Approximate fluid equations, using $\theta = \nabla_a u^a$:
 						</p>
 						$$
-						D_t \begin{pmatrix} n_b \\ e \\ Y_\text{e} \end{pmatrix} = - \begin{pmatrix} n_b \theta \\ (e + p) \theta \\ {\color{red}\epsilon^{-1}} \left( A Y_\text{e} - B \right) \end{pmatrix}.
+						D_t \begin{pmatrix} n_b \\ e \\ Y_\text{e} \end{pmatrix} = - \begin{pmatrix} n_b \theta \\ \left( e + p(n_b, e, Y_\text{e}) \right) \theta \\ {\color{red}\epsilon^{-1}} \left( A Y_\text{e} - B \right) \end{pmatrix}.
 						$$
 						<p>
 							Short timescale encoded in $\epsilon \ll 1$.
@@ -235,10 +235,10 @@
 								</p>
 								$$
 								\begin{aligned}
-								\mathcal{O}(\epsilon^{-1}) & \colon & 0 &= -A Y_0 + B, \\
+								\mathcal{O}(\epsilon^{-1}) & \colon & 0 &= -A Y_0 + B & \implies & Y_0 = Y_\text{eq} = F(n_b, e), \\
 								\mathcal{O}(\epsilon^{0}) & \colon & D_t Y_0 &= -A Y_1 \\
 								& \implies & Y_1 &= -A^{-1} D_t Y_0 \\
-								& & &= F(n_b, e) \theta.
+								& & &= G(n_b, e) \theta.
 								\end{aligned}
 								$$
 							</div>
@@ -248,9 +248,9 @@
 								</p>
 								$$
 								\begin{aligned}
-								p(n_b, e, Y_\text{e}) &= p(n_b, e, Y_0(n_b, e)) + \epsilon \partial_{Y_\text{e}} p Y_1 \\
-								&= p_0(n_b, e) + \Pi, \\
-								\Pi &= \zeta(n_b, e) \theta.
+								p(n_b, e, Y_\text{e}) &= p(n_b, e, Y_\text{eq}(n_b, e)) + \epsilon \partial_{Y_\text{e}} p Y_1 \\
+								&= p_\text{eq}(n_b, e) + \Pi, \\
+								\Pi &= -\zeta(n_b, e) \theta.
 								\end{aligned}
 								$$
 								<p>
@@ -262,7 +262,7 @@
 									Reduced model:
 								</p>
 								$$
-								D_t \begin{pmatrix} n_b \\ e \end{pmatrix} = - \begin{pmatrix} n_b \theta \\ (e + {\color{blue} p_0 + \Pi}) \theta \end{pmatrix}.
+								D_t \begin{pmatrix} n_b \\ e \end{pmatrix} = - \begin{pmatrix} n_b \theta \\ (e + {\color{blue} p_\text{eq} + \Pi}) \theta \end{pmatrix}.
 								$$
 								<ul>
 									<li>
@@ -407,13 +407,13 @@
 										Bulk viscous approximation:
 									</li>
 									$$
-									D_t \begin{pmatrix} n_b \\ e \end{pmatrix} = - \begin{pmatrix} n_b \theta \\ (e + {\color{blue} p_0 + \Pi}) \theta \end{pmatrix}.
+									D_t \begin{pmatrix} n_b \\ e \end{pmatrix} = - \begin{pmatrix} n_b \theta \\ (e + {\color{blue} p_\text{eq} + \Pi}) \theta \end{pmatrix}.
 									$$
 									<li>
 										"Infinitely fast" $\implies \Pi \to 0$.
 									</li>
 									<li>
-										${\footnotesize \Pi = -\epsilon p_{,Y} A^{-1} \left( \rho Y_{0,n_b} + (e + p_0) Y_{0, e} \right) \theta}.$
+										${\footnotesize \zeta = \epsilon p_{,Y_\text{e}} A^{-1} \left( n_b Y_{\text{eq},n_b} + (e + p_\text{eq}) Y_{\text{eq}, e} \right) }.$
 									</li>
 								</ul>
 							</div>
@@ -474,7 +474,7 @@
 									<li>
 										Previously 
 										$$
-										Y_\text{e}(t=0) = Y_0(t=0),
+										Y_\text{e}(t=0) = Y_\text{eq}(t=0),
 										$$
 										equilibrium.
 									</li>
@@ -482,12 +482,12 @@
 										Now set 
 										$$
 										\begin{aligned} 
-										\Delta Y &= Y_\text{e}(t=0) - Y_0(t=0) \\&= \mathcal{O}(1).
+										\Delta Y &= Y_\text{e}(t=0) - Y_\text{eq}(t=0) \\&= \mathcal{O}(1).
 										\end{aligned}
 										$$
 									</li>
 									<li>
-										$Y_e \to Y_0$ exponentially, timescale $\epsilon^{-1}$.
+										$Y_\text{e} \to Y_\text{eq}$ exponentially, timescale $\epsilon^{-1}$.
 									</li>
 									<li>
 										$\Pi$ correction doesn't seem as accurate.
@@ -567,7 +567,13 @@
 										Solution: rescale $\tau = t / \epsilon$.
 									</li>
 									<li>
-										Re-solve for $\tau$: captures exponential in $t$
+										Re-solve using 
+										$$
+										Y_\text{e} = \tilde{Y}_0(\tau) + \epsilon \tilde{Y}_1(\tau) + \dots 
+										$$
+									</li>
+									<li>
+										Captures exponential behaviour in $t$.
 									</li>
 									<li>
 										Matched asymptotics: 
@@ -622,7 +628,7 @@
 								<p>
 									Matched asymptotics and modifying the initial data mean we can successfully use bulk viscous approximations.
 								</p>
-								<p>
+								<p class="fragment">
 									Within a numerical scheme, discrete steps or multi-physics aspects can act to push things out of equilibrium...
 								</p>
 							</div>
