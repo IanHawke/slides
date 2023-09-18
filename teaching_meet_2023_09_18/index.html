@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>LaTeX vs accessibility</title>
+
+		<meta name="description" content="Teaching Meeting">
+		<meta name="author" content="Ian Hawke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="../math1058/reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../math1058/reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../math1058/reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../math1058/reveal.js/plugin/highlight/monokai.css">
+
+		<!-- Personal defaults -->
+		<link rel="stylesheet" href="../math1058/lectures/reveal_css.css">
+	</style>
+
+
+
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="Title">
+
+					<section>
+						<h2 class="r-fit-text">LaTeX vs Accessibility</h2>
+						<p>
+							<ul style="list-style: none;">
+								<li> Ian Hawke
+							</ul>
+						</p>
+
+						<aside class="notes">
+							Notes for the teaching meeting.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Problem">
+
+					<section>
+						<h2>PDFs</h2>
+
+						<ul>
+							<li>
+								LaTeX <em>output</em> mixes style and content.
+							</li>
+							<li>
+								Typically output to PDF, which (eg) screen readers struggle with:
+								<ul>
+									<li>
+										accessible fonts;
+									</li>
+									<li>
+										plots;
+									</li>
+									<li>
+										mathematics.
+									</li>
+								</ul>
+							</li>
+							<li>
+								Loss of <em>structure</em> makes it inaccessible.
+							</li>
+							<li>
+								<a href="https://people.bath.ac.uk/cspehj/">Emma Cliffe</a> has <a href="https://stem-enable.github.io/Accessibility-of-maths-e-resources/">more detail</a> on this, including <a href="https://www.youtube.com/watch?v=hrC_NWRQi8s">a talk</a>.
+							</li>
+						</ul>
+
+						<aside class="notes">
+							Emma Cliffe's talk is detailed here; the points are a summary.
+						</aside>
+
+					</section>
+
+					<section>
+
+						<h2>What works</h2>
+
+						<ul>
+							<li>
+								MS Word (recent versions).
+							</li>
+							<li>
+								HTML.
+							</li>
+						</ul>
+
+						<p class="fragment">
+							With 50+ person-years of LaTeX material to convert, plus maintenance pain, neither is acceptable.
+						</p>
+
+						<p class="fragment">
+							Instead, convert LaTeX to accessible form.
+						</p>
+
+						<aside class="notes">
+							Accessibility support in technology needs people and cash. Therefore only the big formats really work. However, these aren't appropriate as the base single source of truth,
+						</aside>
+
+					</section>
+
+					<section>
+
+						<h2>Options</h2>
+
+						<ul>
+							<li>
+								Markdown (RMarkdown, Jupyter).
+								<ul>
+									<li>
+										Outputs in all formats;
+									</li>
+									<li>
+										Easy to use;
+									</li>
+									<li>
+										Not starting from LaTeX.
+									</li>
+								</ul>
+							</li>
+							<li>
+								Pandoc.
+								<ul>
+									<li>
+										Outputs in all formats;
+									</li>
+									<li>
+										Hard to use;
+									</li>
+									<li>
+										Converts between all (relevant) formats.
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="https://chirun.readthedocs.io/en/latest/">Chirun</a>.
+								<ul>
+									<li>
+										Outputs in some formats;
+									</li>
+									<li>
+										Moderately easy to use;
+									</li>
+									<li>
+										Can use LaTeX as base format.
+									</li>
+								</ul>
+							</li>
+						</ul>
+
+					</section>
+
+				</section>
+
+				<section id="Chirun">
+
+					<section>
+						<h2>One document</h2>
+
+							<div style="position:absolute; width:768px; left:0px; top:100px; height:800px">
+								<pre style="width:768px; left:0px; height:800px">
+									<code data-trim data-no-escape data-line-numbers="5">
+\documentclass[a4paper]{report}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+...
+\usepackage{chirun}
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem*{note}{Note}
+\newtheorem*{solution}{Solution}
+
+\begin{document}
+
+\chapter{Linear programming}
+\label{chap:lp}
+
+\section{The problem}
+\label{sec:lp:problem}
+									</code>
+								</pre>
+							</div>
+							<div style="position:absolute; width:768px; top:100px; left:768px">
+								<iframe width="768" height="800" data-src="https://ianhawke.github.io/slides/math1058/chirun_material/notes/notes_by_chapter/linear_programming/index.html"></iframe>
+							</div>
+
+						<aside class="notes">
+							To convert a single document add the chirun package and compile. It will give both HTML and PDF output.
+						</aside>
+					</section>
+
+					<section data-background-iframe="https://ianhawke.github.io/slides/math1058/chirun_material/index.html">
+						<aside class="notes">
+							Here we see a full course. This requires setting up a configuration file as well.
+						</aside>
+					</section>
+
+					<section>
+						<h2>What works?</h2>
+
+						<p>
+							Not all LaTeX packages or features work with HTML/MathJax.
+						</p>
+
+						<ul>
+							<li>
+								Working: ams, beamer, enumerate, graphicx, ifthen, natbib, many more.
+							</li>
+							<li>
+								Not working: mathtools, some cross-referencing issues, symbols that rely on extra fonts (eg esint, txfonts).
+							</li>
+							<li>
+								Probably not working out of the box: your favourite package.
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>How to use?</h2>
+
+						<ul>
+							<li>
+								Python package.
+								<ul>
+									<li>
+										Command line install and build.
+									</li>
+									<li>
+										Rapid iteration and test.
+									</li>
+									<li>
+										Painful to upload to Blackboard.
+									</li>
+								</ul>
+							</li>
+							<li>
+								LTI.
+								<ul>
+									<li>
+										"Just" upload LaTeX files to Blackboard; builds, adds to course.
+									</li>
+									<li>
+										Slow iteration and test.
+									</li>
+									<li>
+										Now working.
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+				</section>
+
+				<section id="Summary">
+					<section>
+
+						<h2>Summary</h2>
+						<ul>
+							<li>
+								Chirun is <em>one possible</em> solution for accessibility.
+							</li>
+							<li>
+								Few alternatives.
+							</li>
+							<li>
+								We need to take this more seriously.
+							</li>
+						</ul>
+
+						<aside class="notes">
+						</aside>
+
+					</section>
+
+				</section>
+
+			</div>
+
+		</div>
+
+
+		<script src="../math1058/reveal.js/dist/reveal.js"></script>
+		<script src="../math1058/reveal.js/plugin/zoom/zoom.js"></script>
+		<script src="../math1058/reveal.js/plugin/notes/notes.js"></script>
+		<script src="../math1058/reveal.js/plugin/search/search.js"></script>
+		<script src="../math1058/reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../math1058/reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../math1058/reveal.js/plugin/math/math.js"></script>
+		<script src="../math1058/reveal.js/plugin/spotlight/spotlight.js"></script>
+		<script src="../math1058/lectures/reveal_defaults.js"></script>
+
+	</body>
+</html>
