@@ -181,7 +181,7 @@
 						\]
 						<div class="fragment">
 							<p>
-								<b>Proof:</b> Limit requires $\exists \epsilon > 0, N > 0$ such that
+								<b>Proof:</b> Limit requires $\forall \, \epsilon > 0 \,\, \exists \, N > 0$ such that
 							</p>
 							\[
 							l - \epsilon < \frac{f(n)}{g(n)} < l + \epsilon \quad \forall n \ge N.
@@ -201,7 +201,7 @@
 							<br>
 							The proof relies on the definition of the limit. It needs us to consider the two bounds separately. From each bound we then need to link the constants, small and large, given by the limit definition, to the constant appearing in the big O definition.
 							<br>
-							In the first case this happens straightforwardly. In the second we have to assume that $\epsilon$ is smaller than $l$ so that we can invert the constant into the appropriate form. As we just need $\epsilon$ to exist, we can always do this by, for example, choosing $\epsilon = l/2$.
+							In the first case this happens straightforwardly. In the second we have to assume that $\epsilon$ is smaller than $l$ so that we can invert the constant into the appropriate form. If this is not true then instead we choose $N$ big enough so that the bound holds for, for example,  $\epsilon_0 = l/2$. Then as $\epsilon_0 < \epsilon$ the result still holds.
 						</aside>
 					</section>
 
@@ -215,7 +215,7 @@
 						\]
 						<div class="fragment">
 							<p>
-								<b>Proof:</b> Limit requires $\exists \epsilon > 0, N > 0$ such that
+								<b>Proof:</b> Limit requires $\forall \, \epsilon > 0 \,\, \exists \, N > 0$ such that
 							</p>
 							\[
 							- \epsilon < \frac{f(n)}{g(n)} < + \epsilon \quad \forall n \ge N.
@@ -233,7 +233,7 @@
 						<aside class="notes">
 							The proof that two functions have different efficiency follows very similar lines. In fact, the proof that f is bounded by g is essentially identical.
 							<br>
-							However, the proof that g cannot be bounded by f has to be different. The fact that l is zero means that no matter how small $\epsilon$ is, it cannot be the case that the lower bound of the limit gives a positive bound. Therefore we work by contradiction. We assume that g can be bounded by f and check what this means for the ratio. As $c$ must be a positive constant, we must be able to bound the ratio a finite amount away from zero, no matter how large $n$ gets. This contradicts the limit.
+							However, the proof that g cannot be bounded by f has to be different. The point is that for $g = \mathcal{O}(f)$ there has to exist a <em>fixed</em> constant $c > 0$ so that $f / g \ge c^{-1}$. However, we can choose $\epsilon$ freely. If we choose $\epsilon < c^{-1}$ then the two bounds are contradictory.
 						</aside>
 					</section>
 
