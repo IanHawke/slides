@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Turbulence Modelling</title>
+
+		<meta name="description" content="Turbulence Modelling, Southampton">
+		<meta name="author" content="Ian Hawke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="../math1058/reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../math1058/reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../math1058/reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../math1058/reveal.js/plugin/highlight/monokai.css">
+
+		<!-- Personal defaults -->
+		<link rel="stylesheet" href="../math1058/lectures/reveal_css.css">
+	</style>
+
+
+
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="Title">
+
+					<section data-background="figures/scales.png" data-background-position='right' data-background-size="50%">
+						<div style="float: center; width: 50%">
+							<h2>Turbulence modelling in neutron star merger simulations</h2>
+							<p style="margin: 50px">
+								<ul style="list-style: none;">
+									<li> 
+										Ian Hawke
+									</li>
+									<li>
+										David Radice
+									</li>
+								</ul>
+							</p>
+							<p>
+								<ul style="list-style: none;">
+									<li>
+										See <a href="https://arxiv.org/abs/2402.03224">arxiv:2402.03224</a>.
+									</li>
+									<li>
+										At <a href="https://doi.org/10.1007/s41115-023-00019-9">Liv Rev Comp Astro (2024) 10:1.</a>
+									</li>
+									<li> <a href="https://https://github.com/IanHawke">github.com/IanHawke</a></li>
+									<li> STAG, University of Southampton</li>
+								</ul>
+							</p>
+							<p style="position:absolute; bottom:5px;">
+								<ul style="list-style: none;">
+									<li> <a href="https://ianhawke.github.io/slides/southampton-2024">ianhawke.github.io/slides/southampton-2024</a> </li>
+								</ul>
+							</p>
+						</div>
+						<aside class="notes">
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Introduction">
+
+					<section>
+
+						<h2>Toy model</h2>
+
+						<div class="container">
+							<div class="col">
+								<p>
+									Incompressible Navier-Stokes:
+								</p>
+								$$
+								\partial_t \mathbf{v} + {\color{red}{\mathbf{v} \cdot \partial_{\mathbf{x}} \mathbf{v}}} = - \frac{\nabla p}{\rho} + {\color{blue}{\nu \nabla^2 \mathbf{v}}}.
+								$$
+								<p>
+									1d modes, $v \sim \sum_k V_k(t) e^{i k x}$, implies
+								</p>
+								$$
+								\partial_t V_k + {\color{red}{\sum_{k'} i k' V_{k-k'} V_{k'}}} = \dots - {\color{blue}{\nu k^2 V_k}}.
+								$$
+								<p>
+									<span style="color:blue">Final term</span> is dissipation, $V_k \sim e^{-\nu k^2 t}$.
+								</p>
+								<p>
+									<span style="color:red"> Advective term</span> <em>couples scales</em>.
+								</p>
+							</div>
+							<div class="col">
+								<img src="figures/KH_density_2048.svg" style="height:100%">
+							</div>
+						</div>
+					</section>
+
+					<section>
+						<h2>Kolmogorov</h2>
+
+						<div class="container">
+							<div class="col" style="position:relative">
+								<p>
+									Turbulence has power $\sim k^{-5/3}$ if
+								</p>
+								<ul>
+									<li>
+										stationary
+									</li>
+									<li>
+										isotropic
+									</li>
+									<li>
+										$\ell \sim$ inertial subrange.
+									</li>
+								</ul>
+								<p class="fragment" data-fragment-index="2">
+									"Proof" only in simple cases. Shown "experimentally" for
+								</p>
+								<ul class="fragment" data-fragment-index="2">
+									<li>
+										compressible
+									</li>
+									<li>
+										relativistic hydrodynamics
+									</li>
+									<li>
+										MHD.
+									</li>
+								</ul>
+								<p style="margin-top:150px; margin-bottom:0px">
+									<ul style="list-style:none; font-size:0.6em">
+										<li> <a href="https://arxiv.org/abs/1209.2936">Radice & Rezzolla, 1209.2936</a> </li>
+										<li> <a href="https://arxiv.org/abs/1808.09721">Wright & Hawke, 1808.09721</a></li>
+									</ul>
+								</p>
+							</div>
+							<div class="col">
+								<img src="figures/Radice1209_2936.svg" style="width:90%">
+								<img src="figures/WrightHawke1808_09721.svg" style="width:90%">
+							</div>
+						</div>
+
+					</section>
+
+					<section>
+						<h2>Reynolds Number</h2>
+
+						<div class="container">
+							<div class="col">
+								<p>
+									Dissipation scale $\ell_d \sim \mathrm{Re}^{-3/4} \ell_0$. Estimate for NSs:
+								</p>
+								<ul>
+									<li class="fragment">
+										Neutrino diffusion: $\mathrm{Re} \sim 4 \times 10^6$ so $\ell_\nu \sim 1 \mathrm{cm}$.
+									</li>
+									<li class="fragment">
+										But $\lambda_\nu \gg \ell_\nu$, so ineffective.
+									</li>
+									<li class="fragment">
+										Electron scattering: $\mathrm{Re} \sim 5 \times 10^{15}$ so $\ell_d \sim 1 \mathrm{nm}$.
+									</li>
+									<li class="fragment">
+										MHD dominates below $\ell_B \sim 1 \mathrm{cm}$.
+									</li>
+								</ul>
+								<p class="fragment">
+									Numbers slightly larger in accretion disk.
+								</p>
+								<p class="fragment">
+									We will <b>never</b> resolve dissipation numerically.
+								</p>
+							</div>
+							<div class="col">
+								<img src="figures/scales.png" style="height:100%">
+							</div>
+						</div>
+					</section>
+
+				</section>
+
+			</div>
+
+		</div>
+
+
+		<script src="../math1058/reveal.js/dist/reveal.js"></script>
+		<script src="../math1058/reveal.js/plugin/zoom/zoom.js"></script>
+		<script src="../math1058/reveal.js/plugin/notes/notes.js"></script>
+		<script src="../math1058/reveal.js/plugin/search/search.js"></script>
+		<script src="../math1058/reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../math1058/reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../math1058/reveal.js/plugin/math/math.js"></script>
+		<script src="../math1058/reveal.js/plugin/spotlight/spotlight.js"></script>
+		<script src="../math1058/lectures/reveal_defaults.js"></script>
+
+	</body>
+</html>
