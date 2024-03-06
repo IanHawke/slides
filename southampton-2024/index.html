@@ -76,7 +76,7 @@
 
 				</section>
 
-				<section id="Introduction">
+				<section id="Numbers">
 
 					<section>
 
@@ -122,6 +122,9 @@
 										stationary
 									</li>
 									<li>
+										homogeneous
+									</li>
+									<li>
 										isotropic
 									</li>
 									<li>
@@ -139,10 +142,13 @@
 										relativistic hydrodynamics
 									</li>
 									<li>
-										MHD.
+										MHD
+									</li>
+									<li>
+										etc.
 									</li>
 								</ul>
-								<p style="margin-top:150px; margin-bottom:0px">
+								<p style="margin-top:100px; margin-bottom:0px">
 									<ul style="list-style:none; font-size:0.6em">
 										<li> <a href="https://arxiv.org/abs/1209.2936">Radice & Rezzolla, 1209.2936</a> </li>
 										<li> <a href="https://arxiv.org/abs/1808.09721">Wright & Hawke, 1808.09721</a></li>
@@ -183,13 +189,270 @@
 									Numbers slightly larger in accretion disk.
 								</p>
 								<p class="fragment">
-									We will <b>never</b> resolve dissipation numerically.
+									Cost of DNS $\sim \mathrm{Re}^3$: can <b>never</b> resolve dissipation numerically.
 								</p>
 							</div>
 							<div class="col">
 								<img src="figures/scales.png" style="height:100%">
 							</div>
 						</div>
+					</section>
+
+				</section>
+
+				<section id="Modelling">
+
+					<section>
+						<h2>Reynolds equations</h2>
+
+						<div class="container">
+							<div class="col">
+								<p>
+									How do we model all scales using only information from large scales?
+								</p>
+								<ol>
+									<li class="fragment" data-fragment-index="2">
+										Statistically: short scale is  unknowable.
+									</li>
+									<li class="fragment" data-fragment-index="2">
+										Physically: short scale is model-able.
+									</li>
+									<li class="fragment" data-fragment-index="2">
+										Numerically: short scale is correctable.
+									</li>
+								</ol>
+								<p class="fragment" data-fragment-index="5">
+									Take Navier-Stokes, filter with $\mathbf{v} = \langle \mathbf{v} \rangle + \delta \mathbf{v}$: 
+								</p>
+								<div class="fragment" data-fragment-index="5">
+								$$
+								\begin{aligned}
+								\partial_t \langle \mathbf{v} \rangle + \langle \mathbf{v} \rangle \cdot \partial_{\mathbf{x}} \langle \mathbf{v} \rangle = &- \frac{\nabla  \langle p \rangle}{ \rho} + \nu \nabla^2 \langle \mathbf{v} \rangle \\ &- {\color{red}{\nabla \cdot \left( \delta \mathbf{v} \otimes \delta \mathbf{v}\right)}}.
+								\end{aligned}
+								$$
+								</div>
+								<p class="fragment" data-fragment-index="6">
+									The turbulence model gives the <span style="color:red">Reynolds stresses</span>.
+								</p>
+							</div>
+							<div class="col">
+								<img src="figures/KH_density_both.svg" style="height:90%">
+							</div>
+						</div>
+					</section>
+
+					<section>
+						<h2>Boussinesq vs Numerics</h2>
+						<div class="container">
+							<div class="col" style="border:1px solid black; padding:10px;">
+								<h3>Boussinesq</h3>
+								<p>
+									Decompose the stresses, use Boussinesq hypothesis:
+								</p>
+								$$
+								\begin{aligned}
+								\langle \delta v^i \delta v_j \rangle &= K \delta^i_j + a^i_j \\
+								&= K \delta^i_j + \nu_T g^{il} \partial_{(l} \langle \delta v_{j)} \rangle.
+								\end{aligned}
+								$$
+								<p class="fragment" data-fragment-index="2">
+									Gives <em>effective</em> pressure, viscosity
+								</p>
+								<div class="fragment" data-fragment-index="2">
+								$$
+								\begin{aligned}
+								\partial_t \langle \mathbf{v} \rangle + \langle \mathbf{v} \rangle \cdot \partial_{\mathbf{x}} \langle \mathbf{v} \rangle = &- \frac{\nabla  \left( \langle p \rangle + \rho K \right)}{ \rho } \\&+ (\nu + \nu_T) \nabla^2 \langle \mathbf{v} \rangle .
+								\end{aligned}
+								$$
+								</div>
+							</div>
+							<div class="col" style="border:1px solid black; padding:10px;">
+								<h3>Numerics</h3>
+								<p class="fragment" data-fragment-index="3">
+									Discrete approximation:
+								</p>
+								<ul class="fragment" data-fragment-index="3">
+									<li>
+										$\partial_t \to (\mathbf{v}^{n+1} - \mathbf{v}^n) / \Delta t$,
+									</li>
+									<li>
+										$\partial_x \to (\mathbf{v}_{i} - \mathbf{v}_{i-1}) / \Delta x$. 
+									</li>
+								</ul>
+								<p style="margin-bottom:115px;" class="fragment" data-fragment-index="4">
+									The approximate solution solves <em>modified equation</em> (to $\mathcal{O}(\Delta^3)$)
+								</p>
+								<div class="fragment" data-fragment-index="4">
+								$$
+								\begin{aligned}
+								\partial_t \mathbf{v} + \mathbf{v} \cdot \partial_{\mathbf{x}} \mathbf{v} = &-\frac{\nabla p}{\rho} \\
+								&+ \left( \nu + \nu_{\Delta} \right) \nabla^2 \mathbf{v}.
+								\end{aligned}
+								$$
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<section>
+						<h2>Relativity: Equations of motion</h2>
+						<p>
+							$3+1$ applied to $T_{ab}$ gives
+						</p>
+						$$
+						\partial_t \left( \sqrt{\gamma} \mathbf{q} \right) + \partial_j \left( \alpha \sqrt{\gamma} \mathbf{f}^{(j)} \right) = \mathbf{s}.
+						$$
+						<p>
+							Fluxes nonlinear: $\mathbf{f}^{(j)}_{S_i} = S^j_i + S_i N^j$. Closure gives
+						</p>
+						$$
+						\langle S_{ij} \rangle = \langle S_i \rangle \langle v_j \rangle + \langle p \rangle \delta_{ij} + \tau_{ij}.
+						$$
+						<ul class="fragment">
+							<li>
+								EOS issue: $\langle p \rangle \ne p(\langle \rho \rangle, \dots)$;
+							</li>
+							<li>
+								Recovering 4-velocity from $\langle v_j \rangle$ non-trivial;
+							</li>
+							<li>
+								Not covariant: depends on slice normal $N^a$.
+							</li>
+							<li>
+								Many closure options; see eg Radice, Viganò et al.
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Relativity: the observer</h2>
+						<ol>
+							<li>
+								Define $U^a$ so that $\nabla_a \left( \langle j \rangle U^a \right) = \nabla_a J^a = 0$.
+							</li>
+							<li>
+								Decompose $T_{ab}$ wrt $U^a$: splits into (non)-ideal parts.
+							</li>
+							<li>
+								Average orthogonal to $U^a$, giving
+							</li>
+						</ol>
+						$$
+						\nabla_a T^a_{b, \mathrm{ideal}} = - \nabla_a \tau^a_b.
+						$$
+						<ul class="fragment">
+							<li>
+								Covariant (up to observer choice);
+							</li>
+							<li>
+								Same EOS issues;
+							</li>
+							<li>
+								Same closure issues...
+							</li>
+							<li class="fragment">
+								but now can interpret closure terms "physically": particle drift, bulk/anisotropic pressure, etc.
+							</li>
+						</ul>
+					</section>
+
+				</section>
+
+				<section id="Magnetic field amplification">
+
+					<section>
+						<div class="container">
+							<div class="col">
+								<h2>Magnetic field amplification: BLES</h2>
+								<p>
+									Before LES modelling, magnetized NS mergers
+								</p>
+								<ul>
+									<li>
+										saw the Kelvin-Helmholtz instability;
+									</li>
+									<li>
+										saw the right early growth;
+									</li>
+									<li>
+										failed to capture saturation.
+									</li>
+								</ul>
+								<ul class="fragment">
+									<li>
+										Best resolutions $\sim 10 \mathrm{m}$;
+									</li>
+									<li>
+										Dissipation scales $\sim 1 \mathrm{cm}$.
+									</li>
+								</ul>
+								<p class="fragment">
+									Results depend on initial field strength. However, even unphysical values do not saturate correctly. 
+								</p>
+								<p style="margin-top:100px; margin-bottom:0px">
+									<ul style="list-style:none; font-size:0.6em">
+										<li> <a href="https://arxiv.org/abs/1509.09205">Kiuchi et al, 1509.09205</a> </li>
+										<li> <a href="https://arxiv.org/abs/1710.01311">Kiuchi et al, 1710.01311</a></li>
+									</ul>
+								</p>
+							</div>
+							<div class="col">
+								<img src="figures/Kiuchi_et_al_2015_fig5.svg" style="width:80%">
+								<img src="figures/Kiuchi_et_al_2018_fig4a.svg" style="width:80%">
+							</div>
+						</div>
+					</section>
+
+					<section>
+						<div class="container">
+							<div class="col">
+								<h2>Magnetic field amplification: ALES</h2>
+								<p>
+									With LES modelling, magnetized NS mergers
+								</p>
+								<ul>
+									<li>
+										capture saturation;
+									</li>
+									<li>
+										reach magnetar field strengths;
+									</li>
+									<li>
+										show some universality (toroidal dominant);
+									</li>
+									<li>
+										possible inverse cascade;
+									</li>
+									<li>
+										possible $\alpha\Omega$ dynamo.
+									</li>
+								</ul>
+								<p style="margin-top:100px; margin-bottom:0px">
+									<ul style="list-style:none; font-size:0.6em">
+										<li> <a href="https://arxiv.org/abs/2112.08413">Palenzuela et al, 2112.08413</a> </li>
+									</ul>
+								</p>
+							</div>
+							<div class="col">
+								<img src="figures/Palenzuela_et_al_2021_fig5.svg" style="height:100%">
+							</div>
+						</div>
+					</section>
+				</section>
+
+				<section id="Summary">
+
+					<section>
+						<h2>Summary</h2>
+						<img src="figures/Kiuchi_2023_Fig_1b.png" style="width:80%">
+						<p>
+							Turbulence models: garbage in, physics out?
+						</p>
+						<p style="text-align:right;">
+							<ul style="list-style:none; font-size:0.6em; text-align: right;">
+								<li> <a href="https://arxiv.org/abs/2306.15721">Kiuchi et al, 2306.15721</a> </li>
+							</ul>
+						</p>
 					</section>
 
 				</section>
