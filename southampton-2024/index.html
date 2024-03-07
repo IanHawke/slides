@@ -336,6 +336,15 @@
 								</div>
 							</div>
 						</div>
+						<aside class="notes">
+							There are many problems with introducing a reduced-order model in this way, but I just want to highlight one to start.
+							<br>
+							One of the first and simplest turbulence models introduced by Boussinesq used in incompressible Navier Stokes relies on decomposing the Reynolds stresses into the isotropic and anisotropic pieces and applying different models to each. The first is linked to the energy stored on short scales - the turbulent kinetic energy - and is evolved phenomenologically. The anisotropic piece is assumed to be linked to the meso-scale velocity gradients, giving a turbulent kinematic viscosity. Then this is plugged back into the Reynolds equations giving us exactly the Navier Stokes equations, but with <em>effective</em> pressure and kinematic viscosity terms. The tuneable parameter of the turbulent viscosity then controls the accuracy of the simulation.
+							<br>
+							However, the numerical method also has an impact on the results. As an illustration, take the continuum Navier Stokes equations and use simple first order differencing to get a discrete update scheme. We can then Taylor expand about a single point to find the <em>modified equation</em> that the discrete variables actually solve. This again gives an effective Navier Stokes scheme, where the <em>numerical viscosity</em> depends on the grid spacing and local velocity.
+							<br>
+							This emphasizes that disentangling turbulent modelling effects from numerical effects is not simple. Given the nonlinear scale interaction this can be really problematic in assessing the utility of turbulence models.
+						</aside>
 					</section>
 
 					<section>
@@ -366,6 +375,17 @@
 								Many closure options; see eg Radice, Viganò et al.
 							</li>
 						</ul>
+						<aside class="notes">
+							However, we must continue undeterred. Turbulence is a reality: choosing not to add any terms is in itself a choice of turbulence model, and - as we will see later - usually a very bad choice. I now want to touch on how the approaches work in relativity.
+							<br>
+							The first approach was pioneered by Radice in 2015, although there are earlier suggested models for, for example, dynamos, as in Giacomazzo 2011. In this approach the average-residual split is applied at the equations of motion level. First do the standard 3+1 split, using stress-energy conservation to give balance laws. The conserved variables are the stress-energy projected with respect to tetrad components defining the coordinates. To close the system we need to be able to compute the fluxes, which are themselves projected stress-energy terms. However, for a fluid the relationship is nonlinear; in this exmple of the momentum term the $S_i$ piece is the conserved momentum, which is known, and the $N^j$ is the normal to the slice, also known, but the velocity is not known. Therefore the averaged flux introduces a residual term which includes anisotropic stresses. This must be modelled.
+							<br>
+							Note here, and in everything that following, it's assumed that the spacetime is fully known and that averaging commutes with that. The standard argument for this is that the curvature lengthscale is much larger than any other physical lengthscale, and much larger than the averaging scale. This is an argument very specific to NS mergers and similar simulations.
+							<br>
+							We see a range of issues with this closure immediately. The first follows from compressibility: the average of the pressure is not the pressure of the averages. This introduces another turbulent closure. The second is purely relativistic: internal calculations rely on the 4-velocity being unit-normalised. Averaging components within a slice breaks this normalisation. The steps to get around this are not simple, nor exact. Finally, we see that the result of the averaging process depends on the slice; the results are not covariant. This is particularly problematic for judging the utility of the turbulence model; we cannot rely on equivalence principle arguments to check the model in controllable, simple, spacetimes, and then extend the model to dynamical cases.
+							<br>
+							Despite these shortcomings all currently implemented closure schemes rely on this sort of approach. The three key models are Radice's model inspired by the Smagorinsky closure - essentially an extension of Boussinesq's turbulent viscosity hypothesis, Kiuchi's phenomenological approach, and Viganò and Palenzuela's approach where the closures are linked to properties of the numerical scheme. Given the different assumptions in the models, it is likely that they essentially implement different physics.
+						</aside>
 					</section>
 
 					<section>
@@ -398,6 +418,17 @@
 								but now can interpret closure terms "physically": particle drift, bulk/anisotropic pressure, etc.
 							</li>
 						</ul>
+						<aside class="notes">
+							The alternative approach to discuss was introduced by us: Thomas Celora, Nils, myself, and Greg Comer, with more recent work by Marcus.
+							<br>
+							The idea here is to formulate a covariant filtering model. To do this we always filter within the spacelike slice normal to the observer $U^a$. The observer and the filtering operation are nonlinearly related, by choosing that the continuity equation holds for the filtered observer.
+							<br>
+							Once we have the filtered observer we can decompose the micro-scale stress-energy with respect to it. Even if the short scale stress-energy is an ideal model with respect to its micro-scale velocity, it will not appear so when decomposed with respect to this averaged observer. By splitting this decomposition into the diagonal ideal part and off-diagonal residual part, stress-energy conservation gives us a turbulence model form in a covariant way.
+							<br>
+							This only "fixes" the covariance issue. We have all the additional closure terms that now need fixing. However, we have a fully self-consistent dense stress-energy tensor (with respect to the observer 4-velocity), so these can be physically interpreted in terms of particle drifts, bulk pressures, and so on.
+							<br>
+							Whether this is a useful way to work is waiting on an actual implementation of this filtering approach, which Thomas and Marcus are currently working on, with encouraging results.
+						</aside>
 					</section>
 
 				</section>
@@ -445,6 +476,17 @@
 								<img src="figures/Kiuchi_et_al_2018_fig4a.svg" style="width:80%">
 							</div>
 						</div>
+						<aside class="notes">
+							We have now skimmed the theory. The review covers a wide range of numerical results that are linked to turbulence modelling. Here I'm going to focus on one set of results: magnetic field amplification during NS mergers.
+							<br>
+							As a reminder, it's believed that the magnetic fields within the merging neutron stars start relatively small (so that the pressure is dominated by hydro effects) but are rapidly wound up by dynamo effects due to Kelvin-Helmholtz instabilities in the shear layer in merger, and the MRI in the remnant and its surrounding disk. As this rapidly becomes strongly nonlinear it's long been a priority of simulations to quantify when the magnetic field growth saturates, as this is important for pressure support of the remnant, and for the generation of magnetars. It's also important to understand the magnetic field structure post-merger, as this is important for jet launch and behaviour.
+							<br>
+							Before turbulence modelling through this Large Eddy Simulation (LES) framework was introduced, the problem is best illustrated by these two sets of simulations by Kiuchi. These use the best numerical resolutions ever in live spacetime simulations, nearly an order of magnitude better than anyone else at the time. They capture the expected linear growth phases of the magnetic instabilities. However, the value of the magnetic field saturation does not converge with resolution. Neither does the relative amount of magnetic field energy in poloidal and toroidal components.
+							<br>
+							This is unsurprising give the four order of magnitude difference between the grid resolution and the dissipation scale. There are arguments that the key features of the instability could be captured on lengthscales around 5m; however, that would require at least another factor 16 in computational power, and nobody is willing to push that for a "maybe".
+							<br>
+							With these results showing that the "no turbulence" model just wasn't giving useful results, there was a push to include turbulence models.
+						</aside>
 					</section>
 
 					<section>
@@ -481,6 +523,13 @@
 								<img src="figures/Palenzuela_et_al_2021_fig5.svg" style="height:100%">
 							</div>
 						</div>
+						<aside class="notes">
+							After LES models were included the results did show numerical convergence. The clearest plots of this come from the work of the Spanish groups as shown here. The bottom plot in particular shows saturation in the accretion disk is well captured; the top plot shows that capturing saturation in the remnant core is harder.
+							<br>
+							These simulations have suggested that NS mergers can wind up the magnetic fields to magnetar strength. They also show some universality in the magnetic field structure post merger, although this result is strongly disputed by some other groups. There is clear evidence of structure on different scales in the fluid and magnetic fields, and weak evidence of the structures in the magnetic field moving power from short to long scales - an inverse cascade.
+							<br>
+							Very recently there have been high-resolution simulations by Kiuchi using a different phenomenological closure. Again the nonlinear saturation is captured and converges. However, different dynamo effects are seen. The $\alpha$ viscosity sees poloidal flux generated in the shear layer due to the existing toroidal field. The rotation ($\Omega$ effect) then uses that poloidal flux to generate more toroidal field. This is again an inverse-cascade effect: however, due to the different closure schemes, it is not obvious it describes the same physics!
+						</aside>
 					</section>
 				</section>
 
@@ -497,6 +546,9 @@
 								<li> <a href="https://arxiv.org/abs/2306.15721">Kiuchi et al, 2306.15721</a> </li>
 							</ul>
 						</p>
+						<aside class="notes">
+							Turbulence modelling has barely started in NS simulation. It seems to be essential; but its impact on the results is substantially greater than our understanding of what the model should contain.
+						</aside>
 					</section>
 
 				</section>
