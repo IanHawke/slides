@@ -71,6 +71,11 @@
 							</p>
 						</div>
 						<aside class="notes">
+							This is a rapid summary of the Living Review  on Turbulence Modelling in NS merger simulations that's recently been published by David Radice and myself. I'm going to be focusing more on the theory end, although I'll touch on the key impact on the results.
+							<br>
+							To get us all on the same page, I'm talking about nonlinear NS mergers in full GR. These are needed for multimessenger observations; we want fully consistent correlations of the GW and EM signals emitted through inspiral, merger, and post-merger phase, including jets, kilonovae, and other messy effects. This means extremely expensive simulations with a model that should include a dynamical spacetime, hydrodynamics, magnetic fields, neutrinos, multiple particle species, and so on. For now that's a pipe dream, but the best simulations are getting there.
+							<br>
+							The problem, as indicated by these images by Ciolfi, is the formation of small scale structure through merger and into the post-merger phase, and particularly its impact on the long term dynamics. This is what we mean by <em>turbulence</em>: the transfer of information, energy-momentum, and power, between widely varying lengthscales, and qualitative changes in the behaviour on one scale (particularly the large scale) due to structures formed at a different scale (particularly the small scale).
 						</aside>
 					</section>
 
@@ -107,6 +112,15 @@
 								<img src="figures/KH_density_2048.svg" style="height:100%">
 							</div>
 						</div>
+						<aside class="notes">
+							To make this discussion of scale interaction clearer we'll look at a specific model both visually and mathematically. Restricting to Newtonian hydrodynamics the image shows a simulation of a Kelvin-Helmholtz instability, where a layer of dense fluid is moving counter to the bulk fluid. The interfaces between the different layers breaks up due to the instability. We see vorticity - local rotation - appearing at a range of scales. How these structures propagate, grow, and decay has a qualitative impact on the large scale flow.
+							<br>
+							Mathematically we use the toy model of incompressible Navier-Stokes. We have the momentum equation for the velocity with the nonlinear advective term in red, the pressure gradient term in black, and the dissipation term due to anisotropic stresses in blue. For now we treat the kinematic viscosity coefficient $\nu$ as a constant, but we'll see later that it varies wildly. To see how the behaviour depends on the lengthscale we decompose into modes; the wave-number $k$ is small for long lengthscales. Plugging this in we see that the growth or decay of the power at a given scale (or wave-number) is driven by two key effects.
+							<br>
+							On the right hand side, when there is substantial power at short enough lengthscales (so large wavenumber), the dissipative term leads to exponential damping of the power. What "short enough" means here depends on the size of the viscosity, the global lengthscale of the system, and the timescale under consideration. This illustrates the interpretation of the dissipation term as removing energy from the system due to micro-scale interactions not explicitly included in the fluid-scale model. 
+							<br>
+							On the left hand side the nonlinear advective term couples different scales; essentially there are two exponentials here, and their wave-numbers must sum to the wave-number under consideration. This transfers energy-momentum from large scales to small, known as the <em>energy cascade</em>. If energy can be transferred from small scales to large, this is an <em>inverse cascade</em>.
+						</aside>
 					</section>
 
 					<section>
@@ -160,7 +174,13 @@
 								<img src="figures/WrightHawke1808_09721.svg" style="width:90%">
 							</div>
 						</div>
-
+						<aside class="notes">
+							Explicitly solving for how the cascade occurs is difficult even in the simplest Newtonian models. The Kolmogorov theory is famous for going as far as possible based on minimal assumptions. It assumes a sort of steady state: there is a statistical sense in which the small scale turbulent structure is assumed to be stationary, homogeneous and isotropic. In that case the energy equation (found by dotting the momentum equation with the velocity in the simple Newtonian case) can be integrated over a control volume, and a number of terms drop out (roughly speaking, isotropy kills the pressure term and stationarity kills the time derivative). This leaves the energy injected at large scales (the equivalent of the advective term) balancing the energy lost to dissipation. The other assumptions give the power-law scaling with wave-number for the power in, for example, the velocity.
+							<br>
+							Whilst this proof is only clear in the simplest cases, there's a lot of experimental evidence to suggest it's a good fit, and a lot of numerical evidence to say that it works, even in more complex models. Key for our purposes are the figures which show relativistic simulations. At the top is hydrodynamic simulations of Radice showing the <em>compensated</em> power spectrum; if the result were perfect we should see horizontal lines. This illustrates that the result holds, as is expected, only within the inertial range. At long lengthscales - the energy containing range - there's not enough transfer of power to get the right scaling. At short enough lengthscales we get the dissipation, although here that will be purely numerical, not physics. 
+							<br>
+							The bottom image is from simulations by Alex Wright using various relativistic hydro models including magnetic fields. Again we see the inertial range. We should note that MHD and associated theories aren't expected to follow the Kolmogorov scaling all the way down to the dissipation scale - there should be additional nonlinear interactions that break the scaling first.
+						</aside>
 					</section>
 
 					<section>
@@ -196,6 +216,21 @@
 								<img src="figures/scales.png" style="height:100%">
 							</div>
 						</div>
+						<aside class="notes">
+							So, if we want to simulate the correct physics we need to be able to capture all of the scales of the problem: the energy containing range, the inertial subrange, and the transition to dissipation. A simulation that covers all these scales is called a <em>Direct Numerical Simulation</em>, or DNS.
+							<br>
+							There are two numbers we need to know: the lengthscale where dissipation acts (to see if the simulation captures it), and the strength of the dissipative effects, encoded in the dimensionless Reynolds number. Here I've linked the Reynolds number to the "global scale" in the simulation, but there are other ways it can be introduced. To make this concrete, in the merger phase of a NS simulation the global scale is the thickness of the Kelvin-Helmholtz shear layer between the merging stars, which is at most of the order of 1km. In the post-merger phase there is dissipation in the surrounding accretion disk, where the global scale depends on the disk height, which depends on the radial location. This makes the global scale considerably larger.
+							<br>
+							The main effect not included in the continuum fluid model is the behaviour of the neutrinos. Estimates by, for example, Thompson and Duncan, suggest that the dominant effect is due to neutrinos produced by the hot matter in merger being first trapped and then diffusing out. The viscosity depends on the neutrino energy, mean free path, and the fluid density, but roughly gives Reynolds numbers around a million for a dissipation scale around a cm. However, in order for this effect to happen efficiently enough the mean free path of the neutrinos needs to be less than the dissipation scale. In the hot remnant it's typically the case that the mean free path is of the order of metres.
+							<br>
+							Therefore this dissipation mechanism doesn't work, and power will keep cascading to ever smaller scales. The next effect at the micro-scale is electron scattering, where the Reynolds number is now nine orders of magnitude larger. If this is the dominant source of dissipation then the Kolmogorov cascade will hold down to nm scales.
+							<br>
+							However, there are also the nonlinear MHD effects. In the NS remnant those start to dominate below cm scales. At this point we expect a different qualitative change.
+							<br>
+							The impact in the post-merger phase through the disk is essentially the same, although the numbers change (as the global scale changes, but so do the estimated viscosity values).
+							<br>
+							To put these numbers in the numerical simulation context: most current simulations can capture scales around 100m; the best can capture scales around 10m. This is four orders of magnitude bigger than any dissipation scale listed here. Given the cost of a simulation scales as the fourth power of the number of points, we need sixteen orders of magnitude more compute power to hit the dissipation scale (at best).
+						</aside>
 					</section>
 
 				</section>
@@ -239,6 +274,15 @@
 								<img src="figures/KH_density_both.svg" style="height:90%">
 							</div>
 						</div>
+						<aside class="notes">
+							So, we can never hope to numerically simulate the true physics of the system. The idea of turbulence <em>modelling</em> is therefore to capture the key qualitative features of the fine scale physics using only information on coarser scales. Essentially, we want to ensure that the simulation shown in the top plot has the same qualitative statistics as the bottom plot. To do this we need to modify the model that we are simulating: we need to come up with an effective theory that we can simulate, that statistically has the appropriate features.
+							<br>
+							In the review we outlined three different ways of thinking about this. The first is the approach typically used in Newtonian incompressible flow. There the information lost when we restrict to long scales is assumed to be smooth but random. The statistics are then built in by choosing how these random variables behave. The second approach is the one that most in relativity take. The information is in principle exact, and so a physical model of its behaviour can be used, and a coarse-graining procedure used to represent what its effects would look like at longer scales. The final approach is specifically associated with the Spanish groups led by Viganò and Palenzuela. Here it's assumed that the major effects are purely numerical error as we're too far away from the dissipative lengthscale. This can be corrected for based on assumptions about the interactions between the numerics and the model.
+							<br>
+							To make this concrete, we go back to the toy model and introduce a filtering or averaging process, indicated by the angle brackets. We can then split all terms into their filtered and residual parts. The filtered part is the term we can know - it exists on long scales. The residual term is unknown. We then write the momentum equation for the filtered part, which looks like the standard Navier Stokes equations, plus a term due to the residual stresses. Every term here is knowable at the long scale except for these Reynolds stresses. In turbulence modelling the idea is to approximate the Reynolds stresses using filtered quantities.
+							<br>
+							Note that this equation is a huge simplification due to incompressibility. This simplifies the density - here constant - and the pressure, which is a Lagrange multiplier due to the incompressibility constraint.
+						</aside>
 					</section>
 
 					<section>
