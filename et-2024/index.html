@@ -422,8 +422,16 @@
 								</ul>
 							</div>
 						</div>
+						<p style="margin-top:100px; margin-bottom:0px">
+							<ul style="list-style:none; font-size:0.6em">
+								<li> <a href="https://arxiv.org/abs/2107.01083">Celora et al, 2107.01083</a></li>
+								<li> <a href="https://arxiv.org/abs/2405.13593">Celora et al, 2405.13593</a></li>
+							</ul>
+						</p>
 						<aside class="notes">
 							The alternative approach to discuss was introduced by us: Thomas Celora, Nils, myself, and Greg Comer, with more recent work by Marcus.
+							<br>
+							Take the figure on the right; think of a slice as a single computational cell, the vertical direction as time, and see that the velocity pattern within the cell is complex and small-scaled. The individual observers have individual "clocks", linked to the issues with the Lorentz factor noted above. Fixing this locally is painful; it's better to do this "globally" (over the cell) by constructing an observer. The red line (and neighbouring blue lines) is a "simple" observer varying slowly. This is the foundation of the covariant approach.
 							<br>
 							The idea here is to formulate a covariant filtering model. To do this we always filter within the spacelike slice normal to the observer $U^a$. The observer and the filtering operation are nonlinearly related, by choosing that the continuity equation holds for the filtered observer.
 							<br>
@@ -431,7 +439,7 @@
 							<br>
 							This only "fixes" the covariance issue. We have all the additional closure terms that now need fixing. However, we have a fully self-consistent dense stress-energy tensor (with respect to the observer 4-velocity), so these can be physically interpreted in terms of particle drifts, bulk pressures, and so on.
 							<br>
-							Whether this is a useful way to work is waiting on an actual implementation of this filtering approach, which Thomas and Marcus are currently working on, with encouraging results.
+							Whether this is a useful way to work is waiting on an actual implementation of this filtering approach, which Thomas and Marcus are currently working on, with encouraging results; see the most recent preprint linked here.
 						</aside>
 					</section>
 
