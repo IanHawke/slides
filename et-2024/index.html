@@ -565,6 +565,65 @@
 
 				</section>
 
+				<section id="Additional material">
+
+					<section>
+						<h2>Filtering vs Coarse-graining</h2>
+						<img src="figures/additional/Lin_scale_filt_BC_0_BW.png" style="width:100%">
+						<img src="figures/additional/Filter_scale_BC_bl=fw.png" style="width:100%">
+						<aside class="notes">
+							Filtering introduces an operator that takes one tensor field to another tensor field. When applied to numerical data, as here with Kelvin-Helmholtz type data, we have data at the "same grid resolution", but it should "look smoother" after filtering. By using a wider filter length we see larger differences, and these are concentrated near steep gradients. Both these features are expected.
+							<br>
+							When coarse graining we are effectively "moving to a lower resolution". The bottom row shows the impact of filtering and then coarse graining, which is the implicit impact of using a numerical scheme.
+						</aside>
+					</section>
+					
+					<section>
+						<h2>Non-ideal model: first version</h2>
+						$$
+						\langle T^{ab} \rangle \sim \tilde{\epsilon} U^a U^b + (p + \tilde{\Pi}) \tilde{\perp}^{ab} + 2 \tilde{q}^{(a} U^{b)} + \tilde{\pi}^{ab}
+						$$
+						<p>
+							where $\tilde{\Pi} = - \zeta \tilde{\theta}, \tilde{q}^a \sim -\kappa \nabla^a \tilde{T}, \tilde{\pi}^{ab} = -\eta \tilde{\sigma}^{ab}$.
+						</p>
+						<p>
+							Best fit model assuming $\zeta, \kappa, \eta$ are $f(\tilde{T}, \tilde{n})$ is really poor.
+						</p>
+						<img src="figures/additional/Const_coeff_models_densityEOS.png" style="width:100%">
+						<aside class="notes">
+							Now that we have filtered data we can use the observer and project the filtered stress energy tensor appropriately, computing what the individual terms are. By assuming that the coarse grained (meso-) model is a non-ideal single fluid we can interpret the additional terms as bulk and shear pressures and heat fluxes. That links the additional terms to velocity and temperature gradients through the viscosity coefficients. We can then find the best fit coefficients that would give a turbulence closure model.
+							<br>
+							If this truly were a non-ideal fluid then the only physical possibility is that the viscosity coefficients depend on number density, temperature, and species. So we try that first. We have lots of data - every single filtered point - so can compute the appropriate coefficient at every point, and compute a best fit model.
+							<br>
+							However, the best fit model is still clearly poor. The figure shows the distribution of the magnitudes of the residual bulk and shear pressures, and the magnitude of the heat flux, as compared to the distribution for the best fit model. Only the heat flux is remotely close; given the log scales, the non-ideal pressures are unacceptably poor.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Non-ideal model: second version</h2>
+						
+						<p>
+							Allow shear viscosity to be
+						</p>
+						$$
+						\log \eta \sim c_0 + \dots c_{\sigma^2} \log \sigma^{ab} \sigma_{ab} + c_{\omega^2} \log \omega^{ab} \omega_{ab}.
+						$$
+						<p class="fragment" data-fragment-index="1">
+							Similar improvements are seen for the bulk viscosity case $\zeta$.
+						</p>
+						<div class="r-stack">
+							<img src="figures/additional/eta_best_compare.png" style="width:100%">
+							<img src="figures/additional/zeta_best.png" style="width:100%" class="fragment" data-fragment-index="1">
+						</div>
+						<aside class="notes">
+							There's no good reason for the subgrid model to behave like a "true" non-ideal fluid in this sense. We can fit on more general variables. The obvious choice is on velocity gradients - this would be how we'd get a Boussinesq or Smagorinsky type model anyway. So we expand the fitting variables.
+							<br>
+							In this case we see much better results. If everything was perfect then the left plot would be a straight diagonal line, and the distributions would perfectly match. However, the key point is the right hand plot, where the distributions are close, so we would hope that at a statistical level this subgrid scheme would have the same impact on the stress energy tensor as the fine grained (micro-) model did.
+						</aside>
+					</section>
+
+				</section>
+
 			</div>
 
 		</div>
