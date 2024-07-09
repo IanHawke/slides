@@ -622,6 +622,21 @@
 						</aside>
 					</section>
 
+					<section>
+						<h2>EoS assumptions</h2>
+						<p>
+							Should the EoS of the filtered model be the "true" EoS? Try <em>fitting</em> for $\Gamma$.
+						</p>
+						<img src="figures/additional/Interp_Gamma_reldiff.png" style="width:100%">
+						<aside class="notes">
+							One implicit assumption that we've used so far is that despite the fact that the coarse-grained, filtered, meso-model is genuinely a different effective theory (as it's non-ideal hydro, not ideal hydro), we have still retained the assumption that the equation of state is identical to that at the micro level, which we consider to be the "true" equation of state.
+							<br>
+							This assumption can be checked by doing a pointwise fit, making instead assumptions about the bulk viscosity. Clearly, we are free to trade off the equation of state of the effective theory with the bulk viscous pressure. More generally, we can consider the filtered energy of the system as a function of the filtered thermodynamic potentials, and directly compute the adiabatic indices and compressibilities as appropriate derivatives of the energy.
+							<br>
+							When we do this calculation using the original, fine-scale data, we see that the adiabatic index is correctly recovered to numerical accuracy. When we use the filtered meso-model data we see that the adiabatic index can be affected to the percent level. In other words, it is <em>not obvious</em> that the appropriate equation of state to use is the "true" equation of state. Working in the other direction, we get the slightly disconcerting result: when simulating with one particular equation of state, the "effective true" micro-model equation of state it encodes may be measurably different, particularly near steep gradients.
+						</aside>
+					</section>
+
 				</section>
 
 			</div>
