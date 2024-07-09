@@ -443,6 +443,46 @@
 						</aside>
 					</section>
 
+					<section>
+						<h2>MHD issues</h2>
+
+						$$
+						T^a_{b,\; \mathrm{ideal}} \sim T^a_{b,\; \mathrm{ideal\, fluid}} + \underbrace{T^a_{b,\; \mathrm{EM}}}_{\sim F^a_c F^c_b} \, ; \quad \langle T^a_b \rangle \sim \tilde{T}^a_{b,\; \mathrm{ideal\, fluid}} + \underbrace{\tilde{T}^a_{b,\; \mathrm{EM}}}_{\sim \tilde{F}^a_c \tilde{F}^c_b} + \tau^a_b \, .
+						$$
+						<p>Many choices can be made.</p>
+						<ul>
+							<li>Filter vector potential - linear ($\tilde{F}_{ab} = \nabla_{[a} \tilde{A}_{b]}$).</li>
+							<li>Filter fields - nonlinear ($\tilde{F}^{ab} \ne \epsilon^{cdab} \tilde{b}_c U_d$).</li>
+							<li class="fragment" data-fragment-index="1">Filter current - Ohm's law nonlinear.</li>
+							<div class="fragment" data-fragment-index="1">
+							$$
+							\begin{aligned}
+							&&\langle j^a \rangle &= \tilde{\sigma} U^a + \tilde{J}^a \\
+							\implies && \tilde{E}^a &= \mathcal{R} \tilde{J}^a + \tilde{\alpha} \tilde{B}^a + \tilde{\gamma} \epsilon^{abcd} \tilde{J}_b U_c \tilde{B}_d \, .
+							\end{aligned}
+							$$
+							</div>
+							<li class="fragment">Stress-energy residual $\tau$ can be "assigned" to fluid or Faraday part (non-ideal fluid, MHD, mix, or eg axions).</li>
+						</ul>
+						<aside class="notes">
+							Things get even messier when we include magnetic fields. The filtered stress-energy tensor will still be dense, but now we have additional freedom in how we filter the individual fields, and additional choices we can make.
+							<br>
+							In numerical codes there are typically two choices made: either the vector potential is evolved or the magnetic fields. In both cases a scheme can be constructed to impose, for example, the no-monopole constraint. However, we also need to construct the Faraday tensor in order to compute the stress-energy, to couple to the spacetime. This is a nonlinear process, so filtering will lead to residuals: the question is where those residuals go. The advantage of the vector potential approach is that the filtered Faraday is consistent with the filtered vector potential automatically, and consistent fields can be computed from it. However, these fields are not consistent with the filtered micro-scale fields.
+							<br> 
+							It's not just the definition of the Faraday that defines MHD. We also need the closure relation for the electric field, Ohm's law, which can be given either directly in terms of the field, or in terms of the current. At the micro-scale the current is orthogonal to the fluid velocity so that the charge density vanishes. After filtering this is not automatically true. The filtered charge current will have components along the filtered observer, corresponding to a resistivity, as well as pieces along the filtered magnetic field (corresponding to an alpha-dynamo) and a third indepenent piece (corresponding to an effective Hall drift term). In general the filtering allows for all of these non-ideal pieces to be included in a subgrid model.
+							<br>
+							Finally we have to decide how the residual terms in the stress-energy are distributed between effective fluid viscosities and non-ideal parts of the Faraday. As the Faraday appears quadratically in the stress-energy, even if its filtered version is consistent with all other terms used (as in the vector potential approach) there would still be residuals between the filtered EM stress-energy and the stress-energy constructed using the filtered Faraday. We could decide to use ideal MHD at the filtered level, and put all the residuals into the fluid. We could put some residuals into the Faraday, and maybe even use anomalous MHD (as is used to model, for example, axion clouds). There will be freedom to interpret the model in odd ways, and local arguments are not enough to distinguish them.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Uncertainty Quantification</h2>
+
+						<aside class="notes">
+
+						</aside>
+					</section>
+
 				</section>
 
 				<section id="Magnetic field amplification">
