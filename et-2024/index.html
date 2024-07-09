@@ -635,6 +635,11 @@
 						<h2>Filtering vs Coarse-graining</h2>
 						<img src="figures/additional/Lin_scale_filt_BC_0_BW.png" style="width:100%">
 						<img src="figures/additional/Filter_scale_BC_bl=fw.png" style="width:100%">
+						<p style="margin-top:80px; margin-bottom:0px">
+							<ul style="list-style:none; font-size:0.6em">
+								<li> <a href="https://arxiv.org/abs/2405.13593">Celora et al, 2405.13593</a></li>
+							</ul>
+						</p>
 						<aside class="notes">
 							Filtering introduces an operator that takes one tensor field to another tensor field. When applied to numerical data, as here with Kelvin-Helmholtz type data, we have data at the "same grid resolution", but it should "look smoother" after filtering. By using a wider filter length we see larger differences, and these are concentrated near steep gradients. Both these features are expected.
 							<br>
@@ -654,6 +659,11 @@
 							Best fit model assuming $\zeta, \kappa, \eta$ are $f(\tilde{T}, \tilde{n})$ is really poor.
 						</p>
 						<img src="figures/additional/Const_coeff_models_densityEOS.png" style="width:100%">
+						<p style="margin-top:32px; margin-bottom:0px">
+							<ul style="list-style:none; font-size:0.6em">
+								<li> <a href="https://arxiv.org/abs/2405.13593">Celora et al, 2405.13593</a></li>
+							</ul>
+						</p>
 						<aside class="notes">
 							Now that we have filtered data we can use the observer and project the filtered stress energy tensor appropriately, computing what the individual terms are. By assuming that the coarse grained (meso-) model is a non-ideal single fluid we can interpret the additional terms as bulk and shear pressures and heat fluxes. That links the additional terms to velocity and temperature gradients through the viscosity coefficients. We can then find the best fit coefficients that would give a turbulence closure model.
 							<br>
@@ -679,6 +689,11 @@
 							<img src="figures/additional/eta_best_compare.png" style="width:100%">
 							<img src="figures/additional/zeta_best.png" style="width:100%" class="fragment" data-fragment-index="1">
 						</div>
+						<p style="margin-top:100px; margin-bottom:0px">
+							<ul style="list-style:none; font-size:0.6em">
+								<li> <a href="https://arxiv.org/abs/2405.13593">Celora et al, 2405.13593</a></li>
+							</ul>
+						</p>
 						<aside class="notes">
 							There's no good reason for the subgrid model to behave like a "true" non-ideal fluid in this sense. We can fit on more general variables. The obvious choice is on velocity gradients - this would be how we'd get a Boussinesq or Smagorinsky type model anyway. So we expand the fitting variables.
 							<br>
@@ -692,6 +707,11 @@
 							Should the EoS of the filtered model be the "true" EoS? Try <em>fitting</em> for $\Gamma$.
 						</p>
 						<img src="figures/additional/Interp_Gamma_reldiff.png" style="width:100%">
+						<p style="margin-top:51px; margin-bottom:0px">
+							<ul style="list-style:none; font-size:0.6em">
+								<li> <a href="https://arxiv.org/abs/2405.13593">Celora et al, 2405.13593</a></li>
+							</ul>
+						</p>
 						<aside class="notes">
 							One implicit assumption that we've used so far is that despite the fact that the coarse-grained, filtered, meso-model is genuinely a different effective theory (as it's non-ideal hydro, not ideal hydro), we have still retained the assumption that the equation of state is identical to that at the micro level, which we consider to be the "true" equation of state.
 							<br>
