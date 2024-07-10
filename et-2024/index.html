@@ -475,38 +475,6 @@
 						</aside>
 					</section>
 
-					<section>
-						<h2>Uncertainty Quantification</h2>
-
-						<p>We numerically solve the <em>forward problem</em></p>
-						$$
-						\partial_t \mathbf{U} = \mathcal{L}(\mathbf{U}; \mathbf{c}_{\mathrm{phys}}, \mathbf{c}_{\mathrm{num}}, \mathbf{c}_{\mathrm{filt}}).
-						$$
-						<p>Coefficients $\mathbf{c}$ are uncertainties in physics, numerics, and model due to filtering.</p>
-						<p class="fragment" data-fragment-index="1">
-							UQ: predict observable $\mathcal{O}(\mathbf{c}_{\mathrm{phys}})$ for data analysts.
-						</p>
-						<p class="fragment" data-fragment-index="1">
-							Data analysis then solve <em>backward problem</em> $\mathcal{O}_{\mathrm{observed}} \implies \mathbf{c}_{\mathrm{phys}}$.
-						</p>
-						<p class="fragment">
-							Get rid of $\mathbf{c}_{\mathrm{num}}$ by improving resolution, varying IC/BC methods, etc.
-						</p>
-						<p class="fragment">
-							Impact of subgrid model in $\mathbf{c}_{\mathrm{filt}}$. <em>Potential confusion</em> with $\mathbf{c}_{\mathrm{phys}}$ through EoS, model choices.
-						</p>
-
-						<aside class="notes">
-							The concerns about the equation of state and the definition of the filtered model feed through to one of our key concerns: using observations, such as gravitational wave signals, to constrain physical parameters.
-							<br>
-							The formal language of uncertainty quantification follows. We are solving a time evolution problem, and the operator defining the time update depends on a number of coefficients, whose value and even form may be uncertain. Key examples include the equation of state (either in functional form, or defined through microphysical constants), and the initial data. These uncertainties are due both to physics - for example, what impact does full lattice QCD have on the compressibility - but also due to numerical assumptions - for example, what impact does the assumption of conformally flat initial data have. There are also our usual numerical issues such as finite grid resolution and choice of numerical methods and grid structures.
-							<br>
-							Once we can compute an observable we want to eliminate the numerical uncertainties so that we know how the observable varies purely depending on the physics choices. Data analysts can then take this input and then, as if by magic, solve the backward problem using real observations to constraint the physical coefficients.
-							<br>
-							The point I want to stress here is that we usually think of eliminating the numerical uncertainties by extrapolating to the continuum limit. However, the point of subgrid models is that the continuum limit is practically impossible to reach. Therefore we have to take care to consider the impact of the filtering on these uncertainties, particularly as - at finite resolution - disentangling these effects from the physics will be hard.
-						</aside>
-					</section>
-
 				</section>
 
 				<section id="Magnetic field amplification">
@@ -630,6 +598,38 @@
 				</section>
 
 				<section id="Additional material">
+
+					<section>
+						<h2>Uncertainty Quantification</h2>
+
+						<p>We numerically solve the <em>forward problem</em></p>
+						$$
+						\partial_t \mathbf{U} = \mathcal{L}(\mathbf{U}; \mathbf{c}_{\mathrm{phys}}, \mathbf{c}_{\mathrm{num}}, \mathbf{c}_{\mathrm{filt}}).
+						$$
+						<p>Coefficients $\mathbf{c}$ are uncertainties in physics, numerics, and model due to filtering.</p>
+						<p class="fragment" data-fragment-index="1">
+							UQ: predict observable $\mathcal{O}(\mathbf{c}_{\mathrm{phys}})$ for data analysts.
+						</p>
+						<p class="fragment" data-fragment-index="1">
+							Data analysis then solve <em>backward problem</em> $\mathcal{O}_{\mathrm{observed}} \implies \mathbf{c}_{\mathrm{phys}}$.
+						</p>
+						<p class="fragment">
+							Get rid of $\mathbf{c}_{\mathrm{num}}$ by improving resolution, varying IC/BC methods, etc.
+						</p>
+						<p class="fragment">
+							Impact of subgrid model in $\mathbf{c}_{\mathrm{filt}}$. <em>Potential confusion</em> with $\mathbf{c}_{\mathrm{phys}}$ through EoS, model choices.
+						</p>
+
+						<aside class="notes">
+							The concerns about the equation of state and the definition of the filtered model feed through to one of our key concerns: using observations, such as gravitational wave signals, to constrain physical parameters.
+							<br>
+							The formal language of uncertainty quantification follows. We are solving a time evolution problem, and the operator defining the time update depends on a number of coefficients, whose value and even form may be uncertain. Key examples include the equation of state (either in functional form, or defined through microphysical constants), and the initial data. These uncertainties are due both to physics - for example, what impact does full lattice QCD have on the compressibility - but also due to numerical assumptions - for example, what impact does the assumption of conformally flat initial data have. There are also our usual numerical issues such as finite grid resolution and choice of numerical methods and grid structures.
+							<br>
+							Once we can compute an observable we want to eliminate the numerical uncertainties so that we know how the observable varies purely depending on the physics choices. Data analysts can then take this input and then, as if by magic, solve the backward problem using real observations to constraint the physical coefficients.
+							<br>
+							The point I want to stress here is that we usually think of eliminating the numerical uncertainties by extrapolating to the continuum limit. However, the point of subgrid models is that the continuum limit is practically impossible to reach. Therefore we have to take care to consider the impact of the filtering on these uncertainties, particularly as - at finite resolution - disentangling these effects from the physics will be hard.
+						</aside>
+					</section>
 
 					<section>
 						<h2>Filtering vs Coarse-graining</h2>
