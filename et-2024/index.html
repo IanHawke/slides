@@ -304,7 +304,7 @@
 								</p>
 								<div class="fragment" data-fragment-index="2">
 								$$
-								\begin{aligned}
+								\begin{aligned}\small
 								\partial_t \langle \mathbf{v} \rangle + \langle \mathbf{v} \rangle \cdot \partial_{\mathbf{x}} \langle \mathbf{v} \rangle = &- \frac{\nabla  \left( \langle p \rangle + \rho K \right)}{ \rho } \\&+ (\nu + \nu_T) \nabla^2 \langle \mathbf{v} \rangle .
 								\end{aligned}
 								$$
@@ -328,7 +328,7 @@
 								</p>
 								<div class="fragment" data-fragment-index="4">
 								$$
-								\begin{aligned}
+								\begin{aligned}\small
 								\partial_t \mathbf{v} + \mathbf{v} \cdot \partial_{\mathbf{x}} \mathbf{v} = &-\frac{\nabla p}{\rho} \\
 								&+ \left( \nu + \nu_{\Delta} \right) \nabla^2 \mathbf{v}.
 								\end{aligned}
@@ -347,34 +347,38 @@
 						</aside>
 					</section>
 
-					<section>
-						<h2>Relativity: Equations of motion</h2>
-						<p>
-							$3+1$ applied to $T_{ab}$ gives
-						</p>
-						$$
-						\partial_t \left( \sqrt{\gamma} \mathbf{q} \right) + \partial_j \left( \alpha \sqrt{\gamma} \mathbf{f}^{(j)} \right) = \mathbf{s}.
-						$$
-						<p>
-							Fluxes nonlinear: $\mathbf{f}^{(j)}_{S_i} = S^j_i + S_i N^j$. Closure gives
-						</p>
-						$$
-						\langle S_{ij} \rangle = \langle S_i \rangle \langle v_j \rangle + \langle p \rangle \delta_{ij} + \tau_{ij}.
-						$$
-						<ul class="fragment">
-							<li>
-								EOS issue: $\langle p \rangle \ne p(\langle \rho \rangle, \dots)$;
-							</li>
-							<li>
-								Recovering 4-velocity from $\langle v_j \rangle$ non-trivial;
-							</li>
-							<li>
-								Not covariant: depends on slice normal $N^a$.
-							</li>
-							<li>
-								Many closure options; see eg Radice, Viganò et al.
-							</li>
-						</ul>
+					<section data-background-image="figures/time_average1.png" data-background-position="right" data-background-size="30%">
+						<div class="container" style="width:75%">
+							<div class="col">
+								<h2>Relativity: Equations of motion</h2>
+								<p>
+									$3+1$ applied to $T_{ab}$ gives
+								</p>
+								$$
+								\partial_t \left( \sqrt{\gamma} \mathbf{q} \right) + \partial_j \left( \alpha \sqrt{\gamma} \mathbf{f}^{(j)} \right) = \mathbf{s}.
+								$$
+								<p>
+									Fluxes nonlinear: $\mathbf{f}^{(j)}_{S_i} = S^j_i + S_i N^j$. Closure gives
+								</p>
+								$$
+								\langle S_{ij} \rangle = \langle S_i \rangle \langle v_j \rangle + \langle p \rangle \delta_{ij} + \tau_{ij}.
+								$$
+								<ul class="fragment">
+									<li>
+										EOS issue: $\langle p \rangle \ne p(\langle \rho \rangle, \dots)$;
+									</li>
+									<li>
+										Recovering 4-velocity from $\langle v_j \rangle$ non-trivial;
+									</li>
+									<li>
+										Not covariant: depends on slice normal $N^a$.
+									</li>
+									<li>
+										Many closure options; see eg Radice, Viganò et al.
+									</li>
+								</ul>
+							</div>
+						</div>
 						<aside class="notes">
 							However, we must continue undeterred. Turbulence is a reality: choosing not to add any terms is in itself a choice of turbulence model, and - as we will see later - usually a very bad choice. I now want to touch on how the approaches work in relativity.
 							<br>
