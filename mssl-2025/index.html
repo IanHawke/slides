@@ -152,6 +152,43 @@
 
 					<!-- https://dcc.ligo.org/LIGO-G1700908/public -->
 
+					<section>
+						<div class="container">
+							<div class="col">
+								<h2>Nonlinear simulations</h2>
+								<ul>
+									<li>
+										Needed for waveform models;
+									</li>
+									<li>
+										Expensive;
+									</li>
+									<li>
+										Scales issues:
+										<ul>
+											<li>
+												$\Delta x \sim 100 \mathrm{m}$;
+											</li>
+											<li>
+												$\Delta t \sim 10^{-7} \mathrm{s}$;
+											</li>
+										</ul>
+									</li>
+									<li>
+										<em>Subgrid</em> models needed.
+									</li>
+								</ul>
+							</div>
+							<div class="col" style="flex: 2.5 1 0">
+								<img src="figures/nsbh_rm.png" style="width:100%; margin:0px">
+							</div>
+							<aside class="notes">
+								Here is a neutron star-black hole merger simulation, done by Rahime Matur in our group. We use it here to emphasise the scales on which nonlinear simulations work. Remember, we use such simulations both for insight into the nonlinear dynamics of the models, and to tune reduced models that are used for detection and parameter estimation. A nonlinear simulation like this takes weaks to simulate tens of milliseconds of "real time". In order to do detection or parameter estimation, the reduced models need to cover the entire signal, which may be seconds long, in sub-millisecond time. 
+								<br>
+								In addition to the expense, we need to know that numerical simulations are only practical when using grid sizes around a hundred metres (or maybe down to a few tens of metres with the largest supercomputers). Thus we will only capture physics on scales longer than a hundred metres or so, and on timescales slower than a tenth of a microsecond or so.
+							</aside>
+					</section>
+
 				</section>
 
 				<section id="Mergers and reactions">
@@ -219,7 +256,7 @@
 				<section id="Multiscale">
 
 					<section>
-						<h2>Toy model</h2>
+						<h2>Reactions: Toy model</h2>
 						<p>
 							Approximate fluid equations, using $\theta = \nabla_a u^a$:
 						</p>
@@ -395,7 +432,7 @@
 
 					<section>
 
-						<h2>Toy model</h2>
+						<h2>Turbulence: Toy model</h2>
 
 						<div class="container">
 							<div class="col">
