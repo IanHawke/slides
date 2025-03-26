@@ -1,0 +1,1110 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Turbulence Modelling</title>
+
+		<meta name="description" content="Turbulence Modelling, MSSL 2025">
+		<meta name="author" content="Ian Hawke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="../math1058/reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../math1058/reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../math1058/reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../math1058/reveal.js/plugin/highlight/monokai.css">
+
+		<!-- Personal defaults -->
+		<link rel="stylesheet" href="../math1058/lectures/reveal_css.css">
+	</style>
+
+
+
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="Title">
+
+					<section data-background="../et-2024/figures/scales.png" data-background-position='right' data-background-size="50%">
+						<div style="float: center; width: 50%">
+							<h2>Turbulence modelling in neutron star merger simulations</h2>
+							<p style="margin: 50px">
+								<ul style="list-style: none;">
+									<li> 
+										Ian Hawke
+									</li>
+									<li>
+										Also Thomas Celora, Peter Hammond, Marcus Hatton, Alex Wright, Nils Andersson, Greg Comer, David Radice.
+									</li>
+								</ul>
+							</p>
+							<p>
+								<ul style="list-style: none;">
+									<li>
+										See <a href="https://arxiv.org/abs/2205.11377">2205.11377</a>, <a href="https://arxiv.org/abs/2108.08649">2108.08649</a>, <a href="https://arxiv.org/abs/2107.01083">2107.01083</a>, <a href="https://arxiv.org/abs/2402.03224">arxiv:2402.03224</a>.
+									</li>
+									<li>
+										At <a href="https://doi.org/10.1007/s41115-023-00019-9">Liv Rev Comp Astro (2024) 10:1.</a>
+									</li>
+									<li> <a href="https://github.com/IanHawke">github.com/IanHawke</a></li>
+									<li> STAG, University of Southampton</li>
+								</ul>
+							</p>
+							<p style="position:absolute; bottom:5px;">
+								<ul style="list-style: none;">
+									<li> <a href="https://ianhawke.github.io/slides/mssl-2025">ianhawke.github.io/slides/mssl-2025</a> </li>
+								</ul>
+							</p>
+						</div>
+						<aside class="notes">
+							To get us all on the same page, I'm talking about nonlinear NS mergers in full GR. These are needed for multimessenger observations; we want fully consistent correlations of the GW and EM signals emitted through inspiral, merger, and post-merger phase, including jets, kilonovae, and other messy effects. This means extremely expensive simulations with a model that should include a dynamical spacetime, hydrodynamics, magnetic fields, neutrinos, multiple particle species, and so on. For now that's a pipe dream, but the best simulations are getting there.
+							<br>
+							The problem, as indicated by these images by Ciolfi, is the formation of small scale structure through merger and into the post-merger phase, and particularly its impact on the long term dynamics. This is what we mean by <em>turbulence</em>: the transfer of information, energy-momentum, and power, between widely varying lengthscales, and qualitative changes in the behaviour on one scale (particularly the large scale) due to structures formed at a different scale (particularly the small scale).
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Gravitational waves and parameter estimation">
+
+					<section>
+						<div class="container">
+							<div class="col">
+								<h2>GW170817</h2>
+
+								<ul>
+									<li>
+										<em>One</em> multimessenger detection.
+										<ul>
+											<li>
+												Gravitational waves;
+											</li>
+											<li>
+												$\gamma$ - first detected;
+											</li>
+											<li>
+												All EM band - long term.
+											</li>
+										</ul>
+									</li>
+									<li>
+										GWs seen for inspiral.
+									</li>
+									<li>
+										Constrains matter properties.
+										<ul>
+											<li>
+												Masses;
+											</li>
+											<li>
+												Tidal compressibility;
+											</li>
+											<li>
+												Equation of state.
+											</li>
+										</ul>
+									</li>
+									<li>
+										O4 just starting: 
+									</li>
+									<li>
+										Many more detections.
+									</li>
+								</ul>
+								<p class="fragment">
+									How does parameter estimation work?
+								</p>
+							</div>
+							<div class="col" style="flex: 1.5 1 0">
+								<img src="../eth/figures/timeline-with-spectrum-amgv7.png" style="width:100%; margin:0px">
+							</div>
+						</div>
+						<aside class="notes">
+							So unless something has happened very recently, we've still only had the one multimessenger signal. Whilst we can hope for more in O4 it's really with the next generation of detectors - Einstein Telescope and Cosmic Explorer - that we expect numbers to really take off. At that point we'll be probing the post-merger regime, where temperatures become significant and nuclear reactions come into play. 
+							<br>
+							Now, adding additional physics to our codes is painful and expensive. Do we really have to do it? We should only do it when it makes a difference: when we can distinguish the additional physical parameters or model additions in observations. So, first we should say roughly how parameter estimation from gravitational waves works.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Parameter Estimation</h2>
+						<video controls data-autoplay loop="false" src="https://dcc.ligo.org/public/0142/G1700908/009/basic_animation_v2_gaussblur.mp4" style="width:100%; margin:0px">
+						<aside class="notes">
+							Here's a toy picture for you. Start from a signal and a model. Overlay the wave strains. Change one parameter at a time. In this case the model is a black hole binary, so the parameters are the total mass and the distance to the source. First modify the mass until the phase matches; then modify the distance until the amplitude does. Finally, fold in the detector noise. At that point we have the best match between the model and the signal.
+							<br>
+							We can measure the overlap between the best model result and the signal. If multiple parameter values are within a certain tolerance of the best case, or two different models have similar best matches, then they can't be distinguished, so there's no point adding that physics to the model.					
+						</aside>
+					</section>
+
+					<!-- https://dcc.ligo.org/LIGO-G1700908/public -->
+
+				</section>
+
+				<section id="Mergers and reactions">
+
+					<section>
+
+						<div class="container">
+							<div class="col">
+								<h2>Neutron star merger</h2>
+								<ul>
+									<li>
+										Merger is messy:
+										<ul>
+											<li>
+												Shearing instabilities;
+											</li>
+											<li>
+												Temperature increase through shocks;
+											</li>
+											<li>
+												Nuclear reactions.
+											</li>
+										</ul>
+									</li>
+									<li>
+										Urca reactions:
+										$$
+										\begin{aligned}
+										  \text{n} &\to \text{p} + \text{e}^- + \bar{\nu}_e \\
+										  \text{p} + \text{e}^- &\to \text{n} + \nu_e.
+										\end{aligned}
+										$$
+									</li>
+									<li>
+										Keep track of species $Y_\text{e} \sim n_\text{e} / n_b$ by
+										$$
+										D_t Y_\text{e} = \Gamma_\text{e}(n_b, T, Y_\text{e}).
+										$$
+									</li>
+									<li class="fragment">
+										Urca timescale $\sim 10^{-8}-10^{-10}$ seconds: $< \Delta t$. <em>Stiff</em>: $\Gamma_\text{e} \gg 1$.
+									</li>
+								</ul>
+							</div>
+							<div class="col">
+								<div>
+									<img src="../portsmouth-2023/figures/pch/rhomubTYe.svg" style="width:100%; margin:0px">
+									<img src="../portsmouth-2023/figures/pch/mub_T_new.svg" style="width:100%; margin:0px">
+								</div>
+							</div>
+						</div>
+
+						<aside class="notes">
+							There is a lot of physics driven by merger. Here the focus is on the small-scale structure driven by merger, with the shocks making the temperature shoot up, shearing instabilities and turbulent effects driving power to small scales, and neutrinos and nuclear reactions becoming much more important. Here I'm going to be motivated by the weak interactions, particularly of Urca type, where the relative amount of baryons and electrons changes due to the reactions, with energy-momentum transferred into neutrinos.
+							<br>
+							For now, the focus is on the evolution of the lepton fraction keeping track of the number of electrons at each point. This is an advection equation with a source - the reaction rate. The dimensions of the reaction rate are inverse time, so we need an idea of the reaction timescale.
+							<br>
+							Unfortunately for numerical studies, typical Urca reaction rates can be smaller than the numerical timestep. When we solve the evolution equations, we would want to use explicit methods: we can't do this stably. We're left with a problem: we can either switch to a timestep limited by the reactions or an implicit scheme in time, both of which are impractical. Or we can do something else.
+						</aside>
+
+					</section>
+
+				</section>	
+
+				<section id="Multiscale">
+
+					<section>
+						<h2>Toy model</h2>
+						<p>
+							Approximate fluid equations, using $\theta = \nabla_a u^a$:
+						</p>
+						$$
+						D_t \begin{pmatrix} n_b \\ e \\ Y_\text{e} \end{pmatrix} = - \begin{pmatrix} n_b \theta \\ \left( e + p(n_b, e, Y_\text{e}) \right) \theta \\ {\color{red}\epsilon^{-1}} \left( A Y_\text{e} - B \right) \end{pmatrix}.
+						$$
+						<p>
+							Short timescale encoded in $\epsilon \ll 1$.
+						</p>
+						<div class="r-stack">
+							<div class="fragment fade-in-then-out" style="width:100%">
+								<p>
+									Assume $Y_\text{e} = Y_0 + \epsilon Y_1 + \dots$ and separate scales:
+								</p>
+								$$
+								\begin{aligned}
+								\mathcal{O}(\epsilon^{-1}) & \colon & 0 &= -A Y_0 + B & \implies & Y_0 = Y_\text{eq} = F(n_b, e), \\
+								\mathcal{O}(\epsilon^{0}) & \colon & D_t Y_0 &= -A Y_1 \\
+								& \implies & Y_1 &= -A^{-1} D_t Y_0 \\
+								& & &= G(n_b, e) \theta.
+								\end{aligned}
+								$$
+							</div>
+							<div class="fragment fade-in-then-out" style="width:100%">
+								<p>
+									Expand pressure:
+								</p>
+								$$
+								\begin{aligned}
+								p(n_b, e, Y_\text{e}) &= p(n_b, e, Y_\text{eq}(n_b, e)) + \epsilon \partial_{Y_\text{e}} p Y_1 \\
+								&= p_\text{eq}(n_b, e) + \Pi, \\
+								\Pi &= -\zeta(n_b, e) \theta.
+								\end{aligned}
+								$$
+								<p>
+									Appearance of <em>bulk viscous pressure</em>.
+								</p>
+							</div>
+							<div class="fragment fade-in" style="width:100%">
+								<p>
+									Reduced model:
+								</p>
+								$$
+								D_t \begin{pmatrix} n_b \\ e \end{pmatrix} = - \begin{pmatrix} n_b \theta \\ (e + {\color{blue} p_\text{eq} + \Pi}) \theta \end{pmatrix}.
+								$$
+								<ul>
+									<li>
+										No longer tracking species: always in equilibrium.
+									</li>
+									<li>
+										Scales now tractable: $\Gamma_\text{e} \sim \epsilon^{-1} \to \Pi \sim \epsilon.$
+									</li>
+								</ul>
+							</div>
+						</div>
+						<aside class="notes">
+							We develop the key idea using a toy model.
+							<br>
+							Here we've taken the relativistic fluid equations and made a couple of key approximations. First, we've assumed we're working in coordinates moving along with the fluid flow. Second, we've assumed we're working on a small enough scale that the pressure and the expansion (which is the divergence of the velocity) are both roughly constant. There's plenty of cases where this doesn't work - turbulence wouldn't allow us to do this - but enough cases where it will to fix our ideas.
+							<br>
+							Next, we assume that the reactions are happening on a short timescale. Dimensionally we can pull this out into $\epsilon$, a small number encoding the ratio of scales. We will also linearize the reaction rate to make the steps clearer, although this isn't essential. Our key assumption is now that there is scale separation: behaviour at each power of $\epsilon$ is independent. Again, this wouldn't work in turbulent cases.
+							<br>
+							With these assumptions we can look for a power series solution in the species fraction. Plug this power series into the equation of motion for the species fraction and look at each power of the scale ratio separately. The leading order term in the power series is then fixed: remember $A, B$ are known functions that don't depend on the species fraction, as they come from linearising the reaction rate. We also see that this leading order term is in equilibrium: if it were the total species fraction and we plugged it into the equation of motion then its time derivative vanishes.
+							<br>
+							At zeroth order we have the next term in the expansion given by the time derivative of the equilibrium leading order term. Using the chain rule and the other equations of motion we can expand the time derivative. The precise form of the terms isn't essential here. What matters is that they are all evaluated at equilibrium, where the species fraction is given by the leading order term, which itself depends only on the baryon number and internal energy. We also pull out a factor of the expansion.
+							<br>
+							The reason for pulling out the expansion can be seen by going back to the other equations of motion, those for the baryon number and internal energy. The only place where the species fraction matters is in the pressure. We Taylor expand about equilibrium: the first order term is proportional to the first order term in the species fraction, so proportional to the expansion. That means it behaves exactly as expected for a bulk viscous pressure. The bulk viscous coefficient then depends on the baryon number and internal energy.
+							<br>
+							Putting this all together, what this multiscale calculation does is give us a reduced model. In the reduced model the species fraction is not evolved, but always assumed to be in equilibrium. Its value can be computed by setting the reaction rate to zero. The leading order impact of the out-of-equilibrium behaviour that should be there manifests itself as a bulk viscous pressure. The bulk viscous pressure coefficient can be evaluated using appropriate derivatives of the reaction rate, evaluated at equilibrium. We thus have to evaluate fewer equations of motion. More importantly, the problematic fast timescale has been removed from the problem, as the bulk viscous pressure correction term is linear in the small scale ratio, not inversely proportional to it as the reaction rate was.
+						</aside>
+
+					</section>
+
+					<section>
+
+						<h2>Impact of $\Pi$</h2>
+
+						<div class="container">
+							<div class="col">
+
+							<p>
+								Check with a "real" equation of state:
+							</p>
+							<ul>
+								<li>
+									Bulk viscous pressure can be big for neutron star core in merger;
+								</li>
+								<li>
+									Bulk viscous approximation <em>needed</em> above dashed lines (resolution dependent).
+								</li>
+							</ul>
+							</div>
+
+							<div>
+								<img src="../portsmouth-2023/figures/pch/Pip_cont_zoom.svg" style="width:1100px; margin:0px">
+							</div>
+						</div>
+
+						<aside class="notes">
+							Let us now move from the toy model to looking at the impact for a real equation of state. Here we're using the APR4 equation of state, with the reaction rates and derivatives computed using the Fermi surface approximation. That's not ideal: unfortunately very few equations of state also have the reaction rates in a suitable form for this calculation in full.
+							<br>
+							This plot covers the range of densities and temperatures relevant for a neutron star merger. The core of the neutron star is typically at a few times nuclear saturation density (see note below). The outer layers of the neutron star are many orders of magnitude lower, but the Urca reactions are rapidly suppressed at low densities. The temperature of the neutron star during inspiral is low - it is expected to be well below 1MeV - but can reach around 100MeV through merger in extreme cases.
+							<br>
+							There are two key pieces of information in this plot. The first, given by the colour, is how big the bulk viscous pressure is compared to the total pressure. We see this can be substantial - certainly into the percent level - at low temperatures, and particularly through the core. The second piece of information is the timescale of the reactions. Remember, bulk viscous pressure is an approximation, and that approximation is only needed if the numerical timestep is too big. The lines pick a particular timestep. Every region below a line has reactions slow enough that the bulk viscous approximation isn't needed, and the full nonlinear reaction can be directly solved. The solid line is quite a poor numerical resolution by current standards. The top, dotted, line is an order of magnitude better than the best simulation ever run. We see that there's a region in parameter space where we will have no choice but to use a bulk viscous approximation.
+						</aside>
+
+					</section>
+
+				</section>
+
+				<section id="Simulation results">
+
+					<section>
+						<div class="container">
+							<div class="col">
+								<h2>Impact on GWs</h2>
+
+								<ul>
+									<li>
+										Do nonlinear merger simulation;
+									</li>
+									<li class="fragment" data-fragment-index=0>
+										Simulate with $\epsilon \to 0, \infty$;
+									</li>
+									<li class="fragment" data-fragment-index=1>
+										Filter out inspiral signal;
+									</li>
+									<li class="fragment" data-fragment-index=1>
+										Reactions "soften" EOS, $$\Delta f \simeq 58\textrm{Hz}$$
+									</li>
+									<li class="fragment" data-fragment-index=2>
+										Compute the mismatch between signals,
+										$$
+										\mathcal{M} \sim 1 - \frac{\max \langle h_1 \vert h_2 (\sim \textrm{phase}) \rangle}{\sqrt{\langle h_1 \vert h_1 \rangle\langle h_2 \vert h_2 \rangle}}
+										$$
+									</li>
+									<li class="fragment" data-fragment-index=3>
+										$$
+										\varrho_\textrm{req} \gtrsim 1 / \sqrt{2 \mathcal{M}} \quad  = 1.2
+										$$
+										Limits are distinguishable in GWs by ET.
+									</li>
+								</ul>
+							</div>
+							<div class="col r-stack">
+								<img src="../portsmouth-2023/figures/pch/strain.svg" style="width:100%; margin:0px"class="fragment fade-in-then-out" data-fragment-index=0>
+								<div style="width:95%; margin:0px" class="fragment fade-in" data-fragment-index=1>
+									<img src="../portsmouth-2023/figures/pch/sqrtPSD_OoE_NSE.svg" style="width:100%; margin:0px">
+									<img src="../portsmouth-2023/figures/pch/sqrtPSD_OoE_OEL.svg" style="width:100%; margin:0px">
+								</div>
+							</div>
+						</div>
+						<aside class="notes">
+							Having argued that the nuclear reactions, in the bulk viscous approximation, can be relevant through merger, we actually want to test that. Doing the full nonlinear simulations is a real pain: for proper consistency we would need to keep track of the products of the reactions - that would be the neutrinos - by including radiation hydrodynamics, which increases the computational expense massively. Instead we focus on the extreme limits: the case where the reactions are infinitely slow and infinitely fast. If there's no way of distinguishing between these two cases observationally then we can leave this out of the model.
+							<br>
+							The simulations here again use the APR4 equation of state, and take two 1.4 solar mass neutron stars, initially 40km separated and in equilibrium, and run the simulation through a few orbits before merger. The three gravitational wave signals you see here are the slow and fast reaction limits, and then the slow reaction limit again but with a different numerical resolution to check that any differences are due to changing the model, not numerical error. By eye, it's impossible to tell the difference between the models.
+							<br>
+							However, we don't quantify signals by eye, nor do we do it in the time domain. Instead we look at signals in the frequency domain. So, perform the Fourier transform and look at where the power is in the signal. As the inspiral phase of the simulation will be the same - reactions only do anything at high enough densities and temperatures, so in the post-merger regime - we filter out the lower frequency inspiral signal to concentrate on the post-merger behaviour. This filtering was done in two different ways, and the result are unchanged by the choice.
+							<br>
+							The top panel compares the power spectra of the two models. The horizontal line is the design noise curve for the Einstein Telescope, giving us confidence that this post-merger signal would be detectable in ET. The peak in the power spectra of the post-merger signal has moved, as shown by the vertical dashed lines, by about 60Hz. This isn't a lot in a signal at 3kHz, but is orders of magnitude more than the phase change caused by changing numerical resolution, shown in the bottom panel. 
+							<br>
+							The question is then whether this makes a difference for estimating physical parameters in an observational pipeline. In particular, if we had a signal, and had the two templates for the different reaction limits, would we be able to distinguish which template was the better fit to the signal, given the noise? We can use the mismatch between the template signals to find the required signal-to-noise-ratio for distinguishability. The mismatch roughly finds the minimum difference, in frequency space, of two signals after phase and time shifting. The SNR required is then roughly the inverse square root of the mismatch. In our case the mismatch was 36%, so the SNR required is 1.2.
+							<br>
+							For a merger happening at a similar distance to GW170817, and using a next generation GW detector, we see that the signals are distinguishable.
+							<br>
+							I need to emphasise that this does not mean we could measure nuclear reaction parameters through GWs. We should instead think of this as being a potential systematic error in the signals. It's then necessary to include nuclear reactions correctly into numerical simulations to get sufficiently accurate templates for ET.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Numbers">
+
+					<section>
+
+						<h2>Toy model</h2>
+
+						<div class="container">
+							<div class="col">
+								<p>
+									Incompressible Navier-Stokes:
+								</p>
+								$$
+								\partial_t \mathbf{v} + {\color{red}{\mathbf{v} \cdot \partial_{\mathbf{x}} \mathbf{v}}} = - \frac{\nabla p}{\rho} + {\color{blue}{\nu \nabla^2 \mathbf{v}}}.
+								$$
+								<p>
+									1d modes, $v \sim \sum_k V_k(t) e^{i k x}$, implies
+								</p>
+								$$
+								\partial_t V_k + {\color{red}{\sum_{k'} i k' V_{k-k'} V_{k'}}} = \dots - {\color{blue}{\nu k^2 V_k}}.
+								$$
+								<p>
+									<span style="color:blue">Final term</span> is dissipation, $V_k \sim e^{-\nu k^2 t}$.
+								</p>
+								<p>
+									<span style="color:red"> Advective term</span> <em>couples scales</em>.
+								</p>
+							</div>
+							<div class="col">
+								<img src="../et-2024/figures/KH_density_2048.svg" style="height:100%">
+							</div>
+						</div>
+						<aside class="notes">
+							To make this discussion of scale interaction clearer we'll look at a specific model both visually and mathematically. Restricting to Newtonian hydrodynamics the image shows a simulation of a Kelvin-Helmholtz instability, where a layer of dense fluid is moving counter to the bulk fluid. The interfaces between the different layers breaks up due to the instability. We see vorticity - local rotation - appearing at a range of scales. How these structures propagate, grow, and decay has a qualitative impact on the large scale flow.
+							<br>
+							Mathematically we use the toy model of incompressible Navier-Stokes. We have the momentum equation for the velocity with the nonlinear advective term in red, the pressure gradient term in black, and the dissipation term due to anisotropic stresses in blue. For now we treat the kinematic viscosity coefficient $\nu$ as a constant, but we'll see later that it varies wildly. To see how the behaviour depends on the lengthscale we decompose into modes; the wave-number $k$ is small for long lengthscales. Plugging this in we see that the growth or decay of the power at a given scale (or wave-number) is driven by two key effects.
+							<br>
+							On the right hand side, when there is substantial power at short enough lengthscales (so large wavenumber), the dissipative term leads to exponential damping of the power. What "short enough" means here depends on the size of the viscosity, the global lengthscale of the system, and the timescale under consideration. This illustrates the interpretation of the dissipation term as removing energy from the system due to micro-scale interactions not explicitly included in the fluid-scale model. 
+							<br>
+							On the left hand side the nonlinear advective term couples different scales; essentially there are two exponentials here, and their wave-numbers must sum to the wave-number under consideration. This transfers energy-momentum from large scales to small, known as the <em>energy cascade</em>. If energy can be transferred from small scales to large, this is an <em>inverse cascade</em>.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Reynolds Number</h2>
+
+						<div class="container">
+							<div class="col">
+								<p>
+									Dissipation scale $\ell_d \sim \mathrm{Re}^{-3/4} \ell_0$. Estimate for NSs:
+								</p>
+								<ul>
+									<li class="fragment">
+										Neutrino diffusion: $\mathrm{Re} \sim 4 \times 10^6$ so $\ell_\nu \sim 1 \mathrm{cm}$.
+									</li>
+									<li class="fragment">
+										But $\lambda_\nu \gg \ell_\nu$, so ineffective.
+									</li>
+									<li class="fragment">
+										Electron scattering: $\mathrm{Re} \sim 5 \times 10^{15}$ so $\ell_d \sim 1 \mathrm{nm}$.
+									</li>
+									<li class="fragment">
+										MHD dominates below $\ell_B \sim 1 \mathrm{cm}$.
+									</li>
+								</ul>
+								<p class="fragment">
+									Numbers slightly larger in accretion disk.
+								</p>
+								<p class="fragment">
+									Cost of DNS $\sim \mathrm{Re}^3$: can <b>never</b> resolve dissipation numerically.
+								</p>
+							</div>
+							<div class="col">
+								<img src="../et-2024/figures/scales.png" style="height:100%">
+							</div>
+						</div>
+						<aside class="notes">
+							So, if we want to simulate the correct physics we need to be able to capture all of the scales of the problem: the energy containing range, the inertial subrange, and the transition to dissipation. A simulation that covers all these scales is called a <em>Direct Numerical Simulation</em>, or DNS.
+							<br>
+							There are two numbers we need to know: the lengthscale where dissipation acts (to see if the simulation captures it), and the strength of the dissipative effects, encoded in the dimensionless Reynolds number. Here I've linked the Reynolds number to the "global scale" in the simulation, but there are other ways it can be introduced. To make this concrete, in the merger phase of a NS simulation the global scale is the thickness of the Kelvin-Helmholtz shear layer between the merging stars, which is at most of the order of 1km. In the post-merger phase there is dissipation in the surrounding accretion disk, where the global scale depends on the disk height, which depends on the radial location. This makes the global scale considerably larger.
+							<br>
+							The main effect not included in the continuum fluid model is the behaviour of the neutrinos. Estimates by, for example, Thompson and Duncan, suggest that the dominant effect is due to neutrinos produced by the hot matter in merger being first trapped and then diffusing out. The viscosity depends on the neutrino energy, mean free path, and the fluid density, but roughly gives Reynolds numbers around a million for a dissipation scale around a cm. However, in order for this effect to happen efficiently enough the mean free path of the neutrinos needs to be less than the dissipation scale. In the hot remnant it's typically the case that the mean free path is of the order of metres.
+							<br>
+							Therefore this dissipation mechanism doesn't work, and power will keep cascading to ever smaller scales. The next effect at the micro-scale is electron scattering, where the Reynolds number is now nine orders of magnitude larger. If this is the dominant source of dissipation then the Kolmogorov cascade will hold down to nm scales.
+							<br>
+							However, there are also the nonlinear MHD effects. In the NS remnant those start to dominate below cm scales. At this point we expect a different qualitative change.
+							<br>
+							The impact in the post-merger phase through the disk is essentially the same, although the numbers change (as the global scale changes, but so do the estimated viscosity values).
+							<br>
+							To put these numbers in the numerical simulation context: most current simulations can capture scales around 100m; the best can capture scales around 10m. This is four orders of magnitude bigger than any dissipation scale listed here. Given the cost of a simulation scales as the fourth power of the number of points, we need sixteen orders of magnitude more compute power to hit the dissipation scale (at best).
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Modelling">
+
+					<section>
+						<h2>Reynolds equations</h2>
+
+						<div class="container">
+							<div class="col">
+								<p>
+									How do we model all scales using only information from large scales?
+								</p>
+								<ol>
+									<li class="fragment" data-fragment-index="2">
+										Statistically: short scale is  unknowable.
+									</li>
+									<li class="fragment" data-fragment-index="2">
+										Physically: short scale is model-able.
+									</li>
+									<li class="fragment" data-fragment-index="2">
+										Numerically: short scale is correctable.
+									</li>
+								</ol>
+								<p class="fragment" data-fragment-index="5">
+									Take Navier-Stokes, filter with $\mathbf{v} = \langle \mathbf{v} \rangle + \delta \mathbf{v}$: 
+								</p>
+								<div class="fragment" data-fragment-index="5">
+								$$
+								\begin{aligned}
+								\partial_t \langle \mathbf{v} \rangle + \langle \mathbf{v} \rangle \cdot \partial_{\mathbf{x}} \langle \mathbf{v} \rangle = &- \frac{\nabla  \langle p \rangle}{ \rho} + \nu \nabla^2 \langle \mathbf{v} \rangle \\ &- {\color{red}{\nabla \cdot \left( \delta \mathbf{v} \otimes \delta \mathbf{v}\right)}}.
+								\end{aligned}
+								$$
+								</div>
+								<p class="fragment" data-fragment-index="6">
+									The turbulence model gives the <span style="color:red">Reynolds stresses</span>.
+								</p>
+							</div>
+							<div class="col">
+								<img src="../et-2024/figures/KH_density_both.svg" style="height:90%">
+							</div>
+						</div>
+						<aside class="notes">
+							So, we can never hope to numerically simulate the true physics of the system. The idea of turbulence <em>modelling</em> is therefore to capture the key qualitative features of the fine scale physics using only information on coarser scales. Essentially, we want to ensure that the simulation shown in the top plot has the same qualitative statistics as the bottom plot. To do this we need to modify the model that we are simulating: we need to come up with an effective theory that we can simulate, that statistically has the appropriate features.
+							<br>
+							In the review we outlined three different ways of thinking about this. The first is the approach typically used in Newtonian incompressible flow. There the information lost when we restrict to long scales is assumed to be smooth but random. The statistics are then built in by choosing how these random variables behave. The second approach is the one that most in relativity take. The information is in principle exact, and so a physical model of its behaviour can be used, and a coarse-graining procedure used to represent what its effects would look like at longer scales. The final approach is specifically associated with the Spanish groups led by Viganò and Palenzuela. Here it's assumed that the major effects are purely numerical error as we're too far away from the dissipative lengthscale. This can be corrected for based on assumptions about the interactions between the numerics and the model.
+							<br>
+							To make this concrete, we go back to the toy model and introduce a filtering or averaging process, indicated by the angle brackets. We can then split all terms into their filtered and residual parts. The filtered part is the term we can know - it exists on long scales. The residual term is unknown. We then write the momentum equation for the filtered part, which looks like the standard Navier Stokes equations, plus a term due to the residual stresses. Every term here is knowable at the long scale except for these Reynolds stresses. In turbulence modelling the idea is to approximate the Reynolds stresses using filtered quantities.
+							<br>
+							Note that this equation is a huge simplification due to incompressibility. This simplifies the density - here constant - and the pressure, which is a Lagrange multiplier due to the incompressibility constraint.
+						</aside>
+					</section>
+
+					<section data-background-image="../et-2024/figures/time_average1.png" data-background-position="right" data-background-size="30%">
+						<div class="container" style="width:75%">
+							<div class="col">
+								<h2>Relativity: Equations of motion</h2>
+								<p>
+									$3+1$ applied to $T_{ab}$ gives
+								</p>
+								$$
+								\partial_t \left( \sqrt{\gamma} \mathbf{q} \right) + \partial_j \left( \alpha \sqrt{\gamma} \mathbf{f}^{(j)} \right) = \mathbf{s}.
+								$$
+								<p>
+									Fluxes nonlinear: $\mathbf{f}^{(j)}_{S_i} = S^j_i + S_i N^j$. Closure gives
+								</p>
+								$$
+								\langle S_{ij} \rangle = \langle S_i \rangle \langle v_j \rangle + \langle p \rangle \delta_{ij} + \tau_{ij}.
+								$$
+								<ul class="fragment">
+									<li>
+										EOS issue: $\langle p \rangle \ne p(\langle \rho \rangle, \dots)$;
+									</li>
+									<li>
+										Recovering 4-velocity from $\langle v_j \rangle$ non-trivial;
+									</li>
+									<li>
+										Not covariant: depends on slice normal $N^a$.
+									</li>
+									<li>
+										Many closure options; see eg Radice, Viganò et al.
+									</li>
+								</ul>
+							</div>
+						</div>
+						<aside class="notes">
+							However, we must continue undeterred. Turbulence is a reality: choosing not to add any terms is in itself a choice of turbulence model, and - as we will see later - usually a very bad choice. I now want to touch on how the approaches work in relativity.
+							<br>
+							The first approach was pioneered by Radice in 2015, although there are earlier suggested models for, for example, dynamos, as in Giacomazzo 2011. In this approach the average-residual split is applied at the equations of motion level. First do the standard 3+1 split, using stress-energy conservation to give balance laws. The conserved variables are the stress-energy projected with respect to tetrad components defining the coordinates. To close the system we need to be able to compute the fluxes, which are themselves projected stress-energy terms. However, for a fluid the relationship is nonlinear; in this exmple of the momentum term the $S_i$ piece is the conserved momentum, which is known, and the $N^j$ is the normal to the slice, also known, but the velocity is not known. Therefore the averaged flux introduces a residual term which includes anisotropic stresses. This must be modelled.
+							<br>
+							Note here, and in everything that following, it's assumed that the spacetime is fully known and that averaging commutes with that. The standard argument for this is that the curvature lengthscale is much larger than any other physical lengthscale, and much larger than the averaging scale. This is an argument very specific to NS mergers and similar simulations.
+							<br>
+							We see a range of issues with this closure immediately. The first follows from compressibility: the average of the pressure is not the pressure of the averages. This introduces another turbulent closure. The second is purely relativistic: internal calculations rely on the 4-velocity being unit-normalised. Averaging components within a slice breaks this normalisation. The steps to get around this are not simple, nor exact. Finally, we see that the result of the averaging process depends on the slice; the results are not covariant. This is particularly problematic for judging the utility of the turbulence model; we cannot rely on equivalence principle arguments to check the model in controllable, simple, spacetimes, and then extend the model to dynamical cases.
+							<br>
+							Despite these shortcomings all currently implemented closure schemes rely on this sort of approach. The three key models are Radice's model inspired by the Smagorinsky closure - essentially an extension of Boussinesq's turbulent viscosity hypothesis, Kiuchi's phenomenological approach, and Viganò and Palenzuela's approach where the closures are linked to properties of the numerical scheme. Given the different assumptions in the models, it is likely that they essentially implement different physics.
+						</aside>
+					</section>
+
+					<section data-background-image="../et-2024/figures/time_average1.png" data-background-position="right" data-background-size="30%">
+						<div class="container" style="width:70%">
+							<div class="col">
+								<h2>Relativity: the observer</h2>
+								<ol>
+									<li>
+										Define $U^a$ so that $\nabla_a \left( \langle j \rangle U^a \right) = \nabla_a J^a = 0$.
+									</li>
+									<li>
+										Decompose $T_{ab}$ wrt $U^a$: splits into (non)-ideal parts.
+									</li>
+									<li>
+										Average orthogonal to $U^a$, giving
+									</li>
+								</ol>
+								$$
+								\nabla_a T^a_{b, \mathrm{ideal}} = - \nabla_a \tau^a_b.
+								$$
+								<ul class="fragment">
+									<li>
+										Covariant (up to observer choice);
+									</li>
+									<li>
+										Same EOS issues;
+									</li>
+									<li>
+										Same closure issues...
+									</li>
+									<li class="fragment">
+										but now can interpret closure terms "physically": particle drift, bulk/anisotropic pressure, etc.
+									</li>
+								</ul>
+							</div>
+						</div>
+						<p style="margin-top:100px; margin-bottom:0px">
+							<ul style="list-style:none; font-size:0.6em">
+								<li> <a href="https://arxiv.org/abs/2107.01083">Celora et al, 2107.01083</a></li>
+								<li> <a href="https://arxiv.org/abs/2405.13593">Celora et al, 2405.13593</a></li>
+							</ul>
+						</p>
+						<aside class="notes">
+							The alternative approach to discuss was introduced by us: Thomas Celora, Nils, myself, and Greg Comer, with more recent work by Marcus.
+							<br>
+							Take the figure on the right; think of a slice as a single computational cell, the vertical direction as time, and see that the velocity pattern within the cell is complex and small-scaled. The individual observers have individual "clocks", linked to the issues with the Lorentz factor noted above. Fixing this locally is painful; it's better to do this "globally" (over the cell) by constructing an observer. The red line (and neighbouring blue lines) is a "simple" observer varying slowly. This is the foundation of the covariant approach.
+							<br>
+							The idea here is to formulate a covariant filtering model. To do this we always filter within the spacelike slice normal to the observer $U^a$. The observer and the filtering operation are nonlinearly related, by choosing that the continuity equation holds for the filtered observer.
+							<br>
+							Once we have the filtered observer we can decompose the micro-scale stress-energy with respect to it. Even if the short scale stress-energy is an ideal model with respect to its micro-scale velocity, it will not appear so when decomposed with respect to this averaged observer. By splitting this decomposition into the diagonal ideal part and off-diagonal residual part, stress-energy conservation gives us a turbulence model form in a covariant way.
+							<br>
+							This only "fixes" the covariance issue. We have all the additional closure terms that now need fixing. However, we have a fully self-consistent dense stress-energy tensor (with respect to the observer 4-velocity), so these can be physically interpreted in terms of particle drifts, bulk pressures, and so on.
+							<br>
+							Whether this is a useful way to work is waiting on an actual implementation of this filtering approach, which Thomas and Marcus are currently working on, with encouraging results; see the most recent preprint linked here.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Non-ideal model: first version</h2>
+						$$
+						\langle T^{ab} \rangle \sim \tilde{\epsilon} U^a U^b + (p + \tilde{\Pi}) \tilde{\perp}^{ab} + 2 \tilde{q}^{(a} U^{b)} + \tilde{\pi}^{ab}
+						$$
+						<p>
+							where $\tilde{\Pi} = - \zeta \tilde{\theta}, \tilde{q}^a \sim -\kappa \nabla^a \tilde{T}, \tilde{\pi}^{ab} = -\eta \tilde{\sigma}^{ab}$.
+						</p>
+						<p>
+							Best fit model assuming $\zeta, \kappa, \eta$ are $f(\tilde{T}, \tilde{n})$ is really poor.
+						</p>
+						<img src="../et-2024/figures/additional/Const_coeff_models_densityEOS.png" style="width:100%">
+						<p style="margin-top:32px; margin-bottom:0px">
+							<ul style="list-style:none; font-size:0.6em">
+								<li> <a href="https://arxiv.org/abs/2405.13593">Celora et al, 2405.13593</a></li>
+							</ul>
+						</p>
+						<aside class="notes">
+							Now that we have filtered data we can use the observer and project the filtered stress energy tensor appropriately, computing what the individual terms are. By assuming that the coarse grained (meso-) model is a non-ideal single fluid we can interpret the additional terms as bulk and shear pressures and heat fluxes. That links the additional terms to velocity and temperature gradients through the viscosity coefficients. We can then find the best fit coefficients that would give a turbulence closure model.
+							<br>
+							If this truly were a non-ideal fluid then the only physical possibility is that the viscosity coefficients depend on number density, temperature, and species. So we try that first. We have lots of data - every single filtered point - so can compute the appropriate coefficient at every point, and compute a best fit model.
+							<br>
+							However, the best fit model is still clearly poor. The figure shows the distribution of the magnitudes of the residual bulk and shear pressures, and the magnitude of the heat flux, as compared to the distribution for the best fit model. Only the heat flux is remotely close; given the log scales, the non-ideal pressures are unacceptably poor.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Non-ideal model: second version</h2>
+						
+						<p>
+							Allow shear viscosity to be
+						</p>
+						$$
+						\log \eta \sim c_0 + \dots c_{\sigma^2} \log \sigma^{ab} \sigma_{ab} + c_{\omega^2} \log \omega^{ab} \omega_{ab}.
+						$$
+						<p class="fragment" data-fragment-index="1">
+							Similar improvements are seen for the bulk viscosity case $\zeta$.
+						</p>
+						<div class="r-stack">
+							<img src="../et-2024/figures/additional/eta_best_compare.png" style="width:100%">
+							<img src="../et-2024/figures/additional/zeta_best.png" style="width:100%" class="fragment" data-fragment-index="1">
+						</div>
+						<p style="margin-top:100px; margin-bottom:0px">
+							<ul style="list-style:none; font-size:0.6em">
+								<li> <a href="https://arxiv.org/abs/2405.13593">Celora et al, 2405.13593</a></li>
+							</ul>
+						</p>
+						<aside class="notes">
+							There's no good reason for the subgrid model to behave like a "true" non-ideal fluid in this sense. We can fit on more general variables. The obvious choice is on velocity gradients - this would be how we'd get a Boussinesq or Smagorinsky type model anyway. So we expand the fitting variables.
+							<br>
+							In this case we see much better results. If everything was perfect then the left plot would be a straight diagonal line, and the distributions would perfectly match. However, the key point is the right hand plot, where the distributions are close, so we would hope that at a statistical level this subgrid scheme would have the same impact on the stress energy tensor as the fine grained (micro-) model did.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Magnetic field amplification">
+
+					<section>
+						<div class="container">
+							<div class="col">
+								<h2>Magnetic field amplification: BLES</h2>
+								<p>
+									Before LES modelling, magnetized NS mergers
+								</p>
+								<ul>
+									<li>
+										saw the Kelvin-Helmholtz instability;
+									</li>
+									<li>
+										saw the right early growth;
+									</li>
+									<li>
+										failed to capture saturation.
+									</li>
+								</ul>
+								<ul class="fragment">
+									<li>
+										Best resolutions $\sim 10 \mathrm{m}$;
+									</li>
+									<li>
+										Dissipation scales $\sim 1 \mathrm{cm}$.
+									</li>
+								</ul>
+								<p class="fragment">
+									Results depend on initial field strength. However, even unphysical values do not saturate correctly. 
+								</p>
+								<p style="margin-top:100px; margin-bottom:0px">
+									<ul style="list-style:none; font-size:0.6em">
+										<li> <a href="https://arxiv.org/abs/1509.09205">Kiuchi et al, 1509.09205</a> </li>
+										<li> <a href="https://arxiv.org/abs/1710.01311">Kiuchi et al, 1710.01311</a></li>
+									</ul>
+								</p>
+							</div>
+							<div class="col">
+								<img src="../et-2024/figures/Kiuchi_et_al_2015_fig5.svg" style="width:80%">
+								<img src="../et-2024/figures/Kiuchi_et_al_2018_fig4a.svg" style="width:80%">
+							</div>
+						</div>
+						<aside class="notes">
+							We have now skimmed the theory. The review covers a wide range of numerical results that are linked to turbulence modelling. Here I'm going to focus on one set of results: magnetic field amplification during NS mergers.
+							<br>
+							As a reminder, it's believed that the magnetic fields within the merging neutron stars start relatively small (so that the pressure is dominated by hydro effects) but are rapidly wound up by dynamo effects due to Kelvin-Helmholtz instabilities in the shear layer in merger, and the MRI in the remnant and its surrounding disk. As this rapidly becomes strongly nonlinear it's long been a priority of simulations to quantify when the magnetic field growth saturates, as this is important for pressure support of the remnant, and for the generation of magnetars. It's also important to understand the magnetic field structure post-merger, as this is important for jet launch and behaviour.
+							<br>
+							Before turbulence modelling through this Large Eddy Simulation (LES) framework was introduced, the problem is best illustrated by these two sets of simulations by Kiuchi. These use the best numerical resolutions ever in live spacetime simulations, nearly an order of magnitude better than anyone else at the time. They capture the expected linear growth phases of the magnetic instabilities. However, the value of the magnetic field saturation does not converge with resolution. Neither does the relative amount of magnetic field energy in poloidal and toroidal components.
+							<br>
+							This is unsurprising give the four order of magnitude difference between the grid resolution and the dissipation scale. There are arguments that the key features of the instability could be captured on lengthscales around 5m; however, that would require at least another factor 16 in computational power, and nobody is willing to push that for a "maybe".
+							<br>
+							With these results showing that the "no turbulence" model just wasn't giving useful results, there was a push to include turbulence models.
+						</aside>
+					</section>
+
+					<section>
+						<div class="container">
+							<div class="col">
+								<h2>Magnetic field amplification: ALES</h2>
+								<p>
+									With LES modelling, magnetized NS mergers
+								</p>
+								<ul>
+									<li>
+										capture saturation;
+									</li>
+									<li>
+										reach magnetar field strengths;
+									</li>
+									<li>
+										show some universality (toroidal dominant);
+									</li>
+									<li>
+										possible inverse cascade;
+									</li>
+									<li>
+										possible $\alpha\Omega$ dynamo.
+									</li>
+								</ul>
+								<p style="margin-top:100px; margin-bottom:0px">
+									<ul style="list-style:none; font-size:0.6em">
+										<li> <a href="https://arxiv.org/abs/2112.08413">Palenzuela et al, 2112.08413</a> </li>
+									</ul>
+								</p>
+							</div>
+							<div class="col">
+								<img src="../et-2024/figures/Palenzuela_et_al_2021_fig5.svg" style="height:100%">
+							</div>
+						</div>
+						<aside class="notes">
+							After LES models were included the results did show numerical convergence. The clearest plots of this come from the work of the Spanish groups as shown here. The bottom plot in particular shows saturation in the accretion disk is well captured; the top plot shows that capturing saturation in the remnant core is harder.
+							<br>
+							These simulations have suggested that NS mergers can wind up the magnetic fields to magnetar strength. They also show some universality in the magnetic field structure post merger, although this result is strongly disputed by some other groups. There is clear evidence of structure on different scales in the fluid and magnetic fields, and weak evidence of the structures in the magnetic field moving power from short to long scales - an inverse cascade.
+							<br>
+							Very recently there have been high-resolution simulations by Kiuchi using a different phenomenological closure. Again the nonlinear saturation is captured and converges. However, different dynamo effects are seen. The $\alpha$ viscosity sees poloidal flux generated in the shear layer due to the existing toroidal field. The rotation ($\Omega$ effect) then uses that poloidal flux to generate more toroidal field. This is again an inverse-cascade effect: however, due to the different closure schemes, it is not obvious it describes the same physics!
+						</aside>
+					</section>
+				</section>
+
+				<section id="Summary">
+
+					<section>
+						<h2>Summary</h2>
+						<img src="../et-2024/figures/Kiuchi_2023_Fig_1b.png" style="width:80%">
+						<p>
+							Turbulence models: a game that we have no choice but to play.
+						</p>
+						<p style="text-align:right;">
+							<ul style="list-style:none; font-size:0.6em; text-align: right;">
+								<li> <a href="https://arxiv.org/abs/2306.15721">Kiuchi et al, 2306.15721</a> </li>
+							</ul>
+						</p>
+						<aside class="notes">
+							Turbulence modelling has barely started in NS simulation. It seems to be essential; but its impact on the results is substantially greater than our understanding of what the model should contain.
+						</aside>
+					</section>
+
+				</section>
+
+				<section id="Additional material">
+
+					<section>
+						<h2>Kolmogorov</h2>
+
+						<div class="container">
+							<div class="col" style="position:relative">
+								<p>
+									Turbulence has power $\sim k^{-5/3}$ if
+								</p>
+								<ul>
+									<li>
+										stationary
+									</li>
+									<li>
+										homogeneous
+									</li>
+									<li>
+										isotropic
+									</li>
+									<li>
+										$\ell \sim$ inertial subrange.
+									</li>
+								</ul>
+								<p class="fragment" data-fragment-index="2">
+									"Proof" only in simple cases. Shown "experimentally" for
+								</p>
+								<ul class="fragment" data-fragment-index="2">
+									<li>
+										compressible
+									</li>
+									<li>
+										relativistic hydrodynamics
+									</li>
+									<li>
+										MHD
+									</li>
+									<li>
+										etc.
+									</li>
+								</ul>
+								<p style="margin-top:100px; margin-bottom:0px">
+									<ul style="list-style:none; font-size:0.6em">
+										<li> <a href="https://arxiv.org/abs/1209.2936">Radice & Rezzolla, 1209.2936</a> </li>
+										<li> <a href="https://arxiv.org/abs/1808.09721">Wright & Hawke, 1808.09721</a></li>
+									</ul>
+								</p>
+							</div>
+							<div class="col">
+								<img src="../et-2024/figures/Radice1209_2936.svg" style="width:90%">
+								<img src="../et-2024/figures/WrightHawke1808_09721.svg" style="width:90%">
+							</div>
+						</div>
+						<aside class="notes">
+							Explicitly solving for how the cascade occurs is difficult even in the simplest Newtonian models. The Kolmogorov theory is famous for going as far as possible based on minimal assumptions. It assumes a sort of steady state: there is a statistical sense in which the small scale turbulent structure is assumed to be stationary, homogeneous and isotropic. In that case the energy equation (found by dotting the momentum equation with the velocity in the simple Newtonian case) can be integrated over a control volume, and a number of terms drop out (roughly speaking, isotropy kills the pressure term and stationarity kills the time derivative). This leaves the energy injected at large scales (the equivalent of the advective term) balancing the energy lost to dissipation. The other assumptions give the power-law scaling with wave-number for the power in, for example, the velocity.
+							<br>
+							Whilst this proof is only clear in the simplest cases, there's a lot of experimental evidence to suggest it's a good fit, and a lot of numerical evidence to say that it works, even in more complex models. Key for our purposes are the figures which show relativistic simulations. At the top is hydrodynamic simulations of Radice showing the <em>compensated</em> power spectrum; if the result were perfect we should see horizontal lines. This illustrates that the result holds, as is expected, only within the inertial range. At long lengthscales - the energy containing range - there's not enough transfer of power to get the right scaling. At short enough lengthscales we get the dissipation, although here that will be purely numerical, not physics. 
+							<br>
+							The bottom image is from simulations by Alex Wright using various relativistic hydro models including magnetic fields. Again we see the inertial range. We should note that MHD and associated theories aren't expected to follow the Kolmogorov scaling all the way down to the dissipation scale - there should be additional nonlinear interactions that break the scaling first.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Boussinesq vs Numerics</h2>
+						<div class="container">
+							<div class="col" style="border:1px solid black; padding:10px;">
+								<h3>Boussinesq</h3>
+								<p>
+									Decompose the stresses, use Boussinesq hypothesis:
+								</p>
+								$$
+								\begin{aligned}
+								\langle \delta v^i \delta v_j \rangle &= K \delta^i_j + a^i_j \\
+								&= K \delta^i_j + \nu_T g^{il} \partial_{(l} \langle v_{j)} \rangle.
+								\end{aligned}
+								$$
+								<p class="fragment" data-fragment-index="2">
+									Gives <em>effective</em> pressure, viscosity
+								</p>
+								<div class="fragment" data-fragment-index="2">
+								$$
+								\begin{aligned}\small
+								\partial_t \langle \mathbf{v} \rangle + \langle \mathbf{v} \rangle \cdot \partial_{\mathbf{x}} \langle \mathbf{v} \rangle = &- \frac{\nabla  \left( \langle p \rangle + \rho K \right)}{ \rho } \\&+ (\nu + \nu_T) \nabla^2 \langle \mathbf{v} \rangle .
+								\end{aligned}
+								$$
+								</div>
+							</div>
+							<div class="col" style="border:1px solid black; padding:10px;">
+								<h3>Numerics</h3>
+								<p class="fragment" data-fragment-index="3">
+									Discrete approximation:
+								</p>
+								<ul class="fragment" data-fragment-index="3">
+									<li>
+										$\partial_t \to (\mathbf{v}^{n+1} - \mathbf{v}^n) / \Delta t$,
+									</li>
+									<li>
+										$\partial_x \to (\mathbf{v}_{i} - \mathbf{v}_{i-1}) / \Delta x$. 
+									</li>
+								</ul>
+								<p style="margin-bottom:115px;" class="fragment" data-fragment-index="4">
+									The approximate solution solves <em>modified equation</em> (to $\mathcal{O}(\Delta^3)$)
+								</p>
+								<div class="fragment" data-fragment-index="4">
+								$$
+								\begin{aligned}\small
+								\partial_t \mathbf{v} + \mathbf{v} \cdot \partial_{\mathbf{x}} \mathbf{v} = &-\frac{\nabla p}{\rho} \\
+								&+ \left( \nu + \nu_{\Delta} \right) \nabla^2 \mathbf{v}.
+								\end{aligned}
+								$$
+								</div>
+							</div>
+						</div>
+						<aside class="notes">
+							There are many problems with introducing a reduced-order model in this way, but I just want to highlight one to start.
+							<br>
+							One of the first and simplest turbulence models introduced by Boussinesq used in incompressible Navier Stokes relies on decomposing the Reynolds stresses into the isotropic and anisotropic pieces and applying different models to each. The first is linked to the energy stored on short scales - the turbulent kinetic energy - and is evolved phenomenologically. The anisotropic piece is assumed to be linked to the meso-scale velocity gradients, giving a turbulent kinematic viscosity. Then this is plugged back into the Reynolds equations giving us exactly the Navier Stokes equations, but with <em>effective</em> pressure and kinematic viscosity terms. The tuneable parameter of the turbulent viscosity then controls the accuracy of the simulation.
+							<br>
+							However, the numerical method also has an impact on the results. As an illustration, take the continuum Navier Stokes equations and use simple first order differencing to get a discrete update scheme. We can then Taylor expand about a single point to find the <em>modified equation</em> that the discrete variables actually solve. This again gives an effective Navier Stokes scheme, where the <em>numerical viscosity</em> depends on the grid spacing and local velocity.
+							<br>
+							This emphasizes that disentangling turbulent modelling effects from numerical effects is not simple. Given the nonlinear scale interaction this can be really problematic in assessing the utility of turbulence models.
+						</aside>
+					</section>
+
+					<section>
+						<h2>MHD issues</h2>
+
+						$$
+						T^a_{b,\; \mathrm{ideal}} \sim T^a_{b,\; \mathrm{ideal\, fluid}} + \underbrace{T^a_{b,\; \mathrm{EM}}}_{\sim F^a_c F^c_b} \, ; \quad \langle T^a_b \rangle \sim \tilde{T}^a_{b,\; \mathrm{ideal\, fluid}} + \underbrace{\tilde{T}^a_{b,\; \mathrm{EM}}}_{\sim \tilde{F}^a_c \tilde{F}^c_b} + \tau^a_b \, .
+						$$
+						<p>Many choices can be made.</p>
+						<ul>
+							<li>Filter vector potential - linear ($\tilde{F}_{ab} = \nabla_{[a} \tilde{A}_{b]}$).</li>
+							<li>Filter fields - nonlinear ($\tilde{F}^{ab} \ne \epsilon^{cdab} \tilde{b}_c U_d$).</li>
+							<li class="fragment" data-fragment-index="1">Filter current - Ohm's law nonlinear.</li>
+							<div class="fragment" data-fragment-index="1">
+							$$
+							\begin{aligned}
+							&&\langle j^a \rangle &= \tilde{\sigma} U^a + \tilde{J}^a \\
+							\implies && \tilde{E}^a &= \mathcal{R} \tilde{J}^a + \tilde{\alpha} \tilde{B}^a + \tilde{\gamma} \epsilon^{abcd} \tilde{J}_b U_c \tilde{B}_d \, .
+							\end{aligned}
+							$$
+							</div>
+							<li class="fragment">Stress-energy residual $\tau$ can be "assigned" to fluid or Faraday part (non-ideal fluid, MHD, mix, or eg axions).</li>
+						</ul>
+						<aside class="notes">
+							Things get even messier when we include magnetic fields. The filtered stress-energy tensor will still be dense, but now we have additional freedom in how we filter the individual fields, and additional choices we can make.
+							<br>
+							In numerical codes there are typically two choices made: either the vector potential is evolved or the magnetic fields. In both cases a scheme can be constructed to impose, for example, the no-monopole constraint. However, we also need to construct the Faraday tensor in order to compute the stress-energy, to couple to the spacetime. This is a nonlinear process, so filtering will lead to residuals: the question is where those residuals go. The advantage of the vector potential approach is that the filtered Faraday is consistent with the filtered vector potential automatically, and consistent fields can be computed from it. However, these fields are not consistent with the filtered micro-scale fields.
+							<br> 
+							It's not just the definition of the Faraday that defines MHD. We also need the closure relation for the electric field, Ohm's law, which can be given either directly in terms of the field, or in terms of the current. At the micro-scale the current is orthogonal to the fluid velocity so that the charge density vanishes. After filtering this is not automatically true. The filtered charge current will have components along the filtered observer, corresponding to a resistivity, as well as pieces along the filtered magnetic field (corresponding to an alpha-dynamo) and a third indepenent piece (corresponding to an effective Hall drift term). In general the filtering allows for all of these non-ideal pieces to be included in a subgrid model.
+							<br>
+							Finally we have to decide how the residual terms in the stress-energy are distributed between effective fluid viscosities and non-ideal parts of the Faraday. As the Faraday appears quadratically in the stress-energy, even if its filtered version is consistent with all other terms used (as in the vector potential approach) there would still be residuals between the filtered EM stress-energy and the stress-energy constructed using the filtered Faraday. We could decide to use ideal MHD at the filtered level, and put all the residuals into the fluid. We could put some residuals into the Faraday, and maybe even use anomalous MHD (as is used to model, for example, axion clouds). There will be freedom to interpret the model in odd ways, and local arguments are not enough to distinguish them.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Uncertainty Quantification</h2>
+
+						<p>We numerically solve the <em>forward problem</em></p>
+						$$
+						\partial_t \mathbf{U} = \mathcal{L}(\mathbf{U}; \mathbf{c}_{\mathrm{phys}}, \mathbf{c}_{\mathrm{num}}, \mathbf{c}_{\mathrm{filt}}).
+						$$
+						<p>Coefficients $\mathbf{c}$ are uncertainties in physics, numerics, and model due to filtering.</p>
+						<p class="fragment" data-fragment-index="1">
+							UQ: predict observable $\mathcal{O}(\mathbf{c}_{\mathrm{phys}})$ for data analysts.
+						</p>
+						<p class="fragment" data-fragment-index="1">
+							Data analysis then solve <em>backward problem</em> $\mathcal{O}_{\mathrm{observed}} \implies \mathbf{c}_{\mathrm{phys}}$.
+						</p>
+						<p class="fragment">
+							Get rid of $\mathbf{c}_{\mathrm{num}}$ by improving resolution, varying IC/BC methods, etc.
+						</p>
+						<p class="fragment">
+							Impact of subgrid model in $\mathbf{c}_{\mathrm{filt}}$. <em>Potential confusion</em> with $\mathbf{c}_{\mathrm{phys}}$ through EoS, model choices.
+						</p>
+
+						<aside class="notes">
+							The concerns about the equation of state and the definition of the filtered model feed through to one of our key concerns: using observations, such as gravitational wave signals, to constrain physical parameters.
+							<br>
+							The formal language of uncertainty quantification follows. We are solving a time evolution problem, and the operator defining the time update depends on a number of coefficients, whose value and even form may be uncertain. Key examples include the equation of state (either in functional form, or defined through microphysical constants), and the initial data. These uncertainties are due both to physics - for example, what impact does full lattice QCD have on the compressibility - but also due to numerical assumptions - for example, what impact does the assumption of conformally flat initial data have. There are also our usual numerical issues such as finite grid resolution and choice of numerical methods and grid structures.
+							<br>
+							Once we can compute an observable we want to eliminate the numerical uncertainties so that we know how the observable varies purely depending on the physics choices. Data analysts can then take this input and then, as if by magic, solve the backward problem using real observations to constraint the physical coefficients.
+							<br>
+							The point I want to stress here is that we usually think of eliminating the numerical uncertainties by extrapolating to the continuum limit. However, the point of subgrid models is that the continuum limit is practically impossible to reach. Therefore we have to take care to consider the impact of the filtering on these uncertainties, particularly as - at finite resolution - disentangling these effects from the physics will be hard.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Filtering vs Coarse-graining</h2>
+						<img src="../et-2024/figures/additional/Lin_scale_filt_BC_0_BW.png" style="width:100%">
+						<img src="../et-2024/figures/additional/Filter_scale_BC_bl=fw.png" style="width:100%">
+						<p style="margin-top:80px; margin-bottom:0px">
+							<ul style="list-style:none; font-size:0.6em">
+								<li> <a href="https://arxiv.org/abs/2405.13593">Celora et al, 2405.13593</a></li>
+							</ul>
+						</p>
+						<aside class="notes">
+							Filtering introduces an operator that takes one tensor field to another tensor field. When applied to numerical data, as here with Kelvin-Helmholtz type data, we have data at the "same grid resolution", but it should "look smoother" after filtering. By using a wider filter length we see larger differences, and these are concentrated near steep gradients. Both these features are expected.
+							<br>
+							When coarse graining we are effectively "moving to a lower resolution". The bottom row shows the impact of filtering and then coarse graining, which is the implicit impact of using a numerical scheme.
+						</aside>
+					</section>
+					
+					<section>
+						<h2>Non-ideal model: first version</h2>
+						$$
+						\langle T^{ab} \rangle \sim \tilde{\epsilon} U^a U^b + (p + \tilde{\Pi}) \tilde{\perp}^{ab} + 2 \tilde{q}^{(a} U^{b)} + \tilde{\pi}^{ab}
+						$$
+						<p>
+							where $\tilde{\Pi} = - \zeta \tilde{\theta}, \tilde{q}^a \sim -\kappa \nabla^a \tilde{T}, \tilde{\pi}^{ab} = -\eta \tilde{\sigma}^{ab}$.
+						</p>
+						<p>
+							Best fit model assuming $\zeta, \kappa, \eta$ are $f(\tilde{T}, \tilde{n})$ is really poor.
+						</p>
+						<img src="../et-2024/figures/additional/Const_coeff_models_densityEOS.png" style="width:100%">
+						<p style="margin-top:32px; margin-bottom:0px">
+							<ul style="list-style:none; font-size:0.6em">
+								<li> <a href="https://arxiv.org/abs/2405.13593">Celora et al, 2405.13593</a></li>
+							</ul>
+						</p>
+						<aside class="notes">
+							Now that we have filtered data we can use the observer and project the filtered stress energy tensor appropriately, computing what the individual terms are. By assuming that the coarse grained (meso-) model is a non-ideal single fluid we can interpret the additional terms as bulk and shear pressures and heat fluxes. That links the additional terms to velocity and temperature gradients through the viscosity coefficients. We can then find the best fit coefficients that would give a turbulence closure model.
+							<br>
+							If this truly were a non-ideal fluid then the only physical possibility is that the viscosity coefficients depend on number density, temperature, and species. So we try that first. We have lots of data - every single filtered point - so can compute the appropriate coefficient at every point, and compute a best fit model.
+							<br>
+							However, the best fit model is still clearly poor. The figure shows the distribution of the magnitudes of the residual bulk and shear pressures, and the magnitude of the heat flux, as compared to the distribution for the best fit model. Only the heat flux is remotely close; given the log scales, the non-ideal pressures are unacceptably poor.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Non-ideal model: second version</h2>
+						
+						<p>
+							Allow shear viscosity to be
+						</p>
+						$$
+						\log \eta \sim c_0 + \dots c_{\sigma^2} \log \sigma^{ab} \sigma_{ab} + c_{\omega^2} \log \omega^{ab} \omega_{ab}.
+						$$
+						<p class="fragment" data-fragment-index="1">
+							Similar improvements are seen for the bulk viscosity case $\zeta$.
+						</p>
+						<div class="r-stack">
+							<img src="../et-2024/figures/additional/eta_best_compare.png" style="width:100%">
+							<img src="../et-2024/figures/additional/zeta_best.png" style="width:100%" class="fragment" data-fragment-index="1">
+						</div>
+						<p style="margin-top:100px; margin-bottom:0px">
+							<ul style="list-style:none; font-size:0.6em">
+								<li> <a href="https://arxiv.org/abs/2405.13593">Celora et al, 2405.13593</a></li>
+							</ul>
+						</p>
+						<aside class="notes">
+							There's no good reason for the subgrid model to behave like a "true" non-ideal fluid in this sense. We can fit on more general variables. The obvious choice is on velocity gradients - this would be how we'd get a Boussinesq or Smagorinsky type model anyway. So we expand the fitting variables.
+							<br>
+							In this case we see much better results. If everything was perfect then the left plot would be a straight diagonal line, and the distributions would perfectly match. However, the key point is the right hand plot, where the distributions are close, so we would hope that at a statistical level this subgrid scheme would have the same impact on the stress energy tensor as the fine grained (micro-) model did.
+						</aside>
+					</section>
+
+					<section>
+						<h2>EoS assumptions</h2>
+						<p>
+							Should the EoS of the filtered model be the "true" EoS? Try <em>fitting</em> for $\Gamma$.
+						</p>
+						<img src="../et-2024/figures/additional/Interp_Gamma_reldiff.png" style="width:100%">
+						<p style="margin-top:51px; margin-bottom:0px">
+							<ul style="list-style:none; font-size:0.6em">
+								<li> <a href="https://arxiv.org/abs/2405.13593">Celora et al, 2405.13593</a></li>
+							</ul>
+						</p>
+						<aside class="notes">
+							One implicit assumption that we've used so far is that despite the fact that the coarse-grained, filtered, meso-model is genuinely a different effective theory (as it's non-ideal hydro, not ideal hydro), we have still retained the assumption that the equation of state is identical to that at the micro level, which we consider to be the "true" equation of state.
+							<br>
+							This assumption can be checked by doing a pointwise fit, making instead assumptions about the bulk viscosity. Clearly, we are free to trade off the equation of state of the effective theory with the bulk viscous pressure. More generally, we can consider the filtered energy of the system as a function of the filtered thermodynamic potentials, and directly compute the adiabatic indices and compressibilities as appropriate derivatives of the energy.
+							<br>
+							When we do this calculation using the original, fine-scale data, we see that the adiabatic index is correctly recovered to numerical accuracy. When we use the filtered meso-model data we see that the adiabatic index can be affected to the percent level. In other words, it is <em>not obvious</em> that the appropriate equation of state to use is the "true" equation of state. Working in the other direction, we get the slightly disconcerting result: when simulating with one particular equation of state, the "effective true" micro-model equation of state it encodes may be measurably different, particularly near steep gradients.
+						</aside>
+					</section>
+
+				</section>
+
+			</div>
+
+		</div>
+
+
+		<script src="../math1058/reveal.js/dist/reveal.js"></script>
+		<script src="../math1058/reveal.js/plugin/zoom/zoom.js"></script>
+		<script src="../math1058/reveal.js/plugin/notes/notes.js"></script>
+		<script src="../math1058/reveal.js/plugin/search/search.js"></script>
+		<script src="../math1058/reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../math1058/reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../math1058/reveal.js/plugin/math/math.js"></script>
+		<script src="../math1058/reveal.js/plugin/spotlight/spotlight.js"></script>
+		<script src="../math1058/lectures/reveal_defaults.js"></script>
+
+	</body>
+</html>
