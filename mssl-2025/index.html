@@ -251,10 +251,6 @@
 
 					</section>
 
-				</section>	
-
-				<section id="Multiscale">
-
 					<section>
 						<h2>Reactions: Toy model</h2>
 						<p>
@@ -329,45 +325,6 @@
 						</aside>
 
 					</section>
-
-					<section>
-
-						<h2>Impact of $\Pi$</h2>
-
-						<div class="container">
-							<div class="col">
-
-							<p>
-								Check with a "real" equation of state:
-							</p>
-							<ul>
-								<li>
-									Bulk viscous pressure can be big for neutron star core in merger;
-								</li>
-								<li>
-									Bulk viscous approximation <em>needed</em> above dashed lines (resolution dependent).
-								</li>
-							</ul>
-							</div>
-
-							<div>
-								<img src="../portsmouth-2023/figures/pch/Pip_cont_zoom.svg" style="width:1100px; margin:0px">
-							</div>
-						</div>
-
-						<aside class="notes">
-							Let us now move from the toy model to looking at the impact for a real equation of state. Here we're using the APR4 equation of state, with the reaction rates and derivatives computed using the Fermi surface approximation. That's not ideal: unfortunately very few equations of state also have the reaction rates in a suitable form for this calculation in full.
-							<br>
-							This plot covers the range of densities and temperatures relevant for a neutron star merger. The core of the neutron star is typically at a few times nuclear saturation density (see note below). The outer layers of the neutron star are many orders of magnitude lower, but the Urca reactions are rapidly suppressed at low densities. The temperature of the neutron star during inspiral is low - it is expected to be well below 1MeV - but can reach around 100MeV through merger in extreme cases.
-							<br>
-							There are two key pieces of information in this plot. The first, given by the colour, is how big the bulk viscous pressure is compared to the total pressure. We see this can be substantial - certainly into the percent level - at low temperatures, and particularly through the core. The second piece of information is the timescale of the reactions. Remember, bulk viscous pressure is an approximation, and that approximation is only needed if the numerical timestep is too big. The lines pick a particular timestep. Every region below a line has reactions slow enough that the bulk viscous approximation isn't needed, and the full nonlinear reaction can be directly solved. The solid line is quite a poor numerical resolution by current standards. The top, dotted, line is an order of magnitude better than the best simulation ever run. We see that there's a region in parameter space where we will have no choice but to use a bulk viscous approximation.
-						</aside>
-
-					</section>
-
-				</section>
-
-				<section id="Simulation results">
 
 					<section>
 						<div class="container">
@@ -849,6 +806,41 @@
 				</section>
 
 				<section id="Additional material">
+
+					<section>
+
+						<h2>Impact of $\Pi$</h2>
+
+						<div class="container">
+							<div class="col">
+
+							<p>
+								Check with a "real" equation of state:
+							</p>
+							<ul>
+								<li>
+									Bulk viscous pressure can be big for neutron star core in merger;
+								</li>
+								<li>
+									Bulk viscous approximation <em>needed</em> above dashed lines (resolution dependent).
+								</li>
+							</ul>
+							</div>
+
+							<div>
+								<img src="../portsmouth-2023/figures/pch/Pip_cont_zoom.svg" style="width:1100px; margin:0px">
+							</div>
+						</div>
+
+						<aside class="notes">
+							Let us now move from the toy model to looking at the impact for a real equation of state. Here we're using the APR4 equation of state, with the reaction rates and derivatives computed using the Fermi surface approximation. That's not ideal: unfortunately very few equations of state also have the reaction rates in a suitable form for this calculation in full.
+							<br>
+							This plot covers the range of densities and temperatures relevant for a neutron star merger. The core of the neutron star is typically at a few times nuclear saturation density (see note below). The outer layers of the neutron star are many orders of magnitude lower, but the Urca reactions are rapidly suppressed at low densities. The temperature of the neutron star during inspiral is low - it is expected to be well below 1MeV - but can reach around 100MeV through merger in extreme cases.
+							<br>
+							There are two key pieces of information in this plot. The first, given by the colour, is how big the bulk viscous pressure is compared to the total pressure. We see this can be substantial - certainly into the percent level - at low temperatures, and particularly through the core. The second piece of information is the timescale of the reactions. Remember, bulk viscous pressure is an approximation, and that approximation is only needed if the numerical timestep is too big. The lines pick a particular timestep. Every region below a line has reactions slow enough that the bulk viscous approximation isn't needed, and the full nonlinear reaction can be directly solved. The solid line is quite a poor numerical resolution by current standards. The top, dotted, line is an order of magnitude better than the best simulation ever run. We see that there's a region in parameter space where we will have no choice but to use a bulk viscous approximation.
+						</aside>
+
+					</section>
 
 					<section>
 						<h2>Kolmogorov</h2>
