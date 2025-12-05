@@ -1,0 +1,47 @@
+---
+title: "ETK 2025 Panel Discussion"
+format: 
+  revealjs:
+    html-math-method: mathjax
+    fig-format: svg
+    slide-number: true
+    chalkboard: 
+      buttons: false
+      chalk-effect: 0.01
+      chalk-width: 3
+    preview-links: auto
+    footer: "ETK 2025"
+    margin: 0.05
+    pointer:
+      pointerSize: 18
+      color: green
+      alwaysVisible: false
+    code-line-numbers: false
+revealjs-plugins:
+    - pointer
+execute: 
+  cache: true
+---
+
+## Ease of use
+
+* Documentation
+    - More user focused?
+    - Specific examples?
+    - Website reconfiguration?
+* Gallery examples
+    - More BH cases?
+    - CCSN?
+    - Viz/analysis examples?
+* `Carpet` $\to$ `CarpetX` docs?
+
+## Physics/code 
+
+* Modified gravity, scalar fields
+    - Thorn generation?
+    - Infrastructure?
+* EOS
+    - Simplify use of external tables?
+    - Centralize/unify?
+    - Document!
+* `CarpetX` priorities?
