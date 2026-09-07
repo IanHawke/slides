@@ -194,11 +194,11 @@ $$
 $$
 Analytical homogenized model
 $$
-\partial_t \langle u \rangle + \epsilon {\color{blue}\frac{\sqrt{3}}{2}} \partial_x \langle u \rangle = 0 \, .
+\partial_t \langle u \rangle + {\color{blue}\frac{\sqrt{3}}{2}} \partial_x \langle u \rangle = 0 \, .
 $$
 Optimal action filtered model
 $$
-\partial_t \langle u \rangle + \epsilon {\color{red}\left( \frac{\sqrt{3}}{2} + 0.0024 \right)} \partial_x \langle u \rangle = 0 \, .
+\partial_t \langle u \rangle + {\color{red}\left( \frac{\sqrt{3}}{2} + 0.0024 \right)} \partial_x \langle u \rangle = 0 \, .
 $$
 
 ::::
