@@ -234,7 +234,7 @@ $$
 Asymptotic homogenization model
 $$
 \begin{aligned}
-\partial_t \langle u \rangle +& \langle u \rangle \partial_x \langle u \rangle = \\& \epsilon \partial_x \left( \left[ {\color{blue}2} - {\color{blue}2} \langle u^2 \rangle \right] \partial_x \langle u \rangle \right) \, .
+\partial_t \langle u \rangle +& \langle u \rangle \partial_x \langle u \rangle = \\& \epsilon \partial_x \left( \left[ {\color{blue}2} - \langle u^2 \rangle \right] \partial_x \langle u \rangle \right) \, .
 \end{aligned}
 $$
 Optimal action filtered model
